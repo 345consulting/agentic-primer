@@ -120,7 +120,12 @@ def run(kind: Kind = "mock") -> Trace:
         assert isinstance(reply, AIMessage)
         messages.append(reply)
 
-    trace.close(turns=2, messages=len(messages), ended="no tool_calls")
+    # Why this stops, read off the reply rather than asserted. There are two
+    # turns here because two turns are written out, not because the model was
+    # finished -- and if it asks for a tool in turn two, this chapter has
+    # nowhere to put it. That gap is the whole of chapter 5.
+    ended = "no tool_calls" if not reply.tool_calls else "out of written turns"
+    trace.close(turns=2, messages=len(messages), ended=ended)
     return trace
 
 

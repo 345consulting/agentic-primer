@@ -74,3 +74,12 @@ def _context(trace: Trace, turn: int) -> list[Json]:
     (note,) = [n for n in _model_spans(trace)[turn].notes if n.label == "context"]
     messages: list[Json] = note.payload["messages"]
     return messages
+
+
+def test_the_reason_it_stopped_is_read_off_the_reply_not_asserted() -> None:
+    # The chapter has exactly two turns because two are written out. Saying
+    # "no tool_calls" without looking would be true today and a lie the first
+    # time a model asks for a second tool.
+    trace = ch02_tool_call.run()
+    assert trace.summary["ended"] == "no tool_calls"
+    assert "tool_calls" not in _reply(trace, turn=1)
