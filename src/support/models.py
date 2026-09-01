@@ -16,7 +16,7 @@ import os
 from collections.abc import Sequence
 from itertools import count
 from time import monotonic
-from typing import Any, Literal
+from typing import Any, Literal, Self
 
 import httpx
 from langchain_core.callbacks import CallbackManagerForLLMRun
@@ -48,6 +48,21 @@ class Scripted(BaseChatModel):
     @property
     def _llm_type(self) -> str:
         return "scripted"
+
+    def bind_tools(self, tools: Sequence[Any], **kwargs: Any) -> Self:
+        """Accept a declaration and ignore it, exactly as it ignores context.
+
+        A real model is told what it may ask for; a script already knows what
+        it will ask for. Recording the declaration keeps the mock honest --
+        the trace shows what was offered even though nothing consulted it.
+        """
+        if self.watching is not None:
+            self.watching.note(
+                "tools declared to the script",
+                names=[getattr(t, "name", str(t)) for t in tools],
+                consulted=False,
+            )
+        return self
 
     def _generate(
         self,

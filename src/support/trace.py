@@ -14,7 +14,7 @@ from pathlib import Path
 from threading import current_thread
 from typing import Any, Self
 
-from langchain_core.messages import AIMessage, BaseMessage
+from langchain_core.messages import AIMessage, BaseMessage, ToolMessage
 
 type Json = dict[str, Any]
 
@@ -52,6 +52,10 @@ def _describe(message: BaseMessage) -> Json:
             {"name": call["name"], "args": call["args"], "id": call["id"]}
             for call in message.tool_calls
         ]
+    # What request this result answers. Position is not the tie -- several
+    # tool calls can be in flight at once, and the id is all that survives.
+    if isinstance(message, ToolMessage):
+        described["tool_call_id"] = message.tool_call_id
     # Anything the adapter carried across that is not `content`. Reasoning
     # arrives here, and a recorder that omits it is indistinguishable from a
     # provider that never sent it -- which is how a trace starts lying.
@@ -162,7 +166,10 @@ class Trace:
             self.source = source_hash(self.chapter)
 
     @contextmanager
-    def span(self, name: str, **attrs: Any) -> Iterator[Span]:
+    def span(self, name: str, /, **attrs: Any) -> Iterator[Span]:
+        # `name` is positional-only so that an attr may also be called `name`.
+        # A span recording a tool call wants exactly that, and a recorder that
+        # cannot record a field because of its own signature is a bad recorder.
         self._seq += 1
         span = Span(
             name=name,

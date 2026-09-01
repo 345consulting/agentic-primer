@@ -34,3 +34,135 @@ curiosity. Any field a recorder does not capture must be a field it was
 `gen_ai.*` on model events and was written against the same assumption about
 what an `AIMessage` carries. Unverified as of this date. Reasoning tokens are
 billed and may be unaccounted for.
+
+---
+
+## 2026-09-01 — An unconstrained tool argument turns a wrong premise into a fluent fact
+
+**What happened.** Chapter 2's tool was declared `stock_on_hand(part: str)` and
+looked up `{"flange": 17, "grommet": 240}.get(part, 0)`. Asked about flanges,
+the live model called it with `part="flanges"` — plural, which is what an
+English sentence about more than one flange contains. The lookup returned its
+default. Turn two then answered, in fluent and confident prose, *"We have 0
+flanges on hand."*
+
+Nothing failed. The tool ran, returned an `int`, the loop completed, both turns
+were recorded, and every test passed — because the mock's script asks for
+`"flange"` and always will.
+
+**Why it matters.** Two separate defects compounded, and each alone would have
+been survivable.
+
+The schema said `str`, so every string was a legal request. A tool's parameter
+schema is not documentation: it is the only thing constraining what the model
+is able to ask for, and it is enforced by the provider before the call is ever
+made. Declaring `str` declines that enforcement.
+
+The lookup had a default, so an argument outside the intended set produced an
+answer instead of an error. `0` is a plausible stock level, indistinguishable
+from a true one, and by the time it reaches the model it has lost every trace
+of being a fallback. The model is not at fault for believing it — it has no
+other source.
+
+**The rule.** Constrain the argument in the schema, and fail on anything the
+schema let through anyway. `Literal["flange", "grommet"]` puts
+`enum: [...]` in the request body; `STOCK[part]` raises rather than coercing.
+A tool that answers a question it did not understand is worse than one that
+fails, because a failure stops the loop and a wrong number does not.
+
+**What the mock could not have told us.** A scripted model asks for exactly
+what the script says. This was only findable live, and it is the sharpest
+example so far of the standing warning that the two kinds do not prove the
+same things.
+
+---
+
+## 2026-09-01 — The library cost is first-call warm-up, not per-call overhead
+
+**What happened.** Chapter 1's first live run split as 1431ms provider against
+663ms library, and 32% unexplained was left open with two candidate
+explanations: one-time client construction, or real per-call adapter cost.
+Chapter 2 has two invocations in one process and settles it.
+
+| run | turn | provider | library |
+| --- | --- | --- | --- |
+| ch01 | 1 | 1431ms | 663ms |
+| ch01 | 1 | 1455ms | 237ms |
+| ch02 | 1 | 2268ms | 267ms |
+| ch02 | 2 | 1685ms | **14ms** |
+
+The second invocation in the same process costs 14ms of library time. The
+overhead is warm-up, not per-call.
+
+**Why it matters.** It is *not* client construction, which was the leading
+hypothesis. Chapter 2 builds a fresh `ChatDeepSeek` and a fresh `httpx.Client`
+for each turn — because the wire hooks bind to a span, and the span differs per
+turn — and turn two still costs 14ms. What is amortised is process-level: the
+pydantic model machinery, the tool-schema conversion, the SSL context. TLS
+handshaking is not in this number; it falls inside `provider_ms`, between the
+request hook and the response hook.
+
+For a harness this is the difference between an optimisation target and a
+startup cost to pay once and ignore. It also means any benchmark that measures
+a single invocation per process is measuring warm-up, and will overstate
+per-call library cost by an order of magnitude.
+
+**Still open.** Whether the 663ms/237ms spread on two otherwise identical
+chapter-1 runs is ordinary variance or something else. Two samples.
+
+---
+
+## 2026-09-01 — You are billed on the sum of prefixes, and the tool schema is most of it
+
+**What happened.** Measured across the two chapters' live runs, per turn:
+
+| run | turn | input | output | cache hit |
+| --- | --- | --- | --- | --- |
+| ch01 | 1 | 122 | 20 | 0 |
+| ch02 | 1 | 397 | 74 | 0 |
+| ch02 | 2 | 484 | 37 | 384 |
+
+Chapter 2's conversation ends at 484 tokens of context and costs **881 billed
+input tokens** to get there. Nothing was re-read and nothing was retried.
+
+**Where the tokens actually go.** The step from 122 to 397 is one tool
+declaration — a name, a two-value enum, and a one-line docstring — costing
+**275 tokens**, re-sent on every call whether the model uses it or not. The
+tool round trip that did the actual work, request plus result, cost 87. The
+declaration is three times the conversation, and it scales with the size of the
+toolbox rather than with the length of the exchange. Twenty tools is the whole
+context before anyone has said anything.
+
+**Why it compounds.** Every turn re-sends the entire history, so cost is the
+sum of the prefixes rather than the length of the final context. Ten turns of
+this shape is not ten times one turn; it is the triangle.
+
+**The mitigation, and what it costs to break.** Turn two hit DeepSeek's prefix
+cache for 384 of 484 tokens. That cache is provider-side KV state keyed on an
+exact token-prefix match, and it is possible *only because* the context is
+append-only — tool calls and results being permanent members of the transcript
+is precisely what keeps the prefix byte-stable.
+
+The hit was 384 and not 397, which is 6 x 64 exactly: it caches in blocks, and
+the 13 tokens in the trailing partial block were not reusable. Cache boundaries
+land where the block ends, not where the message does.
+
+**The rule this sets for the harness.** Anything that edits history invalidates
+the cache from the edit point onward and pays full price for every token after
+it. Pruning an old tool result, injecting a judge's note mid-transcript,
+rewriting a tool call before dispatch — each is a cache miss for the remainder
+of the run. Append-only is cheap; editing is not. Governance that must alter
+the transcript should alter it as late in the list as possible.
+
+Two structural corollaries: declare tools in a stable order, because reordering
+the list changes the prefix and forfeits the hit for nothing; and keep the
+system prompt free of anything that varies per call, such as a timestamp.
+
+**A caution about the other kind of cache.** A harness-level *response* cache
+(LangChain's `set_llm_cache`, semantic caches) is a different thing entirely.
+A prefix-cache hit is invisible and always correct. A response-cache hit means
+the model never ran, and in an agent loop that means the tool never ran either
+— a stale answer served with a trace that looks healthy. `set_llm_cache` is
+global; switched on here it would return instantly, the httpx hooks would
+record nothing, and `provider_ms` would read as a fast provider rather than a
+call that never happened. Cache the deterministic parts; never the decision.
