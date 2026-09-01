@@ -1,0 +1,48 @@
+[project]
+name            = "agentic-primer"
+version         = "0.1.0"
+description     = "The mechanics of an agentic harness, one chapter at a time."
+requires-python = ">=3.14"
+dependencies    = [
+    "langchain-deepseek>=1.0",
+    "langchain-core>=1.6,<2",
+    "langchain-deepseek>=1.1.0",
+    "langgraph>=1.2,<2",
+    "httpx>=0.28.1",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.14",
+    "pytest>=8.3",
+    "ruff>=0.9",
+]
+
+[tool.mypy]
+files                  = ["src", "tests"]
+mypy_path              = "src"
+explicit_package_bases = true
+python_version = "3.14"
+strict         = true
+
+[tool.pytest.ini_options]
+addopts    = "-v"
+pythonpath = ["src"]
+testpaths  = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ARG", "B", "C4", "E", "F", "I", "N", "PTH", "RET", "RUF", "SIM", "UP", "W"]
+
+# House rule, documented deviation from the ecosystem default: project modules
+# first, standard library second, third-party third. See code-style.md.
+[tool.ruff.lint.isort]
+known-first-party = ["chapters", "order", "support"]
+section-order     = ["future", "first-party", "local-folder", "standard-library", "third-party"]
+
+# BaseChatModel fixes the signature of _generate; `stop`, `run_manager` and
+# `**kwargs` must be accepted whether or not the scripted model uses them.
+[tool.ruff.lint.per-file-ignores]
+"src/support/models.py" = ["ARG002"]
