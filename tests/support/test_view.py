@@ -85,3 +85,14 @@ def test_a_chapter_that_has_never_been_run_says_so_in_place(tmp_path: Path) -> N
     page = book(tmp_path).read_text()
     assert "ch01_single_call" in page
     assert "not run" in page
+
+
+def test_a_chapter_with_a_file_and_a_chapter_without_read_differently(tmp_path: Path) -> None:
+    # A chapter that exists but has not been run is work in progress; one with
+    # no file at all is the ladder ahead. Collapsing them loses the only
+    # progress signal the book carries.
+    page = book(tmp_path).read_text()
+    written = page.index("ch01_single_call")
+    planned = page.index("ch14_parallel")
+    assert "not written" in page[planned : planned + 200]
+    assert "not run" in page[written : written + 200]

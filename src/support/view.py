@@ -364,15 +364,21 @@ def book(out: Path = Path("out")) -> Path:
     nav, sections = [], []
     for chapter, why in ORDER:
         traces = _load(chapter, out)
-        summary = "" if traces else ' <span class="not-run">not run</span>'
+        # Three states, and the difference between the last two matters: a
+        # chapter with no file is the ladder ahead, a chapter with a file and
+        # no trace is work that has not been run yet.
+        if traces:
+            state, body = "", _chapter(chapter, traces)
+        elif source_hash(chapter) == UNKNOWN_SOURCE:
+            state = "not written"
+            body = f'<div class="col missing">{state}</div>'
+        else:
+            state = "not run"
+            body = f'<div class="col missing">{state} &mdash; just run {chapter}</div>'
+        label = f' <span class="not-run">{state}</span>' if state else ""
         nav.append(
             f'<a href="#{chapter}"><b>{html.escape(chapter)}</b> '
-            f'<span class="why">{html.escape(why)}</span>{summary}</a>'
-        )
-        body = (
-            _chapter(chapter, traces)
-            if traces
-            else '<div class="col missing">not run &mdash; `just run ' + chapter + "`</div>"
+            f'<span class="why">{html.escape(why)}</span>{label}</a>'
         )
         sections.append(
             f'<h2 id="{chapter}"><a class="top" href="#top">top</a>'
