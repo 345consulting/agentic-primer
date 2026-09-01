@@ -6,7 +6,10 @@ quietly comparing two different things.
 """
 
 from support.trace import Json, Trace
-from support.view import _wire_fields, render
+from support.view import _wire_fields, book, render
+
+import json
+from pathlib import Path
 
 
 def _recorded(kind: str, source: str) -> Json:
@@ -63,3 +66,22 @@ def test_a_trace_written_before_values_were_recorded_still_renders() -> None:
     fields = _wire_fields(note)
     assert "headers (2)" in fields
     assert fields.count("not recorded") == 2
+
+
+def test_the_book_reads_in_the_reading_order_not_the_order_of_the_files(tmp_path: Path) -> None:
+    for chapter in ("ch02_tool_call", "ch01_single_call"):
+        trace = Trace(chapter=chapter, kind="mock")
+        with trace.span("turn", number=1):
+            pass
+        trace.close(turns=1)
+        (tmp_path / f"{chapter}.mock.json").write_text(json.dumps(trace.as_json()))
+    page = book(tmp_path).read_text()
+    assert page.index("ch01_single_call") < page.index("ch02_tool_call")
+
+
+def test_a_chapter_that_has_never_been_run_says_so_in_place(tmp_path: Path) -> None:
+    # Going missing would be worse: the book is the reading order, so a gap
+    # in it should be visible rather than silently closed up.
+    page = book(tmp_path).read_text()
+    assert "ch01_single_call" in page
+    assert "not run" in page

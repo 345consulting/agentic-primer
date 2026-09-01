@@ -47,6 +47,15 @@ input[type=checkbox] { display: none; }
 .turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
           letter-spacing: .06em; margin-bottom: .3rem; }
 .stale { color: #b26; font-weight: 600; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
 /* A wire note is a handful of short fields and one long one. As a run-on line
    the long field swallows the rest, so each gets its own row and the keys
    line up in a column you can scan down. */
@@ -288,6 +297,28 @@ def render(traces: dict[str, Json]) -> str:
     is the most interesting thing either trace can tell you.
     """
     chapter = next(iter(traces.values()))["chapter"]
+    return (
+        f"<!doctype html><meta charset=utf-8>"
+        f"<title>{html.escape(chapter)}</title><style>{_STYLE}</style>"
+        f"<h1>{html.escape(chapter)}</h1>"
+        f"{_toggles()}{_chapter(chapter, traces)}"
+    )
+
+
+def _toggles() -> str:
+    """Checkbox toggles rather than script: hiding a column is CSS on a
+    sibling selector, so the page stays one file with nothing to load. The
+    inputs must precede every column they hide, which is why they sit here
+    rather than beside the thing they control."""
+    return (
+        '<input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live">'
+        '<div class="toggles">show: '
+        '<label for="hide-mock">mock</label><label for="hide-live">live</label></div>'
+    )
+
+
+def _chapter(chapter: str, traces: dict[str, Json]) -> str:
+    """One chapter's head row and its turns. The same markup on both pages."""
     current = source_hash(chapter)
     heads, bodies = [], []
     for kind in KINDS:
@@ -307,17 +338,56 @@ def render(traces: dict[str, Json]) -> str:
             f'<div class="row">{cells}</div></div>'
         )
 
-    return (
-        f"<!doctype html><meta charset=utf-8>"
-        f"<title>{html.escape(chapter)}</title><style>{_STYLE}</style>"
-        f"<h1>{html.escape(chapter)}</h1>"
-        # Checkbox toggles rather than script: hiding a column is CSS on a
-        # sibling selector, so the page stays one file with nothing to load.
-        f'<input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live">'
-        f'<div class="toggles">show: '
-        f'<label for="hide-mock">mock</label><label for="hide-live">live</label></div>'
-        f'<div class="row head">{"".join(heads)}</div>{"".join(bodies)}'
+    return f'<div class="row head">{"".join(heads)}</div>{"".join(bodies)}'
+
+
+def _load(chapter: str, out: Path) -> dict[str, Json]:
+    """Every kind of this chapter that has been run and left a record."""
+    traces: dict[str, Json] = {}
+    for kind in KINDS:
+        record = out / f"{chapter}.{kind}.json"
+        if record.exists():
+            traces[kind] = json.loads(record.read_text())
+    return traces
+
+
+def book(out: Path = Path("out")) -> Path:
+    """Every chapter that has been run, on one page, in reading order.
+
+    The order comes from `order.ORDER` rather than from the files on disk, so
+    the book reads the way the primer is meant to be read and a chapter that
+    has never been run says so in place rather than going missing. Importing
+    `order` is not importing a chapter: it is the reading order, as data.
+    """
+    from order import ORDER
+
+    nav, sections = [], []
+    for chapter, why in ORDER:
+        traces = _load(chapter, out)
+        summary = "" if traces else ' <span class="not-run">not run</span>'
+        nav.append(
+            f'<a href="#{chapter}"><b>{html.escape(chapter)}</b> '
+            f'<span class="why">{html.escape(why)}</span>{summary}</a>'
+        )
+        body = (
+            _chapter(chapter, traces)
+            if traces
+            else '<div class="col missing">not run &mdash; `just run ' + chapter + "`</div>"
+        )
+        sections.append(
+            f'<h2 id="{chapter}"><a class="top" href="#top">top</a>'
+            f'{html.escape(chapter)} <span class="why">{html.escape(why)}</span></h2>{body}'
+        )
+
+    page = out / "index.html"
+    out.mkdir(parents=True, exist_ok=True)
+    page.write_text(
+        f"<!doctype html><meta charset=utf-8><title>the agentic primer</title>"
+        f'<style>{_STYLE}</style><h1 id="top">the agentic primer</h1>'
+        f'<div class="summary">every chapter that has been run, in reading order</div>'
+        f"{_toggles()}<nav>{''.join(nav)}</nav>{''.join(sections)}"
     )
+    return page
 
 
 def write(trace: Trace, out: Path) -> Path:
@@ -329,12 +399,13 @@ def write(trace: Trace, out: Path) -> Path:
     out.mkdir(parents=True, exist_ok=True)
     (out / f"{trace.chapter}.{trace.kind}.json").write_text(json.dumps(trace.as_json(), indent=2))
 
-    traces: dict[str, Json] = {}
-    for kind in KINDS:
-        record = out / f"{trace.chapter}.{kind}.json"
-        if record.exists():
-            traces[kind] = json.loads(record.read_text())
-
     page = out / f"{trace.chapter}.html"
-    page.write_text(render(traces))
+    page.write_text(render(_load(trace.chapter, out)))
+    # The book is regenerated on every run, so it can never be older than the
+    # chapter pages it collects.
+    book(out)
     return page
+
+
+if __name__ == "__main__":
+    print(book())
