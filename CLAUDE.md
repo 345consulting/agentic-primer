@@ -62,97 +62,109 @@ ch03 missing_tool     no tool covers the question, and nothing fails   written
 ch04 tool_failure     the tool runs and raises; we decide what the model sees   written
 ch05 the_loop         the whole loop, twelve lines of plain Python
 ch06 two_tools        two calls in one reply -- still ONE turn
-ch07 stream           "stream": true -- a reply arrives in pieces
-ch08 stream_tools     tool arguments arrive as fragments of a JSON string
-ch09 retry_policy     transient or permanent, and who is allowed to say so
-ch10 retry_by_local   the harness calls again: no model, no tokens, backoff
-ch11 retry_by_model   the model asks again: a full turn, and a longer list
-ch12 retry_exhausted  out of strikes: escalate, and with what context?
-ch13 skills           a tool whose result is instructions, not data
-ch14 compression      the list is too long; what do you drop, and what does it cost?
-ch15 memory           what survives when the list is thrown away
-ch16 graph            the same behaviour as a StateGraph -- what did it buy?
-ch17 limits           recursion_limit at the boundary
-ch18 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch15
-ch19 interrupt        interrupt and Command(resume=...) as an approval gate
-ch20 subgraph         a graph as a node -- a supervisor, from the ground up
-ch21 parallel         fan-out, Send, join, and the order things merge in
+ch07 retry_policy     transient or permanent, and who is allowed to say so
+ch08 retry_by_local   the harness calls again: no model, no tokens, backoff
+ch09 retry_by_model   the model asks again: a full turn, and a longer list
+ch10 retry_exhausted  out of strikes: escalate, and with what context?
+ch11 supervisor       one loop calls another: a tool whose body is an agent
+ch12 workflow         the same job with nothing deciding -- is the loop worth it?
+ch13 stream           "stream": true -- a reply arrives in pieces
+ch14 stream_tools     tool arguments arrive as fragments of a JSON string
+ch15 hooks            the named points in the loop, and the three powers
+ch16 guards           a hook that can say no, before dispatch
+ch17 judge            a hook that reads the reply, per turn and not per run
+ch18 skills           a tool whose result is instructions, not data
+ch19 compression      the list is too long; what do you drop, and what does it cost?
+ch20 memory           what survives when the list is thrown away
+ch21 graph            the same behaviour as a StateGraph -- what did it buy?
+ch22 limits           recursion_limit at the boundary
+ch23 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch20
+ch24 interrupt        interrupt and Command(resume=...) as an approval gate
+ch25 subgraph         the ch11 supervisor as a graph node -- what did it buy?
+ch26 parallel         fan-out, Send, join, and the order things merge in
 ```
-
-Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
-nothing goes wrong and the question is unanswered anyway; in ch04 something
-goes wrong and we choose what the model is told. Neither retries, because
-retrying needs a loop.
-
-Chapters 7 and 8 are streaming, and they change the recorder before they
-change a chapter. Every request up to here carries `"stream": false`, and
-`_build_wire_hooks` calls `response.read()` -- which consumes a body that has
-not finished arriving. So `support/` learns to record events as they arrive,
-with their arrival times, and the chapters follow. A reply stops being an
-object and becomes a sequence; `model_provider_ms` stops being one number and
-becomes an interval with a first token somewhere inside it. In ch08 the tool
-arguments arrive as fragments of a JSON string, so a tool call cannot be
-parsed, judged or dispatched until the stream ends -- which is the sharpest
-governance question in the primer, because a judge wants the whole turn and a
-streaming interface has already shown the user half of it.
-
-Chapters 9 to 12 are retry, split four ways because they are four different
-questions. **Policy** is classification -- transient or permanent, safe to
-call twice or not -- and it is declared by the tool author, because nobody
-else knows. **By local** is the harness calling again: no model, no tokens,
-bounded by backoff, and correct only when the outcome can change. **By model**
-is the model asking again after reading an error: a full turn each time, on a
-list that has grown by a request and a failure, so attempt three costs more
-than attempt one. **Exhausted** is what happens when the strikes run out. The
-counter has to live outside the model, because from inside the loop attempt
-four looks exactly like attempt one -- and the harder half is what gets handed
-to the human at 2am, since a run that gave up with no account of what it tried
-is worse than one that never started.
-
-The organising question across all four is *who can change the outcome*. Bad
-arguments is the only case where the model retrying is right and the harness
-retrying is useless -- and it is the one case LangGraph's `ToolNode` handles
-by default, reporting `ToolInvocationError` back and re-raising everything
-else. There is no retry anywhere in LangGraph.
-
-
-Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
-nothing goes wrong and the question is unanswered anyway; in ch04 something
-goes wrong and we choose what the model is told. Neither retries, because
-retrying needs a loop.
-
-Chapters 7 to 10 are retry, split four ways because they are four different
-questions. **Policy** is classification -- transient or permanent, safe to
-call twice or not -- and it is declared by the tool author, because nobody
-else knows. **Local** is the harness calling again: no model, no tokens,
-bounded by backoff, and correct only when the outcome can change. **Model** is
-the model asking again after reading an error: a full turn each time, on a
-list that has grown by a request and a failure, so attempt three costs more
-than attempt one. **Exhausted** is what happens when the strikes run out. The counter has to
-live outside the model, because from inside the loop attempt four looks
-exactly like attempt one -- and the harder half is what gets handed to the
-human at 2am, since a run that gave up with no account of what it tried is
-worse than one that never started.
-
-The organising question across all four is *who can change the outcome*. Bad
-arguments is the only case where the model retrying is right and the harness
-retrying is useless -- and it is the one case LangGraph's `ToolNode` handles
-by default, reporting `ToolInvocationError` back and re-raising everything
-else. There is no retry anywhere in LangGraph.
-
-
-Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
-nothing goes wrong and the question is unanswered anyway; in ch04 something
-goes wrong and we choose what the model is told. Neither retries, because
-retrying needs a loop.
-
 
 Chapter 5 is a complete agentic loop in twelve lines of plain Python. Every
 chapter after it answers one question: *what did this buy over chapter 5?*
-Chapters 13 to 15 are admission, eviction and persistence — one problem, which
-is that the list is the state and the budget is finite — and everything up to
-ch15 stays in plain Python, so the framework's answers from ch16 on can be
-asked what they bought.
+Everything through ch20 stays in plain Python, so the framework's answers from
+ch21 on can be asked what they bought.
+
+Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
+nothing goes wrong and the question is unanswered anyway; in ch04 something
+goes wrong and we choose what the model is told. Neither retries, because
+retrying needs a loop.
+
+Chapters 7 to 10 are retry, following straight on from ch04's failure, and
+split four ways because they are four different questions. **Policy** is
+classification — transient or permanent, safe to call twice or not — and it is
+declared by the tool author, because nobody else knows. **By local** is the
+harness calling again: no model, no tokens, bounded by backoff, and correct
+only when the outcome can change. **By model** is the model asking again after
+reading an error: a full turn each time, on a list that has grown by a request
+and a failure, so attempt three costs more than attempt one. **Exhausted** is
+what happens when the strikes run out. The counter has to live outside the
+model, because from inside the loop attempt four looks exactly like attempt
+one — and the harder half is what gets handed to the human at 2am, since a run
+that gave up with no account of what it tried is worse than one that never
+started.
+
+The organising question across retry is *who can change the outcome*. Bad
+arguments is the only case where the model retrying is right and the harness
+retrying is useless — and it is the one case LangGraph's `ToolNode` handles by
+default, reporting `ToolInvocationError` back and re-raising everything else.
+There is no retry anywhere in LangGraph.
+
+Chapters 11 and 12 are orchestration, and they differ only in who chooses the
+sequence. **Supervisor** is the pattern with the cheapest mechanism: a tool
+whose implementation is another loop. Nothing new is needed -- `execute_tool`
+dispatches, and the thing it calls happens to run its own `while` and return a
+string -- which is why multi-agent arrives here, in plain Python, rather than
+with the framework. It is also the first chapter where nesting is not merely
+depth, and where `seq` and `thread`, recorded independently of nesting since
+chapter 1, start to earn their keep.
+
+A supervisor is a pattern; a subgraph is one way to build it. Chapter 25 is
+that way, and having ch11 first is what makes it answerable: call-and-return
+against handoff, an isolated worker against a shared message list, one string
+coming back against a worker's whole transcript merging into the parent's
+context and its bill.
+
+Chapter 12 is the counterweight to chapter 5 and asks the question the rest of
+the primer assumes away: the same job as a fixed sequence, with nothing
+deciding anything, is cheaper, deterministic and testable. A workflow needs no
+framework either, so it stays plain Python — and it is the reason ch21 lands
+as it does, because a `StateGraph` is a workflow engine of which the agent
+loop is one special case.
+
+Chapters 13 and 14 are streaming, and they change the recorder before they
+change a chapter. Every request up to here carries `"stream": false`, and
+`_build_wire_hooks` calls `response.read()` — which consumes a body that has
+not finished arriving. So `support/` learns to record events as they arrive,
+with their arrival times, and the chapters follow. A reply stops being an
+object and becomes a sequence; `model_provider_ms` stops being one number and
+becomes an interval with a first token somewhere inside it. In ch14 the tool
+arguments arrive as fragments of a JSON string, so a tool call cannot be
+parsed, judged or dispatched until the stream ends — which is the sharpest
+governance question in the primer, because a judge wants the whole turn and a
+streaming interface has already shown the user half of it.
+
+Chapters 15 to 17 are the seam. **Hooks** is the mechanism: the named points
+in the loop — before the model, after the reply, before dispatch, after the
+result, around a turn, around the run — and the three powers a hook can have,
+in increasing order of danger: observe, modify, veto. The `Trace` from chapter
+1 is already the first of these; it observes at exactly those points and was
+never called a hook. **Guards** adds veto, before dispatch. **Judge** adds a
+verdict on the reply, per turn rather than per run, which is the whole point:
+a finding that arrives after the run is a report, and a finding that arrives
+during it is a decision.
+
+Judge comes after retry rather than before it, so the strike machinery is
+already built on the concrete case. A judge's rejection is a second trigger
+for the counter from ch10, and it looks nothing like a tool that failed —
+which is easier to see once the first trigger works.
+
+Chapters 18 to 20 are admission, eviction and persistence — one problem, which
+is that the list is the state and the budget is finite.
 
 ## Documented deviations from the code standard
 
