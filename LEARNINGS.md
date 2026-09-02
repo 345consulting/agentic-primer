@@ -48,8 +48,14 @@ exhausted budget, a deadline, a full context window, no progress, and a veto.
 Six of the seven are stops rather than completions, and a summary that does not
 distinguish them reports a run that gave up as a run that finished.
 
-So the definition holds, with one word doing more work than it looks:
-*until*.
+So the definition holds. The six are limits, not the condition — any loop can
+have a cap, and only an agent asks something else whether to continue. When a
+limit fires the run did not finish, it was stopped, which is why the summary
+has to say which.
+
+That is also the line between an agent and a workflow, and the whole of
+`ch13_workflow`: a workflow's exit condition is set at write time, an agent's
+at run time, by something that is not you.
 
 ---
 

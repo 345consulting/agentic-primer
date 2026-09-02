@@ -1,18 +1,29 @@
 # The agentic primer — the mechanics of an agentic harness
 
-> An agent is a loop that sends the whole context to a model, executes whatever
-> the model requests, appends the results to that same context, and repeats —
-> until the model asks for nothing further. The harness owns the list and every
-> decision about it; the model only ever gets a vote.
+> **An agent is a loop whose exit condition is set by the model.**
+
+Unpacked:
+
+> It sends the whole context to a model, executes whatever the model requests,
+> appends the results to that same context, and repeats — until the model asks
+> for nothing further. The harness owns the list and every decision about it;
+> the model only ever gets a vote.
 
 That is the whole subject. Chapter 5 is that paragraph in twelve lines of plain
 Python, chapters 1 to 4 build up to it one idea at a time, and every chapter
 after it answers a single question: *what did this buy over chapter 5?*
 
-Two words in that definition do the work. **Requests** — the model never
-executes anything and never decides anything; it emits a name and some
-arguments and stops. **Owns** — the list is the only state there is, so
-whoever owns the list owns the agent.
+Two words do the work. **Requests** — the model never executes anything and
+never decides anything; it emits a name and some arguments and stops. **Owns**
+— the list is the only state there is, so whoever owns the list owns the agent.
+
+And the one-line version is what separates an agent from everything else it
+resembles: a workflow's exit condition is set at write time, an agent's at run
+time, by something else. A run has seven ways to end and only that one means
+finished; the other six — a cap, a truncated reply, a spent budget, a
+deadline, a full context window, no progress, a veto — are limits you imposed.
+Any loop can have limits. Only an agent asks something else whether to
+continue.
 
 A standalone project, owned by 345 Consulting, LLC. It exists to be read.
 
