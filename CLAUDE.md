@@ -80,17 +80,19 @@ ch21 stream_tools           tool arguments arrive as fragments of a JSON string
 ch22 hooks                  the named points in the loop, and the three powers
 ch23 guards                 a hook that can say no, before dispatch
 ch24 judge                  a hook that reads the reply, per turn and not per run
-ch25 mcp                    a dispatch table you did not write
-ch26 mcp_injection          descriptions you did not write, in a context you did
-ch27 skills                 a tool whose result is instructions, not data
-ch28 compression            the list is too long; what do you drop, and what does it cost?
-ch29 memory                 what survives when the list is thrown away
-ch30 graph                  the same behaviour as a StateGraph -- what did it buy?
-ch31 limits                 recursion_limit at the boundary
-ch32 checkpoint             MemorySaver, thread_id, resume -- and why that is not ch29
-ch33 interrupt              interrupt and Command(resume=...) as an approval gate
-ch34 subgraph               the ch18 supervisor as a graph node -- what did it buy?
-ch35 parallel               fan-out, Send, join, and the order things merge in
+ch25 prompt_types           everything that enters the context is a prompt
+ch26 mcp                    a dispatch table you did not write
+ch27 mcp_injection          descriptions you did not write, in a context you did
+ch28 rag_injection          a document you did not write, telling the model what to do
+ch29 skills                 a tool whose result is instructions, not data
+ch30 compression            the list is too long; what do you drop, and what does it cost?
+ch31 memory                 what survives when the list is thrown away
+ch32 graph                  the same behaviour as a StateGraph -- what did it buy?
+ch33 limits                 recursion_limit at the boundary
+ch34 checkpoint             MemorySaver, thread_id, resume -- and why that is not ch31
+ch35 interrupt              interrupt and Command(resume=...) as an approval gate
+ch36 subgraph               the ch18 supervisor as a graph node -- what did it buy?
+ch37 parallel               fan-out, Send, join, and the order things merge in
 ```
 
 Chapters 5 to 11 are one question: **why did this run stop?** It is the first
@@ -132,8 +134,8 @@ ch23 and ch24; the ending belongs with the others.
 
 Chapter 5 is a complete agentic loop in twelve lines of plain Python. Every
 chapter after it answers one question: *what did this buy over chapter 5?*
-Everything through ch29 stays in plain Python, so the framework's answers from
-ch30 on can be asked what they bought.
+Everything through ch31 stays in plain Python, so the framework's answers from
+ch32 on can be asked what they bought.
 
 Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
 nothing goes wrong and the question is unanswered anyway; in ch04 something
@@ -188,7 +190,7 @@ context and its bill.
 Chapter 19 is the counterweight to chapter 5 and asks the question the rest of
 the primer assumes away: the same job as a fixed sequence, with nothing
 deciding anything, is cheaper, deterministic and testable. A workflow needs no
-framework either, so it stays plain Python — and it is the reason ch30 lands
+framework either, so it stays plain Python — and it is the reason ch32 lands
 as it does, because a `StateGraph` is a workflow engine of which the agent
 loop is one special case.
 
@@ -219,8 +221,31 @@ already built on the concrete case. A judge's rejection is a second trigger
 for the counter from ch17, and it looks nothing like a tool that failed —
 which is easier to see once the first trigger works.
 
-Chapters 25 and 26 are MCP, and they are where a third party gets to write
-into a context we own. **MCP** is a dispatch table discovered at runtime, so
+Chapters 25 to 28 are foreign text. **prompt_types** is the general claim the
+other three are instances of: everything that enters the context is a prompt,
+whatever field carries it. The useful axis is not whether you control it — you
+control most of it — but **when it was authored, and who has read it since**.
+
+| authored | examples | last reviewed |
+| --- | --- | --- |
+| per conversation | system, user | as it is written |
+| at design time | tool descriptions, argument enums, error templates, skill bodies | once, months ago — or never, if a dependency wrote it |
+| during the run | tool results, retrieved documents, MCP descriptions, web pages | never, by anyone |
+
+The middle class is the one that surprises people, because it is theirs and
+they still never look at it as text a model obeys. A tool description lives in
+a docstring, and nobody reviews docstrings as prompt engineering — which is
+precisely the `ch02_tool_call` finding, where `part: str` against
+`Literal[...]` looked like a typing decision and was the only thing
+constraining what the model could ask for. LangGraph's error template, which
+appends "Please fix your mistakes", is in this class too, and nobody chose it.
+
+So the risk gradient is not control, it is attention. The surface people
+review is the system prompt they wrote; the surface that steers the model is
+much wider and mostly unread.
+
+**mcp** and **mcp_injection** are where a third party gets to write into a
+context we own. **MCP** is a dispatch table discovered at runtime, so
 `DECLARED_TOOLS` stops being a literal, the declaration order becomes whatever
 a server returned — quietly forfeiting the stable prefix the cache finding
 depends on — and `tools/list` is a round trip that has to succeed before a
@@ -229,11 +254,16 @@ description is a prompt, written by whoever runs the server, re-sent on every
 call, and invisible to the user who sees only a tool name. Chapter 4 taught
 that the error text is a prompt; this is the general case, which is that every
 string entering the context is a prompt and some were written by strangers.
+**rag_injection** is the same attack through the commonest door: a retrieved
+document containing instructions, arriving as an ordinary tool result. No
+vector store is needed to show it — a search tool returning text is enough,
+which is the point.
+
 They come after guards on purpose: the seam should exist before a stranger is
 plugged into it, and "which of these tools can I actually gate" is a better
 question than "what is a guard".
 
-Chapters 27 to 29 are admission, eviction and persistence — one problem, which
+Chapters 29 to 31 are admission, eviction and persistence — one problem, which
 is that the list is the state and the budget is finite.
 
 ## Documented deviations from the code standard
