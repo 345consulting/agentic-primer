@@ -5,7 +5,7 @@ the ground up, one chapter at a time — no framework abstractions hiding the
 loop, and a trace of every entry and exit so the decision points are readable
 rather than inferred.
 
-Not a product, not a client project, not HiQ. It exists to be read.
+A learning artifact, not a product and not a client project. It exists to be read.
 
 ## Build
 
@@ -278,10 +278,6 @@ order, and the ladder below has been renumbered four times in one day.
 `deepseek-v4-flash`, chosen for price: cheap enough that running a chapter live
 is routine rather than an event. Live runs need `DEEPSEEK_API_KEY` in the
 environment and there is no fallback — absent the key, the run fails.
-
-Per the entity rules this is a `345c.*` secret and belongs in GCP Secret
-Manager, not in HiQ's SSM. **Currently it is neither** — it lives in a mode-600
-file in /tmp, which is a stopgap, not a home.
 
 ## Gotchas
 

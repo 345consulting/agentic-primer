@@ -31,10 +31,13 @@ the httpx hooks in `support/models.py` being worth their keep, beyond
 curiosity. Any field a recorder does not capture must be a field it was
 *decided* not to capture, written down as such. Silence is not a decision.
 
-**Where it applies beyond the primer.** `src/audit/callbacks.py` records
-`gen_ai.*` on model events and was written against the same assumption about
-what an `AIMessage` carries. Unverified as of this date. Reasoning tokens are
-billed and may be unaccounted for.
+**Where it applies beyond the primer.** Any recorder that reads token usage
+off a normalized message inherits the same assumption. Reasoning is a subset
+of output tokens rather than an addition — `completion_tokens: 21` with
+`reasoning_tokens: 18` — so a log keeping only `output_tokens` gets the bill
+right and loses the breakdown. "21 tokens for a one-sentence answer" and
+"3 tokens of answer, 18 of reasoning" are materially different records, and
+only one of them is true.
 
 ---
 
