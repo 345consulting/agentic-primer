@@ -59,23 +59,62 @@ What is not written yet is a plan, and a plan is prose:
 ch01 single_call      one invoke; no tools, no loop, no framework      written
 ch02 tool_call        the model asks; we execute; turn two knows       written
 ch03 missing_tool     no tool covers the question, and nothing fails   written
-ch04 tool_failure     the tool runs and raises; we decide what the model sees
+ch04 tool_failure     the tool runs and raises; we decide what the model sees   written
 ch05 the_loop         the whole loop, twelve lines of plain Python
 ch06 two_tools        two calls in one reply -- still ONE turn
-ch07 retry_policy     transient or permanent, and who is allowed to say so
-ch08 retry_by_local   the harness calls again: no model, no tokens, backoff
-ch09 retry_by_model   the model asks again: a full turn, and a longer list
-ch10 retry_exhausted  out of strikes: escalate, and with what context?
-ch11 skills           a tool whose result is instructions, not data
-ch12 compression      the list is too long; what do you drop, and what does it cost?
-ch13 memory           what survives when the list is thrown away
-ch14 graph            the same behaviour as a StateGraph -- what did it buy?
-ch15 limits           recursion_limit at the boundary
-ch16 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch13
-ch17 interrupt        interrupt and Command(resume=...) as an approval gate
-ch18 subgraph         a graph as a node -- a supervisor, from the ground up
-ch19 parallel         fan-out, Send, join, and the order things merge in
+ch07 stream           "stream": true -- a reply arrives in pieces
+ch08 stream_tools     tool arguments arrive as fragments of a JSON string
+ch09 retry_policy     transient or permanent, and who is allowed to say so
+ch10 retry_by_local   the harness calls again: no model, no tokens, backoff
+ch11 retry_by_model   the model asks again: a full turn, and a longer list
+ch12 retry_exhausted  out of strikes: escalate, and with what context?
+ch13 skills           a tool whose result is instructions, not data
+ch14 compression      the list is too long; what do you drop, and what does it cost?
+ch15 memory           what survives when the list is thrown away
+ch16 graph            the same behaviour as a StateGraph -- what did it buy?
+ch17 limits           recursion_limit at the boundary
+ch18 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch15
+ch19 interrupt        interrupt and Command(resume=...) as an approval gate
+ch20 subgraph         a graph as a node -- a supervisor, from the ground up
+ch21 parallel         fan-out, Send, join, and the order things merge in
 ```
+
+Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
+nothing goes wrong and the question is unanswered anyway; in ch04 something
+goes wrong and we choose what the model is told. Neither retries, because
+retrying needs a loop.
+
+Chapters 7 and 8 are streaming, and they change the recorder before they
+change a chapter. Every request up to here carries `"stream": false`, and
+`_build_wire_hooks` calls `response.read()` -- which consumes a body that has
+not finished arriving. So `support/` learns to record events as they arrive,
+with their arrival times, and the chapters follow. A reply stops being an
+object and becomes a sequence; `model_provider_ms` stops being one number and
+becomes an interval with a first token somewhere inside it. In ch08 the tool
+arguments arrive as fragments of a JSON string, so a tool call cannot be
+parsed, judged or dispatched until the stream ends -- which is the sharpest
+governance question in the primer, because a judge wants the whole turn and a
+streaming interface has already shown the user half of it.
+
+Chapters 9 to 12 are retry, split four ways because they are four different
+questions. **Policy** is classification -- transient or permanent, safe to
+call twice or not -- and it is declared by the tool author, because nobody
+else knows. **By local** is the harness calling again: no model, no tokens,
+bounded by backoff, and correct only when the outcome can change. **By model**
+is the model asking again after reading an error: a full turn each time, on a
+list that has grown by a request and a failure, so attempt three costs more
+than attempt one. **Exhausted** is what happens when the strikes run out. The
+counter has to live outside the model, because from inside the loop attempt
+four looks exactly like attempt one -- and the harder half is what gets handed
+to the human at 2am, since a run that gave up with no account of what it tried
+is worse than one that never started.
+
+The organising question across all four is *who can change the outcome*. Bad
+arguments is the only case where the model retrying is right and the harness
+retrying is useless -- and it is the one case LangGraph's `ToolNode` handles
+by default, reporting `ToolInvocationError` back and re-raising everything
+else. There is no retry anywhere in LangGraph.
+
 
 Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
 nothing goes wrong and the question is unanswered anyway; in ch04 something
@@ -110,9 +149,9 @@ retrying needs a loop.
 
 Chapter 5 is a complete agentic loop in twelve lines of plain Python. Every
 chapter after it answers one question: *what did this buy over chapter 5?*
-Chapters 11 to 13 are admission, eviction and persistence — one problem, which
+Chapters 13 to 15 are admission, eviction and persistence — one problem, which
 is that the list is the state and the budget is finite — and everything up to
-ch13 stays in plain Python, so the framework's answers from ch14 on can be
+ch15 stays in plain Python, so the framework's answers from ch16 on can be
 asked what they bought.
 
 ## Documented deviations from the code standard
