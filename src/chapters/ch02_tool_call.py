@@ -26,7 +26,6 @@ Three things to read the trace for, none of which happened in chapter 1:
    that survive.
 """
 
-from support.cli import main
 from support.models import build_model
 from support.trace import ModelKind, Trace
 
@@ -39,7 +38,7 @@ from langchain_core.tools import tool
 
 SYSTEM_PROMPT = "You answer briefly and plainly. Use the tools you are given."
 
-USER_PROMPT = "Do we have enough flanges on hand to fill an order for 40?"
+USER_PROMPT = "Do we have enough milk for the week? We need four."
 
 
 # A tool is a function plus a description of it. The decorator only builds the
@@ -48,23 +47,23 @@ USER_PROMPT = "Do we have enough flanges on hand to fill an order for 40?"
 # is exactly what happens below.
 # A fact the model cannot know and cannot guess. That is the point: if the
 # answer in turn two is right, it is right because the tool ran.
-STOCK_ON_HAND = {"flange": 17, "grommet": 240}
+STOCK_ON_HAND = {"bread": 2, "butter": 1, "chips": 6, "milk": 2}
 
 # The argument is an enum, not a string, and the enum is in the request body.
 # This is the only thing constraining what the model may ask for -- the first
-# live run of this chapter declared `part: str`, the model asked for "flanges",
+# live run of this chapter declared the argument as `str`, the model asked
 # and a lookup with a default answered 0. The model then reported that as fact.
 # See FINDINGS.md, 2026-09-01.
-type StockedPart = Literal["flange", "grommet"]
+type GroceryItem = Literal["bread", "butter", "chips", "milk"]
 # A test asserts these two agree; a Literal cannot be built from a dict.
 
 
 @tool
-def stock_on_hand(part: StockedPart) -> int:
-    """How many of a part are currently in stock."""
+def stock_on_hand(item: GroceryItem) -> int:
+    """How many of an item are currently in stock."""
     # No default. An argument outside the schema is a broken premise, not a
     # zero -- and a tool that answers anyway is worse than one that fails.
-    return STOCK_ON_HAND[part]
+    return STOCK_ON_HAND[item]
 
 
 # Ours to dispatch, keyed by the name the model will use. This dict and the
@@ -77,14 +76,12 @@ TOOLS: dict[str, Any] = {stock_on_hand.name: stock_on_hand}
 MOCK_MODEL_REQUESTS_TOOL = [
     # No content at all, just a request. This is what a tool call looks like:
     # the model stops mid-thought and waits for the program.
-    AIMessage(
-        "", tool_calls=[{"name": "stock_on_hand", "args": {"part": "flange"}, "id": "call_1"}]
-    )
+    AIMessage("", tool_calls=[{"name": "stock_on_hand", "args": {"item": "milk"}, "id": "call_1"}])
 ]
 
 MOCK_MODEL_ANSWERS = [
     # The answer, which exists only because the result came back.
-    AIMessage("No -- there are 17 flanges on hand, which is 23 short of 40.")
+    AIMessage("No -- there are two in the fridge, so you are two short.")
 ]
 
 
@@ -167,7 +164,3 @@ def run(model_kind: ModelKind = "mock") -> Trace:
     ended = "no tool_calls" if not reply.tool_calls else "out of written turns"
     trace.close(turns=2, messages=len(messages), ended=ended)
     return trace
-
-
-if __name__ == "__main__":
-    main(run)

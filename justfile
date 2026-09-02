@@ -14,13 +14,10 @@ list:
 book:
     PYTHONPATH=src uv run python -m support.view
 
-# run one chapter against the mock model, and open its trace
-run CHAPTER:
-    PYTHONPATH=src uv run python -m chapters.{{CHAPTER}}
-
-# run one chapter against a real provider — requires DEEPSEEK_API_KEY
-run-live CHAPTER:
-    PYTHONPATH=src uv run python -m chapters.{{CHAPTER}} live
+# run one chapter and write its page. Add `live` for the real model provider,
+# which needs DEEPSEEK_API_KEY set and costs money:  just run ch01_... live
+run CHAPTER *LIVE:
+    PYTHONPATH=src uv run python -m run {{CHAPTER}} {{LIVE}}
 
 clean:
     rm -rf .pytest_cache .mypy_cache .ruff_cache out

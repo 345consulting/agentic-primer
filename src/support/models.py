@@ -23,7 +23,7 @@ from typing import Any, Self, override
 
 import httpx
 from langchain_core.callbacks import CallbackManagerForLLMRun
-from langchain_core.language_models import BaseChatModel
+from langchain_core.language_models import BaseChatModel, LanguageModelInput
 from langchain_core.messages import AIMessage, BaseMessage
 from langchain_core.outputs import ChatGeneration, ChatResult
 from langchain_deepseek import ChatDeepSeek
@@ -131,6 +131,41 @@ class MockModel(BaseChatModel):
         return ChatResult(generations=[ChatGeneration(message=reply)])
 
 
+class ThinkingModel(ChatDeepSeek):
+    """`ChatDeepSeek`, with the reasoning it was sent put back on the way out.
+
+    `langchain-deepseek` carries `reasoning_content` inbound, into
+    `additional_kwargs` -- verified against the wire, and the subject of the
+    finding dated 2026-09-01. It does not carry it back out: the assistant
+    message it re-serializes for the next turn has `content`, `role` and
+    `tool_calls` and nothing else.
+
+    DeepSeek's thinking mode requires it back, and answers 400 when it is
+    missing -- but only sometimes, because whether turn one produced any
+    reasoning is the model's choice. A multi-turn tool-calling run therefore
+    fails intermittently, which is the worst way for a defect to present.
+
+    This is a workaround for a library defect, not a lesson. It lives here
+    because a chapter that carried it would be teaching the shape of someone
+    else's bug.
+    """
+
+    @override
+    def _get_request_payload(
+        self, input_: LanguageModelInput, *, stop: list[str] | None = None, **kwargs: Any
+    ) -> dict[str, Any]:
+        payload = super()._get_request_payload(input_, stop=stop, **kwargs)
+        sent = self._convert_input(input_).to_messages()
+        # The payload's messages are positional with the input's, so pair them
+        # and restore what the conversion dropped. Only assistant messages that
+        # actually carried reasoning are touched.
+        for message, serialized in zip(sent, payload.get("messages", []), strict=True):
+            reasoning = message.additional_kwargs.get("reasoning_content")
+            if isinstance(message, AIMessage) and reasoning:
+                serialized["reasoning_content"] = reasoning
+        return payload
+
+
 def build_live_model(span: Span) -> BaseChatModel:
     """A real model provider, with the wire recorded either side of the library.
 
@@ -147,7 +182,7 @@ def build_live_model(span: Span) -> BaseChatModel:
         raise RuntimeError(
             f"environment variable ['{LIVE_KEY}'] is not set; a live run has no fallback"
         )
-    return ChatDeepSeek(
+    return ThinkingModel(
         model=LIVE_MODEL, timeout=60, http_client=httpx.Client(event_hooks=_build_wire_hooks(span))
     )
 

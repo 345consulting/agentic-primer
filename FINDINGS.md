@@ -166,3 +166,135 @@ the model never ran, and in an agent loop that means the tool never ran either
 global; switched on here it would return instantly, the httpx hooks would
 record nothing, and `provider_ms` would read as a fast provider rather than a
 call that never happened. Cache the deterministic parts; never the decision.
+
+---
+
+## 2026-09-01 — The model retried the tool because we kept declaring it
+
+**What happened.** An earlier draft of chapter 3 declared a tool it could not
+dispatch, reported the miss back as a `ToolMessage` with `status="error"`, and
+watched the live model call the same tool again — twice, on two separate runs.
+The obvious reading was that reporting a failure invites a retry, and that a
+harness therefore needs a counter.
+
+The trace said otherwise. Turn two's request body:
+
+```
+tools sent   = ['stock_on_hand', 'restock_eta']
+tool message = "tool ['restock_eta'] is not available"
+```
+
+The tool list is sent on every call, so the request that told the model the
+tool had failed *also told it the tool existed* — and a schema in the `tools`
+array is a much stronger claim than one sentence in a message. The model was
+not being stubborn. It was resolving a contradiction we sent it, in our favour.
+
+**Why it matters.** The first conclusion was about the model, and it would have
+produced the wrong fix: firmer error wording, or a retry budget to contain
+behaviour that was never the model's to begin with. The real defect is ours,
+and the fix is structural — stop advertising a tool that cannot run. Nothing
+requires the declared list to be the same on every turn. Chapter 2 established
+that it is re-sent every time, which is exactly what makes it changeable.
+
+A retry budget is still worth having. It is just not what this was.
+
+**The rule.** When the model does something that looks irrational, read the
+request body before theorising about the model. The context is the only thing
+it has, and we assembled it.
+
+**How it was found.** By asking what was in the tool list, rather than by
+reading the reply again. The reply had already been read three times.
+
+---
+
+## 2026-09-01 — Some failures do not fail
+
+**What happened.** Chapter 3 asks when the next delivery of milk is expected.
+No tool answers that; the toolbox holds `stock_on_hand` and nothing else. The
+live model did not refuse and did not invent a tool -- the declaration is
+enforced by the model provider before a call exists, so a name we never sent
+cannot come back. It called `stock_on_hand("milk")`, got 2, and answered:
+"I don't have access to delivery schedules. There are currently 2 units of
+milk in stock."
+
+The run cost a turn, a tool call and two round trips. It answered a question
+nobody asked and apologised in prose for the one they did.
+
+**Why it matters.** Read the trace as a harness would. Every span opened and
+closed. The tool call succeeded and returned a real number. The reply came
+back `finish_reason: stop` with no tool calls, so the loop terminated the way
+a finished conversation terminates. There is no error, no exception, no retry,
+no status field set to anything but success.
+
+A dashboard counting tool calls and completions scores this run as clean. So
+would a judge that checks the loop terminated properly, and so would every
+assertion in this repository before the ones written for this chapter.
+
+The only evidence that anything went wrong is a sentence of English inside the
+final message, and prose is not a field.
+
+**The rule.** Tool coverage is not observable from the trace. A harness can
+verify that a call succeeded, that a loop terminated, that every span closed --
+and none of that distinguishes an answered question from an unanswerable one.
+If coverage matters, something has to compare the question to the toolbox, and
+that comparison is a judgement, not a metric.
+
+**Where it applies beyond the primer.** This is the case a per-turn judge
+exists for, and it is a sharper argument for one than a wrong answer would be:
+a wrong answer at least produces something to disagree with. Here the model
+behaved correctly at every step, the harness behaved correctly at every step,
+and the user did not get an answer.
+
+**Not reproducible on demand.** One live run in three skipped the tool call
+entirely and answered directly. The substitution is a tendency, not a rule --
+which means a harness cannot even count on the wasted call being there to see.
+
+---
+
+## 2026-09-01 — LangChain carries reasoning inbound and drops it outbound
+
+**What happened.** Chapter 3's live run failed with a 400 from DeepSeek:
+
+```
+The `reasoning_content` in the thinking mode must be passed back to the API.
+```
+
+Intermittently: two failures and one success on the same code, while chapter 2
+passed. The trace has both halves of the explanation in one place.
+
+```
+turn 1 reply      carried reasoning_content = True
+turn 2 sent back  assistant keys: ['content', 'role', 'tool_calls']
+```
+
+`langchain-deepseek` preserves `reasoning_content` **inbound**, into
+`additional_kwargs`. `_convert_message_to_dict` in `langchain_openai` then
+builds the outbound assistant message from known fields only — content, role,
+tool calls — so the reasoning is dropped on the way back. DeepSeek's thinking
+mode requires it, and rejects the request without it.
+
+It is intermittent because whether turn one produced any reasoning at all is
+the model's choice. A multi-turn tool-calling conversation therefore fails
+some of the time, for reasons that have nothing to do with the conversation.
+
+**Why it matters.** This is the same field as the finding at the top of this
+file, found the same way, and it contradicts the conclusion drawn there. That
+one recorded a mistake: a dependency defect asserted from an absence in our own
+instrument, when the adapter had preserved the field correctly and the recorder
+had dropped it. This time the defect is real and it is the adapter's — and the
+difference between the two is not judgement, it is that both were checked
+against the wire.
+
+"LangChain normalizes, and the normalization is lossy in both directions" was
+a slogan in CLAUDE.md. It is now a subclass in `support/models.py`.
+
+**The fix.** `ThinkingModel` overrides `_get_request_payload`, pairs the
+serialized messages with the ones that went in, and restores
+`reasoning_content` on any assistant message that carried it. Three live runs,
+no 400. It is a workaround for someone else's defect, so it lives in
+`support/`, not in a chapter — a chapter carrying it would be teaching the
+shape of a library bug.
+
+**Worth reporting upstream.** Any provider whose API requires reasoning to be
+echoed will hit this, and the failure mode is a 400 that appears only when the
+model happens to think.

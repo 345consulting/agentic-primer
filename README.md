@@ -18,9 +18,9 @@ A standalone project, owned by 345 Consulting, LLC. It exists to be read.
 
     just list                 every chapter on disk, in order
     just run ch01_single_call runs it, writes out/<chapter>.html, prints the path
-    just run-live ch01_...    the same chapter against a real provider
+    just run ch01_... live    the same chapter against the model provider
     just book                 every chapter that has been run, on one page
-    just gate                 ruff + format + mypy + pytest
+    just gate                 ruff + format + mypy + basedpyright + pytest
 
 ## How it is laid out
 

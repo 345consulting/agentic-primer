@@ -33,8 +33,8 @@ def test_we_dispatched_the_tool_ourselves() -> None:
     trace = ch02_tool_call.run()
     (tool,) = trace.find_spans("tool")
     assert tool.attributes["name"] == "stock_on_hand"
-    assert dict(tool.notes[0].payload) == {"part": "flange"}
-    assert tool.notes[1].payload["value"] == 17
+    assert dict(tool.notes[0].payload) == {"item": "milk"}
+    assert tool.notes[1].payload["value"] == 2
 
 
 def test_the_result_re_enters_the_context_as_a_message() -> None:
@@ -43,7 +43,7 @@ def test_the_result_re_enters_the_context_as_a_message() -> None:
     trace = ch02_tool_call.run()
     sent = trace.find_spans("model")[1].context
     assert [m["role"] for m in sent] == ["system", "human", "ai", "tool"]
-    assert sent[-1]["content"] == "17"
+    assert sent[-1]["content"] == "2"
 
 
 def test_the_id_ties_the_result_to_the_request_that_asked_for_it() -> None:
@@ -67,11 +67,11 @@ def test_every_span_that_was_entered_was_exited() -> None:
 def test_the_schema_and_the_lookup_allow_exactly_the_same_parts() -> None:
     """The pairing that produced the finding of 2026-09-01, guarded.
 
-    `StockedPart` is what the request body permits the model to ask for; STOCK_ON_HAND
+    `GroceryItem` is what the request body permits the model to ask for; STOCK_ON_HAND
     is what the tool can answer. A Literal cannot be built from a dict, so the
     two are written by hand and this is what keeps them honest. Drift one way
-    hides a part the model can never reach; the other way advertises a part
+    hides an item the model can never reach; the other way advertises one
     that raises when asked for.
     """
-    permitted = set(get_args(ch02_tool_call.StockedPart.__value__))
+    permitted = set(get_args(ch02_tool_call.GroceryItem.__value__))
     assert permitted == set(ch02_tool_call.STOCK_ON_HAND)

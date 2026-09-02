@@ -12,10 +12,10 @@ Not a product, not a client project, not HiQ. It exists to be read.
 Run every recipe from this directory.
 
 ```
-just list                      the reading order
+just list                      every chapter on disk, in order
 just run ch01_single_call      mock run; writes out/<chapter>.html
-just run-live ch01_single_call the same chapter against a real provider
-just gate                      ruff + ruff format --check + mypy --strict + pytest
+just run ch01_single_call live the same chapter against the model provider
+just gate                      ruff + format + mypy + basedpyright + pytest
 ```
 
 `just gate` is the quality gate: zero violations, zero errors, zero findings.

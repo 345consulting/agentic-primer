@@ -29,7 +29,6 @@ Five things a live run shows that a mock run cannot, all of them visible in
 5. There is a `refusal` field. It is null here.
 """
 
-from support.cli import main
 from support.models import build_model
 from support.trace import ModelKind, Trace
 
@@ -98,7 +97,3 @@ def run(model_kind: ModelKind = "mock") -> Trace:
     ended = "no tool_calls" if not reply.tool_calls else "nowhere to put a tool call"
     trace.close(turns=1, messages=len(messages), ended=ended)
     return trace
-
-
-if __name__ == "__main__":
-    main(run)
