@@ -13,6 +13,46 @@ Append, never rewrite. Date each entry.
 
 ---
 
+## 2026-09-01 — An agent is a loop whose exit condition is set by the model
+
+*Synthesis, and the first one. It came out of a conversation, was corrected
+twice, and has been amended once since by what the chapters did.*
+
+**The definition.**
+
+> An agent is a loop that sends the whole context to a model, executes whatever
+> the model requests, appends the results to that same context, and repeats —
+> until the model asks for nothing further. The harness owns the list and every
+> decision about it; the model only ever gets a vote.
+
+**Two words carry it.** *Requests* — the model never executes and never
+decides; it emits a name and some arguments and stops, and whether anything
+runs is the harness's call. *Owns* — the list is the only state there is, so
+whoever owns the list owns the agent. Language like "the agent decides to use
+a tool" hides exactly the seam a harness needs.
+
+**What it excludes.** Communication is not the subject; that is transport, and
+it is solved. Tools are not the subject either — they are what a turn may
+contain. The subject is the condition: go round again, or stop. A framework
+does not add agency; `ch05_the_loop` will have all of it in twelve lines. What
+a framework adds is management — persistence, concurrency, resumption, limits.
+
+**`ch01_single_call` was already an agent**, in the degenerate case: zero
+iterations, because the first reply asked for nothing. Nothing was missing; the
+condition was false the first time.
+
+**Amended 2026-09-02.** "Until the model asks for nothing further" is the happy
+path, and it is one of seven ways a run ends. The others are a turn cap, a
+truncated reply that the loop's own condition reads as completion, an
+exhausted budget, a deadline, a full context window, no progress, and a veto.
+Six of the seven are stops rather than completions, and a summary that does not
+distinguish them reports a run that gave up as a run that finished.
+
+So the definition holds, with one word doing more work than it looks:
+*until*.
+
+---
+
 ## 2026-09-01 — a recorder that omits a field looks exactly like a provider that never sent it
 
 **What happened.** The first live run of `ch01_single_call` showed
