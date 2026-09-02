@@ -58,26 +58,62 @@ What is not written yet is a plan, and a plan is prose:
 ```
 ch01 single_call      one invoke; no tools, no loop, no framework      written
 ch02 tool_call        the model asks; we execute; turn two knows       written
-ch03 missing_tool     the model asks for what is not there; who decides?
-ch04 two_tools        two calls in one reply -- still ONE turn
+ch03 missing_tool     no tool covers the question, and nothing fails   written
+ch04 tool_failure     the tool runs and raises; we decide what the model sees
 ch05 the_loop         the whole loop, twelve lines of plain Python
-ch06 skills           a tool whose result is instructions, not data
-ch07 compression      the list is too long; what do you drop, and what does it cost?
-ch08 memory           what survives when the list is thrown away
-ch09 graph            the same behaviour as a StateGraph -- what did it buy?
-ch10 limits           recursion_limit at the boundary
-ch11 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch08
-ch12 interrupt        interrupt and Command(resume=...) as an approval gate
-ch13 subgraph         a graph as a node -- a supervisor, from the ground up
-ch14 parallel         fan-out, Send, join, and the order things merge in
+ch06 two_tools        two calls in one reply -- still ONE turn
+ch07 retry_policy     transient or permanent, and who is allowed to say so
+ch08 retry_by_local   the harness calls again: no model, no tokens, backoff
+ch09 retry_by_model   the model asks again: a full turn, and a longer list
+ch10 retry_exhausted  out of strikes: escalate, and with what context?
+ch11 skills           a tool whose result is instructions, not data
+ch12 compression      the list is too long; what do you drop, and what does it cost?
+ch13 memory           what survives when the list is thrown away
+ch14 graph            the same behaviour as a StateGraph -- what did it buy?
+ch15 limits           recursion_limit at the boundary
+ch16 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch13
+ch17 interrupt        interrupt and Command(resume=...) as an approval gate
+ch18 subgraph         a graph as a node -- a supervisor, from the ground up
+ch19 parallel         fan-out, Send, join, and the order things merge in
 ```
+
+Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
+nothing goes wrong and the question is unanswered anyway; in ch04 something
+goes wrong and we choose what the model is told. Neither retries, because
+retrying needs a loop.
+
+Chapters 7 to 10 are retry, split four ways because they are four different
+questions. **Policy** is classification -- transient or permanent, safe to
+call twice or not -- and it is declared by the tool author, because nobody
+else knows. **Local** is the harness calling again: no model, no tokens,
+bounded by backoff, and correct only when the outcome can change. **Model** is
+the model asking again after reading an error: a full turn each time, on a
+list that has grown by a request and a failure, so attempt three costs more
+than attempt one. **Exhausted** is what happens when the strikes run out. The counter has to
+live outside the model, because from inside the loop attempt four looks
+exactly like attempt one -- and the harder half is what gets handed to the
+human at 2am, since a run that gave up with no account of what it tried is
+worse than one that never started.
+
+The organising question across all four is *who can change the outcome*. Bad
+arguments is the only case where the model retrying is right and the harness
+retrying is useless -- and it is the one case LangGraph's `ToolNode` handles
+by default, reporting `ToolInvocationError` back and re-raising everything
+else. There is no retry anywhere in LangGraph.
+
+
+Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
+nothing goes wrong and the question is unanswered anyway; in ch04 something
+goes wrong and we choose what the model is told. Neither retries, because
+retrying needs a loop.
+
 
 Chapter 5 is a complete agentic loop in twelve lines of plain Python. Every
 chapter after it answers one question: *what did this buy over chapter 5?*
-Chapters 6 to 8 are admission, eviction and persistence — one problem, which
-is that the list is the state and the budget is finite — and they stay in
-plain Python so the framework's answers from ch09 on can be asked what they
-bought.
+Chapters 11 to 13 are admission, eviction and persistence — one problem, which
+is that the list is the state and the budget is finite — and everything up to
+ch13 stays in plain Python, so the framework's answers from ch14 on can be
+asked what they bought.
 
 ## Documented deviations from the code standard
 
