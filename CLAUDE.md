@@ -132,7 +132,7 @@ and must not be recorded as either of the first two. The mechanism arrives in
 ch23 and ch24; the ending belongs with the others.
 
 
-**Chapters 1 to 3 are the atom, one clause of the definition each.**
+**Chapters 1 to 3 are the atomic agent, one clause of the definition each.**
 
     a loop that sends the whole context to a model            ch01
     executes whatever the model requests, appends the results ch02
@@ -143,17 +143,18 @@ degenerate case — zero iterations, the condition false the first time. `ch02`
 without `ch03` is a guess about depth. `ch03` without tools never iterates.
 
 The turn cap in `ch03` is the one thing there that is not in the definition.
-It is prudence, not the atom: shipping an unbounded `while` is irresponsible,
-and the model's own ending is still the only one that means finished.
+It is prudence, not part of the atomic agent: shipping an unbounded `while` is
+irresponsible, and the model's own ending is still the only one that means
+finished.
 
 **Everything after ch03 is a variation, an addition, or the framework.**
-Variations are the same atom under conditions it did not choose — no tool
-covers the question, a tool raises, two calls arrive at once, a table someone
-else wrote, a result that is instructions, a reply that arrives in pieces.
-Additions are machinery the atom does not have — retry policy, bounds, hooks,
-guards, judge, compression, memory. `ch19_workflow` is neither: it is the
+Variations are the same atomic agent under conditions it did not choose — no
+tool covers the question, a tool raises, two calls arrive at once, a table
+someone else wrote, a result that is instructions, a reply that arrives in
+pieces. Additions are machinery the atomic agent does not have — retry policy,
+bounds, hooks, guards, judge, compression, memory. `ch19_workflow` is neither: it is the
 contrast, an exit condition set at write time. And `ch18_supervisor` is the
-atom containing itself, which is why it needs no new machinery.
+atomic agent containing itself, which is why it needs no new machinery.
 
 Those groups are a way to read the ladder, not a way to sort it — the order
 follows dependencies instead. A veto needs guards, an injection needs a table

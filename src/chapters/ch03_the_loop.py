@@ -11,8 +11,8 @@ Here it is a condition, so the number of turns becomes a property of the run.
 This chapter completes the definition. `ch01_single_call` was the context and
 who owns it, `ch02_tool_call` was the request and the execution, and this is
 the condition -- one clause each, and nothing left over. Every chapter after
-this one is a variation on the atom, an addition to it, or a framework's
-version of it.
+this one is a variation on the atomic agent, an addition to it, or a
+framework's version of it.
 
 Nothing else is new. `ask_model` and `execute_tool` are `ch02_tool_call`'s,
 unchanged. The loop is six lines and there is no framework in it:
@@ -36,8 +36,8 @@ one's result. Two hand-written turns cannot show that; this is the first
 chapter where the model's next move depends on what the last one returned.
 
 And the loop needs a bound -- which is the one thing here that the definition
-does not ask for. The cap is prudence, not part of the atom: "it will stop on
-its own" is an assumption rather than a property. An early draft of
+does not ask for. The cap is prudence, not part of the atomic agent: "it will
+stop on its own" is an assumption rather than a property. An early draft of
 `ch04_missing_tool` recorded a live model asking for the same unavailable tool
 twice, so an unbounded `while` is a real spend. The cap here is a number and
 nothing more -- `ch17_retry_exhausted` is where a count becomes a policy.

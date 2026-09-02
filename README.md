@@ -9,8 +9,8 @@ Unpacked:
 > for nothing further. The harness owns the list and every decision about it;
 > the model only ever gets a vote.
 
-That is the whole subject, and the first three chapters are that sentence, one
-clause each:
+That is the whole subject, and the first three chapters are the **atomic
+agent** — that sentence, one clause each:
 
     a loop that sends the whole context to a model             ch01_single_call
     executes whatever the model requests, appends the results  ch02_tool_call
