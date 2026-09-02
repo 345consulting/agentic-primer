@@ -1,8 +1,9 @@
 # Findings
 
 Things learned by running the chapters that outlive the chapter that produced
-them. Chapter-specific observations belong in that chapter's docstring; this
-file is for what generalizes.
+them. Chapters are named, never numbered, because a finding outlives the
+reading order and the numbers move. Chapter-specific observations belong in
+that chapter's docstring; this file is for what generalizes.
 
 Append, never rewrite. Date each entry.
 
@@ -39,7 +40,7 @@ billed and may be unaccounted for.
 
 ## 2026-09-01 — An unconstrained tool argument turns a wrong premise into a fluent fact
 
-**What happened.** Chapter 2's tool was declared `stock_on_hand(part: str)` and
+**What happened.** `ch02_tool_call`'s tool was declared `stock_on_hand(part: str)` and
 looked up `{"flange": 17, "grommet": 240}.get(part, 0)`. Asked about flanges,
 the live model called it with `part="flanges"` — plural, which is what an
 English sentence about more than one flange contains. The lookup returned its
@@ -79,23 +80,23 @@ same things.
 
 ## 2026-09-01 — The library cost is first-call warm-up, not per-call overhead
 
-**What happened.** Chapter 1's first live run split as 1431ms provider against
+**What happened.** `ch01_single_call`'s first live run split as 1431ms provider against
 663ms library, and 32% unexplained was left open with two candidate
 explanations: one-time client construction, or real per-call adapter cost.
-Chapter 2 has two invocations in one process and settles it.
+`ch02_tool_call` has two invocations in one process and settles it.
 
 | run | turn | provider | library |
 | --- | --- | --- | --- |
-| ch01 | 1 | 1431ms | 663ms |
-| ch01 | 1 | 1455ms | 237ms |
-| ch02 | 1 | 2268ms | 267ms |
-| ch02 | 2 | 1685ms | **14ms** |
+| ch01_single_call | 1 | 1431ms | 663ms |
+| ch01_single_call | 1 | 1455ms | 237ms |
+| ch02_tool_call | 1 | 2268ms | 267ms |
+| ch02_tool_call | 2 | 1685ms | **14ms** |
 
 The second invocation in the same process costs 14ms of library time. The
 overhead is warm-up, not per-call.
 
 **Why it matters.** It is *not* client construction, which was the leading
-hypothesis. Chapter 2 builds a fresh `ChatDeepSeek` and a fresh `httpx.Client`
+hypothesis. `ch02_tool_call` builds a fresh `ChatDeepSeek` and a fresh `httpx.Client`
 for each turn — because the wire hooks bind to a span, and the span differs per
 turn — and turn two still costs 14ms. What is amortised is process-level: the
 pydantic model machinery, the tool-schema conversion, the SSL context. TLS
@@ -108,7 +109,7 @@ a single invocation per process is measuring warm-up, and will overstate
 per-call library cost by an order of magnitude.
 
 **Still open.** Whether the 663ms/237ms spread on two otherwise identical
-chapter-1 runs is ordinary variance or something else. Two samples.
+`ch01_single_call` runs is ordinary variance or something else. Two samples.
 
 ---
 
@@ -118,11 +119,11 @@ chapter-1 runs is ordinary variance or something else. Two samples.
 
 | run | turn | input | output | cache hit |
 | --- | --- | --- | --- | --- |
-| ch01 | 1 | 122 | 20 | 0 |
-| ch02 | 1 | 397 | 74 | 0 |
-| ch02 | 2 | 484 | 37 | 384 |
+| ch01_single_call | 1 | 122 | 20 | 0 |
+| ch02_tool_call | 1 | 397 | 74 | 0 |
+| ch02_tool_call | 2 | 484 | 37 | 384 |
 
-Chapter 2's conversation ends at 484 tokens of context and costs **881 billed
+`ch02_tool_call`'s conversation ends at 484 tokens of context and costs **881 billed
 input tokens** to get there. Nothing was re-read and nothing was retried.
 
 **Where the tokens actually go.** The step from 122 to 397 is one tool
@@ -171,7 +172,7 @@ call that never happened. Cache the deterministic parts; never the decision.
 
 ## 2026-09-01 — The model retried the tool because we kept declaring it
 
-**What happened.** An earlier draft of chapter 3 declared a tool it could not
+**What happened.** An earlier draft of `ch03_missing_tool` declared a tool it could not
 dispatch, reported the miss back as a `ToolMessage` with `status="error"`, and
 watched the live model call the same tool again — twice, on two separate runs.
 The obvious reading was that reporting a failure invites a retry, and that a
@@ -193,7 +194,7 @@ not being stubborn. It was resolving a contradiction we sent it, in our favour.
 produced the wrong fix: firmer error wording, or a retry budget to contain
 behaviour that was never the model's to begin with. The real defect is ours,
 and the fix is structural — stop advertising a tool that cannot run. Nothing
-requires the declared list to be the same on every turn. Chapter 2 established
+requires the declared list to be the same on every turn. `ch02_tool_call` established
 that it is re-sent every time, which is exactly what makes it changeable.
 
 A retry budget is still worth having. It is just not what this was.
@@ -209,7 +210,7 @@ reading the reply again. The reply had already been read three times.
 
 ## 2026-09-01 — Some failures do not fail
 
-**What happened.** Chapter 3 asks when the next delivery of milk is expected.
+**What happened.** `ch03_missing_tool` asks when the next delivery of milk is expected.
 No tool answers that; the toolbox holds `stock_on_hand` and nothing else. The
 live model did not refuse and did not invent a tool -- the declaration is
 enforced by the model provider before a call exists, so a name we never sent
@@ -253,13 +254,13 @@ which means a harness cannot even count on the wasted call being there to see.
 
 ## 2026-09-01 — LangChain carries reasoning inbound and drops it outbound
 
-**What happened.** Chapter 3's live run failed with a 400 from DeepSeek:
+**What happened.** `ch03_missing_tool`'s live run failed with a 400 from DeepSeek:
 
 ```
 The `reasoning_content` in the thinking mode must be passed back to the API.
 ```
 
-Intermittently: two failures and one success on the same code, while chapter 2
+Intermittently: two failures and one success on the same code, while `ch02_tool_call`
 passed. The trace has both halves of the explanation in one place.
 
 ```

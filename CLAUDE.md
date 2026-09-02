@@ -56,48 +56,91 @@ either fact is a second thing to keep true.
 What is not written yet is a plan, and a plan is prose:
 
 ```
-ch01 single_call      one invoke; no tools, no loop, no framework      written
-ch02 tool_call        the model asks; we execute; turn two knows       written
-ch03 missing_tool     no tool covers the question, and nothing fails   written
-ch04 tool_failure     the tool runs and raises; we decide what the model sees   written
-ch05 the_loop         the whole loop, twelve lines of plain Python
-ch06 two_tools        two calls in one reply -- still ONE turn
-ch07 tool_http        a tool that calls an API: latency, a second secret, real failures
-ch08 retry_policy     transient or permanent, and who is allowed to say so
-ch09 retry_by_local   the harness calls again: no model, no tokens, backoff
-ch10 retry_by_model   the model asks again: a full turn, and a longer list
-ch11 retry_exhausted  out of strikes: escalate, and with what context?
-ch12 supervisor       one loop calls another: a tool whose body is an agent
-ch13 workflow         the same job with nothing deciding -- is the loop worth it?
-ch14 stream           "stream": true -- a reply arrives in pieces
-ch15 stream_tools     tool arguments arrive as fragments of a JSON string
-ch16 hooks            the named points in the loop, and the three powers
-ch17 guards           a hook that can say no, before dispatch
-ch18 judge            a hook that reads the reply, per turn and not per run
-ch19 mcp              a dispatch table you did not write
-ch20 mcp_injection    descriptions you did not write, in a context you did
-ch21 skills           a tool whose result is instructions, not data
-ch22 compression      the list is too long; what do you drop, and what does it cost?
-ch23 memory           what survives when the list is thrown away
-ch24 graph            the same behaviour as a StateGraph -- what did it buy?
-ch25 limits           recursion_limit at the boundary
-ch26 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch23
-ch27 interrupt        interrupt and Command(resume=...) as an approval gate
-ch28 subgraph         the ch12 supervisor as a graph node -- what did it buy?
-ch29 parallel         fan-out, Send, join, and the order things merge in
+ch01 single_call            one invoke; no tools, no loop, no framework      written
+ch02 tool_call              the model asks; we execute; turn two knows       written
+ch03 missing_tool           no tool covers the question, and nothing fails   written
+ch04 tool_failure           the tool runs and raises; we decide what the model sees   written
+ch05 the_loop               the whole loop, and the two ways it is allowed to end
+ch06 loop_finish_reason     it stopped for another reason and the loop called it done
+ch07 loop_budget_exhausted  tokens and money -- a turn cap bounds neither
+ch08 loop_deadline_reached  wall clock, and someone else hanging up
+ch09 loop_context_full      the list outgrows the window: a wall, not a policy
+ch10 loop_no_progress       nothing failed and nothing advanced
+ch11 loop_veto              stopped because forbidden, which is not stopped because done
+ch12 two_tools              two calls in one reply -- still ONE turn
+ch13 tool_http              a tool that calls an API: latency, a second secret, real failures
+ch14 retry_policy           transient or permanent, and who is allowed to say so
+ch15 retry_by_local         the harness calls again: no model, no tokens, backoff
+ch16 retry_by_model         the model asks again: a full turn, and a longer list
+ch17 retry_exhausted        out of strikes: escalate, and with what context?
+ch18 supervisor             one loop calls another: a tool whose body is an agent
+ch19 workflow               the same job with nothing deciding -- is the loop worth it?
+ch20 stream                 "stream": true -- a reply arrives in pieces
+ch21 stream_tools           tool arguments arrive as fragments of a JSON string
+ch22 hooks                  the named points in the loop, and the three powers
+ch23 guards                 a hook that can say no, before dispatch
+ch24 judge                  a hook that reads the reply, per turn and not per run
+ch25 mcp                    a dispatch table you did not write
+ch26 mcp_injection          descriptions you did not write, in a context you did
+ch27 skills                 a tool whose result is instructions, not data
+ch28 compression            the list is too long; what do you drop, and what does it cost?
+ch29 memory                 what survives when the list is thrown away
+ch30 graph                  the same behaviour as a StateGraph -- what did it buy?
+ch31 limits                 recursion_limit at the boundary
+ch32 checkpoint             MemorySaver, thread_id, resume -- and why that is not ch29
+ch33 interrupt              interrupt and Command(resume=...) as an approval gate
+ch34 subgraph               the ch18 supervisor as a graph node -- what did it buy?
+ch35 parallel               fan-out, Send, join, and the order things merge in
 ```
+
+Chapters 5 to 11 are one question: **why did this run stop?** It is the first
+thing anyone asks at 2am, and only the first answer means the work finished.
+
+**the_loop** replaces two hand-written turns with a condition, so the number of
+turns becomes a property of the run rather than something someone typed. It
+carries two endings: the model asked for nothing, and we stopped it at a cap.
+A run that finished and a run that hit the cap are indistinguishable unless
+the summary says which.
+
+**loop_finish_reason** is the loop being wrong rather than bounded. `length`
+and `content_filter` produce a reply with no tool calls, so the loop's own
+condition fires and it reports completion on a truncated half-sentence. It is
+also the first failure this primer provokes on purpose -- setting `max_tokens`
+low makes it happen every time, which finally retires one of the seven
+parameters the model provider has been choosing since chapter 1.
+
+**loop_budget_exhausted** is tokens and money, which a turn cap does not bound: cost is
+the sum of prefixes, so turn ten costs several times turn one. The check has
+to happen before the next request, because after it the money is spent.
+
+**loop_deadline_reached** is wall clock, and cancellation is the same mechanism from
+outside -- the caller hung up and the loop is still spending. Nothing in this
+primer can currently be stopped by anyone but itself.
+
+**loop_context_full** is a wall rather than a policy: the list outgrows the
+window and the request is rejected outright. Chapter 28 is the answer to the
+problem this chapter creates.
+
+**loop_no_progress** is the livelock: same tool, same arguments, three turns
+running, each one valid, none advancing. Nothing failed, so no strike counter
+sees it, and only the turn cap catches it -- late and expensively.
+
+**loop_veto** is a guard or a judge refusing, which is a third kind of ending
+and must not be recorded as either of the first two. The mechanism arrives in
+ch23 and ch24; the ending belongs with the others.
+
 
 Chapter 5 is a complete agentic loop in twelve lines of plain Python. Every
 chapter after it answers one question: *what did this buy over chapter 5?*
-Everything through ch23 stays in plain Python, so the framework's answers from
-ch24 on can be asked what they bought.
+Everything through ch29 stays in plain Python, so the framework's answers from
+ch30 on can be asked what they bought.
 
 Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
 nothing goes wrong and the question is unanswered anyway; in ch04 something
 goes wrong and we choose what the model is told. Neither retries, because
 retrying needs a loop.
 
-Chapter 7 is the first tool that leaves the process. Every tool until now
+Chapter 13 is the first tool that leaves the process. Every tool until now
 returns from a dict or raises an exception someone wrote, which makes the
 retry chapters theoretical -- there is no transient failure in a dict lookup.
 An HTTP call brings three things at once: latency inside the tool span, so a
@@ -107,8 +150,8 @@ secret, the first one in this primer that is not the model provider's. It is
 also a second wire, and whether the trace records it is a decision rather than
 an oversight.
 
-Chapters 8 to 11 are retry, following straight on from ch04's failure and
-ch07's real ones, and split four ways because they are four different questions. **Policy** is
+Chapters 14 to 17 are retry, following straight on from ch04's failure and
+ch13's real ones, and split four ways because they are four different questions. **Policy** is
 classification — transient or permanent, safe to call twice or not — and it is
 declared by the tool author, because nobody else knows. **By local** is the
 harness calling again: no model, no tokens, bounded by backoff, and correct
@@ -127,7 +170,7 @@ retrying is useless — and it is the one case LangGraph's `ToolNode` handles by
 default, reporting `ToolInvocationError` back and re-raising everything else.
 There is no retry anywhere in LangGraph.
 
-Chapters 12 and 13 are orchestration, and they differ only in who chooses the
+Chapters 18 and 19 are orchestration, and they differ only in who chooses the
 sequence. **Supervisor** is the pattern with the cheapest mechanism: a tool
 whose implementation is another loop. Nothing new is needed -- `execute_tool`
 dispatches, and the thing it calls happens to run its own `while` and return a
@@ -136,32 +179,32 @@ with the framework. It is also the first chapter where nesting is not merely
 depth, and where `seq` and `thread`, recorded independently of nesting since
 chapter 1, start to earn their keep.
 
-A supervisor is a pattern; a subgraph is one way to build it. Chapter 28 is
-that way, and having ch12 first is what makes it answerable: call-and-return
+A supervisor is a pattern; a subgraph is one way to build it. Chapter 34 is
+that way, and having ch18 first is what makes it answerable: call-and-return
 against handoff, an isolated worker against a shared message list, one string
 coming back against a worker's whole transcript merging into the parent's
 context and its bill.
 
-Chapter 13 is the counterweight to chapter 5 and asks the question the rest of
+Chapter 19 is the counterweight to chapter 5 and asks the question the rest of
 the primer assumes away: the same job as a fixed sequence, with nothing
 deciding anything, is cheaper, deterministic and testable. A workflow needs no
-framework either, so it stays plain Python — and it is the reason ch24 lands
+framework either, so it stays plain Python — and it is the reason ch30 lands
 as it does, because a `StateGraph` is a workflow engine of which the agent
 loop is one special case.
 
-Chapters 14 and 15 are streaming, and they change the recorder before they
+Chapters 20 and 21 are streaming, and they change the recorder before they
 change a chapter. Every request up to here carries `"stream": false`, and
 `_build_wire_hooks` calls `response.read()` — which consumes a body that has
 not finished arriving. So `support/` learns to record events as they arrive,
 with their arrival times, and the chapters follow. A reply stops being an
 object and becomes a sequence; `model_provider_ms` stops being one number and
-becomes an interval with a first token somewhere inside it. In ch15 the tool
+becomes an interval with a first token somewhere inside it. In ch21 the tool
 arguments arrive as fragments of a JSON string, so a tool call cannot be
 parsed, judged or dispatched until the stream ends — which is the sharpest
 governance question in the primer, because a judge wants the whole turn and a
 streaming interface has already shown the user half of it.
 
-Chapters 16 to 18 are the seam. **Hooks** is the mechanism: the named points
+Chapters 22 to 24 are the seam. **Hooks** is the mechanism: the named points
 in the loop — before the model, after the reply, before dispatch, after the
 result, around a turn, around the run — and the three powers a hook can have,
 in increasing order of danger: observe, modify, veto. The `Trace` from chapter
@@ -173,10 +216,10 @@ during it is a decision.
 
 Judge comes after retry rather than before it, so the strike machinery is
 already built on the concrete case. A judge's rejection is a second trigger
-for the counter from ch11, and it looks nothing like a tool that failed —
+for the counter from ch17, and it looks nothing like a tool that failed —
 which is easier to see once the first trigger works.
 
-Chapters 19 and 20 are MCP, and they are where a third party gets to write
+Chapters 25 and 26 are MCP, and they are where a third party gets to write
 into a context we own. **MCP** is a dispatch table discovered at runtime, so
 `DECLARED_TOOLS` stops being a literal, the declaration order becomes whatever
 a server returned — quietly forfeiting the stable prefix the cache finding
@@ -190,7 +233,7 @@ They come after guards on purpose: the seam should exist before a stranger is
 plugged into it, and "which of these tools can I actually gate" is a better
 question than "what is a guard".
 
-Chapters 21 to 23 are admission, eviction and persistence — one problem, which
+Chapters 27 to 29 are admission, eviction and persistence — one problem, which
 is that the list is the state and the budget is finite.
 
 ## Documented deviations from the code standard
@@ -226,6 +269,9 @@ alphabetising it would destroy the sequence the file exists to teach.
 `FINDINGS.md` — things learned by running the chapters that outlive the chapter
 that produced them. Appendable, dated. Chapter-specific observations live in
 that chapter's docstring instead.
+
+Findings name chapters, never number them. A finding outlives the reading
+order, and the ladder below has been renumbered four times in one day.
 
 ## Model
 
