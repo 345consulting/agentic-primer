@@ -3,13 +3,19 @@
 
 """The whole loop, and the two ways it is allowed to end.
 
-Chapters 1 to 4 wrote their turns out by hand, two at a time, and said so:
-`ended = "out of written turns"` was an admission that the number of turns was
-a guess someone typed. Here it is a condition, so the number of turns becomes
-a property of the run.
+`ch02_tool_call` wrote its two turns out by hand and said so: its
+`ended = "out of written turns"` is an admission that the number of turns was
+a guess someone typed, and that a model asking for a third had nowhere to go.
+Here it is a condition, so the number of turns becomes a property of the run.
 
-Nothing else is new. `ask_model` and `execute_tool` are chapter 4's, unchanged.
-The loop is six lines and there is no framework in it:
+This chapter completes the definition. `ch01_single_call` was the context and
+who owns it, `ch02_tool_call` was the request and the execution, and this is
+the condition -- one clause each, and nothing left over. Every chapter after
+this one is a variation on the atom, an addition to it, or a framework's
+version of it.
+
+Nothing else is new. `ask_model` and `execute_tool` are `ch02_tool_call`'s,
+unchanged. The loop is six lines and there is no framework in it:
 
     while True:
         reply = ask_model(...)          one invocation
@@ -29,11 +35,12 @@ shortfall until it knows the price, so turn three exists *because* of turn
 one's result. Two hand-written turns cannot show that; this is the first
 chapter where the model's next move depends on what the last one returned.
 
-And the loop needs a bound, because "it will stop on its own" is an assumption
-rather than a property. `ch03_missing_tool` recorded a live model asking for
-the same unavailable tool twice, so an unbounded `while` is a real spend. The
-cap here is a number and nothing more -- `ch11_retry_exhausted` is where a
-count becomes a policy.
+And the loop needs a bound -- which is the one thing here that the definition
+does not ask for. The cap is prudence, not part of the atom: "it will stop on
+its own" is an assumption rather than a property. An early draft of
+`ch04_missing_tool` recorded a live model asking for the same unavailable tool
+twice, so an unbounded `while` is a real spend. The cap here is a number and
+nothing more -- `ch17_retry_exhausted` is where a count becomes a policy.
 
 Two endings, and the summary must tell them apart:
 
@@ -41,7 +48,7 @@ Two endings, and the summary must tell them apart:
     ended = "turn cap"        we stopped it, and it was not done
 
 A finished run and a capped run are indistinguishable otherwise, which is
-`ch03_missing_tool`'s lesson applied to termination: a record that looks clean
+`ch04_missing_tool`'s lesson applied to termination: a record that looks clean
 is not the same as a run that went well. There are five further ways to end --
 `ch06_loop_finish_reason` through `ch11_loop_veto` -- and each one is a stop
 that this chapter would report as a completion.
@@ -139,7 +146,7 @@ def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
 
 
 def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
-    trace = Trace(chapter="ch05_the_loop", model_kind=model_kind)
+    trace = Trace(chapter="ch03_the_loop", model_kind=model_kind)
     messages: list[BaseMessage] = [SystemMessage(SYSTEM_PROMPT), HumanMessage(USER_PROMPT)]
 
     turns = 0

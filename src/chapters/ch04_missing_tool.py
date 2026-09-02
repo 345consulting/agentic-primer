@@ -63,18 +63,20 @@ TOOLS: dict[str, Any] = {stock_on_hand.name: stock_on_hand}
 
 DECLARED_TOOLS = list(TOOLS.values())
 
-# What the mock model replies -- and here the script is a transcript. These
-# are the two replies the live model actually gave, so the mock column shows
-# the same behaviour rather than a tidier one someone imagined.
-MOCK_MODEL_REACHES_FOR_THE_NEAREST_TOOL = [
-    AIMessage("", tool_calls=[{"name": "stock_on_hand", "args": {"item": "milk"}, "id": "call_1"}])
-]
-
-MOCK_MODEL_ANSWERS = [
+# What the mock model replies, one per turn, consumed in order. Here the
+# script is a transcript: these are the two replies the live model actually
+# gave, so the mock column shows the same behaviour rather than a tidier one.
+MOCK_MODEL_REPLIES = [
+    AIMessage("", tool_calls=[{"name": "stock_on_hand", "args": {"item": "milk"}, "id": "call_1"}]),
     AIMessage(
         "I don't have access to delivery schedules. There are currently 2 units of milk in stock."
-    )
+    ),
 ]
+
+# Six turns is nothing like a policy: a number that stops a runaway loop from
+# being a bill. A parameter as well as a default, so the capped ending can be
+# reached on purpose. See ch03_the_loop.
+TURN_CAP = 6
 
 
 def ask_model(
@@ -110,24 +112,26 @@ def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
     return ToolMessage(content=str(result), tool_call_id=call["id"])
 
 
-def run(model_kind: ModelKind = "mock") -> Trace:
-    trace = Trace(chapter="ch03_missing_tool", model_kind=model_kind)
+def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
+    trace = Trace(chapter="ch04_missing_tool", model_kind=model_kind)
     messages: list[BaseMessage] = [SystemMessage(SYSTEM_PROMPT), HumanMessage(USER_PROMPT)]
+    turns = 0
+    ended = "turn cap"
 
-    with trace.span("turn", number=1):
-        reply = ask_model(model_kind, MOCK_MODEL_REACHES_FOR_THE_NEAREST_TOOL, messages, trace)
-        messages.append(reply)
-        for call in reply.tool_calls:
-            messages.append(execute_tool(call, trace))
+    # ch03_the_loop's loop, unchanged. These chapters are about what happens
+    # inside it, not about its shape.
+    while turns < turn_cap:
+        turns += 1
+        with trace.span("turn", number=turns):
+            reply = ask_model(model_kind, MOCK_MODEL_REPLIES[turns - 1 :], messages, trace)
+            messages.append(reply)
+            if not reply.tool_calls:
+                ended = "no tool_calls"
+                break
+            for call in reply.tool_calls:
+                messages.append(execute_tool(call, trace))
 
-    with trace.span("turn", number=2):
-        reply = ask_model(model_kind, MOCK_MODEL_ANSWERS, messages, trace)
-        messages.append(reply)
-
-    # Every field here reports success, and the run did not answer the
-    # question. `ended` is the honest stop reason and it is still the wrong
-    # story -- there is no field in this summary, or anywhere in the trace,
-    # for "answered a question nobody asked".
-    ended = "no tool_calls" if not reply.tool_calls else "out of written turns"
-    trace.close(turns=2, messages=len(messages), ended=ended)
+    # Nothing here notices the question went unanswered: the tool call
+    # succeeded, the loop ended the way a finished conversation ends.
+    trace.close(turns=turns, messages=len(messages), ended=ended)
     return trace

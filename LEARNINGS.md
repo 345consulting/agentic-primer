@@ -34,7 +34,7 @@ a tool" hides exactly the seam a harness needs.
 **What it excludes.** Communication is not the subject; that is transport, and
 it is solved. Tools are not the subject either — they are what a turn may
 contain. The subject is the condition: go round again, or stop. A framework
-does not add agency; `ch05_the_loop` will have all of it in twelve lines. What
+does not add agency; `ch03_the_loop` will have all of it in twelve lines. What
 a framework adds is management — persistence, concurrency, resumption, limits.
 
 **`ch01_single_call` was already an agent**, in the degenerate case: zero
@@ -225,7 +225,7 @@ call that never happened. Cache the deterministic parts; never the decision.
 
 ## 2026-09-01 — The model retried the tool because we kept declaring it
 
-**What happened.** An earlier draft of `ch03_missing_tool` declared a tool it could not
+**What happened.** An earlier draft of `ch04_missing_tool` declared a tool it could not
 dispatch, reported the miss back as a `ToolMessage` with `status="error"`, and
 watched the live model call the same tool again — twice, on two separate runs.
 The obvious reading was that reporting a failure invites a retry, and that a
@@ -263,7 +263,7 @@ reading the reply again. The reply had already been read three times.
 
 ## 2026-09-01 — Some failures do not fail
 
-**What happened.** `ch03_missing_tool` asks when the next delivery of milk is expected.
+**What happened.** `ch04_missing_tool` asks when the next delivery of milk is expected.
 No tool answers that; the toolbox holds `stock_on_hand` and nothing else. The
 live model did not refuse and did not invent a tool -- the declaration is
 enforced by the model provider before a call exists, so a name we never sent
@@ -307,7 +307,7 @@ which means a harness cannot even count on the wasted call being there to see.
 
 ## 2026-09-01 — LangChain carries reasoning inbound and drops it outbound
 
-**What happened.** `ch03_missing_tool`'s live run failed with a 400 from DeepSeek:
+**What happened.** `ch04_missing_tool`'s live run failed with a 400 from DeepSeek:
 
 ```
 The `reasoning_content` in the thinking mode must be passed back to the API.
@@ -449,7 +449,7 @@ the two groups are one.
 
 ## 2026-09-02 — LangGraph has no retry, and its default error text asks for one
 
-**What happened.** Read from source while deciding what `ch04_tool_failure`
+**What happened.** Read from source while deciding what `ch05_tool_failure`
 should do.
 
 `ToolNode`'s default handler is four lines:
@@ -554,7 +554,7 @@ finding in this file.
 
 ## 2026-09-02 — Turns are the depth of the question, not a property of the agent
 
-**What happened.** `ch05_the_loop` needed a question the loop could not answer
+**What happened.** `ch03_the_loop` needed a question the loop could not answer
 in two turns. The first attempt was *"we need four milk for the week — if we
 are short, what will the rest cost?"* with `stock_on_hand` and `price_of`
 declared. The mock, following a script someone wrote, took three turns. The

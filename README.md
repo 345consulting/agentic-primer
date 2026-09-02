@@ -9,9 +9,15 @@ Unpacked:
 > for nothing further. The harness owns the list and every decision about it;
 > the model only ever gets a vote.
 
-That is the whole subject. Chapter 5 is that paragraph in twelve lines of plain
-Python, chapters 1 to 4 build up to it one idea at a time, and every chapter
-after it answers a single question: *what did this buy over chapter 5?*
+That is the whole subject, and the first three chapters are that sentence, one
+clause each:
+
+    a loop that sends the whole context to a model             ch01_single_call
+    executes whatever the model requests, appends the results  ch02_tool_call
+    and repeats until the model asks for nothing further       ch03_the_loop
+
+Remove any one and it is not an agent. Everything after chapter 3 answers a
+single question: *what did this buy over the loop?*
 
 Two words do the work. **Requests** — the model never executes anything and
 never decides anything; it emits a name and some arguments and stops. **Owns**

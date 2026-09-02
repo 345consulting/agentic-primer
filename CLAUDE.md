@@ -56,11 +56,11 @@ either fact is a second thing to keep true.
 What is not written yet is a plan, and a plan is prose:
 
 ```
-ch01 single_call            one invoke; no tools, no loop, no framework      written
-ch02 tool_call              the model asks; we execute; turn two knows       written
-ch03 missing_tool           no tool covers the question, and nothing fails   written
-ch04 tool_failure           the tool runs and raises; we decide what the model sees   written
-ch05 the_loop               the whole loop, and the two ways it is allowed to end
+ch01 single_call            one invoke; no tools, no loop, no framework   written
+ch02 tool_call              the model asks; we execute; turn two knows   written
+ch03 the_loop               the whole loop, and the two ways it is allowed to end   written
+ch04 missing_tool           no tool covers the question, and nothing fails   written
+ch05 tool_failure           the tool runs and raises; we decide what the model sees   written
 ch06 loop_finish_reason     it stopped for another reason and the loop called it done
 ch07 loop_budget_exhausted  tokens and money -- a turn cap bounds neither
 ch08 loop_deadline_reached  wall clock, and someone else hanging up
@@ -132,10 +132,36 @@ and must not be recorded as either of the first two. The mechanism arrives in
 ch23 and ch24; the ending belongs with the others.
 
 
-Chapter 5 is a complete agentic loop in twelve lines of plain Python. Every
-chapter after it answers one question: *what did this buy over chapter 5?*
+**Chapters 1 to 3 are the atom, one clause of the definition each.**
+
+    a loop that sends the whole context to a model            ch01
+    executes whatever the model requests, appends the results ch02
+    and repeats until the model asks for nothing further      ch03
+
+Remove any one and the definition stops being satisfiable. `ch01` alone is the
+degenerate case — zero iterations, the condition false the first time. `ch02`
+without `ch03` is a guess about depth. `ch03` without tools never iterates.
+
+The turn cap in `ch03` is the one thing there that is not in the definition.
+It is prudence, not the atom: shipping an unbounded `while` is irresponsible,
+and the model's own ending is still the only one that means finished.
+
+**Everything after ch03 is a variation, an addition, or the framework.**
+Variations are the same atom under conditions it did not choose — no tool
+covers the question, a tool raises, two calls arrive at once, a table someone
+else wrote, a result that is instructions, a reply that arrives in pieces.
+Additions are machinery the atom does not have — retry policy, bounds, hooks,
+guards, judge, compression, memory. `ch19_workflow` is neither: it is the
+contrast, an exit condition set at write time. And `ch18_supervisor` is the
+atom containing itself, which is why it needs no new machinery.
+
+Those groups are a way to read the ladder, not a way to sort it — the order
+follows dependencies instead. A veto needs guards, an injection needs a table
+to inject into, a subgraph needs a supervisor and a graph.
+
 Everything through ch31 stays in plain Python, so the framework's answers from
-ch32 on can be asked what they bought.
+ch32 on can be asked what they bought, and every chapter after ch03 answers
+one question: *what did this buy over the loop?*
 
 Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
 nothing goes wrong and the question is unanswered anyway; in ch04 something

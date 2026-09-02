@@ -79,13 +79,16 @@ TOOLS: dict[str, Any] = {price_of.name: price_of, stock_on_hand.name: stock_on_h
 
 DECLARED_TOOLS = list(TOOLS.values())
 
-MOCK_MODEL_ASKS_FOR_A_PRICE = [
-    AIMessage("", tool_calls=[{"name": "price_of", "args": {"item": "milk"}, "id": "call_1"}])
+# What the mock model replies, one per turn, consumed in order.
+MOCK_MODEL_REPLIES = [
+    AIMessage("", tool_calls=[{"name": "price_of", "args": {"item": "milk"}, "id": "call_1"}]),
+    AIMessage("I cannot get the price of milk right now -- the pricing service is unreachable."),
 ]
 
-MOCK_MODEL_ANSWERS = [
-    AIMessage("I cannot get the price of milk right now -- the pricing service is unreachable.")
-]
+# Six turns is nothing like a policy: a number that stops a runaway loop from
+# being a bill. A parameter as well as a default, so the capped ending can be
+# reached on purpose. See ch03_the_loop.
+TURN_CAP = 6
 
 
 def ask_model(
@@ -139,23 +142,27 @@ def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
     return ToolMessage(content=str(result), tool_call_id=call["id"])
 
 
-def run(model_kind: ModelKind = "mock") -> Trace:
-    trace = Trace(chapter="ch04_tool_failure", model_kind=model_kind)
+def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
+    trace = Trace(chapter="ch05_tool_failure", model_kind=model_kind)
     messages: list[BaseMessage] = [SystemMessage(SYSTEM_PROMPT), HumanMessage(USER_PROMPT)]
+    turns = 0
+    ended = "turn cap"
 
-    with trace.span("turn", number=1):
-        reply = ask_model(model_kind, MOCK_MODEL_ASKS_FOR_A_PRICE, messages, trace)
-        messages.append(reply)
-        for call in reply.tool_calls:
-            messages.append(execute_tool(call, trace))
+    # ch03_the_loop's loop, unchanged. These chapters are about what happens
+    # inside it, not about its shape.
+    while turns < turn_cap:
+        turns += 1
+        with trace.span("turn", number=turns):
+            reply = ask_model(model_kind, MOCK_MODEL_REPLIES[turns - 1 :], messages, trace)
+            messages.append(reply)
+            if not reply.tool_calls:
+                ended = "no tool_calls"
+                break
+            for call in reply.tool_calls:
+                messages.append(execute_tool(call, trace))
 
-    with trace.span("turn", number=2):
-        reply = ask_model(model_kind, MOCK_MODEL_ANSWERS, messages, trace)
-        messages.append(reply)
-
-    # Unlike chapter 3, this run knows something went wrong -- the tool span
-    # carries a `failed` note. What it still cannot say is whether the answer
-    # was any good, and `ended` reports a clean stop either way.
-    ended = "no tool_calls" if not reply.tool_calls else "out of written turns"
-    trace.close(turns=2, messages=len(messages), ended=ended)
+    # The tool span carries a `failed` note, so unlike ch04_missing_tool this
+    # run knows something went wrong. It still cannot say the answer was any
+    # good, and `ended` reports a clean stop either way.
+    trace.close(turns=turns, messages=len(messages), ended=ended)
     return trace
