@@ -608,3 +608,48 @@ one.
 **And it is a mock/live finding as much as a design one.** The script asserted
 a sequence that was never necessary, and it passed. Only the live column
 disagreed — the mock will always confirm whatever plan its author imagined.
+
+---
+
+## 2026-09-02 — An empty tool_calls list is not a claim that anything was done
+
+**What happened.** `ch06_loop_finish_reason` sets `max_tokens: 24` — the first
+of the seven CONFIGURABLE parameters this primer has ever set, after five
+chapters of reporting all of them as chosen by the model provider.
+
+The reply came back with **empty content, no tool calls, and
+`finish_reason: length`**. The budget was spent before the model emitted
+anything at all; with thinking on, the reasoning took it.
+
+The loop's condition is `if not reply.tool_calls`. It fired, exactly as
+designed, and would have recorded a completed run that produced nothing
+whatsoever — and would have been within its rights, because an empty list is
+precisely what "the model asked for nothing further" looks like.
+
+**Why it matters.** Termination is inferred from an absence, and three
+different things produce the same absence:
+
+| finish_reason | what it means | tool_calls |
+| --- | --- | --- |
+| `stop` | the model chose to stop | empty |
+| `length` | we cut it off | empty |
+| `content_filter` | it was refused | empty |
+
+Only the first means finished. The provider states which in the same response,
+in a field a loop that infers from `tool_calls` never reads. `ch01_single_call`
+noted this as point 4 of its docstring, as a footnote. In a loop it is not a
+footnote: it ends runs early and reports them as complete.
+
+**The rule.** Read the provider's own account before trusting your inference.
+An inference from absence is the weakest evidence available, and here a
+stronger claim is sitting in the same response for free.
+
+**Two things the sharp version teaches that the tidy one would not.** The
+first draft of the chapter scripted a sentence cut off mid-word, which is what
+truncation looks like when you imagine it. What actually happens at a tight
+budget is emptier and worse: nothing at all comes back, and the run looks like
+a model that had nothing to say.
+
+And the budget is spent on reasoning before any output exists, so `max_tokens`
+does not bound the answer — it bounds the answer *plus the thinking*, and the
+thinking goes first.

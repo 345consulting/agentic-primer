@@ -166,7 +166,7 @@ class ThinkingModel(ChatDeepSeek):
         return payload
 
 
-def build_live_model(span: Span) -> BaseChatModel:
+def build_live_model(span: Span, max_tokens: int | None = None) -> BaseChatModel:
     """A real model provider, with the wire recorded either side of the library.
 
     Fails loudly when the key is absent -- never a default. The client reads
@@ -182,13 +182,23 @@ def build_live_model(span: Span) -> BaseChatModel:
         raise RuntimeError(
             f"environment variable ['{LIVE_KEY}'] is not set; a live run has no fallback"
         )
+    # `max_tokens` is the first of CONFIGURABLE this primer ever sets. Left
+    # None it stays absent from the request body and the model provider
+    # chooses, which is what `defaulted_by_model_provider` has been reporting
+    # since ch01_single_call.
     return ThinkingModel(
-        model=LIVE_MODEL, timeout=60, http_client=httpx.Client(event_hooks=_build_wire_hooks(span))
+        model=LIVE_MODEL,
+        timeout=60,
+        max_tokens=max_tokens,
+        http_client=httpx.Client(event_hooks=_build_wire_hooks(span)),
     )
 
 
 def build_model(
-    model_kind: ModelKind, mock_model_replies: Sequence[AIMessage], span: Span
+    model_kind: ModelKind,
+    mock_model_replies: Sequence[AIMessage],
+    span: Span,
+    max_tokens: int | None = None,
 ) -> BaseChatModel:
     """The one switch.
 
@@ -199,7 +209,7 @@ def build_model(
     build a model that quietly records less than the one beside it.
     """
     if model_kind == "live":
-        return build_live_model(span)
+        return build_live_model(span, max_tokens)
     return MockModel(replies=mock_model_replies, watching=span)
 
 
