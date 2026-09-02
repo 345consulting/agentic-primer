@@ -9,7 +9,7 @@ quietly comparing two different things.
 """
 
 from support.trace import Json, ModelKind, Trace
-from support.view import _render_wire_fields, render, write_book
+from support.view import _digest, _render_wire_fields, render, write_book
 
 import json
 from pathlib import Path
@@ -88,3 +88,44 @@ def test_a_chapter_that_has_never_been_run_says_so_in_place(tmp_path: Path) -> N
     page = write_book(tmp_path).read_text()
     assert "ch01_single_call" in page
     assert "not run" in page
+
+
+def test_nothing_is_expanded_by_default(tmp_path: Path) -> None:
+    # A page that opens everything is a dump. At thirty-five chapters it is
+    # unreadable, so every level must be closed and say enough to be skipped.
+    (tmp_path / "ch01_single_call.mock.json").write_text(json.dumps(_recorded("mock", "abc")))
+    page = write_book(tmp_path).read_text()
+    assert "<details open>" not in page
+
+
+def test_a_closed_span_still_says_what_happened() -> None:
+    # The digest is read off notes the span already carries; nothing new is
+    # computed, so a closed row cannot claim more than the trace recorded.
+    span = {
+        "name": "tool",
+        "attributes": {"name": "stock_on_hand"},
+        "seq": 3,
+        "thread": "MainThread",
+        "elapsed_ms": 1.0,
+        "model_provider_ms": None,
+        "library_ms": None,
+        "notes": [{"label": "args", "item": "milk"}, {"label": "result", "value": 2}],
+        "children": [],
+    }
+    assert _digest(span) == "(item=milk) -> 2"
+
+
+def test_a_turn_reports_what_its_children_did() -> None:
+    child = {
+        "name": "model",
+        "attributes": {},
+        "seq": 2,
+        "thread": "MainThread",
+        "elapsed_ms": 1.0,
+        "model_provider_ms": None,
+        "library_ms": None,
+        "notes": [{"label": "reply", "message": {"content": "", "tool_calls": [{"name": "x"}]}}],
+        "children": [],
+    }
+    turn = {**child, "name": "turn", "notes": [], "children": [child]}
+    assert _digest(turn) == "model x"

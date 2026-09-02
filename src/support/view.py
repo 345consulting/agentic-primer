@@ -51,6 +51,13 @@ input[type=checkbox] { display: none; }
 .turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
           letter-spacing: .06em; margin-bottom: .3rem; }
 .stale { color: #b26; font-weight: 600; }
+.digest { color: var(--dim); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
 h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
      border-top: 1px solid var(--line); }
 h2 .why { color: var(--dim); font-weight: 400; }
@@ -130,8 +137,11 @@ def write_book(out: Path = Path("out")) -> Path:
             f'<span class="why">{html.escape(why)}</span>{label}</a>'
         )
         sections.append(
-            f'<h2 id="{chapter}"><a class="top" href="#top">top</a>'
-            f'{html.escape(chapter)} <span class="why">{html.escape(why)}</span></h2>{body}'
+            f'<details class="chapter" id="{chapter}">'
+            f"<summary>{html.escape(chapter)} "
+            f'<span class="why">{html.escape(why)}</span>'
+            f'<span class="facts">{_facts(traces, state)}</span></summary>'
+            f"{body}</details>"
         )
 
     page = out / "index.html"
@@ -359,17 +369,69 @@ def _render_source(data: Json | None, current: str) -> str:
     )
 
 
+def _facts(traces: dict[str, Json], state: str) -> str:
+    """A chapter's numbers while it is closed: one line per kind that ran."""
+    if state:
+        return state
+    lines = []
+    for kind in MODEL_KINDS:
+        data = traces.get(kind)
+        if data:
+            lines.append(f"{kind}: {summary_line(data['summary'])}")
+    return " \u00b7 ".join(lines)
+
+
+def _digest(span: Json) -> str:
+    """What a span says while it is still closed.
+
+    A collapsed page is only useful if each closed row carries enough to decide
+    whether to open it. Every branch here reads notes the span already has --
+    nothing is computed that the trace did not record.
+    """
+    notes = {note["label"]: note for note in span["notes"]}
+    if reply := notes.get(REPLY):
+        message = reply["message"]
+        calls = message.get("tool_calls") or []
+        usage = message.get("usage") or {}
+        said = (
+            ", ".join(call["name"] for call in calls)
+            if calls
+            else (message["content"][:60] or "(no content)")
+        )
+        tokens = (
+            f"{usage['input_tokens']} in / {usage['output_tokens']} out  "
+            if usage.get("input_tokens")
+            else ""
+        )
+        return f"{tokens}{said}"
+    if failed := notes.get("failed"):
+        return f"{failed['exception']}: {failed['message'][:60]}"
+    if span["children"]:
+        # A turn has no notes of its own; what it did is what its children did.
+        return " + ".join(
+            f"{child['name']} {_digest(child)}".strip() for child in span["children"]
+        )[:110]
+    if "args" in notes:
+        arguments = ", ".join(f"{k}={v}" for k, v in notes["args"].items() if k != "label")
+        result = notes.get("result")
+        outcome = f" -> {result['value']}" if result else " -> not dispatched"
+        return f"({arguments}){outcome}"
+    return ""
+
+
 def _render_span(span: Json) -> str:
     thread = html.escape(str(span.get("thread", "")))
     where = f' <span class="meta">#{span.get("seq", "")} {thread}</span>'
+    digest = _digest(span)
     head = (
         f'<span class="name">{html.escape(span["name"])}</span>'
         f"{_render_attributes(span['attributes'])}{where}{_render_timing(span)}"
+        + (f' <span class="digest">{html.escape(digest)}</span>' if digest else "")
     )
     body = "".join(_render_note(n) for n in span["notes"]) + "".join(
         _render_span(c) for c in span["children"]
     )
-    return f"<details open><summary>{head}</summary>{body}</details>"
+    return f"<details><summary>{head}</summary>{body}</details>"
 
 
 def _render_timing(span: Json) -> str:
