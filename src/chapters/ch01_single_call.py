@@ -30,6 +30,7 @@ Five things a live run shows that a mock run cannot, all of them visible in
 """
 
 from support.models import build_model
+from support.scenario import Scenario, run_scenarios
 from support.trace import ModelKind, Trace
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
@@ -54,9 +55,17 @@ MOCK_MODEL_REPLIES = [
 ]
 
 
-def run(model_kind: ModelKind = "mock") -> Trace:
-    # The trace is ours, not the framework's. Nothing below records itself.
-    trace = Trace(chapter="ch01_single_call", model_kind=model_kind)
+# One situation, and the smallest one there is: nothing is declared, so
+# there is nothing the model could ask for. Every chapter has at least one
+# scenario, named for the situation it puts the agent in, so the page has a
+# single shape whether a chapter runs one situation or eight.
+SCENARIOS = [Scenario(name="agent_with_no_tool", mock_model_replies=MOCK_MODEL_REPLIES)]
+
+
+def run_scenario(
+    model_kind: ModelKind, scenario: Scenario, trace: Trace, _turn_cap: int
+) -> tuple[int, int, str]:
+    """The chapter itself. No loop here, so no turn cap to obey."""
 
     # The context. A plain list we assembled -- no store, no retrieval, no
     # selection. What is in this list is what the model will see.
@@ -76,7 +85,7 @@ def run(model_kind: ModelKind = "mock") -> Trace:
             # raw HTTP either side of the library as well as the normalized
             # reply -- what DeepSeek actually received, and what the library
             # made of what came back.
-            reply = build_model(model_kind, MOCK_MODEL_REPLIES, span).invoke(messages)
+            reply = build_model(model_kind, scenario.mock_model_replies, span).invoke(messages)
 
             # What came back -- one message, and crucially no tool calls.
             span.add_reply(reply)
@@ -94,6 +103,11 @@ def run(model_kind: ModelKind = "mock") -> Trace:
     # model asked for nothing further. That single condition is the entire
     # agentic loop, absent the loop -- and this chapter has no loop to run, so
     # a reply that did ask for something would have nowhere to go.
-    ended = "no tool_calls" if not reply.tool_calls else "nowhere to put a tool call"
-    trace.close(turns=1, messages=len(messages), ended=ended)
-    return trace
+    ended = "no_tool_calls" if not reply.tool_calls else "nowhere to put a tool call"
+    return 1, len(messages), ended
+
+
+def run(model_kind: ModelKind = "mock") -> Trace:
+    # The trace is ours, not the framework's, and recording the run around
+    # the chapter is bookkeeping -- it lives in support/scenario.py.
+    return run_scenarios("ch01_single_call", model_kind, SCENARIOS, run_scenario, turn_cap=1)

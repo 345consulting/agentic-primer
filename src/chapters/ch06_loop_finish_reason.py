@@ -15,10 +15,13 @@ seven CONFIGURABLE parameters this primer has ever set, after five chapters of
 
 Two scenarios, the same loop, one parameter different:
 
-    answers    max_tokens unset      the model finishes, and the loop is right
-    truncated  max_tokens = 24       the model is cut off, and the loop is wrong
+    within_token_limit  max_tokens unset   the model finishes, and the loop is right
+    tokens_exhausted    max_tokens = 24    it never starts, and the loop is wrong
 
-Read the truncated scenario before reading the rest of this. The budget is
+Two runs, the same empty `tool_calls`, and the only thing that tells them
+apart is a field the loop was not reading.
+
+Read the `tokens_exhausted` scenario before reading the rest of this. The budget is
 spent before the model emits anything: the reply has empty content, no tool
 calls, and `finish_reason: length`. A loop that checks only `tool_calls` would
 report a clean run that produced nothing whatsoever -- and would be within its
@@ -44,10 +47,9 @@ anyway.
 """
 
 from support.models import build_model
+from support.scenario import Scenario, run_scenarios
 from support.trace import ModelKind, Trace
 
-from collections.abc import Sequence
-from dataclasses import dataclass
 from typing import Any, Literal
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
@@ -87,28 +89,30 @@ DECLARED_TOOLS = list(TOOLS.values())
 
 TURN_CAP = 6
 
-# The mock cannot be cut off by a parameter it ignores, so it is scripted with
-# what a cut-off reply looks like: content that stops mid-word, no tool calls,
-# and `finish_reason: length` in the metadata. The shape has to match what
-# DeepSeek actually returns, or the mock column would teach the wrong tell.
-ASKS = AIMessage("", tool_calls=[{"name": "lowest_stock_item", "args": {}, "id": "call_1"}])
-PRICES = AIMessage(
-    "", tool_calls=[{"name": "price_of", "args": {"item": "butter"}, "id": "call_2"}]
+# The two tool calls both scenarios start with. `max_tokens` means nothing to
+# a mock model, so what a cut-off reply looks like has to be scripted -- and
+# the shape has to match what DeepSeek actually returns, or the mock column
+# teaches the wrong tell. See `tokens_exhausted` below for what that
+# turned out to be.
+# Both carry `finish_reason: tool_calls`, because that is what a real reply
+# containing tool calls comes back with. Leaving it off let the default fill
+# in `stop`, and a capped run then reported that the model had finished when
+# it had just asked for a tool -- the mock inventing the one fact this
+# chapter is about.
+ASKS = AIMessage(
+    "",
+    tool_calls=[{"name": "lowest_stock_item", "args": {}, "id": "call_1"}],
+    response_metadata={"finish_reason": "tool_calls"},
 )
-
-
-@dataclass(frozen=True)
-class Scenario:
-    """One run of the same loop, under one condition."""
-
-    name: str
-    max_tokens: int | None
-    mock_model_replies: Sequence[AIMessage]
-
+PRICES = AIMessage(
+    "",
+    tool_calls=[{"name": "price_of", "args": {"item": "butter"}, "id": "call_2"}],
+    response_metadata={"finish_reason": "tool_calls"},
+)
 
 SCENARIOS = [
     Scenario(
-        name="answers",
+        name="within_token_limit",
         max_tokens=None,
         mock_model_replies=[
             ASKS,
@@ -120,7 +124,7 @@ SCENARIOS = [
         ],
     ),
     Scenario(
-        name="truncated",
+        name="tokens_exhausted",
         max_tokens=24,
         # One reply, and it is empty. A budget of 24 is spent before the model
         # can emit anything at all -- the reasoning takes it, and what comes
@@ -169,6 +173,23 @@ def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
     return ToolMessage(content=str(result), tool_call_id=call["id"])
 
 
+def _finish_reason(reply: AIMessage) -> str:
+    """The provider's own account of why it stopped, or `stop` if it said nothing."""
+    said: str = reply.response_metadata.get("finish_reason", FINISHED)
+    return said
+
+
+def _with_reason(ended: str, said: str) -> str:
+    """Our conclusion, with the provider's word beside it rather than folded in.
+
+    Two different facts: what the loop decided, and what it decided from. An
+    earlier version translated one into the other -- `f"{said}_exhausted"` --
+    which would have reported a refusal as `content_filter_exhausted`, and a
+    refusal is not an exhausted resource. Quoting is safer than paraphrasing.
+    """
+    return f"{ended} (finish_reason = {said})"
+
+
 def run_scenario(
     model_kind: ModelKind, scenario: Scenario, trace: Trace, turn_cap: int
 ) -> tuple[int, int, str]:
@@ -178,6 +199,9 @@ def run_scenario(
     """
     messages: list[BaseMessage] = [SystemMessage(SYSTEM_PROMPT), HumanMessage(USER_PROMPT)]
     turns = 0
+    # The last reply, so the capped ending can quote where the model had got
+    # to. None means the loop never ran at all, which a cap of zero allows.
+    reply: AIMessage | None = None
 
     while turns < turn_cap:
         turns += 1
@@ -185,33 +209,23 @@ def run_scenario(
             reply = ask_model(model_kind, scenario, turns, messages, trace)
             messages.append(reply)
             if not reply.tool_calls:
-                # The added line. Before trusting our own inference, read the
-                # provider's -- it answered the question in the same response.
-                said = reply.response_metadata.get("finish_reason", FINISHED)
-                ended = "no tool_calls" if said == FINISHED else f"cut off: {said}"
-                return turns, len(messages), ended
+                # The added line. Before trusting its own inference the loop
+                # reads the provider's, which arrived in the same response.
+                # `answer_received` rather than `no_tool_calls`, because this
+                # loop checked: the chapters before it only knew the list was
+                # empty and said so.
+                said = _finish_reason(reply)
+                ended = "answer_received" if said == FINISHED else "tokens_exhausted"
+                return turns, len(messages), _with_reason(ended, said)
             for call in reply.tool_calls:
                 messages.append(execute_tool(call, trace))
-    return turns, len(messages), "turn cap"
+    # Our own ending, and the provider's word for where the model had got
+    # to: `tool_calls` means it was still going when we stopped it.
+    said = _finish_reason(reply) if reply else "never asked"
+    return turns, len(messages), _with_reason("turns_exhausted", said)
 
 
 def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
-    trace = Trace(chapter="ch06_loop_finish_reason", model_kind=model_kind)
-    turns = 0
-    messages = 0
-    endings = []
-
-    # Two runs of one loop. The comparison unit on the page is the scenario,
-    # not the turn -- the same mock and live columns, one row per condition.
-    for scenario in SCENARIOS:
-        with trace.span("scenario", name=scenario.name, max_tokens=scenario.max_tokens):
-            ran, said, ended = run_scenario(model_kind, scenario, trace, turn_cap)
-        turns += ran
-        messages += said
-        endings.append(f"{scenario.name}: {ended}")
-
-    # Both scenarios produced a reply with no tool calls. Only one of them
-    # finished, and the summary can say so only because the loop read the
-    # field rather than inferring from the empty list.
-    trace.close(turns=turns, messages=messages, ended="; ".join(endings))
-    return trace
+    # The scenarios are the chapter; running them and recording the run
+    # around them is bookkeeping, and lives in support/scenario.py.
+    return run_scenarios("ch06_loop_finish_reason", model_kind, SCENARIOS, run_scenario, turn_cap)

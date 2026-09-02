@@ -13,10 +13,13 @@ def test_one_invocation_is_one_turn() -> None:
 
 
 def test_the_model_call_happens_inside_the_turn() -> None:
+    # One shape for every chapter: a run holds scenarios, a scenario holds
+    # turns, a turn holds the model call and whatever tools it asked for.
     trace = ch01_single_call.run()
     depths = {span.name: depth for depth, span in trace.walk()}
-    assert depths["turn"] == 0
-    assert depths["model"] == 1
+    assert depths["scenario"] == 0
+    assert depths["turn"] == 1
+    assert depths["model"] == 2
 
 
 def test_the_context_sent_is_exactly_what_we_assembled() -> None:
@@ -27,7 +30,7 @@ def test_the_context_sent_is_exactly_what_we_assembled() -> None:
 def test_the_loop_would_end_because_the_reply_asks_for_no_tools() -> None:
     trace = ch01_single_call.run()
     assert "tool_calls" not in trace.find_spans("model")[0].reply
-    assert trace.summary["ended"] == "no tool_calls"
+    assert trace.summary["ended"] == "no_tool_calls"
 
 
 def test_the_caller_appended_the_reply_to_the_history() -> None:

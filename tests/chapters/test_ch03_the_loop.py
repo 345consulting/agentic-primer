@@ -39,7 +39,7 @@ def test_the_second_call_could_not_have_been_made_first() -> None:
 
 def test_the_loop_ends_because_the_model_asked_for_nothing() -> None:
     trace = ch03_the_loop.run()
-    assert trace.summary["ended"] == "no tool_calls"
+    assert trace.summary["ended"] == "no_tool_calls"
     assert not trace.find_spans("model")[-1].reply.get("tool_calls")
 
 
@@ -50,11 +50,11 @@ def test_a_capped_run_says_so_rather_than_looking_finished() -> None:
     shape and the same colour on the page. Only the summary distinguishes them.
     """
     trace = ch03_the_loop.run()
-    assert trace.summary["ended"] != "turn cap"
+    assert trace.summary["ended"] != "turns_exhausted"
 
     # Force it: a cap of one cannot reach the model's own ending.
     capped = ch03_the_loop.run(turn_cap=1)
-    assert capped.summary["ended"] == "turn cap"
+    assert capped.summary["ended"] == "turns_exhausted"
     assert capped.summary["turns"] == 1
 
 

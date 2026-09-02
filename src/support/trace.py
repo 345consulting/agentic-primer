@@ -37,6 +37,8 @@ MODEL_KINDS: tuple[ModelKind, ...] = get_args(ModelKind.__value__)
 # lesson, and nothing else reads them.
 CONTEXT = "context"
 
+ENDED = "ended"
+
 REPLY = "reply"
 
 WIRE_REQUEST = "wire request"
@@ -237,9 +239,13 @@ class Trace:
 
 
 def summary_line(items: Json) -> str:
-    """`a=1  b=2` -- the one summary format, so the page and the terminal
-    line cannot drift apart."""
-    return "  ".join(f"{k}={v}" for k, v in items.items())
+    """`a=1 \u00b7 b=2` -- the one summary format, so the page and the terminal
+    line cannot drift apart.
+
+    A middle dot rather than spaces: several `k=v` pairs separated by spaces
+    read as one run-on phrase, and the eye has nothing to stop on.
+    """
+    return " \u00b7 ".join(f"{k}={v}" for k, v in items.items())
 
 
 def _describe(message: BaseMessage) -> Json:

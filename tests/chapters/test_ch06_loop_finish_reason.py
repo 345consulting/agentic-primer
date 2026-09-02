@@ -8,6 +8,7 @@ Everything here is about the difference, and about the field that states it.
 """
 
 from chapters import ch06_loop_finish_reason as chapter
+from support.trace import ENDED
 
 from typing import get_args
 
@@ -15,7 +16,10 @@ from typing import get_args
 def test_both_scenarios_run_the_same_loop() -> None:
     trace = chapter.run()
     scenarios = trace.find_spans("scenario")
-    assert [span.attributes["name"] for span in scenarios] == ["answers", "truncated"]
+    assert [span.attributes["name"] for span in scenarios] == [
+        "within_token_limit",
+        "tokens_exhausted",
+    ]
     assert [span.attributes["max_tokens"] for span in scenarios] == [None, 24]
 
 
@@ -30,17 +34,25 @@ def test_both_scenarios_end_with_no_tool_calls() -> None:
 
 def test_only_the_providers_own_account_distinguishes_them() -> None:
     trace = chapter.run()
-    answers, truncated = trace.find_spans("scenario")
-    assert answers.children[-1].children[0].reply["finish_reason"] == "stop"
-    assert truncated.children[-1].children[0].reply["finish_reason"] == "length"
+    stopped, cut_off = trace.find_spans("scenario")
+    assert stopped.children[-1].children[0].reply["finish_reason"] == "stop"
+    assert cut_off.children[-1].children[0].reply["finish_reason"] == "length"
 
 
-def test_the_summary_reports_the_truncated_run_as_cut_off() -> None:
+def test_each_scenario_records_its_own_ending() -> None:
     trace = chapter.run()
-    assert trace.summary["ended"] == "answers: no tool_calls; truncated: cut off: length"
+    stopped, cut_off = trace.find_spans("scenario")
+    # `answer_received`, not `no_tool_calls`: this loop read the field, so it
+    # can make the stronger claim. ch01 to ch05 only knew the list was empty.
+    assert stopped.require(ENDED).payload["reason"] == "answer_received (finish_reason = stop)"
+    assert cut_off.require(ENDED).payload["reason"] == "tokens_exhausted (finish_reason = length)"
+    # The run summary carries the distinct endings, not one per scenario.
+    assert trace.summary["ended"] == (
+        "answer_received (finish_reason = stop); tokens_exhausted (finish_reason = length)"
+    )
 
 
-def test_the_truncated_reply_produced_nothing_at_all() -> None:
+def test_the_exhausted_reply_produced_nothing_at_all() -> None:
     """The sharpest form of the failure, and the live transcript.
 
     A budget of 24 is spent before the model emits anything: no content, no
@@ -48,9 +60,9 @@ def test_the_truncated_reply_produced_nothing_at_all() -> None:
     produced nothing, and would be within its rights.
     """
     trace = chapter.run()
-    _, truncated = trace.find_spans("scenario")
-    assert len(truncated.children) == 1
-    reply = truncated.children[0].children[0].reply
+    _, cut_off = trace.find_spans("scenario")
+    assert len(cut_off.children) == 1
+    reply = cut_off.children[0].children[0].reply
     assert reply["content"] == ""
     assert "tool_calls" not in reply
 

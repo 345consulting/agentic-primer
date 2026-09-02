@@ -9,7 +9,7 @@ open the file.
 """
 
 from support.chapters import UNKNOWN_SOURCE, chapters, source_hash
-from support.trace import CONTEXT, MODEL_KINDS, REPLY, Json, Trace, summary_line
+from support.trace import CONTEXT, ENDED, MODEL_KINDS, REPLY, Json, Trace, summary_line
 
 import html
 import json
@@ -18,7 +18,18 @@ from pathlib import Path
 
 _STYLE = """
 :root { color-scheme: light dark; --line: #8884; --dim: #8888; }
-body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 1.5rem; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
 h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
 .summary { color: var(--dim); margin-bottom: 1.5rem; }
 details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
@@ -51,7 +62,11 @@ input[type=checkbox] { display: none; }
 .turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
           letter-spacing: .06em; margin-bottom: .3rem; }
 .stale { color: #b26; font-weight: 600; }
-.digest { color: var(--dim); }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
 details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
                             font-size: 1rem; margin-top: 1rem; }
 details.chapter { border: 0; margin: 0; padding: 0; }
@@ -111,33 +126,26 @@ _TOKENS = re.compile(
 def write_book(out: Path = Path("out")) -> Path:
     """Every chapter that has been run, on one page, in reading order.
 
-    The order comes from `order.ORDER` rather than from the files on disk, so
-    the book reads the way the primer is meant to be read and a chapter that
-    has never been run says so in place rather than going missing. Importing
-    `order` is not importing a chapter: it is the reading order, as data.
+    The order and the summaries come from the chapter files themselves, so a
+    chapter that exists is listed the moment it is written, before it has ever
+    been run.
     """
     out.mkdir(parents=True, exist_ok=True)
-    nav, sections = [], []
+    sections = []
     for chapter, why in chapters():
         traces = _load(chapter, out)
-        # Three states, and the difference between the last two matters: a
-        # chapter with no file is the ladder ahead, a chapter with a file and
-        # no trace is work that has not been run yet.
+        # Two states. A chapter with no trace has been written and not run --
+        # there is no third state any more, because the list comes from the
+        # files, so a chapter that is listed exists by definition.
         if traces:
             state, body = "", _render_chapter(chapter, traces)
-        elif source_hash(chapter) == UNKNOWN_SOURCE:
-            state = "not written"
-            body = f'<div class="col missing">{state}</div>'
         else:
             state = "not run"
             body = f'<div class="col missing">{state} &mdash; just run {chapter}</div>'
-        label = f' <span class="not-run">{state}</span>' if state else ""
-        nav.append(
-            f'<a href="#{chapter}"><b>{html.escape(chapter)}</b> '
-            f'<span class="why">{html.escape(why)}</span>{label}</a>'
-        )
         sections.append(
             f'<details class="chapter" id="{chapter}">'
+            # The count goes on its own line under the name and summary:
+            # a chapter's row is a title, and the size of it is a caption.
             f"<summary>{html.escape(chapter)} "
             f'<span class="why">{html.escape(why)}</span>'
             f'<span class="facts">{_facts(traces, state)}</span></summary>'
@@ -147,9 +155,9 @@ def write_book(out: Path = Path("out")) -> Path:
     page = out / "index.html"
     page.write_text(
         f"<!doctype html><meta charset=utf-8><title>the agentic primer</title>"
-        f'<style>{_STYLE}</style><h1 id="top">the agentic primer</h1>'
-        f'<div class="summary">every chapter that has been run, in reading order</div>'
-        f"{_render_toggles()}<nav>{''.join(nav)}</nav>{''.join(sections)}"
+        f"<style>{_STYLE}</style>{_render_toggles()}"
+        f"{_render_header('the agentic primer', 'every chapter that has been run, in order')}"
+        f"{''.join(sections)}"
     )
     return page
 
@@ -165,8 +173,8 @@ def render(traces: dict[str, Json]) -> str:
     return (
         f"<!doctype html><meta charset=utf-8>"
         f"<title>{html.escape(chapter)}</title><style>{_STYLE}</style>"
-        f"<h1>{html.escape(chapter)}</h1>"
-        f"{_render_toggles()}{_render_chapter(chapter, traces)}"
+        f"{_render_toggles()}{_render_header(chapter, '')}"
+        f"{_render_chapter(chapter, traces)}"
     )
 
 
@@ -190,9 +198,42 @@ def write(trace: Trace, out: Path) -> Path:
 
 
 def _render_attributes(attributes: Json) -> str:
-    if not attributes:
+    """A span's identity as a value, anything else as a pair.
+
+    The first attribute is what the span *is* -- a scenario's name, a turn's
+    number, a tool's name -- and its key is guessable from the span's own
+    name, so `partial_failure` says as much as `name=partial_failure`. Every
+    later attribute is a qualifier and keeps its key, because `24` alone does
+    not say `max_tokens`.
+
+    An attribute with no value is dropped rather than printed as `None`: the
+    contrast between a row that shows `max_tokens=24` and one that shows
+    nothing is the same fact, without a Python word leaking onto the page.
+
+    A tool call's id is dropped outright -- forty opaque characters on the
+    busiest row on the page, and it is in the notes and the JSON, where the
+    pairing rule needs it.
+    """
+    shown = [(key, value) for key, value in attributes.items() if key != "id" and value is not None]
+    if not shown:
         return ""
-    return f' <span class="meta">{html.escape(summary_line(attributes))}</span>'
+    (_, identity), *rest = shown
+    parts = [str(identity)] + [f"{key}={value}" for key, value in rest]
+    return f'<span class="meta">{html.escape(" \u00b7 ".join(parts))}</span>'
+
+
+def _head_summary(data: Json) -> Json:
+    """A column's summary, minus what its own rows already say.
+
+    A chapter that ran scenarios states each ending on the scenario's row, so
+    repeating them here says it twice per column and four times per chapter.
+    A chapter that ran turns has nowhere else to put it, so it keeps it.
+    """
+    summary: Json = dict(data["summary"])
+    spans = data["spans"]
+    if spans and spans[0]["name"] == "scenario":
+        summary.pop("ended", None)
+    return summary
 
 
 def _render_chapter(chapter: str, traces: dict[str, Json]) -> str:
@@ -201,12 +242,18 @@ def _render_chapter(chapter: str, traces: dict[str, Json]) -> str:
     heads, bodies = [], []
     for kind in MODEL_KINDS:
         data = traces.get(kind)
-        summary = summary_line(data["summary"]) if data else "not run"
-        heads.append(
-            f'<div class="col col-{kind}"><b>{kind}</b> '
-            f'<span class="meta">{html.escape(summary)}</span>'
-            f"{_render_source(data, current)}</div>"
+        summary = summary_line(_head_summary(data)) if data else "not run"
+        # The kind is the label; the summary and the source stamp are two
+        # separate facts about it.
+        facts = ' <span class="dot">\u00b7</span> '.join(
+            part
+            for part in (
+                f'<span class="meta">{html.escape(summary)}</span>',
+                _render_source(data, current),
+            )
+            if part
         )
+        heads.append(f'<div class="col col-{kind}"><b>{kind}</b> {facts}</div>')
 
     units = max((len(data["spans"]) for data in traces.values()), default=0)
     for index in range(units):
@@ -241,11 +288,16 @@ def _unit_label(traces: dict[str, Json], index: int) -> str:
         data = traces.get(kind)
         if data and index < len(data["spans"]):
             span = data["spans"][index]
-            # Values, not pairs: "turn 1" and "scenario length" read as
-            # headings, where "turn number=1" reads as a debug line. The keys
-            # are still on the span's own row underneath.
-            values = " ".join(str(value) for value in span["attributes"].values())
-            return html.escape(f"{span['name']} {values}".strip())
+            # The heading is the span's name and what it *is* -- the first
+            # attribute -- and nothing else. The qualifiers are on the span's
+            # own row underneath, where they have their keys; here they would
+            # be bare values with nothing to attach to, and an unset one would
+            # print as `None`.
+            identity = next(
+                (str(value) for value in span["attributes"].values() if value is not None),
+                "",
+            )
+            return html.escape(f"{span['name']} {identity}".strip())
     return f"#{index + 1}"
 
 
@@ -382,72 +434,133 @@ def _render_source(data: Json | None, current: str) -> str:
         return ""
     stamp = data.get("source", UNKNOWN_SOURCE)
     if stamp == current or current == UNKNOWN_SOURCE:
-        return f' <span class="meta">source {html.escape(stamp)}</span>'
+        # A stamp that matches is twelve hex characters saying nothing. It
+        # is worth a row only when the two columns came from different code.
+        return ""
     return (
-        f' <span class="stale">recorded from different source '
+        f'<span class="stale">recorded from different source '
         f"({html.escape(stamp)} &ne; {html.escape(current)})</span>"
     )
 
 
 def _facts(traces: dict[str, Json], state: str) -> str:
-    """A chapter's numbers while it is closed: one line per kind that ran."""
+    """A chapter's one line while it is closed: how many of whatever it ran.
+
+    Deliberately not a dashboard. At thirty-five rows the questions are which
+    chapter this is, whether it has run, and how much of it there is. Turns,
+    messages and endings are detail, and detail belongs on the rows below --
+    which is where a reader goes once something has caught their eye.
+
+    Turns or scenarios, never both: a chapter opens one or the other, and the
+    count of the thing it opened is the size of the chapter. When the two
+    kinds disagree it says so as `3/2`, because a disagreement between the
+    columns is the one thing at this level worth interrupting for.
+    """
     if state:
         return state
-    lines = []
-    for kind in MODEL_KINDS:
-        data = traces.get(kind)
-        if data:
-            lines.append(f"{kind}: {summary_line(data['summary'])}")
-    return " \u00b7 ".join(lines)
+    counts = {kind: len(data["spans"]) for kind, data in traces.items()}
+    if not counts:
+        return ""
+    unit = next(iter(traces.values()))["spans"][0]["name"]
+    shown = sorted(set(counts.values()), reverse=True)
+    total = "/".join(str(count) for count in shown)
+    return f"{total} {unit}{'' if shown == [1] else 's'}"
+
+
+ROW_TEXT = 90
+
+
+def _shorten(text: str) -> str:
+    """The first line's worth, and an honest count of what was left out.
+
+    A closed row is one line, and a model can answer with several hundred
+    characters. Cutting silently leaves a reader unsure whether the sentence
+    ended or the page gave up, so the row says which.
+    """
+    text = " ".join(text.split())
+    if len(text) <= ROW_TEXT:
+        return text
+    return f"{text[:ROW_TEXT]}... ({len(text) - ROW_TEXT} more characters)"
 
 
 def _digest(span: Json) -> str:
-    """What a span says while it is still closed.
+    """What came out of a span, said in the span's own terms.
 
-    A collapsed page is only useful if each closed row carries enough to decide
-    whether to open it. Every branch here reads notes the span already has --
-    nothing is computed that the trace did not record.
+    Every row on the page reads left to right as: what it is, what it cost,
+    what came out. This is the last of those, and it is labelled because
+    position alone does not say whether `price_of` on a model row is what the
+    model said or what it asked for.
+
+    Nothing here is computed that the trace did not record.
     """
     notes = {note["label"]: note for note in span["notes"]}
+
     if reply := notes.get(REPLY):
         message = reply["message"]
-        calls = message.get("tool_calls") or []
+        parts = []
         usage = message.get("usage") or {}
-        said = (
-            ", ".join(call["name"] for call in calls)
-            if calls
-            else (message["content"][:60] or "(no content)")
-        )
-        tokens = (
-            f"{usage['input_tokens']} in / {usage['output_tokens']} out  "
-            if usage.get("input_tokens")
-            else ""
-        )
-        return f"{tokens}{said}"
-    if failed := notes.get("failed"):
-        return f"{failed['exception']}: {failed['message'][:60]}"
-    if span["children"]:
-        # A turn has no notes of its own; what it did is what its children did.
-        return " + ".join(
-            f"{child['name']} {_digest(child)}".strip() for child in span["children"]
-        )[:110]
+        if usage.get("input_tokens"):
+            parts.append(f"{usage['input_tokens']} in / {usage['output_tokens']} out")
+        if calls := message.get("tool_calls") or []:
+            parts.append("asked for: " + ", ".join(call["name"] for call in calls))
+        if content := message["content"]:
+            parts.append(f"responded with: {_shorten(content)}")
+        # Empty content and no tool calls is not a rendering artefact: it is
+        # what a reply cut off before it produced anything looks like, and it
+        # is the whole of ch06_loop_finish_reason.
+        if not calls and not content:
+            parts.append("responded with: nothing")
+        return " \u00b7 ".join(parts)
+
+    if ended := notes.get(ENDED):
+        # A scenario has one note. How much it ran and how it stopped is the
+        # whole of what it has to say while closed.
+        inner = span["children"][0]["name"] if span["children"] else "turn"
+        count = len(span["children"])
+        turns = f"{count} {inner}{'' if count == 1 else 's'}"
+        return f"{turns} \u00b7 ended: {ended['reason']}"
+
     if "args" in notes:
-        arguments = ", ".join(f"{k}={v}" for k, v in notes["args"].items() if k != "label")
-        result = notes.get("result")
-        outcome = f" -> {result['value']}" if result else " -> not dispatched"
-        return f"({arguments}){outcome}"
+        given = ", ".join(f"{k}={v}" for k, v in notes["args"].items() if k != "label")
+        parts = [f"given: {given}"] if given else []
+        if failed := notes.get("failed"):
+            # The exception's own message carries a colon, so it goes in
+            # parentheses rather than after a second one.
+            parts.append(f"raised: {failed['exception']} ({failed['message'][:60]})")
+        elif result := notes.get("result"):
+            parts.append(f"returned: {result['value']}")
+        return " \u00b7 ".join(parts)
+
+    if span["children"]:
+        # A turn is one invocation plus its tools, so what came out of it is
+        # what came out of the model. The tools are one row down; repeating
+        # them here was a preview of the thing directly underneath.
+        model = next((c for c in span["children"] if c["name"] == "model"), None)
+        return _digest(model) if model else ""
+
     return ""
 
 
 def _render_span(span: Json) -> str:
-    thread = html.escape(str(span.get("thread", "")))
-    where = f' <span class="meta">#{span.get("seq", "")} {thread}</span>'
-    digest = _digest(span)
-    head = (
-        f'<span class="name">{html.escape(span["name"])}</span>'
-        f"{_render_attributes(span['attributes'])}{where}{_render_timing(span)}"
-        + (f' <span class="digest">{html.escape(digest)}</span>' if digest else "")
-    )
+    # Sequence and thread are recorded on every span and shown on none of
+    # them: until a chapter runs tools concurrently there is one thread and
+    # seq is document order, so the columns are noise. They are in the JSON,
+    # and the chapter that needs them can ask the page to show them.
+    where = ""
+    # Every part of a span's row is a separate fact -- what it is, what it was
+    # given, where it ran, how long it took, what it did -- and space-separated
+    # they read as one phrase. The dot gives the eye somewhere to stop.
+    parts = [
+        part
+        for part in (_render_attributes(span["attributes"]), where, _render_timing(span))
+        if part
+    ]
+    if digest := _digest(span):
+        parts.append(f'<span class="digest">{html.escape(digest)}</span>')
+    facts = ' <span class="dot">\u00b7</span> '.join(parts)
+    # The name is a label rather than one of the facts, so a space follows
+    # it. Everything after it is a separate fact and takes a separator.
+    head = f'<span class="name">{html.escape(span["name"])}</span> {facts}'
     body = "".join(_render_note(n) for n in span["notes"]) + "".join(
         _render_span(c) for c in span["children"]
     )
@@ -461,22 +574,35 @@ def _render_timing(span: Json) -> str:
         return ""
     model_provider, library = span.get("model_provider_ms"), span.get("library_ms")
     if model_provider is None or library is None:
-        return f' <span class="ms">{total:.1f}ms</span>'
+        return f'<span class="ms">{total:.1f}ms</span>'
     return (
-        f' <span class="ms">{total:.1f}ms '
-        f"(model provider {model_provider:.1f} &middot; library {library:.1f})</span>"
+        f'<span class="ms">{total:.1f}ms '
+        f"(model provider {model_provider:.1f} \u00b7 library {library:.1f})</span>"
     )
 
 
 def _render_toggles() -> str:
-    """Checkbox toggles rather than script: hiding a column is CSS on a
-    sibling selector, so the page stays one file with nothing to load. The
-    inputs must precede every column they hide, which is why they sit here
-    rather than beside the thing they control."""
+    """The checkboxes alone.
+
+    Hiding a column is CSS on a sibling selector rather than script, so these
+    must precede every column they hide and cannot move into the header. Their
+    labels can: `for=` reaches an input from anywhere on the page.
+    """
+    return '<input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live">'
+
+
+def _render_header(title: str, subtitle: str) -> str:
+    """Title and column toggles, stuck to the top of the window.
+
+    At thirty-five chapters you are always scrolled away from them, and
+    hiding a column is something you want to do from wherever you are.
+    """
     return (
-        '<input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live">'
-        '<div class="toggles">show: '
-        '<label for="hide-mock">mock</label><label for="hide-live">live</label></div>'
+        f'<header class="top"><h1>{html.escape(title)}</h1>'
+        f'<span class="summary">{html.escape(subtitle)}</span>'
+        f'<span class="toggles">show: '
+        f'<label for="hide-mock">mock</label><label for="hide-live">live</label>'
+        f"</span></header>"
     )
 
 

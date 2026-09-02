@@ -44,8 +44,8 @@ nothing more -- `ch17_retry_exhausted` is where a count becomes a policy.
 
 Two endings, and the summary must tell them apart:
 
-    ended = "no tool_calls"   the model was done
-    ended = "turn cap"        we stopped it, and it was not done
+    ended = "no_tool_calls"     the reply asked for nothing further
+    ended = "turns_exhausted"   we stopped it, and it was not done
 
 A finished run and a capped run are indistinguishable otherwise, which is
 `ch04_missing_tool`'s lesson applied to termination: a record that looks clean
@@ -55,6 +55,7 @@ that this chapter would report as a completion.
 """
 
 from support.models import build_model
+from support.scenario import Scenario, run_scenarios
 from support.trace import ModelKind, Trace
 
 from collections.abc import Sequence
@@ -110,6 +111,10 @@ MOCK_MODEL_REPLIES = [
     AIMessage("You are lowest on butter, and one costs 3.10."),
 ]
 
+# One situation: no single tool answers, because the second call's argument
+# is the first call's result. That dependency is what forces a loop.
+SCENARIOS = [Scenario(name="agent_with_tool_chain", mock_model_replies=MOCK_MODEL_REPLIES)]
+
 # Six turns is nothing like a policy. It is a number that stops a runaway loop
 # from being a bill, chosen to be comfortably more than this question needs.
 # It is a parameter as well as a default so that the capped ending can be
@@ -145,25 +150,26 @@ def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
     return ToolMessage(content=str(result), tool_call_id=call["id"])
 
 
-def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
-    trace = Trace(chapter="ch03_the_loop", model_kind=model_kind)
+def run_scenario(
+    model_kind: ModelKind, scenario: Scenario, trace: Trace, turn_cap: int
+) -> tuple[int, int, str]:
+    """The whole loop, and the two ways it is allowed to end."""
     messages: list[BaseMessage] = [SystemMessage(SYSTEM_PROMPT), HumanMessage(USER_PROMPT)]
-
     turns = 0
-    ended = "turn cap"
+    ended = "turns_exhausted"
 
     while turns < turn_cap:
         turns += 1
         with trace.span("turn", number=turns):
-            remaining = MOCK_MODEL_REPLIES[turns - 1 :]
+            remaining = scenario.mock_model_replies[turns - 1 :]
             reply = ask_model(model_kind, remaining, messages, trace)
             messages.append(reply)
 
-            # The whole termination condition. In ch01 this list was empty on
-            # the first reply and the program stopped; here it is empty when
-            # the model has everything it needs.
+            # The whole termination condition. In ch01_single_call this list
+            # was empty on the first reply and the program stopped; here it is
+            # empty when the model has everything it needs.
             if not reply.tool_calls:
-                ended = "no tool_calls"
+                ended = "no_tool_calls"
                 break
 
             for call in reply.tool_calls:
@@ -171,6 +177,9 @@ def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
 
     # Which of the two endings happened. A run that finished and a run we
     # stopped are the same length, the same shape, and the same colour on the
-    # page -- this line is the only thing that distinguishes them.
-    trace.close(turns=turns, messages=len(messages), ended=ended)
-    return trace
+    # page -- this is the only thing that distinguishes them.
+    return turns, len(messages), ended
+
+
+def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
+    return run_scenarios("ch03_the_loop", model_kind, SCENARIOS, run_scenario, turn_cap)

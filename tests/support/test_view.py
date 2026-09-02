@@ -33,8 +33,10 @@ def _recorded(kind: ModelKind, source: str) -> Json:
 def test_a_column_recorded_from_the_current_source_is_not_flagged() -> None:
     current = Trace(chapter="ch01_single_call").source
     page = render({"mock": _recorded("mock", current)})
+    # A matching stamp says nothing, so it is not shown at all -- only a
+    # disagreement between the columns is worth a reader's attention.
     assert "different source" not in page
-    assert current in page
+    assert current not in page
 
 
 def test_a_column_recorded_from_a_different_source_is_flagged() -> None:
@@ -119,7 +121,9 @@ def test_a_closed_span_still_says_what_happened() -> None:
         "notes": [{"label": "args", "item": "milk"}, {"label": "result", "value": 2}],
         "children": [],
     }
-    assert _digest(span) == "(item=milk) -> 2"
+    # Every row ends with what came out, labelled: position alone cannot
+    # say whether a value is what went in or what came back.
+    assert _digest(span) == "given: item=milk \u00b7 returned: 2"
 
 
 def test_a_turn_reports_what_its_children_did() -> None:
@@ -135,7 +139,9 @@ def test_a_turn_reports_what_its_children_did() -> None:
         "children": [],
     }
     turn = {**child, "name": "turn", "notes": [], "children": [child]}
-    assert _digest(turn) == "model x"
+    # A turn is one invocation plus its tools, so what came out of it is
+    # what came out of the model. The tools are one row down.
+    assert _digest(turn) == "asked for: x"
 
 
 def _span_json(name: str, /, **attributes: object) -> Json:

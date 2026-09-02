@@ -56,7 +56,7 @@ def test_the_id_ties_the_result_to_the_request_that_asked_for_it() -> None:
 def test_turn_two_asks_for_nothing_further_and_that_is_why_it_ends() -> None:
     trace = ch02_tool_call.run()
     assert "tool_calls" not in trace.find_spans("model")[1].reply
-    assert trace.summary["ended"] == "no tool_calls"
+    assert trace.summary["ended"] == "no_tool_calls"
 
 
 def test_every_span_that_was_entered_was_exited() -> None:

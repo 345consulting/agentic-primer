@@ -27,6 +27,7 @@ Three things to read the trace for, none of which happened in chapter 1:
 """
 
 from support.models import build_model
+from support.scenario import Scenario, run_scenarios
 from support.trace import ModelKind, Trace
 
 from collections.abc import Sequence
@@ -73,16 +74,24 @@ TOOLS: dict[str, Any] = {stock_on_hand.name: stock_on_hand}
 
 # What the mock model replies. A live run ignores both and answers for
 # itself. Two, because this chapter writes out two turns.
-MOCK_MODEL_REQUESTS_TOOL = [
+MOCK_MODEL_REPLIES = [
     # No content at all, just a request. This is what a tool call looks like:
     # the model stops mid-thought and waits for the program.
-    AIMessage("", tool_calls=[{"name": "stock_on_hand", "args": {"item": "milk"}, "id": "call_1"}])
+    AIMessage(
+        "",
+        tool_calls=[{"name": "stock_on_hand", "args": {"item": "milk"}, "id": "call_1"}],
+        response_metadata={"finish_reason": "tool_calls"},
+    ),
+    # The answer, which exists only because the result came back.
+    AIMessage(
+        "No -- there are two in the fridge, so you are two short.",
+        response_metadata={"finish_reason": "stop"},
+    ),
 ]
 
-MOCK_MODEL_ANSWERS = [
-    # The answer, which exists only because the result came back.
-    AIMessage("No -- there are two in the fridge, so you are two short.")
-]
+# One situation: a tool exists and it answers the question.
+# ch04_tool_failures is the same axis from the other side.
+SCENARIOS = [Scenario(name="agent_with_one_tool", mock_model_replies=MOCK_MODEL_REPLIES)]
 
 
 # What we tell the model provider exists, built once. It is the same list on every
@@ -139,13 +148,15 @@ def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
     return ToolMessage(content=str(result), tool_call_id=call["id"])
 
 
-def run(model_kind: ModelKind = "mock") -> Trace:
-    trace = Trace(chapter="ch02_tool_call", model_kind=model_kind)
+def run_scenario(
+    model_kind: ModelKind, scenario: Scenario, trace: Trace, _turn_cap: int
+) -> tuple[int, int, str]:
+    """Two turns, written out. No loop yet, so no turn cap to obey."""
     messages: list[BaseMessage] = [SystemMessage(SYSTEM_PROMPT), HumanMessage(USER_PROMPT)]
 
     # A turn is one invocation plus whatever tools that invocation asked for.
     with trace.span("turn", number=1):
-        reply = ask_model(model_kind, MOCK_MODEL_REQUESTS_TOOL, messages, trace)
+        reply = ask_model(model_kind, scenario.mock_model_replies[:1], messages, trace)
         messages.append(reply)
         # In chapter 1 this list was empty and the program stopped. It is not
         # empty, so the turn is not over.
@@ -154,13 +165,16 @@ def run(model_kind: ModelKind = "mock") -> Trace:
 
     # The same stateless model provider, told what happened only by the list.
     with trace.span("turn", number=2):
-        reply = ask_model(model_kind, MOCK_MODEL_ANSWERS, messages, trace)
+        reply = ask_model(model_kind, scenario.mock_model_replies[1:], messages, trace)
         messages.append(reply)
 
     # Why this stops, read off the reply rather than asserted. There are two
     # turns here because two turns are written out, not because the model was
     # finished -- and if it asks for a tool in turn two, this chapter has
-    # nowhere to put it. That gap is the whole of chapter 5.
-    ended = "no tool_calls" if not reply.tool_calls else "out of written turns"
-    trace.close(turns=2, messages=len(messages), ended=ended)
-    return trace
+    # nowhere to put it. That gap is the whole of ch03_the_loop.
+    ended = "no_tool_calls" if not reply.tool_calls else "out of written turns"
+    return 2, len(messages), ended
+
+
+def run(model_kind: ModelKind = "mock") -> Trace:
+    return run_scenarios("ch02_tool_call", model_kind, SCENARIOS, run_scenario, turn_cap=2)
