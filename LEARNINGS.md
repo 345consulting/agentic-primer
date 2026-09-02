@@ -549,3 +549,62 @@ Three of those four are occupied. The empty one is live tests, which means
 `build_live_model`, the wire hooks and every wire note are verified by a person
 reading a page — an instrument checked only against itself, which is the first
 finding in this file.
+
+---
+
+## 2026-09-02 — Turns are the depth of the question, not a property of the agent
+
+**What happened.** `ch05_the_loop` needed a question the loop could not answer
+in two turns. The first attempt was *"we need four milk for the week — if we
+are short, what will the rest cost?"* with `stock_on_hand` and `price_of`
+declared. The mock, following a script someone wrote, took three turns. The
+live model took two: it called **both tools in one reply**.
+
+It was right to. `price_of("milk")` was answerable from the question alone —
+the word *milk* was in it — so nothing had to wait. That is fan-out, not a
+chain, and the script had encoded a sequence the model did not need.
+
+The question was changed so the second call's *argument* is the first call's
+*result*: `lowest_stock_item()` takes no arguments and returns a name;
+`price_of` needs that name. Mock and live then agreed, turn for turn.
+
+**The rule.** A call whose arguments are already known goes now. A call whose
+arguments come from a result must wait. The model issues everything it can at
+once and waits only where it must, so:
+
+    turns ≈ the depth of the data dependencies in the question
+
+The number of tools does not enter into it. Neither does the harness.
+
+**Depth costs; breadth is nearly free.** Each level of depth is another full
+context resend, and cost is the sum of prefixes:
+
+| turn | input | output | cached |
+| --- | --- | --- | --- |
+| 1 | 438 | 66 | 384 |
+| 2 | 518 | 50 | 384 |
+| 3 | 583 | 17 | 512 |
+
+1539 billed input tokens for a conversation that ends at 583. The same three
+calls as fan-out would have been two turns and roughly half the input.
+
+**No framework can fix depth.** `ToolNode` runs a turn's calls concurrently
+through `executor.map`, which helps breadth. Nothing parallelises a
+dependency — that is what "depends on" means, not an implementation limit. So
+a parallel-execution chapter can only ever address half of this.
+
+**Two levers, and neither is the framework.**
+
+*The question.* Naming `milk` collapsed depth 2 to depth 1 by supplying an
+argument the model would otherwise have had to fetch. Phrasing that looks like
+prompt style is the run's shape.
+
+*The tools.* Two narrow tools force depth 2; one `price_of_lowest_stock_item`
+answers in one turn. This is the chatty-API trade, except each round trip
+costs a full context resend, so the penalty is far steeper than an HTTP call.
+Tool granularity is a latency and cost decision before it is an API-design
+one.
+
+**And it is a mock/live finding as much as a design one.** The script asserted
+a sequence that was never necessary, and it passed. Only the live column
+disagreed — the mock will always confirm whatever plan its author imagined.
