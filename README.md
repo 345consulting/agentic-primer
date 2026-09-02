@@ -16,7 +16,7 @@ whoever owns the list owns the agent.
 
 A standalone project, owned by 345 Consulting, LLC. It exists to be read.
 
-    just list                 the reading order
+    just list                 every chapter on disk, in order
     just run ch01_single_call runs it, writes out/<chapter>.html, prints the path
     just run-live ch01_...    the same chapter against a real provider
     just book                 every chapter that has been run, on one page
@@ -25,7 +25,6 @@ A standalone project, owned by 345 Consulting, LLC. It exists to be read.
 ## How it is laid out
 
     src/
-      order.py       the reading order, as data
       support/       scaffolding — models, trace, view. Never a lesson.
       chapters/      the lessons, numbered
 

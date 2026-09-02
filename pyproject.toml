@@ -4,7 +4,6 @@ version         = "0.1.0"
 description     = "The mechanics of an agentic harness, one chapter at a time."
 requires-python = ">=3.14"
 dependencies    = [
-    "langchain-deepseek>=1.0",
     "langchain-core>=1.6,<2",
     "langchain-deepseek>=1.1.0",
     "langgraph>=1.2,<2",
@@ -13,6 +12,7 @@ dependencies    = [
 
 [dependency-groups]
 dev = [
+    "basedpyright>=1.31",
     "mypy>=1.14",
     "pytest>=8.3",
     "ruff>=0.9",
@@ -24,6 +24,43 @@ mypy_path              = "src"
 explicit_package_bases = true
 python_version = "3.14"
 strict         = true
+
+# Two checkers, because they disagree usefully. mypy is the gate the project
+# was written against; basedpyright caught an import cycle, a deprecated
+# `@contextmanager` return type, and three unmarked overrides that mypy passes
+# in silence. The categories below are off for one reason each -- not because
+# they are noisy, but because they are answered by a design decision this
+# project has already made.
+[tool.basedpyright]
+include       = ["src", "tests"]
+extraPaths    = ["src"]
+pythonVersion = "3.14"
+
+# A trace is JSON, and JSON is Any until something narrows it. `view` reads it
+# back off disk, so every field access is Any by construction. Silencing these
+# would take a typed schema for the trace -- a real design decision, not a lint
+# setting, and one that would put the shape of the record in two places.
+reportAny                 = false
+reportExplicitAny         = false
+reportUnknownArgumentType = false
+reportUnknownMemberType   = false
+reportUnknownVariableType = false
+
+# Tests import `_request_headers` and `_response_headers` deliberately: the
+# rule they enforce is that no credential reaches a file on disk, and testing
+# it through the public surface would test the caller instead.
+reportPrivateUsage = false
+
+# Adjacent string literals are how a 100-character line holds a sentence.
+reportImplicitStringConcatenation = false
+
+# `out: Path = Path("out")` is the default output directory, evaluated once at
+# import and never mutated.
+reportCallInDefaultInitializer = false
+
+# A test that calls something for its effect is asserting that it did not
+# raise. Binding the result to `_` says less than the test name already does.
+reportUnusedCallResult = false
 
 [tool.pytest.ini_options]
 addopts    = "-v"

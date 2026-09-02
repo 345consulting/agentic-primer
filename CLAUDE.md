@@ -46,6 +46,67 @@ Comment density tapers. Chapter 1 explains everything because nothing is
 established; later chapters comment only what is new. The comments are the
 delta from the previous chapter.
 
+## The ladder
+
+The chapters on disk are the reading order — they are numbered, so `ls` and
+`just list` answer "what comes next", and each one's first docstring line is
+its summary. There is no list of chapters in code, because a second copy of
+either fact is a second thing to keep true.
+
+What is not written yet is a plan, and a plan is prose:
+
+```
+ch01 single_call      one invoke; no tools, no loop, no framework      written
+ch02 tool_call        the model asks; we execute; turn two knows       written
+ch03 missing_tool     the model asks for what is not there; who decides?
+ch04 two_tools        two calls in one reply -- still ONE turn
+ch05 the_loop         the whole loop, twelve lines of plain Python
+ch06 skills           a tool whose result is instructions, not data
+ch07 compression      the list is too long; what do you drop, and what does it cost?
+ch08 memory           what survives when the list is thrown away
+ch09 graph            the same behaviour as a StateGraph -- what did it buy?
+ch10 limits           recursion_limit at the boundary
+ch11 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch08
+ch12 interrupt        interrupt and Command(resume=...) as an approval gate
+ch13 subgraph         a graph as a node -- a supervisor, from the ground up
+ch14 parallel         fan-out, Send, join, and the order things merge in
+```
+
+Chapter 5 is a complete agentic loop in twelve lines of plain Python. Every
+chapter after it answers one question: *what did this buy over chapter 5?*
+Chapters 6 to 8 are admission, eviction and persistence — one problem, which
+is that the list is the state and the budget is finite — and they stay in
+plain Python so the framework's answers from ch09 on can be asked what they
+bought.
+
+## Documented deviations from the code standard
+
+Per the convention-conflict rule in `~/claude-and-i/docs/standards/code-style.md`,
+a deviation is only valid if it is written down. These two are.
+
+**Function length — "under 40 lines" is measured in code, not in lines.**
+`_describe`, `_generate`, `book` and chapter 1's `run` exceed 40 lines as
+files; none exceeds 20 lines of code. The remainder is comments, and in this
+repo the comments are the lesson — a chapter that fits the limit by deleting
+its explanation has lost the only thing it was for. The limit still binds on
+code: if any of these needs scrolling to follow the *logic*, it gets split.
+
+**"No undocumented returns" does not apply to three-line functions.**
+The standard asks every return path to carry a comment saying why. Here most
+functions are a guard and a return, under a docstring that already says what
+comes back — a per-return comment would restate the signature, which the
+"comment the why, never the what" rule forbids. The rule is honoured where it
+earns its keep: any function with more than one return path explains why each
+one is taken.
+
+**Chapters are ordered by the reading, `support/` by the standard.**
+Modules under `support/` follow "statics on top, public API, then private
+helpers, alphabetical within each". Chapters cannot: `TOOLS` is built from the
+tool function and `DECLARED` from `TOOLS`, so statics and definitions
+necessarily interleave. Past that constraint a chapter is read top to bottom —
+prompts, tools, mock replies, then the functions in the order they run — and
+alphabetising it would destroy the sequence the file exists to teach.
+
 ## Findings
 
 `FINDINGS.md` — things learned by running the chapters that outlive the chapter

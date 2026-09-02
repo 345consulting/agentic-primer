@@ -6,9 +6,9 @@
 _default:
     @just --list
 
-# the reading order, with each chapter's one-line summary
+# every chapter on disk, in order, with its own one-line summary
 list:
-    PYTHONPATH=src uv run python -m order
+    PYTHONPATH=src uv run python -m support.chapters
 
 # every chapter that has been run, on one page, in reading order
 book:
@@ -22,9 +22,6 @@ run CHAPTER:
 run-live CHAPTER:
     PYTHONPATH=src uv run python -m chapters.{{CHAPTER}} live
 
-check: type
-    PYTHONPATH=src uv run python -c "import order; print('import ok')"
-
 clean:
     rm -rf .pytest_cache .mypy_cache .ruff_cache out
     find . -name __pycache__ -type d -prune -exec rm -rf {} +
@@ -37,6 +34,7 @@ gate:
     uv run ruff check src tests
     uv run ruff format --check src tests
     uv run mypy
+    PYTHONPATH=src uv run basedpyright
     uv run pytest
 
 lint:
@@ -47,3 +45,4 @@ test *ARGS:
 
 type:
     uv run mypy
+    PYTHONPATH=src uv run basedpyright

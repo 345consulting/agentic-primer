@@ -1,3 +1,6 @@
+# Copyright (c) 2022-2026 345 Consulting, LLC
+# Proprietary and Confidential. All rights reserved.
+
 """Trace to JSON, and JSON to a page you can read in a browser.
 
 Scaffolding, never a lesson. The JSON is canonical; the page is a projection
@@ -5,7 +8,8 @@ of it. Collapsing is `<details>`, so the page needs no script and no server --
 open the file.
 """
 
-from support.trace import UNKNOWN_SOURCE, Json, Trace, source_hash
+from support.chapters import UNKNOWN_SOURCE, chapters, source_hash
+from support.trace import CONTEXT, MODEL_KINDS, REPLY, Json, Trace, summary_line
 
 import html
 import json
@@ -21,7 +25,7 @@ details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left:
 summary { cursor: pointer; padding: .15rem 0; }
 summary::marker { color: var(--dim); }
 .name { font-weight: 600; }
-.attrs, .ms { color: var(--dim); font-weight: 400; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
 .note { margin: .35rem 0 .5rem 1rem; }
 .label { color: var(--dim); }
 table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
@@ -97,6 +101,162 @@ _TOKENS = re.compile(
 )
 
 
+def write_book(out: Path = Path("out")) -> Path:
+    """Every chapter that has been run, on one page, in reading order.
+
+    The order comes from `order.ORDER` rather than from the files on disk, so
+    the book reads the way the primer is meant to be read and a chapter that
+    has never been run says so in place rather than going missing. Importing
+    `order` is not importing a chapter: it is the reading order, as data.
+    """
+    out.mkdir(parents=True, exist_ok=True)
+    nav, sections = [], []
+    for chapter, why in chapters():
+        traces = _load(chapter, out)
+        # Three states, and the difference between the last two matters: a
+        # chapter with no file is the ladder ahead, a chapter with a file and
+        # no trace is work that has not been run yet.
+        if traces:
+            state, body = "", _render_chapter(chapter, traces)
+        elif source_hash(chapter) == UNKNOWN_SOURCE:
+            state = "not written"
+            body = f'<div class="col missing">{state}</div>'
+        else:
+            state = "not run"
+            body = f'<div class="col missing">{state} &mdash; just run {chapter}</div>'
+        label = f' <span class="not-run">{state}</span>' if state else ""
+        nav.append(
+            f'<a href="#{chapter}"><b>{html.escape(chapter)}</b> '
+            f'<span class="why">{html.escape(why)}</span>{label}</a>'
+        )
+        sections.append(
+            f'<h2 id="{chapter}"><a class="top" href="#top">top</a>'
+            f'{html.escape(chapter)} <span class="why">{html.escape(why)}</span></h2>{body}'
+        )
+
+    page = out / "index.html"
+    page.write_text(
+        f"<!doctype html><meta charset=utf-8><title>the agentic primer</title>"
+        f'<style>{_STYLE}</style><h1 id="top">the agentic primer</h1>'
+        f'<div class="summary">every chapter that has been run, in reading order</div>'
+        f"{_render_toggles()}<nav>{''.join(nav)}</nav>{''.join(sections)}"
+    )
+    return page
+
+
+def render(traces: dict[str, Json]) -> str:
+    """Every kind that has been run, turn beside turn.
+
+    Turns are the unit of comparison, not spans: a mock run and a live run
+    agree on how many turns there were or they do not, and that disagreement
+    is the most interesting thing either trace can tell you.
+    """
+    chapter = next(iter(traces.values()))["chapter"]
+    return (
+        f"<!doctype html><meta charset=utf-8>"
+        f"<title>{html.escape(chapter)}</title><style>{_STYLE}</style>"
+        f"<h1>{html.escape(chapter)}</h1>"
+        f"{_render_toggles()}{_render_chapter(chapter, traces)}"
+    )
+
+
+def write(trace: Trace, out: Path) -> Path:
+    """Write this run, then re-render the page over every kind on disk.
+
+    A run never discards another kind's record. That is what makes the page a
+    comparison rather than a snapshot -- run the mock, run it live, read both.
+    """
+    out.mkdir(parents=True, exist_ok=True)
+    (out / f"{trace.chapter}.{trace.model_kind}.json").write_text(
+        json.dumps(trace.as_json(), indent=2)
+    )
+
+    page = out / f"{trace.chapter}.html"
+    page.write_text(render(_load(trace.chapter, out)))
+    # The book is regenerated on every run, so it can never be older than the
+    # chapter pages it collects.
+    write_book(out)
+    return page
+
+
+def _render_attributes(attributes: Json) -> str:
+    if not attributes:
+        return ""
+    return f' <span class="meta">{html.escape(summary_line(attributes))}</span>'
+
+
+def _render_chapter(chapter: str, traces: dict[str, Json]) -> str:
+    """One chapter's head row and its turns. The same markup on both pages."""
+    current = source_hash(chapter)
+    heads, bodies = [], []
+    for kind in MODEL_KINDS:
+        data = traces.get(kind)
+        summary = summary_line(data["summary"]) if data else "not run"
+        heads.append(
+            f'<div class="col col-{kind}"><b>{kind}</b> '
+            f'<span class="meta">{html.escape(summary)}</span>'
+            f"{_render_source(data, current)}</div>"
+        )
+
+    turns = max((len(d["spans"]) for d in traces.values()), default=0)
+    for index in range(turns):
+        cells = "".join(_render_column(kind, traces.get(kind), index) for kind in MODEL_KINDS)
+        bodies.append(
+            f'<div class="turn"><div class="turnno">turn {index + 1}</div>'
+            f'<div class="row">{cells}</div></div>'
+        )
+
+    return f'<div class="row head">{"".join(heads)}</div>{"".join(bodies)}'
+
+
+def _render_column(kind: str, data: Json | None, index: int) -> str:
+    """One kind's view of one turn -- or a note that this kind has not been run."""
+    if data is None:
+        return f'<div class="col col-{kind} missing">not run</div>'
+    spans = data["spans"]
+    if index >= len(spans):
+        return f'<div class="col col-{kind} missing">no turn {index + 1}</div>'
+    return f'<div class="col col-{kind}">{_render_span(spans[index])}</div>'
+
+
+def _render_field(key: str, value: str, css: str = "") -> str:
+    klass = f' class="{css}"' if css else ""
+    return f"<dt>{html.escape(key)}</dt><dd{klass}>{html.escape(value)}</dd>"
+
+
+def _header_values(note: Json) -> dict[str, str | None]:
+    """Headers as name to value, `None` where the value was not recorded.
+
+    Traces written before the values were recorded carry `header_names`
+    instead. Reading both means an old record still renders -- as names with
+    no values, which is exactly what it is.
+    """
+    headers: dict[str, str | None] = note.get("headers") or {}
+    if not headers:
+        headers = dict.fromkeys(note.get("header_names") or [])
+    return headers
+
+
+def _render_headers(headers: dict[str, str | None]) -> str:
+    """Collapsed by default: the longest field in the note and rarely the point.
+
+    A value of `None` renders as "not recorded" rather than as blank. A header
+    that was present with its value withheld is a different fact from a header
+    that was never sent, and a blank cell cannot tell them apart.
+    """
+    rows = []
+    for name, value in headers.items():
+        cell = (
+            f'<td class="hvalue">{html.escape(value)}</td>'
+            if value is not None
+            else '<td class="hvalue unrecorded">not recorded</td>'
+        )
+        rows.append(f'<tr><td class="hname">{html.escape(name)}</td>{cell}</tr>')
+    return (
+        f'<details><summary>show</summary><table class="headers">{"".join(rows)}</table></details>'
+    )
+
+
 def _highlight(text: str) -> str:
     """Colour JSON without a library. The page stays one self-contained file.
 
@@ -122,14 +282,17 @@ def _highlight(text: str) -> str:
     return "".join(out)
 
 
-def _attrs(attrs: Json) -> str:
-    if not attrs:
-        return ""
-    body = "  ".join(f"{k}={v}" for k, v in attrs.items())
-    return f' <span class="attrs">{html.escape(body)}</span>'
+def _load(chapter: str, out: Path) -> dict[str, Json]:
+    """Every kind of this chapter that has been run and left a record."""
+    traces: dict[str, Json] = {}
+    for kind in MODEL_KINDS:
+        record = out / f"{chapter}.{kind}.json"
+        if record.exists():
+            traces[kind] = json.loads(record.read_text())
+    return traces
 
 
-def _messages(messages: list[Json]) -> str:
+def _render_messages(messages: list[Json]) -> str:
     rows = []
     for index, message in enumerate(messages):
         calls = message.get("tool_calls") or []
@@ -151,78 +314,23 @@ def _messages(messages: list[Json]) -> str:
     return f"<table>{head}{''.join(rows)}</table>"
 
 
-def _header_map(note: Json) -> dict[str, str | None]:
-    """Headers as name to value, `None` where the value was not recorded.
-
-    Traces written before the values were recorded carry `header_names`
-    instead. Reading both means an old record still renders -- as names with
-    no values, which is exactly what it is.
-    """
-    headers: dict[str, str | None] = note.get("headers") or {}
-    if not headers:
-        headers = dict.fromkeys(note.get("header_names") or [])
-    return headers
-
-
-def _headers(headers: dict[str, str | None]) -> str:
-    """Collapsed by default: the longest field in the note and rarely the point.
-
-    A value of `None` renders as "not recorded" rather than as blank. A header
-    that was present with its value withheld is a different fact from a header
-    that was never sent, and a blank cell cannot tell them apart.
-    """
-    rows = []
-    for name, value in headers.items():
-        cell = (
-            f'<td class="hvalue">{html.escape(value)}</td>'
-            if value is not None
-            else '<td class="hvalue unrecorded">not recorded</td>'
-        )
-        rows.append(f'<tr><td class="hname">{html.escape(name)}</td>{cell}</tr>')
-    return (
-        f'<details><summary>show</summary><table class="headers">{"".join(rows)}</table></details>'
-    )
-
-
-def _field(key: str, value: str, css: str = "") -> str:
-    klass = f' class="{css}"' if css else ""
-    return f"<dt>{html.escape(key)}</dt><dd{klass}>{html.escape(value)}</dd>"
-
-
-def _wire_fields(note: Json) -> str:
-    """One row per field, keys in a column you can scan down.
-
-    Headers collapse, because eighteen of them is the longest thing in the
-    note and rarely what you came for. The defaulted parameters do not: every
-    one is a value the provider chose and the record cannot recover, so the
-    run is not reproducible from its own trace, and that should be in the way.
-    """
-    skip = ("label", "body", "at_ms", "headers", "header_names", "defaulted_by_provider")
-    rows = [_field(k, str(v)) for k, v in note.items() if k not in skip]
-    if defaulted := note.get("defaulted_by_provider"):
-        rows.append(_field(f"defaulted ({len(defaulted)})", ", ".join(defaulted), "defaulted"))
-    if headers := _header_map(note):
-        rows.append(f"<dt>headers ({len(headers)})</dt><dd>{_headers(headers)}</dd>")
-    return f'<dl class="wirefields">{"".join(rows)}</dl>'
-
-
-def _note(note: Json) -> str:
+def _render_note(note: Json) -> str:
     label = note["label"]
-    if label == "context":
+    if label == CONTEXT:
         count = len(note["messages"])
         return (
             f'<div class="note"><span class="label">context sent &mdash; '
-            f"{count} message(s)</span>{_messages(note['messages'])}</div>"
+            f"{count} message(s)</span>{_render_messages(note['messages'])}</div>"
         )
-    if label == "reply":
+    if label == REPLY:
         return (
             f'<div class="note"><span class="label">reply</span>'
-            f"{_messages([note['message']])}</div>"
+            f"{_render_messages([note['message']])}</div>"
         )
     if label.startswith("wire "):
         return (
             f'<div class="note"><span class="label">{html.escape(label)}</span>'
-            f"{_wire_fields(note)}"
+            f"{_render_wire_fields(note)}"
             f'<pre class="wire">{_highlight(json.dumps(note.get("body"), indent=2))}</pre></div>'
         )
     rest = {k: v for k, v in note.items() if k != "label"}
@@ -232,45 +340,7 @@ def _note(note: Json) -> str:
     )
 
 
-def _timing(span: Json) -> str:
-    """Total, and where it went. A single number hides the library behind the network."""
-    total = span.get("elapsed_ms")
-    if total is None:
-        return ""
-    provider, library = span.get("provider_ms"), span.get("library_ms")
-    if provider is None or library is None:
-        return f' <span class="ms">{total:.1f}ms</span>'
-    return (
-        f' <span class="ms">{total:.1f}ms '
-        f"(provider {provider:.1f} &middot; library {library:.1f})</span>"
-    )
-
-
-def _span(span: Json) -> str:
-    thread = html.escape(str(span.get("thread", "")))
-    where = f' <span class="attrs">#{span.get("seq", "")} {thread}</span>'
-    head = (
-        f'<span class="name">{html.escape(span["name"])}</span>'
-        f"{_attrs(span['attrs'])}{where}{_timing(span)}"
-    )
-    body = "".join(_note(n) for n in span["notes"]) + "".join(_span(c) for c in span["children"])
-    return f"<details open><summary>{head}</summary>{body}</details>"
-
-
-KINDS = ("mock", "live")
-
-
-def _column(kind: str, data: Json | None, index: int) -> str:
-    """One kind's view of one turn -- or a note that this kind has not been run."""
-    if data is None:
-        return f'<div class="col col-{kind} missing">not run</div>'
-    spans = data["spans"]
-    if index >= len(spans):
-        return f'<div class="col col-{kind} missing">no turn {index + 1}</div>'
-    return f'<div class="col col-{kind}">{_span(spans[index])}</div>'
-
-
-def _source(data: Json | None, current: str) -> str:
+def _render_source(data: Json | None, current: str) -> str:
     """Whether this column still describes the chapter as it is on disk.
 
     A stored trace records a past run. Two columns can agree turn for turn and
@@ -282,30 +352,41 @@ def _source(data: Json | None, current: str) -> str:
         return ""
     stamp = data.get("source", UNKNOWN_SOURCE)
     if stamp == current or current == UNKNOWN_SOURCE:
-        return f' <span class="attrs">source {html.escape(stamp)}</span>'
+        return f' <span class="meta">source {html.escape(stamp)}</span>'
     return (
         f' <span class="stale">recorded from different source '
         f"({html.escape(stamp)} &ne; {html.escape(current)})</span>"
     )
 
 
-def render(traces: dict[str, Json]) -> str:
-    """Every kind that has been run, turn beside turn.
+def _render_span(span: Json) -> str:
+    thread = html.escape(str(span.get("thread", "")))
+    where = f' <span class="meta">#{span.get("seq", "")} {thread}</span>'
+    head = (
+        f'<span class="name">{html.escape(span["name"])}</span>'
+        f"{_render_attributes(span['attributes'])}{where}{_render_timing(span)}"
+    )
+    body = "".join(_render_note(n) for n in span["notes"]) + "".join(
+        _render_span(c) for c in span["children"]
+    )
+    return f"<details open><summary>{head}</summary>{body}</details>"
 
-    Turns are the unit of comparison, not spans: a mock run and a live run
-    agree on how many turns there were or they do not, and that disagreement
-    is the most interesting thing either trace can tell you.
-    """
-    chapter = next(iter(traces.values()))["chapter"]
+
+def _render_timing(span: Json) -> str:
+    """Total, and where it went. A single number hides the library behind the network."""
+    total = span.get("elapsed_ms")
+    if total is None:
+        return ""
+    model_provider, library = span.get("model_provider_ms"), span.get("library_ms")
+    if model_provider is None or library is None:
+        return f' <span class="ms">{total:.1f}ms</span>'
     return (
-        f"<!doctype html><meta charset=utf-8>"
-        f"<title>{html.escape(chapter)}</title><style>{_STYLE}</style>"
-        f"<h1>{html.escape(chapter)}</h1>"
-        f"{_toggles()}{_chapter(chapter, traces)}"
+        f' <span class="ms">{total:.1f}ms '
+        f"(model provider {model_provider:.1f} &middot; library {library:.1f})</span>"
     )
 
 
-def _toggles() -> str:
+def _render_toggles() -> str:
     """Checkbox toggles rather than script: hiding a column is CSS on a
     sibling selector, so the page stays one file with nothing to load. The
     inputs must precede every column they hide, which is why they sit here
@@ -317,101 +398,24 @@ def _toggles() -> str:
     )
 
 
-def _chapter(chapter: str, traces: dict[str, Json]) -> str:
-    """One chapter's head row and its turns. The same markup on both pages."""
-    current = source_hash(chapter)
-    heads, bodies = [], []
-    for kind in KINDS:
-        data = traces.get(kind)
-        summary = "  ".join(f"{k}={v}" for k, v in data["summary"].items()) if data else "not run"
-        heads.append(
-            f'<div class="col col-{kind}"><b>{kind}</b> '
-            f'<span class="attrs">{html.escape(summary)}</span>'
-            f"{_source(data, current)}</div>"
-        )
+def _render_wire_fields(note: Json) -> str:
+    """One row per field, keys in a column you can scan down.
 
-    turns = max((len(d["spans"]) for d in traces.values()), default=0)
-    for index in range(turns):
-        cells = "".join(_column(kind, traces.get(kind), index) for kind in KINDS)
-        bodies.append(
-            f'<div class="turn"><div class="turnno">turn {index + 1}</div>'
-            f'<div class="row">{cells}</div></div>'
-        )
-
-    return f'<div class="row head">{"".join(heads)}</div>{"".join(bodies)}'
-
-
-def _load(chapter: str, out: Path) -> dict[str, Json]:
-    """Every kind of this chapter that has been run and left a record."""
-    traces: dict[str, Json] = {}
-    for kind in KINDS:
-        record = out / f"{chapter}.{kind}.json"
-        if record.exists():
-            traces[kind] = json.loads(record.read_text())
-    return traces
-
-
-def book(out: Path = Path("out")) -> Path:
-    """Every chapter that has been run, on one page, in reading order.
-
-    The order comes from `order.ORDER` rather than from the files on disk, so
-    the book reads the way the primer is meant to be read and a chapter that
-    has never been run says so in place rather than going missing. Importing
-    `order` is not importing a chapter: it is the reading order, as data.
+    Headers collapse, because eighteen of them is the longest thing in the
+    note and rarely what you came for. The defaulted parameters do not: every
+    one is a value the model provider chose and the record cannot recover, so the
+    run is not reproducible from its own trace, and that should be in the way.
     """
-    from order import ORDER
-
-    nav, sections = [], []
-    for chapter, why in ORDER:
-        traces = _load(chapter, out)
-        # Three states, and the difference between the last two matters: a
-        # chapter with no file is the ladder ahead, a chapter with a file and
-        # no trace is work that has not been run yet.
-        if traces:
-            state, body = "", _chapter(chapter, traces)
-        elif source_hash(chapter) == UNKNOWN_SOURCE:
-            state = "not written"
-            body = f'<div class="col missing">{state}</div>'
-        else:
-            state = "not run"
-            body = f'<div class="col missing">{state} &mdash; just run {chapter}</div>'
-        label = f' <span class="not-run">{state}</span>' if state else ""
-        nav.append(
-            f'<a href="#{chapter}"><b>{html.escape(chapter)}</b> '
-            f'<span class="why">{html.escape(why)}</span>{label}</a>'
+    skip = ("label", "body", "at_ms", "headers", "header_names", "defaulted_by_model_provider")
+    rows = [_render_field(k, str(v)) for k, v in note.items() if k not in skip]
+    if defaulted := note.get("defaulted_by_model_provider"):
+        rows.append(
+            _render_field(f"defaulted ({len(defaulted)})", ", ".join(defaulted), "defaulted")
         )
-        sections.append(
-            f'<h2 id="{chapter}"><a class="top" href="#top">top</a>'
-            f'{html.escape(chapter)} <span class="why">{html.escape(why)}</span></h2>{body}'
-        )
-
-    page = out / "index.html"
-    out.mkdir(parents=True, exist_ok=True)
-    page.write_text(
-        f"<!doctype html><meta charset=utf-8><title>the agentic primer</title>"
-        f'<style>{_STYLE}</style><h1 id="top">the agentic primer</h1>'
-        f'<div class="summary">every chapter that has been run, in reading order</div>'
-        f"{_toggles()}<nav>{''.join(nav)}</nav>{''.join(sections)}"
-    )
-    return page
-
-
-def write(trace: Trace, out: Path) -> Path:
-    """Write this run, then re-render the page over every kind on disk.
-
-    A run never discards another kind's record. That is what makes the page a
-    comparison rather than a snapshot -- run the mock, run it live, read both.
-    """
-    out.mkdir(parents=True, exist_ok=True)
-    (out / f"{trace.chapter}.{trace.kind}.json").write_text(json.dumps(trace.as_json(), indent=2))
-
-    page = out / f"{trace.chapter}.html"
-    page.write_text(render(_load(trace.chapter, out)))
-    # The book is regenerated on every run, so it can never be older than the
-    # chapter pages it collects.
-    book(out)
-    return page
+    if headers := _header_values(note):
+        rows.append(f"<dt>headers ({len(headers)})</dt><dd>{_render_headers(headers)}</dd>")
+    return f'<dl class="wirefields">{"".join(rows)}</dl>'
 
 
 if __name__ == "__main__":
-    print(book())
+    print(write_book())
