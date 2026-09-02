@@ -1,9 +1,13 @@
-# Findings
+# Learnings
 
-Things learned by running the chapters that outlive the chapter that produced
-them. Chapters are named, never numbered, because a finding outlives the
-reading order and the numbers move. Chapter-specific observations belong in
-that chapter's docstring; this file is for what generalizes.
+Things learned that outlive the chapter that produced them. Most came from
+running one and reading the trace; a few came from reading a dependency's
+source, and one is a synthesis of the others — each says which, because the
+provenance is part of the claim.
+
+Chapters are named, never numbered: a learning outlives the reading order, and
+the numbers move. Chapter-specific observations belong in that chapter's
+docstring; this file is for what generalizes.
 
 Append, never rewrite. Date each entry.
 
@@ -302,3 +306,200 @@ shape of a library bug.
 **Worth reporting upstream.** Any provider whose API requires reasoning to be
 echoed will hit this, and the failure mode is a 400 that appears only when the
 model happens to think.
+
+**Amended 2026-09-02: this is not a DeepSeek quirk.** Every provider that
+exposes reasoning with tool use requires it back, under a different name, and
+several sign or encrypt it so it cannot be fabricated or edited:
+
+| provider | what must go back | if it is dropped |
+| --- | --- | --- |
+| DeepSeek | `reasoning_content` | 400, as above |
+| Anthropic | `thinking` blocks with their `signature` | rejected; signatures are verified |
+| Gemini | `thoughtSignature` on the function-call part | multi-turn function calling breaks |
+| OpenAI | reasoning items / `encrypted_content`, Responses API only | degraded, not fatal — Chat Completions returns no reasoning to echo |
+
+The shared reason: with tool use the chain of thought is *state for that turn*,
+not a byproduct. The model reasoned, asked for a tool, and is resuming.
+
+So a normalizing layer sits between a harness and four different opaque
+artifacts, keeping only the fields it recognises. Anthropic is the one to
+check first for any harness that uses it: dropping a `signature` is the same
+defect with a stricter failure.
+
+*Provider details from knowledge rather than a doc check, and this area moves
+quickly. Verify before relying on a specific field name.*
+
+---
+
+## 2026-09-02 — Everything that enters the context is a prompt
+
+*Synthesis. This one was not produced by a run: it generalises two entries
+above and one afternoon of reading a dependency's source.*
+
+**What it says.** The model reads one thing — the context — and every field
+that contributes to it is a prompt, whatever the protocol calls it. The
+`tools` array is not a message and is not called a prompt by anyone, and it is
+275 tokens of description and enum values that the model obeys. A tool result
+is data until it contains a sentence, and then it is instruction. A library's
+error template is text someone else wrote into your context.
+
+**The useful axis is not control.** You control nearly all of it. The axis is
+*when it was authored, and who has read it since*:
+
+| authored | examples | last reviewed |
+| --- | --- | --- |
+| per conversation | system, user | as it is written |
+| at design time | tool descriptions, argument enums, error templates, skill bodies | once, months ago — or never, if a dependency wrote it |
+| during the run | tool results, retrieved documents, MCP descriptions, web pages | never, by anyone |
+
+**Why the middle class matters most.** It is yours, and nobody looks at it as
+text a model obeys. A tool description lives in a docstring, and docstrings are
+not reviewed as prompt engineering. That is exactly the `ch02_tool_call`
+finding above: `part: str` against `Literal[...]` read as a typing decision and
+was the only thing constraining what the model could ask for. LangGraph's
+error template is in this class too, and nobody chose it.
+
+**The rule.** Review the context, not the prompt. If a string can reach the
+model, it is part of the instruction set, and its review cadence should match
+its authorship — design-time text needs a design-time review, and run-time
+text needs a guard, because nothing else will ever look at it.
+
+---
+
+## 2026-09-02 — There is exactly one request type
+
+**What it says.** On the wire the model has a single way to ask for anything: a
+function call — a name, an id, and a JSON string of arguments. Everything sold
+as an agentic capability is that mechanism with different strings in the
+dispatch table.
+
+```
+retrieval / RAG         a tool called search
+handing off to an agent a tool called transfer_to_billing, whose body is a loop
+asking the user         a tool called ask_user that blocks on input
+structured output       a tool the framework forces and then unwraps
+MCP                     a dispatch table populated over a protocol
+```
+
+There is no `model_wants_approval` field and no `model_asks_a_question` field.
+Other providers spell the same thing differently — Anthropic returns a
+`tool_use` block, Gemini a `functionCall` part — and newer APIs add genuinely
+distinct kinds: a computer-use call whose arguments are UI actions, and an MCP
+approval request that asks permission rather than execution.
+
+**The part that bites a harness.** Provider-executed tools — `web_search`,
+`code_interpreter`, Anthropic's `server_tool_use` — appear in the reply
+looking exactly like calls and have already run. They are not requests to you.
+A dispatch loop that assumes "a call-shaped thing means my table" will try to
+execute something the model provider already executed, and a guard written to
+gate tool use will not see them at all.
+
+**The rule.** Group by who executes, not by what it is called. Your table
+covers one group; a second group is already done when it reaches you; and the
+loop's termination condition has to read `finish_reason` rather than assuming
+the two groups are one.
+
+---
+
+## 2026-09-02 — LangGraph has no retry, and its default error text asks for one
+
+**What happened.** Read from source while deciding what `ch04_tool_failure`
+should do.
+
+`ToolNode`'s default handler is four lines:
+
+```python
+def _default_handle_tool_errors(e: Exception) -> str:
+    if isinstance(e, ToolInvocationError):
+        return e.message
+    raise e
+```
+
+The model's own mistakes — bad arguments — are reported back so it can correct
+itself. Everything else re-raises and the graph stops. That is a real policy
+and a defensible one, and its axis is *whose fault*, not *can this succeed
+later*.
+
+**Three things follow.**
+
+There is no retry anywhere in it. No count, no backoff, no budget, no
+classification. The only retry in a LangGraph agent is the model choosing to
+call again after reading an error — uncounted and unbounded.
+
+The default error text is a prompt, and it instructs the model to try again:
+`TOOL_CALL_ERROR_TEMPLATE = "Error: {error}\n Please fix your mistakes."`
+
+And it formats with `repr(e)`, so whatever a tool put in its exception message
+— a path, a host, a connection string — is sent to the model provider. An
+exception is written for a developer reading a stack trace, not for a third
+party.
+
+**The rule.** A framework gives you a signal and a sink. Policy — classify,
+count, escalate — is yours whether or not you decide it, and the default is a
+decision someone else made.
+
+---
+
+## 2026-09-02 — Retry is a matrix, and the question is who can change the outcome
+
+**What it says.** "How many retries" is downstream of a classification nobody
+does by default. Retrying only helps if the outcome can change, and who can
+change it decides who should retry.
+
+| failure | harness retry | model retry |
+| --- | --- | --- |
+| rate limit, 5xx, timeout — idempotent tool | backoff, 2-3 | pointless: nothing to fix |
+| timeout — non-idempotent tool | **0** — it may have succeeded | 0 |
+| bad arguments | 0 — same args, same result | **once** — it can fix them |
+| permanent: not found, auth, no capability | 0 | 0 — say so and stop |
+
+**Two cells carry the lesson.** Bad arguments is the only one where the model
+retrying is right and the harness retrying is useless — and it is the single
+cell LangGraph implements. Non-idempotent timeout is the one that bites: it is
+transient by nature and unsafe by consequence, so a budget keyed only on
+transient/permanent gets it wrong and charges someone twice.
+
+**Where the marker belongs.** With the tool author, declared like a schema,
+because nobody else knows whether a call is safe to repeat. Default to
+permanent and opt into retryable: an unclassified failure retried is a loop
+spending money on something that will never work, and an unclassified failure
+not retried is one wasted call and an honest answer. Wrong in the cheap
+direction, which is the same argument as the header allowlist.
+
+**And two outputs, not one.** The harness needs a machine-readable class; the
+model needs prose telling it what to do instead. Telling a model "transient"
+invites it to retry, which is the harness's decision.
+
+---
+
+## 2026-09-02 — `run` produces evidence, a test produces a verdict
+
+**What it says.** They call the same function. `run(model_kind)` returns a
+`Trace`; the runner writes the page and prints a path, and a test asserts
+against the same object and writes nothing. The difference is the output: a
+document for a person, or a boolean.
+
+**Why it is worth stating.** A test can only confirm what someone already
+thought to assert. Every entry in this file came from reading a trace —
+`arguments` double-encoded on the wire, 275 tokens of schema, a cache hit of
+exactly 6 x 64 blocks, 267ms against 14ms, a model calling a tool it had just
+been told was unavailable. Not one of them would have been caught by an
+assertion, because you cannot assert a fact you do not have yet.
+
+So `run` is the product and the tests protect it. That is also why the trace
+records fields nothing asserts — `reasoning_content`, `refusal`,
+`finish_reason`, the defaulted parameters, the raw wire. They are there so the
+next finding is findable.
+
+**And the axes are independent.** Mock/live is not run/test:
+
+```
+              run                          test
+mock    read the mechanics           exact assertions
+live    read what really happens     invariants only
+```
+
+Three of those four are occupied. The empty one is live tests, which means
+`build_live_model`, the wire hooks and every wire note are verified by a person
+reading a page — an instrument checked only against itself, which is the first
+finding in this file.

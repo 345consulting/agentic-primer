@@ -53,7 +53,7 @@ STOCK_ON_HAND = {"bread": 2, "butter": 1, "chips": 6, "milk": 2}
 # This is the only thing constraining what the model may ask for -- the first
 # live run of this chapter declared the argument as `str`, the model asked
 # and a lookup with a default answered 0. The model then reported that as fact.
-# See FINDINGS.md, 2026-09-01.
+# See LEARNINGS.md, 2026-09-01.
 type GroceryItem = Literal["bread", "butter", "chips", "milk"]
 # A test asserts these two agree; a Literal cannot be built from a dict.
 

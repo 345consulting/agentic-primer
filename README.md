@@ -59,5 +59,5 @@ absent the key, the run fails.
 The two do not prove the same things. A scripted model lets a test assert exact
 mechanics; a live one can only be asserted against invariants that hold for any
 model. Anything provable only under mock was the mock's cooperation, not a
-guarantee — see `FINDINGS.md`, where the sharpest finding so far was invisible
+guarantee — see `LEARNINGS.md`, where the sharpest finding so far was invisible
 to every passing test because the script always asked the right question.

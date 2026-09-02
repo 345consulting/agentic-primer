@@ -294,13 +294,13 @@ necessarily interleave. Past that constraint a chapter is read top to bottom —
 prompts, tools, mock replies, then the functions in the order they run — and
 alphabetising it would destroy the sequence the file exists to teach.
 
-## Findings
+## Learnings
 
-`FINDINGS.md` — things learned by running the chapters that outlive the chapter
+`LEARNINGS.md` — things learned by running the chapters that outlive the chapter
 that produced them. Appendable, dated. Chapter-specific observations live in
 that chapter's docstring instead.
 
-Findings name chapters, never number them. A finding outlives the reading
+Learnings name chapters, never number them. A finding outlives the reading
 order, and the ladder below has been renumbered four times in one day.
 
 ## Model

@@ -3,7 +3,7 @@
 
 """The recorder must carry everything the adapter carried.
 
-These exist because of the finding dated 2026-09-01 in FINDINGS.md: a field the
+These exist because of the finding dated 2026-09-01 in LEARNINGS.md: a field the
 recorder drops is indistinguishable from a field the provider never sent.
 """
 
