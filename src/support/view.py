@@ -208,11 +208,11 @@ def _render_chapter(chapter: str, traces: dict[str, Json]) -> str:
             f"{_render_source(data, current)}</div>"
         )
 
-    turns = max((len(d["spans"]) for d in traces.values()), default=0)
-    for index in range(turns):
+    units = max((len(data["spans"]) for data in traces.values()), default=0)
+    for index in range(units):
         cells = "".join(_render_column(kind, traces.get(kind), index) for kind in MODEL_KINDS)
         bodies.append(
-            f'<div class="turn"><div class="turnno">turn {index + 1}</div>'
+            f'<div class="turn"><div class="turnno">{_unit_label(traces, index)}</div>'
             f'<div class="row">{cells}</div></div>'
         )
 
@@ -220,13 +220,33 @@ def _render_chapter(chapter: str, traces: dict[str, Json]) -> str:
 
 
 def _render_column(kind: str, data: Json | None, index: int) -> str:
-    """One kind's view of one turn -- or a note that this kind has not been run."""
+    """One kind's view of one unit -- or a note that this kind has not one."""
     if data is None:
         return f'<div class="col col-{kind} missing">not run</div>'
     spans = data["spans"]
     if index >= len(spans):
-        return f'<div class="col col-{kind} missing">no turn {index + 1}</div>'
+        return f'<div class="col col-{kind} missing">nothing here</div>'
     return f'<div class="col col-{kind}">{_render_span(spans[index])}</div>'
+
+
+def _unit_label(traces: dict[str, Json], index: int) -> str:
+    """What the chapter opened at the top level, named as the chapter named it.
+
+    The comparison unit used to be hardcoded as "turn N", which was true only
+    by accident: every chapter so far opens turns at the top level. A chapter
+    running the same loop under several conditions opens `scenario` spans
+    instead, and the page should say so rather than call them turns.
+    """
+    for kind in MODEL_KINDS:
+        data = traces.get(kind)
+        if data and index < len(data["spans"]):
+            span = data["spans"][index]
+            # Values, not pairs: "turn 1" and "scenario length" read as
+            # headings, where "turn number=1" reads as a debug line. The keys
+            # are still on the span's own row underneath.
+            values = " ".join(str(value) for value in span["attributes"].values())
+            return html.escape(f"{span['name']} {values}".strip())
+    return f"#{index + 1}"
 
 
 def _render_field(key: str, value: str, css: str = "") -> str:

@@ -9,7 +9,14 @@ quietly comparing two different things.
 """
 
 from support.trace import Json, ModelKind, Trace
-from support.view import _digest, _render_wire_fields, render, write_book
+from support.view import (
+    _digest,
+    _render_column,
+    _render_wire_fields,
+    _unit_label,
+    render,
+    write_book,
+)
 
 import json
 from pathlib import Path
@@ -129,3 +136,42 @@ def test_a_turn_reports_what_its_children_did() -> None:
     }
     turn = {**child, "name": "turn", "notes": [], "children": [child]}
     assert _digest(turn) == "model x"
+
+
+def _span_json(name: str, /, **attributes: object) -> Json:
+    # Positional-only, for the third time in this codebase: a span's
+    # attributes can be called `name`, and the recorder's own signature must
+    # not be what stops them. See Trace.span and Span.add_note.
+    return {
+        "name": name,
+        "attributes": attributes,
+        "seq": 1,
+        "thread": "MainThread",
+        "elapsed_ms": 1.0,
+        "model_provider_ms": None,
+        "library_ms": None,
+        "notes": [],
+        "children": [],
+    }
+
+
+def test_the_comparison_unit_is_named_by_what_the_chapter_opened() -> None:
+    """It used to be hardcoded as "turn N", true only by accident.
+
+    Every chapter so far opens turns at the top level. A chapter that runs the
+    same loop under several conditions opens `scenario` spans instead, and the
+    page has to say so rather than call them turns.
+    """
+    turns = {"mock": {"spans": [_span_json("turn", number=1)]}}
+    assert _unit_label(turns, 0) == "turn 1"
+
+    scenarios = {"mock": {"spans": [_span_json("scenario", name="length")]}}
+    assert _unit_label(scenarios, 0) == "scenario length"
+
+
+def test_a_unit_present_in_one_kind_and_not_the_other_is_still_named() -> None:
+    # The live column may have fewer units than the mock; the heading comes
+    # from whichever kind has one, so the rows stay aligned.
+    traces = {"live": {"spans": [_span_json("scenario", name="content_filter")]}}
+    assert _unit_label(traces, 0) == "scenario content_filter"
+    assert "not run" in _render_column("mock", None, 0)
