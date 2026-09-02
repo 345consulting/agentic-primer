@@ -653,3 +653,39 @@ a model that had nothing to say.
 And the budget is spent on reasoning before any output exists, so `max_tokens`
 does not bound the answer — it bounds the answer *plus the thinking*, and the
 thinking goes first.
+
+---
+
+## 2026-09-02 — The same two calls cost 59% more when one waits for the other
+
+**What happened.** `ch06_two_tools` runs one toolbox against two questions.
+Both produce exactly two tool calls; only the dependency differs.
+
+| situation | shape | turns | billed input |
+| --- | --- | --- | --- |
+| both arguments in the question | one reply, two calls | 2 | 1141 |
+| second argument from a result | two replies, one call each | 3 | 1813 |
+
+Fifty-nine per cent more input tokens for identical work, measured live.
+
+**Why.** Cost is the sum of prefixes, so every level of depth is another full
+context resend — and the resends get more expensive as they go, because the
+list has grown by a request and a result each time. Breadth adds a tool span
+and a `ToolMessage`; depth adds a whole turn.
+
+**What it confirms.** This is the earlier entry — *turns are the depth of the
+question, not a property of the agent* — with a controlled comparison rather
+than an accident. The earlier one came from a chapter whose question was
+accidentally shallow; this one holds the toolbox fixed and varies only the
+question, and gets the same answer.
+
+**And it bounds what a framework can do for you.** `ToolNode` dispatches a
+turn's calls through `executor.map`, so a framework can make *breadth*
+concurrent. Nothing parallelises a dependency, because that is what "depends
+on" means. So the whole of concurrency addresses the cheap half.
+
+**The levers are the question and the tools.** Naming `milk` in the question
+supplied an argument the model would otherwise have fetched. A single
+`price_of_lowest_stock_item` would collapse the chain to one turn. Tool
+granularity is a latency and cost decision before it is an API-design one, and
+the penalty per round trip is a full context resend rather than an HTTP call.

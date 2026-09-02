@@ -61,7 +61,7 @@ ch02 tool_call        the model asks; we execute; turn two knows   written
 ch03 the_loop         the whole loop, and the two ways it is allowed to end   written
 ch04 tool_failures    the toolbox lets you down in three ways; one of them looks like it   written
 ch05 loop_endings     every way a run can stop, and only one means finished   written
-ch06 two_tools        two calls in one reply, both succeed -- still ONE turn
+ch06 two_tools        the same two calls, together or in sequence
 ch07 tool_http        a tool that calls an API: latency, a second secret, real failures
 ch08 retry_policy     transient or permanent, and who is allowed to say so
 ch09 retry_by_local   the harness calls again: no model, no tokens, backoff
@@ -147,7 +147,8 @@ indistinguishable unless the summary says which. A veto is the exception and
 waits for `guards`, since it needs something to do the vetoing.
 
 `two_tools` is the clean case of what `partial_failure` showed under duress:
-two calls in one reply, both succeeding, one turn. Fan-out on its own decides
+two calls in one reply, both succeeding. Neither of its situations is a single
+turn — two calls belong to one turn, and the run needs another to answer. Fan-out on its own decides
 nothing — it is a fact about a trace — which is why the failing version came
 first and this one reads as the baseline it was measured against. Ordering and
 concurrency belong to `parallel`, where a framework runs the same two calls on
