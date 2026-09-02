@@ -62,40 +62,53 @@ ch03 missing_tool     no tool covers the question, and nothing fails   written
 ch04 tool_failure     the tool runs and raises; we decide what the model sees   written
 ch05 the_loop         the whole loop, twelve lines of plain Python
 ch06 two_tools        two calls in one reply -- still ONE turn
-ch07 retry_policy     transient or permanent, and who is allowed to say so
-ch08 retry_by_local   the harness calls again: no model, no tokens, backoff
-ch09 retry_by_model   the model asks again: a full turn, and a longer list
-ch10 retry_exhausted  out of strikes: escalate, and with what context?
-ch11 supervisor       one loop calls another: a tool whose body is an agent
-ch12 workflow         the same job with nothing deciding -- is the loop worth it?
-ch13 stream           "stream": true -- a reply arrives in pieces
-ch14 stream_tools     tool arguments arrive as fragments of a JSON string
-ch15 hooks            the named points in the loop, and the three powers
-ch16 guards           a hook that can say no, before dispatch
-ch17 judge            a hook that reads the reply, per turn and not per run
-ch18 skills           a tool whose result is instructions, not data
-ch19 compression      the list is too long; what do you drop, and what does it cost?
-ch20 memory           what survives when the list is thrown away
-ch21 graph            the same behaviour as a StateGraph -- what did it buy?
-ch22 limits           recursion_limit at the boundary
-ch23 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch20
-ch24 interrupt        interrupt and Command(resume=...) as an approval gate
-ch25 subgraph         the ch11 supervisor as a graph node -- what did it buy?
-ch26 parallel         fan-out, Send, join, and the order things merge in
+ch07 tool_http        a tool that calls an API: latency, a second secret, real failures
+ch08 retry_policy     transient or permanent, and who is allowed to say so
+ch09 retry_by_local   the harness calls again: no model, no tokens, backoff
+ch10 retry_by_model   the model asks again: a full turn, and a longer list
+ch11 retry_exhausted  out of strikes: escalate, and with what context?
+ch12 supervisor       one loop calls another: a tool whose body is an agent
+ch13 workflow         the same job with nothing deciding -- is the loop worth it?
+ch14 stream           "stream": true -- a reply arrives in pieces
+ch15 stream_tools     tool arguments arrive as fragments of a JSON string
+ch16 hooks            the named points in the loop, and the three powers
+ch17 guards           a hook that can say no, before dispatch
+ch18 judge            a hook that reads the reply, per turn and not per run
+ch19 mcp              a dispatch table you did not write
+ch20 mcp_injection    descriptions you did not write, in a context you did
+ch21 skills           a tool whose result is instructions, not data
+ch22 compression      the list is too long; what do you drop, and what does it cost?
+ch23 memory           what survives when the list is thrown away
+ch24 graph            the same behaviour as a StateGraph -- what did it buy?
+ch25 limits           recursion_limit at the boundary
+ch26 checkpoint       MemorySaver, thread_id, resume -- and why that is not ch23
+ch27 interrupt        interrupt and Command(resume=...) as an approval gate
+ch28 subgraph         the ch12 supervisor as a graph node -- what did it buy?
+ch29 parallel         fan-out, Send, join, and the order things merge in
 ```
 
 Chapter 5 is a complete agentic loop in twelve lines of plain Python. Every
 chapter after it answers one question: *what did this buy over chapter 5?*
-Everything through ch20 stays in plain Python, so the framework's answers from
-ch21 on can be asked what they bought.
+Everything through ch23 stays in plain Python, so the framework's answers from
+ch24 on can be asked what they bought.
 
 Chapters 3 and 4 are the failure pair, and they fail differently: in ch03
 nothing goes wrong and the question is unanswered anyway; in ch04 something
 goes wrong and we choose what the model is told. Neither retries, because
 retrying needs a loop.
 
-Chapters 7 to 10 are retry, following straight on from ch04's failure, and
-split four ways because they are four different questions. **Policy** is
+Chapter 7 is the first tool that leaves the process. Every tool until now
+returns from a dict or raises an exception someone wrote, which makes the
+retry chapters theoretical -- there is no transient failure in a dict lookup.
+An HTTP call brings three things at once: latency inside the tool span, so a
+turn's cost splits three ways rather than two; real failure classes, where
+timeout and 429 and 503 are transient and 404 and 401 are not; and a second
+secret, the first one in this primer that is not the model provider's. It is
+also a second wire, and whether the trace records it is a decision rather than
+an oversight.
+
+Chapters 8 to 11 are retry, following straight on from ch04's failure and
+ch07's real ones, and split four ways because they are four different questions. **Policy** is
 classification — transient or permanent, safe to call twice or not — and it is
 declared by the tool author, because nobody else knows. **By local** is the
 harness calling again: no model, no tokens, bounded by backoff, and correct
@@ -114,7 +127,7 @@ retrying is useless — and it is the one case LangGraph's `ToolNode` handles by
 default, reporting `ToolInvocationError` back and re-raising everything else.
 There is no retry anywhere in LangGraph.
 
-Chapters 11 and 12 are orchestration, and they differ only in who chooses the
+Chapters 12 and 13 are orchestration, and they differ only in who chooses the
 sequence. **Supervisor** is the pattern with the cheapest mechanism: a tool
 whose implementation is another loop. Nothing new is needed -- `execute_tool`
 dispatches, and the thing it calls happens to run its own `while` and return a
@@ -123,32 +136,32 @@ with the framework. It is also the first chapter where nesting is not merely
 depth, and where `seq` and `thread`, recorded independently of nesting since
 chapter 1, start to earn their keep.
 
-A supervisor is a pattern; a subgraph is one way to build it. Chapter 25 is
-that way, and having ch11 first is what makes it answerable: call-and-return
+A supervisor is a pattern; a subgraph is one way to build it. Chapter 28 is
+that way, and having ch12 first is what makes it answerable: call-and-return
 against handoff, an isolated worker against a shared message list, one string
 coming back against a worker's whole transcript merging into the parent's
 context and its bill.
 
-Chapter 12 is the counterweight to chapter 5 and asks the question the rest of
+Chapter 13 is the counterweight to chapter 5 and asks the question the rest of
 the primer assumes away: the same job as a fixed sequence, with nothing
 deciding anything, is cheaper, deterministic and testable. A workflow needs no
-framework either, so it stays plain Python — and it is the reason ch21 lands
+framework either, so it stays plain Python — and it is the reason ch24 lands
 as it does, because a `StateGraph` is a workflow engine of which the agent
 loop is one special case.
 
-Chapters 13 and 14 are streaming, and they change the recorder before they
+Chapters 14 and 15 are streaming, and they change the recorder before they
 change a chapter. Every request up to here carries `"stream": false`, and
 `_build_wire_hooks` calls `response.read()` — which consumes a body that has
 not finished arriving. So `support/` learns to record events as they arrive,
 with their arrival times, and the chapters follow. A reply stops being an
 object and becomes a sequence; `model_provider_ms` stops being one number and
-becomes an interval with a first token somewhere inside it. In ch14 the tool
+becomes an interval with a first token somewhere inside it. In ch15 the tool
 arguments arrive as fragments of a JSON string, so a tool call cannot be
 parsed, judged or dispatched until the stream ends — which is the sharpest
 governance question in the primer, because a judge wants the whole turn and a
 streaming interface has already shown the user half of it.
 
-Chapters 15 to 17 are the seam. **Hooks** is the mechanism: the named points
+Chapters 16 to 18 are the seam. **Hooks** is the mechanism: the named points
 in the loop — before the model, after the reply, before dispatch, after the
 result, around a turn, around the run — and the three powers a hook can have,
 in increasing order of danger: observe, modify, veto. The `Trace` from chapter
@@ -160,10 +173,24 @@ during it is a decision.
 
 Judge comes after retry rather than before it, so the strike machinery is
 already built on the concrete case. A judge's rejection is a second trigger
-for the counter from ch10, and it looks nothing like a tool that failed —
+for the counter from ch11, and it looks nothing like a tool that failed —
 which is easier to see once the first trigger works.
 
-Chapters 18 to 20 are admission, eviction and persistence — one problem, which
+Chapters 19 and 20 are MCP, and they are where a third party gets to write
+into a context we own. **MCP** is a dispatch table discovered at runtime, so
+`DECLARED_TOOLS` stops being a literal, the declaration order becomes whatever
+a server returned — quietly forfeiting the stable prefix the cache finding
+depends on — and `tools/list` is a round trip that has to succeed before a
+request can be made at all. **Injection** is the consequence: a tool
+description is a prompt, written by whoever runs the server, re-sent on every
+call, and invisible to the user who sees only a tool name. Chapter 4 taught
+that the error text is a prompt; this is the general case, which is that every
+string entering the context is a prompt and some were written by strangers.
+They come after guards on purpose: the seam should exist before a stranger is
+plugged into it, and "which of these tools can I actually gate" is a better
+question than "what is a guard".
+
+Chapters 21 to 23 are admission, eviction and persistence — one problem, which
 is that the list is the state and the budget is finite.
 
 ## Documented deviations from the code standard
