@@ -613,7 +613,7 @@ disagreed — the mock will always confirm whatever plan its author imagined.
 
 ## 2026-09-02 — An empty tool_calls list is not a claim that anything was done
 
-**What happened.** `ch06_loop_finish_reason` sets `max_tokens: 24` — the first
+**What happened.** `ch05_loop_endings` sets `max_tokens: 24` — the first
 of the seven CONFIGURABLE parameters this primer has ever set, after five
 chapters of reporting all of them as chosen by the model provider.
 

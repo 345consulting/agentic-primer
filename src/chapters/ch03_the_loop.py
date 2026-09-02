@@ -50,7 +50,7 @@ Two endings, and the summary must tell them apart:
 A finished run and a capped run are indistinguishable otherwise, which is
 `ch04_missing_tool`'s lesson applied to termination: a record that looks clean
 is not the same as a run that went well. There are five further ways to end --
-`ch06_loop_finish_reason` through `ch11_loop_veto` -- and each one is a stop
+`ch05_loop_endings` through `ch11_loop_veto` -- and each one is a stop
 that this chapter would report as a completion.
 """
 

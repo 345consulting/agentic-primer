@@ -507,7 +507,7 @@ def _digest(span: Json) -> str:
             parts.append(f"responded with: {_shorten(content)}")
         # Empty content and no tool calls is not a rendering artefact: it is
         # what a reply cut off before it produced anything looks like, and it
-        # is the whole of ch06_loop_finish_reason.
+        # is the whole of ch05_loop_endings.
         if not calls and not content:
             parts.append("responded with: nothing")
         return " \u00b7 ".join(parts)

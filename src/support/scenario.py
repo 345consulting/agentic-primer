@@ -8,7 +8,7 @@ loop under conditions it chooses -- the same category as `Trace` and the wire
 hooks, which is why it may be imported rather than built by hand in an earlier
 chapter first. It does not participate in the loop. It names what varies.
 
-Built by hand in `ch06_loop_finish_reason`, which ran one loop twice to show
+Built by hand in `ch05_loop_endings`, which ran one loop twice to show
 that two replies with no tool calls can mean different things, and graduated
 here for every chapter after it.
 
@@ -41,7 +41,7 @@ class Scenario:
     # can declare a tool that another must not see. Empty means the chapter's
     # own DECLARED_TOOLS, which is what every chapter before ch04 used.
     tools: Sequence[BaseTool] = field(default_factory=tuple)
-    # ch06_loop_finish_reason: low enough and the reply comes back empty.
+    # ch05_loop_endings: low enough and the reply comes back empty.
     max_tokens: int | None = None
 
     def attributes(self) -> dict[str, str | int | None]:

@@ -1,7 +1,24 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
 # Proprietary and Confidential. All rights reserved.
 
-"""It stopped for another reason, and the loop called it done.
+"""Every way this loop can stop, and only one of them means finished.
+
+A run ends for one of several reasons and the summary has to say which, or a
+run that gave up reads exactly like a run that succeeded. Each ending is a
+scenario, so they sit on one page and can be read against each other.
+
+Two are here today:
+
+    within_token_limit  max_tokens unset   the model finishes
+    tokens_exhausted    max_tokens = 24    it never starts
+
+and the rest arrive as scenarios rather than as chapters -- a budget spent, a
+deadline passed, a context window full, a loop making no progress. `turns_
+exhausted` already exists in the code and needs only a scenario to show it.
+The one that cannot live here is a veto, which needs a guard to do the vetoing
+and so waits for ch23_guards.
+
+The first ending below is the one the earlier chapters could not tell apart.
 
 `ch03_the_loop` ends when the reply carries no tool calls, and every chapter
 since has agreed that this means the model was finished. It does not. It means
@@ -228,4 +245,4 @@ def run_scenario(
 def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
     # The scenarios are the chapter; running them and recording the run
     # around them is bookkeeping, and lives in support/scenario.py.
-    return run_scenarios("ch06_loop_finish_reason", model_kind, SCENARIOS, run_scenario, turn_cap)
+    return run_scenarios("ch05_loop_endings", model_kind, SCENARIOS, run_scenario, turn_cap)

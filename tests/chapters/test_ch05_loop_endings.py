@@ -7,7 +7,7 @@ Two scenarios end with a reply carrying no tool calls. One of them finished.
 Everything here is about the difference, and about the field that states it.
 """
 
-from chapters import ch06_loop_finish_reason as chapter
+from chapters import ch05_loop_endings as chapter
 from support.trace import ENDED
 
 from typing import get_args
