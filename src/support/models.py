@@ -190,7 +190,7 @@ def build_live_model(span: Span, max_tokens: int | None = None) -> BaseChatModel
         model=LIVE_MODEL,
         timeout=60,
         max_tokens=max_tokens,
-        http_client=httpx.Client(event_hooks=_build_wire_hooks(span)),
+        http_client=httpx.Client(event_hooks=build_wire_hooks(span)),
     )
 
 
@@ -256,7 +256,22 @@ def _response_headers(headers: httpx.Headers) -> dict[str, str | None]:
     return _record(headers, lambda _name: True)
 
 
-def _build_wire_hooks(span: Span) -> dict[str, list[Any]]:
+def _body(text: str) -> Any:
+    """A response body as JSON where it is JSON, and as text where it is not.
+
+    Written against one model provider, this assumed every response was JSON --
+    and the first status code with an empty body crashed the run. A recorder
+    that only works on the happy path is not a recorder.
+    """
+    if not text:
+        return None
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        return text
+
+
+def build_wire_hooks(span: Span) -> dict[str, list[Any]]:
     """httpx hooks that record the actual bytes, either side of the library.
 
     Request header values are recorded only for names on an allowlist. The
@@ -293,7 +308,7 @@ def _build_wire_hooks(span: Span) -> dict[str, list[Any]]:
             at_ms=monotonic() * 1000,
             status=response.status_code,
             headers=_response_headers(response.headers),
-            body=json.loads(response.text),
+            body=_body(response.text),
         )
 
     return {"request": [on_request], "response": [on_response]}

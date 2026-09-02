@@ -62,7 +62,7 @@ ch03 the_loop         the whole loop, and the two ways it is allowed to end   wr
 ch04 tool_failures    the toolbox lets you down in three ways; one of them looks like it   written
 ch05 loop_endings     every way a run can stop, and only one means finished   written
 ch06 two_tools        the same two calls, together or in sequence
-ch07 tool_http        a tool that calls an API: latency, a second secret, real failures
+ch07 tool_http        a tool that calls an API: latency, a second secret, real failures   written
 ch08 retry_policy     transient or permanent, and who is allowed to say so
 ch09 retry_by_local   the harness calls again: no model, no tokens, backoff
 ch10 retry_by_model   the model asks again: a full turn, and a longer list

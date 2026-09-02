@@ -689,3 +689,58 @@ supplied an argument the model would otherwise have fetched. A single
 `price_of_lowest_stock_item` would collapse the chain to one turn. Tool
 granularity is a latency and cost decision before it is an API-design one, and
 the penalty per round trip is a full context resend rather than an HTTP call.
+
+---
+
+## 2026-09-02 — A tool that leaves the process brings back four things
+
+**What happened.** `ch07_tool_http` is the first chapter whose tool makes a
+real HTTP call. Five situations against httpbin, live:
+
+| situation | tool span | status | outcome |
+| --- | --- | --- | --- |
+| service_answers | 225ms | 200 | a price |
+| service_rate_limits | 226ms | 429 | transient, and `Retry-After` says how long |
+| service_is_broken | 199ms | 500 | transient, and it says nothing |
+| service_says_no | 200ms | 404 | permanent; retrying is pure cost |
+| service_is_slow | 2331ms | — | timeout, and the call may still have landed |
+
+**1. Latency lands somewhere new.** A turn's cost stopped splitting two ways.
+`model_provider_ms` and `library_ms` are joined by a service that is nothing to
+do with either, and it is the largest number on the row for the timeout case.
+
+**2. Failures arrive with meanings.** These are real status codes, not
+exceptions someone invented, and no two want the same treatment. The timeout
+is the one with teeth: transient by nature and unsafe by consequence, because
+you do not know whether the work happened. No status code tells you that —
+only the tool's author knows whether calling twice is safe.
+
+**3. The credential is guarded at one boundary and not the other.** The
+request recorder refuses `Authorization` by allowlist, and that held:
+
+    request   authorization  None
+
+httpbin echoes request headers in its *response body*, which is recorded
+whole:
+
+    response  "Authorization": "Bearer primer-demo-key"
+
+So the value withheld at one end arrived at the other, and every check in this
+repository still passed. The key here is fabricated, which is the only reason
+this is safe to demonstrate; a real one would be sitting in `out/*.json` in
+plaintext. **Redaction is per-boundary, and a boundary nobody thought about is
+not redacted.**
+
+**4. The model retried a failure that can never succeed.** Told the 404 had
+failed and to answer without the tool, the live run called it again anyway —
+eleven turns against the mock's ten. It received a sentence, and trying again
+is a reasonable inference from a sentence. Which is why classification belongs
+to the tool and the counter belongs outside the loop: neither is something a
+model can be persuaded into.
+
+**And two bugs in our own recorder, found by the first non-DeepSeek response.**
+It assumed every response body was JSON, so a 429 with an empty body crashed
+the run — a recorder that only works on the happy path is not a recorder. And
+`httpx.codes.OK` types as a `(200, 'OK')` tuple, so the status comparison was
+confusing at best; `response.is_success` is what httpx actually offers.
+basedpyright caught the second, mypy passed it, which is now the third time.
