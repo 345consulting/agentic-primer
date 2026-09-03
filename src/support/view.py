@@ -552,6 +552,11 @@ def _digest(span: Json) -> str:
             parts.append(f"raised: {named} ({message})" if named else f"raised: {message}")
         elif result := notes.get("result"):
             parts.append(f"returned: {result['value']}")
+        elif dispatched := notes.get("dispatched"):
+            # No `result` and no `failed` -- the call ran, and something
+            # after it chose not to let the value stand. Distinct from a
+            # call that never ran at all, which has neither note.
+            parts.append(f"ran: {dispatched['value']} (withheld)")
         return " \u00b7 ".join(parts)
 
     if span["children"]:

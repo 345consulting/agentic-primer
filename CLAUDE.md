@@ -86,26 +86,37 @@ ch12 supervisor     one loop calls another: a tool whose body is an agent   writ
 ch13 workflow       the same job with nothing deciding -- is the loop worth it?   written
 ch14 stream         "stream": true -- a reply arrives in pieces   written
 ch15 stream_tools   tool arguments arrive as fragments of a JSON string   written
-ch16 observability  instrumentation that observes and never participates
-ch17 hooks          the named points in the loop, and the three powers
-ch18 guards         a hook that can say no, before dispatch
-ch19 loop_veto      stopped because forbidden, which is not stopped because done
-ch20 judge          a hook that reads the reply, per turn and not per run
-ch21 prompt_types   everything that enters the context is a prompt
-ch22 mcp            a dispatch table you did not write
-ch23 mcp_injection  descriptions you did not write, in a context you did
-ch24 rag_injection  a document you did not write, telling the model what to do
-ch25 skills         a tool whose result is instructions, not data
-ch26 compression    the list is too long; what do you drop, and what does it cost?
-ch27 memory         what survives when the list is thrown away
-ch28 graph          the same behaviour as a StateGraph -- what did it buy?
-ch29 limits         recursion_limit at the boundary
-ch30 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
-ch31 interrupt      interrupt and Command(resume=...) as an approval gate
-ch32 subgraph       the supervisor as a graph node -- what did it buy?
-ch33 parallel       fan-out, Send, join, and the order things merge in
-ch34 reducers       two updates to one field: append, or replace
+ch16 observability  instrumentation that observes and never participates  skipped
+ch17 stream_producer  the harness becomes the server -- pushing its own progress, span by span, not the model's tokens  skipped
+ch18 hooks          the named points in the loop, and the three powers   written
+ch19 guards         a hook that can say no, before dispatch
+ch20 loop_veto      stopped because forbidden, which is not stopped because done
+ch21 judge          a hook that reads the reply, per turn and not per run
+ch22 prompt_types   everything that enters the context is a prompt
+ch23 mcp            a dispatch table you did not write
+ch24 mcp_injection  descriptions you did not write, in a context you did
+ch25 rag_injection  a document you did not write, telling the model what to do
+ch26 skills         a tool whose result is instructions, not data
+ch27 compression    the list is too long; what do you drop, and what does it cost?
+ch28 memory         what survives when the list is thrown away
+ch29 graph          the same behaviour as a StateGraph -- what did it buy?
+ch30 limits         recursion_limit at the boundary
+ch31 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
+ch32 interrupt      interrupt and Command(resume=...) as an approval gate
+ch33 subgraph       the supervisor as a graph node -- what did it buy?
+ch34 parallel       fan-out, Send, join, and the order things merge in
+ch35 reducers       two updates to one field: append, or replace
 ```
+
+`stream_producer` sits here because this is the conversation that produced it
+-- `stream` and `stream_tools` fresh, `observability` just finished naming
+what a span is for. It has no dependency on anything around it, unlike
+`observability`'s position before `hooks`, which is load-bearing: nothing
+here requires the harness to have a server before it can have guards. Neither
+`stream_producer`'s mechanism (an ASGI app, SSE framing) nor
+`observability`'s is agentic -- both are generic instrumentation and generic
+serving, wearing this ladder's vocabulary. What is not generic is the payload:
+`gen_ai.*` field names for one, span-shaped progress events for the other.
 
 Chapters are named in prose and numbered only in that list. The numbers have
 moved five times in two days; the names have not.

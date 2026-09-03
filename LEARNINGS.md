@@ -1061,3 +1061,59 @@ reads `call["args"]`, never `reply.content` -- so the model's own
 explanation, sitting right beside the call it is explaining, has been
 silently thrown away in every chapter since `ch04`, with nothing ever
 surfacing that it was happening.
+
+---
+
+## 2026-09-03 — A hook is a pre-registered rule at a named point, for a specific actor
+
+*Sanjeev's, from building `ch18_hooks` and then asking whether `guards`,
+`loop_veto` and `judge` are anything more than this.*
+
+Three powers, in order of danger: observe (reads, changes nothing), modify
+(reads, returns a replacement), veto (reads, can refuse). Not every point
+gets every power for free -- `pre` and `post` do not offer the same veto.
+Before an action, nothing has happened, so a veto refuses the action itself.
+After, the action already occurred; a veto there can only stop its
+*consequence* -- the result never reaching the message list, the loop ending
+instead of continuing on it. Same word, two different things, depending on
+which side of the action the hook sits.
+
+**And a rule only proves it is real once more than one is attached to the
+same point.** One hook per point cannot show whether hooks see the original
+input or each other's output. Chaining observe -> modify -> veto on one call
+showed the veto firing on the *normalized* value, not the one the model
+sent -- proof that hooks are a pipeline, not a set of independent checks
+running against the same untouched input.
+
+**The actors it attaches to are not a fixed list of five.** Tool, model,
+agent and step are the primitives with real pre/post moments. Supervisor and
+workflow are shapes built from those four, not additional kinds needing their
+own hook category -- confirmed against this primer's own earlier findings: a
+supervisor is an ordinary agent nested in a tool, and a workflow does not
+act, a step does.
+
+**`guards` and `judge`, checked against this, are mostly scenarios of it.**
+`guards`' mechanism -- a pre-hook with veto power -- is fully built here;
+what it adds is a real cross-call condition (`ch11`'s `state.total_ordered`)
+in place of the single-call catalog check this chapter kept deliberately
+simple. `judge` is the same shape at a different actor -- `model`'s post
+hook, reading a reply instead of a tool's result -- which this chapter's own
+scope explicitly deferred. Neither needs new machinery.
+
+**`loop_veto` is the one exception, and the gap is real.** This chapter has
+no loop -- every scenario is one isolated call, no `run_turns`, no model, no
+multiple turns. A veto here returns an error and stops there; nothing has
+ever tested what happens *next* -- whether the model sees the refusal and
+tries something else, or the run ends immediately. Every ending this primer
+has built so far is "the model asked for nothing" or "we hit a cap."
+"Stopped because forbidden" is a third kind that does not exist anywhere yet,
+and it needs an actual multi-turn loop to be a question at all.
+
+**This is the same shape as `supervisor`/`workflow` one level up.** Those are
+configurations of `agent`/`tool`/`step`, not new primitives -- a supervisor is
+an agent nested in a tool, a workflow is a step wrapping whatever is inside.
+`guards`/`judge` are the identical move at the hook layer: specific, named
+conditions built from `pre`/`post` x {observe, modify, veto}, not new powers
+or new points. The ladder has now made this move twice -- primitives first,
+then named patterns that turn out to be configurations of them, not
+additions to them.
