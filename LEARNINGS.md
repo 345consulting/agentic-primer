@@ -928,3 +928,44 @@ version scatters the same three decisions across `add_node` calls, a
 `path_map`, and whatever `route()` looks like, none of which has to be near
 the others. `graph` is where this primer puts a number on that trade rather
 than asserting it.
+
+---
+
+## 2026-09-03 — A live model batches what a script spaced out on purpose
+
+*From the live run of `ch11_state`, and the third time the live column has
+declined to cooperate with a scenario's script -- after `tool_program`'s
+injection and `who_retries`' split order.*
+
+`a_running_total_survives_between_calls` is scripted as two turns, one
+`place_order` in each, because that shape is what proves the lesson: a value
+that outlives a single turn, which a local scoped to one turn's dispatch loop
+cannot do. The live model put both calls in one reply instead -- the
+`ch06_two_tools` fan-out shape, not the scripted sequence -- and answered in
+one turn.
+
+`state.total_ordered` still came out right, 5 + 3 = 8, because
+`increment_order_total` runs once per call and does not care how many turns
+they are spread across. Nothing broke. But this particular run does not
+demonstrate what the scenario exists to demonstrate: it never needed a value
+that survives between turns, because the model never spread its calls across
+more than one.
+
+**The general shape, now three times over.** A scripted model proves the
+sharp version of a claim because it is told to behave the sharp way. A live
+model proves whatever it actually does, and what it actually does is smarter
+than the script whenever a shortcut is available: `tool_program` found the
+model refusing an injected argument the schema happened to block;
+`who_retries` found it splitting a rejected order into two calls that
+together satisfied the user's intent; here it found the model skipping the
+very turn boundary the scenario was built to require. In every case the
+model was not wrong -- it did what a competent agent should do -- and in
+every case the mock's scripted shape was the only reason the lesson was
+visible at all.
+
+**What this means for a scenario, going forward.** A mock scenario proves a
+mechanism can do what the docstring claims. It does not prove a live model
+will exercise that mechanism the way the scenario expects, and a chapter
+whose claim depends on the model behaving one specific way should say so --
+this one now does, in its own docstring -- rather than let a live run that
+takes a smarter path read as a contradiction.
