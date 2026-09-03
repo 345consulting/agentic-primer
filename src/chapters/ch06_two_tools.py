@@ -49,13 +49,14 @@ Both tool calls here run in order, on one thread. `seq` and `thread` have been
 recorded since `ch01_single_call` for the chapter where that stops being true.
 """
 
-from support.models import build_model
-from support.scenario import Scenario, run_scenarios
+from support.agent import execute_tool as dispatch_and_record
+from support.scenario import Scenario, run_scenario, run_scenarios
 from support.trace import ModelKind, Trace
 
+from functools import partial
 from typing import Any, Literal
 
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.messages.tool import ToolCall
 from langchain_core.tools import tool
 
@@ -124,6 +125,7 @@ ASKS_THE_PRICE = AIMessage(
 SCENARIOS = [
     Scenario(
         name="arguments_in_the_question",
+        question="How much is milk, and how many do we have?",
         mock_model_replies=[
             ASKS_FOR_BOTH,
             AIMessage(
@@ -134,6 +136,7 @@ SCENARIOS = [
     ),
     Scenario(
         name="argument_from_a_result",
+        question="Whatever we are lowest on -- what does one of them cost?",
         mock_model_replies=[
             ASKS_WHICH,
             ASKS_THE_PRICE,
@@ -145,64 +148,19 @@ SCENARIOS = [
     ),
 ]
 
-QUESTIONS = {
-    "arguments_in_the_question": "How much is milk, and how many do we have?",
-    "argument_from_a_result": "Whatever we are lowest on -- what does one of them cost?",
-}
 
-
-def ask_model(
-    model_kind: ModelKind, scenario: Scenario, turn: int, messages: list[BaseMessage], trace: Trace
-) -> AIMessage:
-    """One invocation, recorded. `ch02_tool_call`'s, unchanged."""
-    with trace.span("model", model_kind=model_kind) as span:
-        span.add_context(messages)
-        reply = (
-            build_model(model_kind, scenario.mock_model_replies[turn - 1 :], span)
-            .bind_tools(DECLARED_TOOLS)
-            .invoke(messages)
-        )
-        span.add_reply(reply)
-    assert isinstance(reply, AIMessage)
-    return reply
-
-
-def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
-    """One tool call, dispatched by us. `ch02_tool_call`'s, unchanged."""
-    with trace.span("tool", name=call["name"], id=call["id"]) as span:
-        span.add_note("args", **call["args"])
-        result = TOOLS[call["name"]].invoke(call["args"])
-        span.add_note("result", value=result)
-    return ToolMessage(content=str(result), tool_call_id=call["id"])
-
-
-def run_scenario(
-    model_kind: ModelKind, scenario: Scenario, trace: Trace, turn_cap: int
-) -> tuple[int, int, str]:
-    """`ch03_the_loop`'s loop, unchanged. The `for` is what does the work here."""
-    messages: list[BaseMessage] = [
-        SystemMessage(SYSTEM_PROMPT),
-        HumanMessage(QUESTIONS[scenario.name]),
-    ]
-    turns = 0
-    ended = "turns_exhausted"
-
-    while turns < turn_cap:
-        turns += 1
-        with trace.span("turn", number=turns):
-            reply = ask_model(model_kind, scenario, turns, messages, trace)
-            messages.append(reply)
-            if not reply.tool_calls:
-                ended = "no_tool_calls"
-                break
-            # `for`, not `if`, since ch02_tool_call -- and this is the chapter
-            # where it iterates more than once. Two tool spans under one turn,
-            # in the order the model listed them, on one thread.
-            for call in reply.tool_calls:
-                messages.append(execute_tool(call, trace))
-
-    return turns, len(messages), ended
+def execute_tool(
+    call: ToolCall, _scenario: Scenario, _model_kind: ModelKind, trace: Trace
+) -> ToolMessage:
+    """No decision to make: these tools cannot fail, so this is bookkeeping."""
+    return dispatch_and_record(call, trace, lambda name, args, _span: TOOLS[name].invoke(args))
 
 
 def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
-    return run_scenarios("ch06_two_tools", model_kind, SCENARIOS, run_scenario, turn_cap)
+    return run_scenarios(
+        "ch06_two_tools",
+        model_kind,
+        SCENARIOS,
+        partial(run_scenario, system_prompt=SYSTEM_PROMPT, execute_tool=execute_tool),
+        turn_cap,
+    )

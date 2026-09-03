@@ -63,14 +63,14 @@ unless you say otherwise, so a tool that runs a program hands it every secret
 the harness holds -- the model provider's key included.
 """
 
-from support.models import build_model
 from support.program import Outcome, run_program
-from support.scenario import Scenario, run_scenarios
+from support.scenario import Scenario, run_scenario, run_scenarios
 from support.trace import ModelKind, Span, Trace
 
+from functools import partial
 from typing import Any, Literal
 
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.messages.tool import ToolCall
 from langchain_core.tools import tool
 
@@ -173,7 +173,12 @@ GIVES_UP = AIMessage(
 )
 
 SCENARIOS = [
-    Scenario(name="program_answers", mock_model_replies=[ASKS_FOR_MILK, ANSWERS]),
+    Scenario(
+        name="program_answers",
+        question=QUESTIONS["program_answers"],
+        tools=DECLARED_TOOLS,
+        mock_model_replies=[ASKS_FOR_MILK, ANSWERS],
+    ),
     Scenario(name="program_fails", mock_model_replies=[ASKS_FOR_MILK, GIVES_UP]),
     Scenario(name="program_is_missing", mock_model_replies=[ASKS_FOR_MILK, GIVES_UP]),
     Scenario(name="program_hangs", mock_model_replies=[ASKS_FOR_MILK, GIVES_UP]),
@@ -185,22 +190,6 @@ SCENARIOS = [
         ],
     ),
 ]
-
-
-def ask_model(
-    model_kind: ModelKind, scenario: Scenario, turn: int, messages: list[BaseMessage], trace: Trace
-) -> AIMessage:
-    """One invocation, recorded. `ch02_tool_call`'s, unchanged."""
-    with trace.span("model", model_kind=model_kind) as span:
-        span.add_context(messages)
-        reply = (
-            build_model(model_kind, scenario.mock_model_replies[turn - 1 :], span)
-            .bind_tools(DECLARED_TOOLS)
-            .invoke(messages)
-        )
-        span.add_reply(reply)
-    assert isinstance(reply, AIMessage)
-    return reply
 
 
 def execute_tool(
@@ -224,30 +213,11 @@ def execute_tool(
     return ToolMessage(content=str(result), tool_call_id=call["id"])
 
 
-def run_scenario(
-    model_kind: ModelKind, scenario: Scenario, trace: Trace, turn_cap: int
-) -> tuple[int, int, str]:
-    """`ch03_the_loop`'s loop. Nothing here knows a program was started."""
-    messages: list[BaseMessage] = [
-        SystemMessage(SYSTEM_PROMPT),
-        HumanMessage(QUESTIONS[scenario.name]),
-    ]
-    turns = 0
-    ended = "turns_exhausted"
-
-    while turns < turn_cap:
-        turns += 1
-        with trace.span("turn", number=turns):
-            reply = ask_model(model_kind, scenario, turns, messages, trace)
-            messages.append(reply)
-            if not reply.tool_calls:
-                ended = "no_tool_calls"
-                break
-            for call in reply.tool_calls:
-                messages.append(execute_tool(call, scenario, model_kind, trace))
-
-    return turns, len(messages), ended
-
-
 def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
-    return run_scenarios("ch08_tool_program", model_kind, SCENARIOS, run_scenario, turn_cap)
+    return run_scenarios(
+        "ch08_tool_program",
+        model_kind,
+        SCENARIOS,
+        partial(run_scenario, system_prompt=SYSTEM_PROMPT, execute_tool=execute_tool),
+        turn_cap,
+    )

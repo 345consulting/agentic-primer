@@ -31,7 +31,7 @@ src/
   chapters/      the lessons, numbered
 ```
 
-Three rules keep the scaffolding honest:
+Four rules keep the scaffolding honest:
 
 - **Nothing in `support/` may import from `chapters/`.**
 - **Every mechanism a chapter imports from `support/` was built by hand in an
@@ -41,6 +41,21 @@ Three rules keep the scaffolding honest:
 - **Recording is scaffolding, even when it is interesting.** `Trace`, `view`,
   and the httpx wire hooks observe; they never participate. The second rule
   constrains mechanisms a chapter uses to work, not the instruments watching it.
+- **The first three chapters keep their own copies of everything.** They are
+  the foundation, and a reader should be able to follow one of them without
+  opening another file — `single_call` has nothing before it to import from,
+  `tool_call` writes `ask_model` out again because `bind_tools` is what is new
+  inside it, and `the_loop`'s claim is *a complete agent in twelve lines*,
+  which has to stay checkable by looking. Everything from `tool_failures`
+  onward composes `support/agent.py` instead.
+
+`support/agent.py` holds the agent's three verbs, once, after the chapters
+that teach them: `ask_model`, `execute_tool` and `run_turns`. They are
+functions taking what varies rather than a base class to override, so a later
+chapter's control flow can be read without following an inheritance chain.
+They do the bookkeeping and make no decisions — a chapter that catches a
+failure and chooses what the model is told keeps that in the chapter, because
+wherever there is such a choice it is the lesson.
 
 Comment density tapers. `single_call` explains everything because nothing is
 established; later chapters comment only what is new. The comments are the

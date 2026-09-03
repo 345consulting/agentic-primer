@@ -17,12 +17,14 @@ conditions: a field that is named can be grepped, and a chapter that varies
 something new should have to say so here.
 """
 
+from support.agent import ask_model, run_turns
 from support.trace import ENDED, ModelKind, Trace
 
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
 
-from langchain_core.messages import AIMessage
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.messages.tool import ToolCall
 from langchain_core.tools import BaseTool
 
 
@@ -37,6 +39,9 @@ class Scenario:
 
     name: str
     mock_model_replies: Sequence[AIMessage]
+    # The question is part of the situation, not a constant beside it: ch04
+    # and ch08 kept per-scenario question tables on the side before this.
+    question: str = ""
     # ch04_tool_failures: the toolbox itself is what varies, so one scenario
     # can declare a tool that another must not see. Empty means the chapter's
     # own DECLARED_TOOLS, which is what every chapter before ch04 used.
@@ -60,9 +65,49 @@ class Scenario:
 
 # What a chapter's own loop returns: how many turns it ran, how long the list
 # got, and how it ended.
+# What a chapter's own loop returns: how many turns it ran, how long the list
+# got, and how it ended.
 type Outcome = tuple[int, int, str]
 
+# The one thing a chapter with no loop of its own still has to provide.
+type ExecuteTool = Callable[[ToolCall, Scenario, ModelKind, Trace], ToolMessage]
+
 type RunOne = Callable[[ModelKind, Scenario, Trace, int], Outcome]
+
+
+def run_scenario(
+    model_kind: ModelKind,
+    scenario: Scenario,
+    trace: Trace,
+    turn_cap: int,
+    system_prompt: str,
+    execute_tool: ExecuteTool,
+) -> Outcome:
+    """One situation, run through `support/agent.py`'s loop.
+
+    Bookkeeping, and it was identical in four chapters: assemble the two
+    opening messages, close over the scenario so the model gets its tools and
+    its canned replies, hand the chapter's own `execute_tool` to the loop.
+
+    What is left in a chapter is `execute_tool`, because deciding what to
+    catch and what the model is told is the lesson wherever there is one.
+    """
+    messages: list[BaseMessage] = [SystemMessage(system_prompt), HumanMessage(scenario.question)]
+
+    def ask(turn: int, so_far: list[BaseMessage]) -> AIMessage:
+        return ask_model(
+            trace,
+            model_kind,
+            scenario.mock_model_replies[turn - 1 :],
+            so_far,
+            scenario.tools,
+            scenario.max_tokens,
+        )
+
+    def execute(call: ToolCall) -> ToolMessage:
+        return execute_tool(call, scenario, model_kind, trace)
+
+    return run_turns(messages, trace, turn_cap, ask, execute)
 
 
 def run_scenarios(

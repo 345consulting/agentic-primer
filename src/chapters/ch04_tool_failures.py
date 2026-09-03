@@ -59,13 +59,13 @@ That is a constraint, not a preference, and it is the first thing in this
 primer that a naive `try` around the whole loop would break.
 """
 
-from support.models import build_model
-from support.scenario import Scenario, run_scenarios
+from support.scenario import Scenario, run_scenario, run_scenarios
 from support.trace import ModelKind, Trace
 
+from functools import partial
 from typing import Any, Literal
 
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.messages.tool import ToolCall
 from langchain_core.tools import tool
 
@@ -103,6 +103,7 @@ TOOLS: dict[str, Any] = {price_of.name: price_of, stock_on_hand.name: stock_on_h
 SCENARIOS = [
     Scenario(
         name="no_tool_available",
+        question="When is the next delivery of milk expected?",
         # `price_of` is withheld here. Declared, it would raise when the model
         # reached for it, and this scenario's whole point is that nothing goes
         # wrong. That is why a scenario carries its own toolbox.
@@ -118,6 +119,7 @@ SCENARIOS = [
     ),
     Scenario(
         name="tool_exception",
+        question="How much does milk cost right now?",
         tools=(price_of, stock_on_hand),
         mock_model_replies=[
             AIMessage("", tool_calls=[{"name": "price_of", "args": {"item": "milk"}, "id": "c1"}]),
@@ -126,6 +128,7 @@ SCENARIOS = [
     ),
     Scenario(
         name="partial_failure",
+        question="How much is milk, and how many do we have?",
         tools=(price_of, stock_on_hand),
         mock_model_replies=[
             AIMessage(
@@ -140,30 +143,10 @@ SCENARIOS = [
     ),
 ]
 
-QUESTIONS = {
-    "no_tool_available": "When is the next delivery of milk expected?",
-    "tool_exception": "How much does milk cost right now?",
-    "partial_failure": "How much is milk, and how many do we have?",
-}
 
-
-def ask_model(
-    model_kind: ModelKind, scenario: Scenario, turn: int, messages: list[BaseMessage], trace: Trace
-) -> AIMessage:
-    """One invocation, recorded, declaring this scenario's tools."""
-    with trace.span("model", model_kind=model_kind) as span:
-        span.add_context(messages)
-        reply = (
-            build_model(model_kind, scenario.mock_model_replies[turn - 1 :], span)
-            .bind_tools(list(scenario.tools))
-            .invoke(messages)
-        )
-        span.add_reply(reply)
-    assert isinstance(reply, AIMessage)
-    return reply
-
-
-def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
+def execute_tool(
+    call: ToolCall, _scenario: Scenario, _model_kind: ModelKind, trace: Trace
+) -> ToolMessage:
     """One tool call, and the decision to make when it raises."""
     with trace.span("tool", name=call["name"], id=call["id"]) as span:
         span.add_note("args", **call["args"])
@@ -192,32 +175,13 @@ def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
     return ToolMessage(content=str(result), tool_call_id=call["id"])
 
 
-def run_scenario(
-    model_kind: ModelKind, scenario: Scenario, trace: Trace, turn_cap: int
-) -> tuple[int, int, str]:
-    """ch03_the_loop's loop, unchanged. Returns turns, messages, and the ending."""
-    messages: list[BaseMessage] = [
-        SystemMessage(SYSTEM_PROMPT),
-        HumanMessage(QUESTIONS[scenario.name]),
-    ]
-    turns = 0
-
-    while turns < turn_cap:
-        turns += 1
-        with trace.span("turn", number=turns):
-            reply = ask_model(model_kind, scenario, turns, messages, trace)
-            messages.append(reply)
-            if not reply.tool_calls:
-                return turns, len(messages), "no_tool_calls"
-            # Every call gets a reply, including the ones that raised. Break
-            # out of this loop on the first failure and the next request is
-            # rejected: a tool_call_id without a ToolMessage is malformed.
-            for call in reply.tool_calls:
-                messages.append(execute_tool(call, trace))
-    return turns, len(messages), "turns_exhausted"
-
-
 def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
     # The scenarios are the chapter; running them and recording the run
     # around them is bookkeeping, and lives in support/scenario.py.
-    return run_scenarios("ch04_tool_failures", model_kind, SCENARIOS, run_scenario, turn_cap)
+    return run_scenarios(
+        "ch04_tool_failures",
+        model_kind,
+        SCENARIOS,
+        partial(run_scenario, system_prompt=SYSTEM_PROMPT, execute_tool=execute_tool),
+        turn_cap,
+    )

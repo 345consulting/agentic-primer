@@ -15,7 +15,11 @@ this one is a variation on the atomic agent, an addition to it, or a
 framework's version of it.
 
 Nothing else is new. `ask_model` and `execute_tool` are `ch02_tool_call`'s,
-unchanged. The loop is six lines and there is no framework in it:
+written out again rather than imported: these three chapters are the
+foundation, and a reader should be able to follow one of them without opening
+another file. Everything after them composes `support/agent.py` instead.
+
+The loop is six lines and there is no framework in it:
 
     while True:
         reply = ask_model(...)          one invocation
@@ -50,8 +54,8 @@ Two endings, and the summary must tell them apart:
 A finished run and a capped run are indistinguishable otherwise, which is
 `ch04_missing_tool`'s lesson applied to termination: a record that looks clean
 is not the same as a run that went well. There are five further ways to end --
-`ch05_loop_endings` through `ch11_loop_veto` -- and each one is a stop
-that this chapter would report as a completion.
+`ch05_loop_endings`, and each one is a stop that this chapter would report as
+a completion.
 """
 
 from support.models import build_model

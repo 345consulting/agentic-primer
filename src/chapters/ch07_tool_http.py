@@ -57,15 +57,15 @@ living with the tool and the counter living outside the loop -- neither is
 something the model can be persuaded into.
 """
 
-from support.models import build_model
-from support.scenario import Scenario, run_scenarios
+from support.scenario import Scenario, run_scenario, run_scenarios
 from support.service import SERVICE, SERVICE_KEY, Canned, build_http_client
 from support.trace import ModelKind, Span, Trace
 
+from functools import partial
 from typing import Any, Literal
 
 import httpx
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.messages.tool import ToolCall
 from langchain_core.tools import tool
 
@@ -165,7 +165,7 @@ MOCK_MODEL_GIVES_UP = [
 ]
 
 SCENARIOS = [
-    Scenario(name=name, mock_model_replies=replies)
+    Scenario(name=name, question=USER_PROMPT, mock_model_replies=replies, tools=DECLARED_TOOLS)
     for name, replies in (
         ("service_answers", MOCK_MODEL_REPLIES),
         ("service_rate_limits", MOCK_MODEL_GIVES_UP),
@@ -174,22 +174,6 @@ SCENARIOS = [
         ("service_is_slow", MOCK_MODEL_GIVES_UP),
     )
 ]
-
-
-def ask_model(
-    model_kind: ModelKind, scenario: Scenario, turn: int, messages: list[BaseMessage], trace: Trace
-) -> AIMessage:
-    """One invocation, recorded. `ch02_tool_call`'s, unchanged."""
-    with trace.span("model", model_kind=model_kind) as span:
-        span.add_context(messages)
-        reply = (
-            build_model(model_kind, scenario.mock_model_replies[turn - 1 :], span)
-            .bind_tools(DECLARED_TOOLS)
-            .invoke(messages)
-        )
-        span.add_reply(reply)
-    assert isinstance(reply, AIMessage)
-    return reply
 
 
 def execute_tool(
@@ -213,27 +197,11 @@ def execute_tool(
     return ToolMessage(content=str(result), tool_call_id=call["id"])
 
 
-def run_scenario(
-    model_kind: ModelKind, scenario: Scenario, trace: Trace, turn_cap: int
-) -> tuple[int, int, str]:
-    """`ch03_the_loop`'s loop. Nothing here knows the tool left the process."""
-    messages: list[BaseMessage] = [SystemMessage(SYSTEM_PROMPT), HumanMessage(USER_PROMPT)]
-    turns = 0
-    ended = "turns_exhausted"
-
-    while turns < turn_cap:
-        turns += 1
-        with trace.span("turn", number=turns):
-            reply = ask_model(model_kind, scenario, turns, messages, trace)
-            messages.append(reply)
-            if not reply.tool_calls:
-                ended = "no_tool_calls"
-                break
-            for call in reply.tool_calls:
-                messages.append(execute_tool(call, scenario, model_kind, trace))
-
-    return turns, len(messages), ended
-
-
 def run(model_kind: ModelKind = "mock", turn_cap: int = TURN_CAP) -> Trace:
-    return run_scenarios("ch07_tool_http", model_kind, SCENARIOS, run_scenario, turn_cap)
+    return run_scenarios(
+        "ch07_tool_http",
+        model_kind,
+        SCENARIOS,
+        partial(run_scenario, system_prompt=SYSTEM_PROMPT, execute_tool=execute_tool),
+        turn_cap,
+    )

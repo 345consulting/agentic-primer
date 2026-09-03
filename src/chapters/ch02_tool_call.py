@@ -109,9 +109,10 @@ def ask_model(
 ) -> AIMessage:
     """One invocation, recorded: the exact context in, the reply out.
 
-    Chapter 1 wrote this out by hand. It is a named function here rather than
-    a `support/` import because chapter 5 replaces the two calls below with a
-    loop, and a loop whose body lives in another file teaches nothing.
+    `ch01_single_call` wrote this out by hand without tools. It is written out
+    again here, rather than imported from `support/agent.py`, because what is
+    new in this chapter is inside it: `bind_tools`, and what that does and does
+    not do. Chapters after `ch03_the_loop` import it instead.
     """
     with trace.span("model", model_kind=model_kind) as span:
         span.add_context(messages)

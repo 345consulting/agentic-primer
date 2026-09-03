@@ -63,14 +63,13 @@ refused is teaching something else, and the failure would not be reproducible
 anyway.
 """
 
-from support.models import build_model
+from support.agent import ask_model, execute_tool
 from support.scenario import Scenario, run_scenarios
 from support.trace import ModelKind, Trace
 
 from typing import Any, Literal
 
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
-from langchain_core.messages.tool import ToolCall
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
 from langchain_core.tools import tool
 
 SYSTEM_PROMPT = "You answer briefly and plainly. Use the tools you are given."
@@ -156,40 +155,6 @@ SCENARIOS = [
 ]
 
 
-def ask_model(
-    model_kind: ModelKind,
-    scenario: Scenario,
-    turn: int,
-    messages: list[BaseMessage],
-    trace: Trace,
-) -> AIMessage:
-    """One invocation, recorded, with this scenario's `max_tokens`."""
-    with trace.span("model", model_kind=model_kind) as span:
-        span.add_context(messages)
-        reply = (
-            build_model(
-                model_kind,
-                scenario.mock_model_replies[turn - 1 :],
-                span,
-                max_tokens=scenario.max_tokens,
-            )
-            .bind_tools(DECLARED_TOOLS)
-            .invoke(messages)
-        )
-        span.add_reply(reply)
-    assert isinstance(reply, AIMessage)
-    return reply
-
-
-def execute_tool(call: ToolCall, trace: Trace) -> ToolMessage:
-    """One tool call, dispatched by us. ch02_tool_call's, unchanged."""
-    with trace.span("tool", name=call["name"], id=call["id"]) as span:
-        span.add_note("args", **call["args"])
-        result = TOOLS[call["name"]].invoke(call["args"])
-        span.add_note("result", value=result)
-    return ToolMessage(content=str(result), tool_call_id=call["id"])
-
-
 def _finish_reason(reply: AIMessage) -> str:
     """The provider's own account of why it stopped, or `stop` if it said nothing."""
     said: str = reply.response_metadata.get("finish_reason", FINISHED)
@@ -223,7 +188,14 @@ def run_scenario(
     while turns < turn_cap:
         turns += 1
         with trace.span("turn", number=turns):
-            reply = ask_model(model_kind, scenario, turns, messages, trace)
+            reply = ask_model(
+                trace,
+                model_kind,
+                scenario.mock_model_replies[turns - 1 :],
+                messages,
+                DECLARED_TOOLS,
+                scenario.max_tokens,
+            )
             messages.append(reply)
             if not reply.tool_calls:
                 # The added line. Before trusting its own inference the loop
@@ -235,7 +207,10 @@ def run_scenario(
                 ended = "answer_received" if said == FINISHED else "tokens_exhausted"
                 return turns, len(messages), _with_reason(ended, said)
             for call in reply.tool_calls:
-                messages.append(execute_tool(call, trace))
+                # No decision to make here: these tools cannot fail.
+                messages.append(
+                    execute_tool(call, trace, lambda name, args, _span: TOOLS[name].invoke(args))
+                )
     # Our own ending, and the provider's word for where the model had got
     # to: `tool_calls` means it was still going when we stopped it.
     said = _finish_reason(reply) if reply else "never asked"
