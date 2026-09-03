@@ -83,7 +83,7 @@ ch09 who_retries    four cells of one matrix: who can change the outcome   writt
 ch10 routing        the loop branches -- an `if`, in three different places   written
 ch11 state          what travels besides messages, and who may write it   written
 ch12 supervisor     one loop calls another: a tool whose body is an agent   written
-ch13 workflow       the same job with nothing deciding -- is the loop worth it?
+ch13 workflow       the same job with nothing deciding -- is the loop worth it?   written
 ch14 stream         "stream": true -- a reply arrives in pieces
 ch15 stream_tools   tool arguments arrive as fragments of a JSON string
 ch16 observability  instrumentation that observes and never participates
