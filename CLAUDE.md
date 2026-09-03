@@ -79,7 +79,7 @@ ch05 loop_endings   every way a run can stop, and only one means finished   writ
 ch06 two_tools      the same two calls, together or in sequence   written
 ch07 tool_http      a tool that calls an API: latency, a second secret, real failures   written
 ch08 tool_program   a tool that runs a program: exit codes, and an argument that is a command   written
-ch09 who_retries    four cells of one matrix: who can change the outcome
+ch09 who_retries    four cells of one matrix: who can change the outcome   written
 ch10 routing        the loop branches -- an `if`, in three different places
 ch11 state          what travels besides messages, and who may write it
 ch12 supervisor     one loop calls another: a tool whose body is an agent
@@ -189,6 +189,13 @@ long, then what — is the harness's, because the same tool deserves five
 attempts in a batch job and none behind a waiting user. And the counter lives
 outside the loop, because from inside it attempt four looks exactly like
 attempt one.
+
+Three of the four cells are `none`, which is the finding: retry is not a
+default with exceptions, it is one cell, and everything else is reporting or
+stopping. And the harness's only lever on the model is the sentence it hands
+back — it cannot make the model try again and cannot stop it, so each of the
+three sentences it can write is the harness telling the model which cell it is
+in.
 
 Bad arguments is the only cell where the model retrying is right and the
 harness retrying is useless — and it is the one cell LangGraph's `ToolNode`

@@ -796,3 +796,73 @@ recorded faithfully, and every check in this repository passes.
 process is the worst of the three to reason about: it started, so a timeout on
 a program that changes anything is not safe to retry, and nothing in the
 outcome says so.
+
+---
+
+## 2026-09-02 — A tool cannot enforce a limit, because it never sees the sequence
+
+*From the live runs of `who_retries`, whose mock column scripted the wrong
+answer and was believed until the model disagreed with it. Reproduced: two
+live runs, same split, same total.*
+
+The chapter's third cell is "bad arguments: the model retries, once". The tool
+rejects `quantity=20` against a bound of 12, the harness does not retry —
+retrying an identical call would produce an identical rejection — and the
+sentence handed back invites the model to correct the arguments.
+
+The mock model corrects them, to 12, and says so. **The live model ordered 20.**
+
+> turn 2 · asked for: place_order, place_order
+>   place_order(item=milk, quantity=12) → ordered 12 x milk
+>   place_order(item=milk, quantity=8)  → ordered 8 x milk
+> turn 3 · "Ordered 20 bottles of milk total (12 + 8), as the per-order
+>           maximum is 12."
+
+**Nothing malfunctioned.** The error message named the bound, which is what
+made it fixable. The tool enforced the bound. Both calls were inside it. The
+harness dispatched what it was asked for, as it does. And the user's stated
+intent — twenty bottles — was satisfied exactly, by a model that treated the
+limit as a fact about calls rather than a fact about orders.
+
+**Which it is.** `if not 1 <= quantity <= MAX_PER_ORDER` is a bound on one
+invocation. A tool is called with arguments and returns a result; it does not
+know it was called before, is about to be called again, or is one of two calls
+in the same reply. It cannot enforce a total, a rate, a budget or a quota,
+because none of those are properties of a call — they are properties of a
+sequence, and the sequence is the harness's.
+
+**The idempotence claim is narrower than it reads.** `place_order` is declared
+not idempotent, and this chapter spends its argument on what that forbids: the
+harness must not retry a call that may already have run. It forbids exactly
+that and nothing else. The model called the non-idempotent tool twice, in one
+reply, deliberately — and there was no rule to break, because the rule was
+about retries and this was not a retry.
+
+**The general form.** Three parties can produce a second call, and they are
+governed in three different places:
+
+| who calls again | why | what stops it |
+| --- | --- | --- |
+| the harness | the failure was transient | `retryable and idempotent` |
+| the model | the sentence invited it | nothing, before `guards` |
+| the model, differently | it inferred a way around | nothing, and no sentence would |
+
+Only the first is retry. The other two are the model doing what it is for, and
+a matrix organised around "who retries" quietly assumes the second row is a
+repeat of the same call. It need not be.
+
+**What this costs the reader who does not notice.** A tool author writes a
+bound, tests it, sees it reject, and believes the system is bounded. It is
+bounded per call. Every quota in a harness — spend, rate, rows written, emails
+sent — has this shape, and every one of them is safe only if it is counted
+somewhere that outlives a single invocation. That place is the loop, which is
+the argument for `guards`: a check before dispatch, holding state across calls,
+able to say no to the second one.
+
+**And a note on mocks, again.** The mock column asserted a scripted correction
+and passed. It was not wrong about the mechanism — the harness really does
+behave that way — it was wrong about the model, which is the one thing a
+scripted model can never be right about by construction. This is the second
+time the live column has contradicted a scripted assumption about model
+behaviour, after `tool_program`'s injection, and both times the live answer was
+the more interesting one.

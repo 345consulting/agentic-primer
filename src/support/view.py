@@ -523,10 +523,20 @@ def _digest(span: Json) -> str:
     if "args" in notes:
         given = ", ".join(f"{k}={v}" for k, v in notes["args"].items() if k != "label")
         parts = [f"given: {given}"] if given else []
+        # A call that was retried and then worked leaves no trace in the
+        # message list -- ch09_who_retries is about the model never learning
+        # that. The page is not the model, and this is where it can say so.
+        tries = sum(1 for note in span["notes"] if note["label"] == "attempt")
+        if tries > 1:
+            parts.append(f"attempts: {tries}")
         if failed := notes.get("failed"):
             # The exception's own message carries a colon, so it goes in
-            # parentheses rather than after a second one.
-            parts.append(f"raised: {failed['exception']} ({failed['message'][:60]})")
+            # parentheses rather than after a second one. A chapter whose
+            # failures are all one class records no type name, and then the
+            # message is the whole of what happened.
+            named = failed.get("exception")
+            message = failed["message"][:60]
+            parts.append(f"raised: {named} ({message})" if named else f"raised: {message}")
         elif result := notes.get("result"):
             parts.append(f"returned: {result['value']}")
         return " \u00b7 ".join(parts)

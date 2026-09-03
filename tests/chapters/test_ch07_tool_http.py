@@ -14,7 +14,7 @@ import pytest
 
 
 def test_every_failure_class_has_a_situation() -> None:
-    # These are the specimens ch08_retry_policy classifies. Two transient, one
+    # These are the specimens ch09_who_retries classifies. Two transient, one
     # permanent, and one that is transient by nature and unsafe by consequence.
     assert [scenario.name for scenario in chapter.SCENARIOS] == [
         "service_answers",
@@ -76,7 +76,7 @@ def test_a_failing_service_is_reported_with_what_it_said() -> None:
 
 def test_nothing_retries() -> None:
     # Every situation takes exactly two turns: the call, then an answer or an
-    # apology. Classification arrives in ch08, the attempt in ch09.
+    # apology. Both the classification and the attempt arrive in ch09.
     trace = chapter.run()
     assert [len(scenario.children) for scenario in trace.find_spans("scenario")] == [2] * 5
 

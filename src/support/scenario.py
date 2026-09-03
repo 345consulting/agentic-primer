@@ -65,8 +65,6 @@ class Scenario:
 
 # What a chapter's own loop returns: how many turns it ran, how long the list
 # got, and how it ended.
-# What a chapter's own loop returns: how many turns it ran, how long the list
-# got, and how it ended.
 type Outcome = tuple[int, int, str]
 
 # The one thing a chapter with no loop of its own still has to provide.

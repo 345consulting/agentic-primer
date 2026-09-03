@@ -12,7 +12,7 @@ and starts splitting three: the model provider, the library, and now a service
 that is nothing to do with either.
 
 **Failures arrive as status codes, with meanings attached.** These are the
-specimens `ch08_retry_policy` classifies, and no two of them want the same
+specimens `ch09_who_retries` classifies, and no two of them want the same
 treatment:
 
     service_answers      200   nothing to decide
