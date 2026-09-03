@@ -10,6 +10,7 @@ that safe: no credential-bearing header value is ever put in the record.
 from support.models import (
     RECORDED_REQUEST_HEADERS,
     SECRET_HEADERS,
+    RecordingTransport,
     _request_headers,
     _response_headers,
     build_wire_hooks,
@@ -84,3 +85,31 @@ def test_an_ordinary_response_is_still_read_and_recorded_whole() -> None:
         read.assert_called_once()
     (note,) = [n for n in span.notes if n.label == "wire response"]
     assert note.payload["body"] == {"ok": True}
+
+
+def test_a_streaming_response_records_every_frame_even_if_closed_early() -> None:
+    """The bug this guards: recording after the `for` loop in `__iter__`
+    depended on `StopIteration`, and a real SSE client never triggers one --
+    it reads until it has seen `[DONE]` and calls `.close()` directly, never
+    asking the generator for one more value. `close()` is where the fix
+    records instead, so a caller that stops early is what this simulates.
+    """
+
+    def frames(_request: httpx.Request) -> httpx.Response:
+        body = b'data: {"a": 1}\n\ndata: {"b": 2}\n\ndata: [DONE]\n\n'
+        return httpx.Response(
+            200, headers={"content-type": "text/event-stream"}, stream=httpx.ByteStream(body)
+        )
+
+    trace = Trace(chapter="test", model_kind="live")
+    with trace.span("model") as span:
+        transport = RecordingTransport(span, inner=httpx.MockTransport(frames))
+        with (
+            httpx.Client(transport=transport) as client,
+            client.stream("GET", "https://example.test") as response,
+        ):
+            # One line only -- not exhausted -- then closed, the way an SSE
+            # client stops as soon as it has what it needs.
+            next(response.iter_lines())
+    (note,) = [n for n in span.notes if n.label == "wire frame"]
+    assert "a" in note.payload["raw"]

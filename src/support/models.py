@@ -12,7 +12,7 @@ guessed at. A live run proves the same mechanics against a real model
 provider, and shows you which parts of the trace were the mock's cooperation.
 """
 
-from support.trace import WIRE_REQUEST, WIRE_RESPONSE, ModelKind, Span
+from support.trace import WIRE_FRAME, WIRE_REQUEST, WIRE_RESPONSE, ModelKind, Span
 
 import json
 import os
@@ -25,6 +25,7 @@ import httpx
 from langchain_core.callbacks import CallbackManagerForLLMRun
 from langchain_core.language_models import BaseChatModel, LanguageModelInput
 from langchain_core.messages import AIMessage, AIMessageChunk, BaseMessage
+from langchain_core.messages.tool import tool_call_chunk
 from langchain_core.outputs import ChatGeneration, ChatGenerationChunk, ChatResult
 from langchain_deepseek import ChatDeepSeek
 
@@ -70,6 +71,43 @@ RECORDED_REQUEST_HEADERS = frozenset(
 # fingerprint of the machine that sent it. No credential has this prefix, and
 # the family grows, so it is matched by prefix rather than enumerated.
 RECORDED_REQUEST_PREFIX = "x-stainless-"
+
+
+# How many pieces a mocked tool call's arguments are split into. Three is
+# enough for a fragment to be visible mid-stream and for the last one to
+# complete it -- `ch15_stream_tools` is what that middle state is for.
+MOCK_ARGUMENT_PIECES = 3
+
+
+def _chunked_tool_calls(reply: AIMessage) -> Iterator[ChatGenerationChunk]:
+    """A reply's tool calls, with each call's arguments split mid-JSON.
+
+    A real provider streams a call's arguments as fragments of the JSON
+    string it is building, and picks its own boundaries -- mid-key, mid-value,
+    anywhere. This splits into equal thirds, which is enough to put a
+    half-finished argument on the wire; `ch15_stream_tools` is about what a
+    harness may and may not do with one.
+    """
+    for call in reply.tool_calls:
+        serialized = json.dumps(call["args"])
+        width = max(1, len(serialized) // MOCK_ARGUMENT_PIECES)
+        pieces = [serialized[at : at + width] for at in range(0, len(serialized), width)]
+        for index, piece in enumerate(pieces):
+            first = index == 0
+            yield ChatGenerationChunk(
+                message=AIMessageChunk(
+                    content="",
+                    tool_call_chunks=[
+                        tool_call_chunk(
+                            # Name and id arrive once, with the first fragment.
+                            name=call["name"] if first else None,
+                            args=piece,
+                            id=call["id"] if first else None,
+                            index=0,
+                        )
+                    ],
+                )
+            )
 
 
 class MockModel(BaseChatModel):
@@ -152,15 +190,15 @@ class MockModel(BaseChatModel):
             )
         reply = self.replies[self.calls]
         self.calls += 1
-        assert not reply.tool_calls, (
-            "MockModel._stream does not chunk tool calls; see ch15_stream_tools"
-        )
         if self.watching is not None:
             self.watching.add_note(
                 "context ignored by the mock model",
                 messages=len(messages),
                 roles=[m.type for m in messages],
             )
+        if reply.tool_calls:
+            yield from _chunked_tool_calls(reply)
+            return
         words = str(reply.content).split(" ")
         for index, word in enumerate(words):
             piece = word if index == len(words) - 1 else f"{word} "
@@ -226,7 +264,9 @@ def build_live_model(span: Span, max_tokens: int | None = None) -> BaseChatModel
         model=LIVE_MODEL,
         timeout=60,
         max_tokens=max_tokens,
-        http_client=httpx.Client(event_hooks=build_wire_hooks(span)),
+        http_client=httpx.Client(
+            event_hooks=build_wire_hooks(span), transport=RecordingTransport(span)
+        ),
     )
 
 
@@ -307,6 +347,68 @@ def _body(text: str) -> Any:
         return text
 
 
+class _RecordedStream(httpx.SyncByteStream):
+    """A response body that records each frame as it passes, and passes it on.
+
+    An event hook cannot do this: hooks fire once, when the response line
+    arrives, and the body has not been sent yet. Reading it there is what
+    `on_response` used to do, and it forced the whole stream to buffer before
+    anything downstream could iterate it. A stream that records on the way
+    through keeps the timing honest and the wire visible at the same time.
+
+    The first version recorded after the `for` loop inside `__iter__`, and
+    every live run silently recorded nothing: the OpenAI SDK reads an SSE
+    stream until it sees `[DONE]`, then calls `.close()` directly, and never
+    drives the generator to a natural `StopIteration`. Code placed after a
+    `yield` only runs on that path or on `GeneratorExit`, neither of which
+    happened. `close()` is what every caller reliably invokes regardless of
+    how the read ends, which is why the accumulator is an instance attribute
+    and the note is added there instead.
+    """
+
+    def __init__(self, inner: httpx.SyncByteStream, span: Span) -> None:
+        self._inner: httpx.SyncByteStream = inner
+        self._span: Span = span
+        self._parts: list[bytes] = []
+
+    @override
+    def __iter__(self) -> Iterator[bytes]:
+        for raw in self._inner:
+            self._parts.append(raw)
+            yield raw
+
+    @override
+    def close(self) -> None:
+        # Not after the `for` loop in `__iter__`: an SSE client reads until it
+        # has seen `[DONE]` and then closes the stream directly, without ever
+        # asking this generator for one more value -- code placed after that
+        # loop depends on `StopIteration`, which never arrives. `close()` is
+        # what every caller reliably invokes, whichever way the read ends, so
+        # this is the one place the accumulated frames are guaranteed to land.
+        self._inner.close()
+        self._span.add_note(
+            WIRE_FRAME,
+            frames=len(self._parts),
+            raw=b"".join(self._parts).decode(errors="replace"),
+        )
+
+
+class RecordingTransport(httpx.BaseTransport):
+    """`httpx`'s default transport, with a streamed body teed into the span."""
+
+    def __init__(self, span: Span, inner: httpx.BaseTransport | None = None) -> None:
+        self._span: Span = span
+        self._inner: httpx.BaseTransport = inner or httpx.HTTPTransport()
+
+    @override
+    def handle_request(self, request: httpx.Request) -> httpx.Response:
+        response = self._inner.handle_request(request)
+        if response.headers.get("content-type", "").startswith("text/event-stream"):
+            assert isinstance(response.stream, httpx.SyncByteStream)
+            response.stream = _RecordedStream(response.stream, self._span)
+        return response
+
+
 def build_wire_hooks(span: Span) -> dict[str, list[Any]]:
     """httpx hooks that record the actual bytes, either side of the library.
 
@@ -353,7 +455,7 @@ def build_wire_hooks(span: Span) -> dict[str, list[Any]]:
             status=response.status_code,
             headers=_response_headers(response.headers),
             body=(
-                "(streamed -- see the model span's `chunk` notes, not this record)"
+                "(streamed -- see this span's `wire frame` notes for the raw bytes)"
                 if streaming
                 else _body(response.text)
             ),

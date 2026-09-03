@@ -38,6 +38,15 @@ would ever produce, which the primer's own gotchas already name -- anything
 provable only under mock was the mock's cooperation, not the framework's
 guarantee.
 
+**The raw wire is recorded too, not just our reading of it.** `WIRE_FRAME`
+holds every `data: {...}` line exactly as it arrived, syntax-highlighted on
+the page the same way `WIRE_REQUEST`/`WIRE_RESPONSE` already are -- one note
+for the whole stream rather than one per frame, since a long reply is dozens
+of them and a page block each would be the bloat a span per chunk would have
+been. This is not the same information as the `chunk` notes: those are our
+own accumulation, already interpreted; the wire frame is what the provider
+actually sent, `reasoning_content` and all, before anything here touched it.
+
 Tool calls are out of scope here on purpose. `ch15_stream_tools` is where a
 call's own arguments arrive as fragments of a JSON string, unusable until
 the stream ends -- a different shape of problem from splitting plain text,

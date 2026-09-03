@@ -43,6 +43,8 @@ ENDED = "ended"
 
 REPLY = "reply"
 
+WIRE_FRAME = "wire frame"
+
 WIRE_REQUEST = "wire request"
 
 WIRE_RESPONSE = "wire response"

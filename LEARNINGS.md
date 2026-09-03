@@ -1034,3 +1034,30 @@ forwarded, and a filter needs something structured to filter.
 **The mistake to avoid is assuming the consuming side taught you anything
 about the producing side.** One is a firehose you accumulate; the other is a
 decision about what someone should see.
+
+---
+
+## 2026-09-03 — A reply can be a message and a tool request at once
+
+*Sanjeev's, from asking to see content and a tool call in the same response
+on the actual page, then asking whether reasoning ever overlapped either.*
+
+Confirmed directly, not assumed: a live call returned `content="I'll help you
+find the price of milk -- let me look that up for you now."` and
+`tool_calls=[price_of(item="milk")]` on the same `AIMessage`. Every mock
+script in this primer, since `ch04_tool_failures`, has written tool-call
+replies with `content=""` -- a convention that quietly became an assumption
+nobody had tested against a real model.
+
+**One frame never mixes them.** In a streamed trace built to check this, each
+`delta` carried exactly one of `reasoning_content`, `content`, or
+`tool_calls` -- never two at once. But a *reply*, accumulated across many
+frames, can and does end up with both: 31 reasoning chunks, then 10 content
+chunks, then 11 tool-call chunks, cleanly separated in arrival order, merging
+into one message with both fields non-empty.
+
+**And every `execute_tool` in this codebase discards the content half.** It
+reads `call["args"]`, never `reply.content` -- so the model's own
+explanation, sitting right beside the call it is explaining, has been
+silently thrown away in every chapter since `ch04`, with nothing ever
+surfacing that it was happening.

@@ -7,7 +7,6 @@ from chapters import ch14_stream as chapter
 from support.models import MockModel
 from support.trace import Span
 
-import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 
 
@@ -56,12 +55,11 @@ def test_first_and_last_token_ms_are_a_real_split_not_one_number() -> None:
     assert streamed["chunks"] > 1
 
 
-def test_the_mock_model_chunks_a_reply_it_was_not_asked_to() -> None:
-    # MockModel.stream() refuses tool calls -- ch15_stream_tools chunks
-    # those, a different shape from splitting plain text.
-    tool_call_reply = AIMessage(
-        "", tool_calls=[{"name": "price_of", "args": {"item": "milk"}, "id": "c1"}]
-    )
-    model = MockModel(replies=[tool_call_reply])
-    with pytest.raises(AssertionError):
-        list(model.stream([HumanMessage("hi")]))
+def test_text_is_chunked_by_word_and_carries_no_tool_calls() -> None:
+    # This chapter's shape: content arrives in pieces, each one useful on its
+    # own. A call's arguments are the opposite, and are ch15_stream_tools'.
+    model = MockModel(replies=[AIMessage("Milk is 1.20.")])
+    chunks = list(model.stream([HumanMessage("hi")]))
+    assert len(chunks) > 1
+    assert not any(chunk.tool_call_chunks for chunk in chunks)
+    assert "".join(str(chunk.content) for chunk in chunks) == "Milk is 1.20."

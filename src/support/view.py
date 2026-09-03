@@ -9,7 +9,7 @@ open the file.
 """
 
 from support.chapters import UNKNOWN_SOURCE, chapters, source_hash
-from support.trace import CONTEXT, ENDED, MODEL_KINDS, REPLY, Json, Trace, summary_line
+from support.trace import CONTEXT, ENDED, MODEL_KINDS, REPLY, WIRE_FRAME, Json, Trace, summary_line
 
 import html
 import json
@@ -408,6 +408,19 @@ def _render_note(note: Json) -> str:
         return (
             f'<div class="note"><span class="label">reply</span>'
             f"{_render_messages([note['message']])}</div>"
+        )
+    if label == WIRE_FRAME:
+        # Not one JSON document -- `data: {...}` lines, blank lines between
+        # them, a `[DONE]` sentinel that is not JSON at all. `_highlight`
+        # tokenizes raw text rather than requiring `json.loads` first, so it
+        # colors the embedded objects and leaves the SSE framing alone.
+        # Collapsed by default, the same as headers: the raw wire is worth
+        # having, rarely what a first read of the page is looking for.
+        return (
+            f'<div class="note"><span class="label">{html.escape(label)} '
+            f"({note['frames']} frames)</span>"
+            f"<details><summary>show</summary>"
+            f'<pre class="wire">{_highlight(note["raw"])}</pre></details></div>'
         )
     if label.startswith("wire "):
         return (
