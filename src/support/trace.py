@@ -35,6 +35,8 @@ MODEL_KINDS: tuple[ModelKind, ...] = get_args(ModelKind.__value__)
 # quietly stop finding the notes and drop the model provider/library split off the
 # page. Chapter-authored labels stay literals in their chapter: those are the
 # lesson, and nothing else reads them.
+CHUNK = "chunk"
+
 CONTEXT = "context"
 
 ENDED = "ended"

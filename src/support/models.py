@@ -16,7 +16,7 @@ from support.trace import WIRE_REQUEST, WIRE_RESPONSE, ModelKind, Span
 
 import json
 import os
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Iterator, Sequence
 from itertools import count
 from time import monotonic
 from typing import Any, Self, override
@@ -24,8 +24,8 @@ from typing import Any, Self, override
 import httpx
 from langchain_core.callbacks import CallbackManagerForLLMRun
 from langchain_core.language_models import BaseChatModel, LanguageModelInput
-from langchain_core.messages import AIMessage, BaseMessage
-from langchain_core.outputs import ChatGeneration, ChatResult
+from langchain_core.messages import AIMessage, AIMessageChunk, BaseMessage
+from langchain_core.outputs import ChatGeneration, ChatGenerationChunk, ChatResult
 from langchain_deepseek import ChatDeepSeek
 
 # Cheap enough that running a chapter live is routine rather than an event,
@@ -129,6 +129,42 @@ class MockModel(BaseChatModel):
                 roles=[m.type for m in messages],
             )
         return ChatResult(generations=[ChatGeneration(message=reply)])
+
+    @override
+    def _stream(
+        self,
+        messages: list[BaseMessage],
+        stop: list[str] | None = None,
+        run_manager: CallbackManagerForLLMRun | None = None,
+        **kwargs: Any,
+    ) -> Iterator[ChatGenerationChunk]:
+        """The scripted reply, split into words and yielded one at a time.
+
+        `ch14_stream` is the first chapter to call this instead of
+        `_generate`. A reply carrying tool calls is out of scope here --
+        `ch15_stream_tools` chunks a call's own arguments, a different shape
+        from splitting plain text, and gets its own mock support there.
+        """
+        if self.calls >= len(self.replies):
+            raise RuntimeError(
+                f"mock model exhausted at call ['{self.calls + 1}'] of "
+                f"['{len(self.replies)}'] -- the loop ran longer than the mock model expected"
+            )
+        reply = self.replies[self.calls]
+        self.calls += 1
+        assert not reply.tool_calls, (
+            "MockModel._stream does not chunk tool calls; see ch15_stream_tools"
+        )
+        if self.watching is not None:
+            self.watching.add_note(
+                "context ignored by the mock model",
+                messages=len(messages),
+                roles=[m.type for m in messages],
+            )
+        words = str(reply.content).split(" ")
+        for index, word in enumerate(words):
+            piece = word if index == len(words) - 1 else f"{word} "
+            yield ChatGenerationChunk(message=AIMessageChunk(content=piece))
 
 
 class ThinkingModel(ChatDeepSeek):
@@ -302,13 +338,25 @@ def build_wire_hooks(span: Span) -> dict[str, list[Any]]:
         )
 
     def on_response(response: httpx.Response) -> None:
-        response.read()
+        # `.read()` blocks until the whole body has arrived -- correct for an
+        # ordinary response, wrong for an event stream: it would force the
+        # entire reply to buffer before `ch14_stream`'s loop ever gets to
+        # iterate it, collapsing every chunk's arrival into one instant.
+        # Status and headers are available the moment the response line is,
+        # streamed or not; only the body recording waits on `.read()`.
+        streaming = response.headers.get("content-type", "").startswith("text/event-stream")
+        if not streaming:
+            response.read()
         span.add_note(
             WIRE_RESPONSE,
             at_ms=monotonic() * 1000,
             status=response.status_code,
             headers=_response_headers(response.headers),
-            body=_body(response.text),
+            body=(
+                "(streamed -- see the model span's `chunk` notes, not this record)"
+                if streaming
+                else _body(response.text)
+            ),
         )
 
     return {"request": [on_request], "response": [on_response]}

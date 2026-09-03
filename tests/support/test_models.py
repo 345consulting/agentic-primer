@@ -12,7 +12,11 @@ from support.models import (
     SECRET_HEADERS,
     _request_headers,
     _response_headers,
+    build_wire_hooks,
 )
+from support.trace import Trace
+
+from unittest.mock import patch
 
 import httpx
 
@@ -49,3 +53,34 @@ def test_a_credential_header_is_withheld_in_both_directions() -> None:
         recorded = _response_headers(httpx.Headers({name: "secret", "date": "now"}))
         assert recorded[name] is None, name
         assert recorded["date"] == "now"
+
+
+def test_a_streaming_response_is_not_force_read_before_it_can_be_iterated() -> None:
+    """`.read()` blocks until the whole body has arrived. Calling it inside
+    the response hook would force an event stream to buffer completely
+    before `ch14_stream`'s loop ever gets to iterate it, collapsing every
+    chunk's real arrival time into the instant the hook ran.
+    """
+    trace = Trace(chapter="test", model_kind="live")
+    with trace.span("model") as span:
+        hooks = build_wire_hooks(span)
+        (on_response,) = hooks["response"]
+        response = httpx.Response(200, headers={"content-type": "text/event-stream"})
+        with patch.object(response, "read") as read:
+            on_response(response)
+        read.assert_not_called()
+
+
+def test_an_ordinary_response_is_still_read_and_recorded_whole() -> None:
+    trace = Trace(chapter="test", model_kind="live")
+    with trace.span("model") as span:
+        hooks = build_wire_hooks(span)
+        (on_response,) = hooks["response"]
+        response = httpx.Response(
+            200, headers={"content-type": "application/json"}, json={"ok": True}
+        )
+        with patch.object(response, "read", wraps=response.read) as read:
+            on_response(response)
+        read.assert_called_once()
+    (note,) = [n for n in span.notes if n.label == "wire response"]
+    assert note.payload["body"] == {"ok": True}

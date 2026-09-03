@@ -11,6 +11,10 @@ docstring; this file is for what generalizes.
 
 Append, never rewrite. Date each entry.
 
+**Before writing an entry, ask what was learned.** Don't draft one from a
+unilateral read of the conversation -- confirm the framing with Sanjeev first,
+the way every entry so far was proposed and discussed before it was written.
+
 ---
 
 ## 2026-09-01 — An agent is a loop whose exit condition is set by the model
@@ -1002,3 +1006,31 @@ that made the clean example; nothing about the pattern requires it. And a
 supervisor still needs its own model call to decide *whether* and *which*
 sub-agent to invoke -- a fixed list of agents run in a fixed order, with
 nothing deciding, is `ch13_workflow`, not a supervisor.
+
+---
+
+## 2026-09-03 — A stream's granularity belongs to whoever produces it
+
+*Sanjeev's, from building and running `stream` -- the consuming half -- and
+working out what it does and does not tell you about the producing half.*
+
+`stream`'s live runs came back with 129 chunks one time and 54 another, for
+answers of similar length. Nothing in the request asks for a chunk size --
+`"stream": true` is a boolean, and everything about how finely the reply gets
+sliced is the provider's choice. A consumer takes what it is given and
+accumulates.
+
+That asymmetry inverts when the harness is the producer. Pushing progress to
+a user of the harness is a connection we own at both ends, so granularity
+stops being something to absorb and becomes something to design: run,
+scenario, turn, span, or token -- each a different answer to "how much does
+the person watching want to see."
+
+Exposing that as a user-facing control -- a "thinking" knob, showing more or
+less of what the harness is doing -- only works if the levels were designed in
+from the start, because they are a filter over which span-closes get
+forwarded, and a filter needs something structured to filter.
+
+**The mistake to avoid is assuming the consuming side taught you anything
+about the producing side.** One is a firehose you accumulate; the other is a
+decision about what someone should see.
