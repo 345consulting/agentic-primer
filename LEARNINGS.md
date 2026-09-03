@@ -969,3 +969,36 @@ will exercise that mechanism the way the scenario expects, and a chapter
 whose claim depends on the model behaving one specific way should say so --
 this one now does, in its own docstring -- rather than let a live run that
 takes a smarter path read as a contradiction.
+
+---
+
+## 2026-09-03 — A model cannot call another agent, only ever a tool
+
+*Synthesis, from building `ch12_supervisor` and the conversation that
+followed it -- the same finding as `ch02_tool_call`'s, proven true one level
+up rather than discovered anew.*
+
+`ch02_tool_call` established this at the first level: the model emits a name
+and some arguments, never executes anything, never knows what is behind the
+name. `ch12_supervisor` is the same fact one level up. From the model's side,
+`consult_inventory_expert` is indistinguishable from `price_of` -- a name in
+its toolbox, nothing more. It has no concept of "delegating to another
+agent," because the model was never given that concept; it only has
+`tool_calls`, and `tool_calls` does not know what a tool's body contains.
+
+So "agents calling agents" is not a new capability the model gained. It is
+the same one-line mechanism from `ch02` -- the model asks, we decide what
+runs -- with our decision, this once, being "run a whole other `run_turns`."
+Nothing about the model's side of the exchange changed at all, which is why
+`ch12` needed no new mechanism: `consult_inventory_expert` is declared the
+same way every tool since `ch04_tool_failures` has been, and `Trace.span`'s
+existing stack nests the inner agent's spans for free, because it does not
+know or care that this call's implementation happens to be another loop.
+
+**The corollary, worth keeping distinct from this.** A supervisor is defined
+by having *at least one* tool whose implementation is another agent -- not by
+every tool being one. `ch12`'s two tools both happen to be sub-agents because
+that made the clean example; nothing about the pattern requires it. And a
+supervisor still needs its own model call to decide *whether* and *which*
+sub-agent to invoke -- a fixed list of agents run in a fixed order, with
+nothing deciding, is `ch13_workflow`, not a supervisor.
