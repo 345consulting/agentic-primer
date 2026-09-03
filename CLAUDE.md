@@ -80,7 +80,7 @@ ch06 two_tools      the same two calls, together or in sequence   written
 ch07 tool_http      a tool that calls an API: latency, a second secret, real failures   written
 ch08 tool_program   a tool that runs a program: exit codes, and an argument that is a command   written
 ch09 who_retries    four cells of one matrix: who can change the outcome   written
-ch10 routing        the loop branches -- an `if`, in three different places
+ch10 routing        the loop branches -- an `if`, in three different places   written
 ch11 state          what travels besides messages, and who may write it
 ch12 supervisor     one loop calls another: a tool whose body is an agent
 ch13 workflow       the same job with nothing deciding -- is the loop worth it?

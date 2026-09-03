@@ -866,3 +866,65 @@ scripted model can never be right about by construction. This is the second
 time the live column has contradicted a scripted assumption about model
 behaviour, after `tool_program`'s injection, and both times the live answer was
 the more interesting one.
+
+---
+
+## 2026-09-03 — LangGraph's conditional edge is a checkpoint function, not a new primitive
+
+*Synthesis, from working through `ch10_routing` and then asking what
+LangGraph's own vocabulary was hiding.*
+
+`ch10_routing` needed three `if`s in three different places -- after the
+reply, before the model, on a turn counter already carried. Mapping each one
+onto LangGraph turned into a rabbit hole of terms -- node, edge, conditional
+edge, entry point, `path_map`, `BranchSpec` -- that felt like separate
+machinery. It is one idea, worn three ways.
+
+**A node is a function. An edge is "what runs next."** `add_node("model",
+ask_model)` is naming a function; the string and the function are the same
+thing seen from two sides -- the name is what an edge can point at, the
+function is what actually runs when it does. `add_edge("tools", "model")` is
+a fixed answer to "what runs next": always this, decided when the graph was
+built.
+
+**A conditional edge is the same slot, with the fixed answer replaced by a
+function call.** `add_conditional_edges("model", route, path_map)` stores a
+function plus a dict, attached to the `"model"` node. When `"model"` finishes,
+the function runs against whatever is around -- the reply, in this case --
+and returns a key; the dict turns that key into a real destination. Nothing
+about this is a different kind of edge under the hood: it is the same "what
+runs next" question, answered at run time instead of at build time.
+
+**The map is not capped at two.** `tools_condition` only ever returns
+`"tools"` or `"__end__"`, so its map only needs two entries -- which makes it
+easy to mistake for the shape of the mechanism rather than one instance of
+it. `route()` can return as many distinct answers as the logic needs, and the
+map just grows to match: `{"done": "__end__", "confirm": "confirm_node",
+"dispatch": "tools"}` is exactly as valid as a two-entry map, same call, same
+storage.
+
+**`set_conditional_entry_point` is the identical thing at a different
+attachment point.** Not after a node -- before the graph's first node runs at
+all. Same shape, function plus map; the only difference is where it is
+registered. This is `ch10`'s `the_question_needs_no_model`: the function
+decides before `"model"` is ever entered, so `ask_model` never runs, and
+there is no reply to have branched on in the first place.
+
+**The plain-language version, arrived at last and worth keeping over the
+vocabulary:** a conditional edge is a checkpoint function dropped at a named
+spot -- after a node, before one, or nowhere in particular, just on state the
+loop is carrying. It looks at whatever is around, returns a name, and the
+name says what runs next. Everything else -- "edge," "branch," "entry
+point" -- is packaging around that one idea, repeated at three attachment
+points.
+
+**What this buys over writing the `if` by hand, and what it costs.** The `if`
+becomes data the engine can inspect -- drawable (`get_graph().draw_mermaid()`),
+and destinations decouple from callers, who no longer need to know which
+function handles `"tools"`, only that something registered under that name
+does. The cost is that control flow stops being readable top to bottom in one
+file: `ch10`'s three `if`s sit exactly where they take effect; the graph
+version scatters the same three decisions across `add_node` calls, a
+`path_map`, and whatever `route()` looks like, none of which has to be near
+the others. `graph` is where this primer puts a number on that trade rather
+than asserting it.
