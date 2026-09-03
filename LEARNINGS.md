@@ -744,3 +744,55 @@ the run — a recorder that only works on the happy path is not a recorder. And
 `httpx.codes.OK` types as a `(200, 'OK')` tuple, so the status comparison was
 confusing at best; `response.is_success` is what httpx actually offers.
 basedpyright caught the second, mypy passed it, which is now the third time.
+
+---
+
+## 2026-09-02 — The argument schema is a shell-injection defence, by accident
+
+**What happened.** `ch08_tool_program` runs a program from a command line built
+out of the model's argument, unquoted, deliberately. The situation
+`argument_is_a_command` asks for an item named `milk; echo pwned`, arriving
+the way it does in practice — as upstream text the model passes through, not
+as something a model invents.
+
+The mock column runs it:
+
+    $ printf 1.20 --item milk; echo pwned
+    out: '1.20\npwned'
+
+The live column refuses:
+
+> "the price tool only accepts the exact catalog items `bread`, `butter`,
+> `chips`, or `milk`. The string `milk; echo pwned` isn't a valid item"
+
+The parameter is `Literal["bread", "butter", "chips", "milk"]`, so it reaches
+the model provider as an `enum`. **The schema stopped it.**
+
+**Why it matters.** This is the `ch02_tool_call` finding arriving somewhere
+else entirely. There, `part: str` against `Literal[...]` looked like a typing
+decision, and the cost of getting it wrong was a fluent wrong answer. Here the
+same decision is the difference between a tool and a shell.
+
+Nobody writes an argument type as a security control, and in this case it is
+one. Which also means the defence is accidental and therefore fragile: it
+holds only for arguments that happen to be enumerable.
+
+**And that is the common case going the other way.** A tool whose argument is
+a path, a filename, a search query or a customer's name has no enum to hide
+behind. Then the only thing between a model's output and a shell is quoting,
+and nothing in the loop, the tool or the recorder will tell you it is missing:
+the mock column shows the command running, the exit code is 0, the result is
+recorded faithfully, and every check in this repository passes.
+
+**What a process boundary gives back, compared with the other two.**
+
+| boundary | vocabulary | on a timeout |
+| --- | --- | --- |
+| in-process | exceptions, with types and messages | n/a |
+| network | status codes with agreed meanings, `Retry-After` | the request may never have been received |
+| process | an exit code, and prose on stderr if you are lucky | the process certainly ran, and may have finished |
+
+`404` says the thing is not there. `1` says the program was unhappy. A killed
+process is the worst of the three to reason about: it started, so a timeout on
+a program that changes anything is not safe to retry, and nothing in the
+outcome says so.

@@ -56,42 +56,40 @@ either fact is a second thing to keep true.
 What is not written yet is a plan, and a plan is prose:
 
 ```
-ch01 single_call      one invoke; no tools, no loop, no framework   written
-ch02 tool_call        the model asks; we execute; turn two knows   written
-ch03 the_loop         the whole loop, and the two ways it is allowed to end   written
-ch04 tool_failures    the toolbox lets you down in three ways; one of them looks like it   written
-ch05 loop_endings     every way a run can stop, and only one means finished   written
-ch06 two_tools        the same two calls, together or in sequence
-ch07 tool_http        a tool that calls an API: latency, a second secret, real failures   written
-ch08 retry_policy     transient or permanent, and who is allowed to say so
-ch09 retry_by_local   the harness calls again: no model, no tokens, backoff
-ch10 retry_by_model   the model asks again: a full turn, and a longer list
-ch11 retry_exhausted  out of strikes: escalate, and with what context?
-ch12 routing          the loop branches -- an `if`, in three different places
-ch13 state            what travels besides messages, and who may write it
-ch14 supervisor       one loop calls another: a tool whose body is an agent
-ch15 workflow         the same job with nothing deciding -- is the loop worth it?
-ch16 stream           "stream": true -- a reply arrives in pieces
-ch17 stream_tools     tool arguments arrive as fragments of a JSON string
-ch18 observability    instrumentation that observes and never participates
-ch19 hooks            the named points in the loop, and the three powers
-ch20 guards           a hook that can say no, before dispatch
-ch21 loop_veto        stopped because forbidden, which is not stopped because done
-ch22 judge            a hook that reads the reply, per turn and not per run
-ch23 prompt_types     everything that enters the context is a prompt
-ch24 mcp              a dispatch table you did not write
-ch25 mcp_injection    descriptions you did not write, in a context you did
-ch26 rag_injection    a document you did not write, telling the model what to do
-ch27 skills           a tool whose result is instructions, not data
-ch28 compression      the list is too long; what do you drop, and what does it cost?
-ch29 memory           what survives when the list is thrown away
-ch30 graph            the same behaviour as a StateGraph -- what did it buy?
-ch31 limits           recursion_limit at the boundary
-ch32 checkpoint       MemorySaver, thread_id, resume -- and why that is not memory
-ch33 interrupt        interrupt and Command(resume=...) as an approval gate
-ch34 subgraph         the supervisor as a graph node -- what did it buy?
-ch35 parallel         fan-out, Send, join, and the order things merge in
-ch36 reducers         two updates to one field: append, or replace
+ch01 single_call    one invoke; no tools, no loop, no framework   written
+ch02 tool_call      the model asks; we execute; turn two knows   written
+ch03 the_loop       the whole loop, and the two ways it is allowed to end   written
+ch04 tool_failures  the toolbox lets you down in three ways; one of them looks like it   written
+ch05 loop_endings   every way a run can stop, and only one means finished   written
+ch06 two_tools      the same two calls, together or in sequence   written
+ch07 tool_http      a tool that calls an API: latency, a second secret, real failures   written
+ch08 tool_program   a tool that runs a program: exit codes, and an argument that is a command   written
+ch09 who_retries    four cells of one matrix: who can change the outcome
+ch10 routing        the loop branches -- an `if`, in three different places
+ch11 state          what travels besides messages, and who may write it
+ch12 supervisor     one loop calls another: a tool whose body is an agent
+ch13 workflow       the same job with nothing deciding -- is the loop worth it?
+ch14 stream         "stream": true -- a reply arrives in pieces
+ch15 stream_tools   tool arguments arrive as fragments of a JSON string
+ch16 observability  instrumentation that observes and never participates
+ch17 hooks          the named points in the loop, and the three powers
+ch18 guards         a hook that can say no, before dispatch
+ch19 loop_veto      stopped because forbidden, which is not stopped because done
+ch20 judge          a hook that reads the reply, per turn and not per run
+ch21 prompt_types   everything that enters the context is a prompt
+ch22 mcp            a dispatch table you did not write
+ch23 mcp_injection  descriptions you did not write, in a context you did
+ch24 rag_injection  a document you did not write, telling the model what to do
+ch25 skills         a tool whose result is instructions, not data
+ch26 compression    the list is too long; what do you drop, and what does it cost?
+ch27 memory         what survives when the list is thrown away
+ch28 graph          the same behaviour as a StateGraph -- what did it buy?
+ch29 limits         recursion_limit at the boundary
+ch30 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
+ch31 interrupt      interrupt and Command(resume=...) as an approval gate
+ch32 subgraph       the supervisor as a graph node -- what did it buy?
+ch33 parallel       fan-out, Send, join, and the order things merge in
+ch34 reducers       two updates to one field: append, or replace
 ```
 
 Chapters are named in prose and numbered only in that list. The numbers have
@@ -160,19 +158,33 @@ latency inside the tool span, real failure classes where timeout and 429 and
 503 are transient and 404 and 401 are not, and a second secret — the first in
 this primer that is not the model provider's.
 
-**Retry is four questions, not one.** `retry_policy` is classification —
-transient or permanent, safe to call twice or not — declared by the tool
-author, because nobody else knows. `retry_by_local` is the harness calling
-again: no model, no tokens, bounded by backoff, and correct only when the
-outcome can change. `retry_by_model` is the model asking again after reading
-an error: a full turn each time, on a list that has grown by a request and a
-failure. `retry_exhausted` is escalation, and what a human is handed at 2am.
+**`who_retries` is one question with four answers**, and they are four cells
+of a matrix rather than four chapters:
 
-The organising question across all four is *who can change the outcome*. Bad
-arguments is the only case where the model retrying is right and the harness
-retrying is useless — and it is the one case LangGraph's `ToolNode` handles by
-default, reporting `ToolInvocationError` back and re-raising everything else.
-There is no retry anywhere in LangGraph.
+| failure | the harness retrying | the model retrying |
+| --- | --- | --- |
+| rate limit, 5xx, timeout on an idempotent tool | backoff, two or three | pointless: nothing to fix |
+| timeout on a tool that is not idempotent | **none** — it may have succeeded | none |
+| bad arguments | none — same call, same result | **once** — it can fix them |
+| permanent: not found, auth, no capability | none | none — say so and stop |
+
+Classification is the tool's, because only its author knows whether calling
+again could work and whether calling twice is safe. Policy — how many, how
+long, then what — is the harness's, because the same tool deserves five
+attempts in a batch job and none behind a waiting user. And the counter lives
+outside the loop, because from inside it attempt four looks exactly like
+attempt one.
+
+Bad arguments is the only cell where the model retrying is right and the
+harness retrying is useless — and it is the one cell LangGraph's `ToolNode`
+implements, reporting `ToolInvocationError` back and re-raising everything
+else. There is no retry anywhere in LangGraph.
+
+`tool_program` is the third boundary, after in-process and the network, and
+the only one where the model's output becomes an executable command. Its
+failures speak a third vocabulary — exit codes, stderr, and a timeout that
+kills rather than gives up, so you know less about the process than you would
+about a request. `who_retries` inherits all three.
 
 `routing` and `state` are the shape of the loop itself. Routing is an `if` in
 three different places — after the reply, before the model, on something we
