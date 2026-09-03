@@ -74,13 +74,23 @@ class Span:
     exited_at: datetime | None = None
     notes: list[Note] = field(default_factory=list)
     children: list[Span] = field(default_factory=list)
+    # `notes` and `children` are each correctly ordered among themselves, but
+    # separately -- a note added between two child spans has no way to say
+    # so. `_entries` is the one true recorded order, notes and children
+    # mixed, and it exists because `ch21_judge` was the first chapter to put
+    # a note between two children of the same span and the page rendered
+    # both notes before either child, showing a verdict before the reply it
+    # judged. Not serialized directly; `as_json`'s `body` is built from it.
+    _entries: list[Note | Span] = field(default_factory=list, repr=False)
 
     def add_note(self, label: str, /, **payload: Any) -> None:
         # `label` is positional-only because a caller records payload keys it
         # does not choose -- a tool's arguments are named by the model, and a
         # tool with a parameter called `label` would otherwise collide with
         # this signature and raise. Same reason as `Trace.span`.
-        self.notes.append(Note(label, payload))
+        note = Note(label, payload)
+        self.notes.append(note)
+        self._entries.append(note)
 
     def add_context(self, messages: Sequence[BaseMessage]) -> None:
         """The exact list handed to the model provider, recorded before it goes."""
@@ -160,6 +170,16 @@ class Span:
             "library_ms": self.library_ms,
             "notes": [{"label": n.label, **n.payload} for n in self.notes],
             "children": [c.as_json() for c in self.children],
+            # The one field the page actually renders from -- `notes` and
+            # `children` above stay exactly as they were for everything that
+            # already reads them (every chapter's tests included); this is
+            # the two, interleaved in the order they were really recorded.
+            "body": [
+                {"kind": "note", "value": {"label": e.label, **e.payload}}
+                if isinstance(e, Note)
+                else {"kind": "span", "value": e.as_json()}
+                for e in self._entries
+            ],
         }
 
 
@@ -195,6 +215,8 @@ class Trace:
         )
         parent = self._open[-1] if self._open else None
         (parent.children if parent else self.spans).append(span)
+        if parent is not None:
+            parent._entries.append(span)
         self._open.append(span)
         try:
             yield span

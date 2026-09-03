@@ -562,8 +562,12 @@ def _digest(span: Json) -> str:
     if span["children"]:
         # A turn is one invocation plus its tools, so what came out of it is
         # what came out of the model. The tools are one row down; repeating
-        # them here was a preview of the thing directly underneath.
-        model = next((c for c in span["children"] if c["name"] == "model"), None)
+        # them here was a preview of the thing directly underneath. The
+        # *last* model child, not the first: ch21_judge is the first chapter
+        # where a turn can hold more than one, one retry each, and the first
+        # is the rejected attempt -- summarizing the turn by it would show a
+        # verdict the run itself did not settle on.
+        model = next((c for c in reversed(span["children"]) if c["name"] == "model"), None)
         return _digest(model) if model else ""
 
     return ""
@@ -589,8 +593,20 @@ def _render_span(span: Json) -> str:
     # The name is a label rather than one of the facts, so a space follows
     # it. Everything after it is a separate fact and takes a separator.
     head = f'<span class="name">{html.escape(span["name"])}</span> {facts}'
-    body = "".join(_render_note(n) for n in span["notes"]) + "".join(
-        _render_span(c) for c in span["children"]
+    # `span["body"]` is notes and children interleaved in the order they
+    # were actually recorded -- `notes` then `children`, concatenated,
+    # would show every note before any child, which is wrong the moment a
+    # note is added between two of them. `ch21_judge` is the first chapter
+    # that does: a verdict recorded after each retry's own `model` span.
+    # A trace written before `body` existed has neither key to fall back
+    # on -- reconstructed the old way, notes first, for exactly that file.
+    entries: list[Json] = span.get("body") or [
+        *({"kind": "note", "value": n} for n in span["notes"]),
+        *({"kind": "span", "value": c} for c in span["children"]),
+    ]
+    body = "".join(
+        _render_note(entry["value"]) if entry["kind"] == "note" else _render_span(entry["value"])
+        for entry in entries
     )
     return f"<details><summary>{head}</summary>{body}</details>"
 

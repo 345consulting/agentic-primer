@@ -89,9 +89,9 @@ ch15 stream_tools   tool arguments arrive as fragments of a JSON string   writte
 ch16 observability  instrumentation that observes and never participates  skipped
 ch17 stream_producer  the harness becomes the server -- pushing its own progress, span by span, not the model's tokens  skipped
 ch18 hooks          the named points in the loop, and the three powers   written
-ch19 guards         a hook that can say no, before dispatch
-ch20 loop_veto      stopped because forbidden, which is not stopped because done
-ch21 judge          a hook that reads the reply, per turn and not per run
+ch19 guards         a hook that can say no, before dispatch   written
+ch20 loop_veto      stopped because forbidden, which is not stopped because done   written
+ch21 judge          a hook that reads the reply, per turn and not per run   written
 ch22 prompt_types   everything that enters the context is a prompt
 ch23 mcp            a dispatch table you did not write
 ch24 mcp_injection  descriptions you did not write, in a context you did

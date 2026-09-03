@@ -12,6 +12,7 @@ from support.trace import Json, ModelKind, Trace
 from support.view import (
     _digest,
     _render_column,
+    _render_span,
     _render_wire_fields,
     _unit_label,
     render,
@@ -20,6 +21,8 @@ from support.view import (
 
 import json
 from pathlib import Path
+
+from langchain_core.messages import AIMessage
 
 
 def _recorded(kind: ModelKind, source: str) -> Json:
@@ -181,3 +184,68 @@ def test_a_unit_present_in_one_kind_and_not_the_other_is_still_named() -> None:
     traces = {"live": {"spans": [_span_json("scenario", name="content_filter")]}}
     assert _unit_label(traces, 0) == "scenario content_filter"
     assert "not run" in _render_column("mock", None, 0)
+
+
+def test_notes_and_children_render_in_the_order_they_were_recorded() -> None:
+    """The bug ch21_judge found: a note added between two child spans used
+    to render after both children, showing a verdict before the reply it
+    judged. `body` fixes that; this asserts the fix, not just that it runs.
+    """
+    trace = Trace(chapter="test", model_kind="mock")
+    with trace.span("turn", number=1) as span:
+        with trace.span("model", label="first-model"):
+            pass
+        span.add_note("judged", marker="first-verdict")
+        with trace.span("model", label="second-model"):
+            pass
+        span.add_note("judged", marker="second-verdict")
+    trace.close(turns=1, messages=0, ended="test")
+
+    turn = trace.spans[0].as_json()
+    kinds = [entry["kind"] for entry in turn["body"]]
+    assert kinds == ["span", "note", "span", "note"]
+
+    rendered = _render_span(turn)
+    positions = [
+        rendered.index(marker)
+        for marker in ("first-model", "first-verdict", "second-model", "second-verdict")
+    ]
+    assert positions == sorted(positions)
+
+
+def test_a_trace_recorded_before_body_existed_still_renders() -> None:
+    # No "body" key at all -- the shape every out/*.json on disk had before
+    # this fix. Falls back to notes-then-children rather than crashing.
+    span: Json = {
+        "name": "turn",
+        "attributes": {"number": 1},
+        "seq": 1,
+        "thread": "MainThread",
+        "elapsed_ms": None,
+        "model_provider_ms": None,
+        "library_ms": None,
+        "notes": [{"label": "ended", "reason": "test"}],
+        "children": [],
+    }
+    assert "ended" in _render_span(span)
+
+
+def test_the_turn_digest_summarizes_the_last_model_attempt_not_the_first() -> None:
+    # ch21_judge's other bug: a turn with two `model` children (a rejected
+    # attempt, then an accepted retry) summarized itself from the first --
+    # the one that failed, not the one whose outcome the turn actually has.
+    trace = Trace(chapter="test", model_kind="mock")
+    with trace.span("turn", number=1):
+        with trace.span("model") as first:
+            first.add_reply(_ai_message_stub("rejected answer"))
+        with trace.span("model") as second:
+            second.add_reply(_ai_message_stub("accepted answer"))
+    trace.close(turns=1, messages=0, ended="test")
+
+    digest = _digest(trace.spans[0].as_json())
+    assert "accepted answer" in digest
+    assert "rejected answer" not in digest
+
+
+def _ai_message_stub(content: str) -> AIMessage:
+    return AIMessage(content)

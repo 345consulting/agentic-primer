@@ -60,13 +60,12 @@ can attach, but that each one's input is the one before it's output, and a
 scenario with only one hook per point can never show that.
 """
 
+from support.hooks import AfterHook, BeforeHook, HookVerdict, dispatch_with_hooks
 from support.trace import ModelKind, Trace
 
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass
 from typing import Any, Literal
 
-from langchain_core.messages import ToolMessage
 from langchain_core.messages.tool import ToolCall, tool_call
 
 type GroceryItem = Literal["bread", "butter", "chips", "milk"]
@@ -96,23 +95,6 @@ def place_order(item: str, quantity: int) -> str:
 
 
 TOOLS: dict[str, Callable[..., Any]] = {"price_of": price_of, "place_order": place_order}
-
-
-@dataclass
-class HookVerdict:
-    """What one hook decided. Independent fields -- a hook may leave a note
-    regardless of whether it also modifies or vetoes, and the fields being
-    separate is what makes `observe` provably powerless: it can fill `note`
-    and nothing else, and nothing else is what changes the run.
-    """
-
-    note: str | None = None
-    veto: str | None = None
-    replacement: dict[str, Any] | None = None
-
-
-type BeforeHook = Callable[[ToolCall], HookVerdict]
-type AfterHook = Callable[[ToolCall, Any], HookVerdict]
 
 
 def note_if_a_write(call: ToolCall) -> HookVerdict:
@@ -176,71 +158,6 @@ def refuse_implausible_price(_call: ToolCall, result: Any) -> HookVerdict:
     return HookVerdict()
 
 
-def dispatch_with_hooks(
-    call: ToolCall,
-    trace: Trace,
-    before_hooks: Sequence[BeforeHook],
-    after_hooks: Sequence[AfterHook],
-    tools: dict[str, Callable[..., Any]] | None = None,
-) -> ToolMessage:
-    """One call, run through a named point's hooks before and after dispatch.
-
-    Not `execute_tool` from `support/agent.py`: that function has no hook
-    points at all, and adding them there would be teaching the mechanism by
-    editing scaffolding a reader cannot see change. It graduates once a
-    chapter after this one needs it built in rather than built by hand.
-    """
-    dispatch = tools if tools is not None else TOOLS
-    with trace.span("tool", name=call["name"], id=call["id"]) as span:
-        span.add_note("args", **call["args"])
-        for hook in before_hooks:
-            verdict = hook(call)
-            span.add_note(
-                "hook",
-                when="pre",
-                by=hook.__name__,
-                note=verdict.note,
-                veto=verdict.veto,
-                replacement=verdict.replacement,
-            )
-            if verdict.veto is not None:
-                return ToolMessage(
-                    content=f"['{call['name']}'] blocked before it ran: {verdict.veto}",
-                    tool_call_id=call["id"],
-                    status="error",
-                )
-            if verdict.replacement is not None:
-                call = tool_call(name=call["name"], args=verdict.replacement, id=call["id"])
-
-        result: Any = dispatch[call["name"]](**call["args"])
-        # Recorded before any post hook runs, so a post-veto's trace proves
-        # the call actually happened -- otherwise it would read identically
-        # to a pre-veto that stopped it from ever running at all.
-        span.add_note("dispatched", value=result)
-
-        for after_hook in after_hooks:
-            verdict = after_hook(call, result)
-            span.add_note(
-                "hook",
-                when="post",
-                by=after_hook.__name__,
-                note=verdict.note,
-                veto=verdict.veto,
-                replacement=verdict.replacement,
-            )
-            if verdict.veto is not None:
-                return ToolMessage(
-                    content=f"['{call['name']}'] ran, but the result was withheld: {verdict.veto}",
-                    tool_call_id=call["id"],
-                    status="error",
-                )
-            if verdict.replacement is not None:
-                result = verdict.replacement["value"]
-
-        span.add_note("result", value=result)
-    return ToolMessage(content=str(result), tool_call_id=call["id"])
-
-
 def run(model_kind: ModelKind = "mock") -> Trace:
     """`model_kind` is accepted and never read, the same honest no-op
     `ch13_workflow` used -- nothing here calls a model either.
@@ -300,8 +217,8 @@ def run(model_kind: ModelKind = "mock") -> Trace:
             # tool_post_veto needs a tool that actually returns an implausible
             # price to refuse -- a distinct dispatch table, local to this one
             # scenario, rather than a special case inside `price_of` itself.
-            tools = {"price_of": broken_price_of} if name == "tool_post_veto" else None
-            reply = dispatch_with_hooks(call, trace, before, after, tools)
+            tools = {"price_of": broken_price_of} if name == "tool_post_veto" else TOOLS
+            reply, _vetoed = dispatch_with_hooks(call, trace, before, after, tools)
             ended = f"{reply.status}: {reply.content}"
             span.add_note("ended", reason=ended)
         endings.append(ended)

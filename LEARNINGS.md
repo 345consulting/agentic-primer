@@ -1117,3 +1117,26 @@ conditions built from `pre`/`post` x {observe, modify, veto}, not new powers
 or new points. The ladder has now made this move twice -- primitives first,
 then named patterns that turn out to be configurations of them, not
 additions to them.
+
+---
+
+## 2026-09-03 — The hook is the guarantee; the model's manners are not
+
+*Sanjeev's, from the live run of `loop_veto`, where the model asked
+permission instead of routing around a refusal the way `ch09`'s did.*
+
+`ch20`'s live model stopped after the refusal and asked permission --
+*"Would you like me to order 4 more instead?"* -- rather than quietly
+retrying with a smaller number the way `ch09`'s live model split 20 into
+12+8 without asking anyone. Same shape of situation, same kind of model,
+opposite choice. Nothing distinguishes in advance which behavior a given run
+will produce.
+
+**That is the case for the hook being belt-and-suspenders, not redundant.**
+If the model always asked first, the hook would just be enforcing what good
+behavior already provides. If the model always routed around silently, the
+hook would be the only thing stopping it. This session proved both happen
+from the same setup -- so the hook has to hold regardless of which one shows
+up, and it did: the guard recomputes the real total on every attempt,
+whether that attempt arrives as a polite question or a silent retry. The
+model's manners are not the control. The hook is.
