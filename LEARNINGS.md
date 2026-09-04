@@ -1236,3 +1236,22 @@ way: `type: "document"` and `type: "input_file"` both came back a `400`
 naming exactly what the schema accepts -- `text`, `image_url`, `file`, and
 nothing else. The indicator isn't a menu the model reads; it's a closed
 contract the provider enforces before the request is even accepted.
+
+---
+
+## 2026-09-03 — Skills work because the model is smart enough to follow them
+
+*Sanjeev's, from `skills`, in his own words: "skills are tools that return
+a set of instructions that the model is intelligent enough to follow."*
+
+That capability is exactly what makes `ch24`'s injection and `ch26`'s
+skill the same mechanism aimed in different directions -- and this
+chapter's own live testing showed the model is more capable of following
+an instruction than the design assumed. `ch26` scripted a minimal pair
+expecting a command to be followed and a description not to be; live, the
+description was followed seven times out of eight anyway, because the
+model didn't just parse grammar, it noticed a stated pattern about
+"outputs" sitting next to its own output and completed it. The same
+intelligence that makes a skill usable on the strength of plain English
+instructions is what makes an unlabeled, undefended piece of text from
+anywhere just as persuasive.
