@@ -97,7 +97,7 @@ ch23 mcp            a dispatch table you did not write   written
 ch24 mcp_injection  descriptions you did not write, in a context you did   written
 ch25 rag_injection  a document you did not write, telling the model what to do   written
 ch26 skills         a tool whose result is instructions, not data   written
-ch27 compression    the list is too long; what do you drop, and what does it cost?
+ch27 compression    the list is too long; what do you drop, and what does it cost?   written
 ch28 memory         what survives when the list is thrown away
 ch29 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up
 ch30 graph          the same behaviour as a StateGraph -- what did it buy?

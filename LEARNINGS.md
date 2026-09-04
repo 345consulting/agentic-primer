@@ -1255,3 +1255,22 @@ model didn't just parse grammar, it noticed a stated pattern about
 intelligence that makes a skill usable on the strength of plain English
 instructions is what makes an unlabeled, undefended piece of text from
 anywhere just as persuasive.
+
+---
+
+## 2026-09-04 — Compression is a method, not a black box
+
+*Sanjeev's, from `compression`, in his own words: "I thought of
+compression as some blackbox full of magic, and what I am learning is
+there's a clearly defined method to this witchcraft, and it makes so much
+sense."*
+
+Ten scenarios, and every one of them was a concrete, nameable decision --
+truncate by position (and break something), truncate by whole turns
+instead, target by role, target by age, summarize and pay for it in a
+model call, protect what's pinned, filter what's declared. None of it
+required guessing at what a provider does internally. The "magic" was
+always a specific choice about what to drop and when, checkable the same
+way everything else in this primer is checkable -- by asking the model a
+question only the dropped thing could answer, and seeing whether it still
+can.
