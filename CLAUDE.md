@@ -101,7 +101,7 @@ ch27 compression    the list is too long; what do you drop, and what does it cos
 ch28 caching        what triggers a hit, what triggers a miss, and what a hit actually is   written
 ch29 memory         what survives when the list is thrown away   written
 ch30 roles          same content, three roles -- who's saying it, and does it matter?   written
-ch31 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up
+ch31 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up   written
 ch32 graph          the same behaviour as a StateGraph -- what did it buy?
 ch33 limits         recursion_limit at the boundary
 ch34 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory

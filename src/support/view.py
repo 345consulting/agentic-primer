@@ -457,8 +457,18 @@ def _render_note(note: Json) -> str:
             f'<pre class="wire">{_highlight(json.dumps(note.get("body"), indent=2))}</pre></div>'
         )
     rest = {k: v for k, v in note.items() if k != "label"}
+    # A note whose payload names a real file under `out/` -- `ch31`'s
+    # checkpoint jsonl, so far -- gets a link straight to it, relative to
+    # where this page itself lives. Nothing else in `rest` changes; the
+    # path still renders as ordinary highlighted JSON too.
+    path = rest.get("path")
+    # A chapter records the path it actually wrote to, `out/...` -- this
+    # page lives at `out/index.html`, so the href has to drop that prefix
+    # or it resolves to `out/out/...`, a 404.
+    href = path.removeprefix("out/") if isinstance(path, str) else None
+    link = f' <a href="{html.escape(href)}" target="_blank">open file</a>' if href else ""
     return (
-        f'<div class="note"><span class="label">{html.escape(label)}</span> '
+        f'<div class="note"><span class="label">{html.escape(label)}</span>{link} '
         f"{_highlight(json.dumps(rest))}</div>"
     )
 

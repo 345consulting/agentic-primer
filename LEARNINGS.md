@@ -1337,3 +1337,25 @@ declarative, non-commanding phrasing got imitated seven times out of
 eight -- is the hint that these mechanisms would likely separate for a
 weaker or more ambiguous instruction, where only some of the three
 reasons would still carry it.
+
+---
+
+## 2026-09-04 — Resume is a deserialize step, not an operation the API knows about
+
+*Sanjeev's, from `stop_resume`, in his own words, confirming my own
+description back as the learning itself: "'resume' isn't a special
+operation the model or the API knows about -- it's just: turn the last
+saved line back into real message objects, and keep calling ask_model
+like nothing happened. The illusion of continuity lives entirely in that
+deserialize step."*
+
+Nothing about `ask_model` changes, nothing about the request changes,
+nothing on the wire says "this conversation was interrupted." A resumed
+run and an uninterrupted one produce the identical request shape once
+`deserialize_message` has turned the last jsonl line's plain dicts back
+into real `SystemMessage`/`HumanMessage`/`AIMessage`/`ToolMessage`
+objects. The API has no concept of resumption to support, because from
+its side there is nothing to resume -- just a list of messages, same as
+every call since `ch01`. The entire mechanism lives on this side of the
+wire, in the two functions that convert between text on disk and objects
+in memory.
