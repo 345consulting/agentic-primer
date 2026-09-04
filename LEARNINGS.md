@@ -1365,7 +1365,7 @@ in memory.
 ## 2026-09-04 — LangGraph is a framework for calling what we give it, plus housekeeping the primer had already built
 
 *Sanjeev's, from `graph`, in his own words: "LG is just a framework for
-calling waht we give it, and to do some housekeeping which the primer has
+calling what we give it, and to do some housekeeping which the primer has
 already done."*
 
 `StateGraph` runs functions we wrote, on an order we declared with
@@ -1382,3 +1382,34 @@ something the primer built by hand first, from `ch01` through `ch11`.
 loop's bookkeeping as a schedule of node calls and dict merges, which is
 exactly why it was answerable by comparing it against a hand-built version
 that already existed.
+
+---
+
+## 2026-09-04 — A super-step is a single execution unit, and recursion_limit counts units, not node calls
+
+*Sanjeev's, from a conversation about `limits`, in his own words: a
+super-step is "a single execution unit" -- and by his own gloss, that
+phrasing already carries the parallel case, since to him "exec unit"
+means one scheduled round whether it holds one node or several running
+together.*
+
+`recursion_limit` is a misnomer -- there's no call stack anywhere in a
+compiled graph, just a step counter borrowed from Pregel/bulk-synchronous-
+parallel terminology, incremented once per super-step and checked against
+the limit each time. In `ch32`'s graphs, with no fan-out anywhere, a
+super-step and a single node execution are the same thing, so the counter
+happens to equal "how many node calls has this run made." That equivalence
+breaks the moment nodes fan out from the same predecessor (`ch37_parallel`,
+via `Send`): several nodes can run within the same synchronized round, and
+the counter still only advances by one for the whole round, not once per
+node inside it.
+
+The same logic extends across a graph boundary, not just within one round.
+If a node's body is itself a compiled subgraph (`ch36_subgraph`), the
+child graph's own super-steps are counted against the *parent's*
+`recursion_limit`, not a separate budget of their own -- unless the child
+is invoked as its own independent `.invoke()` call, which is precisely the
+"isolated worker with its own context" distinction `supervisor` already
+drew against `subgraph`'s "call-and-return, one shared limit." A subgraph
+nested by composition spends the parent's recursion budget; a subgraph
+invoked as a separate run spends its own.
