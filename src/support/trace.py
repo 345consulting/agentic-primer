@@ -92,9 +92,33 @@ class Span:
         self.notes.append(note)
         self._entries.append(note)
 
-    def add_context(self, messages: Sequence[BaseMessage]) -> None:
-        """The exact list handed to the model provider, recorded before it goes."""
-        self.add_note(CONTEXT, messages=[_describe(m) for m in messages])
+    def add_context(self, messages: Sequence[BaseMessage], tools: Sequence[Any] = ()) -> None:
+        """The exact list handed to the model provider, recorded before it goes
+        -- and, since `ch22_prompt_types`, the tool declarations sent beside
+        it. A tool's docstring becomes its schema `description`; a `Literal`
+        becomes an `enum`. Both are text the model reads on every call, and
+        until now neither ever appeared in a `context` note -- this recorder
+        was itself an instance of `ch22`'s finding, not just an illustration
+        of it: a piece of the prompt nobody had reviewed as one.
+
+        `t.tool_call_schema.model_json_schema()`, not `t.args`: a `Literal`
+        declared as a reusable type alias serializes as a `$ref` into a
+        `$defs` block, and `.args` alone does not include it -- recording
+        that would have been the exact failure this chapter is named for,
+        a field dropped while the trace still looked complete.
+        """
+        self.add_note(
+            CONTEXT,
+            messages=[_describe(m) for m in messages],
+            tools=[
+                {
+                    "name": t.name,
+                    "description": t.description,
+                    "schema": t.tool_call_schema.model_json_schema(),
+                }
+                for t in tools
+            ],
+        )
 
     def add_reply(self, message: BaseMessage) -> None:
         """What came back, including whether it asked for any tools."""

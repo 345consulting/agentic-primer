@@ -1140,3 +1140,31 @@ from the same setup -- so the hook has to hold regardless of which one shows
 up, and it did: the guard recomputes the real total on every attempt,
 whether that attempt arrives as a polite question or a silent retry. The
 model's manners are not the control. The hook is.
+
+---
+
+## 2026-09-03 — Everything sent to the model is a prompt
+
+*Sanjeev's, from `prompt_types`, in his own words: "everything sent to the
+model, whether a human prompt, list of tools, outputs from tools, outputs
+from model... literally anything, including request for tools from the
+model, is a prompt."*
+
+There is no privileged field. `system` and `human` feel like "the prompt"
+because they are the one row someone reviews every time it changes, but a
+tool's declared description, its argument enum, a tool's result, and the
+model's own prior reply all land in the same list and get read the same
+way -- the model does not know or care which field carried a given piece of
+text into its context. Calling only `system`/`human` "the prompt" is a
+convention of who wrote it and when, not a fact about what the model does
+with it.
+
+**The useful split is not "do we control it" -- almost all of it, we do --
+it's when it was authored and who has reviewed it since.** Per-conversation
+(written now, read now), design-time (written once, reviewed rarely or
+never), during-the-run (produced by this run's own calls, reviewed by
+nobody, ever -- not even the model, which has already moved on by the time
+its own prior reply comes back as context). The middle row is the one that
+surprises people, because a tool's docstring lives in code, not in a prompt
+file, and so it never gets audited as one -- which is exactly `ch02`'s old
+finding (`part: str` vs. `Literal[...]`) wearing a different name.

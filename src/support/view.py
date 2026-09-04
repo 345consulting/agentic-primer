@@ -396,13 +396,38 @@ def _render_messages(messages: list[Json]) -> str:
     return f"<table>{head}{''.join(rows)}</table>"
 
 
+def _render_declared_tools(tools: list[Json]) -> str:
+    """The design-time half of the context: a docstring as a `description`,
+    a `Literal` as an `enum` -- sent on every call, never in `messages`, and
+    collapsed by default the way headers already are, since most reads of
+    this page are not here to re-review a tool's schema.
+    """
+    if not tools:
+        return ""
+    rows = [
+        f"<tr><td>{html.escape(t['name'])}</td>"
+        f"<td>{html.escape(t['description'])}</td>"
+        f"<td>{html.escape(json.dumps(t['schema']))}</td></tr>"
+        for t in tools
+    ]
+    head = "<tr><th>tool</th><th>description</th><th>schema</th></tr>"
+    return (
+        f"<details><summary>declared tools ({len(tools)})</summary>"
+        f"<table>{head}{''.join(rows)}</table></details>"
+    )
+
+
 def _render_note(note: Json) -> str:
     label = note["label"]
     if label == CONTEXT:
         count = len(note["messages"])
+        # `tools` is absent on a trace recorded before `ch22_prompt_types` --
+        # a design-time prompt this page never showed until that chapter
+        # named the gap. `.get` renders the old shape instead of crashing.
         return (
             f'<div class="note"><span class="label">context sent &mdash; '
-            f"{count} message(s)</span>{_render_messages(note['messages'])}</div>"
+            f"{count} message(s)</span>{_render_messages(note['messages'])}"
+            f"{_render_declared_tools(note.get('tools') or [])}</div>"
         )
     if label == REPLY:
         return (

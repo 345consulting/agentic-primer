@@ -92,7 +92,7 @@ ch18 hooks          the named points in the loop, and the three powers   written
 ch19 guards         a hook that can say no, before dispatch   written
 ch20 loop_veto      stopped because forbidden, which is not stopped because done   written
 ch21 judge          a hook that reads the reply, per turn and not per run   written
-ch22 prompt_types   everything that enters the context is a prompt
+ch22 prompt_types   everything that enters the context is a prompt   written
 ch23 mcp            a dispatch table you did not write
 ch24 mcp_injection  descriptions you did not write, in a context you did
 ch25 rag_injection  a document you did not write, telling the model what to do
@@ -270,7 +270,7 @@ it was authored and who has read it since.
 | --- | --- | --- |
 | per conversation | system, user | as it is written |
 | at design time | tool descriptions, argument enums, error templates, skill bodies | once, months ago — or never, if a dependency wrote it |
-| during the run | tool results, retrieved documents, MCP descriptions, web pages | never, by anyone |
+| during the run | tool results, a sub-agent's answer, retrieved documents, MCP descriptions, web pages, uploaded files | never, by anyone |
 
 The middle class is the one that surprises people, because it is theirs and
 they still never look at it as text a model obeys. A tool description lives in

@@ -60,7 +60,7 @@ def ask_model(
     the whole list goes every time and what `bind_tools` does and does not do.
     """
     with trace.span("model", model_kind=model_kind) as span:
-        span.add_context(messages)
+        span.add_context(messages, tools)
         model = build_model(model_kind, mock_model_replies, span, max_tokens)
         reply = model.bind_tools(list(tools)).invoke(messages) if tools else model.invoke(messages)
         span.add_reply(reply)
