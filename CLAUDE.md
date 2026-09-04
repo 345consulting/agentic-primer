@@ -109,6 +109,8 @@ ch35 interrupt      interrupt and Command(resume=...) as an approval gate
 ch36 subgraph       the supervisor as a graph node -- what did it buy?
 ch37 parallel       fan-out, Send, join, and the order things merge in
 ch38 reducers       two updates to one field: append, or replace
+ch39 callbacks      the audit trail and the hook are the same mechanism in LangChain
+ch40 capstone       everything since graph, composed into one real scenario
 ```
 
 `stream_producer` sits here because this is the conversation that produced it
@@ -149,6 +151,22 @@ at that price. `memory` is what motivated asking the question in the first
 place -- recalling a fact across runs needs a role to arrive in -- but
 `memory` makes its own role choice inline and moves on; `roles` is the
 chapter that goes back and tests whether that choice was ever load-bearing.
+
+**`callbacks` and `capstone` close the LangGraph arc, and they are not the
+same kind of chapter as `graph` through `reducers`.** Every one of those
+tests one framework claim against a hand-built equivalent already proven
+in plain Python. `callbacks` is the one loose thread the ladder's own
+`hooks`/`observability` reasoning left open: LangChain implements tracing
+through callbacks, `hooks`' taxonomy was built and tested without ever
+touching that system, and `ch16_observability` -- the chapter that would
+have closed the gap -- was skipped, not written. `callbacks` closes it
+directly: does a hook attached through LangChain's real callback API
+actually suppress the audit trail the way the ladder's own prose already
+warned it could. `capstone` is a different question entirely -- not one
+more primitive tested in isolation, but whether everything already proven
+individually across `graph` through `reducers` actually composes into one
+working scenario. Both come last on purpose: neither is answerable before
+the arc they close is built.
 
 Chapters are named in prose and numbered only in that list. The numbers have
 moved five times in two days; the names have not.
