@@ -1294,3 +1294,24 @@ first message broke the match back to `0`; editing the second-to-last
 message left `cache_read` at `256`, completely unchanged, because that
 trailing stretch was never part of any cached block to begin with, edited
 or not.
+
+---
+
+## 2026-09-04 — Memory is just text content, and the role is your call
+
+*Sanjeev's, from discussing `memory` before building it, in his own words:
+"is it just another content of type=text, and role=user?" and, confirming
+the role isn't fixed either -- "you mean I get to define system/user/
+assistant or whatever?" -- "and this is precisely my learning."*
+
+A recalled memory fact has no dedicated slot. It is `type: "text"`, the
+same as everything else `ch25` already proved the schema is closed to
+(`text`, `image_url`, `file` -- nothing else exists, confirmed by a real
+`400`). And the role it rides in -- `system`, framed as background the
+assistant already knows, or `user`, framed as something just restated, or
+even a fabricated prior `AIMessage`/`ToolMessage` pretending a lookup just
+happened -- is entirely the harness's own choice, the same choice `ch23`'s
+resource splice and `ch26`'s skill loader already made explicitly. The API
+has no opinion. "Memory" is not a mechanism the model or the protocol
+provides; it is a decision the harness makes about which role to hand a
+piece of text to, dressed up in a bigger name.

@@ -100,14 +100,15 @@ ch26 skills         a tool whose result is instructions, not data   written
 ch27 compression    the list is too long; what do you drop, and what does it cost?   written
 ch28 caching        what triggers a hit, what triggers a miss, and what a hit actually is   written
 ch29 memory         what survives when the list is thrown away
-ch30 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up
-ch31 graph          the same behaviour as a StateGraph -- what did it buy?
-ch32 limits         recursion_limit at the boundary
-ch33 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
-ch34 interrupt      interrupt and Command(resume=...) as an approval gate
-ch35 subgraph       the supervisor as a graph node -- what did it buy?
-ch36 parallel       fan-out, Send, join, and the order things merge in
-ch37 reducers       two updates to one field: append, or replace
+ch30 roles          same content, three roles -- who's saying it, and does it matter?
+ch31 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up
+ch32 graph          the same behaviour as a StateGraph -- what did it buy?
+ch33 limits         recursion_limit at the boundary
+ch34 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
+ch35 interrupt      interrupt and Command(resume=...) as an approval gate
+ch36 subgraph       the supervisor as a graph node -- what did it buy?
+ch37 parallel       fan-out, Send, join, and the order things merge in
+ch38 reducers       two updates to one field: append, or replace
 ```
 
 `stream_producer` sits here because this is the conversation that produced it
@@ -131,6 +132,23 @@ a hand-built version that already exists, instead of arriving unexplained.
 survives *across* runs; `stop_resume` is picking up *one* run that stopped,
 which is a fact about position and pending state, not about what was
 learned.
+
+**`roles` is conceptually a sibling of `prompt_types` -- classifying by
+*who's saying it* instead of *when it was authored* -- and sits here
+instead of there anyway.** Every chapter since `ch01` has chosen a role
+(`system`, `human`, `ai`, `tool`) without comment; this chapter makes that
+choice itself the subject, live-tested rather than assumed: does framing
+the identical fact as `system`, `user`, or a fabricated prior `assistant`
+turn change what the model does with it. It belongs right after
+`prompt_types` by dependency -- it needs nothing `mcp` through `caching`
+built. It sits here instead because six chapters in between are already
+written, gated, and cross-reference each other by number; moving it
+earlier costs those chapters nothing in dependency and everything in
+churn, and this ladder's numbers have never been the part worth protecting
+at that price. `memory` is what motivated asking the question in the first
+place -- recalling a fact across runs needs a role to arrive in -- but
+`memory` makes its own role choice inline and moves on; `roles` is the
+chapter that goes back and tests whether that choice was ever load-bearing.
 
 Chapters are named in prose and numbered only in that list. The numbers have
 moved five times in two days; the names have not.
