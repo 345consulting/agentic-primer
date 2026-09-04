@@ -100,14 +100,17 @@ table.headers td.unrecorded { color: var(--dim); font-style: italic; }
 .wirefields dd.defaulted { color: #b26; }
 @media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
 /* Wrap rather than scroll: the page is read at whatever width the window is,
-   and a horizontal scrollbar inside a column hides the end of every line. */
-pre.wire .k { color: #06c; }
-pre.wire .s { color: #0a7; }
-pre.wire .n { color: #b26; }
-pre.wire .l { color: #a60; font-style: italic; }
+   and a horizontal scrollbar inside a column hides the end of every line.
+   Unscoped, not `pre.wire .k` -- `_highlight` colours a plain note's inline
+   JSON too, not only a wire block's, and a token class means the same thing
+   everywhere it appears. */
+.k { color: #06c; }
+.s { color: #0a7; }
+.n { color: #b26; }
+.l { color: #a60; font-style: italic; }
 @media (prefers-color-scheme: dark) {
-  pre.wire .k { color: #7bf; } pre.wire .s { color: #6d9; }
-  pre.wire .n { color: #f9a; } pre.wire .l { color: #fc7; }
+  .k { color: #7bf; } .s { color: #6d9; }
+  .n { color: #f9a; } .l { color: #fc7; }
 }
 pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
            white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -456,7 +459,7 @@ def _render_note(note: Json) -> str:
     rest = {k: v for k, v in note.items() if k != "label"}
     return (
         f'<div class="note"><span class="label">{html.escape(label)}</span> '
-        f"{html.escape(json.dumps(rest))}</div>"
+        f"{_highlight(json.dumps(rest))}</div>"
     )
 
 

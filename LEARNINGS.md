@@ -1168,3 +1168,22 @@ its own prior reply comes back as context). The middle row is the one that
 surprises people, because a tool's docstring lives in code, not in a prompt
 file, and so it never gets audited as one -- which is exactly `ch02`'s old
 finding (`part: str` vs. `Literal[...]`) wearing a different name.
+
+---
+
+## 2026-09-03 — MCP is more than a tool list and a call
+
+*Sanjeev's, from `mcp`, in his own words: "mcp is more than just a tool
+list and call; resource get's remote content to the model; prompts are
+the same, injected from remote."*
+
+Easy to hear "MCP" and think "remote tools" and stop there -- `tools/list`
+and `tools/call` are the familiar shape, the one every chapter since `ch02`
+already has a mental slot for. Resources and prompts are not a smaller
+version of the same idea; they are content from somewhere else landing in
+the model's context with no round trip and no model involved in the
+decision at all. A resource is remote content the *client* fetched and
+handed over. A prompt is a remote-defined conversation the client seeded
+before turn one. Both are injected in the plain sense of the word -- text
+placed into context by something other than the person or model currently
+in the loop -- and neither leaves a mark saying so once it's there.
