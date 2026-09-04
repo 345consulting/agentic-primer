@@ -102,7 +102,7 @@ ch28 caching        what triggers a hit, what triggers a miss, and what a hit ac
 ch29 memory         what survives when the list is thrown away   written
 ch30 roles          same content, three roles -- who's saying it, and does it matter?   written
 ch31 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up   written
-ch32 graph          the same behaviour as a StateGraph -- what did it buy?
+ch32 graph          the same behaviour as a StateGraph -- what did it buy?   written
 ch33 limits         recursion_limit at the boundary
 ch34 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
 ch35 interrupt      interrupt and Command(resume=...) as an approval gate

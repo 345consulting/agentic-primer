@@ -1359,3 +1359,26 @@ its side there is nothing to resume -- just a list of messages, same as
 every call since `ch01`. The entire mechanism lives on this side of the
 wire, in the two functions that convert between text on disk and objects
 in memory.
+
+---
+
+## 2026-09-04 — LangGraph is a framework for calling what we give it, plus housekeeping the primer had already built
+
+*Sanjeev's, from `graph`, in his own words: "LG is just a framework for
+calling waht we give it, and to do some housekeeping which the primer has
+already done."*
+
+`StateGraph` runs functions we wrote, on an order we declared with
+`add_edge`/`add_conditional_edges`, and merges each one's return dict into
+`state` by key, using a reducer we chose (`add_messages`, or the default
+overwrite). Nothing under `state["messages"]` is LangGraph's -- the name is
+ours, the contents are whatever `call_model` and `call_tool` return, and
+the appending-not-replacing behavior only happens because `ch32` annotated
+that field with `add_messages`. Every piece of that housekeeping --
+appending results to a running list, deciding whether to loop again,
+carrying tool declarations alongside but outside the message list -- is
+something the primer built by hand first, from `ch01` through `ch11`.
+`graph` doesn't introduce a new capability; it re-implements the same
+loop's bookkeeping as a schedule of node calls and dict merges, which is
+exactly why it was answerable by comparing it against a hand-built version
+that already existed.

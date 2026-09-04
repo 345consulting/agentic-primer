@@ -62,6 +62,12 @@ reportCallInDefaultInitializer = false
 # raise. Binding the result to `_` says less than the test name already does.
 reportUnusedCallResult = false
 
+# `langgraph` ships `py.typed` at the package root, but basedpyright still
+# flags specific submodules (`langgraph.graph`, `langgraph.graph.message`)
+# as stub-less -- a real quirk of the package, not something a chapter can
+# fix, and one every chapter from `ch32_graph` onward would otherwise hit.
+reportMissingTypeStubs = false
+
 [tool.pytest.ini_options]
 addopts    = "-v"
 pythonpath = ["src"]
