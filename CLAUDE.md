@@ -98,15 +98,16 @@ ch24 mcp_injection  descriptions you did not write, in a context you did   writt
 ch25 rag_injection  a document you did not write, telling the model what to do   written
 ch26 skills         a tool whose result is instructions, not data   written
 ch27 compression    the list is too long; what do you drop, and what does it cost?   written
-ch28 memory         what survives when the list is thrown away
-ch29 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up
-ch30 graph          the same behaviour as a StateGraph -- what did it buy?
-ch31 limits         recursion_limit at the boundary
-ch32 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
-ch33 interrupt      interrupt and Command(resume=...) as an approval gate
-ch34 subgraph       the supervisor as a graph node -- what did it buy?
-ch35 parallel       fan-out, Send, join, and the order things merge in
-ch36 reducers       two updates to one field: append, or replace
+ch28 caching        what triggers a hit, what triggers a miss, and what a hit actually is   written
+ch29 memory         what survives when the list is thrown away
+ch30 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up
+ch31 graph          the same behaviour as a StateGraph -- what did it buy?
+ch32 limits         recursion_limit at the boundary
+ch33 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
+ch34 interrupt      interrupt and Command(resume=...) as an approval gate
+ch35 subgraph       the supervisor as a graph node -- what did it buy?
+ch36 parallel       fan-out, Send, join, and the order things merge in
+ch37 reducers       two updates to one field: append, or replace
 ```
 
 `stream_producer` sits here because this is the conversation that produced it

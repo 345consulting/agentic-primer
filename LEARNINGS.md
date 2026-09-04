@@ -1274,3 +1274,23 @@ always a specific choice about what to drop and when, checkable the same
 way everything else in this primer is checkable -- by asking the model a
 question only the dropped thing could answer, and seeing whether it still
 can.
+
+---
+
+## 2026-09-04 — Caching is token-by-token, in complete blocks, prefix-based
+
+*Sanjeev's, from `caching`, in his own words (refined together): "Caching
+works token by token, in complete blocks, prefix-based -- not character by
+character. A change within or before the last fully-cached block breaks
+everything back to zero, from compression or an intentional edit alike. A
+change after that boundary costs nothing, since that part was never
+cached at all."*
+
+Confirmed with real numbers, not the exact byte count: a 211-token
+identical repeat reported `cache_read: 128`, not 211 -- the true matching
+prefix, rounded down to a complete 128-token block. A 339-token
+conversation cleared two blocks (`cache_read: 256`). Editing the very
+first message broke the match back to `0`; editing the second-to-last
+message left `cache_read` at `256`, completely unchanged, because that
+trailing stretch was never part of any cached block to begin with, edited
+or not.
