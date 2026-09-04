@@ -1315,3 +1315,25 @@ resource splice and `ch26`'s skill loader already made explicitly. The API
 has no opinion. "Memory" is not a mechanism the model or the protocol
 provides; it is a decision the harness makes about which role to hand a
 piece of text to, dressed up in a bigger name.
+
+---
+
+## 2026-09-04 — Each role means something different to the model
+
+*Sanjeev's, from `roles`, in his own words: "each role type is different,
+with different meaning, and different responsibilities that is
+interpreted by the model."*
+
+True even though `ch30`'s own live numbers showed no compliance
+difference across them -- fifteen out of fifteen, one clear imperative,
+every role. What differs is the *mechanism*, not necessarily the
+outcome: `system` carries documented authority, `user` is the direct
+request, a fabricated `assistant` turn works through self-consistency --
+the model not contradicting a prior turn attributed to itself, a wholly
+different lever than being told or asked. Three different reasons the
+model went along with it, converging on the same answer because the
+instruction was unambiguous. `ch26`'s own finding -- that even
+declarative, non-commanding phrasing got imitated seven times out of
+eight -- is the hint that these mechanisms would likely separate for a
+weaker or more ambiguous instruction, where only some of the three
+reasons would still carry it.
