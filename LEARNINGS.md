@@ -1187,3 +1187,23 @@ handed over. A prompt is a remote-defined conversation the client seeded
 before turn one. Both are injected in the plain sense of the word -- text
 placed into context by something other than the person or model currently
 in the loop -- and neither leaves a mark saying so once it's there.
+
+---
+
+## 2026-09-03 — Injection changes behavior without consent
+
+*Sanjeev's, from `mcp_injection`, in his own words: "my first exposure to
+how injection can change the behavior w/o consent, and how to approach
+it."*
+
+`ch24`'s live model appended a marker string to an unrelated "say hello"
+reply, having never called the tool whose description carried the
+instruction. No one asked it to. No one told it to. The text was declared
+alongside a question about something else entirely, and the model acted on
+it anyway -- consent was never in the loop, because nothing about a tool's
+`description` field looks like a place instructions could come from. The
+approach that actually holds isn't "detect bad text" in general -- that's
+unbounded, someone always phrases it differently -- it's moving the guard
+to the earliest point the hostile content exists as data and has not yet
+become something the model reads: before declaration, not before dispatch.
+By the time a `tool_call` exists, the description already did its work.

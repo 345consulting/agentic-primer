@@ -94,7 +94,7 @@ ch20 loop_veto      stopped because forbidden, which is not stopped because done
 ch21 judge          a hook that reads the reply, per turn and not per run   written
 ch22 prompt_types   everything that enters the context is a prompt   written
 ch23 mcp            a dispatch table you did not write   written
-ch24 mcp_injection  descriptions you did not write, in a context you did
+ch24 mcp_injection  descriptions you did not write, in a context you did   written
 ch25 rag_injection  a document you did not write, telling the model what to do
 ch26 skills         a tool whose result is instructions, not data
 ch27 compression    the list is too long; what do you drop, and what does it cost?
