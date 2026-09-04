@@ -168,6 +168,19 @@ individually across `graph` through `reducers` actually composes into one
 working scenario. Both come last on purpose: neither is answerable before
 the arc they close is built.
 
+**`ch16_observability` gets written when `callbacks` does, not before.**
+Every mechanism it would formalize already exists by hand across this
+ladder -- `Trace`/`Span` in `support/trace.py`, the httpx wire hooks in
+`support/models.py`, timing split into model-provider vs. library,
+`view.py`'s rendering -- which is why it was skipped rather than dropped.
+What it was actually waiting on is `callbacks`' own subject: whether
+LangChain's real callback-based tracing is the same mechanism as a hook,
+strong enough to suppress the audit trail. Writing `observability` first
+would mean naming `gen_ai.*` conventions around spans nobody has yet shown
+can be silently defeated; writing it alongside `callbacks` means the
+`gen_ai.*` mapping and the hook/tracing collision land in the same
+sitting, once both halves of the claim are provable.
+
 Chapters are named in prose and numbered only in that list. The numbers have
 moved five times in two days; the names have not.
 
