@@ -99,7 +99,7 @@ ch25 rag_injection  a document you did not write, telling the model what to do  
 ch26 skills         a tool whose result is instructions, not data   written
 ch27 compression    the list is too long; what do you drop, and what does it cost?   written
 ch28 caching        what triggers a hit, what triggers a miss, and what a hit actually is   written
-ch29 memory         what survives when the list is thrown away
+ch29 memory         what survives when the list is thrown away   written
 ch30 roles          same content, three roles -- who's saying it, and does it matter?
 ch31 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up
 ch32 graph          the same behaviour as a StateGraph -- what did it buy?
