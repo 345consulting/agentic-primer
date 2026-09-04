@@ -1207,3 +1207,32 @@ unbounded, someone always phrases it differently -- it's moving the guard
 to the earliest point the hostile content exists as data and has not yet
 become something the model reads: before declaration, not before dispatch.
 By the time a `tool_call` exists, the description already did its work.
+
+---
+
+## 2026-09-03 — Retrieved content joins the message the same way a prompt does
+
+*Sanjeev's, from `rag_injection`, in his own words: "I've always wondered
+how content makes it into the model, turns out, it's literally the same
+way as the user prompt, maybe with an indicator that it is a reference
+content."*
+
+No indicator, confirmed directly across every chapter that spliced
+something in -- a resource's text, a retrieved document, all landed as a
+plain `HumanMessage`, same `content` field a typed question uses, nothing
+marking it as fetched rather than authored. The one real exception is
+native multimodal content: an image or PDF sent as actual bytes carries a
+typed content block (`type: "image_url"`, etc.) that routes it to a
+different encoder -- but that tag means "decode this differently," not
+"trust this less." Text extracted *from* an image or PDF (OCR, transcription)
+collapses right back into the no-indicator case, which is the common one:
+almost every real RAG and document pipeline extracts to text first.
+
+**Confirmed live, not just described, once both media types were actually
+sent.** An image used `type: "image_url"`; a PDF and a DOCX both use the
+same generic `type: "file"` block, distinguished only by the MIME type
+inside the data URI -- no separate "document" type exists. Proven the hard
+way: `type: "document"` and `type: "input_file"` both came back a `400`
+naming exactly what the schema accepts -- `text`, `image_url`, `file`, and
+nothing else. The indicator isn't a menu the model reads; it's a closed
+contract the provider enforces before the request is even accepted.
