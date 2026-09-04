@@ -99,13 +99,14 @@ ch25 rag_injection  a document you did not write, telling the model what to do  
 ch26 skills         a tool whose result is instructions, not data   written
 ch27 compression    the list is too long; what do you drop, and what does it cost?
 ch28 memory         what survives when the list is thrown away
-ch29 graph          the same behaviour as a StateGraph -- what did it buy?
-ch30 limits         recursion_limit at the boundary
-ch31 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
-ch32 interrupt      interrupt and Command(resume=...) as an approval gate
-ch33 subgraph       the supervisor as a graph node -- what did it buy?
-ch34 parallel       fan-out, Send, join, and the order things merge in
-ch35 reducers       two updates to one field: append, or replace
+ch29 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up
+ch30 graph          the same behaviour as a StateGraph -- what did it buy?
+ch31 limits         recursion_limit at the boundary
+ch32 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
+ch33 interrupt      interrupt and Command(resume=...) as an approval gate
+ch34 subgraph       the supervisor as a graph node -- what did it buy?
+ch35 parallel       fan-out, Send, join, and the order things merge in
+ch36 reducers       two updates to one field: append, or replace
 ```
 
 `stream_producer` sits here because this is the conversation that produced it
@@ -117,6 +118,18 @@ here requires the harness to have a server before it can have guards. Neither
 `observability`'s is agentic -- both are generic instrumentation and generic
 serving, wearing this ladder's vocabulary. What is not generic is the payload:
 `gen_ai.*` field names for one, span-shaped progress events for the other.
+
+**`stop_resume` sits before `graph` on purpose, the same reason `hooks`
+sits before `observability`'s framework equivalents ever could.** Picking
+a stopped run back up from a jsonl snapshot needs nothing `graph` provides
+-- it is plain-Python-achievable, and building it there keeps `checkpoint`
+answerable later the way `subgraph` is answerable because `supervisor` came
+first: `MemorySaver`/`thread_id`/`Command(resume=...)` get compared against
+a hand-built version that already exists, instead of arriving unexplained.
+`stop_resume` is not `memory` under another name -- `memory` is what
+survives *across* runs; `stop_resume` is picking up *one* run that stopped,
+which is a fact about position and pending state, not about what was
+learned.
 
 Chapters are named in prose and numbered only in that list. The numbers have
 moved five times in two days; the names have not.
