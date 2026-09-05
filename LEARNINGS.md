@@ -1429,3 +1429,20 @@ directly, not assumed: bolting our own jsonl persistence onto
 `update_state()` before its first `invoke()` -- worked without touching
 `thread_id`, resume, or any node logic. The checkpointer is a slot; what's
 plugged into it never leaks into the graph's own code.
+
+---
+
+## 2026-09-04 — StateGraph is a general workflow engine, not an agent framework
+
+*Sanjeev's, from `subgraph`: "LG StateGraph is going to be a major player
+in workflows. Period."*
+
+Nothing proven since `graph` -- schema-mapping between subgraphs, swappable
+checkpoint storage, a step-counted recursion boundary, automatic field
+merging by declared schema -- is agentic in nature; every one of those is
+generic graph/workflow machinery wearing this ladder's vocabulary. That
+generality is exactly why it scales past the agent use case: the same
+primitives that build a model-calling loop build any node-and-edge
+workflow with typed state, checkpointing, and composition, which is the
+argument for `StateGraph` becoming a major player in workflow
+orchestration generally, not just LLM agents.
