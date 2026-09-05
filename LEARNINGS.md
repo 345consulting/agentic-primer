@@ -1446,3 +1446,20 @@ primitives that build a model-calling loop build any node-and-edge
 workflow with typed state, checkpointing, and composition, which is the
 argument for `StateGraph` becoming a major player in workflow
 orchestration generally, not just LLM agents.
+
+---
+
+## 2026-09-04 — A reducer's location is the schema, not the node
+
+*Sanjeev's, from `reducers`: "the location of a reducer and custom logic
+is key within the graph."*
+
+`Annotated[T, reducer]` is declared once, at the schema level -- every
+node that touches that field inherits the same merge behavior
+automatically, with no per-node choice and no way to opt out locally.
+`ch38`'s `left`/`right` nodes never coordinate or know about each other;
+the merge logic that resolves their simultaneous writes lives entirely in
+`FanState`'s declaration, not in either node's body. Put custom logic
+(`operator.add`, or anything else) in the wrong place -- inside a node
+instead of the schema -- and it only governs that one node's return, not
+what happens when two different nodes write the same field.

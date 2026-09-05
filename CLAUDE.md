@@ -108,7 +108,7 @@ ch34 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
 ch35 interrupt      interrupt and Command(resume=...) as an approval gate skipped
 ch36 subgraph       the supervisor as a graph node -- what did it buy?   written
 ch37 parallel       fan-out, Send, join, and the order things merge in  skipped
-ch38 reducers       two updates to one field: append, or replace
+ch38 reducers       two updates to one field: append, or replace   written
 ch39 callbacks      the audit trail and the hook are the same mechanism in LangChain
 ch40 capstone       everything since graph, composed into one real scenario
 ```
@@ -356,7 +356,7 @@ one problem, which is that the list is the state and the budget is finite.
 ## Documented deviations from the code standard
 
 Per the convention-conflict rule in `~/claude-and-i/docs/standards/code-style.md`,
-a deviation is only valid if it is written down. These two are.
+a deviation is only valid if it is written down. These four are.
 
 **Function length — "under 40 lines" is measured in code, not in lines.**
 `_describe`, `_generate`, `book` and chapter 1's `run` exceed 40 lines as
@@ -380,6 +380,16 @@ tool function and `DECLARED` from `TOOLS`, so statics and definitions
 necessarily interleave. Past that constraint a chapter is read top to bottom —
 prompts, tools, mock replies, then the functions in the order they run — and
 alphabetising it would destroy the sequence the file exists to teach.
+
+**`ch38_reducers`'s node functions are named `state`, not `_state`, even
+where genuinely unused.** mypy's overload resolution for
+`StateGraph.add_node` fails whenever the parameter is named with a leading
+underscore — a real mypy-specific quirk, not a style choice; basedpyright
+accepts either name, and the same call with a used, non-underscore
+parameter passes both. `src/chapters/ch38_reducers.py` carries `ARG001` in
+`per-file-ignores` for exactly this: several of that chapter's scenarios
+are about the reducer alone, with nothing in the node function needing to
+read `state` at all.
 
 ## Learnings
 

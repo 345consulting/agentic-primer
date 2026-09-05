@@ -89,3 +89,12 @@ section-order     = ["future", "first-party", "local-folder", "standard-library"
 # `**kwargs` must be accepted whether or not the scripted model uses them.
 [tool.ruff.lint.per-file-ignores]
 "src/support/models.py" = ["ARG002"]
+
+# mypy's overload resolution for StateGraph.add_node fails whenever a node
+# function's parameter is named with a leading underscore -- a real mypy
+# quirk with this specific generic API, confirmed against basedpyright
+# (which accepts either name) and against every other chapter's node
+# functions (none of which happen to have an unused state parameter). The
+# node functions here are unused by design -- several scenarios are the
+# reducer alone, no state read -- so ARG001 is the one honest exception.
+"src/chapters/ch38_reducers.py" = ["ARG001"]
