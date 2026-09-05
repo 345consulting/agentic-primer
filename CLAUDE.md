@@ -104,7 +104,7 @@ ch30 roles          same content, three roles -- who's saying it, and does it ma
 ch31 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up   written
 ch32 graph          the same behaviour as a StateGraph -- what did it buy?   written
 ch33 limits         recursion_limit at the boundary   written
-ch34 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory
+ch34 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory   written
 ch35 interrupt      interrupt and Command(resume=...) as an approval gate
 ch36 subgraph       the supervisor as a graph node -- what did it buy?
 ch37 parallel       fan-out, Send, join, and the order things merge in

@@ -1413,3 +1413,19 @@ is invoked as its own independent `.invoke()` call, which is precisely the
 drew against `subgraph`'s "call-and-return, one shared limit." A subgraph
 nested by composition spends the parent's recursion budget; a subgraph
 invoked as a separate run spends its own.
+
+---
+
+## 2026-09-04 — LangGraph's storage is swappable
+
+*Sanjeev's, from `checkpoint`: "LangGraph's swappable storage."*
+
+`InMemorySaver`, `SqliteSaver`, `PostgresSaver` all implement the same
+contract -- `get_state`/`update_state`/commit-on-node-return -- and only
+`graph.compile(checkpointer=...)` changes to swap between them. Proven
+directly, not assumed: bolting our own jsonl persistence onto
+`InMemorySaver` -- reading `get_state().values`, writing it out with
+`ch31`'s own message format, then seeding a brand-new checkpointer via
+`update_state()` before its first `invoke()` -- worked without touching
+`thread_id`, resume, or any node logic. The checkpointer is a slot; what's
+plugged into it never leaks into the graph's own code.
