@@ -105,7 +105,7 @@ ch31 stop_resume    a jsonl snapshot after every turn, and picking back up   wri
 ch32 graph          the same behaviour as a StateGraph -- what did it buy?   written
 ch33 limits         recursion_limit at the boundary   written
 ch34 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory   written
-ch35 interrupt      interrupt and Command(resume=...) as an approval gate
+ch35 interrupt      interrupt and Command(resume=...) as an approval gate   written
 ch36 subgraph       the supervisor as a graph node -- what did it buy?   written
 ch37 parallel       fan-out, Send, join, and the order things merge in
 ch38 reducers       two updates to one field: append, or replace   written

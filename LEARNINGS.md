@@ -1482,3 +1482,22 @@ powers (observe, abort via `raise_error`) -- never modify. Any need past
 flight, adding a new kind of checkpoint, anything
 `HookVerdict.replacement`-shaped -- has to be built as custom logic in the
 graph itself, not as a callback.
+
+---
+
+## 2026-09-06 — interrupt() adds scheduling markers to the checkpoint, not just data
+
+*Sanjeev's, from `interrupt`: "an interrupt adds additional markers in
+the checkpoint so a resume goes directly to the next step."*
+
+A checkpoint was always a snapshot of state (`ch34`'s subject);
+`interrupt()` additionally records the pending-task queue (`snap.next`,
+`snap.tasks`) -- which node was mid-execution when it paused -- and the
+specific `Interrupt` object(s) that node raised, each with its own `id`.
+Resuming reads that queue directly and dispatches straight to the pending
+node; it never re-derives "where to go" from `START`'s edges, the same
+way an OS scheduler reads a process table rather than replaying a process
+from its source. Completed nodes are simply absent from the pending
+list, so they never re-run; only whatever node was in-flight does, from
+its own top -- anything in that node before the `interrupt()` call
+executes twice on resume.
