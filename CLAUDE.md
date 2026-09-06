@@ -111,7 +111,7 @@ ch37 parallel       fan-out, Send, join, and the order things merge in   written
 ch38 reducers       two updates to one field: append, or replace   written
 ch39 callbacks      the audit trail and the hook are the same mechanism in LangChain   written
 ch40 capstone       everything since graph, composed into one real scenario   written
-ch41 result_cache   a cache of answers, not of attention -- what's needed to hit it
+ch41 result_cache   a cache of answers, not of attention -- what's needed to hit it   written
 ch42 model_tiers    the same task, two models -- getting a complexity signal right   written
 ```
 

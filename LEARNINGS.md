@@ -1574,3 +1574,29 @@ built, because every scenario that needed a real answer used the
 routed-to call itself as its own signal (`finish_reason`) rather than
 paying for a second one. The spectrum is real and the chapter is honest
 about which parts of it it actually proved.
+
+---
+
+## 2026-09-06 — result caching is critical architecture, and threshold plus TTL are what separate good cache usage from bad
+
+*Sanjeev's, from `result_cache`: "result_caching is a critical
+architecture setup, but tuning the thresholds will be key between good
+and bad cache usage", including paying attention to TTL for cache
+entries.*
+
+`result_cache`'s own five scenarios are the evidence: the same
+mechanism, correctly configured (a three-zone threshold plus a
+per-source TTL check), served a real paraphrase and correctly withheld
+an ambiguous one; the same mechanism with a single naive cutoff instead
+served a genuinely wrong answer with full confidence. Threshold tuning
+is necessary, but this chapter found it is not always sufficient on its
+own -- a structurally similar, substantively different pair ("what is
+our return policy" vs. "what is our shipping policy") scored *higher*
+(0.669) than the real paraphrase (0.57) under TF-IDF, so no threshold,
+however carefully placed, gets both right. That is a ceiling on the
+similarity measure itself, not a tuning mistake -- a real embedding
+would likely fix it. TTL is the second, independent knob: a match can
+be correctly, confidently similar and still need to ask, because
+similarity says nothing about whether the source it came from is still
+current. Getting the threshold right and ignoring TTL is still bad
+cache usage; both have to be tuned, for different reasons.
