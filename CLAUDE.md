@@ -86,7 +86,7 @@ ch12 supervisor     one loop calls another: a tool whose body is an agent   writ
 ch13 workflow       the same job with nothing deciding -- is the loop worth it?   written
 ch14 stream         "stream": true -- a reply arrives in pieces   written
 ch15 stream_tools   tool arguments arrive as fragments of a JSON string   written
-ch16 observability  instrumentation that observes and never participates
+ch16 observability  instrumentation that observes and never participates   written
 ch17 stream_producer  the harness becomes the server
 ch18 hooks          the named points in the loop, and the three powers   written
 ch19 guards         a hook that can say no, before dispatch   written
