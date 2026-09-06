@@ -33,6 +33,7 @@ from typing import Any
 
 from langchain_core.messages import AIMessage, BaseMessage, ToolMessage
 from langchain_core.messages.tool import ToolCall
+from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool
 
 # What a chapter provides so a tool can be run: the name the model asked for,
@@ -53,16 +54,21 @@ def ask_model(
     messages: list[BaseMessage],
     tools: Sequence[BaseTool],
     max_tokens: int | None = None,
+    config: RunnableConfig | None = None,
 ) -> AIMessage:
     """One invocation, recorded: the exact context in, the reply out.
 
     `ch02_tool_call` writes this out by hand, with the comments explaining why
     the whole list goes every time and what `bind_tools` does and does not do.
+    `config` is `ch39_callbacks`' own addition -- every chapter before it had
+    no reason to pass one, so it defaults to `None` and changes nothing for
+    any of them.
     """
     with trace.span("model", model_kind=model_kind) as span:
         span.add_context(messages, tools)
         model = build_model(model_kind, mock_model_replies, span, max_tokens)
-        reply = model.bind_tools(list(tools)).invoke(messages) if tools else model.invoke(messages)
+        bound = model.bind_tools(list(tools)) if tools else model
+        reply = bound.invoke(messages, config=config)
         span.add_reply(reply)
     # invoke() is typed as returning BaseMessage. Narrowing is for the type
     # checker, not for correctness.

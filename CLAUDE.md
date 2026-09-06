@@ -78,7 +78,7 @@ ch04 tool_failures  the toolbox lets you down in three ways; one of them looks l
 ch05 loop_endings   every way a run can stop, and only one means finished   written
 ch06 two_tools      the same two calls, together or in sequence   written
 ch07 tool_http      a tool that calls an API: latency, a second secret, real failures   written
-ch08 tool_program   a tool that runs a program: exit codes, and an argument that is a command   written
+ch08 tool_program   a tool that runs a program: exit codes, and an argument for command   written
 ch09 who_retries    four cells of one matrix: who can change the outcome   written
 ch10 routing        the loop branches -- an `if`, in three different places   written
 ch11 state          what travels besides messages, and who may write it   written
@@ -86,8 +86,8 @@ ch12 supervisor     one loop calls another: a tool whose body is an agent   writ
 ch13 workflow       the same job with nothing deciding -- is the loop worth it?   written
 ch14 stream         "stream": true -- a reply arrives in pieces   written
 ch15 stream_tools   tool arguments arrive as fragments of a JSON string   written
-ch16 observability  instrumentation that observes and never participates  skipped
-ch17 stream_producer  the harness becomes the server -- pushing its own progress, span by span, not the model's tokens  skipped
+ch16 observability  instrumentation that observes and never participates
+ch17 stream_producer  the harness becomes the server
 ch18 hooks          the named points in the loop, and the three powers   written
 ch19 guards         a hook that can say no, before dispatch   written
 ch20 loop_veto      stopped because forbidden, which is not stopped because done   written
@@ -98,18 +98,18 @@ ch24 mcp_injection  descriptions you did not write, in a context you did   writt
 ch25 rag_injection  a document you did not write, telling the model what to do   written
 ch26 skills         a tool whose result is instructions, not data   written
 ch27 compression    the list is too long; what do you drop, and what does it cost?   written
-ch28 caching        what triggers a hit, what triggers a miss, and what a hit actually is   written
+ch28 caching        what triggers a hit, what triggers a miss written
 ch29 memory         what survives when the list is thrown away   written
 ch30 roles          same content, three roles -- who's saying it, and does it matter?   written
-ch31 stop_resume    a jsonl snapshot after every turn, and picking a stopped run back up   written
+ch31 stop_resume    a jsonl snapshot after every turn, and picking back up   written
 ch32 graph          the same behaviour as a StateGraph -- what did it buy?   written
 ch33 limits         recursion_limit at the boundary   written
 ch34 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory   written
-ch35 interrupt      interrupt and Command(resume=...) as an approval gate skipped
+ch35 interrupt      interrupt and Command(resume=...) as an approval gate
 ch36 subgraph       the supervisor as a graph node -- what did it buy?   written
-ch37 parallel       fan-out, Send, join, and the order things merge in  skipped
+ch37 parallel       fan-out, Send, join, and the order things merge in
 ch38 reducers       two updates to one field: append, or replace   written
-ch39 callbacks      the audit trail and the hook are the same mechanism in LangChain
+ch39 callbacks      the audit trail and the hook are the same mechanism in LangChain   written
 ch40 capstone       everything since graph, composed into one real scenario
 ```
 

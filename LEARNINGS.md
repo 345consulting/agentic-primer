@@ -1463,3 +1463,22 @@ the merge logic that resolves their simultaneous writes lives entirely in
 (`operator.add`, or anything else) in the wrong place -- inside a node
 instead of the schema -- and it only governs that one node's return, not
 what happens when two different nodes write the same field.
+
+---
+
+## 2026-09-06 — LangChain's callbacks cover the common cases, not every need
+
+*Sanjeev's, from `callbacks`: "LG callbacks are a good set of pre/post
+hooks, but may require custom ones also depending on my needs."*
+
+The built-in surface (`on_chain_start/end`, `on_tool_start/end`,
+`on_chat_model_start`, `on_llm_end`, `on_tool_error`, etc.) covers every
+standard lifecycle boundary, and any `BaseCallbackHandler` subclass plugs
+into all of them via one `config={"callbacks": [...]}` list -- no
+framework code to modify. But it's a fixed menu: it can only observe an
+event that already exists, and it only has two of `ch18`'s three hook
+powers (observe, abort via `raise_error`) -- never modify. Any need past
+"watch these fixed points and possibly bail out" -- reshaping data in
+flight, adding a new kind of checkpoint, anything
+`HookVerdict.replacement`-shaped -- has to be built as custom logic in the
+graph itself, not as a callback.

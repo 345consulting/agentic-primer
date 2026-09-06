@@ -90,6 +90,12 @@ section-order     = ["future", "first-party", "local-folder", "standard-library"
 [tool.ruff.lint.per-file-ignores]
 "src/support/models.py" = ["ARG002"]
 
+# CallbackManagerMixin fixes on_chat_model_start's exact signature; matching
+# it is the point of ch39's Meddler scenario -- a callback handler's real
+# interface is what any application would have to implement, and most of
+# its parameters go unused here on purpose.
+"src/chapters/ch39_callbacks.py" = ["ARG002"]
+
 # mypy's overload resolution for StateGraph.add_node fails whenever a node
 # function's parameter is named with a leading underscore -- a real mypy
 # quirk with this specific generic API, confirmed against basedpyright
