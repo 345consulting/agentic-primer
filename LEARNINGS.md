@@ -1549,3 +1549,28 @@ sends one complete event instead of forwarding every token. Consuming a
 stream and producing one are not the same mechanism wearing two names --
 one is bound by what arrives, the other is a decision about what a
 client actually needs to see.
+
+---
+
+## 2026-09-06 — model routing has a real spectrum of mechanisms, and each step up it costs more by construction
+
+*Sanjeev's, from `model_tiers`: "Model routing has real, measurable
+impact, and lots of possibilities to improve and save on tokens. These
+can include a remote model call, local ML models, or even a small
+trained local LLM."*
+
+`model_tiers` built two ends of that spectrum and named the ones it
+didn't build. A deterministic heuristic (length, or a regex for
+structure) costs nothing beyond string work and was proven to guess
+wrong in a specific, findable way -- fooled by a short question that
+needed real reasoning. A scripted stand-in for a small, locally-run
+trained router (what RouteLLM's matrix-factorization and BERT routers
+actually are) sits one step up: a real local inference cost, in
+exchange for a decision nothing in its own source can explain. Neither
+of those reaches for the model being routed *to* just to decide whether
+to route to it -- a remote LLM call spent purely on judging complexity
+is a third, more expensive tier this chapter only described, never
+built, because every scenario that needed a real answer used the
+routed-to call itself as its own signal (`finish_reason`) rather than
+paying for a second one. The spectrum is real and the chapter is honest
+about which parts of it it actually proved.

@@ -111,7 +111,28 @@ ch37 parallel       fan-out, Send, join, and the order things merge in   written
 ch38 reducers       two updates to one field: append, or replace   written
 ch39 callbacks      the audit trail and the hook are the same mechanism in LangChain   written
 ch40 capstone       everything since graph, composed into one real scenario   written
+ch41 result_cache   a cache of answers, not of attention -- what's needed to hit it
+ch42 model_tiers    the same task, two models -- getting a complexity signal right   written
 ```
+
+**`result_cache` and `model_tiers` extend the ladder past `capstone`, not
+inside it.** `capstone` closed the LangGraph arc on purpose -- these two are
+a different arc, prompted by an outside article's own claims about
+production token efficiency, checked against what this primer had actually
+built before adding anything. `result_cache` is not `ch28_caching` under
+another name: `ch28` is the model provider's own prefix cache, byte-exact,
+saving compute *inside* a call that still happens; `result_cache` is an
+application-level cache that skips the call *entirely*, and the article's
+own code called a plain SHA-256 hash a "semantic cache" without ever
+computing a similarity -- the gap between that claim and what a real
+embedding-similarity lookup requires (a threshold, a false-hit risk, a
+staleness question) is the chapter. A third candidate, `route_before_generate`,
+was proposed and dropped before being written: `ch10_routing`'s own first
+scenario, `the_question_needs_no_model`, already is exactly that -- a branch
+that runs before the model is ever called, with the LangGraph equivalent
+already named in its own docstring (`set_conditional_entry_point`). Checking
+that before building it, not after, is the same discipline every chapter
+here already asks of a live run: verify, don't assume.
 
 `stream_producer` sits here because this is the conversation that produced it
 -- `stream` and `stream_tools` fresh, `observability` just finished naming
