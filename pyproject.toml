@@ -114,3 +114,8 @@ section-order     = ["future", "first-party", "local-folder", "standard-library"
 # leading-underscore parameter, so the honest exception is ARG001, not a
 # renamed, still-unused parameter.
 "src/chapters/ch37_parallel.py" = ["ARG001"]
+
+# Same mypy quirk as ch37/ch38 -- the capstone's own "dispatch" node is
+# the identical pure pass-through, kept only so add_conditional_edges has
+# a node to attach Send's fan-out function to.
+"src/chapters/ch40_capstone.py" = ["ARG001"]

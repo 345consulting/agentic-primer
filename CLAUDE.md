@@ -110,7 +110,7 @@ ch36 subgraph       the supervisor as a graph node -- what did it buy?   written
 ch37 parallel       fan-out, Send, join, and the order things merge in   written
 ch38 reducers       two updates to one field: append, or replace   written
 ch39 callbacks      the audit trail and the hook are the same mechanism in LangChain   written
-ch40 capstone       everything since graph, composed into one real scenario
+ch40 capstone       everything since graph, composed into one real scenario   written
 ```
 
 `stream_producer` sits here because this is the conversation that produced it
