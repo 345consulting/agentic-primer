@@ -14,7 +14,7 @@ from collections.abc import Generator, Iterator, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from threading import current_thread
+from threading import Lock, current_thread, local
 from typing import Any, Literal, get_args
 
 from langchain_core.messages import AIMessage, BaseMessage, ToolMessage
@@ -217,36 +217,68 @@ class Trace:
     source: str = ""
     spans: list[Span] = field(default_factory=list)
     summary: Json = field(default_factory=dict)
-    _open: list[Span] = field(default_factory=list, repr=False)
+    # Nesting is a per-thread concept: "what is currently open" means "open on
+    # this call stack". A single shared list here nested a genuinely
+    # concurrent branch's span inside whichever other thread's span happened
+    # to still be open when it started -- found by running ch37_parallel's
+    # threaded scenarios and inspecting the tree, not by inspection of this
+    # file. `_seq` still needs a lock: `+=1` is a read-modify-write, and two
+    # threads racing it can hand out the same number.
+    _open: local = field(default_factory=local, repr=False)
     _seq: int = field(default=0, repr=False)
+    _seq_lock: Lock = field(default_factory=Lock, repr=False)
 
     def __post_init__(self) -> None:
         if not self.source:
             self.source = source_hash(self.chapter)
 
+    def _stack(self) -> list[Span]:
+        stack: list[Span] | None = getattr(self._open, "stack", None)
+        if stack is None:
+            stack = []
+            self._open.stack = stack
+        return stack
+
     @contextmanager
     def span(self, name: str, /, **attributes: Any) -> Generator[Span]:
         # `name` is positional-only so that an attr may also be called `name`.
         # A span recording a tool call wants exactly that, and a recorder that
-        # cannot record a field because of its own signature is a bad recorder.
-        self._seq += 1
+        # cannot record a field because of its own signature is a bad recorder
+        # -- the same reason `parent` is pulled out of `attributes` here
+        # rather than given its own keyword parameter: a named parameter
+        # ahead of `**attributes` has mypy check every caller's unpacked dict
+        # against its type, and a scenario's own attributes are `str | int |
+        # None`, not `Span | None`.
+        #
+        # `parent` is for the one case the thread-local stack cannot express:
+        # a genuinely concurrent branch (`ch37_parallel`'s Send-dispatched
+        # nodes) runs on a worker thread that never had anything open on its
+        # own stack, so left implicit it would nest under nothing -- correct,
+        # but useless for reading a fan-out as one tree. Passing the span it
+        # logically belongs to says so explicitly, the same call the chapter
+        # code already has to make to know which branch it is.
+        parent: Span | None = attributes.pop("parent", None)
+        with self._seq_lock:
+            self._seq += 1
+            seq = self._seq
         span = Span(
             name=name,
             attributes=attributes,
             entered_at=datetime.now(UTC),
-            seq=self._seq,
+            seq=seq,
             thread=current_thread().name,
         )
-        parent = self._open[-1] if self._open else None
-        (parent.children if parent else self.spans).append(span)
-        if parent is not None:
-            parent._entries.append(span)
-        self._open.append(span)
+        stack = self._stack()
+        effective_parent = parent if parent is not None else (stack[-1] if stack else None)
+        (effective_parent.children if effective_parent else self.spans).append(span)
+        if effective_parent is not None:
+            effective_parent._entries.append(span)
+        stack.append(span)
         try:
             yield span
         finally:
             span.exited_at = datetime.now(UTC)
-            self._open.pop()
+            stack.pop()
 
     def close(self, *, turns: int, messages: int, ended: str, **extra: Any) -> None:
         """Finish the run. Raises if a span was entered and never exited.
@@ -257,8 +289,8 @@ class Trace:
         instead of rendering a wrong summary at the top of the page. `extra`
         is for what a particular chapter also has to say.
         """
-        if self._open:
-            still_open = ", ".join(s.name for s in self._open)
+        if stack := self._stack():
+            still_open = ", ".join(s.name for s in stack)
             raise RuntimeError(
                 f"chapter ['{self.chapter}'] closed with spans still open: ['{still_open}']"
             )

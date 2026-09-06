@@ -107,3 +107,10 @@ section-order     = ["future", "first-party", "local-folder", "standard-library"
 # node functions here are unused by design -- several scenarios are the
 # reducer alone, no state read -- so ARG001 is the one honest exception.
 "src/chapters/ch38_reducers.py" = ["ARG001"]
+
+# Same mypy quirk as ch38 -- every "dispatch" node here is a pure
+# pass-through that exists only to give add_conditional_edges a node to
+# attach Send's fan-out function to; StateGraph.add_node breaks on a
+# leading-underscore parameter, so the honest exception is ARG001, not a
+# renamed, still-unused parameter.
+"src/chapters/ch37_parallel.py" = ["ARG001"]

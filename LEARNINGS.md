@@ -1501,3 +1501,29 @@ from its source. Completed nodes are simply absent from the pending
 list, so they never re-run; only whatever node was in-flight does, from
 its own top -- anything in that node before the `interrupt()` call
 executes twice on resume.
+
+---
+
+## 2026-09-06 — parallel needs a consolidation step or it doesn't, but the graph has to be built for whichever answer
+
+*Sanjeev's, from `parallel`: "parallel may or may not need a
+consolidation or reducer depending on what the goal is; however,
+parallel requires careful graph design."*
+
+`Send`'s three scenarios without a model in the way (dynamic branch
+count, real concurrency, dispatch-order-preserving merge) never needed a
+judgment about the results -- a reducer just joins them. The two that
+came after layered something that does need one: a single `summarize`
+node folding a joined batch into one answer, and a judge inspecting the
+whole batch before deciding whether the round even happened. Neither is
+free. A reducer only resolves *simultaneous writes to one field*
+(`ch38`'s subject) -- it says nothing about whether the branches were
+independent to begin with, whether their number was known at graph-build
+time, or what happens to a branch's own state once it's discarded after
+merging. Those are decided in how the graph is wired -- what `Send`
+targets, what the reducer's annotated type is, whether a judgment node
+sits between the merge and `END` -- not decided by the presence of
+`Send` itself. `Send` gives you concurrency; whether that concurrency
+resolves to one thing, several things, or a retry of the whole round is
+still a design decision made once, at graph-build time, same as every
+other edge.

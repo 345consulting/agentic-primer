@@ -107,7 +107,7 @@ ch33 limits         recursion_limit at the boundary   written
 ch34 checkpoint     MemorySaver, thread_id, resume -- and why that is not memory   written
 ch35 interrupt      interrupt and Command(resume=...) as an approval gate   written
 ch36 subgraph       the supervisor as a graph node -- what did it buy?   written
-ch37 parallel       fan-out, Send, join, and the order things merge in
+ch37 parallel       fan-out, Send, join, and the order things merge in   written
 ch38 reducers       two updates to one field: append, or replace   written
 ch39 callbacks      the audit trail and the hook are the same mechanism in LangChain   written
 ch40 capstone       everything since graph, composed into one real scenario
@@ -389,7 +389,10 @@ accepts either name, and the same call with a used, non-underscore
 parameter passes both. `src/chapters/ch38_reducers.py` carries `ARG001` in
 `per-file-ignores` for exactly this: several of that chapter's scenarios
 are about the reducer alone, with nothing in the node function needing to
-read `state` at all.
+read `state` at all. `ch37_parallel`'s five `dispatch` node functions hit
+the exact same quirk — each exists only to give `add_conditional_edges` a
+node to attach `Send`'s fan-out function to, so `state` is read by none of
+them — and carry the same `ARG001` exception.
 
 ## Learnings
 

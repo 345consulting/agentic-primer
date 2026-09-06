@@ -36,7 +36,7 @@ details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left:
 summary { cursor: pointer; padding: .15rem 0; }
 summary::marker { color: var(--dim); }
 .name { font-weight: 600; }
-.meta, .ms { color: var(--dim); font-weight: 400; }
+.meta, .ms, .thread { color: var(--dim); font-weight: 400; }
 .note { margin: .35rem 0 .5rem 1rem; }
 .label { color: var(--dim); }
 table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
@@ -612,11 +612,18 @@ def _digest(span: Json) -> str:
 
 
 def _render_span(span: Json) -> str:
-    # Sequence and thread are recorded on every span and shown on none of
-    # them: until a chapter runs tools concurrently there is one thread and
-    # seq is document order, so the columns are noise. They are in the JSON,
-    # and the chapter that needs them can ask the page to show them.
-    where = ""
+    # Sequence and thread are recorded on every span and shown on most of
+    # them as noise: until a chapter runs branches concurrently there is one
+    # thread, and pointing it out on every span teaches nothing. ch37_parallel
+    # is the chapter that needs it -- its whole claim is that branches run on
+    # separate OS threads, not one at a time -- so a span outside the main
+    # thread names it; everything on MainThread stays silent as before.
+    thread = span.get("thread") or ""
+    where = (
+        f'<span class="thread">thread={html.escape(thread)}</span>'
+        if thread not in ("", "MainThread")
+        else ""
+    )
     # Every part of a span's row is a separate fact -- what it is, what it was
     # given, where it ran, how long it took, what it did -- and space-separated
     # they read as one phrase. The dot gives the eye somewhere to stop.
