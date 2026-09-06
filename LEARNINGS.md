@@ -1527,3 +1527,25 @@ sits between the merge and `END` -- not decided by the presence of
 resolves to one thing, several things, or a retry of the whole round is
 still a design decision made once, at graph-build time, same as every
 other edge.
+
+---
+
+## 2026-09-06 — SSE consumer and SSE producer are different roles, and the granularity is a choice either way
+
+*Sanjeev's, from `stream_producer`: "sse requires a server setup to act
+as a server sending events to the end user, and the levels of sse to be
+sent can be controlled (doesn't have to be pieces like the SSE consumer
+chapter)."*
+
+`ch14`/`ch15` consumed a stream someone else produced -- the model
+provider decides the chunk boundaries, and the harness just reads
+whatever arrives. Being the producer is a different job: it needs an
+actual server (an ASGI app, in this ladder's case) to have anything to
+send *to*, and -- unlike the consumer side -- the producer chooses its
+own granularity. Nothing requires the outgoing stream to mirror the
+incoming one piece for piece; `stream_producer` gates its own
+`model_replied` frame on the provider's stream finishing entirely, and
+sends one complete event instead of forwarding every token. Consuming a
+stream and producing one are not the same mechanism wearing two names --
+one is bound by what arrives, the other is a decision about what a
+client actually needs to see.
