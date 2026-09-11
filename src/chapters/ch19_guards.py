@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """A hook that can say no, before dispatch -- with something real to refuse.
 

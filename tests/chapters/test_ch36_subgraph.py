@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """The supervisor as a graph node -- what did it buy? Same-schema sharing,
 narrower-schema mapping, the context bill, and ch33's recursion-limit

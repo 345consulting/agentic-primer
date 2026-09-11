@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Chapter 32 builds LangGraph's core objects up one clause at a time --
 ch01, ch02, ch03 as a graph -- then asks what any of it actually bought.

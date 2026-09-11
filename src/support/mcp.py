@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """A stand-in for what an MCP server hands a client -- three catalogs, each
 discovered by a call instead of written as a literal, and the three matching

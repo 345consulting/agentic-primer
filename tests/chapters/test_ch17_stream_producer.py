@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """the harness becomes the server. `sse_frame_sent` notes are recorded
 on the span each frame actually belongs to (scenario for run-level

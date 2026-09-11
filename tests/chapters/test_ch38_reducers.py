@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Two updates to one field: append, or replace. No model calls anywhere
 in this chapter -- these are pure state-merge mechanics, identical under

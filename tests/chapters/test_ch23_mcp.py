@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Chapter 23 asserts what changes when a dispatch table, a document, or a
 conversation seed arrives from a call instead of a literal -- five

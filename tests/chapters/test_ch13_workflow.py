@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Chapter 13 asserts a sequence with nothing deciding it at run time --
 and one step, of five, whose own body still has something deciding.

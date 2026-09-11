@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Chapter 18 asserts the three powers, at both ends of one call, and that
 hooks attached to the same point see each other's work.

@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Chapter 25 asserts a document can out-rank the legitimate answer on the
 query's own terms while also carrying an attack, and that a guard between

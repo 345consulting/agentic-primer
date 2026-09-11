@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Chapter 31 asserts a genuinely separate process can resume a stopped
 run from nothing but a jsonl snapshot on disk, and that the two ways a

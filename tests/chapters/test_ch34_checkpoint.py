@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """InMemorySaver is ch31's snapshot-and-resume, reimplemented -- with no
 explicit save call, and a finer checkpoint grain than a turn.

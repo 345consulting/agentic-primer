@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Chapter 26 asserts a skill's result is read as an instruction, not
 data -- and that the boundary is grammatical mood in theory, weaker than

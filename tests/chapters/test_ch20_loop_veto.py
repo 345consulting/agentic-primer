@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Chapter 20 asserts a third ending -- "vetoed", distinct from both ways
 the loop already knew how to stop -- and that reaching it is a choice the

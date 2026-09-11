@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Instrumentation that observes and never participates -- checked
 against a real opentelemetry-sdk TracerProvider and SpanExporter, not

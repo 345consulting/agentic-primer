@@ -1,9 +1,9 @@
 # Agentic Primer
 
-A 345c-owned learning project. The mechanics of an agentic harness, built from
-the ground up, one chapter at a time — no framework abstractions hiding the
-loop, and a trace of every entry and exit so the decision points are readable
-rather than inferred.
+A 345 Consulting, LLC-owned learning project. The mechanics of an agentic
+harness, built from the ground up, one chapter at a time — no framework
+abstractions hiding the loop, and a trace of every entry and exit so the
+decision points are readable rather than inferred.
 
 A learning artifact, not a product and not a client project. It exists to be read.
 

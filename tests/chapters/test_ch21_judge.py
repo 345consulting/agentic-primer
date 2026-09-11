@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """Chapter 21 asserts a verdict with nowhere to put a rewrite, and a
 rejection that retries the model the way ch09 retried a tool.

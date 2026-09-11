@@ -1,5 +1,5 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
-# Proprietary and Confidential. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root.
 
 """recursion_limit is ch03's turn cap, reimplemented by LangGraph -- and it
 fails differently when it binds: the hand-built cap ends the run and
