@@ -1,8 +1,7 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
 # Licensed under the MIT License. See LICENSE in the project root.
 
-"""a cache of answers, not of attention -- exact match, then what a
-paraphrase needs to hit it.
+"""a cache of answers, not of attention -- what's needed to hit it.
 
 `ch28_caching` is the model provider's own prefix cache: byte-exact,
 saving compute *inside* a call that still happens. This chapter is a

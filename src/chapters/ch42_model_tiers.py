@@ -1,8 +1,7 @@
 # Copyright (c) 2022-2026 345 Consulting, LLC
 # Licensed under the MIT License. See LICENSE in the project root.
 
-"""the same task, two models -- what a complexity signal actually has to
-get right.
+"""the same task, two models -- getting a complexity signal right.
 
 This project has exactly one live model, chosen for price since `ch01`.
 There is no second, larger provider configured, and there will not be
