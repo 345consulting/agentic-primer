@@ -1,0 +1,360 @@
+{
+  "chapter": "ch15_stream_tools",
+  "model_kind": "mock",
+  "source": "d197da1b0e05",
+  "summary": {
+    "turns": 2,
+    "messages": 2,
+    "ended": "judged 5 times, 3 of them early, dispatched nothing; dispatched once: 1.20 for milk"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "judged_on_every_chunk"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 2.606,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "judged 5 times, 3 of them early, dispatched nothing"
+        }
+      ],
+      "children": [
+        {
+          "name": "model",
+          "attributes": {
+            "model_kind": "mock"
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 2.4520000000000004,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "context",
+              "messages": [
+                {
+                  "id": null,
+                  "role": "system",
+                  "content": "You answer briefly and plainly. Use the tools you are given."
+                },
+                {
+                  "id": null,
+                  "role": "human",
+                  "content": "How much is milk?"
+                }
+              ]
+            },
+            {
+              "label": "tools declared to the mock model",
+              "names": [
+                "price_of"
+              ],
+              "consulted": false
+            },
+            {
+              "label": "context ignored by the mock model",
+              "messages": 2,
+              "roles": [
+                "system",
+                "human"
+              ]
+            },
+            {
+              "label": "reply",
+              "message": {
+                "id": "lc_run--01a068c6-e79c-7120-bd0d-f376f6f06cdf",
+                "role": "ai",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "name": "price_of",
+                    "args": {
+                      "item": "milk"
+                    },
+                    "id": "c1"
+                  }
+                ]
+              }
+            }
+          ],
+          "children": [
+            {
+              "name": "stream",
+              "attributes": {},
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 2.2929999999999997,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"ite",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {}
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"",
+                  "parsed_as": [
+                    {
+                      "item": ""
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": ""
+                    }
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "knew_it_was_a_fragment": true
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "knew_it_was_a_fragment": true
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "judged_when_complete"
+      },
+      "seq": 4,
+      "thread": "MainThread",
+      "elapsed_ms": 0.754,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "dispatched once: 1.20 for milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "model",
+          "attributes": {
+            "model_kind": "mock"
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.47100000000000003,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "context",
+              "messages": [
+                {
+                  "id": null,
+                  "role": "system",
+                  "content": "You answer briefly and plainly. Use the tools you are given."
+                },
+                {
+                  "id": null,
+                  "role": "human",
+                  "content": "How much is milk?"
+                }
+              ]
+            },
+            {
+              "label": "tools declared to the mock model",
+              "names": [
+                "price_of"
+              ],
+              "consulted": false
+            },
+            {
+              "label": "context ignored by the mock model",
+              "messages": 2,
+              "roles": [
+                "system",
+                "human"
+              ]
+            },
+            {
+              "label": "reply",
+              "message": {
+                "id": "lc_run--01a068c6-e79d-7843-9664-4460468d0fe3",
+                "role": "ai",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "name": "price_of",
+                    "args": {
+                      "item": "milk"
+                    },
+                    "id": "c1"
+                  }
+                ]
+              }
+            }
+          ],
+          "children": [
+            {
+              "name": "stream",
+              "attributes": {},
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 0.412,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"ite",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"",
+                  "parsed_as": [
+                    {
+                      "item": ""
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "price_of",
+            "id": "c1"
+          },
+          "seq": 7,
+          "thread": "MainThread",
+          "elapsed_ms": 0.27399999999999997,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": "1.20 for milk"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ]
+}

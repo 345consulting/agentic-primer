@@ -1,0 +1,249 @@
+<!doctype html><meta charset=utf-8><title>ch35_interrupt</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line.
+   Unscoped, not `pre.wire .k` -- `_highlight` colours a plain note's inline
+   JSON too, not only a wire block's, and a token class means the same thing
+   everywhere it appears. */
+.k { color: #06c; }
+.s { color: #0a7; }
+.n { color: #b26; }
+.l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  .k { color: #7bf; } .s { color: #6d9; }
+  .n { color: #f9a; } .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch35_interrupt</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=0 · messages=0</span></div><div class="col col-live"><b>live</b> <span class="meta">turns=0 · messages=0</span></div></div><div class="turn"><div class="turnno">scenario interrupt_pauses_the_run_and_returns_immediately</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">interrupt_pauses_the_run_and_returns_immediately</span> <span class="dot">·</span> <span class="ms">3.1ms</span></summary><details><summary><span class="name">pause</span> <span class="ms">2.4ms</span></summary><div class="note"><span class="label">checkpoint_after_pause</span> {<span class="k">&quot;values&quot;</span>: {<span class="k">&quot;order_total&quot;</span>: <span class="n">500</span>, <span class="k">&quot;approved&quot;</span>: <span class="l">false</span>}, <span class="k">&quot;pending_node&quot;</span>: [<span class="s">&quot;place_order&quot;</span>], <span class="k">&quot;pending_interrupt_value&quot;</span>: {<span class="k">&quot;question&quot;</span>: <span class="s">&quot;approve this order?&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">500</span>}}</div></details><div class="note"><span class="label">the_call_returned_instead_of_raising</span> {<span class="k">&quot;raised&quot;</span>: <span class="l">false</span>, <span class="k">&quot;interrupt_present&quot;</span>: <span class="l">true</span>, <span class="k">&quot;interrupt_value&quot;</span>: {<span class="k">&quot;question&quot;</span>: <span class="s">&quot;approve this order?&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">500</span>}, <span class="k">&quot;approved_field_untouched&quot;</span>: <span class="l">false</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">interrupt_pauses_the_run_and_returns_immediately</span> <span class="dot">·</span> <span class="ms">2.4ms</span></summary><details><summary><span class="name">pause</span> <span class="ms">1.7ms</span></summary><div class="note"><span class="label">checkpoint_after_pause</span> {<span class="k">&quot;values&quot;</span>: {<span class="k">&quot;order_total&quot;</span>: <span class="n">500</span>, <span class="k">&quot;approved&quot;</span>: <span class="l">false</span>}, <span class="k">&quot;pending_node&quot;</span>: [<span class="s">&quot;place_order&quot;</span>], <span class="k">&quot;pending_interrupt_value&quot;</span>: {<span class="k">&quot;question&quot;</span>: <span class="s">&quot;approve this order?&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">500</span>}}</div></details><div class="note"><span class="label">the_call_returned_instead_of_raising</span> {<span class="k">&quot;raised&quot;</span>: <span class="l">false</span>, <span class="k">&quot;interrupt_present&quot;</span>: <span class="l">true</span>, <span class="k">&quot;interrupt_value&quot;</span>: {<span class="k">&quot;question&quot;</span>: <span class="s">&quot;approve this order?&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">500</span>}, <span class="k">&quot;approved_field_untouched&quot;</span>: <span class="l">false</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario command_resume_dispatches_straight_to_the_pending_node</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">command_resume_dispatches_straight_to_the_pending_node</span> <span class="dot">·</span> <span class="ms">2.3ms</span></summary><details><summary><span class="name">pause</span> <span class="ms">1.0ms</span></summary><div class="note"><span class="label">checkpoint_after_pause</span> {<span class="k">&quot;step_one_run_count&quot;</span>: <span class="n">1</span>, <span class="k">&quot;values&quot;</span>: {<span class="k">&quot;order_total&quot;</span>: <span class="n">500</span>, <span class="k">&quot;approved&quot;</span>: <span class="l">false</span>}, <span class="k">&quot;pending_node&quot;</span>: [<span class="s">&quot;place_order&quot;</span>], <span class="k">&quot;pending_interrupt_value&quot;</span>: {<span class="k">&quot;question&quot;</span>: <span class="s">&quot;approve?&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">500</span>}}</div></details><details><summary><span class="name">resume</span> <span class="ms">0.6ms</span></summary><div class="note"><span class="label">checkpoint_after_resume</span> {<span class="k">&quot;step_one_run_count&quot;</span>: <span class="n">1</span>, <span class="k">&quot;values&quot;</span>: {<span class="k">&quot;order_total&quot;</span>: <span class="n">500</span>, <span class="k">&quot;approved&quot;</span>: <span class="l">true</span>}, <span class="k">&quot;pending_node&quot;</span>: [], <span class="k">&quot;pending_interrupt_value&quot;</span>: <span class="l">null</span>}</div></details><div class="note"><span class="label">only_the_pending_node_reran</span> {<span class="k">&quot;step_one_run_count&quot;</span>: <span class="n">1</span>, <span class="k">&quot;final_approved&quot;</span>: <span class="l">true</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">command_resume_dispatches_straight_to_the_pending_node</span> <span class="dot">·</span> <span class="ms">2.3ms</span></summary><details><summary><span class="name">pause</span> <span class="ms">1.1ms</span></summary><div class="note"><span class="label">checkpoint_after_pause</span> {<span class="k">&quot;step_one_run_count&quot;</span>: <span class="n">1</span>, <span class="k">&quot;values&quot;</span>: {<span class="k">&quot;order_total&quot;</span>: <span class="n">500</span>, <span class="k">&quot;approved&quot;</span>: <span class="l">false</span>}, <span class="k">&quot;pending_node&quot;</span>: [<span class="s">&quot;place_order&quot;</span>], <span class="k">&quot;pending_interrupt_value&quot;</span>: {<span class="k">&quot;question&quot;</span>: <span class="s">&quot;approve?&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">500</span>}}</div></details><details><summary><span class="name">resume</span> <span class="ms">0.6ms</span></summary><div class="note"><span class="label">checkpoint_after_resume</span> {<span class="k">&quot;step_one_run_count&quot;</span>: <span class="n">1</span>, <span class="k">&quot;values&quot;</span>: {<span class="k">&quot;order_total&quot;</span>: <span class="n">500</span>, <span class="k">&quot;approved&quot;</span>: <span class="l">true</span>}, <span class="k">&quot;pending_node&quot;</span>: [], <span class="k">&quot;pending_interrupt_value&quot;</span>: <span class="l">null</span>}</div></details><div class="note"><span class="label">only_the_pending_node_reran</span> {<span class="k">&quot;step_one_run_count&quot;</span>: <span class="n">1</span>, <span class="k">&quot;final_approved&quot;</span>: <span class="l">true</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario code_before_the_interrupt_call_runs_twice_on_resume</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">code_before_the_interrupt_call_runs_twice_on_resume</span> <span class="dot">·</span> <span class="ms">1.5ms</span></summary><details><summary><span class="name">pause</span> <span class="ms">0.6ms</span></summary><div class="note"><span class="label">before_interrupt_runs_so_far</span> {<span class="k">&quot;count&quot;</span>: <span class="n">1</span>}</div></details><details><summary><span class="name">resume</span> <span class="ms">0.4ms</span></summary><div class="note"><span class="label">before_interrupt_runs_so_far</span> {<span class="k">&quot;count&quot;</span>: <span class="n">2</span>}</div></details><div class="note"><span class="label">the_pre_interrupt_line_ran_twice</span> {<span class="k">&quot;before_interrupt_runs&quot;</span>: <span class="n">2</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">code_before_the_interrupt_call_runs_twice_on_resume</span> <span class="dot">·</span> <span class="ms">1.6ms</span></summary><details><summary><span class="name">pause</span> <span class="ms">0.6ms</span></summary><div class="note"><span class="label">before_interrupt_runs_so_far</span> {<span class="k">&quot;count&quot;</span>: <span class="n">1</span>}</div></details><details><summary><span class="name">resume</span> <span class="ms">0.6ms</span></summary><div class="note"><span class="label">before_interrupt_runs_so_far</span> {<span class="k">&quot;count&quot;</span>: <span class="n">2</span>}</div></details><div class="note"><span class="label">the_pre_interrupt_line_ran_twice</span> {<span class="k">&quot;before_interrupt_runs&quot;</span>: <span class="n">2</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario an_approval_gate_actually_gates_the_action</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">an_approval_gate_actually_gates_the_action</span> <span class="dot">·</span> <span class="ms">7.5ms</span></summary><details><summary><span class="name">pause</span> <span class="meta">approved</span> <span class="dot">·</span> <span class="ms">2.7ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1.7ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">1.7ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">Order 500 widgets.</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>place_order</td><td>Place an order for a quantity of an item.</td><td>{&quot;description&quot;: &quot;Place an order for a quantity of an item.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}, &quot;quantity&quot;: {&quot;title&quot;: &quot;Quantity&quot;, &quot;type&quot;: &quot;integer&quot;}}, &quot;required&quot;: [&quot;item&quot;, &quot;quantity&quot;], &quot;title&quot;: &quot;place_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;place_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">1</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;widget&quot;, &quot;quantity&quot;: 500})</div></td></tr></table></div></details></details><div class="note"><span class="label">checkpoint_after_pause</span> {<span class="k">&quot;values&quot;</span>: {<span class="k">&quot;messages&quot;</span>: [{<span class="k">&quot;role&quot;</span>: <span class="s">&quot;human&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order 500 widgets.&quot;</span>}, {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;ai&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>}]}, <span class="k">&quot;pending_node&quot;</span>: [<span class="s">&quot;approval_gate&quot;</span>], <span class="k">&quot;pending_interrupt_value&quot;</span>: {<span class="k">&quot;tool&quot;</span>: <span class="s">&quot;place_order&quot;</span>, <span class="k">&quot;args&quot;</span>: {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;widget&quot;</span>, <span class="k">&quot;quantity&quot;</span>: <span class="n">500</span>}}}</div></details><details><summary><span class="name">resume</span> <span class="meta">approved</span> <span class="dot">·</span> <span class="ms">0.8ms</span></summary><details><summary><span class="name">tool</span> <span class="meta">place_order</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">given: item=widget, quantity=500 · returned: ordered 500 x widget</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;widget&quot;</span>, <span class="k">&quot;quantity&quot;</span>: <span class="n">500</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;ordered 500 x widget&quot;</span>}</div></details><div class="note"><span class="label">orders_placed_so_far</span> {<span class="k">&quot;orders&quot;</span>: [<span class="s">&quot;ordered 500 x widget&quot;</span>]}</div></details><details><summary><span class="name">pause</span> <span class="meta">denied</span> <span class="dot">·</span> <span class="ms">1.2ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">Order 500 widgets.</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>place_order</td><td>Place an order for a quantity of an item.</td><td>{&quot;description&quot;: &quot;Place an order for a quantity of an item.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}, &quot;quantity&quot;: {&quot;title&quot;: &quot;Quantity&quot;, &quot;type&quot;: &quot;integer&quot;}}, &quot;required&quot;: [&quot;item&quot;, &quot;quantity&quot;], &quot;title&quot;: &quot;place_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;place_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">1</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;widget&quot;, &quot;quantity&quot;: 500})</div></td></tr></table></div></details></details><div class="note"><span class="label">checkpoint_after_pause</span> {<span class="k">&quot;values&quot;</span>: {<span class="k">&quot;messages&quot;</span>: [{<span class="k">&quot;role&quot;</span>: <span class="s">&quot;human&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order 500 widgets.&quot;</span>}, {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;ai&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>}]}, <span class="k">&quot;pending_node&quot;</span>: [<span class="s">&quot;approval_gate&quot;</span>], <span class="k">&quot;pending_interrupt_value&quot;</span>: {<span class="k">&quot;tool&quot;</span>: <span class="s">&quot;place_order&quot;</span>, <span class="k">&quot;args&quot;</span>: {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;widget&quot;</span>, <span class="k">&quot;quantity&quot;</span>: <span class="n">500</span>}}}</div></details><details><summary><span class="name">resume</span> <span class="meta">denied</span> <span class="dot">·</span> <span class="ms">0.5ms</span></summary><div class="note"><span class="label">orders_placed_so_far</span> {<span class="k">&quot;orders&quot;</span>: [<span class="s">&quot;ordered 500 x widget&quot;</span>]}</div></details><div class="note"><span class="label">the_gate_actually_gated_the_order</span> {<span class="k">&quot;orders_placed&quot;</span>: [<span class="s">&quot;ordered 500 x widget&quot;</span>], <span class="k">&quot;approved_thread_final&quot;</span>: <span class="s">&quot;ordered 500 x widget&quot;</span>, <span class="k">&quot;denied_thread_final&quot;</span>: <span class="s">&quot;denied by approver&quot;</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">an_approval_gate_actually_gates_the_action</span> <span class="dot">·</span> <span class="ms">2823.0ms</span></summary><details><summary><span class="name">pause</span> <span class="meta">approved</span> <span class="dot">·</span> <span class="ms">1670.3ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1666.4ms</span> <span class="dot">·</span> <span class="digest">371 in / 72 out · asked for: place_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1666.3ms (model provider 1392.1 · library 274.2)</span> <span class="dot">·</span> <span class="digest">371 in / 72 out · asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">Order 500 widgets.</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>place_order</td><td>Place an order for a quantity of an item.</td><td>{&quot;description&quot;: &quot;Place an order for a quantity of an item.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}, &quot;quantity&quot;: {&quot;title&quot;: &quot;Quantity&quot;, &quot;type&quot;: &quot;integer&quot;}}, &quot;required&quot;: [&quot;item&quot;, &quot;quantity&quot;], &quot;title&quot;: &quot;place_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">358</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order 500 widgets.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;place_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Place an order for a quantity of an item.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            },
+            <span class="k">&quot;quantity&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;integer&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>,
+            <span class="s">&quot;quantity&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Sun, 06 Sep 2026 17:07:28 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 b4700b9a7dfcbdb388dd2a5d94e86ffc.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">dUYeL1VZqRSq7h9CqI7G7TP8cKlDqUfPq9418oIjcCRD8yVGGjSWlA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P1</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">f4d7656e92a41595439ec5b29046673d</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;54598bb0-b034-4eba-bac7-2172e1d5d96d&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788714448</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user wants to order 500 widgets. Simple order.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_F0yT5CE0dlW7vK7ISzXE2063&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;place_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;widget\&quot;, \&quot;quantity\&quot;: 500}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">371</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">72</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">443</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">12</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">115</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;widget&quot;, &quot;quantity&quot;: 500})</div></td></tr></table></div></details></details><div class="note"><span class="label">checkpoint_after_pause</span> {<span class="k">&quot;values&quot;</span>: {<span class="k">&quot;messages&quot;</span>: [{<span class="k">&quot;role&quot;</span>: <span class="s">&quot;human&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order 500 widgets.&quot;</span>}, {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;ai&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>}]}, <span class="k">&quot;pending_node&quot;</span>: [<span class="s">&quot;approval_gate&quot;</span>], <span class="k">&quot;pending_interrupt_value&quot;</span>: {<span class="k">&quot;tool&quot;</span>: <span class="s">&quot;place_order&quot;</span>, <span class="k">&quot;args&quot;</span>: {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;widget&quot;</span>, <span class="k">&quot;quantity&quot;</span>: <span class="n">500</span>}}}</div></details><details><summary><span class="name">resume</span> <span class="meta">approved</span> <span class="dot">·</span> <span class="ms">2.5ms</span></summary><details><summary><span class="name">tool</span> <span class="meta">place_order</span> <span class="dot">·</span> <span class="ms">0.8ms</span> <span class="dot">·</span> <span class="digest">given: item=widget, quantity=500 · returned: ordered 500 x widget</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;widget&quot;</span>, <span class="k">&quot;quantity&quot;</span>: <span class="n">500</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;ordered 500 x widget&quot;</span>}</div></details><div class="note"><span class="label">orders_placed_so_far</span> {<span class="k">&quot;orders&quot;</span>: [<span class="s">&quot;ordered 500 x widget&quot;</span>]}</div></details><details><summary><span class="name">pause</span> <span class="meta">denied</span> <span class="dot">·</span> <span class="ms">1144.4ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1140.1ms</span> <span class="dot">·</span> <span class="digest">371 in / 75 out · asked for: place_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1140.1ms (model provider 1127.9 · library 12.2)</span> <span class="dot">·</span> <span class="digest">371 in / 75 out · asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">Order 500 widgets.</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>place_order</td><td>Place an order for a quantity of an item.</td><td>{&quot;description&quot;: &quot;Place an order for a quantity of an item.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}, &quot;quantity&quot;: {&quot;title&quot;: &quot;Quantity&quot;, &quot;type&quot;: &quot;integer&quot;}}, &quot;required&quot;: [&quot;item&quot;, &quot;quantity&quot;], &quot;title&quot;: &quot;place_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">358</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order 500 widgets.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;place_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Place an order for a quantity of an item.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            },
+            <span class="k">&quot;quantity&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;integer&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>,
+            <span class="s">&quot;quantity&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Sun, 06 Sep 2026 17:07:29 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 1c80fe425edf82026702c486fb324fd0.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">IHpWTURdHqxF_oQBpwBryOy9gfkHaSrnX_VMi2nkvp-EpvL7Tx0WJA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">6ae8aae6c1745a7644f0fe2d2ef65239</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;26217839-2185-4a5d-abbe-a6006b3ac342&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788714449</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user wants to order 500 widgets. I&#x27;ll place the order.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_NjJaFIMgOK8pyj8hIBd50906&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;place_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;widget\&quot;, \&quot;quantity\&quot;: 500}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">371</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">75</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">446</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">15</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">115</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;widget&quot;, &quot;quantity&quot;: 500})</div></td></tr></table></div></details></details><div class="note"><span class="label">checkpoint_after_pause</span> {<span class="k">&quot;values&quot;</span>: {<span class="k">&quot;messages&quot;</span>: [{<span class="k">&quot;role&quot;</span>: <span class="s">&quot;human&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order 500 widgets.&quot;</span>}, {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;ai&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>}]}, <span class="k">&quot;pending_node&quot;</span>: [<span class="s">&quot;approval_gate&quot;</span>], <span class="k">&quot;pending_interrupt_value&quot;</span>: {<span class="k">&quot;tool&quot;</span>: <span class="s">&quot;place_order&quot;</span>, <span class="k">&quot;args&quot;</span>: {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;widget&quot;</span>, <span class="k">&quot;quantity&quot;</span>: <span class="n">500</span>}}}</div></details><details><summary><span class="name">resume</span> <span class="meta">denied</span> <span class="dot">·</span> <span class="ms">1.5ms</span></summary><div class="note"><span class="label">orders_placed_so_far</span> {<span class="k">&quot;orders&quot;</span>: [<span class="s">&quot;ordered 500 x widget&quot;</span>]}</div></details><div class="note"><span class="label">the_gate_actually_gated_the_order</span> {<span class="k">&quot;orders_placed&quot;</span>: [<span class="s">&quot;ordered 500 x widget&quot;</span>], <span class="k">&quot;approved_thread_final&quot;</span>: <span class="s">&quot;ordered 500 x widget&quot;</span>, <span class="k">&quot;denied_thread_final&quot;</span>: <span class="s">&quot;denied by approver&quot;</span>}</div></details></div></div></div>

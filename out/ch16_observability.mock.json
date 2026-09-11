@@ -1,0 +1,2027 @@
+{
+  "chapter": "ch16_observability",
+  "model_kind": "mock",
+  "source": "2c4540aad89c",
+  "summary": {
+    "turns": 0,
+    "messages": 0,
+    "ended": "n/a"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_real_otel_span_carries_the_gen_ai_attributes"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 2.8739999999999997,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "otel_span_exported",
+          "path": "out/ch16_observability/a_real_otel_span_carries_the_gen_ai_attributes/spans.jsonl"
+        },
+        {
+          "label": "attributes_used_real_constants",
+          "attribute_keys": [
+            "gen_ai.system",
+            "gen_ai.request.model"
+          ],
+          "reply": "hello.",
+          "usage_present": false
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 1.909,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 1.881,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Say hello."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07790-8011-7a23-b1a3-4a98a40da5a1-0",
+                    "role": "ai",
+                    "content": "hello."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Say hello."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8011-7a23-b1a3-4a98a40da5a1-0",
+                      "role": "ai",
+                      "content": "hello."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 1.881,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Say hello."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8011-7a23-b1a3-4a98a40da5a1-0",
+                      "role": "ai",
+                      "content": "hello."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Say hello."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8011-7a23-b1a3-4a98a40da5a1-0",
+                        "role": "ai",
+                        "content": "hello."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 1.909,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 1.881,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Say hello."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8011-7a23-b1a3-4a98a40da5a1-0",
+                      "role": "ai",
+                      "content": "hello."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Say hello."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8011-7a23-b1a3-4a98a40da5a1-0",
+                        "role": "ai",
+                        "content": "hello."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1.881,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Say hello."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8011-7a23-b1a3-4a98a40da5a1-0",
+                        "role": "ai",
+                        "content": "hello."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Say hello."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07790-8011-7a23-b1a3-4a98a40da5a1-0",
+                          "role": "ai",
+                          "content": "hello."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "otel_span_exported",
+            "path": "out/ch16_observability/a_real_otel_span_carries_the_gen_ai_attributes/spans.jsonl"
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "attributes_used_real_constants",
+            "attribute_keys": [
+              "gen_ai.system",
+              "gen_ai.request.model"
+            ],
+            "reply": "hello.",
+            "usage_present": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "otel_nests_spans_via_contextvars_the_same_way_our_stack_does"
+      },
+      "seq": 4,
+      "thread": "MainThread",
+      "elapsed_ms": 1.659,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "otel_spans_exported",
+          "path": "out/ch16_observability/otel_nests_spans_via_contextvars_the_same_way_our_stack_does/spans.jsonl"
+        },
+        {
+          "label": "the_chain_matches_our_own_stacks_nesting",
+          "tool_parent_is_model": true,
+          "model_parent_is_scenario": true,
+          "scenario_has_no_parent": true,
+          "all_spans_share_one_trace_id": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 1.119,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 0.758,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "What's the status of A100?"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "check_order",
+                      "description": "Check the status of an order by id.",
+                      "schema": {
+                        "description": "Check the status of an order by id.",
+                        "properties": {
+                          "order_id": {
+                            "title": "Order Id",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "order_id"
+                        ],
+                        "title": "check_order",
+                        "type": "object"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "check_order"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07790-8012-76c3-9b7c-dceeafeec5c7-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "check_order",
+                        "args": {
+                          "order_id": "A100"
+                        },
+                        "id": "c1"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What's the status of A100?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8012-76c3-9b7c-dceeafeec5c7-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "check_order",
+                "id": "c1"
+              },
+              "seq": 7,
+              "thread": "MainThread",
+              "elapsed_ms": 0.193,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "order_id": "A100"
+                },
+                {
+                  "label": "result",
+                  "value": "order A100: shipped"
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "order_id": "A100"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "order A100: shipped"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.758,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What's the status of A100?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8012-76c3-9b7c-dceeafeec5c7-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What's the status of A100?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8012-76c3-9b7c-dceeafeec5c7-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "check_order",
+                  "id": "c1"
+                },
+                "seq": 7,
+                "thread": "MainThread",
+                "elapsed_ms": 0.193,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "order_id": "A100"
+                  },
+                  {
+                    "label": "result",
+                    "value": "order A100: shipped"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "order_id": "A100"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "order A100: shipped"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 1.119,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.758,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What's the status of A100?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8012-76c3-9b7c-dceeafeec5c7-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What's the status of A100?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8012-76c3-9b7c-dceeafeec5c7-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "check_order",
+                  "id": "c1"
+                },
+                "seq": 7,
+                "thread": "MainThread",
+                "elapsed_ms": 0.193,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "order_id": "A100"
+                  },
+                  {
+                    "label": "result",
+                    "value": "order A100: shipped"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "order_id": "A100"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "order A100: shipped"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 6,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.758,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What's the status of A100?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8012-76c3-9b7c-dceeafeec5c7-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "What's the status of A100?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "check_order",
+                            "description": "Check the status of an order by id.",
+                            "schema": {
+                              "description": "Check the status of an order by id.",
+                              "properties": {
+                                "order_id": {
+                                  "title": "Order Id",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "order_id"
+                              ],
+                              "title": "check_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "check_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07790-8012-76c3-9b7c-dceeafeec5c7-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "check_order",
+                              "args": {
+                                "order_id": "A100"
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "check_order",
+                    "id": "c1"
+                  },
+                  "seq": 7,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.193,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "order_id": "A100"
+                    },
+                    {
+                      "label": "result",
+                      "value": "order A100: shipped"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "order_id": "A100"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "order A100: shipped"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "otel_spans_exported",
+            "path": "out/ch16_observability/otel_nests_spans_via_contextvars_the_same_way_our_stack_does/spans.jsonl"
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "the_chain_matches_our_own_stacks_nesting",
+            "tool_parent_is_model": true,
+            "model_parent_is_scenario": true,
+            "scenario_has_no_parent": true,
+            "all_spans_share_one_trace_id": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_broken_span_exporter_cannot_break_the_call"
+      },
+      "seq": 8,
+      "thread": "MainThread",
+      "elapsed_ms": 0.7110000000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "the_call_completed_despite_the_broken_exporter",
+          "raised": false,
+          "reply": "fine, despite the exporter."
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 9,
+          "thread": "MainThread",
+          "elapsed_ms": 0.164,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 10,
+              "thread": "MainThread",
+              "elapsed_ms": 0.15100000000000002,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "go"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07790-8013-77d1-a1de-5a2868719971-0",
+                    "role": "ai",
+                    "content": "fine, despite the exporter."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "go"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8013-77d1-a1de-5a2868719971-0",
+                      "role": "ai",
+                      "content": "fine, despite the exporter."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 10,
+                "thread": "MainThread",
+                "elapsed_ms": 0.15100000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "go"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8013-77d1-a1de-5a2868719971-0",
+                      "role": "ai",
+                      "content": "fine, despite the exporter."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "go"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8013-77d1-a1de-5a2868719971-0",
+                        "role": "ai",
+                        "content": "fine, despite the exporter."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 9,
+            "thread": "MainThread",
+            "elapsed_ms": 0.164,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 10,
+                "thread": "MainThread",
+                "elapsed_ms": 0.15100000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "go"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8013-77d1-a1de-5a2868719971-0",
+                      "role": "ai",
+                      "content": "fine, despite the exporter."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "go"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8013-77d1-a1de-5a2868719971-0",
+                        "role": "ai",
+                        "content": "fine, despite the exporter."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 10,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.15100000000000002,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "go"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8013-77d1-a1de-5a2868719971-0",
+                        "role": "ai",
+                        "content": "fine, despite the exporter."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "go"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07790-8013-77d1-a1de-5a2868719971-0",
+                          "role": "ai",
+                          "content": "fine, despite the exporter."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "the_call_completed_despite_the_broken_exporter",
+            "raised": false,
+            "reply": "fine, despite the exporter."
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "usage_and_reasoning_tokens_map_to_the_spec"
+      },
+      "seq": 11,
+      "thread": "MainThread",
+      "elapsed_ms": 0.5599999999999999,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "otel_span_exported",
+          "path": "out/ch16_observability/usage_and_reasoning_tokens_map_to_the_spec/spans.jsonl"
+        },
+        {
+          "label": "usage_mapped_under_mock_only_when_present",
+          "usage_present": false,
+          "usage": null
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 12,
+          "thread": "MainThread",
+          "elapsed_ms": 0.166,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 13,
+              "thread": "MainThread",
+              "elapsed_ms": 0.152,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Explain briefly why the sky is blue."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07790-8014-7a93-ac80-31f2bf390758-0",
+                    "role": "ai",
+                    "content": "A short reply, to keep reasoning tokens visible."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Explain briefly why the sky is blue."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8014-7a93-ac80-31f2bf390758-0",
+                      "role": "ai",
+                      "content": "A short reply, to keep reasoning tokens visible."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 13,
+                "thread": "MainThread",
+                "elapsed_ms": 0.152,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Explain briefly why the sky is blue."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8014-7a93-ac80-31f2bf390758-0",
+                      "role": "ai",
+                      "content": "A short reply, to keep reasoning tokens visible."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Explain briefly why the sky is blue."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8014-7a93-ac80-31f2bf390758-0",
+                        "role": "ai",
+                        "content": "A short reply, to keep reasoning tokens visible."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 12,
+            "thread": "MainThread",
+            "elapsed_ms": 0.166,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 13,
+                "thread": "MainThread",
+                "elapsed_ms": 0.152,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Explain briefly why the sky is blue."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07790-8014-7a93-ac80-31f2bf390758-0",
+                      "role": "ai",
+                      "content": "A short reply, to keep reasoning tokens visible."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Explain briefly why the sky is blue."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8014-7a93-ac80-31f2bf390758-0",
+                        "role": "ai",
+                        "content": "A short reply, to keep reasoning tokens visible."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 13,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.152,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Explain briefly why the sky is blue."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07790-8014-7a93-ac80-31f2bf390758-0",
+                        "role": "ai",
+                        "content": "A short reply, to keep reasoning tokens visible."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Explain briefly why the sky is blue."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07790-8014-7a93-ac80-31f2bf390758-0",
+                          "role": "ai",
+                          "content": "A short reply, to keep reasoning tokens visible."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "otel_span_exported",
+            "path": "out/ch16_observability/usage_and_reasoning_tokens_map_to_the_spec/spans.jsonl"
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "usage_mapped_under_mock_only_when_present",
+            "usage_present": false,
+            "usage": null
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4714 @@
+{
+  "chapter": "ch34_checkpoint",
+  "model_kind": "mock",
+  "source": "3c257bbf7b48",
+  "summary": {
+    "turns": 0,
+    "messages": 0,
+    "ended": "n/a"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_checkpointer_resumes_a_thread_across_separate_invoke_calls"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 4.6610000000000005,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "second_call_saw_the_first",
+          "second_call_input_message_count": 1,
+          "full_history_length": 5,
+          "final_reply": "You already asked me something, in turn one."
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 0.376,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 0.37,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                      "role": "system",
+                      "content": "Answer briefly."
+                    },
+                    {
+                      "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                      "role": "human",
+                      "content": "Say something."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                    "role": "ai",
+                    "content": "This is turn one."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "role": "human",
+                        "content": "Say something."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                      "role": "ai",
+                      "content": "This is turn one."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 0.37,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "role": "human",
+                        "content": "Say something."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                      "role": "ai",
+                      "content": "This is turn one."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "role": "human",
+                          "content": "Say something."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "role": "ai",
+                        "content": "This is turn one."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "checkpoint",
+          "attributes": {
+            "label": "saved after turn 1",
+            "thread_id": "resume-demo"
+          },
+          "seq": 4,
+          "thread": "MainThread",
+          "elapsed_ms": 0.163,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "held_by_the_checkpointer",
+              "message_count": 3,
+              "roles": [
+                "system",
+                "human",
+                "ai"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "checkpoint",
+          "attributes": {
+            "label": "read back before turn 2 -- what it will load",
+            "thread_id": "resume-demo"
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.057,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "held_by_the_checkpointer",
+              "message_count": 3,
+              "roles": [
+                "system",
+                "human",
+                "ai"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 6,
+          "thread": "MainThread",
+          "elapsed_ms": 0.201,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 7,
+              "thread": "MainThread",
+              "elapsed_ms": 0.19699999999999998,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                      "role": "system",
+                      "content": "Answer briefly."
+                    },
+                    {
+                      "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                      "role": "human",
+                      "content": "Say something."
+                    },
+                    {
+                      "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                      "role": "ai",
+                      "content": "This is turn one."
+                    },
+                    {
+                      "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                      "role": "human",
+                      "content": "What did I just say?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                    "role": "ai",
+                    "content": "You already asked me something, in turn one."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "role": "human",
+                        "content": "Say something."
+                      },
+                      {
+                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "role": "ai",
+                        "content": "This is turn one."
+                      },
+                      {
+                        "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                        "role": "human",
+                        "content": "What did I just say?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                      "role": "ai",
+                      "content": "You already asked me something, in turn one."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 7,
+                "thread": "MainThread",
+                "elapsed_ms": 0.19699999999999998,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "role": "human",
+                        "content": "Say something."
+                      },
+                      {
+                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "role": "ai",
+                        "content": "This is turn one."
+                      },
+                      {
+                        "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                        "role": "human",
+                        "content": "What did I just say?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                      "role": "ai",
+                      "content": "You already asked me something, in turn one."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "role": "human",
+                          "content": "Say something."
+                        },
+                        {
+                          "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                          "role": "ai",
+                          "content": "This is turn one."
+                        },
+                        {
+                          "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                          "role": "human",
+                          "content": "What did I just say?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                        "role": "ai",
+                        "content": "You already asked me something, in turn one."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "checkpoint",
+          "attributes": {
+            "label": "saved after turn 2",
+            "thread_id": "resume-demo"
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.094,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "held_by_the_checkpointer",
+              "message_count": 5,
+              "roles": [
+                "system",
+                "human",
+                "ai",
+                "human",
+                "ai"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "held_by_the_checkpointer",
+                "message_count": 5,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai",
+                  "human",
+                  "ai"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 0.376,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 0.37,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "role": "human",
+                        "content": "Say something."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                      "role": "ai",
+                      "content": "This is turn one."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "role": "human",
+                          "content": "Say something."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "role": "ai",
+                        "content": "This is turn one."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.37,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "role": "human",
+                          "content": "Say something."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "role": "ai",
+                        "content": "This is turn one."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                            "role": "system",
+                            "content": "Answer briefly."
+                          },
+                          {
+                            "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                            "role": "human",
+                            "content": "Say something."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                          "role": "ai",
+                          "content": "This is turn one."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "checkpoint",
+            "attributes": {
+              "label": "saved after turn 1",
+              "thread_id": "resume-demo"
+            },
+            "seq": 4,
+            "thread": "MainThread",
+            "elapsed_ms": 0.163,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "held_by_the_checkpointer",
+                  "message_count": 3,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "checkpoint",
+            "attributes": {
+              "label": "read back before turn 2 -- what it will load",
+              "thread_id": "resume-demo"
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 0.057,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "held_by_the_checkpointer",
+                  "message_count": 3,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 6,
+            "thread": "MainThread",
+            "elapsed_ms": 0.201,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 7,
+                "thread": "MainThread",
+                "elapsed_ms": 0.19699999999999998,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "role": "human",
+                        "content": "Say something."
+                      },
+                      {
+                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "role": "ai",
+                        "content": "This is turn one."
+                      },
+                      {
+                        "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                        "role": "human",
+                        "content": "What did I just say?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                      "role": "ai",
+                      "content": "You already asked me something, in turn one."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "role": "human",
+                          "content": "Say something."
+                        },
+                        {
+                          "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                          "role": "ai",
+                          "content": "This is turn one."
+                        },
+                        {
+                          "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                          "role": "human",
+                          "content": "What did I just say?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                        "role": "ai",
+                        "content": "You already asked me something, in turn one."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 7,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.19699999999999998,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "role": "human",
+                          "content": "Say something."
+                        },
+                        {
+                          "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                          "role": "ai",
+                          "content": "This is turn one."
+                        },
+                        {
+                          "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                          "role": "human",
+                          "content": "What did I just say?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                        "role": "ai",
+                        "content": "You already asked me something, in turn one."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                            "role": "system",
+                            "content": "Answer briefly."
+                          },
+                          {
+                            "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                            "role": "human",
+                            "content": "Say something."
+                          },
+                          {
+                            "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                            "role": "ai",
+                            "content": "This is turn one."
+                          },
+                          {
+                            "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                            "role": "human",
+                            "content": "What did I just say?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                          "role": "ai",
+                          "content": "You already asked me something, in turn one."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "checkpoint",
+            "attributes": {
+              "label": "saved after turn 2",
+              "thread_id": "resume-demo"
+            },
+            "seq": 8,
+            "thread": "MainThread",
+            "elapsed_ms": 0.094,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "held_by_the_checkpointer",
+                "message_count": 5,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai",
+                  "human",
+                  "ai"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "held_by_the_checkpointer",
+                  "message_count": 5,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "human",
+                    "ai"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "second_call_saw_the_first",
+            "second_call_input_message_count": 1,
+            "full_history_length": 5,
+            "final_reply": "You already asked me something, in turn one."
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "two_thread_ids_never_see_each_others_history"
+      },
+      "seq": 9,
+      "thread": "MainThread",
+      "elapsed_ms": 2.395,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "thread_b_starts_empty",
+          "thread_b_message_count_before_reply": 1,
+          "thread_b_never_saw_a100": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 10,
+          "thread": "MainThread",
+          "elapsed_ms": 0.166,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 11,
+              "thread": "MainThread",
+              "elapsed_ms": 0.157,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                      "role": "system",
+                      "content": "Answer briefly."
+                    },
+                    {
+                      "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                      "role": "human",
+                      "content": "My order is A100."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                    "role": "ai",
+                    "content": "noted."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                        "role": "human",
+                        "content": "My order is A100."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                      "role": "ai",
+                      "content": "noted."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 11,
+                "thread": "MainThread",
+                "elapsed_ms": 0.157,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                        "role": "human",
+                        "content": "My order is A100."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                      "role": "ai",
+                      "content": "noted."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                          "role": "human",
+                          "content": "My order is A100."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                        "role": "ai",
+                        "content": "noted."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "checkpoint",
+          "attributes": {
+            "label": "saved for thread-a",
+            "thread_id": "thread-a"
+          },
+          "seq": 12,
+          "thread": "MainThread",
+          "elapsed_ms": 0.054,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "held_by_the_checkpointer",
+              "message_count": 3,
+              "roles": [
+                "system",
+                "human",
+                "ai"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "checkpoint",
+          "attributes": {
+            "label": "thread-b before its own first call -- empty",
+            "thread_id": "thread-b"
+          },
+          "seq": 13,
+          "thread": "MainThread",
+          "elapsed_ms": 0.009000000000000001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "held_by_the_checkpointer",
+              "message_count": 0,
+              "roles": []
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "held_by_the_checkpointer",
+                "message_count": 0,
+                "roles": []
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 14,
+          "thread": "MainThread",
+          "elapsed_ms": 0.15100000000000002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 15,
+              "thread": "MainThread",
+              "elapsed_ms": 0.14200000000000002,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                      "role": "human",
+                      "content": "What's my order number?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                    "role": "ai",
+                    "content": "noted."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                        "role": "human",
+                        "content": "What's my order number?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                      "role": "ai",
+                      "content": "noted."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 15,
+                "thread": "MainThread",
+                "elapsed_ms": 0.14200000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                        "role": "human",
+                        "content": "What's my order number?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                      "role": "ai",
+                      "content": "noted."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                          "role": "human",
+                          "content": "What's my order number?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                        "role": "ai",
+                        "content": "noted."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 10,
+            "thread": "MainThread",
+            "elapsed_ms": 0.166,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 11,
+                "thread": "MainThread",
+                "elapsed_ms": 0.157,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                        "role": "human",
+                        "content": "My order is A100."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                      "role": "ai",
+                      "content": "noted."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                          "role": "human",
+                          "content": "My order is A100."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                        "role": "ai",
+                        "content": "noted."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 11,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.157,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                          "role": "human",
+                          "content": "My order is A100."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                        "role": "ai",
+                        "content": "noted."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                            "role": "system",
+                            "content": "Answer briefly."
+                          },
+                          {
+                            "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                            "role": "human",
+                            "content": "My order is A100."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                          "role": "ai",
+                          "content": "noted."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "checkpoint",
+            "attributes": {
+              "label": "saved for thread-a",
+              "thread_id": "thread-a"
+            },
+            "seq": 12,
+            "thread": "MainThread",
+            "elapsed_ms": 0.054,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "held_by_the_checkpointer",
+                  "message_count": 3,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "checkpoint",
+            "attributes": {
+              "label": "thread-b before its own first call -- empty",
+              "thread_id": "thread-b"
+            },
+            "seq": 13,
+            "thread": "MainThread",
+            "elapsed_ms": 0.009000000000000001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "held_by_the_checkpointer",
+                "message_count": 0,
+                "roles": []
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "held_by_the_checkpointer",
+                  "message_count": 0,
+                  "roles": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 14,
+            "thread": "MainThread",
+            "elapsed_ms": 0.15100000000000002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 15,
+                "thread": "MainThread",
+                "elapsed_ms": 0.14200000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                        "role": "human",
+                        "content": "What's my order number?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                      "role": "ai",
+                      "content": "noted."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                          "role": "human",
+                          "content": "What's my order number?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                        "role": "ai",
+                        "content": "noted."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 15,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.14200000000000002,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                          "role": "human",
+                          "content": "What's my order number?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                        "role": "ai",
+                        "content": "noted."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                            "role": "human",
+                            "content": "What's my order number?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                          "role": "ai",
+                          "content": "noted."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "thread_b_starts_empty",
+            "thread_b_message_count_before_reply": 1,
+            "thread_b_never_saw_a100": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "the_checkpoint_granularity_is_finer_than_our_snapshot"
+      },
+      "seq": 16,
+      "thread": "MainThread",
+      "elapsed_ms": 3.79,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "resumed_without_reasking_the_model",
+          "crashed": true,
+          "checkpoint_captured_the_model_reply_before_the_crash": true,
+          "call_model_invocations": 1,
+          "call_tool_invocations": 2,
+          "final_answer_present": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 17,
+          "thread": "MainThread",
+          "elapsed_ms": 0.6489999999999999,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 18,
+              "thread": "MainThread",
+              "elapsed_ms": 0.633,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                      "role": "system",
+                      "content": "Answer briefly."
+                    },
+                    {
+                      "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                      "role": "human",
+                      "content": "What's the status of order A100?"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "check_order",
+                      "description": "Check the status of an order by id.",
+                      "schema": {
+                        "description": "Check the status of an order by id.",
+                        "properties": {
+                          "order_id": {
+                            "title": "Order Id",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "order_id"
+                        ],
+                        "title": "check_order",
+                        "type": "object"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "check_order"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "check_order",
+                        "args": {
+                          "order_id": "A100"
+                        },
+                        "id": "c1"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                        "role": "human",
+                        "content": "What's the status of order A100?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 18,
+                "thread": "MainThread",
+                "elapsed_ms": 0.633,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                        "role": "human",
+                        "content": "What's the status of order A100?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                          "role": "human",
+                          "content": "What's the status of order A100?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 19,
+          "thread": "MainThread",
+          "elapsed_ms": 0.003,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [],
+          "body": []
+        },
+        {
+          "name": "checkpoint",
+          "attributes": {
+            "label": "saved mid-turn, right after the crash",
+            "thread_id": "crash-demo"
+          },
+          "seq": 20,
+          "thread": "MainThread",
+          "elapsed_ms": 0.094,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "held_by_the_checkpointer",
+              "message_count": 3,
+              "roles": [
+                "system",
+                "human",
+                "ai"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 21,
+          "thread": "MainThread",
+          "elapsed_ms": 0.186,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "check_order",
+                "id": "c1"
+              },
+              "seq": 22,
+              "thread": "MainThread",
+              "elapsed_ms": 0.174,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "order_id": "A100"
+                },
+                {
+                  "label": "result",
+                  "value": "order A100: shipped"
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "order_id": "A100"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "order A100: shipped"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "check_order",
+                  "id": "c1"
+                },
+                "seq": 22,
+                "thread": "MainThread",
+                "elapsed_ms": 0.174,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "order_id": "A100"
+                  },
+                  {
+                    "label": "result",
+                    "value": "order A100: shipped"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "order_id": "A100"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "order A100: shipped"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "checkpoint",
+          "attributes": {
+            "label": "saved after the resumed turn completed",
+            "thread_id": "crash-demo"
+          },
+          "seq": 23,
+          "thread": "MainThread",
+          "elapsed_ms": 0.064,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "held_by_the_checkpointer",
+              "message_count": 4,
+              "roles": [
+                "system",
+                "human",
+                "ai",
+                "tool"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "held_by_the_checkpointer",
+                "message_count": 4,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai",
+                  "tool"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 17,
+            "thread": "MainThread",
+            "elapsed_ms": 0.6489999999999999,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 18,
+                "thread": "MainThread",
+                "elapsed_ms": 0.633,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                        "role": "human",
+                        "content": "What's the status of order A100?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                          "role": "human",
+                          "content": "What's the status of order A100?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 18,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.633,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                          "role": "human",
+                          "content": "What's the status of order A100?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                            "role": "system",
+                            "content": "Answer briefly."
+                          },
+                          {
+                            "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                            "role": "human",
+                            "content": "What's the status of order A100?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "check_order",
+                            "description": "Check the status of an order by id.",
+                            "schema": {
+                              "description": "Check the status of an order by id.",
+                              "properties": {
+                                "order_id": {
+                                  "title": "Order Id",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "order_id"
+                              ],
+                              "title": "check_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "check_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "check_order",
+                              "args": {
+                                "order_id": "A100"
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 19,
+            "thread": "MainThread",
+            "elapsed_ms": 0.003,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [],
+            "body": []
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "checkpoint",
+            "attributes": {
+              "label": "saved mid-turn, right after the crash",
+              "thread_id": "crash-demo"
+            },
+            "seq": 20,
+            "thread": "MainThread",
+            "elapsed_ms": 0.094,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "held_by_the_checkpointer",
+                  "message_count": 3,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 21,
+            "thread": "MainThread",
+            "elapsed_ms": 0.186,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "check_order",
+                  "id": "c1"
+                },
+                "seq": 22,
+                "thread": "MainThread",
+                "elapsed_ms": 0.174,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "order_id": "A100"
+                  },
+                  {
+                    "label": "result",
+                    "value": "order A100: shipped"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "order_id": "A100"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "order A100: shipped"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "check_order",
+                    "id": "c1"
+                  },
+                  "seq": 22,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.174,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "order_id": "A100"
+                    },
+                    {
+                      "label": "result",
+                      "value": "order A100: shipped"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "order_id": "A100"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "order A100: shipped"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "checkpoint",
+            "attributes": {
+              "label": "saved after the resumed turn completed",
+              "thread_id": "crash-demo"
+            },
+            "seq": 23,
+            "thread": "MainThread",
+            "elapsed_ms": 0.064,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "held_by_the_checkpointer",
+                "message_count": 4,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai",
+                  "tool"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "held_by_the_checkpointer",
+                  "message_count": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "resumed_without_reasking_the_model",
+            "crashed": true,
+            "checkpoint_captured_the_model_reply_before_the_crash": true,
+            "call_model_invocations": 1,
+            "call_tool_invocations": 2,
+            "final_answer_present": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_checkpoint_is_not_memory"
+      },
+      "seq": 24,
+      "thread": "MainThread",
+      "elapsed_ms": 1.281,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "checkpoint_scope_vs_memory_scope",
+          "fresh_thread_has_any_checkpointed_state": false,
+          "cross_run_memory_still_finds_the_fact": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 25,
+          "thread": "MainThread",
+          "elapsed_ms": 0.15100000000000002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 26,
+              "thread": "MainThread",
+              "elapsed_ms": 0.14200000000000002,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                      "role": "system",
+                      "content": "Answer briefly."
+                    },
+                    {
+                      "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                      "role": "human",
+                      "content": "My favorite color is teal."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                    "role": "ai",
+                    "content": "I don't know that."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                        "role": "human",
+                        "content": "My favorite color is teal."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                      "role": "ai",
+                      "content": "I don't know that."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 26,
+                "thread": "MainThread",
+                "elapsed_ms": 0.14200000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                        "role": "human",
+                        "content": "My favorite color is teal."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                      "role": "ai",
+                      "content": "I don't know that."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                          "role": "human",
+                          "content": "My favorite color is teal."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                        "role": "ai",
+                        "content": "I don't know that."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "checkpoint",
+          "attributes": {
+            "label": "saved -- scoped to color-thread only",
+            "thread_id": "color-thread"
+          },
+          "seq": 27,
+          "thread": "MainThread",
+          "elapsed_ms": 0.053,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "held_by_the_checkpointer",
+              "message_count": 3,
+              "roles": [
+                "system",
+                "human",
+                "ai"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "checkpoint",
+          "attributes": {
+            "label": "a fresh thread -- nothing to load",
+            "thread_id": "unrelated-thread"
+          },
+          "seq": 28,
+          "thread": "MainThread",
+          "elapsed_ms": 0.007,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "held_by_the_checkpointer",
+              "message_count": 0,
+              "roles": []
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "held_by_the_checkpointer",
+                "message_count": 0,
+                "roles": []
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 25,
+            "thread": "MainThread",
+            "elapsed_ms": 0.15100000000000002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 26,
+                "thread": "MainThread",
+                "elapsed_ms": 0.14200000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                        "role": "human",
+                        "content": "My favorite color is teal."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                      "role": "ai",
+                      "content": "I don't know that."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                          "role": "human",
+                          "content": "My favorite color is teal."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                        "role": "ai",
+                        "content": "I don't know that."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 26,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.14200000000000002,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                          "role": "human",
+                          "content": "My favorite color is teal."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                        "role": "ai",
+                        "content": "I don't know that."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                            "role": "system",
+                            "content": "Answer briefly."
+                          },
+                          {
+                            "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                            "role": "human",
+                            "content": "My favorite color is teal."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                          "role": "ai",
+                          "content": "I don't know that."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "checkpoint",
+            "attributes": {
+              "label": "saved -- scoped to color-thread only",
+              "thread_id": "color-thread"
+            },
+            "seq": 27,
+            "thread": "MainThread",
+            "elapsed_ms": 0.053,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "held_by_the_checkpointer",
+                "message_count": 3,
+                "roles": [
+                  "system",
+                  "human",
+                  "ai"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "held_by_the_checkpointer",
+                  "message_count": 3,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "checkpoint",
+            "attributes": {
+              "label": "a fresh thread -- nothing to load",
+              "thread_id": "unrelated-thread"
+            },
+            "seq": 28,
+            "thread": "MainThread",
+            "elapsed_ms": 0.007,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "held_by_the_checkpointer",
+                "message_count": 0,
+                "roles": []
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "held_by_the_checkpointer",
+                  "message_count": 0,
+                  "roles": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "checkpoint_scope_vs_memory_scope",
+            "fresh_thread_has_any_checkpointed_state": false,
+            "cross_run_memory_still_finds_the_fact": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "we_can_bolt_our_own_disk_persistence_onto_it"
+      },
+      "seq": 29,
+      "thread": "MainThread",
+      "elapsed_ms": 3.3240000000000003,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "snapshot_written",
+          "path": "out/ch34_checkpoint/we_can_bolt_our_own_disk_persistence_onto_it/disk-demo.json"
+        },
+        {
+          "label": "resumed_after_a_simulated_process_restart",
+          "fresh_process_had_no_state_before_seeding": true,
+          "seeding_from_disk_restored_state": true,
+          "final_history_length": 5
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 30,
+          "thread": "MainThread",
+          "elapsed_ms": 0.192,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 31,
+              "thread": "MainThread",
+              "elapsed_ms": 0.179,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                      "role": "system",
+                      "content": "Answer briefly."
+                    },
+                    {
+                      "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                      "role": "human",
+                      "content": "Remember: A100."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                    "role": "ai",
+                    "content": "noted, on disk now."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                        "role": "human",
+                        "content": "Remember: A100."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                      "role": "ai",
+                      "content": "noted, on disk now."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 31,
+                "thread": "MainThread",
+                "elapsed_ms": 0.179,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                        "role": "human",
+                        "content": "Remember: A100."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                      "role": "ai",
+                      "content": "noted, on disk now."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                          "role": "human",
+                          "content": "Remember: A100."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                        "role": "ai",
+                        "content": "noted, on disk now."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 32,
+          "thread": "MainThread",
+          "elapsed_ms": 0.164,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 33,
+              "thread": "MainThread",
+              "elapsed_ms": 0.154,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                      "role": "system",
+                      "content": "Answer briefly."
+                    },
+                    {
+                      "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                      "role": "human",
+                      "content": "Remember: A100."
+                    },
+                    {
+                      "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                      "role": "ai",
+                      "content": "noted, on disk now."
+                    },
+                    {
+                      "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                      "role": "human",
+                      "content": "What did I ask you?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                    "role": "ai",
+                    "content": "noted, on disk now."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                        "role": "human",
+                        "content": "Remember: A100."
+                      },
+                      {
+                        "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                        "role": "ai",
+                        "content": "noted, on disk now."
+                      },
+                      {
+                        "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                        "role": "human",
+                        "content": "What did I ask you?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                      "role": "ai",
+                      "content": "noted, on disk now."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 33,
+                "thread": "MainThread",
+                "elapsed_ms": 0.154,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                        "role": "human",
+                        "content": "Remember: A100."
+                      },
+                      {
+                        "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                        "role": "ai",
+                        "content": "noted, on disk now."
+                      },
+                      {
+                        "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                        "role": "human",
+                        "content": "What did I ask you?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                      "role": "ai",
+                      "content": "noted, on disk now."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                          "role": "human",
+                          "content": "Remember: A100."
+                        },
+                        {
+                          "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                          "role": "ai",
+                          "content": "noted, on disk now."
+                        },
+                        {
+                          "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                          "role": "human",
+                          "content": "What did I ask you?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                        "role": "ai",
+                        "content": "noted, on disk now."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 30,
+            "thread": "MainThread",
+            "elapsed_ms": 0.192,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 31,
+                "thread": "MainThread",
+                "elapsed_ms": 0.179,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                        "role": "human",
+                        "content": "Remember: A100."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                      "role": "ai",
+                      "content": "noted, on disk now."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                          "role": "human",
+                          "content": "Remember: A100."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                        "role": "ai",
+                        "content": "noted, on disk now."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 31,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.179,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                          "role": "human",
+                          "content": "Remember: A100."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                        "role": "ai",
+                        "content": "noted, on disk now."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                            "role": "system",
+                            "content": "Answer briefly."
+                          },
+                          {
+                            "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                            "role": "human",
+                            "content": "Remember: A100."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                          "role": "ai",
+                          "content": "noted, on disk now."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "snapshot_written",
+            "path": "out/ch34_checkpoint/we_can_bolt_our_own_disk_persistence_onto_it/disk-demo.json"
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 32,
+            "thread": "MainThread",
+            "elapsed_ms": 0.164,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 33,
+                "thread": "MainThread",
+                "elapsed_ms": 0.154,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                        "role": "system",
+                        "content": "Answer briefly."
+                      },
+                      {
+                        "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                        "role": "human",
+                        "content": "Remember: A100."
+                      },
+                      {
+                        "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                        "role": "ai",
+                        "content": "noted, on disk now."
+                      },
+                      {
+                        "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                        "role": "human",
+                        "content": "What did I ask you?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                      "role": "ai",
+                      "content": "noted, on disk now."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                          "role": "human",
+                          "content": "Remember: A100."
+                        },
+                        {
+                          "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                          "role": "ai",
+                          "content": "noted, on disk now."
+                        },
+                        {
+                          "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                          "role": "human",
+                          "content": "What did I ask you?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                        "role": "ai",
+                        "content": "noted, on disk now."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 33,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.154,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                          "role": "system",
+                          "content": "Answer briefly."
+                        },
+                        {
+                          "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                          "role": "human",
+                          "content": "Remember: A100."
+                        },
+                        {
+                          "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                          "role": "ai",
+                          "content": "noted, on disk now."
+                        },
+                        {
+                          "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                          "role": "human",
+                          "content": "What did I ask you?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                        "role": "ai",
+                        "content": "noted, on disk now."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                            "role": "system",
+                            "content": "Answer briefly."
+                          },
+                          {
+                            "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                            "role": "human",
+                            "content": "Remember: A100."
+                          },
+                          {
+                            "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                            "role": "ai",
+                            "content": "noted, on disk now."
+                          },
+                          {
+                            "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                            "role": "human",
+                            "content": "What did I ask you?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                          "role": "ai",
+                          "content": "noted, on disk now."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "resumed_after_a_simulated_process_restart",
+            "fresh_process_had_no_state_before_seeding": true,
+            "seeding_from_disk_restored_state": true,
+            "final_history_length": 5
+          }
+        }
+      ]
+    }
+  ]
+}

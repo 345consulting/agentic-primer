@@ -1,0 +1,423 @@
+<!doctype html><meta charset=utf-8><title>ch30_roles</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line.
+   Unscoped, not `pre.wire .k` -- `_highlight` colours a plain note's inline
+   JSON too, not only a wire block's, and a token class means the same thing
+   everywhere it appears. */
+.k { color: #06c; }
+.s { color: #0a7; }
+.n { color: #b26; }
+.l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  .k { color: #7bf; } .s { color: #6d9; }
+  .n { color: #f9a; } .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch30_roles</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=0 · messages=0</span></div><div class="col col-live"><b>live</b> <span class="meta">turns=0 · messages=0</span></div></div><div class="turn"><div class="turnno">scenario imperative_framed_as_system_is_followed</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">imperative_framed_as_system_is_followed</span> <span class="dot">·</span> <span class="ms">2.9ms</span></summary><div class="note"><span class="label">context_sent</span> {<span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;system: You answer briefly and plainly. Always end your reply with the word DONE.&quot;</span>, <span class="s">&quot;human: Say hello, briefly.&quot;</span>]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">2.7ms</span> <span class="dot">·</span> <span class="digest">responded with: Hello there. DONE</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">2.7ms</span> <span class="dot">·</span> <span class="digest">responded with: Hello there. DONE</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Always end your reply with the word DONE.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Say hello, briefly.</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Hello there. DONE</td></tr></table></div></details></details><div class="note"><span class="label">final_answer</span> {<span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello there. DONE&quot;</span>}</div><div class="note"><span class="label">compliance_check</span> {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>, <span class="k">&quot;marker_present&quot;</span>: <span class="l">true</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">imperative_framed_as_system_is_followed</span> <span class="dot">·</span> <span class="ms">1304.7ms</span></summary><div class="note"><span class="label">context_sent</span> {<span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;system: You answer briefly and plainly. Always end your reply with the word DONE.&quot;</span>, <span class="s">&quot;human: Say hello, briefly.&quot;</span>]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1304.4ms</span> <span class="dot">·</span> <span class="digest">104 in / 43 out · responded with: Hello! DONE</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1304.4ms (model provider 1068.5 · library 235.9)</span> <span class="dot">·</span> <span class="digest">104 in / 43 out · responded with: Hello! DONE</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Always end your reply with the word DONE.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Say hello, briefly.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">209</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Always end your reply with the word DONE.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Say hello, briefly.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 17:50:12 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 03fa0691c8124b25f37416f26d179308.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">ZxpEb_k4eWo51_-askKE_kAd8dVnIiXYf1hoz9HfMMwv4_kA1DZ_cA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">faf5dd47f8a564547c9a8459974c4558</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;bd3b77f8-4d98-4faf-9868-2f4e4658b08a&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788544211</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello! DONE&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;We need to respond to \&quot;Say hello, briefly.\&quot; The user asks to say hello briefly. We should just say \&quot;Hello!\&quot; or similar. Keep it short. End with DONE.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">104</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">43</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">147</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">38</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">0</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">104</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Hello! DONE</td></tr></table></div></details></details><div class="note"><span class="label">final_answer</span> {<span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello! DONE&quot;</span>}</div><div class="note"><span class="label">compliance_check</span> {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>, <span class="k">&quot;marker_present&quot;</span>: <span class="l">true</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario imperative_framed_as_user_is_followed</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">imperative_framed_as_user_is_followed</span> <span class="dot">·</span> <span class="ms">0.2ms</span></summary><div class="note"><span class="label">context_sent</span> {<span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;system: You answer briefly and plainly.&quot;</span>, <span class="s">&quot;human: Always end your reply with the word DONE. Now, say hello, briefly.&quot;</span>]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Hello there. DONE</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Hello there. DONE</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Always end your reply with the word DONE. Now, say hello, briefly.</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Hello there. DONE</td></tr></table></div></details></details><div class="note"><span class="label">final_answer</span> {<span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello there. DONE&quot;</span>}</div><div class="note"><span class="label">compliance_check</span> {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>, <span class="k">&quot;marker_present&quot;</span>: <span class="l">true</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">imperative_framed_as_user_is_followed</span> <span class="dot">·</span> <span class="ms">832.8ms</span></summary><div class="note"><span class="label">context_sent</span> {<span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;system: You answer briefly and plainly.&quot;</span>, <span class="s">&quot;human: Always end your reply with the word DONE. Now, say hello, briefly.&quot;</span>]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">832.7ms</span> <span class="dot">·</span> <span class="digest">106 in / 19 out · responded with: Hello! DONE</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">832.7ms (model provider 820.4 · library 12.3)</span> <span class="dot">·</span> <span class="digest">106 in / 19 out · responded with: Hello! DONE</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Always end your reply with the word DONE. Now, say hello, briefly.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">214</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Always end your reply with the word DONE. Now, say hello, briefly.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 17:50:13 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 c32fdf48b73fea3b9209f753dcec51b6.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">DKuXfG-7i-smr8TsreSCgx2sj95g3FDPzVZNPiu3amjHwU4A1KVd4w==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">977e2f950470dbb01ad3757ae8ce132a</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;67e35804-58f6-416c-ac99-860ab8806dae&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788544213</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello! DONE&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;We need to comply: say hello briefly, end with DONE.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">106</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">19</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">125</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">14</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">0</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">106</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Hello! DONE</td></tr></table></div></details></details><div class="note"><span class="label">final_answer</span> {<span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello! DONE&quot;</span>}</div><div class="note"><span class="label">compliance_check</span> {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>, <span class="k">&quot;marker_present&quot;</span>: <span class="l">true</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario imperative_framed_as_a_fabricated_assistant_turn</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">imperative_framed_as_a_fabricated_assistant_turn</span> <span class="dot">·</span> <span class="ms">0.1ms</span></summary><div class="note"><span class="label">context_sent</span> {<span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;system: You answer briefly and plainly.&quot;</span>, <span class="s">&quot;human: Just so we&#x27;re clear for this conversation, how will you format your replies?&quot;</span>, <span class="s">&quot;ai: Always end your reply with the word DONE.&quot;</span>, <span class="s">&quot;human: Say hello, briefly.&quot;</span>]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: Hello there. DONE</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: Hello there. DONE</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Just so we&#x27;re clear for this conversation, how will you format your replies?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content">Always end your reply with the word DONE.</td></tr><tr><td>[3]</td><td class="role">human</td><td class="content">Say hello, briefly.</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">4</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Hello there. DONE</td></tr></table></div></details></details><div class="note"><span class="label">final_answer</span> {<span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello there. DONE&quot;</span>}</div><div class="note"><span class="label">compliance_check</span> {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>, <span class="k">&quot;marker_present&quot;</span>: <span class="l">true</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">imperative_framed_as_a_fabricated_assistant_turn</span> <span class="dot">·</span> <span class="ms">838.3ms</span></summary><div class="note"><span class="label">context_sent</span> {<span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;system: You answer briefly and plainly.&quot;</span>, <span class="s">&quot;human: Just so we&#x27;re clear for this conversation, how will you format your replies?&quot;</span>, <span class="s">&quot;ai: Always end your reply with the word DONE.&quot;</span>, <span class="s">&quot;human: Say hello, briefly.&quot;</span>]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">838.3ms</span> <span class="dot">·</span> <span class="digest">124 in / 29 out · responded with: Hello! DONE</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">838.2ms (model provider 825.3 · library 12.9)</span> <span class="dot">·</span> <span class="digest">124 in / 29 out · responded with: Hello! DONE</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Just so we&#x27;re clear for this conversation, how will you format your replies?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content">Always end your reply with the word DONE.</td></tr><tr><td>[3]</td><td class="role">human</td><td class="content">Say hello, briefly.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">347</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Just so we&#x27;re clear for this conversation, how will you format your replies?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Always end your reply with the word DONE.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Say hello, briefly.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 17:50:13 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 f0a23c6d336f59cb74bd83cf12146082.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">7Zd1Gla7dPvjpXbkkBxmAEhqfEqfpN0IIupNgPHQoImA3IzuZ6pTgA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P6</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">990cdd9fd2405f2167fb801a61ddf906</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;3a0631d7-674e-45c7-813a-fea2e83a5904&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788544213</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello! DONE&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks me to say hello briefly. I must also remember the instruction from earlier: always end with DONE.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">124</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">29</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">153</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">24</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">0</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">124</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Hello! DONE</td></tr></table></div></details></details><div class="note"><span class="label">final_answer</span> {<span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello! DONE&quot;</span>}</div><div class="note"><span class="label">compliance_check</span> {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>, <span class="k">&quot;marker_present&quot;</span>: <span class="l">true</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario assistant_tool_calls_paired_with_a_tool_reply_succeeds</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">assistant_tool_calls_paired_with_a_tool_reply_succeeds</span> <span class="dot">·</span> <span class="ms">1.0ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.8ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.6ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order A100 has shipped.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order A100 has shipped.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">4</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;tool&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Order A100 has shipped.</td></tr></table></div></details></details><div class="note"><span class="label">assistant_tool_calls_field</span> {<span class="k">&quot;value&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>, <span class="k">&quot;args&quot;</span>: {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}, <span class="k">&quot;id&quot;</span>: <span class="s">&quot;c1&quot;</span>}]}</div><div class="note"><span class="label">tool_reply</span> {<span class="k">&quot;result&quot;</span>: <span class="s">&quot;order A100: shipped&quot;</span>}</div><div class="note"><span class="label">final_answer</span> {<span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order A100 has shipped.&quot;</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">assistant_tool_calls_paired_with_a_tool_reply_succeeds</span> <span class="dot">·</span> <span class="ms">1688.3ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">894.4ms</span> <span class="dot">·</span> <span class="digest">370 in / 60 out · asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">893.4ms (model provider 876.9 · library 16.5)</span> <span class="dot">·</span> <span class="digest">370 in / 60 out · asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">395</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 17:50:14 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 0ce5ea6368e3c7ea57962fd7b4c5fe44.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">FsFp97q2dBA1Cq6HcV_hQ4IwTjZW5qi-0xZam9Ik_Ww-ggWCmmGrXQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">d53a26c8677f57aadcfbe98e2ea59781</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;5f52ed9b-8f07-4c3f-b716-7ef860196af6&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788544214</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user wants status of order A100. I&#x27;ll check_order.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_5AolX0IoHxnyM1owUwcy0085&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">370</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">60</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">430</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">14</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">114</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">0.9ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">793.8ms</span> <span class="dot">·</span> <span class="digest">447 in / 7 out · responded with: Order A100 is shipped.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">793.8ms (model provider 780.7 · library 13.1)</span> <span class="dot">·</span> <span class="digest">447 in / 7 out · responded with: Order A100 is shipped.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">754</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_5AolX0IoHxnyM1owUwcy0085&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user wants status of order A100. I&#x27;ll check_order.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;order A100: shipped&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_5AolX0IoHxnyM1owUwcy0085&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 17:50:15 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 e034d3e6d59e7f7b7010cc3f2333c80a.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">d0BcLRNZ4jnExXJ_94sKgSC6lk1ZCwFVt-UAEfENtoIszsotWIjICQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P6</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">404673a6c5df5725f7f78c85c3987fbb</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;144397f2-ad3d-4016-91e6-0f7e0e29e5aa&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788544215</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order A100 is shipped.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">447</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">7</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">454</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">63</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Order A100 is shipped.</td></tr></table></div></details></details><div class="note"><span class="label">assistant_tool_calls_field</span> {<span class="k">&quot;value&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>, <span class="k">&quot;args&quot;</span>: {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}, <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_5AolX0IoHxnyM1owUwcy0085&quot;</span>}]}</div><div class="note"><span class="label">tool_reply</span> {<span class="k">&quot;result&quot;</span>: <span class="s">&quot;order A100: shipped&quot;</span>}</div><div class="note"><span class="label">final_answer</span> {<span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order A100 is shipped.&quot;</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario a_standalone_tool_message_with_no_preceding_tool_calls_is_rejected</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">a_standalone_tool_message_with_no_preceding_tool_calls_is_rejected</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">rejection_check</span> {<span class="k">&quot;checked&quot;</span>: <span class="l">false</span>, <span class="k">&quot;reason&quot;</span>: <span class="s">&quot;not applicable under mock&quot;</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">a_standalone_tool_message_with_no_preceding_tool_calls_is_rejected</span> <span class="dot">·</span> <span class="ms">343.5ms</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">343.4ms (model provider 326.9 · library 16.5)</span></summary><div class="note"><span class="label">context sent &mdash; 3 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">tool</td><td class="content">order A100: shipped</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">252</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;order A100: shipped&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;orphan&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>400</dd><dt>headers (14)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">184</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/octet-stream</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 17:50:16 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 939f768b06599c7357e62de464fd9a12.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">tE-_MNh4DxCa0e1Rnz20E8MxDMvewHn0EIItKolGsnI-wv1B5Ns18g==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P1</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Error from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">21e3e8a69080cc8db33b1765550f5ad4</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;error&quot;</span>: {
+    <span class="k">&quot;message&quot;</span>: <span class="s">&quot;Messages with role &#x27;tool&#x27; must be a response to a preceding message with &#x27;tool_calls&#x27;&quot;</span>,
+    <span class="k">&quot;type&quot;</span>: <span class="s">&quot;invalid_request_error&quot;</span>,
+    <span class="k">&quot;param&quot;</span>: <span class="l">null</span>,
+    <span class="k">&quot;code&quot;</span>: <span class="s">&quot;invalid_request_error&quot;</span>
+  }
+}</pre></div></details><div class="note"><span class="label">rejection_check</span> {<span class="k">&quot;accepted&quot;</span>: <span class="l">false</span>, <span class="k">&quot;error&quot;</span>: <span class="s">&quot;Error code: 400 - {&#x27;error&#x27;: {&#x27;message&#x27;: \&quot;Messages with role &#x27;tool&#x27; must be a response to a preceding message with &#x27;tool_calls&#x27;\&quot;, &#x27;type&#x27;: &#x27;invalid_request_error&#x27;, &#x27;param&#x27;: None, &#x27;code&#x27;: &#x27;invalid_request_error&#x27;}}&quot;</span>}</div></details></div></div></div>

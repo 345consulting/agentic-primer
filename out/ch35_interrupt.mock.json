@@ -1,0 +1,3863 @@
+{
+  "chapter": "ch35_interrupt",
+  "model_kind": "mock",
+  "source": "b2e1b21ada5f",
+  "summary": {
+    "turns": 0,
+    "messages": 0,
+    "ended": "n/a"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "interrupt_pauses_the_run_and_returns_immediately"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 3.133,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "the_call_returned_instead_of_raising",
+          "raised": false,
+          "interrupt_present": true,
+          "interrupt_value": {
+            "question": "approve this order?",
+            "total": 500
+          },
+          "approved_field_untouched": false
+        }
+      ],
+      "children": [
+        {
+          "name": "pause",
+          "attributes": {},
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 2.398,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "checkpoint_after_pause",
+              "values": {
+                "order_total": 500,
+                "approved": false
+              },
+              "pending_node": [
+                "place_order"
+              ],
+              "pending_interrupt_value": {
+                "question": "approve this order?",
+                "total": 500
+              }
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "checkpoint_after_pause",
+                "values": {
+                  "order_total": 500,
+                  "approved": false
+                },
+                "pending_node": [
+                  "place_order"
+                ],
+                "pending_interrupt_value": {
+                  "question": "approve this order?",
+                  "total": 500
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "pause",
+            "attributes": {},
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 2.398,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "checkpoint_after_pause",
+                "values": {
+                  "order_total": 500,
+                  "approved": false
+                },
+                "pending_node": [
+                  "place_order"
+                ],
+                "pending_interrupt_value": {
+                  "question": "approve this order?",
+                  "total": 500
+                }
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "checkpoint_after_pause",
+                  "values": {
+                    "order_total": 500,
+                    "approved": false
+                  },
+                  "pending_node": [
+                    "place_order"
+                  ],
+                  "pending_interrupt_value": {
+                    "question": "approve this order?",
+                    "total": 500
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "the_call_returned_instead_of_raising",
+            "raised": false,
+            "interrupt_present": true,
+            "interrupt_value": {
+              "question": "approve this order?",
+              "total": 500
+            },
+            "approved_field_untouched": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "command_resume_dispatches_straight_to_the_pending_node"
+      },
+      "seq": 3,
+      "thread": "MainThread",
+      "elapsed_ms": 2.2729999999999997,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "only_the_pending_node_reran",
+          "step_one_run_count": 1,
+          "final_approved": true
+        }
+      ],
+      "children": [
+        {
+          "name": "pause",
+          "attributes": {},
+          "seq": 4,
+          "thread": "MainThread",
+          "elapsed_ms": 1.024,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "checkpoint_after_pause",
+              "step_one_run_count": 1,
+              "values": {
+                "order_total": 500,
+                "approved": false
+              },
+              "pending_node": [
+                "place_order"
+              ],
+              "pending_interrupt_value": {
+                "question": "approve?",
+                "total": 500
+              }
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "checkpoint_after_pause",
+                "step_one_run_count": 1,
+                "values": {
+                  "order_total": 500,
+                  "approved": false
+                },
+                "pending_node": [
+                  "place_order"
+                ],
+                "pending_interrupt_value": {
+                  "question": "approve?",
+                  "total": 500
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "resume",
+          "attributes": {},
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.555,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "checkpoint_after_resume",
+              "step_one_run_count": 1,
+              "values": {
+                "order_total": 500,
+                "approved": true
+              },
+              "pending_node": [],
+              "pending_interrupt_value": null
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "checkpoint_after_resume",
+                "step_one_run_count": 1,
+                "values": {
+                  "order_total": 500,
+                  "approved": true
+                },
+                "pending_node": [],
+                "pending_interrupt_value": null
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "pause",
+            "attributes": {},
+            "seq": 4,
+            "thread": "MainThread",
+            "elapsed_ms": 1.024,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "checkpoint_after_pause",
+                "step_one_run_count": 1,
+                "values": {
+                  "order_total": 500,
+                  "approved": false
+                },
+                "pending_node": [
+                  "place_order"
+                ],
+                "pending_interrupt_value": {
+                  "question": "approve?",
+                  "total": 500
+                }
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "checkpoint_after_pause",
+                  "step_one_run_count": 1,
+                  "values": {
+                    "order_total": 500,
+                    "approved": false
+                  },
+                  "pending_node": [
+                    "place_order"
+                  ],
+                  "pending_interrupt_value": {
+                    "question": "approve?",
+                    "total": 500
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "resume",
+            "attributes": {},
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 0.555,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "checkpoint_after_resume",
+                "step_one_run_count": 1,
+                "values": {
+                  "order_total": 500,
+                  "approved": true
+                },
+                "pending_node": [],
+                "pending_interrupt_value": null
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "checkpoint_after_resume",
+                  "step_one_run_count": 1,
+                  "values": {
+                    "order_total": 500,
+                    "approved": true
+                  },
+                  "pending_node": [],
+                  "pending_interrupt_value": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "only_the_pending_node_reran",
+            "step_one_run_count": 1,
+            "final_approved": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "code_before_the_interrupt_call_runs_twice_on_resume"
+      },
+      "seq": 6,
+      "thread": "MainThread",
+      "elapsed_ms": 1.451,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "the_pre_interrupt_line_ran_twice",
+          "before_interrupt_runs": 2
+        }
+      ],
+      "children": [
+        {
+          "name": "pause",
+          "attributes": {},
+          "seq": 7,
+          "thread": "MainThread",
+          "elapsed_ms": 0.628,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "before_interrupt_runs_so_far",
+              "count": 1
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "before_interrupt_runs_so_far",
+                "count": 1
+              }
+            }
+          ]
+        },
+        {
+          "name": "resume",
+          "attributes": {},
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.423,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "before_interrupt_runs_so_far",
+              "count": 2
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "before_interrupt_runs_so_far",
+                "count": 2
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "pause",
+            "attributes": {},
+            "seq": 7,
+            "thread": "MainThread",
+            "elapsed_ms": 0.628,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "before_interrupt_runs_so_far",
+                "count": 1
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "before_interrupt_runs_so_far",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "resume",
+            "attributes": {},
+            "seq": 8,
+            "thread": "MainThread",
+            "elapsed_ms": 0.423,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "before_interrupt_runs_so_far",
+                "count": 2
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "before_interrupt_runs_so_far",
+                  "count": 2
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "the_pre_interrupt_line_ran_twice",
+            "before_interrupt_runs": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "an_approval_gate_actually_gates_the_action"
+      },
+      "seq": 9,
+      "thread": "MainThread",
+      "elapsed_ms": 7.515,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "the_gate_actually_gated_the_order",
+          "orders_placed": [
+            "ordered 500 x widget"
+          ],
+          "approved_thread_final": "ordered 500 x widget",
+          "denied_thread_final": "denied by approver"
+        }
+      ],
+      "children": [
+        {
+          "name": "pause",
+          "attributes": {
+            "thread": "approved"
+          },
+          "seq": 10,
+          "thread": "MainThread",
+          "elapsed_ms": 2.655,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "checkpoint_after_pause",
+              "values": {
+                "messages": [
+                  {
+                    "role": "human",
+                    "content": "Order 500 widgets."
+                  },
+                  {
+                    "role": "ai",
+                    "content": ""
+                  }
+                ]
+              },
+              "pending_node": [
+                "approval_gate"
+              ],
+              "pending_interrupt_value": {
+                "tool": "place_order",
+                "args": {
+                  "item": "widget",
+                  "quantity": 500
+                }
+              }
+            }
+          ],
+          "children": [
+            {
+              "name": "turn",
+              "attributes": {
+                "number": 1
+              },
+              "seq": 11,
+              "thread": "MainThread",
+              "elapsed_ms": 1.673,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [],
+              "children": [
+                {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 12,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1.668,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                          "role": "human",
+                          "content": "Order 500 widgets."
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Place an order for a quantity of an item.",
+                          "schema": {
+                            "description": "Place an order for a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "title": "Item",
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "widget",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                            "role": "human",
+                            "content": "Order 500 widgets."
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Place an order for a quantity of an item.",
+                            "schema": {
+                              "description": "Place an order for a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "title": "Item",
+                                  "type": "string"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "widget",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "body": [
+                {
+                  "kind": "span",
+                  "value": {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 12,
+                    "thread": "MainThread",
+                    "elapsed_ms": 1.668,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                            "role": "human",
+                            "content": "Order 500 widgets."
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Place an order for a quantity of an item.",
+                            "schema": {
+                              "description": "Place an order for a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "title": "Item",
+                                  "type": "string"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "widget",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "turn",
+                "attributes": {
+                  "number": 1
+                },
+                "seq": 11,
+                "thread": "MainThread",
+                "elapsed_ms": 1.673,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [],
+                "children": [
+                  {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 12,
+                    "thread": "MainThread",
+                    "elapsed_ms": 1.668,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                            "role": "human",
+                            "content": "Order 500 widgets."
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Place an order for a quantity of an item.",
+                            "schema": {
+                              "description": "Place an order for a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "title": "Item",
+                                  "type": "string"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "widget",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "body": [
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 12,
+                      "thread": "MainThread",
+                      "elapsed_ms": 1.668,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                                "role": "human",
+                                "content": "Order 500 widgets."
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "place_order",
+                                "description": "Place an order for a quantity of an item.",
+                                "schema": {
+                                  "description": "Place an order for a quantity of an item.",
+                                  "properties": {
+                                    "item": {
+                                      "title": "Item",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "item",
+                                    "quantity"
+                                  ],
+                                  "title": "place_order",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "place_order"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 1,
+                            "roles": [
+                              "human"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "widget",
+                                    "quantity": 500
+                                  },
+                                  "id": "c1"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "checkpoint_after_pause",
+                "values": {
+                  "messages": [
+                    {
+                      "role": "human",
+                      "content": "Order 500 widgets."
+                    },
+                    {
+                      "role": "ai",
+                      "content": ""
+                    }
+                  ]
+                },
+                "pending_node": [
+                  "approval_gate"
+                ],
+                "pending_interrupt_value": {
+                  "tool": "place_order",
+                  "args": {
+                    "item": "widget",
+                    "quantity": 500
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "resume",
+          "attributes": {
+            "thread": "approved"
+          },
+          "seq": 13,
+          "thread": "MainThread",
+          "elapsed_ms": 0.809,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "orders_placed_so_far",
+              "orders": [
+                "ordered 500 x widget"
+              ]
+            }
+          ],
+          "children": [
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "place_order",
+                "id": "c1"
+              },
+              "seq": 14,
+              "thread": "MainThread",
+              "elapsed_ms": 0.214,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "widget",
+                  "quantity": 500
+                },
+                {
+                  "label": "result",
+                  "value": "ordered 500 x widget"
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "item": "widget",
+                    "quantity": 500
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "ordered 500 x widget"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "place_order",
+                  "id": "c1"
+                },
+                "seq": 14,
+                "thread": "MainThread",
+                "elapsed_ms": 0.214,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "widget",
+                    "quantity": 500
+                  },
+                  {
+                    "label": "result",
+                    "value": "ordered 500 x widget"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "widget",
+                      "quantity": 500
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "ordered 500 x widget"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "orders_placed_so_far",
+                "orders": [
+                  "ordered 500 x widget"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "pause",
+          "attributes": {
+            "thread": "denied"
+          },
+          "seq": 15,
+          "thread": "MainThread",
+          "elapsed_ms": 1.1789999999999998,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "checkpoint_after_pause",
+              "values": {
+                "messages": [
+                  {
+                    "role": "human",
+                    "content": "Order 500 widgets."
+                  },
+                  {
+                    "role": "ai",
+                    "content": ""
+                  }
+                ]
+              },
+              "pending_node": [
+                "approval_gate"
+              ],
+              "pending_interrupt_value": {
+                "tool": "place_order",
+                "args": {
+                  "item": "widget",
+                  "quantity": 500
+                }
+              }
+            }
+          ],
+          "children": [
+            {
+              "name": "turn",
+              "attributes": {
+                "number": 1
+              },
+              "seq": 16,
+              "thread": "MainThread",
+              "elapsed_ms": 0.232,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [],
+              "children": [
+                {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 17,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.22699999999999998,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                          "role": "human",
+                          "content": "Order 500 widgets."
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Place an order for a quantity of an item.",
+                          "schema": {
+                            "description": "Place an order for a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "title": "Item",
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "widget",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                            "role": "human",
+                            "content": "Order 500 widgets."
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Place an order for a quantity of an item.",
+                            "schema": {
+                              "description": "Place an order for a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "title": "Item",
+                                  "type": "string"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "widget",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "body": [
+                {
+                  "kind": "span",
+                  "value": {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 17,
+                    "thread": "MainThread",
+                    "elapsed_ms": 0.22699999999999998,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                            "role": "human",
+                            "content": "Order 500 widgets."
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Place an order for a quantity of an item.",
+                            "schema": {
+                              "description": "Place an order for a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "title": "Item",
+                                  "type": "string"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "widget",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "turn",
+                "attributes": {
+                  "number": 1
+                },
+                "seq": 16,
+                "thread": "MainThread",
+                "elapsed_ms": 0.232,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [],
+                "children": [
+                  {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 17,
+                    "thread": "MainThread",
+                    "elapsed_ms": 0.22699999999999998,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                            "role": "human",
+                            "content": "Order 500 widgets."
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Place an order for a quantity of an item.",
+                            "schema": {
+                              "description": "Place an order for a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "title": "Item",
+                                  "type": "string"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "widget",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "body": [
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 17,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.22699999999999998,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                                "role": "human",
+                                "content": "Order 500 widgets."
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "place_order",
+                                "description": "Place an order for a quantity of an item.",
+                                "schema": {
+                                  "description": "Place an order for a quantity of an item.",
+                                  "properties": {
+                                    "item": {
+                                      "title": "Item",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "item",
+                                    "quantity"
+                                  ],
+                                  "title": "place_order",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "place_order"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 1,
+                            "roles": [
+                              "human"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "widget",
+                                    "quantity": 500
+                                  },
+                                  "id": "c1"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "checkpoint_after_pause",
+                "values": {
+                  "messages": [
+                    {
+                      "role": "human",
+                      "content": "Order 500 widgets."
+                    },
+                    {
+                      "role": "ai",
+                      "content": ""
+                    }
+                  ]
+                },
+                "pending_node": [
+                  "approval_gate"
+                ],
+                "pending_interrupt_value": {
+                  "tool": "place_order",
+                  "args": {
+                    "item": "widget",
+                    "quantity": 500
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "resume",
+          "attributes": {
+            "thread": "denied"
+          },
+          "seq": 18,
+          "thread": "MainThread",
+          "elapsed_ms": 0.49299999999999994,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "orders_placed_so_far",
+              "orders": [
+                "ordered 500 x widget"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "orders_placed_so_far",
+                "orders": [
+                  "ordered 500 x widget"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "pause",
+            "attributes": {
+              "thread": "approved"
+            },
+            "seq": 10,
+            "thread": "MainThread",
+            "elapsed_ms": 2.655,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "checkpoint_after_pause",
+                "values": {
+                  "messages": [
+                    {
+                      "role": "human",
+                      "content": "Order 500 widgets."
+                    },
+                    {
+                      "role": "ai",
+                      "content": ""
+                    }
+                  ]
+                },
+                "pending_node": [
+                  "approval_gate"
+                ],
+                "pending_interrupt_value": {
+                  "tool": "place_order",
+                  "args": {
+                    "item": "widget",
+                    "quantity": 500
+                  }
+                }
+              }
+            ],
+            "children": [
+              {
+                "name": "turn",
+                "attributes": {
+                  "number": 1
+                },
+                "seq": 11,
+                "thread": "MainThread",
+                "elapsed_ms": 1.673,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [],
+                "children": [
+                  {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 12,
+                    "thread": "MainThread",
+                    "elapsed_ms": 1.668,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                            "role": "human",
+                            "content": "Order 500 widgets."
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Place an order for a quantity of an item.",
+                            "schema": {
+                              "description": "Place an order for a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "title": "Item",
+                                  "type": "string"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "widget",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "body": [
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 12,
+                      "thread": "MainThread",
+                      "elapsed_ms": 1.668,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                                "role": "human",
+                                "content": "Order 500 widgets."
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "place_order",
+                                "description": "Place an order for a quantity of an item.",
+                                "schema": {
+                                  "description": "Place an order for a quantity of an item.",
+                                  "properties": {
+                                    "item": {
+                                      "title": "Item",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "item",
+                                    "quantity"
+                                  ],
+                                  "title": "place_order",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "place_order"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 1,
+                            "roles": [
+                              "human"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "widget",
+                                    "quantity": 500
+                                  },
+                                  "id": "c1"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 1
+                  },
+                  "seq": 11,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1.673,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 12,
+                      "thread": "MainThread",
+                      "elapsed_ms": 1.668,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                                "role": "human",
+                                "content": "Order 500 widgets."
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "place_order",
+                                "description": "Place an order for a quantity of an item.",
+                                "schema": {
+                                  "description": "Place an order for a quantity of an item.",
+                                  "properties": {
+                                    "item": {
+                                      "title": "Item",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "item",
+                                    "quantity"
+                                  ],
+                                  "title": "place_order",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "place_order"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 1,
+                            "roles": [
+                              "human"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "widget",
+                                    "quantity": 500
+                                  },
+                                  "id": "c1"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "body": [
+                    {
+                      "kind": "span",
+                      "value": {
+                        "name": "model",
+                        "attributes": {
+                          "model_kind": "mock"
+                        },
+                        "seq": 12,
+                        "thread": "MainThread",
+                        "elapsed_ms": 1.668,
+                        "model_provider_ms": null,
+                        "library_ms": null,
+                        "notes": [
+                          {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                                "role": "human",
+                                "content": "Order 500 widgets."
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "place_order",
+                                "description": "Place an order for a quantity of an item.",
+                                "schema": {
+                                  "description": "Place an order for a quantity of an item.",
+                                  "properties": {
+                                    "item": {
+                                      "title": "Item",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "item",
+                                    "quantity"
+                                  ],
+                                  "title": "place_order",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "place_order"
+                            ],
+                            "consulted": false
+                          },
+                          {
+                            "label": "context ignored by the mock model",
+                            "messages": 1,
+                            "roles": [
+                              "human"
+                            ]
+                          },
+                          {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "widget",
+                                    "quantity": 500
+                                  },
+                                  "id": "c1"
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "children": [],
+                        "body": [
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "context",
+                              "messages": [
+                                {
+                                  "id": "bfb4ba40-911d-411f-9d90-8f3e82cc50ad",
+                                  "role": "human",
+                                  "content": "Order 500 widgets."
+                                }
+                              ],
+                              "tools": [
+                                {
+                                  "name": "place_order",
+                                  "description": "Place an order for a quantity of an item.",
+                                  "schema": {
+                                    "description": "Place an order for a quantity of an item.",
+                                    "properties": {
+                                      "item": {
+                                        "title": "Item",
+                                        "type": "string"
+                                      },
+                                      "quantity": {
+                                        "title": "Quantity",
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "required": [
+                                      "item",
+                                      "quantity"
+                                    ],
+                                    "title": "place_order",
+                                    "type": "object"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "tools declared to the mock model",
+                              "names": [
+                                "place_order"
+                              ],
+                              "consulted": false
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "context ignored by the mock model",
+                              "messages": 1,
+                              "roles": [
+                                "human"
+                              ]
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "reply",
+                              "message": {
+                                "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                                "role": "ai",
+                                "content": "",
+                                "tool_calls": [
+                                  {
+                                    "name": "place_order",
+                                    "args": {
+                                      "item": "widget",
+                                      "quantity": 500
+                                    },
+                                    "id": "c1"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "checkpoint_after_pause",
+                  "values": {
+                    "messages": [
+                      {
+                        "role": "human",
+                        "content": "Order 500 widgets."
+                      },
+                      {
+                        "role": "ai",
+                        "content": ""
+                      }
+                    ]
+                  },
+                  "pending_node": [
+                    "approval_gate"
+                  ],
+                  "pending_interrupt_value": {
+                    "tool": "place_order",
+                    "args": {
+                      "item": "widget",
+                      "quantity": 500
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "resume",
+            "attributes": {
+              "thread": "approved"
+            },
+            "seq": 13,
+            "thread": "MainThread",
+            "elapsed_ms": 0.809,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "orders_placed_so_far",
+                "orders": [
+                  "ordered 500 x widget"
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "place_order",
+                  "id": "c1"
+                },
+                "seq": 14,
+                "thread": "MainThread",
+                "elapsed_ms": 0.214,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "widget",
+                    "quantity": 500
+                  },
+                  {
+                    "label": "result",
+                    "value": "ordered 500 x widget"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "widget",
+                      "quantity": 500
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "ordered 500 x widget"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "place_order",
+                    "id": "c1"
+                  },
+                  "seq": 14,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.214,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "item": "widget",
+                      "quantity": 500
+                    },
+                    {
+                      "label": "result",
+                      "value": "ordered 500 x widget"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "item": "widget",
+                        "quantity": 500
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "ordered 500 x widget"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "orders_placed_so_far",
+                  "orders": [
+                    "ordered 500 x widget"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "pause",
+            "attributes": {
+              "thread": "denied"
+            },
+            "seq": 15,
+            "thread": "MainThread",
+            "elapsed_ms": 1.1789999999999998,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "checkpoint_after_pause",
+                "values": {
+                  "messages": [
+                    {
+                      "role": "human",
+                      "content": "Order 500 widgets."
+                    },
+                    {
+                      "role": "ai",
+                      "content": ""
+                    }
+                  ]
+                },
+                "pending_node": [
+                  "approval_gate"
+                ],
+                "pending_interrupt_value": {
+                  "tool": "place_order",
+                  "args": {
+                    "item": "widget",
+                    "quantity": 500
+                  }
+                }
+              }
+            ],
+            "children": [
+              {
+                "name": "turn",
+                "attributes": {
+                  "number": 1
+                },
+                "seq": 16,
+                "thread": "MainThread",
+                "elapsed_ms": 0.232,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [],
+                "children": [
+                  {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 17,
+                    "thread": "MainThread",
+                    "elapsed_ms": 0.22699999999999998,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                            "role": "human",
+                            "content": "Order 500 widgets."
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Place an order for a quantity of an item.",
+                            "schema": {
+                              "description": "Place an order for a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "title": "Item",
+                                  "type": "string"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "widget",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "body": [
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 17,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.22699999999999998,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                                "role": "human",
+                                "content": "Order 500 widgets."
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "place_order",
+                                "description": "Place an order for a quantity of an item.",
+                                "schema": {
+                                  "description": "Place an order for a quantity of an item.",
+                                  "properties": {
+                                    "item": {
+                                      "title": "Item",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "item",
+                                    "quantity"
+                                  ],
+                                  "title": "place_order",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "place_order"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 1,
+                            "roles": [
+                              "human"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "widget",
+                                    "quantity": 500
+                                  },
+                                  "id": "c1"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 1
+                  },
+                  "seq": 16,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.232,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 17,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.22699999999999998,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                              "role": "human",
+                              "content": "Order 500 widgets."
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "place_order",
+                              "description": "Place an order for a quantity of an item.",
+                              "schema": {
+                                "description": "Place an order for a quantity of an item.",
+                                "properties": {
+                                  "item": {
+                                    "title": "Item",
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "title": "Quantity",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "item",
+                                  "quantity"
+                                ],
+                                "title": "place_order",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 1,
+                          "roles": [
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "widget",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                                "role": "human",
+                                "content": "Order 500 widgets."
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "place_order",
+                                "description": "Place an order for a quantity of an item.",
+                                "schema": {
+                                  "description": "Place an order for a quantity of an item.",
+                                  "properties": {
+                                    "item": {
+                                      "title": "Item",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "item",
+                                    "quantity"
+                                  ],
+                                  "title": "place_order",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "place_order"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 1,
+                            "roles": [
+                              "human"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "widget",
+                                    "quantity": 500
+                                  },
+                                  "id": "c1"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "body": [
+                    {
+                      "kind": "span",
+                      "value": {
+                        "name": "model",
+                        "attributes": {
+                          "model_kind": "mock"
+                        },
+                        "seq": 17,
+                        "thread": "MainThread",
+                        "elapsed_ms": 0.22699999999999998,
+                        "model_provider_ms": null,
+                        "library_ms": null,
+                        "notes": [
+                          {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                                "role": "human",
+                                "content": "Order 500 widgets."
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "place_order",
+                                "description": "Place an order for a quantity of an item.",
+                                "schema": {
+                                  "description": "Place an order for a quantity of an item.",
+                                  "properties": {
+                                    "item": {
+                                      "title": "Item",
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "title": "Quantity",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "item",
+                                    "quantity"
+                                  ],
+                                  "title": "place_order",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "place_order"
+                            ],
+                            "consulted": false
+                          },
+                          {
+                            "label": "context ignored by the mock model",
+                            "messages": 1,
+                            "roles": [
+                              "human"
+                            ]
+                          },
+                          {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "widget",
+                                    "quantity": 500
+                                  },
+                                  "id": "c1"
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "children": [],
+                        "body": [
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "context",
+                              "messages": [
+                                {
+                                  "id": "5ad2ad29-6e7a-45c7-b8f1-c2eb1d878739",
+                                  "role": "human",
+                                  "content": "Order 500 widgets."
+                                }
+                              ],
+                              "tools": [
+                                {
+                                  "name": "place_order",
+                                  "description": "Place an order for a quantity of an item.",
+                                  "schema": {
+                                    "description": "Place an order for a quantity of an item.",
+                                    "properties": {
+                                      "item": {
+                                        "title": "Item",
+                                        "type": "string"
+                                      },
+                                      "quantity": {
+                                        "title": "Quantity",
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "required": [
+                                      "item",
+                                      "quantity"
+                                    ],
+                                    "title": "place_order",
+                                    "type": "object"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "tools declared to the mock model",
+                              "names": [
+                                "place_order"
+                              ],
+                              "consulted": false
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "context ignored by the mock model",
+                              "messages": 1,
+                              "roles": [
+                                "human"
+                              ]
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "reply",
+                              "message": {
+                                "id": "lc_run--01a077b0-51c0-75b0-9d15-faae36c59cf7-0",
+                                "role": "ai",
+                                "content": "",
+                                "tool_calls": [
+                                  {
+                                    "name": "place_order",
+                                    "args": {
+                                      "item": "widget",
+                                      "quantity": 500
+                                    },
+                                    "id": "c1"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "checkpoint_after_pause",
+                  "values": {
+                    "messages": [
+                      {
+                        "role": "human",
+                        "content": "Order 500 widgets."
+                      },
+                      {
+                        "role": "ai",
+                        "content": ""
+                      }
+                    ]
+                  },
+                  "pending_node": [
+                    "approval_gate"
+                  ],
+                  "pending_interrupt_value": {
+                    "tool": "place_order",
+                    "args": {
+                      "item": "widget",
+                      "quantity": 500
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "resume",
+            "attributes": {
+              "thread": "denied"
+            },
+            "seq": 18,
+            "thread": "MainThread",
+            "elapsed_ms": 0.49299999999999994,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "orders_placed_so_far",
+                "orders": [
+                  "ordered 500 x widget"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "orders_placed_so_far",
+                  "orders": [
+                    "ordered 500 x widget"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "the_gate_actually_gated_the_order",
+            "orders_placed": [
+              "ordered 500 x widget"
+            ],
+            "approved_thread_final": "ordered 500 x widget",
+            "denied_thread_final": "denied by approver"
+          }
+        }
+      ]
+    }
+  ]
+}

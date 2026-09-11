@@ -1,0 +1,910 @@
+{
+  "chapter": "ch15_stream_tools",
+  "model_kind": "live",
+  "source": "d197da1b0e05",
+  "summary": {
+    "turns": 2,
+    "messages": 2,
+    "ended": "judged 13 times, 10 of them early, dispatched nothing; dispatched once: 1.20 for milk"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "judged_on_every_chunk"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 1276.9470000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "judged 13 times, 10 of them early, dispatched nothing"
+        }
+      ],
+      "children": [
+        {
+          "name": "model",
+          "attributes": {
+            "model_kind": "live"
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 1276.724,
+          "model_provider_ms": 357.02858304977417,
+          "library_ms": 919.6954169502258,
+          "notes": [
+            {
+              "label": "context",
+              "messages": [
+                {
+                  "id": null,
+                  "role": "system",
+                  "content": "You answer briefly and plainly. Use the tools you are given."
+                },
+                {
+                  "id": null,
+                  "role": "human",
+                  "content": "How much is milk?"
+                }
+              ]
+            },
+            {
+              "label": "wire request",
+              "attempt": 1,
+              "at_ms": 1034276505.710583,
+              "method": "POST",
+              "url": "https://api.deepseek.com/v1/chat/completions",
+              "headers": {
+                "accept": "application/json",
+                "accept-encoding": "gzip, deflate, zstd",
+                "authorization": null,
+                "connection": "keep-alive",
+                "content-length": "449",
+                "content-type": "application/json",
+                "host": "api.deepseek.com",
+                "user-agent": "OpenAI/Python 3.6.0",
+                "x-stainless-arch": "arm64",
+                "x-stainless-async": "false",
+                "x-stainless-lang": "python",
+                "x-stainless-os": "MacOS",
+                "x-stainless-package-version": "3.6.0",
+                "x-stainless-read-timeout": "60.0",
+                "x-stainless-retry-count": "0",
+                "x-stainless-runtime": "CPython",
+                "x-stainless-runtime-version": "3.14.7"
+              },
+              "defaulted_by_model_provider": [
+                "temperature",
+                "max_tokens",
+                "top_p",
+                "stop",
+                "seed",
+                "tool_choice"
+              ],
+              "body": {
+                "messages": [
+                  {
+                    "content": "You answer briefly and plainly. Use the tools you are given.",
+                    "role": "system"
+                  },
+                  {
+                    "content": "How much is milk?",
+                    "role": "user"
+                  }
+                ],
+                "model": "deepseek-v4-flash",
+                "stream": true,
+                "tools": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "price_of",
+                      "description": "The current shelf price of an item, in pounds.",
+                      "parameters": {
+                        "properties": {
+                          "item": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "item"
+                        ],
+                        "type": "object"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "wire response",
+              "at_ms": 1034276862.739166,
+              "status": 200,
+              "headers": {
+                "access-control-allow-credentials": "true",
+                "cache-control": "no-cache",
+                "connection": "keep-alive",
+                "content-type": "text/event-stream; charset=utf-8",
+                "date": "Thu, 03 Sep 2026 19:37:37 GMT",
+                "server": "elb",
+                "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                "transfer-encoding": "chunked",
+                "vary": "origin, access-control-request-method, access-control-request-headers",
+                "via": "1.1 7ee47747c4818585fe9ee49bdf1ecccc.cloudfront.net (CloudFront)",
+                "x-amz-cf-id": "mhQyy2b7wzjvzGvl3DwjWpMc-g5Qozdoeboth5Qo3jbPK2uG4BxNsw==",
+                "x-amz-cf-pop": "DEN53-P2",
+                "x-cache": "Miss from cloudfront",
+                "x-content-type-options": "nosniff",
+                "x-ds-trace-id": "5602cecfbc692be98f67ec866c38aff2"
+              },
+              "body": "(streamed -- see this span's `wire frame` notes for the raw bytes)"
+            },
+            {
+              "label": "wire frame",
+              "frames": 12,
+              "raw": "data: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":null,\"reasoning_content\":\"\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\"Need\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" to\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" check\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" price\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" of\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" milk\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\".\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" Simple\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" tool\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" call\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\".\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"id\":\"call_00_1ET9SFofOlLyFkW3ye1q2872\",\"type\":\"function\",\"function\":{\"name\":\"price_of\",\"arguments\":\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"{\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"\\\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"item\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"\\\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\": \"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"\\\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"m\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"ilk\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"\\\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"}\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"063cddba-a106-4ada-866a-61b31ce6ba03\",\"object\":\"chat.completion.chunk\",\"created\":1788464257,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"\",\"reasoning_content\":null},\"logprobs\":null,\"finish_reason\":\"tool_calls\"}],\"usage\":{\"prompt_tokens\":391,\"completion_tokens\":56,\"total_tokens\":447,\"prompt_tokens_details\":{\"cached_tokens\":384},\"completion_tokens_details\":{\"reasoning_tokens\":11},\"prompt_cache_hit_tokens\":384,\"prompt_cache_miss_tokens\":7}}\n\ndata: [DONE]\n\n"
+            },
+            {
+              "label": "reply",
+              "message": {
+                "id": "lc_run--01a068c6-d969-73f3-9a0e-83dce4c3d5c4",
+                "role": "ai",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "name": "price_of",
+                    "args": {
+                      "item": "milk"
+                    },
+                    "id": "call_00_1ET9SFofOlLyFkW3ye1q2872"
+                  }
+                ]
+              }
+            }
+          ],
+          "children": [
+            {
+              "name": "stream",
+              "attributes": {},
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 1112.0890000000002,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {}
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {}
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {}
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {}
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\"",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {}
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": ",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {}
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"",
+                  "parsed_as": [
+                    {
+                      "item": ""
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": ""
+                    }
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"m",
+                  "parsed_as": [
+                    {
+                      "item": "m"
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": "m"
+                    }
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "knew_it_was_a_fragment": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "knew_it_was_a_fragment": true
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "knew_it_was_a_fragment": true
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                },
+                {
+                  "label": "judged",
+                  "on": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "knew_it_was_a_fragment": true
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "judged_when_complete"
+      },
+      "seq": 4,
+      "thread": "MainThread",
+      "elapsed_ms": 880.74,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "dispatched once: 1.20 for milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "model",
+          "attributes": {
+            "model_kind": "live"
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 879.896,
+          "model_provider_ms": 367.25279200077057,
+          "library_ms": 512.6432079992294,
+          "notes": [
+            {
+              "label": "context",
+              "messages": [
+                {
+                  "id": null,
+                  "role": "system",
+                  "content": "You answer briefly and plainly. Use the tools you are given."
+                },
+                {
+                  "id": null,
+                  "role": "human",
+                  "content": "How much is milk?"
+                }
+              ]
+            },
+            {
+              "label": "wire request",
+              "attempt": 1,
+              "at_ms": 1034277620.1722909,
+              "method": "POST",
+              "url": "https://api.deepseek.com/v1/chat/completions",
+              "headers": {
+                "accept": "application/json",
+                "accept-encoding": "gzip, deflate, zstd",
+                "authorization": null,
+                "connection": "keep-alive",
+                "content-length": "449",
+                "content-type": "application/json",
+                "host": "api.deepseek.com",
+                "user-agent": "OpenAI/Python 3.6.0",
+                "x-stainless-arch": "arm64",
+                "x-stainless-async": "false",
+                "x-stainless-lang": "python",
+                "x-stainless-os": "MacOS",
+                "x-stainless-package-version": "3.6.0",
+                "x-stainless-read-timeout": "60.0",
+                "x-stainless-retry-count": "0",
+                "x-stainless-runtime": "CPython",
+                "x-stainless-runtime-version": "3.14.7"
+              },
+              "defaulted_by_model_provider": [
+                "temperature",
+                "max_tokens",
+                "top_p",
+                "stop",
+                "seed",
+                "tool_choice"
+              ],
+              "body": {
+                "messages": [
+                  {
+                    "content": "You answer briefly and plainly. Use the tools you are given.",
+                    "role": "system"
+                  },
+                  {
+                    "content": "How much is milk?",
+                    "role": "user"
+                  }
+                ],
+                "model": "deepseek-v4-flash",
+                "stream": true,
+                "tools": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "price_of",
+                      "description": "The current shelf price of an item, in pounds.",
+                      "parameters": {
+                        "properties": {
+                          "item": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "item"
+                        ],
+                        "type": "object"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "wire response",
+              "at_ms": 1034277987.4250829,
+              "status": 200,
+              "headers": {
+                "access-control-allow-credentials": "true",
+                "cache-control": "no-cache",
+                "connection": "keep-alive",
+                "content-type": "text/event-stream; charset=utf-8",
+                "date": "Thu, 03 Sep 2026 19:37:38 GMT",
+                "server": "elb",
+                "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                "transfer-encoding": "chunked",
+                "vary": "origin, access-control-request-method, access-control-request-headers",
+                "via": "1.1 ebcfae1084a6f4b6ecf9ff045173381c.cloudfront.net (CloudFront)",
+                "x-amz-cf-id": "yNxs6ZXUznkoOZ1ZoO03MM0nfCzUdaXNAog4teqHdwC0L-aLJSBArw==",
+                "x-amz-cf-pop": "DEN53-P4",
+                "x-cache": "Miss from cloudfront",
+                "x-content-type-options": "nosniff",
+                "x-ds-trace-id": "6379253f4ce06069a165ba2a4b7aed7e"
+              },
+              "body": "(streamed -- see this span's `wire frame` notes for the raw bytes)"
+            },
+            {
+              "label": "wire frame",
+              "frames": 14,
+              "raw": "data: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":null,\"reasoning_content\":\"\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\"The\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" user\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" asks\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" how\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" much\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" milk\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" is\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\".\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" I\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" need\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" to\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" check\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" price\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" of\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\" milk\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":null,\"reasoning_content\":\".\"},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"id\":\"call_00_wLYBz1v06MHiHLscUN808066\",\"type\":\"function\",\"function\":{\"name\":\"price_of\",\"arguments\":\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"{\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"\\\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"item\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"\\\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\": \"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"\\\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"m\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"ilk\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"\\\"\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"tool_calls\":[{\"index\":0,\"function\":{\"arguments\":\"}\"}}]},\"logprobs\":null,\"finish_reason\":null}]}\n\ndata: {\"id\":\"3135686f-5697-4d6c-9dff-8804d7de8b37\",\"object\":\"chat.completion.chunk\",\"created\":1788464258,\"model\":\"deepseek-v4-flash\",\"system_fingerprint\":\"a26a7955944dc5c60445bff77fac9c8e\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"\",\"reasoning_content\":null},\"logprobs\":null,\"finish_reason\":\"tool_calls\"}],\"usage\":{\"prompt_tokens\":391,\"completion_tokens\":61,\"total_tokens\":452,\"prompt_tokens_details\":{\"cached_tokens\":384},\"completion_tokens_details\":{\"reasoning_tokens\":16},\"prompt_cache_hit_tokens\":384,\"prompt_cache_miss_tokens\":7}}\n\ndata: [DONE]\n\n"
+            },
+            {
+              "label": "reply",
+              "message": {
+                "id": "lc_run--01a068c6-ddca-7480-819c-0c2ba3d80ddd",
+                "role": "ai",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "name": "price_of",
+                    "args": {
+                      "item": "milk"
+                    },
+                    "id": "call_00_wLYBz1v06MHiHLscUN808066"
+                  }
+                ]
+              }
+            }
+          ],
+          "children": [
+            {
+              "name": "stream",
+              "attributes": {},
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 869.3349999999999,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\"",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": ",
+                  "parsed_as": [
+                    {}
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"",
+                  "parsed_as": [
+                    {
+                      "item": ""
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"m",
+                  "parsed_as": [
+                    {
+                      "item": "m"
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": false
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                },
+                {
+                  "label": "chunk",
+                  "raw_arguments": "{\"item\": \"milk\"}",
+                  "parsed_as": [
+                    {
+                      "item": "milk"
+                    }
+                  ],
+                  "arguments_complete": true
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "price_of",
+            "id": "call_00_wLYBz1v06MHiHLscUN808066"
+          },
+          "seq": 7,
+          "thread": "MainThread",
+          "elapsed_ms": 0.794,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": "1.20 for milk"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ]
+}

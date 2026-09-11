@@ -1,0 +1,810 @@
+{
+  "chapter": "ch38_reducers",
+  "model_kind": "mock",
+  "source": "4445b59fcbbb",
+  "summary": {
+    "turns": 0,
+    "messages": 0,
+    "ended": "n/a"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "no_reducer_means_replace"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 3.9839999999999995,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "second_write_is_all_that_survives",
+          "final_note": "from second"
+        }
+      ],
+      "children": [
+        {
+          "name": "node",
+          "attributes": {
+            "name": "first"
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 0.006,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "note": "from first"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "note": "from first"
+              }
+            }
+          ]
+        },
+        {
+          "name": "node",
+          "attributes": {
+            "name": "second"
+          },
+          "seq": 3,
+          "thread": "MainThread",
+          "elapsed_ms": 0.004,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "note": "from second"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "note": "from second"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "first"
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 0.006,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "note": "from first"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "note": "from first"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "second"
+            },
+            "seq": 3,
+            "thread": "MainThread",
+            "elapsed_ms": 0.004,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "note": "from second"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "note": "from second"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "second_write_is_all_that_survives",
+            "final_note": "from second"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "add_messages_is_the_one_field_that_appends"
+      },
+      "seq": 4,
+      "thread": "MainThread",
+      "elapsed_ms": 3.285,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "seed_passed_to_invoke",
+          "message": "go",
+          "note": "initial"
+        },
+        {
+          "label": "one_field_accumulates_the_other_replaces",
+          "message_count": 3,
+          "messages": [
+            "go",
+            "turn one reply",
+            "turn two reply"
+          ],
+          "final_note": "from turn two"
+        }
+      ],
+      "children": [
+        {
+          "name": "node",
+          "attributes": {
+            "name": "turn_one"
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.012,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "message": "turn one reply",
+              "note": "from turn one"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "message": "turn one reply",
+                "note": "from turn one"
+              }
+            }
+          ]
+        },
+        {
+          "name": "node",
+          "attributes": {
+            "name": "turn_two"
+          },
+          "seq": 6,
+          "thread": "MainThread",
+          "elapsed_ms": 0.007,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "message": "turn two reply",
+              "note": "from turn two"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "message": "turn two reply",
+                "note": "from turn two"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "seed_passed_to_invoke",
+            "message": "go",
+            "note": "initial"
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "turn_one"
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 0.012,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "message": "turn one reply",
+                "note": "from turn one"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "message": "turn one reply",
+                  "note": "from turn one"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "turn_two"
+            },
+            "seq": 6,
+            "thread": "MainThread",
+            "elapsed_ms": 0.007,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "message": "turn two reply",
+                "note": "from turn two"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "message": "turn two reply",
+                  "note": "from turn two"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "one_field_accumulates_the_other_replaces",
+            "message_count": 3,
+            "messages": [
+              "go",
+              "turn one reply",
+              "turn two reply"
+            ],
+            "final_note": "from turn two"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_custom_reducer_is_just_a_function"
+      },
+      "seq": 7,
+      "thread": "MainThread",
+      "elapsed_ms": 1.296,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "operator_add_accumulates_across_turns",
+          "final_total": 8
+        }
+      ],
+      "children": [
+        {
+          "name": "node",
+          "attributes": {
+            "name": "add_five"
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.003,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "total": 5
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "total": 5
+              }
+            }
+          ]
+        },
+        {
+          "name": "node",
+          "attributes": {
+            "name": "add_three"
+          },
+          "seq": 9,
+          "thread": "MainThread",
+          "elapsed_ms": 0.001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "total": 3
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "total": 3
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "add_five"
+            },
+            "seq": 8,
+            "thread": "MainThread",
+            "elapsed_ms": 0.003,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "total": 5
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "total": 5
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "add_three"
+            },
+            "seq": 9,
+            "thread": "MainThread",
+            "elapsed_ms": 0.001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "total": 3
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "total": 3
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "operator_add_accumulates_across_turns",
+            "final_total": 8
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "the_wrong_reducer_choice_silently_loses_data"
+      },
+      "seq": 10,
+      "thread": "MainThread",
+      "elapsed_ms": 1.213,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "a100_never_recorded",
+          "final_order_ids_checked": [
+            "B200"
+          ],
+          "a100_survived": false
+        }
+      ],
+      "children": [
+        {
+          "name": "node",
+          "attributes": {
+            "name": "check_first_order"
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 0.002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "order_ids_checked": [
+                "A100"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "order_ids_checked": [
+                  "A100"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "node",
+          "attributes": {
+            "name": "check_second_order"
+          },
+          "seq": 12,
+          "thread": "MainThread",
+          "elapsed_ms": 0.002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "order_ids_checked": [
+                "B200"
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "order_ids_checked": [
+                  "B200"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "check_first_order"
+            },
+            "seq": 11,
+            "thread": "MainThread",
+            "elapsed_ms": 0.002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "order_ids_checked": [
+                  "A100"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "order_ids_checked": [
+                    "A100"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "check_second_order"
+            },
+            "seq": 12,
+            "thread": "MainThread",
+            "elapsed_ms": 0.002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "order_ids_checked": [
+                  "B200"
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "order_ids_checked": [
+                    "B200"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "a100_never_recorded",
+            "final_order_ids_checked": [
+              "B200"
+            ],
+            "a100_survived": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "two_nodes_writing_the_same_field_in_one_super_step_both_survive"
+      },
+      "seq": 13,
+      "thread": "MainThread",
+      "elapsed_ms": 1.964,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "seed_passed_to_invoke",
+          "message": "go",
+          "total": 0
+        },
+        {
+          "label": "both_simultaneous_writes_survived",
+          "messages": [
+            "go",
+            "left branch",
+            "right branch"
+          ],
+          "both_branches_present": true,
+          "total": 11
+        }
+      ],
+      "children": [
+        {
+          "name": "node",
+          "attributes": {
+            "name": "left"
+          },
+          "seq": 14,
+          "thread": "ThreadPoolExecutor-5_0",
+          "elapsed_ms": 0.015000000000000001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "message": "left branch",
+              "total": 1
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "message": "left branch",
+                "total": 1
+              }
+            }
+          ]
+        },
+        {
+          "name": "node",
+          "attributes": {
+            "name": "right"
+          },
+          "seq": 15,
+          "thread": "ThreadPoolExecutor-5_0",
+          "elapsed_ms": 0.007,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "wrote",
+              "message": "right branch",
+              "total": 10
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrote",
+                "message": "right branch",
+                "total": 10
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "seed_passed_to_invoke",
+            "message": "go",
+            "total": 0
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "left"
+            },
+            "seq": 14,
+            "thread": "ThreadPoolExecutor-5_0",
+            "elapsed_ms": 0.015000000000000001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "message": "left branch",
+                "total": 1
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "message": "left branch",
+                  "total": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "node",
+            "attributes": {
+              "name": "right"
+            },
+            "seq": 15,
+            "thread": "ThreadPoolExecutor-5_0",
+            "elapsed_ms": 0.007,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrote",
+                "message": "right branch",
+                "total": 10
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrote",
+                  "message": "right branch",
+                  "total": 10
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "both_simultaneous_writes_survived",
+            "messages": [
+              "go",
+              "left branch",
+              "right branch"
+            ],
+            "both_branches_present": true,
+            "total": 11
+          }
+        }
+      ]
+    }
+  ]
+}

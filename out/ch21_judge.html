@@ -1,0 +1,310 @@
+<!doctype html><meta charset=utf-8><title>ch21_judge</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line. */
+pre.wire .k { color: #06c; }
+pre.wire .s { color: #0a7; }
+pre.wire .n { color: #b26; }
+pre.wire .l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  pre.wire .k { color: #7bf; } pre.wire .s { color: #6d9; }
+  pre.wire .n { color: #f9a; } pre.wire .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch21_judge</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=3 · messages=0</span></div><div class="col col-live"><b>live</b> <span class="meta">turns=3 · messages=0</span></div></div><div class="turn"><div class="turnno">scenario judge_rejects_a_tool_call</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">judge_rejects_a_tool_call</span> <span class="dot">·</span> <span class="ms">3.6ms</span> <span class="dot">·</span> <span class="digest">1 turn · ended: accepted on attempt 2: ordered 2 x milk</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">3.5ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">3.2ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Order a couple bottles of milk.</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;place_order&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 2, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 500})</div></td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 1, &quot;passed&quot;: false, &quot;reason&quot;: &quot;500 is not reasonable for &#x27;a couple&#x27;&quot;}</div><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Order a couple bottles of milk.</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 500})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">rejected: 500 is not reasonable for &#x27;a couple&#x27;. Try different arguments.</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;place_order&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 4, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;tool&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 2})</div></td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 2, &quot;passed&quot;: true, &quot;reason&quot;: null}</div><details><summary><span class="name">tool</span> <span class="meta">place_order</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk, quantity=2 · returned: ordered 2 x milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 2}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;ordered 2 x milk&quot;}</div></details></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;accepted on attempt 2: ordered 2 x milk&quot;}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">judge_rejects_a_tool_call</span> <span class="dot">·</span> <span class="ms">1206.1ms</span> <span class="dot">·</span> <span class="digest">1 turn · ended: accepted on attempt 1: ordered 2 x milk</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1205.9ms</span> <span class="dot">·</span> <span class="digest">401 in / 90 out · asked for: place_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1205.8ms (model provider 964.4 · library 241.5)</span> <span class="dot">·</span> <span class="digest">401 in / 90 out · asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Order a couple bottles of milk.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">490</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order a couple bottles of milk.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;place_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Order a quantity of an item.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            },
+            <span class="k">&quot;quantity&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;integer&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>,
+            <span class="s">&quot;quantity&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 21:01:55 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 a42ce842e0f60814700ead82353e9f08.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">gTTV_S42CmYXokMhxj0ojC35in1D-9nE6YD-dupQ8Mb8PzMmVwPAjw==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">4d3be9295dcb550e84f7e2bc06d8ceb1</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;6f9e9fa6-5ffa-4b8b-993e-ffe3637faf1e&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788469315</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user wants to order \&quot;a couple bottles of milk.\&quot; A couple usually means two. I should place an order for milk quantity 2.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_i5fTix5VDGCGtH66yZj61929&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;place_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;, \&quot;quantity\&quot;: 2}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">401</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">90</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">491</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">29</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">17</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 2})</div></td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 1, &quot;passed&quot;: true, &quot;reason&quot;: null}</div><details><summary><span class="name">tool</span> <span class="meta">place_order</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">given: item=milk, quantity=2 · returned: ordered 2 x milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 2}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;ordered 2 x milk&quot;}</div></details></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;accepted on attempt 1: ordered 2 x milk&quot;}</div></details></div></div></div><div class="turn"><div class="turnno">scenario judge_rejects_a_final_answer</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">judge_rejects_a_final_answer</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">1 turn · ended: attempt 2, passed=True: Milk is 1.20 per bottle.</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20 per bottle.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Sure, happy to help with grocery questions.</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 2, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Sure, happy to help with grocery questions.</td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 1, &quot;passed&quot;: false, &quot;reason&quot;: &quot;answer does not mention &#x27;milk&#x27;&quot;}</div><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20 per bottle.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content">Sure, happy to help with grocery questions.</td></tr><tr><td>[3]</td><td class="role">human</td><td class="content">That does not work: answer does not mention &#x27;milk&#x27;. Try again.</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 4, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk is 1.20 per bottle.</td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 2, &quot;passed&quot;: true, &quot;reason&quot;: null}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;attempt 2, passed=True: Milk is 1.20 per bottle.&quot;}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">judge_rejects_a_final_answer</span> <span class="dot">·</span> <span class="ms">1178.2ms</span> <span class="dot">·</span> <span class="digest">1 turn · ended: attempt 1, passed=True: Milk prices vary by location, store, and type. In the U.S., a gallon of whole milk typically costs around $3 to $4.</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1178.1ms</span> <span class="dot">·</span> <span class="digest">101 in / 82 out · responded with: Milk prices vary by location, store, and type. In the U.S., a gallon of whole milk typical... (25 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1178.1ms (model provider 1166.5 · library 11.6)</span> <span class="dot">·</span> <span class="digest">101 in / 82 out · responded with: Milk prices vary by location, store, and type. In the U.S., a gallon of whole milk typical... (25 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">194</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 21:01:56 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 8b9292a3a907c0814dfd42d54fb3ab62.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">v5PlaVYGRqzMdSdauyHMdwRqvWkLEDlLi83GQMeE7oc8mfkqG6oxYw==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">816fdcf6af935f63025947c958fd5fe9</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;989d5b1f-9724-4a72-bf92-c2dcbc4ea4d9&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788469316</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Milk prices vary by location, store, and type. In the U.S., a gallon of whole milk typically costs around $3 to $4.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;We need answer. Need know milk price ambiguous. Need ask clarification? User asks \&quot;How much is milk?\&quot; We can respond generally, depends location/store/brand/type. Could give average US price ~$3.50 gallon. Need brief.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">101</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">82</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">183</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">50</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">0</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">101</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk prices vary by location, store, and type. In the U.S., a gallon of whole milk typically costs around $3 to $4.</td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 1, &quot;passed&quot;: true, &quot;reason&quot;: null}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;attempt 1, passed=True: Milk prices vary by location, store, and type. In the U.S., a gallon of whole milk typically costs around $3 to $4.&quot;}</div></details></div></div></div><div class="turn"><div class="turnno">scenario judge_gives_up_after_max_attempts</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">judge_gives_up_after_max_attempts</span> <span class="dot">·</span> <span class="ms">0.5ms</span> <span class="dot">·</span> <span class="digest">1 turn · ended: gave up after 3 attempts: 500 is not reasonable for &#x27;a couple&#x27;</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.5ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Order a couple bottles of milk.</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;place_order&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 2, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 500})</div></td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 1, &quot;passed&quot;: false, &quot;reason&quot;: &quot;500 is not reasonable for &#x27;a couple&#x27;&quot;}</div><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Order a couple bottles of milk.</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 500})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">rejected: 500 is not reasonable for &#x27;a couple&#x27;. Try different arguments.</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;place_order&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 4, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;tool&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 500})</div></td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 2, &quot;passed&quot;: false, &quot;reason&quot;: &quot;500 is not reasonable for &#x27;a couple&#x27;&quot;}</div><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 6 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Order a couple bottles of milk.</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 500})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">rejected: 500 is not reasonable for &#x27;a couple&#x27;. Try different arguments.</td></tr><tr><td>[4]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 500})</div></td></tr><tr><td>[5]</td><td class="role">tool</td><td class="content">rejected: 500 is not reasonable for &#x27;a couple&#x27;. Try different arguments.</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;place_order&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 6, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;tool&quot;, &quot;ai&quot;, &quot;tool&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 500})</div></td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 3, &quot;passed&quot;: false, &quot;reason&quot;: &quot;500 is not reasonable for &#x27;a couple&#x27;&quot;}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;gave up after 3 attempts: 500 is not reasonable for &#x27;a couple&#x27;&quot;}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">judge_gives_up_after_max_attempts</span> <span class="dot">·</span> <span class="ms">1276.6ms</span> <span class="dot">·</span> <span class="digest">1 turn · ended: accepted on attempt 1 instead of giving up</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1276.5ms</span> <span class="dot">·</span> <span class="digest">401 in / 91 out · asked for: place_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1276.5ms (model provider 1265.0 · library 11.5)</span> <span class="dot">·</span> <span class="digest">401 in / 91 out · asked for: place_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Order a couple bottles of milk.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">490</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order a couple bottles of milk.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;place_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Order a quantity of an item.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            },
+            <span class="k">&quot;quantity&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;integer&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>,
+            <span class="s">&quot;quantity&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 21:01:57 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 b93403e5b15ed21bc6e80b8108e9d988.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">zBvirxMWwKl1CxzJf4DzebPTqCEPZMxk-jJ5BPZU4DdhblHzN1d38w==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">5c36017d8de5e6c3ecef562d66398563</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;7ad8ccb1-0a7d-44b5-882f-4e7c8af7ef55&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788469317</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks to order a couple bottles of milk. \&quot;A couple\&quot; typically means two. Use place_order with item milk, quantity 2.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_A3KqI2FByYTtwlvSBDJw1760&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;place_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;, \&quot;quantity\&quot;: 2}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">401</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">91</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">492</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">30</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">17</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">place_order({&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 2})</div></td></tr></table></div></details><div class="note"><span class="label">judged</span> {&quot;attempt&quot;: 1, &quot;passed&quot;: true, &quot;reason&quot;: null}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;accepted on attempt 1 instead of giving up&quot;}</div></details></div></div></div>

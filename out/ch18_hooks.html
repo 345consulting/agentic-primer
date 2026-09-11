@@ -1,0 +1,96 @@
+<!doctype html><meta charset=utf-8><title>ch18_hooks</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line. */
+pre.wire .k { color: #06c; }
+pre.wire .s { color: #0a7; }
+pre.wire .n { color: #b26; }
+pre.wire .l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  pre.wire .k { color: #7bf; } pre.wire .s { color: #6d9; }
+  pre.wire .n { color: #f9a; } pre.wire .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch18_hooks</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=7 · messages=0</span></div><div class="col col-live"><b>live</b> <span class="meta">not run</span></div></div><div class="turn"><div class="turnno">scenario tool_pre_observe</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">tool_pre_observe</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">1 tool · ended: success: ordered 2 x milk</span></summary><details><summary><span class="name">tool</span> <span class="meta">place_order</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk, quantity=2 · returned: ordered 2 x milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 2}</div><div class="note"><span class="label">hook</span> {&quot;when&quot;: &quot;pre&quot;, &quot;by&quot;: &quot;note_if_a_write&quot;, &quot;note&quot;: &quot;place_order is a write&quot;, &quot;veto&quot;: null, &quot;replacement&quot;: null}</div><div class="note"><span class="label">dispatched</span> {&quot;value&quot;: &quot;ordered 2 x milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;ordered 2 x milk&quot;}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;success: ordered 2 x milk&quot;}</div></details></div><div class="col col-live missing">not run</div></div></div><div class="turn"><div class="turnno">scenario tool_pre_modify</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">tool_pre_modify</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">1 tool · ended: success: ordered 2 x milk</span></summary><details><summary><span class="name">tool</span> <span class="meta">place_order</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=  Milk , quantity=2 · returned: ordered 2 x milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;  Milk &quot;, &quot;quantity&quot;: 2}</div><div class="note"><span class="label">hook</span> {&quot;when&quot;: &quot;pre&quot;, &quot;by&quot;: &quot;normalize_item&quot;, &quot;note&quot;: null, &quot;veto&quot;: null, &quot;replacement&quot;: {&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 2}}</div><div class="note"><span class="label">dispatched</span> {&quot;value&quot;: &quot;ordered 2 x milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;ordered 2 x milk&quot;}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;success: ordered 2 x milk&quot;}</div></details></div><div class="col col-live missing">not run</div></div></div><div class="turn"><div class="turnno">scenario tool_pre_veto</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">tool_pre_veto</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">1 tool · ended: error: [&#x27;place_order&#x27;] blocked before it ran: [&#x27;saffron&#x27;] is not in the catalog</span></summary><details><summary><span class="name">tool</span> <span class="meta">place_order</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=saffron, quantity=1</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;saffron&quot;, &quot;quantity&quot;: 1}</div><div class="note"><span class="label">hook</span> {&quot;when&quot;: &quot;pre&quot;, &quot;by&quot;: &quot;refuse_unlisted_items&quot;, &quot;note&quot;: null, &quot;veto&quot;: &quot;[&#x27;saffron&#x27;] is not in the catalog&quot;, &quot;replacement&quot;: null}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;error: [&#x27;place_order&#x27;] blocked before it ran: [&#x27;saffron&#x27;] is not in the catalog&quot;}</div></details></div><div class="col col-live missing">not run</div></div></div><div class="turn"><div class="turnno">scenario tool_post_observe</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">tool_post_observe</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">1 tool · ended: success: 1.20 for milk [internal_ref=8821]</span></summary><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20 for milk [internal_ref=8821]</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">dispatched</span> {&quot;value&quot;: &quot;1.20 for milk [internal_ref=8821]&quot;}</div><div class="note"><span class="label">hook</span> {&quot;when&quot;: &quot;post&quot;, &quot;by&quot;: &quot;note_the_result&quot;, &quot;note&quot;: &quot;result observed&quot;, &quot;veto&quot;: null, &quot;replacement&quot;: null}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.20 for milk [internal_ref=8821]&quot;}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;success: 1.20 for milk [internal_ref=8821]&quot;}</div></details></div><div class="col col-live missing">not run</div></div></div><div class="turn"><div class="turnno">scenario tool_post_modify</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">tool_post_modify</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">1 tool · ended: success: 1.20 for milk</span></summary><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20 for milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">dispatched</span> {&quot;value&quot;: &quot;1.20 for milk [internal_ref=8821]&quot;}</div><div class="note"><span class="label">hook</span> {&quot;when&quot;: &quot;post&quot;, &quot;by&quot;: &quot;redact_internal_reference&quot;, &quot;note&quot;: null, &quot;veto&quot;: null, &quot;replacement&quot;: {&quot;value&quot;: &quot;1.20 for milk&quot;}}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.20 for milk&quot;}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;success: 1.20 for milk&quot;}</div></details></div><div class="col col-live missing">not run</div></div></div><div class="turn"><div class="turnno">scenario tool_post_veto</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">tool_post_veto</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">1 tool · ended: error: [&#x27;price_of&#x27;] ran, but the result was withheld: price [&#x27;0.00 for milk&#x27;] is implausible; withheld</span></summary><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · ran: 0.00 for milk (withheld)</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">dispatched</span> {&quot;value&quot;: &quot;0.00 for milk&quot;}</div><div class="note"><span class="label">hook</span> {&quot;when&quot;: &quot;post&quot;, &quot;by&quot;: &quot;refuse_implausible_price&quot;, &quot;note&quot;: null, &quot;veto&quot;: &quot;price [&#x27;0.00 for milk&#x27;] is implausible; withheld&quot;, &quot;replacement&quot;: null}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;error: [&#x27;price_of&#x27;] ran, but the result was withheld: price [&#x27;0.00 for milk&#x27;] is implausible; withheld&quot;}</div></details></div><div class="col col-live missing">not run</div></div></div><div class="turn"><div class="turnno">scenario pre_tool_hooks_compose</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">pre_tool_hooks_compose</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">1 tool · ended: error: [&#x27;place_order&#x27;] blocked before it ran: [&#x27;chocolate milk&#x27;] is not in the catalog</span></summary><details><summary><span class="name">tool</span> <span class="meta">place_order</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=  Chocolate Milk , quantity=1</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;  Chocolate Milk &quot;, &quot;quantity&quot;: 1}</div><div class="note"><span class="label">hook</span> {&quot;when&quot;: &quot;pre&quot;, &quot;by&quot;: &quot;note_if_a_write&quot;, &quot;note&quot;: &quot;place_order is a write&quot;, &quot;veto&quot;: null, &quot;replacement&quot;: null}</div><div class="note"><span class="label">hook</span> {&quot;when&quot;: &quot;pre&quot;, &quot;by&quot;: &quot;normalize_item&quot;, &quot;note&quot;: null, &quot;veto&quot;: null, &quot;replacement&quot;: {&quot;item&quot;: &quot;chocolate milk&quot;, &quot;quantity&quot;: 1}}</div><div class="note"><span class="label">hook</span> {&quot;when&quot;: &quot;pre&quot;, &quot;by&quot;: &quot;refuse_unlisted_items&quot;, &quot;note&quot;: null, &quot;veto&quot;: &quot;[&#x27;chocolate milk&#x27;] is not in the catalog&quot;, &quot;replacement&quot;: null}</div></details><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;error: [&#x27;place_order&#x27;] blocked before it ran: [&#x27;chocolate milk&#x27;] is not in the catalog&quot;}</div></details></div><div class="col col-live missing">not run</div></div></div>

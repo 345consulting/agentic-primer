@@ -1,0 +1,579 @@
+{
+  "chapter": "ch06_two_tools",
+  "model_kind": "mock",
+  "source": "cccc103d0ce6",
+  "summary": {
+    "turns": 5,
+    "messages": 13,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "arguments_in_the_question",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 3.024,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 2.705,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 2.276,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and how many do we have?"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-f8b4-7ed3-be4c-fa6d63f46f39-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "c1"
+                      },
+                      {
+                        "name": "stock_on_hand",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "c2"
+                      }
+                    ],
+                    "finish_reason": "tool_calls"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "c1"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 0.243,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "result",
+                  "value": "1.20"
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "stock_on_hand",
+                "id": "c2"
+              },
+              "seq": 5,
+              "thread": "MainThread",
+              "elapsed_ms": 0.158,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "result",
+                  "value": 2
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 6,
+          "thread": "MainThread",
+          "elapsed_ms": 0.17200000000000001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 7,
+              "thread": "MainThread",
+              "elapsed_ms": 0.166,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and how many do we have?"
+                    },
+                    {
+                      "id": "lc_run--01a06545-f8b4-7ed3-be4c-fa6d63f46f39-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        },
+                        {
+                          "name": "stock_on_hand",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c2"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "1.20",
+                      "tool_call_id": "c1"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "2",
+                      "tool_call_id": "c2"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 5,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-f8b5-7152-ab23-f6ed74ae6b1b-0",
+                    "role": "ai",
+                    "content": "Milk is 1.20 and there are 2 in stock.",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "argument_from_a_result",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 8,
+      "thread": "MainThread",
+      "elapsed_ms": 0.784,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 9,
+          "thread": "MainThread",
+          "elapsed_ms": 0.279,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 10,
+              "thread": "MainThread",
+              "elapsed_ms": 0.153,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost?"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-f8b5-7152-ab23-f6fb1c0fa235-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "lowest_stock_item",
+                        "args": {},
+                        "id": "c1"
+                      }
+                    ],
+                    "finish_reason": "tool_calls"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "lowest_stock_item",
+                "id": "c1"
+              },
+              "seq": 11,
+              "thread": "MainThread",
+              "elapsed_ms": 0.116,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args"
+                },
+                {
+                  "label": "result",
+                  "value": "butter"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 12,
+          "thread": "MainThread",
+          "elapsed_ms": 0.279,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 13,
+              "thread": "MainThread",
+              "elapsed_ms": 0.16899999999999998,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost?"
+                    },
+                    {
+                      "id": "lc_run--01a06545-f8b5-7152-ab23-f6fb1c0fa235-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "lowest_stock_item",
+                          "args": {},
+                          "id": "c1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "butter",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-f8b6-7fc1-ae32-cf1d05313364-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "butter"
+                        },
+                        "id": "c2"
+                      }
+                    ],
+                    "finish_reason": "tool_calls"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "c2"
+              },
+              "seq": 14,
+              "thread": "MainThread",
+              "elapsed_ms": 0.101,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "butter"
+                },
+                {
+                  "label": "result",
+                  "value": "3.10"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 3
+          },
+          "seq": 15,
+          "thread": "MainThread",
+          "elapsed_ms": 0.211,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 16,
+              "thread": "MainThread",
+              "elapsed_ms": 0.207,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost?"
+                    },
+                    {
+                      "id": "lc_run--01a06545-f8b5-7152-ab23-f6fb1c0fa235-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "lowest_stock_item",
+                          "args": {},
+                          "id": "c1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "butter",
+                      "tool_call_id": "c1"
+                    },
+                    {
+                      "id": "lc_run--01a06545-f8b6-7fc1-ae32-cf1d05313364-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "butter"
+                          },
+                          "id": "c2"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "3.10",
+                      "tool_call_id": "c2"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 6,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-f8b6-7fc1-ae32-cf3a76ceb702-0",
+                    "role": "ai",
+                    "content": "You are lowest on butter, and one costs 3.10.",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

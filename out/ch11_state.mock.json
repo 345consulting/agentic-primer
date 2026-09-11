@@ -1,0 +1,756 @@
+{
+  "chapter": "ch11_state",
+  "model_kind": "mock",
+  "source": "61e7c779021c",
+  "summary": {
+    "turns": 6,
+    "messages": 14,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_running_total_survives_between_calls",
+        "tools": "place_order, price_of",
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 4.8149999999999995,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 4.133,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "state",
+              "total_ordered": 5
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 3.878,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order 5 bottles of milk for the cafe, and 3 for the office, separately."
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order",
+                    "price_of"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06811-d101-7bb1-8e3d-5681047f928c-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 5
+                        },
+                        "id": "c1"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "place_order",
+                "id": "c1"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 0.235,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 5
+                },
+                {
+                  "label": "result",
+                  "value": "ordered 5 x milk"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.352,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "state",
+              "total_ordered": 8
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 0.215,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order 5 bottles of milk for the cafe, and 3 for the office, separately."
+                    },
+                    {
+                      "id": "lc_run--01a06811-d101-7bb1-8e3d-5681047f928c-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 5
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "ordered 5 x milk",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order",
+                    "price_of"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06811-d101-7bb1-8e3d-56a87cf1e65a-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 3
+                        },
+                        "id": "c2"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "place_order",
+                "id": "c2"
+              },
+              "seq": 7,
+              "thread": "MainThread",
+              "elapsed_ms": 0.12300000000000001,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 3
+                },
+                {
+                  "label": "result",
+                  "value": "ordered 3 x milk"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 3
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.191,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "state",
+              "total_ordered": 8
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 9,
+              "thread": "MainThread",
+              "elapsed_ms": 0.187,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order 5 bottles of milk for the cafe, and 3 for the office, separately."
+                    },
+                    {
+                      "id": "lc_run--01a06811-d101-7bb1-8e3d-5681047f928c-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 5
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "ordered 5 x milk",
+                      "tool_call_id": "c1"
+                    },
+                    {
+                      "id": "lc_run--01a06811-d101-7bb1-8e3d-56a87cf1e65a-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 3
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "ordered 3 x milk",
+                      "tool_call_id": "c2"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order",
+                    "price_of"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 6,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06811-d102-7390-a378-801cb03018c0-0",
+                    "role": "ai",
+                    "content": "Ordered 5 for the cafe and 3 for the office -- 8 in total."
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "reads_do_not_touch_the_total",
+        "tools": "place_order, price_of",
+        "max_tokens": null
+      },
+      "seq": 10,
+      "thread": "MainThread",
+      "elapsed_ms": 0.833,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 0.323,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "state",
+              "total_ordered": 0
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 12,
+              "thread": "MainThread",
+              "elapsed_ms": 0.179,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and please order 4 bottles."
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order",
+                    "price_of"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06811-d102-7390-a378-802b913b6a18-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "c1"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "c1"
+              },
+              "seq": 13,
+              "thread": "MainThread",
+              "elapsed_ms": 0.134,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "result",
+                  "value": "1.20 for milk"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 14,
+          "thread": "MainThread",
+          "elapsed_ms": 0.317,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "state",
+              "total_ordered": 4
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 15,
+              "thread": "MainThread",
+              "elapsed_ms": 0.191,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and please order 4 bottles."
+                    },
+                    {
+                      "id": "lc_run--01a06811-d102-7390-a378-802b913b6a18-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "1.20 for milk",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order",
+                    "price_of"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06811-d102-7390-a378-804d977298fc-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 4
+                        },
+                        "id": "c2"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "place_order",
+                "id": "c2"
+              },
+              "seq": 16,
+              "thread": "MainThread",
+              "elapsed_ms": 0.116,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 4
+                },
+                {
+                  "label": "result",
+                  "value": "ordered 4 x milk"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 3
+          },
+          "seq": 17,
+          "thread": "MainThread",
+          "elapsed_ms": 0.18100000000000002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "state",
+              "total_ordered": 4
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 18,
+              "thread": "MainThread",
+              "elapsed_ms": 0.178,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and please order 4 bottles."
+                    },
+                    {
+                      "id": "lc_run--01a06811-d102-7390-a378-802b913b6a18-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "1.20 for milk",
+                      "tool_call_id": "c1"
+                    },
+                    {
+                      "id": "lc_run--01a06811-d102-7390-a378-804d977298fc-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 4
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "ordered 4 x milk",
+                      "tool_call_id": "c2"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order",
+                    "price_of"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 6,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06811-d103-7421-8c66-b9d411bbcdf0-0",
+                    "role": "ai",
+                    "content": "Milk is 1.20 each; ordered 4 bottles."
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,480 @@
+{
+  "chapter": "ch13_workflow",
+  "model_kind": "mock",
+  "source": "93211f368bab",
+  "summary": {
+    "turns": 8,
+    "messages": 0,
+    "ended": "6 in stock; Milk is 1.20 per bottle.; backordered 5 x milk; discounted to 1.08; reserved 2 x milk"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "single_step"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 0.283,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "6 in stock"
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "check_stock",
+            "kind": "function"
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 0.007,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "chips"
+            },
+            {
+              "label": "result",
+              "value": 6
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "dual_in_sequence"
+      },
+      "seq": 3,
+      "thread": "MainThread",
+      "elapsed_ms": 0.013,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "discounted to 1.08"
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "get_price",
+            "kind": "function"
+          },
+          "seq": 4,
+          "thread": "MainThread",
+          "elapsed_ms": 0.002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": "1.20"
+            }
+          ],
+          "children": []
+        },
+        {
+          "name": "step",
+          "attributes": {
+            "name": "apply_discount",
+            "kind": "function"
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.005,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "price": "1.20"
+            },
+            {
+              "label": "result",
+              "value": "1.08"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "three_steps_reserves"
+      },
+      "seq": 6,
+      "thread": "MainThread",
+      "elapsed_ms": 0.008,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "reserved 2 x milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "check_stock",
+            "kind": "function"
+          },
+          "seq": 7,
+          "thread": "MainThread",
+          "elapsed_ms": 0.001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": 2
+            }
+          ],
+          "children": []
+        },
+        {
+          "name": "step",
+          "attributes": {
+            "name": "reserve_stock",
+            "kind": "function"
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk",
+              "quantity": 2
+            },
+            {
+              "label": "result",
+              "value": "reserved 2 x milk"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "three_steps_backorders"
+      },
+      "seq": 9,
+      "thread": "MainThread",
+      "elapsed_ms": 0.007,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "backordered 5 x milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "check_stock",
+            "kind": "function"
+          },
+          "seq": 10,
+          "thread": "MainThread",
+          "elapsed_ms": 0.001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": 2
+            }
+          ],
+          "children": []
+        },
+        {
+          "name": "step",
+          "attributes": {
+            "name": "create_backorder",
+            "kind": "function"
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 0.002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk",
+              "quantity": 5
+            },
+            {
+              "label": "result",
+              "value": "backordered 5 x milk"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_step_can_be_an_agent"
+      },
+      "seq": 12,
+      "thread": "MainThread",
+      "elapsed_ms": 4.393,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "Milk is 1.20 per bottle."
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "check_price_via_agent",
+            "kind": "agent"
+          },
+          "seq": 13,
+          "thread": "MainThread",
+          "elapsed_ms": 4.391,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": "Milk is 1.20 per bottle."
+            }
+          ],
+          "children": [
+            {
+              "name": "turn",
+              "attributes": {
+                "number": 1
+              },
+              "seq": 14,
+              "thread": "MainThread",
+              "elapsed_ms": 4.172000000000001,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [],
+              "children": [
+                {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 15,
+                  "thread": "MainThread",
+                  "elapsed_ms": 3.921,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tool you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "price_of"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a0684f-61ac-7f21-9b95-860026436212-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "a1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "price_of",
+                    "id": "a1"
+                  },
+                  "seq": 16,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.23299999999999998,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "item": "milk"
+                    },
+                    {
+                      "label": "result",
+                      "value": "1.20 for milk"
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "turn",
+              "attributes": {
+                "number": 2
+              },
+              "seq": 17,
+              "thread": "MainThread",
+              "elapsed_ms": 0.2,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [],
+              "children": [
+                {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 18,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.195,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tool you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        },
+                        {
+                          "id": "lc_run--01a0684f-61ac-7f21-9b95-860026436212-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "a1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "1.20 for milk",
+                          "tool_call_id": "a1"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "price_of"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a0684f-61ad-73d1-bef4-354abc0c2679-0",
+                        "role": "ai",
+                        "content": "Milk is 1.20 per bottle."
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

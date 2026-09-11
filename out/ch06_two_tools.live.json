@@ -1,0 +1,396 @@
+{
+  "chapter": "ch06_two_tools",
+  "model_kind": "live",
+  "source": "cccc103d0ce6",
+  "summary": {
+    "turns": 2,
+    "messages": 6,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "arguments_in_the_question",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 3590.239,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 3590.0750000000003,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 3590.024,
+              "model_provider_ms": 3401.2793749570847,
+              "library_ms": 188.74462504291523,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and how many do we have?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975499699.2047501,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "219",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tools",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk, and how many do we have?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975503100.484125,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:18:00 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 9c5f0f2d909551d3aff789d9ac0f878a.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "i7PwJWQ8XdPRUslREdKIl0rvUInAvwrxxBnsSPlXB81JFPUHvslsnw==",
+                    "x-amz-cf-pop": "DEN53-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "ab88d07a7878ce9def1f77ea74123ac6"
+                  },
+                  "body": {
+                    "id": "778ddfba-b305-4b35-886b-8e68a230feb7",
+                    "object": "chat.completion",
+                    "created": 1788405480,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "I don\u2019t have current information about milk prices or our milk inventory. Could you clarify which store or system you\u2019re referring to?",
+                          "reasoning_content": "We need to answer user question. Need context? They ask \"How much is milk, and how many do we have?\" Likely referring to grocery items? But no context. Maybe from previous conversation? I don't have memory. Could be asking about milk price and quantity in inventory. As an assistant without tools or context, I should ask clarifying question. But maybe there is a database? The prompt says \"Use the tools you are given.\" But no tools listed? Actually system says \"You are a helpful AI assistant. Use the tools provided.\" But no tools are shown. So we can only respond. Need to infer? Maybe it's a trick: \"How much is milk\" means cost, \"how many do we have\" means count. We have no data. So ask for clarification. But maybe they expect \"I don't have that information.\" Let's craft response: \"I don't have information about milk prices or inventory. Can you provide more context or check with the relevant system?\" But the instructions \"Use the tools you are given.\" There are none. So I'll say I don't have access to current data."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 108,
+                      "completion_tokens": 260,
+                      "total_tokens": 368,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 0
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 231
+                      },
+                      "prompt_cache_hit_tokens": 0,
+                      "prompt_cache_miss_tokens": 108
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-fc56-7513-8ec1-c981d75bc82c-0",
+                    "role": "ai",
+                    "content": "I don\u2019t have current information about milk prices or our milk inventory. Could you clarify which store or system you\u2019re referring to?",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "We need to answer user question. Need context? They ask \"How much is milk, and how many do we have?\" Likely referring to grocery items? But no context. Maybe from previous conversation? I don't have memory. Could be asking about milk price and quantity in inventory. As an assistant without tools or context, I should ask clarifying question. But maybe there is a database? The prompt says \"Use the tools you are given.\" But no tools listed? Actually system says \"You are a helpful AI assistant. Use the tools provided.\" But no tools are shown. So we can only respond. Need to infer? Maybe it's a trick: \"How much is milk\" means cost, \"how many do we have\" means count. We have no data. So ask for clarification. But maybe they expect \"I don't have that information.\" Let's craft response: \"I don't have information about milk prices or inventory. Can you provide more context or check with the relevant system?\" But the instructions \"Use the tools you are given.\" There are none. So I'll say I don't have access to current data."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 108,
+                      "output_tokens": 260,
+                      "total_tokens": 368,
+                      "input_token_details": {
+                        "cache_read": 0
+                      },
+                      "output_token_details": {
+                        "reasoning": 231
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "argument_from_a_result",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 4,
+      "thread": "MainThread",
+      "elapsed_ms": 1728.502,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 1728.434,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 1728.4060000000002,
+              "model_provider_ms": 1717.0924171209335,
+              "library_ms": 11.313582879066644,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975503122.1457909,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "233",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tools",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Whatever we are lowest on -- what does one of them cost?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975504839.238208,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:18:04 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 43eacc46a8d7338068c3e681a16f62be.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "SPEpqFqaLO3SASPzp-MaUBPOCSzIhdQshYSN-CuAl16rj7m9buSD6g==",
+                    "x-amz-cf-pop": "DEN53-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "257c34583c587584e46b19bb216898d1"
+                  },
+                  "body": {
+                    "id": "b38ca6e6-5330-4312-83e0-75abead25e26",
+                    "object": "chat.completion",
+                    "created": 1788405484,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "I need a bit more context to know what you\u2019re referring to. Could you tell me which items/products you have in mind, or share your inventory list? Then I can tell you what one of the lowest-stock items costs.",
+                          "reasoning_content": "We need answer. Need understand user: \"Whatever we are lowest on -- what does one of them cost?\" Need likely from inventory? Need ask clarifying? But maybe context? No context. Could be asking about item lowest in stock, price. Need respond need more info. Could mention need know which product/lowest inventory and prices. But maybe \"one of them\" cost singular. Need ask for list? Let's craft concise answer."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 109,
+                      "completion_tokens": 137,
+                      "total_tokens": 246,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 0
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 88
+                      },
+                      "prompt_cache_hit_tokens": 0,
+                      "prompt_cache_miss_tokens": 109
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-09be-7fc0-afff-8dd55e6d50e2-0",
+                    "role": "ai",
+                    "content": "I need a bit more context to know what you\u2019re referring to. Could you tell me which items/products you have in mind, or share your inventory list? Then I can tell you what one of the lowest-stock items costs.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "We need answer. Need understand user: \"Whatever we are lowest on -- what does one of them cost?\" Need likely from inventory? Need ask clarifying? But maybe context? No context. Could be asking about item lowest in stock, price. Need respond need more info. Could mention need know which product/lowest inventory and prices. But maybe \"one of them\" cost singular. Need ask for list? Let's craft concise answer."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 109,
+                      "output_tokens": 137,
+                      "total_tokens": 246,
+                      "input_token_details": {
+                        "cache_read": 0
+                      },
+                      "output_token_details": {
+                        "reasoning": 88
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1059 @@
+{
+  "chapter": "ch08_tool_program",
+  "model_kind": "mock",
+  "source": "b226f3e82b50",
+  "summary": {
+    "turns": 10,
+    "messages": 25,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "program_answers",
+        "tools": "price_of",
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 2.5709999999999997,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 2.2239999999999998,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 2.159,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "price_of"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6117-7ae1-8b75-2f632182053a-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "c1"
+                      }
+                    ],
+                    "finish_reason": "tool_calls"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "c1"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 0.043000000000000003,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "command",
+                  "line": "printf 1.20 --item milk"
+                },
+                {
+                  "label": "exit",
+                  "code": 0,
+                  "out": "1.20",
+                  "err": ""
+                },
+                {
+                  "label": "result",
+                  "value": "1.20"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.194,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 0.189,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    },
+                    {
+                      "id": "lc_run--01a06546-6117-7ae1-8b75-2f632182053a-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "1.20",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "price_of"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6117-7ae1-8b75-2f7f00faafc9-0",
+                    "role": "ai",
+                    "content": "Milk is 1.20.",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "program_fails",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 7,
+      "thread": "MainThread",
+      "elapsed_ms": 0.305,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.157,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 9,
+              "thread": "MainThread",
+              "elapsed_ms": 0.13799999999999998,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": ""
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6117-7ae1-8b75-2f632182053a-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "c1"
+                      }
+                    ],
+                    "finish_reason": "tool_calls"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "c1"
+              },
+              "seq": 10,
+              "thread": "MainThread",
+              "elapsed_ms": 0.013,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "command",
+                  "line": "ls /no-such-price-list/milk"
+                },
+                {
+                  "label": "exit",
+                  "code": 1,
+                  "out": "",
+                  "err": "ls: /no-such-price-list/milk: No such file or directory"
+                },
+                {
+                  "label": "failed",
+                  "exception": "PriceProgramError",
+                  "message": "['ls'] exited ['1']: ls: /no-such-price-list/milk: No such file or directory"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 0.134,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 12,
+              "thread": "MainThread",
+              "elapsed_ms": 0.131,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": ""
+                    },
+                    {
+                      "id": "lc_run--01a06546-6117-7ae1-8b75-2f632182053a-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "['price_of'] failed: ['ls'] exited ['1']: ls: /no-such-price-list/milk: No such file or directory. Answer without it.",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6117-7ae1-8b75-2f9fdb68468e-0",
+                    "role": "ai",
+                    "content": "I could not get the price of milk.",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "program_is_missing",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 13,
+      "thread": "MainThread",
+      "elapsed_ms": 0.281,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 14,
+          "thread": "MainThread",
+          "elapsed_ms": 0.15100000000000002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 15,
+              "thread": "MainThread",
+              "elapsed_ms": 0.136,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": ""
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6117-7ae1-8b75-2f632182053a-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "c1"
+                      }
+                    ],
+                    "finish_reason": "tool_calls"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "c1"
+              },
+              "seq": 16,
+              "thread": "MainThread",
+              "elapsed_ms": 0.009000000000000001,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "command",
+                  "line": "price-of --item milk"
+                },
+                {
+                  "label": "exit",
+                  "code": 127,
+                  "out": "",
+                  "err": "price-of: command not found"
+                },
+                {
+                  "label": "failed",
+                  "exception": "PriceProgramError",
+                  "message": "['price-of'] exited ['127']: price-of: command not found"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 17,
+          "thread": "MainThread",
+          "elapsed_ms": 0.11699999999999999,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 18,
+              "thread": "MainThread",
+              "elapsed_ms": 0.114,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": ""
+                    },
+                    {
+                      "id": "lc_run--01a06546-6117-7ae1-8b75-2f632182053a-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "['price_of'] failed: ['price-of'] exited ['127']: price-of: command not found. Answer without it.",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6117-7ae1-8b75-2f9fdb68468e-0",
+                    "role": "ai",
+                    "content": "I could not get the price of milk.",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "program_hangs",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 19,
+      "thread": "MainThread",
+      "elapsed_ms": 0.34099999999999997,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 20,
+          "thread": "MainThread",
+          "elapsed_ms": 0.189,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 21,
+              "thread": "MainThread",
+              "elapsed_ms": 0.147,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": ""
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6117-7ae1-8b75-2f632182053a-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "c1"
+                      }
+                    ],
+                    "finish_reason": "tool_calls"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "c1"
+              },
+              "seq": 22,
+              "thread": "MainThread",
+              "elapsed_ms": 0.008,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "command",
+                  "line": "sleep 30 # milk"
+                },
+                {
+                  "label": "exit",
+                  "code": null,
+                  "out": "",
+                  "err": "killed after 2s"
+                },
+                {
+                  "label": "failed",
+                  "exception": "PriceProgramError",
+                  "message": "['sleep'] exited ['None']: killed after 2s"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 23,
+          "thread": "MainThread",
+          "elapsed_ms": 0.14300000000000002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 24,
+              "thread": "MainThread",
+              "elapsed_ms": 0.13999999999999999,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": ""
+                    },
+                    {
+                      "id": "lc_run--01a06546-6117-7ae1-8b75-2f632182053a-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "['price_of'] failed: ['sleep'] exited ['None']: killed after 2s. Answer without it.",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6117-7ae1-8b75-2f9fdb68468e-0",
+                    "role": "ai",
+                    "content": "I could not get the price of milk.",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "argument_is_a_command",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 25,
+      "thread": "MainThread",
+      "elapsed_ms": 0.38,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 26,
+          "thread": "MainThread",
+          "elapsed_ms": 0.163,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 27,
+              "thread": "MainThread",
+              "elapsed_ms": 0.15100000000000002,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": ""
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6118-72f3-a03e-b6e8d3abece6-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk; echo pwned"
+                        },
+                        "id": "c1"
+                      }
+                    ],
+                    "finish_reason": "tool_calls"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "c1"
+              },
+              "seq": 28,
+              "thread": "MainThread",
+              "elapsed_ms": 0.004,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk; echo pwned"
+                },
+                {
+                  "label": "command",
+                  "line": "printf 1.20 --item milk; echo pwned"
+                },
+                {
+                  "label": "exit",
+                  "code": 0,
+                  "out": "1.20\npwned",
+                  "err": ""
+                },
+                {
+                  "label": "result",
+                  "value": "1.20\npwned"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 29,
+          "thread": "MainThread",
+          "elapsed_ms": 0.20900000000000002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 30,
+              "thread": "MainThread",
+              "elapsed_ms": 0.205,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": ""
+                    },
+                    {
+                      "id": "lc_run--01a06546-6118-72f3-a03e-b6e8d3abece6-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk; echo pwned"
+                          },
+                          "id": "c1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "1.20\npwned",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06546-6118-72f3-a03e-b6fcb7b36481-0",
+                    "role": "ai",
+                    "content": "Milk is 1.20 pwned.",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

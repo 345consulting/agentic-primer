@@ -1,0 +1,535 @@
+{
+  "chapter": "ch19_guards",
+  "model_kind": "mock",
+  "source": "e1d080d0bb95",
+  "summary": {
+    "turns": 2,
+    "messages": 0,
+    "ended": "total_ordered=8; success: ordered 8 x milk; total_ordered=8; success: ordered 8 x milk; error: ['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "an_order_within_budget"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 0.17,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "total_ordered=8; success: ordered 8 x milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "place_order",
+            "id": "c1"
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 0.01,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk",
+              "quantity": 8
+            },
+            {
+              "label": "hook",
+              "when": "pre",
+              "by": "refuse_if_over_budget",
+              "note": null,
+              "veto": null,
+              "replacement": null
+            },
+            {
+              "label": "dispatched",
+              "value": "ordered 8 x milk"
+            },
+            {
+              "label": "hook",
+              "when": "post",
+              "by": "record_the_order",
+              "note": "total_ordered now 8",
+              "veto": null,
+              "replacement": null
+            },
+            {
+              "label": "result",
+              "value": "ordered 8 x milk"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk",
+                "quantity": 8
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_if_over_budget",
+                "note": null,
+                "veto": null,
+                "replacement": null
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "dispatched",
+                "value": "ordered 8 x milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "post",
+                "by": "record_the_order",
+                "note": "total_ordered now 8",
+                "veto": null,
+                "replacement": null
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "ordered 8 x milk"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "place_order",
+              "id": "c1"
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 0.01,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk",
+                "quantity": 8
+              },
+              {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_if_over_budget",
+                "note": null,
+                "veto": null,
+                "replacement": null
+              },
+              {
+                "label": "dispatched",
+                "value": "ordered 8 x milk"
+              },
+              {
+                "label": "hook",
+                "when": "post",
+                "by": "record_the_order",
+                "note": "total_ordered now 8",
+                "veto": null,
+                "replacement": null
+              },
+              {
+                "label": "result",
+                "value": "ordered 8 x milk"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 8
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "pre",
+                  "by": "refuse_if_over_budget",
+                  "note": null,
+                  "veto": null,
+                  "replacement": null
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "dispatched",
+                  "value": "ordered 8 x milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "post",
+                  "by": "record_the_order",
+                  "note": "total_ordered now 8",
+                  "veto": null,
+                  "replacement": null
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "ordered 8 x milk"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "total_ordered=8; success: ordered 8 x milk"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_split_order_exceeds_the_budget"
+      },
+      "seq": 3,
+      "thread": "MainThread",
+      "elapsed_ms": 0.031,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "total_ordered=8; success: ordered 8 x milk; error: ['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12"
+        }
+      ],
+      "children": [
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "place_order",
+            "id": "c2"
+          },
+          "seq": 4,
+          "thread": "MainThread",
+          "elapsed_ms": 0.006,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk",
+              "quantity": 8
+            },
+            {
+              "label": "hook",
+              "when": "pre",
+              "by": "refuse_if_over_budget",
+              "note": null,
+              "veto": null,
+              "replacement": null
+            },
+            {
+              "label": "dispatched",
+              "value": "ordered 8 x milk"
+            },
+            {
+              "label": "hook",
+              "when": "post",
+              "by": "record_the_order",
+              "note": "total_ordered now 8",
+              "veto": null,
+              "replacement": null
+            },
+            {
+              "label": "result",
+              "value": "ordered 8 x milk"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk",
+                "quantity": 8
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_if_over_budget",
+                "note": null,
+                "veto": null,
+                "replacement": null
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "dispatched",
+                "value": "ordered 8 x milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "post",
+                "by": "record_the_order",
+                "note": "total_ordered now 8",
+                "veto": null,
+                "replacement": null
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "ordered 8 x milk"
+              }
+            }
+          ]
+        },
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "place_order",
+            "id": "c3"
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.01,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk",
+              "quantity": 8
+            },
+            {
+              "label": "hook",
+              "when": "pre",
+              "by": "refuse_if_over_budget",
+              "note": null,
+              "veto": "8 already ordered this run; 8 more would be 16, over the budget of 12",
+              "replacement": null
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk",
+                "quantity": 8
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_if_over_budget",
+                "note": null,
+                "veto": "8 already ordered this run; 8 more would be 16, over the budget of 12",
+                "replacement": null
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "place_order",
+              "id": "c2"
+            },
+            "seq": 4,
+            "thread": "MainThread",
+            "elapsed_ms": 0.006,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk",
+                "quantity": 8
+              },
+              {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_if_over_budget",
+                "note": null,
+                "veto": null,
+                "replacement": null
+              },
+              {
+                "label": "dispatched",
+                "value": "ordered 8 x milk"
+              },
+              {
+                "label": "hook",
+                "when": "post",
+                "by": "record_the_order",
+                "note": "total_ordered now 8",
+                "veto": null,
+                "replacement": null
+              },
+              {
+                "label": "result",
+                "value": "ordered 8 x milk"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 8
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "pre",
+                  "by": "refuse_if_over_budget",
+                  "note": null,
+                  "veto": null,
+                  "replacement": null
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "dispatched",
+                  "value": "ordered 8 x milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "post",
+                  "by": "record_the_order",
+                  "note": "total_ordered now 8",
+                  "veto": null,
+                  "replacement": null
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "ordered 8 x milk"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "place_order",
+              "id": "c3"
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 0.01,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk",
+                "quantity": 8
+              },
+              {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_if_over_budget",
+                "note": null,
+                "veto": "8 already ordered this run; 8 more would be 16, over the budget of 12",
+                "replacement": null
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 8
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "pre",
+                  "by": "refuse_if_over_budget",
+                  "note": null,
+                  "veto": "8 already ordered this run; 8 more would be 16, over the budget of 12",
+                  "replacement": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "total_ordered=8; success: ordered 8 x milk; error: ['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12"
+          }
+        }
+      ]
+    }
+  ]
+}

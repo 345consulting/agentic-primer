@@ -1,0 +1,1095 @@
+<!doctype html><meta charset=utf-8><title>ch07_tool_http</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line. */
+pre.wire .k { color: #06c; }
+pre.wire .s { color: #0a7; }
+pre.wire .n { color: #b26; }
+pre.wire .l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  pre.wire .k { color: #7bf; } pre.wire .s { color: #6d9; }
+  pre.wire .n { color: #f9a; } pre.wire .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch07_tool_http</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=10 · messages=25</span></div><div class="col col-live"><b>live</b> <span class="meta">turns=11 · messages=27</span> <span class="dot">·</span> <span class="stale">recorded from different source (6c127b6757c6 &ne; 6e43a7f7af86)</span></div></div><div class="turn"><div class="turnno">scenario service_answers</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">service_answers · tools=price_of</span> <span class="dot">·</span> <span class="ms">3.4ms</span> <span class="dot">·</span> <span class="digest">2 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">3.0ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">2.6ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 2, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.4ms (model provider 0.2 · library 0.2)</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/get?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (2)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">content-length</td><td class="hvalue">140</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;args&quot;</span>: {
+    <span class="k">&quot;item&quot;</span>: <span class="s">&quot;milk&quot;</span>
+  },
+  <span class="k">&quot;headers&quot;</span>: {
+    <span class="k">&quot;Authorization&quot;</span>: <span class="s">&quot;Bearer primer-demo-key&quot;</span>,
+    <span class="k">&quot;Host&quot;</span>: <span class="s">&quot;httpbin.org&quot;</span>
+  },
+  <span class="k">&quot;url&quot;</span>: <span class="s">&quot;https://httpbin.org/get?item=milk&quot;</span>
+}</pre></div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.20&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 4, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;tool&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk is 1.20.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">service_answers · tools=price_of</span> <span class="dot">·</span> <span class="ms">2809.2ms</span> <span class="dot">·</span> <span class="digest">2 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1733.9ms</span> <span class="dot">·</span> <span class="digest">393 in / 59 out · asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1298.7ms (model provider 1115.6 · library 183.2)</span> <span class="dot">·</span> <span class="digest">393 in / 59 out · asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">457</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:07 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 6baae223a8a0bac3ed58b2661c840b8e.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">dSAqMCOvnA_v5o3X95dAhO6qta-YVHzONnap80l-aiFTeWARHgCr_A==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P1</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">cad8881dcd048414b35065c656ee5563</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;70b37e7d-ff84-4a46-b0ac-19e1175ea308&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405487</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks for price of milk. I&#x27;ll call price_of.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_UNpcxFWmXCZwBMzY0mI64048&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">393</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">59</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">452</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">14</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">9</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">435.1ms (model provider 428.8 · library 6.2)</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/get?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (7)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">access-control-allow-origin</td><td class="hvalue">*</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">390</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:09 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">gunicorn/19.9.0</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;args&quot;</span>: {
+    <span class="k">&quot;item&quot;</span>: <span class="s">&quot;milk&quot;</span>
+  },
+  <span class="k">&quot;headers&quot;</span>: {
+    <span class="k">&quot;Accept&quot;</span>: <span class="s">&quot;*/*&quot;</span>,
+    <span class="k">&quot;Accept-Encoding&quot;</span>: <span class="s">&quot;gzip, deflate, zstd&quot;</span>,
+    <span class="k">&quot;Authorization&quot;</span>: <span class="s">&quot;Bearer primer-demo-key&quot;</span>,
+    <span class="k">&quot;Host&quot;</span>: <span class="s">&quot;httpbin.org&quot;</span>,
+    <span class="k">&quot;User-Agent&quot;</span>: <span class="s">&quot;python-httpx/0.28.1&quot;</span>,
+    <span class="k">&quot;X-Amzn-Trace-Id&quot;</span>: <span class="s">&quot;Root=1-6a98e6f0-7c28ffee3407763450aa542a&quot;</span>
+  },
+  <span class="k">&quot;origin&quot;</span>: <span class="s">&quot;71.218.120.63&quot;</span>,
+  <span class="k">&quot;url&quot;</span>: <span class="s">&quot;https://httpbin.org/get?item=milk&quot;</span>
+}</pre></div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.20&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">1075.1ms</span> <span class="dot">·</span> <span class="digest">467 in / 9 out · responded with: Milk costs £1.20.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1075.1ms (model provider 1061.0 · library 14.1)</span> <span class="dot">·</span> <span class="digest">467 in / 9 out · responded with: Milk costs £1.20.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">792</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_UNpcxFWmXCZwBMzY0mI64048&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks for price of milk. I&#x27;ll call price_of.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;1.20&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_UNpcxFWmXCZwBMzY0mI64048&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:09 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 152ee7adb7321146282dd89ad75c983e.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">48aBBor0eaWrgouXPdBfA9W0-l9bX7x95h8UflxHb8d5MB_Oeer8EQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">0d6190ad545b30b7f3c334ef29becfa8</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;8d325283-e072-4366-bcea-4e67b136c755&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405489</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Milk costs \u00a31.20.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">467</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">9</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">476</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">83</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk costs £1.20.</td></tr></table></div></details></details></details></div></div></div><div class="turn"><div class="turnno">scenario service_rate_limits</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">service_rate_limits · tools=price_of</span> <span class="dot">·</span> <span class="ms">0.5ms</span> <span class="dot">·</span> <span class="digest">2 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 2, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.2ms (model provider 0.0 · library 0.1)</span> <span class="dot">·</span> <span class="digest">given: item=milk · raised: PriceServiceError ([&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;])</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/status/429?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>429</dd><dt>headers (3)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">content-length</td><td class="hvalue">0</td></tr><tr><td class="hname">content-type</td><td class="hvalue">text/plain; charset=utf-8</td></tr><tr><td class="hname">retry-after</td><td class="hvalue">3</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">failed</span> {&quot;exception&quot;: &quot;PriceServiceError&quot;, &quot;message&quot;: &quot;[&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: I could not get the price of milk.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: I could not get the price of milk.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]. Answer without it.</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 4, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;tool&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I could not get the price of milk.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">service_rate_limits · tools=price_of</span> <span class="dot">·</span> <span class="ms">4517.3ms</span> <span class="dot">·</span> <span class="digest">3 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1611.7ms</span> <span class="dot">·</span> <span class="digest">393 in / 62 out · asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1391.5ms (model provider 1378.6 · library 12.9)</span> <span class="dot">·</span> <span class="digest">393 in / 62 out · asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">457</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:10 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 a42ce842e0f60814700ead82353e9f08.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">2oxcSrrLM6gs0V-6cwtXbr2MLhkN1OGBOM4snUmNV6yu-DB2xsUG1w==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">9dd0c3552acc1677caf68aa1b76a81d8</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;fe10349a-3cc9-4c42-a136-f3575b75f07e&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405490</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks how much milk is. I should call price_of(\&quot;milk\&quot;).&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_HArb1iGk19uryfmvpVUi0982&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">393</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">62</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">455</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">17</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">9</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">220.2ms (model provider 212.2 · library 8.0)</span> <span class="dot">·</span> <span class="digest">given: item=milk · raised: PriceServiceError ([&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;])</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/status/429?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>429</dd><dt>headers (7)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">access-control-allow-origin</td><td class="hvalue">*</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">0</td></tr><tr><td class="hname">content-type</td><td class="hvalue">text/html; charset=utf-8</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:11 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">gunicorn/19.9.0</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">failed</span> {&quot;exception&quot;: &quot;PriceServiceError&quot;, &quot;message&quot;: &quot;[&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">1469.8ms</span> <span class="dot">·</span> <span class="digest">487 in / 69 out · asked for: price_of · responded with: Let me retry that.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1276.3ms (model provider 1266.4 · library 9.9)</span> <span class="dot">·</span> <span class="digest">487 in / 69 out · asked for: price_of · responded with: Let me retry that.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]. Answer without it.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">882</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_HArb1iGk19uryfmvpVUi0982&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks how much milk is. I should call price_of(\&quot;milk\&quot;).&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]. Answer without it.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_HArb1iGk19uryfmvpVUi0982&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:12 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 8b9292a3a907c0814dfd42d54fb3ab62.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">2w3O5GF7FfMcUwm3vPY4CkhSWeWu7L4HDcaZ-nBxO6TsdDDai-L4ZQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">dd5c641daf0c68cedfd3f374b9ab834c</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;6a2a5709-f4c8-4958-9b5d-a0232a35f09e&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405492</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Let me retry that.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The tool call failed with 429. I should try again maybe. Let me retry.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_VMFyGF7QJufGp165NDS83395&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">487</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">69</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">556</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">19</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">103</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Let me retry that.<div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">193.5ms (model provider 185.1 · library 8.3)</span> <span class="dot">·</span> <span class="digest">given: item=milk · raised: PriceServiceError ([&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;])</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/status/429?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>429</dd><dt>headers (7)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">access-control-allow-origin</td><td class="hvalue">*</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">0</td></tr><tr><td class="hname">content-type</td><td class="hvalue">text/html; charset=utf-8</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:13 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">gunicorn/19.9.0</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">failed</span> {&quot;exception&quot;: &quot;PriceServiceError&quot;, &quot;message&quot;: &quot;[&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">3</span> <span class="dot">·</span> <span class="ms">1435.7ms</span> <span class="dot">·</span> <span class="digest">588 in / 58 out · responded with: I wasn&#x27;t able to fetch the current price of milk — the price service is rate-limited right... (35 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1435.6ms (model provider 1426.2 · library 9.4)</span> <span class="dot">·</span> <span class="digest">588 in / 58 out · responded with: I wasn&#x27;t able to fetch the current price of milk — the price service is rate-limited right... (35 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 6 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]. Answer without it.</td></tr><tr><td>[4]</td><td class="role">ai</td><td class="content">Let me retry that.<div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[5]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]. Answer without it.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">1328</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_HArb1iGk19uryfmvpVUi0982&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks how much milk is. I should call price_of(\&quot;milk\&quot;).&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]. Answer without it.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_HArb1iGk19uryfmvpVUi0982&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Let me retry that.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_VMFyGF7QJufGp165NDS83395&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The tool call failed with 429. I should try again maybe. Let me retry.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;429&#x27;]. Answer without it.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_VMFyGF7QJufGp165NDS83395&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:13 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 31667d33ae27ae30b347b8856ce52276.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">z67WKzdBGtAX0wqp7BdlESyY2NMP3kDgGoa3it0dmaMrevqchunifg==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">d4dc8c09b2c41ef871cff2f3756130f7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;712a9b2b-1242-428f-b60d-c6e00ca7fc92&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405493</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;I wasn&#x27;t able to fetch the current price of milk \u2014 the price service is rate-limited right now. Please try again in a moment.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The tool is failing with 429 (rate limited). I cannot retrieve the price. I should inform the user that I couldn&#x27;t retrieve it.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">588</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">58</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">646</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">512</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">29</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">512</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">76</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I wasn&#x27;t able to fetch the current price of milk — the price service is rate-limited right now. Please try again in a moment.</td></tr></table></div></details></details></details></div></div></div><div class="turn"><div class="turnno">scenario service_is_broken</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">service_is_broken · tools=price_of</span> <span class="dot">·</span> <span class="ms">0.5ms</span> <span class="dot">·</span> <span class="digest">2 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 2, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.1ms (model provider 0.0 · library 0.1)</span> <span class="dot">·</span> <span class="digest">given: item=milk · raised: PriceServiceError ([&#x27;https://httpbin.org&#x27;] answered [&#x27;500&#x27;])</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/status/500?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>500</dd><dt>headers (2)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">content-length</td><td class="hvalue">0</td></tr><tr><td class="hname">content-type</td><td class="hvalue">text/plain; charset=utf-8</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">failed</span> {&quot;exception&quot;: &quot;PriceServiceError&quot;, &quot;message&quot;: &quot;[&#x27;https://httpbin.org&#x27;] answered [&#x27;500&#x27;]&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: I could not get the price of milk.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: I could not get the price of milk.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;500&#x27;]. Answer without it.</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 4, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;tool&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I could not get the price of milk.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">service_is_broken · tools=price_of</span> <span class="dot">·</span> <span class="ms">2817.9ms</span> <span class="dot">·</span> <span class="digest">2 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1244.3ms</span> <span class="dot">·</span> <span class="digest">393 in / 55 out · asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1049.1ms (model provider 1038.6 · library 10.5)</span> <span class="dot">·</span> <span class="digest">393 in / 55 out · asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">457</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:14 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 706548e2e8ccb2860757a9c147e29fe6.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">dxhWwkUZcAPcuroJrJs7Ut333rd0td32-BazBdwu7UTRzhdadSXqGg==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">c635dd4c6dc326b3021c4f5940a297b9</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;1184b73a-4520-4f04-9dd2-c369983b0e36&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405494</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;Need price of milk. Call price_of milk.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_N8yy8fynX5xhW289P9aB8750&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">393</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">55</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">448</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">10</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">9</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">195.2ms (model provider 189.8 · library 5.4)</span> <span class="dot">·</span> <span class="digest">given: item=milk · raised: PriceServiceError ([&#x27;https://httpbin.org&#x27;] answered [&#x27;500&#x27;])</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/status/500?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>500</dd><dt>headers (7)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">access-control-allow-origin</td><td class="hvalue">*</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">0</td></tr><tr><td class="hname">content-type</td><td class="hvalue">text/html; charset=utf-8</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:15 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">gunicorn/19.9.0</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">failed</span> {&quot;exception&quot;: &quot;PriceServiceError&quot;, &quot;message&quot;: &quot;[&#x27;https://httpbin.org&#x27;] answered [&#x27;500&#x27;]&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">1573.6ms</span> <span class="dot">·</span> <span class="digest">480 in / 62 out · responded with: I couldn&#x27;t retrieve the milk price right now—the price lookup failed. Please try again in ... (9 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1573.5ms (model provider 1560.5 · library 13.0)</span> <span class="dot">·</span> <span class="digest">480 in / 62 out · responded with: I couldn&#x27;t retrieve the milk price right now—the price lookup failed. Please try again in ... (9 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;500&#x27;]. Answer without it.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">856</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_N8yy8fynX5xhW289P9aB8750&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;Need price of milk. Call price_of milk.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;500&#x27;]. Answer without it.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_N8yy8fynX5xhW289P9aB8750&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:16 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 8e8ff6f69325d8196c02b63be536a6d0.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">SuJLkA5Nm99OTY_AowkKYwgamKBfyJyPxWPcE42jBILf6IXVcj1Bug==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P1</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">6d598c2e6cb8bc9f01466efc8cd3cbc3</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;b890f13b-a4f9-4d66-88f2-7a920329806c&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405496</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;I couldn&#x27;t retrieve the milk price right now\u2014the price lookup failed. Please try again in a moment.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;Tool failed. Need answer without it. I don&#x27;t know price. Could perhaps mention unable. User asks \&quot;How much is milk?\&quot; I should answer plainly, maybe say unable to retrieve price.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">480</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">62</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">542</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">39</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">96</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I couldn&#x27;t retrieve the milk price right now—the price lookup failed. Please try again in a moment.</td></tr></table></div></details></details></details></div></div></div><div class="turn"><div class="turnno">scenario service_says_no</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">service_says_no · tools=price_of</span> <span class="dot">·</span> <span class="ms">0.4ms</span> <span class="dot">·</span> <span class="digest">2 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 2, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.1ms (model provider 0.0 · library 0.1)</span> <span class="dot">·</span> <span class="digest">given: item=milk · raised: PriceServiceError ([&#x27;https://httpbin.org&#x27;] answered [&#x27;404&#x27;])</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/status/404?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>404</dd><dt>headers (2)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">content-length</td><td class="hvalue">0</td></tr><tr><td class="hname">content-type</td><td class="hvalue">text/plain; charset=utf-8</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">failed</span> {&quot;exception&quot;: &quot;PriceServiceError&quot;, &quot;message&quot;: &quot;[&#x27;https://httpbin.org&#x27;] answered [&#x27;404&#x27;]&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: I could not get the price of milk.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: I could not get the price of milk.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;404&#x27;]. Answer without it.</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 4, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;tool&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I could not get the price of milk.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">service_says_no · tools=price_of</span> <span class="dot">·</span> <span class="ms">2920.6ms</span> <span class="dot">·</span> <span class="digest">2 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1493.3ms</span> <span class="dot">·</span> <span class="digest">393 in / 72 out · asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1283.4ms (model provider 1271.4 · library 12.0)</span> <span class="dot">·</span> <span class="digest">393 in / 72 out · asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">457</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:17 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 cf7db6af8b8a86ebeb9fc938221e81da.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">4Y8PpRuwR6UbGbbPMUHPCR981Fen381VJEenN3dU3OCEP3-Qr3CM1A==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">30f03c815553e7667e114d5bc55ce9f1</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;d99c3fbd-b150-4299-b808-9d9066c42f6b&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405497</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks how much is milk. I need to get current shelf price of milk. I&#x27;ll call price_of with item milk.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_1Ps039QUhUif29cQ3ha21192&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">393</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">72</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">465</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">27</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">9</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">209.8ms (model provider 202.7 · library 7.1)</span> <span class="dot">·</span> <span class="digest">given: item=milk · raised: PriceServiceError ([&#x27;https://httpbin.org&#x27;] answered [&#x27;404&#x27;])</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/status/404?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>404</dd><dt>headers (7)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">access-control-allow-origin</td><td class="hvalue">*</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">0</td></tr><tr><td class="hname">content-type</td><td class="hvalue">text/html; charset=utf-8</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:18 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">gunicorn/19.9.0</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">failed</span> {&quot;exception&quot;: &quot;PriceServiceError&quot;, &quot;message&quot;: &quot;[&#x27;https://httpbin.org&#x27;] answered [&#x27;404&#x27;]&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">1427.3ms</span> <span class="dot">·</span> <span class="digest">497 in / 50 out · responded with: I couldn&#x27;t retrieve the current price of milk — the price lookup failed. Please try again ... (12 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1427.2ms (model provider 1414.7 · library 12.5)</span> <span class="dot">·</span> <span class="digest">497 in / 50 out · responded with: I couldn&#x27;t retrieve the current price of milk — the price lookup failed. Please try again ... (12 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;404&#x27;]. Answer without it.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">926</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_1Ps039QUhUif29cQ3ha21192&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks how much is milk. I need to get current shelf price of milk. I&#x27;ll call price_of with item milk.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] answered [&#x27;404&#x27;]. Answer without it.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_1Ps039QUhUif29cQ3ha21192&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:19 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 d2ee90557b7dff69fea2eb2ff85880ec.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">w_tITrppQeQkEOIDAveztrYffdiA_ve3VKZlF_FfGyhHAaVCbfD_2Q==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">cf5f8b95016f6326c7b05e7279e040ad</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;c5f03034-e680-4075-9f3e-dcfe0a1a4d3e&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405499</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;I couldn&#x27;t retrieve the current price of milk \u2014 the price lookup failed. Please try again in a moment.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The tool failed. I should answer without it, meaning I don&#x27;t have the price. I&#x27;ll say I couldn&#x27;t retrieve it.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">497</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">50</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">547</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">27</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">113</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I couldn&#x27;t retrieve the current price of milk — the price lookup failed. Please try again in a moment.</td></tr></table></div></details></details></details></div></div></div><div class="turn"><div class="turnno">scenario service_is_slow</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">service_is_slow · tools=price_of</span> <span class="dot">·</span> <span class="ms">0.5ms</span> <span class="dot">·</span> <span class="digest">2 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 2, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · raised: PriceServiceError ([&#x27;https://httpbin.org&#x27;] did not answer in time)</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/delay/10?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">failed</span> {&quot;exception&quot;: &quot;PriceServiceError&quot;, &quot;message&quot;: &quot;[&#x27;https://httpbin.org&#x27;] did not answer in time&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: I could not get the price of milk.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: I could not get the price of milk.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] did not answer in time. Answer without it.</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 4, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;tool&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I could not get the price of milk.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">service_is_slow · tools=price_of</span> <span class="dot">·</span> <span class="ms">5118.6ms</span> <span class="dot">·</span> <span class="digest">2 turns · ended: no_tool_calls</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;no_tool_calls&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">3506.0ms</span> <span class="dot">·</span> <span class="digest">393 in / 67 out · asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1343.3ms (model provider 1331.4 · library 11.9)</span> <span class="dot">·</span> <span class="digest">393 in / 67 out · asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">457</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:20 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 d898fedd2c97412525c0a8011787cf32.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">FaPkowM-N2IbwBWYNPpelXz8jrS9aUhQJfLArMYIILVPBGjA7hLwDg==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">fb6a78da6d88e9975056adca865c747d</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;e6c7761d-2985-4324-90a0-b4bb20ac9310&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405500</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks \&quot;How much is milk?\&quot; I should use the price_of tool with item \&quot;milk\&quot;.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_2L5ECx8fmD4yWO1h5O0k1168&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">393</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">67</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">460</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">22</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">9</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">2162.6ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · raised: PriceServiceError ([&#x27;https://httpbin.org&#x27;] did not answer in time)</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>GET</dd><dt>url</dt><dd>https://httpbin.org/delay/10?item=milk</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (6)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">*/*</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">host</td><td class="hvalue">httpbin.org</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">python-httpx/0.28.1</td></tr></table></details></dd></dl><pre class="wire"><span class="l">null</span></pre></div><div class="note"><span class="label">failed</span> {&quot;exception&quot;: &quot;PriceServiceError&quot;, &quot;message&quot;: &quot;[&#x27;https://httpbin.org&#x27;] did not answer in time&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">1612.6ms</span> <span class="dot">·</span> <span class="digest">494 in / 64 out · responded with: I couldn&#x27;t retrieve the current price of milk — the price lookup service timed out. Please... (54 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1612.5ms (model provider 1601.3 · library 11.2)</span> <span class="dot">·</span> <span class="digest">494 in / 64 out · responded with: I couldn&#x27;t retrieve the current price of milk — the price lookup service timed out. Please... (54 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] did not answer in time. Answer without it.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">909</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_2L5ECx8fmD4yWO1h5O0k1168&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks \&quot;How much is milk?\&quot; I should use the price_of tool with item \&quot;milk\&quot;.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;[&#x27;price_of&#x27;] failed: [&#x27;https://httpbin.org&#x27;] did not answer in time. Answer without it.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_2L5ECx8fmD4yWO1h5O0k1168&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of one of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 03:18:24 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 03fa0691c8124b25f37416f26d179308.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">Yr7bmHVWarXNjqDJNsyzUW6vdz7tlISOHuY1UuGFcMxPzrmBzVK1KQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">b6eb7fd8f5194e1b3035ba87dc123d2e</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;39645c84-1fde-458e-a363-92d22648a55d&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788405504</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;I couldn&#x27;t retrieve the current price of milk \u2014 the price lookup service timed out. Please try again shortly, or check the shelf price directly.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The tool call failed due to network timeout. I should answer without it. I don&#x27;t have the price. I need to be honest that I couldn&#x27;t retrieve it.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">494</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">64</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">558</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">34</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">110</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I couldn&#x27;t retrieve the current price of milk — the price lookup service timed out. Please try again shortly, or check the shelf price directly.</td></tr></table></div></details></details></details></div></div></div>

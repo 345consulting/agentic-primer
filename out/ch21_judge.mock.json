@@ -1,0 +1,4637 @@
+{
+  "chapter": "ch21_judge",
+  "model_kind": "mock",
+  "source": "39ddea2b13ab",
+  "summary": {
+    "turns": 3,
+    "messages": 0,
+    "ended": "accepted on attempt 2: ordered 2 x milk; attempt 2, passed=True: Milk is 1.20 per bottle.; gave up after 3 attempts: 500 is not reasonable for 'a couple'"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "judge_rejects_a_tool_call"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 3.592,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "accepted on attempt 2: ordered 2 x milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 3.455,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "judged",
+              "attempt": 1,
+              "passed": false,
+              "reason": "500 is not reasonable for 'a couple'"
+            },
+            {
+              "label": "judged",
+              "attempt": 2,
+              "passed": true,
+              "reason": null
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 3.222,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order a couple bottles of milk."
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 500
+                        },
+                        "id": "c1"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 0.196,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order a couple bottles of milk."
+                    },
+                    {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 2
+                        },
+                        "id": "c2"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c1"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 2
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "place_order",
+                "id": "c2"
+              },
+              "seq": 5,
+              "thread": "MainThread",
+              "elapsed_ms": 0.003,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 2
+                },
+                {
+                  "label": "result",
+                  "value": "ordered 2 x milk"
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "item": "milk",
+                    "quantity": 2
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "ordered 2 x milk"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 3.222,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "judged",
+                "attempt": 1,
+                "passed": false,
+                "reason": "500 is not reasonable for 'a couple'"
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 0.196,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c1"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 2
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c1"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 2
+                            },
+                            "id": "c2"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "judged",
+                "attempt": 2,
+                "passed": true,
+                "reason": null
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "place_order",
+                  "id": "c2"
+                },
+                "seq": 5,
+                "thread": "MainThread",
+                "elapsed_ms": 0.003,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk",
+                    "quantity": 2
+                  },
+                  {
+                    "label": "result",
+                    "value": "ordered 2 x milk"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk",
+                      "quantity": 2
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "ordered 2 x milk"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 3.455,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "judged",
+                "attempt": 1,
+                "passed": false,
+                "reason": "500 is not reasonable for 'a couple'"
+              },
+              {
+                "label": "judged",
+                "attempt": 2,
+                "passed": true,
+                "reason": null
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 3.222,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 0.196,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c1"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 2
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c1"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 2
+                            },
+                            "id": "c2"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "place_order",
+                  "id": "c2"
+                },
+                "seq": 5,
+                "thread": "MainThread",
+                "elapsed_ms": 0.003,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk",
+                    "quantity": 2
+                  },
+                  {
+                    "label": "result",
+                    "value": "ordered 2 x milk"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk",
+                      "quantity": 2
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "ordered 2 x milk"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 3.222,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Order a couple bottles of milk."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "judged",
+                  "attempt": 1,
+                  "passed": false,
+                  "reason": "500 is not reasonable for 'a couple'"
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 4,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.196,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 2
+                            },
+                            "id": "c2"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Order a couple bottles of milk."
+                          },
+                          {
+                            "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "milk",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                            "tool_call_id": "c1"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 2
+                              },
+                              "id": "c2"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "judged",
+                  "attempt": 2,
+                  "passed": true,
+                  "reason": null
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "place_order",
+                    "id": "c2"
+                  },
+                  "seq": 5,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.003,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "item": "milk",
+                      "quantity": 2
+                    },
+                    {
+                      "label": "result",
+                      "value": "ordered 2 x milk"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "item": "milk",
+                        "quantity": 2
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "ordered 2 x milk"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "accepted on attempt 2: ordered 2 x milk"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "judge_rejects_a_final_answer"
+      },
+      "seq": 6,
+      "thread": "MainThread",
+      "elapsed_ms": 0.333,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "attempt 2, passed=True: Milk is 1.20 per bottle."
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 7,
+          "thread": "MainThread",
+          "elapsed_ms": 0.324,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "judged",
+              "attempt": 1,
+              "passed": false,
+              "reason": "answer does not mention 'milk'"
+            },
+            {
+              "label": "judged",
+              "attempt": 2,
+              "passed": true,
+              "reason": null
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 8,
+              "thread": "MainThread",
+              "elapsed_ms": 0.156,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                    "role": "ai",
+                    "content": "Sure, happy to help with grocery questions."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How much is milk?"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                      "role": "ai",
+                      "content": "Sure, happy to help with grocery questions."
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 9,
+              "thread": "MainThread",
+              "elapsed_ms": 0.121,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    },
+                    {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                      "role": "ai",
+                      "content": "Sure, happy to help with grocery questions."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "That does not work: answer does not mention 'milk'. Try again."
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                    "role": "ai",
+                    "content": "Milk is 1.20 per bottle."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How much is milk?"
+                      },
+                      {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "role": "ai",
+                        "content": "Sure, happy to help with grocery questions."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "That does not work: answer does not mention 'milk'. Try again."
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                      "role": "ai",
+                      "content": "Milk is 1.20 per bottle."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 8,
+                "thread": "MainThread",
+                "elapsed_ms": 0.156,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How much is milk?"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                      "role": "ai",
+                      "content": "Sure, happy to help with grocery questions."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "role": "ai",
+                        "content": "Sure, happy to help with grocery questions."
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "judged",
+                "attempt": 1,
+                "passed": false,
+                "reason": "answer does not mention 'milk'"
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 9,
+                "thread": "MainThread",
+                "elapsed_ms": 0.121,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How much is milk?"
+                      },
+                      {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "role": "ai",
+                        "content": "Sure, happy to help with grocery questions."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "That does not work: answer does not mention 'milk'. Try again."
+                      }
+                    ]
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                      "role": "ai",
+                      "content": "Milk is 1.20 per bottle."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        },
+                        {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                          "role": "ai",
+                          "content": "Sure, happy to help with grocery questions."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "That does not work: answer does not mention 'milk'. Try again."
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                        "role": "ai",
+                        "content": "Milk is 1.20 per bottle."
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "judged",
+                "attempt": 2,
+                "passed": true,
+                "reason": null
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 7,
+            "thread": "MainThread",
+            "elapsed_ms": 0.324,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "judged",
+                "attempt": 1,
+                "passed": false,
+                "reason": "answer does not mention 'milk'"
+              },
+              {
+                "label": "judged",
+                "attempt": 2,
+                "passed": true,
+                "reason": null
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 8,
+                "thread": "MainThread",
+                "elapsed_ms": 0.156,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How much is milk?"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                      "role": "ai",
+                      "content": "Sure, happy to help with grocery questions."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "role": "ai",
+                        "content": "Sure, happy to help with grocery questions."
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 9,
+                "thread": "MainThread",
+                "elapsed_ms": 0.121,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How much is milk?"
+                      },
+                      {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "role": "ai",
+                        "content": "Sure, happy to help with grocery questions."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "That does not work: answer does not mention 'milk'. Try again."
+                      }
+                    ]
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                      "role": "ai",
+                      "content": "Milk is 1.20 per bottle."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        },
+                        {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                          "role": "ai",
+                          "content": "Sure, happy to help with grocery questions."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "That does not work: answer does not mention 'milk'. Try again."
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                        "role": "ai",
+                        "content": "Milk is 1.20 per bottle."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 8,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.156,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "role": "ai",
+                        "content": "Sure, happy to help with grocery questions."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                          "role": "ai",
+                          "content": "Sure, happy to help with grocery questions."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "judged",
+                  "attempt": 1,
+                  "passed": false,
+                  "reason": "answer does not mention 'milk'"
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 9,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.121,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        },
+                        {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                          "role": "ai",
+                          "content": "Sure, happy to help with grocery questions."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "That does not work: answer does not mention 'milk'. Try again."
+                        }
+                      ]
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                        "role": "ai",
+                        "content": "Milk is 1.20 per bottle."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          },
+                          {
+                            "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                            "role": "ai",
+                            "content": "Sure, happy to help with grocery questions."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "That does not work: answer does not mention 'milk'. Try again."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                          "role": "ai",
+                          "content": "Milk is 1.20 per bottle."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "judged",
+                  "attempt": 2,
+                  "passed": true,
+                  "reason": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "attempt 2, passed=True: Milk is 1.20 per bottle."
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "judge_gives_up_after_max_attempts"
+      },
+      "seq": 10,
+      "thread": "MainThread",
+      "elapsed_ms": 0.539,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "gave up after 3 attempts: 500 is not reasonable for 'a couple'"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 0.532,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "judged",
+              "attempt": 1,
+              "passed": false,
+              "reason": "500 is not reasonable for 'a couple'"
+            },
+            {
+              "label": "judged",
+              "attempt": 2,
+              "passed": false,
+              "reason": "500 is not reasonable for 'a couple'"
+            },
+            {
+              "label": "judged",
+              "attempt": 3,
+              "passed": false,
+              "reason": "500 is not reasonable for 'a couple'"
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 12,
+              "thread": "MainThread",
+              "elapsed_ms": 0.14200000000000002,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order a couple bottles of milk."
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 500
+                        },
+                        "id": "c1"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 13,
+              "thread": "MainThread",
+              "elapsed_ms": 0.182,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order a couple bottles of milk."
+                    },
+                    {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 500
+                        },
+                        "id": "c2"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c1"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 14,
+              "thread": "MainThread",
+              "elapsed_ms": 0.183,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order a couple bottles of milk."
+                    },
+                    {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                      "tool_call_id": "c1"
+                    },
+                    {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                      "tool_call_id": "c2"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "place_order"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 6,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 500
+                        },
+                        "id": "c3"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c1"
+                      },
+                      {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c2"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c2"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 6,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool",
+                      "ai",
+                      "tool"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c3"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.14200000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "judged",
+                "attempt": 1,
+                "passed": false,
+                "reason": "500 is not reasonable for 'a couple'"
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 13,
+                "thread": "MainThread",
+                "elapsed_ms": 0.182,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c1"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c1"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c2"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "judged",
+                "attempt": 2,
+                "passed": false,
+                "reason": "500 is not reasonable for 'a couple'"
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 14,
+                "thread": "MainThread",
+                "elapsed_ms": 0.183,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c1"
+                      },
+                      {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c2"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c2"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 6,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c3"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c1"
+                        },
+                        {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c2"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c2"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 6,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c3"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "judged",
+                "attempt": 3,
+                "passed": false,
+                "reason": "500 is not reasonable for 'a couple'"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 11,
+            "thread": "MainThread",
+            "elapsed_ms": 0.532,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "judged",
+                "attempt": 1,
+                "passed": false,
+                "reason": "500 is not reasonable for 'a couple'"
+              },
+              {
+                "label": "judged",
+                "attempt": 2,
+                "passed": false,
+                "reason": "500 is not reasonable for 'a couple'"
+              },
+              {
+                "label": "judged",
+                "attempt": 3,
+                "passed": false,
+                "reason": "500 is not reasonable for 'a couple'"
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.14200000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 13,
+                "thread": "MainThread",
+                "elapsed_ms": 0.182,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c1"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c1"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c2"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 14,
+                "thread": "MainThread",
+                "elapsed_ms": 0.183,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order a couple bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c1"
+                      },
+                      {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c2"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                        "tool_call_id": "c2"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 6,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 500
+                          },
+                          "id": "c3"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c1"
+                        },
+                        {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c2"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c2"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 6,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c3"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 12,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.14200000000000002,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Order a couple bottles of milk."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "judged",
+                  "attempt": 1,
+                  "passed": false,
+                  "reason": "500 is not reasonable for 'a couple'"
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 13,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.182,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c2"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Order a couple bottles of milk."
+                          },
+                          {
+                            "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "milk",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                            "tool_call_id": "c1"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c2"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "judged",
+                  "attempt": 2,
+                  "passed": false,
+                  "reason": "500 is not reasonable for 'a couple'"
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 14,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.183,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order a couple bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c1"
+                        },
+                        {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c2"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                          "tool_call_id": "c2"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 6,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool",
+                        "ai",
+                        "tool"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 500
+                            },
+                            "id": "c3"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Order a couple bottles of milk."
+                          },
+                          {
+                            "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "milk",
+                                  "quantity": 500
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                            "tool_call_id": "c1"
+                          },
+                          {
+                            "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "milk",
+                                  "quantity": 500
+                                },
+                                "id": "c2"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
+                            "tool_call_id": "c2"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 6,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool",
+                          "ai",
+                          "tool"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 500
+                              },
+                              "id": "c3"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "judged",
+                  "attempt": 3,
+                  "passed": false,
+                  "reason": "500 is not reasonable for 'a couple'"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "gave up after 3 attempts: 500 is not reasonable for 'a couple'"
+          }
+        }
+      ]
+    }
+  ]
+}

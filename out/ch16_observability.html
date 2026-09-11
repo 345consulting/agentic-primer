@@ -1,0 +1,294 @@
+<!doctype html><meta charset=utf-8><title>ch16_observability</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line.
+   Unscoped, not `pre.wire .k` -- `_highlight` colours a plain note's inline
+   JSON too, not only a wire block's, and a token class means the same thing
+   everywhere it appears. */
+.k { color: #06c; }
+.s { color: #0a7; }
+.n { color: #b26; }
+.l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  .k { color: #7bf; } .s { color: #6d9; }
+  .n { color: #f9a; } .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch16_observability</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=0 · messages=0</span></div><div class="col col-live"><b>live</b> <span class="meta">turns=0 · messages=0</span></div></div><div class="turn"><div class="turnno">scenario a_real_otel_span_carries_the_gen_ai_attributes</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">a_real_otel_span_carries_the_gen_ai_attributes</span> <span class="dot">·</span> <span class="ms">2.9ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1.9ms</span> <span class="dot">·</span> <span class="digest">responded with: hello.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">1.9ms</span> <span class="dot">·</span> <span class="digest">responded with: hello.</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">Say hello.</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">1</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">hello.</td></tr></table></div></details></details><div class="note"><span class="label">otel_span_exported</span> <a href="ch16_observability/a_real_otel_span_carries_the_gen_ai_attributes/spans.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch16_observability/a_real_otel_span_carries_the_gen_ai_attributes/spans.jsonl&quot;</span>}</div><div class="note"><span class="label">attributes_used_real_constants</span> {<span class="k">&quot;attribute_keys&quot;</span>: [<span class="s">&quot;gen_ai.system&quot;</span>, <span class="s">&quot;gen_ai.request.model&quot;</span>], <span class="k">&quot;reply&quot;</span>: <span class="s">&quot;hello.&quot;</span>, <span class="k">&quot;usage_present&quot;</span>: <span class="l">false</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">a_real_otel_span_carries_the_gen_ai_attributes</span> <span class="dot">·</span> <span class="ms">955.9ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">954.2ms</span> <span class="dot">·</span> <span class="digest">86 in / 8 out · responded with: Hello!</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">954.0ms (model provider 726.1 · library 228.0)</span> <span class="dot">·</span> <span class="digest">86 in / 8 out · responded with: Hello!</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">Say hello.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">96</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Say hello.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Sun, 06 Sep 2026 16:32:35 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 975ade3143a5f26adabbac0540e470ce.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">NtBc9rQtj4hJIVRptXtSQL8Sjt1F6gXz5MY5wWeEtUKVLPYZiXEV_A==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P6</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">22b319df8c0894c8122d88c10d5065ad</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;bc0f7f19-670e-439b-a69c-f1a716d9c3b6&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788712355</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Hello!&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;We need answer hello.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">86</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">8</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">94</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">5</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">0</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">86</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Hello!</td></tr></table></div></details></details><div class="note"><span class="label">otel_span_exported</span> <a href="ch16_observability/a_real_otel_span_carries_the_gen_ai_attributes/spans.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch16_observability/a_real_otel_span_carries_the_gen_ai_attributes/spans.jsonl&quot;</span>}</div><div class="note"><span class="label">attributes_used_real_constants</span> {<span class="k">&quot;attribute_keys&quot;</span>: [<span class="s">&quot;gen_ai.system&quot;</span>, <span class="s">&quot;gen_ai.request.model&quot;</span>], <span class="k">&quot;reply&quot;</span>: <span class="s">&quot;Hello!&quot;</span>, <span class="k">&quot;usage_present&quot;</span>: <span class="l">true</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario otel_nests_spans_via_contextvars_the_same_way_our_stack_does</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">otel_nests_spans_via_contextvars_the_same_way_our_stack_does</span> <span class="dot">·</span> <span class="ms">1.7ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1.1ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.8ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">What&#x27;s the status of A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">1</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped&quot;</span>}</div></details></details><div class="note"><span class="label">otel_spans_exported</span> <a href="ch16_observability/otel_nests_spans_via_contextvars_the_same_way_our_stack_does/spans.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch16_observability/otel_nests_spans_via_contextvars_the_same_way_our_stack_does/spans.jsonl&quot;</span>}</div><div class="note"><span class="label">the_chain_matches_our_own_stacks_nesting</span> {<span class="k">&quot;tool_parent_is_model&quot;</span>: <span class="l">true</span>, <span class="k">&quot;model_parent_is_scenario&quot;</span>: <span class="l">true</span>, <span class="k">&quot;scenario_has_no_parent&quot;</span>: <span class="l">true</span>, <span class="k">&quot;all_spans_share_one_trace_id&quot;</span>: <span class="l">true</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">otel_nests_spans_via_contextvars_the_same_way_our_stack_does</span> <span class="dot">·</span> <span class="ms">1125.7ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1122.4ms</span> <span class="dot">·</span> <span class="digest">363 in / 84 out · asked for: check_order · responded with: I&#x27;ll check the status of order A100 for you.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1118.7ms (model provider 1102.1 · library 16.5)</span> <span class="dot">·</span> <span class="digest">363 in / 84 out · asked for: check_order · responded with: I&#x27;ll check the status of order A100 for you.</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">What&#x27;s the status of A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">327</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Sun, 06 Sep 2026 16:32:36 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 0952fdd661cdbb703496fdb1bd8ea4a2.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">D7gVnjA2Ks8d6T_Dr4rlUTmV2Z1IYonSSA6UKkloPZZGQ3W4dOQQFA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">b44f53b3ca4ece97685e7639a0db53c9</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;0fe14175-10dd-485e-bc0d-d116ac434430&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788712356</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;I&#x27;ll check the status of order A100 for you.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks about status of order A100. I should check order status. Use tool check_order with order_id \&quot;A100\&quot;.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_6FjHr9SCRCo62cXcTfXK7622&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">363</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">84</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">447</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">27</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">107</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I&#x27;ll check the status of order A100 for you.<div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">2.2ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped&quot;</span>}</div></details></details><div class="note"><span class="label">otel_spans_exported</span> <a href="ch16_observability/otel_nests_spans_via_contextvars_the_same_way_our_stack_does/spans.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch16_observability/otel_nests_spans_via_contextvars_the_same_way_our_stack_does/spans.jsonl&quot;</span>}</div><div class="note"><span class="label">the_chain_matches_our_own_stacks_nesting</span> {<span class="k">&quot;tool_parent_is_model&quot;</span>: <span class="l">true</span>, <span class="k">&quot;model_parent_is_scenario&quot;</span>: <span class="l">true</span>, <span class="k">&quot;scenario_has_no_parent&quot;</span>: <span class="l">true</span>, <span class="k">&quot;all_spans_share_one_trace_id&quot;</span>: <span class="l">true</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario a_broken_span_exporter_cannot_break_the_call</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">a_broken_span_exporter_cannot_break_the_call</span> <span class="dot">·</span> <span class="ms">0.7ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: fine, despite the exporter.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: fine, despite the exporter.</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">go</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">1</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">fine, despite the exporter.</td></tr></table></div></details></details><div class="note"><span class="label">the_call_completed_despite_the_broken_exporter</span> {<span class="k">&quot;raised&quot;</span>: <span class="l">false</span>, <span class="k">&quot;reply&quot;</span>: <span class="s">&quot;fine, despite the exporter.&quot;</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">a_broken_span_exporter_cannot_break_the_call</span> <span class="dot">·</span> <span class="ms">1861.8ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1859.4ms</span> <span class="dot">·</span> <span class="digest">84 in / 145 out · responded with: What would you like me to do? Let me know what you need help with, and I’ll get started!</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1859.3ms (model provider 1845.7 · library 13.6)</span> <span class="dot">·</span> <span class="digest">84 in / 145 out · responded with: What would you like me to do? Let me know what you need help with, and I’ll get started!</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">go</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">88</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;go&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Sun, 06 Sep 2026 16:32:37 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 31667d33ae27ae30b347b8856ce52276.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">6lj5hOPjMK_H-K5FBN9hQr778YJZ4z6lx8i_0jZNKPDa5MB2Ap3a0A==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">0b939ff935ef1aa6fb514200fca12cb7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;c4563ab3-c21b-42eb-b8a9-6f4f82970f4a&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788712357</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What would you like me to do? Let me know what you need help with, and I\u2019ll get started!&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;We need answer user \&quot;go\&quot;. Need infer context? They just said \&quot;go\&quot;. Could be asking to proceed? Maybe from initial? We need respond appropriately. Since no prior context, \&quot;go\&quot; could mean start, continue, or chess/go game. Need maybe ask clarification? But maybe we should be concise: \&quot;What would you like me to go on? Please provide your request.\&quot; But final should be helpful. We can say \&quot;Ready! What would you like to do?\&quot; Maybe mention if they meant game Go. But no. Need maybe not overcomplicate.\n\nNeed produce final answer.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">84</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">145</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">229</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">120</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">0</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">84</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">What would you like me to do? Let me know what you need help with, and I’ll get started!</td></tr></table></div></details></details><div class="note"><span class="label">the_call_completed_despite_the_broken_exporter</span> {<span class="k">&quot;raised&quot;</span>: <span class="l">false</span>, <span class="k">&quot;reply&quot;</span>: <span class="s">&quot;What would you like me to do? Let me know what you need help with, and I\u2019ll get started!&quot;</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario usage_and_reasoning_tokens_map_to_the_spec</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">usage_and_reasoning_tokens_map_to_the_spec</span> <span class="dot">·</span> <span class="ms">0.6ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: A short reply, to keep reasoning tokens visible.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: A short reply, to keep reasoning tokens visible.</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">Explain briefly why the sky is blue.</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">1</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">A short reply, to keep reasoning tokens visible.</td></tr></table></div></details></details><div class="note"><span class="label">otel_span_exported</span> <a href="ch16_observability/usage_and_reasoning_tokens_map_to_the_spec/spans.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch16_observability/usage_and_reasoning_tokens_map_to_the_spec/spans.jsonl&quot;</span>}</div><div class="note"><span class="label">usage_mapped_under_mock_only_when_present</span> {<span class="k">&quot;usage_present&quot;</span>: <span class="l">false</span>, <span class="k">&quot;usage&quot;</span>: <span class="l">null</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">usage_and_reasoning_tokens_map_to_the_spec</span> <span class="dot">·</span> <span class="ms">1979.6ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1977.5ms</span> <span class="dot">·</span> <span class="digest">91 in / 143 out · responded with: The sky looks blue because sunlight is scattered by the tiny molecules and particles in Ea... (480 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1977.4ms (model provider 1962.1 · library 15.3)</span> <span class="dot">·</span> <span class="digest">91 in / 143 out · responded with: The sky looks blue because sunlight is scattered by the tiny molecules and particles in Ea... (480 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 1 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">human</td><td class="content">Explain briefly why the sky is blue.</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">122</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Explain briefly why the sky is blue.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Sun, 06 Sep 2026 16:32:39 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 5957ea451aa45a9d254075e89c5df686.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">VHwszw6sFjqrzFSKJEEqxZFVVd73m9Xv5Xmtny2cnGHr0pLykOSznA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">d9deb1753788df3bcc2fc3104385f65f</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;31b9275a-b3e0-4fbc-8a32-f45ff9a22c7a&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788712359</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;The sky looks blue because sunlight is scattered by the tiny molecules and particles in Earth\u2019s atmosphere. Shorter wavelengths of light\u2014like blue and violet\u2014are scattered much more than longer wavelengths like red and orange. This is called **Rayleigh scattering**.\n\nAlthough violet is scattered even more than blue, the Sun emits less violet light, and our eyes are also less sensitive to violet. So we see the sky as **blue**.\n\nDuring sunrise or sunset, sunlight travels through more atmosphere, so the blue light is scattered away, leaving the reds and oranges we see.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;We need answer. Need explain briefly why sky blue. Include Rayleigh scattering, sunlight, shorter wavelengths scattered more, blue perceived. Keep concise.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">91</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">143</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">234</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">28</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">0</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">91</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">The sky looks blue because sunlight is scattered by the tiny molecules and particles in Earth’s atmosphere. Shorter wavelengths of light—like blue and violet—are scattered much more than longer wavelengths like red and orange. This is called **Rayleigh scattering**.
+
+Although violet is scattered even more than blue, the Sun emits less violet light, and our eyes are also less sensitive to violet. So we see the sky as **blue**.
+
+During sunrise or sunset, sunlight travels through more atmosphere, so the blue light is scattered away, leaving the reds and oranges we see.</td></tr></table></div></details></details><div class="note"><span class="label">otel_span_exported</span> <a href="ch16_observability/usage_and_reasoning_tokens_map_to_the_spec/spans.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch16_observability/usage_and_reasoning_tokens_map_to_the_spec/spans.jsonl&quot;</span>}</div><div class="note"><span class="label">usage_mapped_under_mock_only_when_present</span> {<span class="k">&quot;usage_present&quot;</span>: <span class="l">true</span>, <span class="k">&quot;usage&quot;</span>: {<span class="k">&quot;input_tokens&quot;</span>: <span class="n">91</span>, <span class="k">&quot;output_tokens&quot;</span>: <span class="n">143</span>, <span class="k">&quot;total_tokens&quot;</span>: <span class="n">234</span>, <span class="k">&quot;input_token_details&quot;</span>: {<span class="k">&quot;cache_read&quot;</span>: <span class="n">0</span>}, <span class="k">&quot;output_token_details&quot;</span>: {<span class="k">&quot;reasoning&quot;</span>: <span class="n">28</span>}}}</div></details></div></div></div>

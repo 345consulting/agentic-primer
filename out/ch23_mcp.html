@@ -1,0 +1,821 @@
+<!doctype html><meta charset=utf-8><title>ch23_mcp</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line.
+   Unscoped, not `pre.wire .k` -- `_highlight` colours a plain note's inline
+   JSON too, not only a wire block's, and a token class means the same thing
+   everywhere it appears. */
+.k { color: #06c; }
+.s { color: #0a7; }
+.n { color: #b26; }
+.l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  .k { color: #7bf; } .s { color: #6d9; }
+  .n { color: #f9a; } .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch23_mcp</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=0 · messages=0</span></div><div class="col col-live"><b>live</b> <span class="meta">turns=0 · messages=0</span></div></div><div class="turn"><div class="turnno">scenario tool_discovered_not_declared</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">tool_discovered_not_declared</span> <span class="dot">·</span> <span class="ms">4.2ms</span></summary><div class="note"><span class="label">tools/list</span> {<span class="k">&quot;catalog&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;item&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Item&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;item&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;price_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}, {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;stock_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;item&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Item&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;item&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;stock_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}, {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;hours_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;day&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Day&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;day&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;hours_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">3.3ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">3.1ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table><details><summary>declared tools (3)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>stock_of</td><td>How many units of an item are on the shelf.</td><td>{&quot;description&quot;: &quot;How many units of an item are on the shelf.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;stock_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>hours_of</td><td>The store&#x27;s opening hours on a given day.</td><td>{&quot;description&quot;: &quot;The store&#x27;s opening hours on a given day.&quot;, &quot;properties&quot;: {&quot;day&quot;: {&quot;title&quot;: &quot;Day&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;day&quot;], &quot;title&quot;: &quot;hours_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;price_of&quot;</span>, <span class="s">&quot;stock_of&quot;</span>, <span class="s">&quot;hours_of&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20 for milk</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;milk&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;1.20 for milk&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20 for milk</td></tr></table><details><summary>declared tools (3)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>stock_of</td><td>How many units of an item are on the shelf.</td><td>{&quot;description&quot;: &quot;How many units of an item are on the shelf.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;stock_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>hours_of</td><td>The store&#x27;s opening hours on a given day.</td><td>{&quot;description&quot;: &quot;The store&#x27;s opening hours on a given day.&quot;, &quot;properties&quot;: {&quot;day&quot;: {&quot;title&quot;: &quot;Day&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;day&quot;], &quot;title&quot;: &quot;hours_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;price_of&quot;</span>, <span class="s">&quot;stock_of&quot;</span>, <span class="s">&quot;hours_of&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">4</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;tool&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk is 1.20.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">tool_discovered_not_declared</span> <span class="dot">·</span> <span class="ms">2344.6ms</span></summary><div class="note"><span class="label">tools/list</span> {<span class="k">&quot;catalog&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;item&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Item&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;item&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;price_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}, {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;stock_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;item&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Item&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;item&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;stock_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}, {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;hours_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;day&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Day&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;day&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;hours_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1669.6ms</span> <span class="dot">·</span> <span class="digest">474 in / 60 out · asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1668.5ms (model provider 1419.7 · library 248.8)</span> <span class="dot">·</span> <span class="digest">474 in / 60 out · asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table><details><summary>declared tools (3)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>stock_of</td><td>How many units of an item are on the shelf.</td><td>{&quot;description&quot;: &quot;How many units of an item are on the shelf.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;stock_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>hours_of</td><td>The store&#x27;s opening hours on a given day.</td><td>{&quot;description&quot;: &quot;The store&#x27;s opening hours on a given day.&quot;, &quot;properties&quot;: {&quot;day&quot;: {&quot;title&quot;: &quot;Day&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;day&quot;], &quot;title&quot;: &quot;hours_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">809</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    },
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;stock_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    },
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;hours_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;day&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;day&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 01:49:44 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 f88732a3c07912cb33374b1e2ce03f84.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">vAfMGOCCYGskJJf0ITJA7sik8DJBGQKBQvA0azhRaoG8OpqHfkS8ww==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P1</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">a3e28c09bfcdea7fa6212c2e6cf1bc02</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;bf10d55b-7955-469d-9d57-44f7f49275aa&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788486584</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks how much milk is. I should check price of milk.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_3NFGnWexSXVWJXGLNMgT8785&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">474</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">60</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">534</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">15</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">90</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">1.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20 for milk</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;milk&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;1.20 for milk&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">674.4ms</span> <span class="dot">·</span> <span class="digest">551 in / 9 out · responded with: Milk is £1.20.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">674.3ms (model provider 660.2 · library 14.1)</span> <span class="dot">·</span> <span class="digest">551 in / 9 out · responded with: Milk is £1.20.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20 for milk</td></tr></table><details><summary>declared tools (3)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>stock_of</td><td>How many units of an item are on the shelf.</td><td>{&quot;description&quot;: &quot;How many units of an item are on the shelf.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;stock_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>hours_of</td><td>The store&#x27;s opening hours on a given day.</td><td>{&quot;description&quot;: &quot;The store&#x27;s opening hours on a given day.&quot;, &quot;properties&quot;: {&quot;day&quot;: {&quot;title&quot;: &quot;Day&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;day&quot;], &quot;title&quot;: &quot;hours_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">1162</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_3NFGnWexSXVWJXGLNMgT8785&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks how much milk is. I should check price of milk.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;1.20 for milk&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_3NFGnWexSXVWJXGLNMgT8785&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    },
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;stock_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    },
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;hours_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;day&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;day&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 01:49:45 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 89657e9ba87ccb5f5b96de064bf6d496.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">5f-t3lGZ5NqQ-yCpapXNhFzkpx_XS0sM2yJfClLrk7Dfx_WKpAtO9w==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">9346a56726d3a0e60bba6b510582c72b</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;1e205845-afb3-4655-bfa8-46a1bf86f66c&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788486585</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Milk is \u00a31.20.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">551</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">9</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">560</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">512</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">512</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">39</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk is £1.20.</td></tr></table></div></details></details></details></div></div></div><div class="turn"><div class="turnno">scenario resource_lands_without_a_round_trip</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">resource_lands_without_a_round_trip</span> <span class="dot">·</span> <span class="ms">0.2ms</span></summary><div class="note"><span class="label">resources/list</span> {<span class="k">&quot;catalog&quot;</span>: [{<span class="k">&quot;uri&quot;</span>: <span class="s">&quot;file:///pricing/policy.md&quot;</span>, <span class="k">&quot;name&quot;</span>: <span class="s">&quot;pricing-policy&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;This quarter&#x27;s pricing policy&quot;</span>, <span class="k">&quot;mimeType&quot;</span>: <span class="s">&quot;text/markdown&quot;</span>}]}</div><div class="note"><span class="label">resources/read</span> {<span class="k">&quot;uri&quot;</span>: <span class="s">&quot;file:///pricing/policy.md&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Round every price to the nearest 5p.&quot;</span>}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk should be rounded to the nearest 5p.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk should be rounded to the nearest 5p.</span></summary><div class="note"><span class="label">context sent &mdash; 3 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Reference document:
+Round every price to the nearest 5p.</td></tr><tr><td>[2]</td><td class="role">human</td><td class="content">How much should milk cost, rounded per the policy?</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">3</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk should be rounded to the nearest 5p.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">resource_lands_without_a_round_trip</span> <span class="dot">·</span> <span class="ms">2954.4ms</span></summary><div class="note"><span class="label">resources/list</span> {<span class="k">&quot;catalog&quot;</span>: [{<span class="k">&quot;uri&quot;</span>: <span class="s">&quot;file:///pricing/policy.md&quot;</span>, <span class="k">&quot;name&quot;</span>: <span class="s">&quot;pricing-policy&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;This quarter&#x27;s pricing policy&quot;</span>, <span class="k">&quot;mimeType&quot;</span>: <span class="s">&quot;text/markdown&quot;</span>}]}</div><div class="note"><span class="label">resources/read</span> {<span class="k">&quot;uri&quot;</span>: <span class="s">&quot;file:///pricing/policy.md&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Round every price to the nearest 5p.&quot;</span>}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">2954.3ms</span> <span class="dot">·</span> <span class="digest">120 in / 250 out · responded with: Without the original price, I can’t give the exact figure. Per policy, milk should be roun... (43 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">2954.3ms (model provider 2942.4 · library 11.9)</span> <span class="dot">·</span> <span class="digest">120 in / 250 out · responded with: Without the original price, I can’t give the exact figure. Per policy, milk should be roun... (43 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 3 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Reference document:
+Round every price to the nearest 5p.</td></tr><tr><td>[2]</td><td class="role">human</td><td class="content">How much should milk cost, rounded per the policy?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">313</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Reference document:\nRound every price to the nearest 5p.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much should milk cost, rounded per the policy?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 01:49:46 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 7232dc40bbe46d9fbc45ec194ca42e44.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">Y_JjPaVuPorNxdsbi8yGaYnx2Qx1fbYQNcQxOamvFaJBmE_p5EuqmA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">ac3ca94c95095a968585cbef0bc21fcb</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;ac939f3d-43a6-4702-b2d6-612881878f87&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788486586</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Without the original price, I can\u2019t give the exact figure. Per policy, milk should be rounded to the nearest 5p \u2014 e.g. \u00a31.23 \u2192 \u00a31.25.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;We need answer. Need infer milk cost? Reference doc says round every price nearest 5p. Need know original milk price? No context. Need ask clarification? We need respond based on reference. But no price. Could say need original price. Policy: round every price to nearest 5p. For milk, if unrounded price e.g.? The prompt: \&quot;How much should milk cost, rounded per the policy?\&quot; We have only reference doc. Need use tool? No tool. Need maybe answer that milk should be rounded to nearest 5p; without shelf price cannot determine. But maybe there is data? Reference document \&quot;Round every price to the nearest 5p.\&quot; Then asks how much should milk cost rounded per policy. Need likely need compute from hidden info? No. We can state rule: milk&#x27;s price should be the nearest multiple of 5p (e.g., \u00a31.23 -&gt; \u00a31.25). Need maybe if price ends in 1/2p etc.\n\nLet&#x27;s craft concise.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">120</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">250</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">370</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">208</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">0</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">120</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Without the original price, I can’t give the exact figure. Per policy, milk should be rounded to the nearest 5p — e.g. £1.23 → £1.25.</td></tr></table></div></details></details></details></div></div></div><div class="turn"><div class="turnno">scenario prompt_seeds_the_conversation</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">prompt_seeds_the_conversation</span> <span class="dot">·</span> <span class="ms">0.1ms</span></summary><div class="note"><span class="label">prompts/list</span> {<span class="k">&quot;catalog&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price-check&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Ask the current price of a named item&quot;</span>, <span class="k">&quot;arguments&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;item&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;the item to price&quot;</span>, <span class="k">&quot;required&quot;</span>: <span class="l">true</span>}]}]}</div><div class="note"><span class="label">prompts/get</span> {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price-check&quot;</span>, <span class="k">&quot;arguments&quot;</span>: {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;butter&quot;</span>}, <span class="k">&quot;messages&quot;</span>: [{<span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>}, {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;human&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What does butter cost right now?&quot;</span>}]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: Butter is 1.20.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: Butter is 1.20.</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What does butter cost right now?</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Butter is 1.20.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">prompt_seeds_the_conversation</span> <span class="dot">·</span> <span class="ms">7933.6ms</span></summary><div class="note"><span class="label">prompts/list</span> {<span class="k">&quot;catalog&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price-check&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Ask the current price of a named item&quot;</span>, <span class="k">&quot;arguments&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;item&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;the item to price&quot;</span>, <span class="k">&quot;required&quot;</span>: <span class="l">true</span>}]}]}</div><div class="note"><span class="label">prompts/get</span> {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price-check&quot;</span>, <span class="k">&quot;arguments&quot;</span>: {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;butter&quot;</span>}, <span class="k">&quot;messages&quot;</span>: [{<span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>}, {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;human&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What does butter cost right now?&quot;</span>}]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">7933.6ms</span> <span class="dot">·</span> <span class="digest">103 in / 903 out · responded with: I cannot provide the exact real-time price of butter right now because I do not have live ... (1021 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">7933.5ms (model provider 7920.7 · library 12.8)</span> <span class="dot">·</span> <span class="digest">103 in / 903 out · responded with: I cannot provide the exact real-time price of butter right now because I do not have live ... (1021 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What does butter cost right now?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">209</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What does butter cost right now?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 01:49:49 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 d2ee90557b7dff69fea2eb2ff85880ec.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">3k9_DF296McgdIxF26S_GtRCHqQEnwO-E0SXdV-lfIC8Ng60Fx3Cew==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">ba014cbc9a8748f18bc35245406c021e</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;047feedf-594c-414b-be66-a6039af2d3e3&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788486589</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;I cannot provide the exact real-time price of butter right now because I do not have live access to market data or grocery store inventories, and I have not been given a tool to fetch current prices.\n\nHowever, based on the most recent data I have (up to my early 2025 training cutoff), here is a general ballpark:\n\n- **US Retail Average (Grocery):** The national average price for a standard pound (16 oz) of salted or unsalted butter typically ranges between **$4.00 and $5.50 per pound** at major supermarkets, though it can be higher for premium or organic brands.\n- **Wholesale/Commodity (CME Group):** The wholesale spot price for butter has been volatile. In late 2024 and early 2025, it hovered around **$2.50 to $3.50 per pound** on the commodity market, but these prices spike seasonally (especially before the winter holidays) and have seen noticeable fluctuations due to feed costs and dairy production levels.\n\nTo find the exact current price in your area, I would recommend checking your local grocery store&#x27;s website or app, or looking up the latest USDA National Dairy Retail Report for your region.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;1.  The user asks \&quot;What does butter cost right now?\&quot; This is asking for a current, real-time price of a commodity (butter).\n2.  I need to check if I have access to real-time data or tools that can fetch this information. Looking at my available tools (from previous turns, though not explicitly listed in this prompt context, typically I have no built-in web search or live data access unless specified). Since I don&#x27;t have an explicit tool listed in the prompt to fetch live prices, I need to respond honestly based on my knowledge cutoff or state my limitations.\n3.  Wait, in this environment, I have access to tools? The prompt says \&quot;Use the tools you are provided.\&quot; However, no tools are actually listed in the system prompt (the user message doesn&#x27;t provide tool definitions). Let me re-read the instructions.\n4.  The system prompt says \&quot;You are an AI assistant. You will be given a task. You must generate a detailed and long answer... Use the tools you are provided.\&quot; But I don&#x27;t see any tool definitions in the current context. Typically, if no tools are available, I cannot fetch real-time data.\n5.  Therefore, I must state that I cannot provide real-time market prices because I don&#x27;t have live internet access unless a tool is specifically provided. I can give general estimates or historical prices if known, but I should clarify the date of my knowledge cutoff if applicable.\n6.  Usually, the price of butter in the US is around $4-5 per pound at retail in recent years (2023-2024). Commodity prices fluctuate. I should apologize for not having live data.\n7.  Let me formulate a response: State I don&#x27;t have real-time access. Provide average retail price based on recent data (e.g., USDA data for Q4 2023 or Q1 2024). Mention wholesale/commodity prices.\n8.  Since no tools are provided explicitly, I should explicitly say \&quot;I don&#x27;t have access to live price feeds\&quot; and give a reasonable estimate based on my training data cutoff (which is late 2024). Let me check when my data ends. My current cutoff is generally estimated for this model, but let&#x27;s say early 2025. I&#x27;ll give a range.\n9.  Let&#x27;s craft the answer: Acknowledge the request, explain limitation (no live data), provide estimate for US retail price (e.g., $4.50-$5.00/lb), mention the difference across countries, and advise checking local store listings or financial commodity websites.\n10. Wait, the user prompt is very simple: \&quot;What does butter cost right now?\&quot;\n11. Since I don&#x27;t have a tool to fetch data, I will answer based on the most recent data I have. The most recent US retail average for butter (Q1 2025) was around $4.50-$5.50 per pound depending on location. The wholesale spot price has been volatile. I will clearly state that I cannot see real-time prices without a tool.\n12. I&#x27;ll respond politely and concisely, noting the limitation and providing a rough estimate based on my knowledge cutoff.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">103</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">903</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">1006</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">652</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">0</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">103</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I cannot provide the exact real-time price of butter right now because I do not have live access to market data or grocery store inventories, and I have not been given a tool to fetch current prices.
+
+However, based on the most recent data I have (up to my early 2025 training cutoff), here is a general ballpark:
+
+- **US Retail Average (Grocery):** The national average price for a standard pound (16 oz) of salted or unsalted butter typically ranges between **$4.00 and $5.50 per pound** at major supermarkets, though it can be higher for premium or organic brands.
+- **Wholesale/Commodity (CME Group):** The wholesale spot price for butter has been volatile. In late 2024 and early 2025, it hovered around **$2.50 to $3.50 per pound** on the commodity market, but these prices spike seasonally (especially before the winter holidays) and have seen noticeable fluctuations due to feed costs and dairy production levels.
+
+To find the exact current price in your area, I would recommend checking your local grocery store&#x27;s website or app, or looking up the latest USDA National Dairy Retail Report for your region.</td></tr></table></div></details></details></details></div></div></div><div class="turn"><div class="turnno">scenario prompt_and_tool_are_two_separate_decisions</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">prompt_and_tool_are_two_separate_decisions</span> <span class="dot">·</span> <span class="ms">0.9ms</span></summary><div class="note"><span class="label">prompts/get</span> {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price-check&quot;</span>, <span class="k">&quot;messages&quot;</span>: [{<span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>}, {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;human&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What does butter cost right now?&quot;</span>}]}</div><div class="note"><span class="label">tools/list</span> {<span class="k">&quot;catalog&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;item&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Item&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;item&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;price_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}, {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;hours_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;day&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Day&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;day&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;hours_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}, {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;stock_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;item&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Item&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;item&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;stock_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.6ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.4ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What does butter cost right now?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;price_of&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;butter&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">given: item=butter · returned: 1.20 for butter</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;butter&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;1.20 for butter&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Butter is 1.20.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Butter is 1.20.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What does butter cost right now?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;butter&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20 for butter</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;price_of&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">4</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;tool&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Butter is 1.20.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">prompt_and_tool_are_two_separate_decisions</span> <span class="dot">·</span> <span class="ms">2234.9ms</span></summary><div class="note"><span class="label">prompts/get</span> {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price-check&quot;</span>, <span class="k">&quot;messages&quot;</span>: [{<span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>}, {<span class="k">&quot;role&quot;</span>: <span class="s">&quot;human&quot;</span>, <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What does butter cost right now?&quot;</span>}]}</div><div class="note"><span class="label">tools/list</span> {<span class="k">&quot;catalog&quot;</span>: [{<span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;item&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Item&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;item&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;price_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}, {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;hours_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;day&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Day&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;day&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;hours_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}, {<span class="k">&quot;name&quot;</span>: <span class="s">&quot;stock_of&quot;</span>, <span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>, <span class="k">&quot;schema&quot;</span>: {<span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>, <span class="k">&quot;properties&quot;</span>: {<span class="k">&quot;item&quot;</span>: {<span class="k">&quot;title&quot;</span>: <span class="s">&quot;Item&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>}}, <span class="k">&quot;required&quot;</span>: [<span class="s">&quot;item&quot;</span>], <span class="k">&quot;title&quot;</span>: <span class="s">&quot;stock_of&quot;</span>, <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>}}]}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1131.7ms</span> <span class="dot">·</span> <span class="digest">375 in / 67 out · asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1131.0ms (model provider 1117.5 · library 13.5)</span> <span class="dot">·</span> <span class="digest">375 in / 67 out · asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What does butter cost right now?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">424</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What does butter cost right now?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 01:49:57 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 d4fb3448d1a8d3229dcf0a89f4bbe7e8.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">A2LTUDIFjx1lG7ZLcSS-lQbZkX4McMVo9N-dygJRF1LB23cqZqUYLQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">94d94d1a2f5b93c2d559133ae5f2d5b2</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;f6ad648d-de9e-45d6-b837-f295282b20af&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788486597</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks what butter costs right now. I&#x27;ll use price_of tool. Need item \&quot;butter\&quot;.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_M3HE7zIiD7otBrLbmt7o2021&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;butter\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">375</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">67</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">442</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">22</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">119</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;butter&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.6ms</span> <span class="dot">·</span> <span class="digest">given: item=butter · returned: 1.20 for butter</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;butter&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;1.20 for butter&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">1102.5ms</span> <span class="dot">·</span> <span class="digest">459 in / 11 out · responded with: Butter costs £1.20 right now.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1102.5ms (model provider 1089.2 · library 13.2)</span> <span class="dot">·</span> <span class="digest">459 in / 11 out · responded with: Butter costs £1.20 right now.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What does butter cost right now?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;butter&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20 for butter</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">808</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What does butter cost right now?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_M3HE7zIiD7otBrLbmt7o2021&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;butter\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks what butter costs right now. I&#x27;ll use price_of tool. Need item \&quot;butter\&quot;.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;1.20 for butter&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_M3HE7zIiD7otBrLbmt7o2021&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 01:49:58 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 f0a2a95cb4d25b2414a9c1a7a754943e.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">FUkzVQjskYYSaqHHA6f3keXF7JqXl_nV-yk59-2sHft0Q129WLp9Ag==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">85506cf06929b5f7f0032e6f9077ea73</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;9106b5c1-4420-43e1-b78d-a74ab744f80c&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788486598</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Butter costs \u00a31.20 right now.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">459</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">11</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">470</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">75</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Butter costs £1.20 right now.</td></tr></table></div></details></details></details></div></div></div><div class="turn"><div class="turnno">scenario dispatch_table_order_is_not_a_promise</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">dispatch_table_order_is_not_a_promise</span> <span class="dot">·</span> <span class="ms">1.8ms</span></summary><div class="note"><span class="label">discovered_twice</span> {<span class="k">&quot;first_order&quot;</span>: [<span class="s">&quot;price_of&quot;</span>, <span class="s">&quot;stock_of&quot;</span>, <span class="s">&quot;hours_of&quot;</span>], <span class="k">&quot;second_order&quot;</span>: [<span class="s">&quot;stock_of&quot;</span>, <span class="s">&quot;hours_of&quot;</span>, <span class="s">&quot;price_of&quot;</span>], <span class="k">&quot;same_content&quot;</span>: <span class="l">true</span>, <span class="k">&quot;same_order&quot;</span>: <span class="l">false</span>, <span class="k">&quot;fingerprint_first&quot;</span>: <span class="s">&quot;3585f1e6510f&quot;</span>, <span class="k">&quot;fingerprint_second&quot;</span>: <span class="s">&quot;158cb46fca11&quot;</span>}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1.3ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">1.1ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table><details><summary>declared tools (3)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>stock_of</td><td>How many units of an item are on the shelf.</td><td>{&quot;description&quot;: &quot;How many units of an item are on the shelf.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;stock_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>hours_of</td><td>The store&#x27;s opening hours on a given day.</td><td>{&quot;description&quot;: &quot;The store&#x27;s opening hours on a given day.&quot;, &quot;properties&quot;: {&quot;day&quot;: {&quot;title&quot;: &quot;Day&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;day&quot;], &quot;title&quot;: &quot;hours_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;price_of&quot;</span>, <span class="s">&quot;stock_of&quot;</span>, <span class="s">&quot;hours_of&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20 for milk</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;milk&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;1.20 for milk&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20 for milk</td></tr></table><details><summary>declared tools (3)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>stock_of</td><td>How many units of an item are on the shelf.</td><td>{&quot;description&quot;: &quot;How many units of an item are on the shelf.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;stock_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>hours_of</td><td>The store&#x27;s opening hours on a given day.</td><td>{&quot;description&quot;: &quot;The store&#x27;s opening hours on a given day.&quot;, &quot;properties&quot;: {&quot;day&quot;: {&quot;title&quot;: &quot;Day&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;day&quot;], &quot;title&quot;: &quot;hours_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;price_of&quot;</span>, <span class="s">&quot;stock_of&quot;</span>, <span class="s">&quot;hours_of&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">4</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;tool&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk is 1.20.</td></tr></table></div></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">dispatch_table_order_is_not_a_promise</span> <span class="dot">·</span> <span class="ms">2507.1ms</span></summary><div class="note"><span class="label">discovered_twice</span> {<span class="k">&quot;first_order&quot;</span>: [<span class="s">&quot;price_of&quot;</span>, <span class="s">&quot;stock_of&quot;</span>, <span class="s">&quot;hours_of&quot;</span>], <span class="k">&quot;second_order&quot;</span>: [<span class="s">&quot;stock_of&quot;</span>, <span class="s">&quot;hours_of&quot;</span>, <span class="s">&quot;price_of&quot;</span>], <span class="k">&quot;same_content&quot;</span>: <span class="l">true</span>, <span class="k">&quot;same_order&quot;</span>: <span class="l">false</span>, <span class="k">&quot;fingerprint_first&quot;</span>: <span class="s">&quot;3585f1e6510f&quot;</span>, <span class="k">&quot;fingerprint_second&quot;</span>: <span class="s">&quot;158cb46fca11&quot;</span>}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1352.6ms</span> <span class="dot">·</span> <span class="digest">474 in / 62 out · asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1352.0ms (model provider 1338.2 · library 13.8)</span> <span class="dot">·</span> <span class="digest">474 in / 62 out · asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table><details><summary>declared tools (3)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>stock_of</td><td>How many units of an item are on the shelf.</td><td>{&quot;description&quot;: &quot;How many units of an item are on the shelf.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;stock_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>hours_of</td><td>The store&#x27;s opening hours on a given day.</td><td>{&quot;description&quot;: &quot;The store&#x27;s opening hours on a given day.&quot;, &quot;properties&quot;: {&quot;day&quot;: {&quot;title&quot;: &quot;Day&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;day&quot;], &quot;title&quot;: &quot;hours_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">809</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    },
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;stock_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    },
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;hours_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;day&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;day&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 01:49:59 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 b29a91b65eb208088dd6199048205ee4.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">XAW3HBN6i2rsNaa56EnM9ZRVwuybF1moOVFAW6x7Gd-FGz_a2rqIoA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">d0b0666a409f8b3777875fa122ec94dc</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;9c149bc6-f319-4f29-b644-651e427049fb&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788486599</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks \&quot;How much is milk?\&quot; I should check the price of milk.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_P1pi13wvc8NLzMLodFhi3362&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">474</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">62</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">536</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">17</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">90</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.5ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20 for milk</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;item&quot;</span>: <span class="s">&quot;milk&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;1.20 for milk&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">1152.5ms</span> <span class="dot">·</span> <span class="digest">553 in / 9 out · responded with: Milk is £1.20.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1152.5ms (model provider 1139.2 · library 13.4)</span> <span class="dot">·</span> <span class="digest">553 in / 9 out · responded with: Milk is £1.20.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20 for milk</td></tr></table><details><summary>declared tools (3)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>price_of</td><td>The current shelf price of an item, in pounds.</td><td>{&quot;description&quot;: &quot;The current shelf price of an item, in pounds.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;price_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>stock_of</td><td>How many units of an item are on the shelf.</td><td>{&quot;description&quot;: &quot;How many units of an item are on the shelf.&quot;, &quot;properties&quot;: {&quot;item&quot;: {&quot;title&quot;: &quot;Item&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;item&quot;], &quot;title&quot;: &quot;stock_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr><tr><td>hours_of</td><td>The store&#x27;s opening hours on a given day.</td><td>{&quot;description&quot;: &quot;The store&#x27;s opening hours on a given day.&quot;, &quot;properties&quot;: {&quot;day&quot;: {&quot;title&quot;: &quot;Day&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;day&quot;], &quot;title&quot;: &quot;hours_of&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">1170</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_P1pi13wvc8NLzMLodFhi3362&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks \&quot;How much is milk?\&quot; I should check the price of milk.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;1.20 for milk&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_P1pi13wvc8NLzMLodFhi3362&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    },
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;stock_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;How many units of an item are on the shelf.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    },
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;hours_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The store&#x27;s opening hours on a given day.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;day&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;day&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 01:50:00 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 153b67ebb1db442b5cea7f360e7f8cb6.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">6DT6XFR6JfTHZ36qgWHOMJdg4DAcy6HJQdg8CzDluNySJ-KK7vuIHQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P1</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">74175ed3d9281db551d268ce4171a62f</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;14fd7903-178b-4e0a-bfb8-901d4ead205e&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788486600</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Milk is \u00a31.20.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">553</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">9</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">562</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">512</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">512</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">41</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk is £1.20.</td></tr></table></div></details></details></details></div></div></div>

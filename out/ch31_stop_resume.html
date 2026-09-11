@@ -1,0 +1,930 @@
+<!doctype html><meta charset=utf-8><title>ch31_stop_resume</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line.
+   Unscoped, not `pre.wire .k` -- `_highlight` colours a plain note's inline
+   JSON too, not only a wire block's, and a token class means the same thing
+   everywhere it appears. */
+.k { color: #06c; }
+.s { color: #0a7; }
+.n { color: #b26; }
+.l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  .k { color: #7bf; } .s { color: #6d9; }
+  .n { color: #f9a; } .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch31_stop_resume</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=0 · messages=0</span></div><div class="col col-live"><b>live</b> <span class="meta">turns=0 · messages=0</span></div></div><div class="turn"><div class="turnno">scenario a_snapshot_after_every_turn_lets_a_new_process_resume</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">a_snapshot_after_every_turn_lets_a_new_process_resume</span> <span class="dot">·</span> <span class="ms">4.1ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">3.1ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">2.9ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped, tracking XYZ001</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order A100 has shipped.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order A100 has shipped.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">4</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;tool&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Order A100 has shipped.</td></tr></table></div></details></details><div class="note"><span class="label">snapshot_written</span> <a href="out/ch31_stop_resume/a_snapshot_after_every_turn_lets_a_new_process_resume/order-support-run.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch31_stop_resume/a_snapshot_after_every_turn_lets_a_new_process_resume/order-support-run.jsonl&quot;</span>, <span class="k">&quot;turn&quot;</span>: <span class="n">2</span>}</div><details><summary><span class="name">turn</span> <span class="meta">3</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Tracking number: XYZ001.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Tracking number: XYZ001.</span></summary><div class="note"><span class="label">context sent &mdash; 6 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr><tr><td>[4]</td><td class="role">ai</td><td class="content">Order A100 has shipped.</td></tr><tr><td>[5]</td><td class="role">human</td><td class="content">And what&#x27;s the tracking number?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">6</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;tool&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Tracking number: XYZ001.</td></tr></table></div></details></details><div class="note"><span class="label">resumed_in_a_new_process</span> <a href="out/ch31_stop_resume/a_snapshot_after_every_turn_lets_a_new_process_resume/order-support-run.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch31_stop_resume/a_snapshot_after_every_turn_lets_a_new_process_resume/order-support-run.jsonl&quot;</span>, <span class="k">&quot;resumed_from_turn&quot;</span>: <span class="n">2</span>, <span class="k">&quot;final_message_count&quot;</span>: <span class="n">7</span>, <span class="k">&quot;final_reply&quot;</span>: <span class="s">&quot;Tracking number: XYZ001.&quot;</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">a_snapshot_after_every_turn_lets_a_new_process_resume</span> <span class="dot">·</span> <span class="ms">3200.7ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1282.3ms</span> <span class="dot">·</span> <span class="digest">377 in / 65 out · asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1281.3ms (model provider 1045.7 · library 235.6)</span> <span class="dot">·</span> <span class="digest">377 in / 65 out · asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">424</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:04:55 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 979fd411be7856884369a8fd4e9bff60.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">IjmOom8Vb2aBTaQzf9fIihJwvi9r2Hvhl6g8e4a2EpvwkBZIyxRGhQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P1</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">43e5618c58a33140760c8cbbd3003ebb</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;b499f650-c294-4476-9d0a-0ef7699aa0b0&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545095</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks status of order A100. Need tool check_order with order_id A100.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_oQTYN6OeaL6BM9zx2Ux07236&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">377</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">65</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">442</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">19</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">121</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">1.0ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped, tracking XYZ001</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">893.5ms</span> <span class="dot">·</span> <span class="digest">463 in / 13 out · responded with: Order A100 is shipped. Tracking number: XYZ001.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">893.4ms (model provider 879.8 · library 13.6)</span> <span class="dot">·</span> <span class="digest">463 in / 13 out · responded with: Order A100 is shipped. Tracking number: XYZ001.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">823</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_oQTYN6OeaL6BM9zx2Ux07236&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks status of order A100. Need tool check_order with order_id A100.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_oQTYN6OeaL6BM9zx2Ux07236&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:04:56 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 0ce5ea6368e3c7ea57962fd7b4c5fe44.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">RsXWrHCkNXNTQl0IhZ1bgBiOiDaqWLOFwiurbM70iBLMDVN-0u8zsw==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">b3e55f60ca33df764e0b3565c92ea25f</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;8611d322-bec0-4ed3-ae2b-2ba4a064ea90&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545096</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order A100 is shipped. Tracking number: XYZ001.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">463</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">13</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">476</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">79</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Order A100 is shipped. Tracking number: XYZ001.</td></tr></table></div></details></details><div class="note"><span class="label">snapshot_written</span> <a href="out/ch31_stop_resume/a_snapshot_after_every_turn_lets_a_new_process_resume/order-support-run.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch31_stop_resume/a_snapshot_after_every_turn_lets_a_new_process_resume/order-support-run.jsonl&quot;</span>, <span class="k">&quot;turn&quot;</span>: <span class="n">2</span>}</div><details><summary><span class="name">turn</span> <span class="meta">3</span> <span class="dot">·</span> <span class="ms">1023.0ms</span> <span class="dot">·</span> <span class="digest">468 in / 64 out · responded with: The tracking number for order A100 is XYZ001.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1023.0ms (model provider 1009.4 · library 13.6)</span> <span class="dot">·</span> <span class="digest">468 in / 64 out · responded with: The tracking number for order A100 is XYZ001.</span></summary><div class="note"><span class="label">context sent &mdash; 6 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr><tr><td>[4]</td><td class="role">ai</td><td class="content">Order A100 is shipped. Tracking number: XYZ001.</td></tr><tr><td>[5]</td><td class="role">human</td><td class="content">And what&#x27;s the tracking number?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">864</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_oQTYN6OeaL6BM9zx2Ux07236&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+          }
+        }
+      ]
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_oQTYN6OeaL6BM9zx2Ux07236&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order A100 is shipped. Tracking number: XYZ001.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;And what&#x27;s the tracking number?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:04:57 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 d367a81605c570be8f51546cf4468ece.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">5fHpr0a2WRQBLfbHhdars97xZF-njZ3Al5LmuPPXtn7EjNYLMYyflw==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">850782879fac17e99061ff4d40727e1e</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;1e75ab62-ed21-4f78-9e39-3b83f6e1d9ce&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545097</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;The tracking number for order A100 is XYZ001.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks what&#x27;s the tracking number. From the previous tool result, it&#x27;s XYZ001. I already mentioned it but can restate. No need to call tool again unless needed. But maybe call to confirm? I already have answer. Just answer.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">468</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">64</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">532</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">52</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">84</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">The tracking number for order A100 is XYZ001.</td></tr></table></div></details></details><div class="note"><span class="label">resumed_in_a_new_process</span> <a href="out/ch31_stop_resume/a_snapshot_after_every_turn_lets_a_new_process_resume/order-support-run.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch31_stop_resume/a_snapshot_after_every_turn_lets_a_new_process_resume/order-support-run.jsonl&quot;</span>, <span class="k">&quot;resumed_from_turn&quot;</span>: <span class="n">2</span>, <span class="k">&quot;final_message_count&quot;</span>: <span class="n">7</span>, <span class="k">&quot;final_reply&quot;</span>: <span class="s">&quot;The tracking number for order A100 is XYZ001.&quot;</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario snapshotting_mid_turn_would_orphan_a_tool_call</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">snapshotting_mid_turn_would_orphan_a_tool_call</span> <span class="dot">·</span> <span class="ms">0.5ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.4ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped, tracking XYZ001</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>}</div></details></details><div class="note"><span class="label">bad_snapshot_written_mid_turn</span> <a href="out/ch31_stop_resume/snapshotting_mid_turn_would_orphan_a_tool_call/bad-timing-run.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch31_stop_resume/snapshotting_mid_turn_would_orphan_a_tool_call/bad-timing-run.jsonl&quot;</span>}</div><div class="note"><span class="label">resume_check</span> {<span class="k">&quot;checked&quot;</span>: <span class="l">false</span>, <span class="k">&quot;reason&quot;</span>: <span class="s">&quot;not applicable under mock&quot;</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">snapshotting_mid_turn_would_orphan_a_tool_call</span> <span class="dot">·</span> <span class="ms">1261.9ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">923.3ms</span> <span class="dot">·</span> <span class="digest">377 in / 66 out · asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">921.2ms (model provider 908.1 · library 13.1)</span> <span class="dot">·</span> <span class="digest">377 in / 66 out · asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">424</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:04:58 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 d9978c4c79926d2f68f210859236f550.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">AeP8CeLp6gmPvpCofCteZhGhsmIFeL2XcgjE-RkLLaKvLSFhCPL4OQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">01bbbd3c1137663d71835f73f0a72401</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;5125c9ca-0741-4799-921b-b575b886bfaa&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545098</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks about order A100 status. I should call check_order with order_id A100.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_VXqk55sx9Kt0CcaD42rc7635&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">377</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">66</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">443</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">20</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">121</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">1.3ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped, tracking XYZ001</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>}</div></details></details><div class="note"><span class="label">bad_snapshot_written_mid_turn</span> <a href="out/ch31_stop_resume/snapshotting_mid_turn_would_orphan_a_tool_call/bad-timing-run.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch31_stop_resume/snapshotting_mid_turn_would_orphan_a_tool_call/bad-timing-run.jsonl&quot;</span>}</div><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">338.2ms (model provider 326.0 · library 12.3)</span></summary><div class="note"><span class="label">context sent &mdash; 3 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">393</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_VXqk55sx9Kt0CcaD42rc7635&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+          }
+        }
+      ]
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>400</dd><dt>headers (14)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">264</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/octet-stream</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:04:59 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 d367a81605c570be8f51546cf4468ece.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">KkHDxGjECqum31TJU8xLM3nfzU5EnsbKsMk3k0TvW-2hn2O5tKgNvg==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Error from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">05d107621e8d4430705a8a9278f3fc1f</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;error&quot;</span>: {
+    <span class="k">&quot;message&quot;</span>: <span class="s">&quot;An assistant message with &#x27;tool_calls&#x27; must be followed by tool messages responding to each &#x27;tool_call_id&#x27;. (insufficient tool messages following tool_calls message)&quot;</span>,
+    <span class="k">&quot;type&quot;</span>: <span class="s">&quot;invalid_request_error&quot;</span>,
+    <span class="k">&quot;param&quot;</span>: <span class="l">null</span>,
+    <span class="k">&quot;code&quot;</span>: <span class="s">&quot;invalid_request_error&quot;</span>
+  }
+}</pre></div></details><div class="note"><span class="label">resume_check</span> {<span class="k">&quot;accepted&quot;</span>: <span class="l">false</span>, <span class="k">&quot;error&quot;</span>: <span class="s">&quot;Error code: 400 - {&#x27;error&#x27;: {&#x27;message&#x27;: \&quot;An assistant message with &#x27;tool_calls&#x27; must be followed by tool messages responding to each &#x27;tool_call_id&#x27;. (insufficient tool messages following tool_calls message)\&quot;, &#x27;type&#x27;: &#x27;invalid_request_error&#x27;, &#x27;param&#x27;: None, &#x27;code&#x27;: &#x27;invalid_request_error&#x27;}}&quot;</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario a_crash_before_the_next_snapshot_loses_at_most_one_turn</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">a_crash_before_the_next_snapshot_loses_at_most_one_turn</span> <span class="dot">·</span> <span class="ms">1.0ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped, tracking XYZ001</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order A100 has shipped.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order A100 has shipped.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">4</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;tool&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Order A100 has shipped.</td></tr></table></div></details></details><details><summary><span class="name">turn</span> <span class="meta">3</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: No, that&#x27;s everything.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">responded with: No, that&#x27;s everything.</span></summary><div class="note"><span class="label">context sent &mdash; 6 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr><tr><td>[4]</td><td class="role">ai</td><td class="content">Order A100 has shipped.</td></tr><tr><td>[5]</td><td class="role">human</td><td class="content">Anything else I should know?</td></tr></table></div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">6</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;tool&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">No, that&#x27;s everything.</td></tr></table></div></details></details><div class="note"><span class="label">recovery_point</span> {<span class="k">&quot;recovered_turn&quot;</span>: <span class="n">2</span>, <span class="k">&quot;turn_three_was_lost&quot;</span>: <span class="l">true</span>}</div><details><summary><span class="name">turn</span> <span class="meta">3</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: No, that&#x27;s everything.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: No, that&#x27;s everything.</span></summary><div class="note"><span class="label">context sent &mdash; 6 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr><tr><td>[4]</td><td class="role">ai</td><td class="content">Order A100 has shipped.</td></tr><tr><td>[5]</td><td class="role">human</td><td class="content">Anything else I should know?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">6</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;tool&quot;</span>, <span class="s">&quot;ai&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">No, that&#x27;s everything.</td></tr></table></div></details></details><div class="note"><span class="label">turn_three_redone_cleanly</span> <a href="out/ch31_stop_resume/a_crash_before_the_next_snapshot_loses_at_most_one_turn/crash-mid-turn-run.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch31_stop_resume/a_crash_before_the_next_snapshot_loses_at_most_one_turn/crash-mid-turn-run.jsonl&quot;</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">a_crash_before_the_next_snapshot_loses_at_most_one_turn</span> <span class="dot">·</span> <span class="ms">4539.0ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1092.1ms</span> <span class="dot">·</span> <span class="digest">377 in / 67 out · asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1091.4ms (model provider 1082.4 · library 9.0)</span> <span class="dot">·</span> <span class="digest">377 in / 67 out · asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">424</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:05:00 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 0ec4ee481d2d7e134f4c87a9b9fc4e06.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">WaqMJpbm_p9XI2zRxQ--ZK1NWndZmxWliwjg3p9TJgK1VbRwkTJGog==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">e4849c10298cca89938dc0f3650c6f7a</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;cbcb39be-9b97-4b21-949d-995828e3354e&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545099</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks for status of order A100. I&#x27;ll use check_order with order_id A100.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_JjoxY1IBMXmZyALeiSeV7814&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">377</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">67</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">444</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">21</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">121</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">0.7ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped, tracking XYZ001</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">713.5ms</span> <span class="dot">·</span> <span class="digest">465 in / 13 out · responded with: Order A100 is shipped. Tracking number: XYZ001.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">713.4ms (model provider 701.1 · library 12.3)</span> <span class="dot">·</span> <span class="digest">465 in / 13 out · responded with: Order A100 is shipped. Tracking number: XYZ001.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">826</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_JjoxY1IBMXmZyALeiSeV7814&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks for status of order A100. I&#x27;ll use check_order with order_id A100.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_JjoxY1IBMXmZyALeiSeV7814&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:05:01 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 51185e40453f61916e037fc6db50766c.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">vVBDneQfAKT-BB2Vq9Al9UVZVS2WEdoAd-IJ0Q7SQ0CGNk6qDo4G4Q==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">6661aa1fcde400fee638acad275d5e4d</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;73b204c7-95f7-4f1d-bf39-e36475b61291&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545100</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order A100 is shipped. Tracking number: XYZ001.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">465</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">13</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">478</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">81</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Order A100 is shipped. Tracking number: XYZ001.</td></tr></table></div></details></details><details><summary><span class="name">turn</span> <span class="meta">3</span> <span class="dot">·</span> <span class="ms">1433.5ms</span> <span class="dot">·</span> <span class="digest">193 in / 125 out · responded with: That&#x27;s all the info I have for order A100. If you need delivery updates, you can track usi... (27 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1433.5ms (model provider 1419.9 · library 13.6)</span> <span class="dot">·</span> <span class="digest">193 in / 125 out · responded with: That&#x27;s all the info I have for order A100. If you need delivery updates, you can track usi... (27 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 6 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr><tr><td>[4]</td><td class="role">ai</td><td class="content">Order A100 is shipped. Tracking number: XYZ001.</td></tr><tr><td>[5]</td><td class="role">human</td><td class="content">Anything else I should know?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (7)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tools, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">749</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_JjoxY1IBMXmZyALeiSeV7814&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks for status of order A100. I&#x27;ll use check_order with order_id A100.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_JjoxY1IBMXmZyALeiSeV7814&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order A100 is shipped. Tracking number: XYZ001.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Anything else I should know?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:05:01 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 152ee7adb7321146282dd89ad75c983e.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">I5ztP6maBLsdWdw2PUmsfyWwmikonMIcJuY0T_tHEezaVkw6kKvtBQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">e85241ed0c0fd91319d0e0c1d9d39040</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;d5231fb1-a77a-4df7-9a10-26d9feb33fa1&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545101</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;That&#x27;s all the info I have for order A100. If you need delivery updates, you can track using XYZ001 with the carrier.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;We need to respond to user query about order A100. We previously looked up order A100 and got shipped, tracking XYZ001. Now user asks \&quot;Anything else I should know?\&quot; We have no other info from tools. Could check order details maybe? There is no tool mentioned besides check_order. We can respond that we only have that info. Or perhaps we can check again with more detail? But no tool for that. So say no additional details available. Keep brief.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">193</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">125</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">318</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">128</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">96</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">128</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">65</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">That&#x27;s all the info I have for order A100. If you need delivery updates, you can track using XYZ001 with the carrier.</td></tr></table></div></details></details><div class="note"><span class="label">recovery_point</span> {<span class="k">&quot;recovered_turn&quot;</span>: <span class="n">2</span>, <span class="k">&quot;turn_three_was_lost&quot;</span>: <span class="l">true</span>}</div><details><summary><span class="name">turn</span> <span class="meta">3</span> <span class="dot">·</span> <span class="ms">1297.6ms</span> <span class="dot">·</span> <span class="digest">467 in / 94 out · responded with: I don&#x27;t have any additional details beyond what I already provided: order A100 is shipped,... (130 more characters)</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1297.6ms (model provider 1283.9 · library 13.6)</span> <span class="dot">·</span> <span class="digest">467 in / 94 out · responded with: I don&#x27;t have any additional details beyond what I already provided: order A100 is shipped,... (130 more characters)</span></summary><div class="note"><span class="label">context sent &mdash; 6 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">What&#x27;s the status of order A100?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">order A100: shipped, tracking XYZ001</td></tr><tr><td>[4]</td><td class="role">ai</td><td class="content">Order A100 is shipped. Tracking number: XYZ001.</td></tr><tr><td>[5]</td><td class="role">human</td><td class="content">Anything else I should know?</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">861</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;What&#x27;s the status of order A100?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_JjoxY1IBMXmZyALeiSeV7814&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+          }
+        }
+      ]
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_JjoxY1IBMXmZyALeiSeV7814&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Order A100 is shipped. Tracking number: XYZ001.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Anything else I should know?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:05:03 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 49a6d4f867bdc98619cc6ae406609b78.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">mZDql__RRMu_X3KKB1HxAA3qdmYdVk2gkPDu6ROXYONKxCy3KD2IrA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P6</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">e156725d294a3bc2316b898ab9ae1f18</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;619f5a79-1cf6-498e-8baa-860b9edc4645&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545103</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;I don&#x27;t have any additional details beyond what I already provided: order A100 is shipped, with tracking number XYZ001. If you need more specifics (like delivery date or carrier), I don&#x27;t have access to that information.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks if there&#x27;s anything else they should know about order A100. I don&#x27;t have additional tools to check more details\u2014I can only check order status. I should be honest that I don&#x27;t have further info available.&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">467</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">94</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">561</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">47</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">83</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">I don&#x27;t have any additional details beyond what I already provided: order A100 is shipped, with tracking number XYZ001. If you need more specifics (like delivery date or carrier), I don&#x27;t have access to that information.</td></tr></table></div></details></details><div class="note"><span class="label">turn_three_redone_cleanly</span> <a href="out/ch31_stop_resume/a_crash_before_the_next_snapshot_loses_at_most_one_turn/crash-mid-turn-run.jsonl" target="_blank">open file</a> {<span class="k">&quot;path&quot;</span>: <span class="s">&quot;out/ch31_stop_resume/a_crash_before_the_next_snapshot_loses_at_most_one_turn/crash-mid-turn-run.jsonl&quot;</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario separate_run_ids_do_not_collide</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">separate_run_ids_do_not_collide</span> <span class="dot">·</span> <span class="ms">0.5ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order A100 has shipped.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order A100 has shipped.</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Track order A100.</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Order A100 has shipped.</td></tr></table></div></details></details><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order B200 is processing.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Order B200 is processing.</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Track order B200.</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">tools declared to the mock model</span> {<span class="k">&quot;names&quot;</span>: [<span class="s">&quot;check_order&quot;</span>], <span class="k">&quot;consulted&quot;</span>: <span class="l">false</span>}</div><div class="note"><span class="label">context ignored by the mock model</span> {<span class="k">&quot;messages&quot;</span>: <span class="n">2</span>, <span class="k">&quot;roles&quot;</span>: [<span class="s">&quot;system&quot;</span>, <span class="s">&quot;human&quot;</span>]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Order B200 is processing.</td></tr></table></div></details></details><div class="note"><span class="label">isolation_check</span> {<span class="k">&quot;run_a_mentions_a100&quot;</span>: <span class="l">true</span>, <span class="k">&quot;run_a_mentions_b200&quot;</span>: <span class="l">false</span>, <span class="k">&quot;run_b_mentions_b200&quot;</span>: <span class="l">true</span>, <span class="k">&quot;run_b_mentions_a100&quot;</span>: <span class="l">false</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">separate_run_ids_do_not_collide</span> <span class="dot">·</span> <span class="ms">1981.3ms</span></summary><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">845.7ms</span> <span class="dot">·</span> <span class="digest">373 in / 69 out · asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">845.0ms (model provider 833.3 · library 11.7)</span> <span class="dot">·</span> <span class="digest">373 in / 69 out · asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Track order A100.</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">409</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Track order A100.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:05:04 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 8a50fe9452625079391cf0ce7a3e0c56.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">3FKb9CKebwB7cmquCl_R0WuIsBJTB4wu5fWD3BS4aAZRWyhpTORgxg==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">580d149712d7d4ccf913ee52b9e6a339</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;4bc55396-9c47-4bd3-9fee-7602da926fb2&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545104</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user wants to track order A100. I&#x27;ll use the check_order tool with order_id \&quot;A100\&quot;.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_n9XU4Ejpep3hl8utspsJ0726&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;A100\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">373</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">69</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">442</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">23</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">117</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;A100&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">0.7ms</span> <span class="dot">·</span> <span class="digest">given: order_id=A100 · returned: order A100: shipped, tracking XYZ001</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;A100&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order A100: shipped, tracking XYZ001&quot;</span>}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1134.1ms</span> <span class="dot">·</span> <span class="digest">373 in / 66 out · asked for: check_order</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1133.4ms (model provider 1121.1 · library 12.4)</span> <span class="dot">·</span> <span class="digest">373 in / 66 out · asked for: check_order</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tools you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">Track order B200.</td></tr></table><details><summary>declared tools (1)</summary><table><tr><th>tool</th><th>description</th><th>schema</th></tr><tr><td>check_order</td><td>Check the status of an order by id.</td><td>{&quot;description&quot;: &quot;Check the status of an order by id.&quot;, &quot;properties&quot;: {&quot;order_id&quot;: {&quot;title&quot;: &quot;Order Id&quot;, &quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;order_id&quot;], &quot;title&quot;: &quot;check_order&quot;, &quot;type&quot;: &quot;object&quot;}</td></tr></table></details></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">409</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tools you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Track order B200.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;Check the status of an order by id.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;order_id&quot;</span>: {
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;order_id&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Fri, 04 Sep 2026 18:05:05 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 025e84e972a461c1dd140ac5fbbbd0aa.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">bPr-GsSQdhYE0BYn21GjtchIkKwAaRa51kg1yAWUMNePdfu5asXhZQ==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN52-P2</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">a25105b886c689496eabbb9459ed70bb</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;bc1689c9-eef8-470f-93fa-824810437b50&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788545105</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks to track order B200. I&#x27;ll use check_order with order_id B200.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_GijBI3SVt8nPnzrmVTpz3956&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;check_order&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;order_id\&quot;: \&quot;B200\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">373</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">66</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">439</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">20</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">117</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">check_order({&quot;order_id&quot;: &quot;B200&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">check_order</span> <span class="dot">·</span> <span class="ms">0.6ms</span> <span class="dot">·</span> <span class="digest">given: order_id=B200 · returned: order B200: shipped, tracking XYZ001</span></summary><div class="note"><span class="label">args</span> {<span class="k">&quot;order_id&quot;</span>: <span class="s">&quot;B200&quot;</span>}</div><div class="note"><span class="label">result</span> {<span class="k">&quot;value&quot;</span>: <span class="s">&quot;order B200: shipped, tracking XYZ001&quot;</span>}</div></details></details><div class="note"><span class="label">isolation_check</span> {<span class="k">&quot;run_a_mentions_a100&quot;</span>: <span class="l">true</span>, <span class="k">&quot;run_a_mentions_b200&quot;</span>: <span class="l">false</span>, <span class="k">&quot;run_b_mentions_b200&quot;</span>: <span class="l">true</span>, <span class="k">&quot;run_b_mentions_a100&quot;</span>: <span class="l">false</span>}</div></details></div></div></div>

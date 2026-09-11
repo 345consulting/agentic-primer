@@ -1,0 +1,1418 @@
+{
+  "chapter": "ch04_tool_failures",
+  "model_kind": "live",
+  "source": "0356ab2e6d8a",
+  "summary": {
+    "turns": 5,
+    "messages": 14,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "no_tool_available",
+        "tools": "stock_on_hand",
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 2326.686,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 2326.412,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 2326.356,
+              "model_provider_ms": 2138.513000011444,
+              "library_ms": 187.84299998855613,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "When is the next delivery of milk expected?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975482865.951875,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "478",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "When is the next delivery of milk expected?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "stock_on_hand",
+                          "description": "How many of an item are currently in stock.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975485004.464875,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:44 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 81c07f42f70c1aec766dc553e24f3864.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "pQpHhqSnVW366E9tHyGN-65WElFJxmdEM5wd5SABGSwz5_Pwy-YSvg==",
+                    "x-amz-cf-pop": "DEN53-P1",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "e5d02ebe6c820259770bb61f4cb37d60"
+                  },
+                  "body": {
+                    "id": "baee1e4b-50c4-43d7-ba20-1d2587fb1bb5",
+                    "object": "chat.completion",
+                    "created": 1788405463,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "I don't have access to delivery schedule information. I can only check current stock levels. Is there something else I can help with?",
+                          "reasoning_content": "The user asks about next delivery of milk expected. I don't have a tool for delivery schedule. I only have stock_on_hand. Maybe I can check stock on hand for milk? But the question asks when next delivery is expected, which isn't directly answerable from stock. Let me see if any tool provides delivery info. Only stock_on_hand. I cannot answer. But perhaps stock level might indicate? No. I should say I don't have that information. Could check stock but not relevant. I'll just respond honestly."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 396,
+                      "completion_tokens": 137,
+                      "total_tokens": 533,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 109
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 12
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-ba96-75f3-9bd9-d6ebe5ec5ef0-0",
+                    "role": "ai",
+                    "content": "I don't have access to delivery schedule information. I can only check current stock levels. Is there something else I can help with?",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The user asks about next delivery of milk expected. I don't have a tool for delivery schedule. I only have stock_on_hand. Maybe I can check stock on hand for milk? But the question asks when next delivery is expected, which isn't directly answerable from stock. Let me see if any tool provides delivery info. Only stock_on_hand. I cannot answer. But perhaps stock level might indicate? No. I should say I don't have that information. Could check stock but not relevant. I'll just respond honestly."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 396,
+                      "output_tokens": 137,
+                      "total_tokens": 533,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 109
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "tool_exception",
+        "tools": "price_of, stock_on_hand",
+        "max_tokens": null
+      },
+      "seq": 4,
+      "thread": "MainThread",
+      "elapsed_ms": 1933.5240000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 1176.409,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 1175.512,
+              "model_provider_ms": 1162.2712500095367,
+              "library_ms": 13.2407499904632,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much does milk cost right now?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975485028.498833,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "704",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much does milk cost right now?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "stock_on_hand",
+                          "description": "How many of an item are currently in stock.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975486190.770083,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:46 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 a5f8144ef16599e2b755229616dbcef6.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "VuzhZQAq954vi0mIpcenvsxXxsGVXhqGhXElMuW4ShLlEqyu9uF0fw==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "765efce3bc25269565c786affe27709d"
+                  },
+                  "body": {
+                    "id": "18910242-3b56-41eb-842e-c224be9e3c93",
+                    "object": "chat.completion",
+                    "created": 1788405466,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "We need answer price of milk. Use price_of.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_ZUrQpf9L47hwQkcu4vae9674",
+                              "type": "function",
+                              "function": {
+                                "name": "price_of",
+                                "arguments": "{\"item\": \"milk\"}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 461,
+                      "completion_tokens": 56,
+                      "total_tokens": 517,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 11
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 77
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-c310-7182-8c18-71fd72540743-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "call_00_ZUrQpf9L47hwQkcu4vae9674"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "We need answer price of milk. Use price_of."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 461,
+                      "output_tokens": 56,
+                      "total_tokens": 517,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 11
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "call_00_ZUrQpf9L47hwQkcu4vae9674"
+              },
+              "seq": 7,
+              "thread": "MainThread",
+              "elapsed_ms": 0.83,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "failed",
+                  "exception": "PriceServiceError",
+                  "message": "pricing service unreachable for ['milk']",
+                  "decision": "report to the model; this chapter has no retry"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 757.053,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 9,
+              "thread": "MainThread",
+              "elapsed_ms": 757.027,
+              "model_provider_ms": 742.3392499685287,
+              "library_ms": 14.687750031471296,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much does milk cost right now?"
+                    },
+                    {
+                      "id": "lc_run--01a06545-c310-7182-8c18-71fd72540743-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_00_ZUrQpf9L47hwQkcu4vae9674"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "We need answer price of milk. Use price_of."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 461,
+                        "output_tokens": 56,
+                        "total_tokens": 517,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 11
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "['price_of'] failed and will not succeed on a retry now. Answer without it, and say plainly that you could not get it.",
+                      "tool_call_id": "call_00_ZUrQpf9L47hwQkcu4vae9674"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975486206.559375,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1144",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much does milk cost right now?",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_ZUrQpf9L47hwQkcu4vae9674",
+                            "function": {
+                              "name": "price_of",
+                              "arguments": "{\"item\": \"milk\"}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "We need answer price of milk. Use price_of."
+                      },
+                      {
+                        "content": "['price_of'] failed and will not succeed on a retry now. Answer without it, and say plainly that you could not get it.",
+                        "role": "tool",
+                        "tool_call_id": "call_00_ZUrQpf9L47hwQkcu4vae9674"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "stock_on_hand",
+                          "description": "How many of an item are currently in stock.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975486948.898625,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:47 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 8df77e01b229d5d8502d6471c086aeb2.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "YhK38soPNETCy7lff1F9WCQtm-_N3f_JX2QY7BGJcZI7g9IF-XWMOQ==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "48f69f981d88ca89633836c4a24ea719"
+                  },
+                  "body": {
+                    "id": "e96163ca-80f0-4ec6-9d42-105348e75a75",
+                    "object": "chat.completion",
+                    "created": 1788405467,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "I couldn\u2019t get the current price of milk.",
+                          "reasoning_content": "The price tool failed. Need say couldn't get it plainly."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 557,
+                      "completion_tokens": 25,
+                      "total_tokens": 582,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 512
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 13
+                      },
+                      "prompt_cache_hit_tokens": 512,
+                      "prompt_cache_miss_tokens": 45
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-c7a9-7873-9db3-5704c5e11d51-0",
+                    "role": "ai",
+                    "content": "I couldn\u2019t get the current price of milk.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The price tool failed. Need say couldn't get it plainly."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 557,
+                      "output_tokens": 25,
+                      "total_tokens": 582,
+                      "input_token_details": {
+                        "cache_read": 512
+                      },
+                      "output_token_details": {
+                        "reasoning": 13
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "partial_failure",
+        "tools": "price_of, stock_on_hand",
+        "max_tokens": null
+      },
+      "seq": 10,
+      "thread": "MainThread",
+      "elapsed_ms": 2517.009,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 1118.528,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 12,
+              "thread": "MainThread",
+              "elapsed_ms": 1117.3999999999999,
+              "model_provider_ms": 1104.5767921209335,
+              "library_ms": 12.82320787906633,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and how many do we have?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975486962.165291,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "712",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk, and how many do we have?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "stock_on_hand",
+                          "description": "How many of an item are currently in stock.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975488066.7420831,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:48 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 1c80fe425edf82026702c486fb324fd0.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "zT0U71ShvrophxHNj8Zjx97baxz4MWquuPaUTZBYxsejU0uL_UahTQ==",
+                    "x-amz-cf-pop": "DEN52-P2",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "186eaf96063b535c249cc1eee2dc4e8c"
+                  },
+                  "body": {
+                    "id": "eb8ca578-7752-4d2a-9063-2ef88d789006",
+                    "object": "chat.completion",
+                    "created": 1788405468,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "We need price and stock of milk. Independent calls.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_AIV8hZUiQ63P6HxuqYxA6625",
+                              "type": "function",
+                              "function": {
+                                "name": "price_of",
+                                "arguments": "{\"item\": \"milk\"}"
+                              }
+                            },
+                            {
+                              "index": 1,
+                              "id": "call_01_6773izWtcipFix0lY1ab7270",
+                              "type": "function",
+                              "function": {
+                                "name": "stock_on_hand",
+                                "arguments": "{\"item\": \"milk\"}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 465,
+                      "completion_tokens": 89,
+                      "total_tokens": 554,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 11
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 81
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-ca9d-7713-b9e8-407ffcdc8e1c-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "call_00_AIV8hZUiQ63P6HxuqYxA6625"
+                      },
+                      {
+                        "name": "stock_on_hand",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "call_01_6773izWtcipFix0lY1ab7270"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "We need price and stock of milk. Independent calls."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 465,
+                      "output_tokens": 89,
+                      "total_tokens": 554,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 11
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "call_00_AIV8hZUiQ63P6HxuqYxA6625"
+              },
+              "seq": 13,
+              "thread": "MainThread",
+              "elapsed_ms": 0.601,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "failed",
+                  "exception": "PriceServiceError",
+                  "message": "pricing service unreachable for ['milk']",
+                  "decision": "report to the model; this chapter has no retry"
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "stock_on_hand",
+                "id": "call_01_6773izWtcipFix0lY1ab7270"
+              },
+              "seq": 14,
+              "thread": "MainThread",
+              "elapsed_ms": 0.47300000000000003,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "result",
+                  "value": 2
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 15,
+          "thread": "MainThread",
+          "elapsed_ms": 1398.4099999999999,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 16,
+              "thread": "MainThread",
+              "elapsed_ms": 1398.3719999999998,
+              "model_provider_ms": 1382.8355829715729,
+              "library_ms": 15.536417028426968,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and how many do we have?"
+                    },
+                    {
+                      "id": "lc_run--01a06545-ca9d-7713-b9e8-407ffcdc8e1c-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_00_AIV8hZUiQ63P6HxuqYxA6625"
+                        },
+                        {
+                          "name": "stock_on_hand",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_01_6773izWtcipFix0lY1ab7270"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "We need price and stock of milk. Independent calls."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 465,
+                        "output_tokens": 89,
+                        "total_tokens": 554,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 11
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "['price_of'] failed and will not succeed on a retry now. Answer without it, and say plainly that you could not get it.",
+                      "tool_call_id": "call_00_AIV8hZUiQ63P6HxuqYxA6625"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "2",
+                      "tool_call_id": "call_01_6773izWtcipFix0lY1ab7270"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975488083.581833,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1371",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk, and how many do we have?",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_AIV8hZUiQ63P6HxuqYxA6625",
+                            "function": {
+                              "name": "price_of",
+                              "arguments": "{\"item\": \"milk\"}"
+                            }
+                          },
+                          {
+                            "type": "function",
+                            "id": "call_01_6773izWtcipFix0lY1ab7270",
+                            "function": {
+                              "name": "stock_on_hand",
+                              "arguments": "{\"item\": \"milk\"}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "We need price and stock of milk. Independent calls."
+                      },
+                      {
+                        "content": "['price_of'] failed and will not succeed on a retry now. Answer without it, and say plainly that you could not get it.",
+                        "role": "tool",
+                        "tool_call_id": "call_00_AIV8hZUiQ63P6HxuqYxA6625"
+                      },
+                      {
+                        "content": "2",
+                        "role": "tool",
+                        "tool_call_id": "call_01_6773izWtcipFix0lY1ab7270"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "stock_on_hand",
+                          "description": "How many of an item are currently in stock.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975489466.417416,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:49 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 e1dbbcedf936fc7d0284466c9c65e78c.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "tVaWEuMMKYmdLmstZahAveuPJT04cAs-EuargIaSO3IO4rPbtPFGmg==",
+                    "x-amz-cf-pop": "DEN53-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "d763e35e7fed5260e7de3d75f34092c1"
+                  },
+                  "body": {
+                    "id": "17183242-d06e-4d10-8722-3a54360b1508",
+                    "object": "chat.completion",
+                    "created": 1788405469,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "I couldn't get the price of milk \u2014 the price lookup failed.\n\nWe have 2 units of milk in stock.",
+                          "reasoning_content": "Price failed. Need to state plainly couldn't get price. Stock is 2."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 603,
+                      "completion_tokens": 42,
+                      "total_tokens": 645,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 512
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 17
+                      },
+                      "prompt_cache_hit_tokens": 512,
+                      "prompt_cache_miss_tokens": 91
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-cefc-75b1-8e39-e6ff347af37d-0",
+                    "role": "ai",
+                    "content": "I couldn't get the price of milk \u2014 the price lookup failed.\n\nWe have 2 units of milk in stock.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "Price failed. Need to state plainly couldn't get price. Stock is 2."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 603,
+                      "output_tokens": 42,
+                      "total_tokens": 645,
+                      "input_token_details": {
+                        "cache_read": 512
+                      },
+                      "output_token_details": {
+                        "reasoning": 17
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

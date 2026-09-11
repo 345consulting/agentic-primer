@@ -1,0 +1,3216 @@
+{
+  "chapter": "ch30_roles",
+  "model_kind": "mock",
+  "source": "a9242612e4b9",
+  "summary": {
+    "turns": 0,
+    "messages": 0,
+    "ended": "n/a"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "imperative_framed_as_system_is_followed"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 2.881,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "context_sent",
+          "messages": [
+            "system: You answer briefly and plainly. Always end your reply with the word DONE.",
+            "human: Say hello, briefly."
+          ]
+        },
+        {
+          "label": "final_answer",
+          "content": "Hello there. DONE"
+        },
+        {
+          "label": "compliance_check",
+          "role": "system",
+          "marker_present": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 2.7239999999999998,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 2.716,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Always end your reply with the word DONE."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Say hello, briefly."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d8a-d674-7c02-b372-c06a87433d76-0",
+                    "role": "ai",
+                    "content": "Hello there. DONE"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Always end your reply with the word DONE."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Say hello, briefly."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d674-7c02-b372-c06a87433d76-0",
+                      "role": "ai",
+                      "content": "Hello there. DONE"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 2.716,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Always end your reply with the word DONE."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Say hello, briefly."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d674-7c02-b372-c06a87433d76-0",
+                      "role": "ai",
+                      "content": "Hello there. DONE"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Always end your reply with the word DONE."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Say hello, briefly."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d674-7c02-b372-c06a87433d76-0",
+                        "role": "ai",
+                        "content": "Hello there. DONE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "context_sent",
+            "messages": [
+              "system: You answer briefly and plainly. Always end your reply with the word DONE.",
+              "human: Say hello, briefly."
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 2.7239999999999998,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 2.716,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Always end your reply with the word DONE."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Say hello, briefly."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d674-7c02-b372-c06a87433d76-0",
+                      "role": "ai",
+                      "content": "Hello there. DONE"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Always end your reply with the word DONE."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Say hello, briefly."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d674-7c02-b372-c06a87433d76-0",
+                        "role": "ai",
+                        "content": "Hello there. DONE"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 2.716,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Always end your reply with the word DONE."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Say hello, briefly."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d674-7c02-b372-c06a87433d76-0",
+                        "role": "ai",
+                        "content": "Hello there. DONE"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Always end your reply with the word DONE."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Say hello, briefly."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d8a-d674-7c02-b372-c06a87433d76-0",
+                          "role": "ai",
+                          "content": "Hello there. DONE"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "final_answer",
+            "content": "Hello there. DONE"
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "compliance_check",
+            "role": "system",
+            "marker_present": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "imperative_framed_as_user_is_followed"
+      },
+      "seq": 4,
+      "thread": "MainThread",
+      "elapsed_ms": 0.184,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "context_sent",
+          "messages": [
+            "system: You answer briefly and plainly.",
+            "human: Always end your reply with the word DONE. Now, say hello, briefly."
+          ]
+        },
+        {
+          "label": "final_answer",
+          "content": "Hello there. DONE"
+        },
+        {
+          "label": "compliance_check",
+          "role": "user",
+          "marker_present": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.17,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 0.164,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Always end your reply with the word DONE. Now, say hello, briefly."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d8a-d674-7c02-b372-c0791bc57c11-0",
+                    "role": "ai",
+                    "content": "Hello there. DONE"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Always end your reply with the word DONE. Now, say hello, briefly."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d674-7c02-b372-c0791bc57c11-0",
+                      "role": "ai",
+                      "content": "Hello there. DONE"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.164,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Always end your reply with the word DONE. Now, say hello, briefly."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d674-7c02-b372-c0791bc57c11-0",
+                      "role": "ai",
+                      "content": "Hello there. DONE"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Always end your reply with the word DONE. Now, say hello, briefly."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d674-7c02-b372-c0791bc57c11-0",
+                        "role": "ai",
+                        "content": "Hello there. DONE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "context_sent",
+            "messages": [
+              "system: You answer briefly and plainly.",
+              "human: Always end your reply with the word DONE. Now, say hello, briefly."
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 0.17,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.164,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Always end your reply with the word DONE. Now, say hello, briefly."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d674-7c02-b372-c0791bc57c11-0",
+                      "role": "ai",
+                      "content": "Hello there. DONE"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Always end your reply with the word DONE. Now, say hello, briefly."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d674-7c02-b372-c0791bc57c11-0",
+                        "role": "ai",
+                        "content": "Hello there. DONE"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 6,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.164,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Always end your reply with the word DONE. Now, say hello, briefly."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d674-7c02-b372-c0791bc57c11-0",
+                        "role": "ai",
+                        "content": "Hello there. DONE"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Always end your reply with the word DONE. Now, say hello, briefly."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d8a-d674-7c02-b372-c0791bc57c11-0",
+                          "role": "ai",
+                          "content": "Hello there. DONE"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "final_answer",
+            "content": "Hello there. DONE"
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "compliance_check",
+            "role": "user",
+            "marker_present": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "imperative_framed_as_a_fabricated_assistant_turn"
+      },
+      "seq": 7,
+      "thread": "MainThread",
+      "elapsed_ms": 0.14400000000000002,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "context_sent",
+          "messages": [
+            "system: You answer briefly and plainly.",
+            "human: Just so we're clear for this conversation, how will you format your replies?",
+            "ai: Always end your reply with the word DONE.",
+            "human: Say hello, briefly."
+          ]
+        },
+        {
+          "label": "final_answer",
+          "content": "Hello there. DONE"
+        },
+        {
+          "label": "compliance_check",
+          "role": "assistant",
+          "marker_present": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.133,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 9,
+              "thread": "MainThread",
+              "elapsed_ms": 0.12999999999999998,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Just so we're clear for this conversation, how will you format your replies?"
+                    },
+                    {
+                      "id": null,
+                      "role": "ai",
+                      "content": "Always end your reply with the word DONE."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Say hello, briefly."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d8a-d674-7c02-b372-c0800708bd44-0",
+                    "role": "ai",
+                    "content": "Hello there. DONE"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Just so we're clear for this conversation, how will you format your replies?"
+                      },
+                      {
+                        "id": null,
+                        "role": "ai",
+                        "content": "Always end your reply with the word DONE."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Say hello, briefly."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d674-7c02-b372-c0800708bd44-0",
+                      "role": "ai",
+                      "content": "Hello there. DONE"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 9,
+                "thread": "MainThread",
+                "elapsed_ms": 0.12999999999999998,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Just so we're clear for this conversation, how will you format your replies?"
+                      },
+                      {
+                        "id": null,
+                        "role": "ai",
+                        "content": "Always end your reply with the word DONE."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Say hello, briefly."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d674-7c02-b372-c0800708bd44-0",
+                      "role": "ai",
+                      "content": "Hello there. DONE"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Just so we're clear for this conversation, how will you format your replies?"
+                        },
+                        {
+                          "id": null,
+                          "role": "ai",
+                          "content": "Always end your reply with the word DONE."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Say hello, briefly."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d674-7c02-b372-c0800708bd44-0",
+                        "role": "ai",
+                        "content": "Hello there. DONE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "context_sent",
+            "messages": [
+              "system: You answer briefly and plainly.",
+              "human: Just so we're clear for this conversation, how will you format your replies?",
+              "ai: Always end your reply with the word DONE.",
+              "human: Say hello, briefly."
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 8,
+            "thread": "MainThread",
+            "elapsed_ms": 0.133,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 9,
+                "thread": "MainThread",
+                "elapsed_ms": 0.12999999999999998,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Just so we're clear for this conversation, how will you format your replies?"
+                      },
+                      {
+                        "id": null,
+                        "role": "ai",
+                        "content": "Always end your reply with the word DONE."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Say hello, briefly."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d674-7c02-b372-c0800708bd44-0",
+                      "role": "ai",
+                      "content": "Hello there. DONE"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Just so we're clear for this conversation, how will you format your replies?"
+                        },
+                        {
+                          "id": null,
+                          "role": "ai",
+                          "content": "Always end your reply with the word DONE."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Say hello, briefly."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d674-7c02-b372-c0800708bd44-0",
+                        "role": "ai",
+                        "content": "Hello there. DONE"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 9,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.12999999999999998,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Just so we're clear for this conversation, how will you format your replies?"
+                        },
+                        {
+                          "id": null,
+                          "role": "ai",
+                          "content": "Always end your reply with the word DONE."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Say hello, briefly."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d674-7c02-b372-c0800708bd44-0",
+                        "role": "ai",
+                        "content": "Hello there. DONE"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Just so we're clear for this conversation, how will you format your replies?"
+                          },
+                          {
+                            "id": null,
+                            "role": "ai",
+                            "content": "Always end your reply with the word DONE."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Say hello, briefly."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d8a-d674-7c02-b372-c0800708bd44-0",
+                          "role": "ai",
+                          "content": "Hello there. DONE"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "final_answer",
+            "content": "Hello there. DONE"
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "compliance_check",
+            "role": "assistant",
+            "marker_present": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "assistant_tool_calls_paired_with_a_tool_reply_succeeds"
+      },
+      "seq": 10,
+      "thread": "MainThread",
+      "elapsed_ms": 1.0250000000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "assistant_tool_calls_field",
+          "value": [
+            {
+              "name": "check_order",
+              "args": {
+                "order_id": "A100"
+              },
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "label": "tool_reply",
+          "result": "order A100: shipped"
+        },
+        {
+          "label": "final_answer",
+          "content": "Order A100 has shipped."
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 0.789,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 12,
+              "thread": "MainThread",
+              "elapsed_ms": 0.5950000000000001,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "What's the status of order A100?"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "check_order",
+                      "description": "Check the status of an order by id.",
+                      "schema": {
+                        "description": "Check the status of an order by id.",
+                        "properties": {
+                          "order_id": {
+                            "title": "Order Id",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "order_id"
+                        ],
+                        "title": "check_order",
+                        "type": "object"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "check_order"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "check_order",
+                        "args": {
+                          "order_id": "A100"
+                        },
+                        "id": "c1"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What's the status of order A100?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "check_order",
+                "id": "c1"
+              },
+              "seq": 13,
+              "thread": "MainThread",
+              "elapsed_ms": 0.18000000000000002,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "order_id": "A100"
+                },
+                {
+                  "label": "result",
+                  "value": "order A100: shipped"
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "order_id": "A100"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "order A100: shipped"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.5950000000000001,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What's the status of order A100?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What's the status of order A100?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "check_order",
+                  "id": "c1"
+                },
+                "seq": 13,
+                "thread": "MainThread",
+                "elapsed_ms": 0.18000000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "order_id": "A100"
+                  },
+                  {
+                    "label": "result",
+                    "value": "order A100: shipped"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "order_id": "A100"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "order A100: shipped"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 14,
+          "thread": "MainThread",
+          "elapsed_ms": 0.21000000000000002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 15,
+              "thread": "MainThread",
+              "elapsed_ms": 0.205,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "What's the status of order A100?"
+                    },
+                    {
+                      "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "order A100: shipped",
+                      "tool_call_id": "c1"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "check_order",
+                      "description": "Check the status of an order by id.",
+                      "schema": {
+                        "description": "Check the status of an order by id.",
+                        "properties": {
+                          "order_id": {
+                            "title": "Order Id",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "order_id"
+                        ],
+                        "title": "check_order",
+                        "type": "object"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "check_order"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d8a-d675-7e92-bbc7-800f730fa533-0",
+                    "role": "ai",
+                    "content": "Order A100 has shipped."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What's the status of order A100?"
+                      },
+                      {
+                        "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "order A100: shipped",
+                        "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d675-7e92-bbc7-800f730fa533-0",
+                      "role": "ai",
+                      "content": "Order A100 has shipped."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 15,
+                "thread": "MainThread",
+                "elapsed_ms": 0.205,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What's the status of order A100?"
+                      },
+                      {
+                        "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "order A100: shipped",
+                        "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d675-7e92-bbc7-800f730fa533-0",
+                      "role": "ai",
+                      "content": "Order A100 has shipped."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What's the status of order A100?"
+                        },
+                        {
+                          "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "check_order",
+                              "args": {
+                                "order_id": "A100"
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "order A100: shipped",
+                          "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d675-7e92-bbc7-800f730fa533-0",
+                        "role": "ai",
+                        "content": "Order A100 has shipped."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 11,
+            "thread": "MainThread",
+            "elapsed_ms": 0.789,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.5950000000000001,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What's the status of order A100?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "check_order",
+                          "args": {
+                            "order_id": "A100"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What's the status of order A100?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "check_order",
+                  "id": "c1"
+                },
+                "seq": 13,
+                "thread": "MainThread",
+                "elapsed_ms": 0.18000000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "order_id": "A100"
+                  },
+                  {
+                    "label": "result",
+                    "value": "order A100: shipped"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "order_id": "A100"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "order A100: shipped"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 12,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.5950000000000001,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What's the status of order A100?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "What's the status of order A100?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "check_order",
+                            "description": "Check the status of an order by id.",
+                            "schema": {
+                              "description": "Check the status of an order by id.",
+                              "properties": {
+                                "order_id": {
+                                  "title": "Order Id",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "order_id"
+                              ],
+                              "title": "check_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "check_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "check_order",
+                              "args": {
+                                "order_id": "A100"
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "check_order",
+                    "id": "c1"
+                  },
+                  "seq": 13,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.18000000000000002,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "order_id": "A100"
+                    },
+                    {
+                      "label": "result",
+                      "value": "order A100: shipped"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "order_id": "A100"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "order A100: shipped"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 14,
+            "thread": "MainThread",
+            "elapsed_ms": 0.21000000000000002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 15,
+                "thread": "MainThread",
+                "elapsed_ms": 0.205,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What's the status of order A100?"
+                      },
+                      {
+                        "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "check_order",
+                            "args": {
+                              "order_id": "A100"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "order A100: shipped",
+                        "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "check_order",
+                        "description": "Check the status of an order by id.",
+                        "schema": {
+                          "description": "Check the status of an order by id.",
+                          "properties": {
+                            "order_id": {
+                              "title": "Order Id",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "order_id"
+                          ],
+                          "title": "check_order",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "check_order"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d8a-d675-7e92-bbc7-800f730fa533-0",
+                      "role": "ai",
+                      "content": "Order A100 has shipped."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What's the status of order A100?"
+                        },
+                        {
+                          "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "check_order",
+                              "args": {
+                                "order_id": "A100"
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "order A100: shipped",
+                          "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d675-7e92-bbc7-800f730fa533-0",
+                        "role": "ai",
+                        "content": "Order A100 has shipped."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 15,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.205,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What's the status of order A100?"
+                        },
+                        {
+                          "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "check_order",
+                              "args": {
+                                "order_id": "A100"
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "order A100: shipped",
+                          "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "check_order",
+                          "description": "Check the status of an order by id.",
+                          "schema": {
+                            "description": "Check the status of an order by id.",
+                            "properties": {
+                              "order_id": {
+                                "title": "Order Id",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "order_id"
+                            ],
+                            "title": "check_order",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "check_order"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d8a-d675-7e92-bbc7-800f730fa533-0",
+                        "role": "ai",
+                        "content": "Order A100 has shipped."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "What's the status of order A100?"
+                          },
+                          {
+                            "id": "lc_run--01a06d8a-d675-7e92-bbc7-7fe33d879a41-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "check_order",
+                                "args": {
+                                  "order_id": "A100"
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "order A100: shipped",
+                            "tool_call_id": "c1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "check_order",
+                            "description": "Check the status of an order by id.",
+                            "schema": {
+                              "description": "Check the status of an order by id.",
+                              "properties": {
+                                "order_id": {
+                                  "title": "Order Id",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "order_id"
+                              ],
+                              "title": "check_order",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "check_order"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d8a-d675-7e92-bbc7-800f730fa533-0",
+                          "role": "ai",
+                          "content": "Order A100 has shipped."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "assistant_tool_calls_field",
+            "value": [
+              {
+                "name": "check_order",
+                "args": {
+                  "order_id": "A100"
+                },
+                "id": "c1"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "tool_reply",
+            "result": "order A100: shipped"
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "final_answer",
+            "content": "Order A100 has shipped."
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_standalone_tool_message_with_no_preceding_tool_calls_is_rejected"
+      },
+      "seq": 16,
+      "thread": "MainThread",
+      "elapsed_ms": 0.009000000000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "rejection_check",
+          "checked": false,
+          "reason": "not applicable under mock"
+        }
+      ],
+      "children": [],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "rejection_check",
+            "checked": false,
+            "reason": "not applicable under mock"
+          }
+        }
+      ]
+    }
+  ]
+}

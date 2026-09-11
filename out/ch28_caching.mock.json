@@ -1,0 +1,186 @@
+{
+  "chapter": "ch28_caching",
+  "model_kind": "mock",
+  "source": "c060f53daa08",
+  "summary": {
+    "turns": 0,
+    "messages": 0,
+    "ended": "n/a"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "identical_prefix_is_a_hit"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 0.13999999999999999,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "cache_check",
+          "checked": false,
+          "reason": "not applicable under mock"
+        }
+      ],
+      "children": [],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "cache_check",
+            "checked": false,
+            "reason": "not applicable under mock"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "appending_to_the_end_still_hits"
+      },
+      "seq": 2,
+      "thread": "MainThread",
+      "elapsed_ms": 0.003,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "cache_check",
+          "checked": false,
+          "reason": "not applicable under mock"
+        }
+      ],
+      "children": [],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "cache_check",
+            "checked": false,
+            "reason": "not applicable under mock"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "changing_the_system_prompt_misses"
+      },
+      "seq": 3,
+      "thread": "MainThread",
+      "elapsed_ms": 0.002,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "cache_check",
+          "checked": false,
+          "reason": "not applicable under mock"
+        }
+      ],
+      "children": [],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "cache_check",
+            "checked": false,
+            "reason": "not applicable under mock"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "reordering_declared_tools_misses"
+      },
+      "seq": 4,
+      "thread": "MainThread",
+      "elapsed_ms": 0.001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "cache_check",
+          "checked": false,
+          "reason": "not applicable under mock"
+        }
+      ],
+      "children": [],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "cache_check",
+            "checked": false,
+            "reason": "not applicable under mock"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "editing_before_the_cached_boundary_misses_entirely"
+      },
+      "seq": 5,
+      "thread": "MainThread",
+      "elapsed_ms": 0.003,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "cache_check",
+          "checked": false,
+          "reason": "not applicable under mock"
+        }
+      ],
+      "children": [],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "cache_check",
+            "checked": false,
+            "reason": "not applicable under mock"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "does_the_cache_go_cold_over_time"
+      },
+      "seq": 6,
+      "thread": "MainThread",
+      "elapsed_ms": 0.001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "cache_check",
+          "checked": false,
+          "reason": "not applicable under mock"
+        }
+      ],
+      "children": [],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "cache_check",
+            "checked": false,
+            "reason": "not applicable under mock"
+          }
+        }
+      ]
+    }
+  ]
+}

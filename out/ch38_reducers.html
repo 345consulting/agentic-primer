@@ -1,0 +1,99 @@
+<!doctype html><meta charset=utf-8><title>ch38_reducers</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line.
+   Unscoped, not `pre.wire .k` -- `_highlight` colours a plain note's inline
+   JSON too, not only a wire block's, and a token class means the same thing
+   everywhere it appears. */
+.k { color: #06c; }
+.s { color: #0a7; }
+.n { color: #b26; }
+.l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  .k { color: #7bf; } .s { color: #6d9; }
+  .n { color: #f9a; } .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch38_reducers</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=0 · messages=0</span></div><div class="col col-live"><b>live</b> <span class="meta">turns=0 · messages=0</span></div></div><div class="turn"><div class="turnno">scenario no_reducer_means_replace</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">no_reducer_means_replace</span> <span class="dot">·</span> <span class="ms">4.0ms</span></summary><details><summary><span class="name">node</span> <span class="meta">first</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;note&quot;</span>: <span class="s">&quot;from first&quot;</span>}</div></details><details><summary><span class="name">node</span> <span class="meta">second</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;note&quot;</span>: <span class="s">&quot;from second&quot;</span>}</div></details><div class="note"><span class="label">second_write_is_all_that_survives</span> {<span class="k">&quot;final_note&quot;</span>: <span class="s">&quot;from second&quot;</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">no_reducer_means_replace</span> <span class="dot">·</span> <span class="ms">4.0ms</span></summary><details><summary><span class="name">node</span> <span class="meta">first</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;note&quot;</span>: <span class="s">&quot;from first&quot;</span>}</div></details><details><summary><span class="name">node</span> <span class="meta">second</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;note&quot;</span>: <span class="s">&quot;from second&quot;</span>}</div></details><div class="note"><span class="label">second_write_is_all_that_survives</span> {<span class="k">&quot;final_note&quot;</span>: <span class="s">&quot;from second&quot;</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario add_messages_is_the_one_field_that_appends</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">add_messages_is_the_one_field_that_appends</span> <span class="dot">·</span> <span class="ms">3.3ms</span></summary><div class="note"><span class="label">seed_passed_to_invoke</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;go&quot;</span>, <span class="k">&quot;note&quot;</span>: <span class="s">&quot;initial&quot;</span>}</div><details><summary><span class="name">node</span> <span class="meta">turn_one</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;turn one reply&quot;</span>, <span class="k">&quot;note&quot;</span>: <span class="s">&quot;from turn one&quot;</span>}</div></details><details><summary><span class="name">node</span> <span class="meta">turn_two</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;turn two reply&quot;</span>, <span class="k">&quot;note&quot;</span>: <span class="s">&quot;from turn two&quot;</span>}</div></details><div class="note"><span class="label">one_field_accumulates_the_other_replaces</span> {<span class="k">&quot;message_count&quot;</span>: <span class="n">3</span>, <span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;go&quot;</span>, <span class="s">&quot;turn one reply&quot;</span>, <span class="s">&quot;turn two reply&quot;</span>], <span class="k">&quot;final_note&quot;</span>: <span class="s">&quot;from turn two&quot;</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">add_messages_is_the_one_field_that_appends</span> <span class="dot">·</span> <span class="ms">3.5ms</span></summary><div class="note"><span class="label">seed_passed_to_invoke</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;go&quot;</span>, <span class="k">&quot;note&quot;</span>: <span class="s">&quot;initial&quot;</span>}</div><details><summary><span class="name">node</span> <span class="meta">turn_one</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;turn one reply&quot;</span>, <span class="k">&quot;note&quot;</span>: <span class="s">&quot;from turn one&quot;</span>}</div></details><details><summary><span class="name">node</span> <span class="meta">turn_two</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;turn two reply&quot;</span>, <span class="k">&quot;note&quot;</span>: <span class="s">&quot;from turn two&quot;</span>}</div></details><div class="note"><span class="label">one_field_accumulates_the_other_replaces</span> {<span class="k">&quot;message_count&quot;</span>: <span class="n">3</span>, <span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;go&quot;</span>, <span class="s">&quot;turn one reply&quot;</span>, <span class="s">&quot;turn two reply&quot;</span>], <span class="k">&quot;final_note&quot;</span>: <span class="s">&quot;from turn two&quot;</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario a_custom_reducer_is_just_a_function</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">a_custom_reducer_is_just_a_function</span> <span class="dot">·</span> <span class="ms">1.3ms</span></summary><details><summary><span class="name">node</span> <span class="meta">add_five</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;total&quot;</span>: <span class="n">5</span>}</div></details><details><summary><span class="name">node</span> <span class="meta">add_three</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;total&quot;</span>: <span class="n">3</span>}</div></details><div class="note"><span class="label">operator_add_accumulates_across_turns</span> {<span class="k">&quot;final_total&quot;</span>: <span class="n">8</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">a_custom_reducer_is_just_a_function</span> <span class="dot">·</span> <span class="ms">1.3ms</span></summary><details><summary><span class="name">node</span> <span class="meta">add_five</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;total&quot;</span>: <span class="n">5</span>}</div></details><details><summary><span class="name">node</span> <span class="meta">add_three</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;total&quot;</span>: <span class="n">3</span>}</div></details><div class="note"><span class="label">operator_add_accumulates_across_turns</span> {<span class="k">&quot;final_total&quot;</span>: <span class="n">8</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario the_wrong_reducer_choice_silently_loses_data</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">the_wrong_reducer_choice_silently_loses_data</span> <span class="dot">·</span> <span class="ms">1.2ms</span></summary><details><summary><span class="name">node</span> <span class="meta">check_first_order</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;order_ids_checked&quot;</span>: [<span class="s">&quot;A100&quot;</span>]}</div></details><details><summary><span class="name">node</span> <span class="meta">check_second_order</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;order_ids_checked&quot;</span>: [<span class="s">&quot;B200&quot;</span>]}</div></details><div class="note"><span class="label">a100_never_recorded</span> {<span class="k">&quot;final_order_ids_checked&quot;</span>: [<span class="s">&quot;B200&quot;</span>], <span class="k">&quot;a100_survived&quot;</span>: <span class="l">false</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">the_wrong_reducer_choice_silently_loses_data</span> <span class="dot">·</span> <span class="ms">1.1ms</span></summary><details><summary><span class="name">node</span> <span class="meta">check_first_order</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;order_ids_checked&quot;</span>: [<span class="s">&quot;A100&quot;</span>]}</div></details><details><summary><span class="name">node</span> <span class="meta">check_second_order</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;order_ids_checked&quot;</span>: [<span class="s">&quot;B200&quot;</span>]}</div></details><div class="note"><span class="label">a100_never_recorded</span> {<span class="k">&quot;final_order_ids_checked&quot;</span>: [<span class="s">&quot;B200&quot;</span>], <span class="k">&quot;a100_survived&quot;</span>: <span class="l">false</span>}</div></details></div></div></div><div class="turn"><div class="turnno">scenario two_nodes_writing_the_same_field_in_one_super_step_both_survive</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">two_nodes_writing_the_same_field_in_one_super_step_both_survive</span> <span class="dot">·</span> <span class="ms">2.0ms</span></summary><div class="note"><span class="label">seed_passed_to_invoke</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;go&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">0</span>}</div><details><summary><span class="name">node</span> <span class="meta">left</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;left branch&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">1</span>}</div></details><details><summary><span class="name">node</span> <span class="meta">right</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;right branch&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">10</span>}</div></details><div class="note"><span class="label">both_simultaneous_writes_survived</span> {<span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;go&quot;</span>, <span class="s">&quot;left branch&quot;</span>, <span class="s">&quot;right branch&quot;</span>], <span class="k">&quot;both_branches_present&quot;</span>: <span class="l">true</span>, <span class="k">&quot;total&quot;</span>: <span class="n">11</span>}</div></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">two_nodes_writing_the_same_field_in_one_super_step_both_survive</span> <span class="dot">·</span> <span class="ms">1.8ms</span></summary><div class="note"><span class="label">seed_passed_to_invoke</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;go&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">0</span>}</div><details><summary><span class="name">node</span> <span class="meta">left</span> <span class="dot">·</span> <span class="ms">0.1ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;left branch&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">1</span>}</div></details><details><summary><span class="name">node</span> <span class="meta">right</span> <span class="dot">·</span> <span class="ms">0.0ms</span></summary><div class="note"><span class="label">wrote</span> {<span class="k">&quot;message&quot;</span>: <span class="s">&quot;right branch&quot;</span>, <span class="k">&quot;total&quot;</span>: <span class="n">10</span>}</div></details><div class="note"><span class="label">both_simultaneous_writes_survived</span> {<span class="k">&quot;messages&quot;</span>: [<span class="s">&quot;go&quot;</span>, <span class="s">&quot;left branch&quot;</span>, <span class="s">&quot;right branch&quot;</span>], <span class="k">&quot;both_branches_present&quot;</span>: <span class="l">true</span>, <span class="k">&quot;total&quot;</span>: <span class="n">11</span>}</div></details></div></div></div>

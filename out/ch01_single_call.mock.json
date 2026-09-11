@@ -1,0 +1,92 @@
+{
+  "chapter": "ch01_single_call",
+  "model_kind": "mock",
+  "source": "f6e5118a7916",
+  "summary": {
+    "turns": 1,
+    "messages": 3,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "agent_with_no_tool",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 2.624,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 2.4789999999999996,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 2.443,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "In one sentence, and per The Hitchhiker's Guide to the Galaxy: what is the Answer to the Ultimate Question of Life, the Universe, and Everything?"
+                    }
+                  ]
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-89d5-7f02-8ea1-6d3a323a72ed-0",
+                    "role": "ai",
+                    "content": "Forty-two, though the question is generally held to be the harder half."
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3161 @@
+{
+  "chapter": "ch42_model_tiers",
+  "model_kind": "mock",
+  "source": "30fa02db6f1a",
+  "summary": {
+    "turns": 0,
+    "messages": 0,
+    "ended": "n/a"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_length_based_heuristic_gets_fooled"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 4.3020000000000005,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "the_short_question_was_actually_hard",
+          "tier_chosen": "cheap",
+          "finish_reason": "length",
+          "was_truncated": true,
+          "content": "No. \u201cSome cats are pets\u201d only tells us that at"
+        }
+      ],
+      "children": [
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "length_heuristic"
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 0.007,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "tier": "cheap",
+              "question_length": 41,
+              "threshold": 50,
+              "reason": "41 characters is under the 50-character threshold"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "tier": "cheap",
+                "question_length": 41,
+                "threshold": 50,
+                "reason": "41 characters is under the 50-character threshold"
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 3,
+          "thread": "MainThread",
+          "elapsed_ms": 4.109,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "heuristic_routed_here",
+              "tier": "cheap",
+              "max_tokens": 20
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 4.069999999999999,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "If some cats are pets, are all pets cats?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a078dc-87d7-77b0-ab4f-a8a6114ca417-0",
+                    "role": "ai",
+                    "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                    "finish_reason": "length"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d7-77b0-ab4f-a8a6114ca417-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                      "finish_reason": "length"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 4.069999999999999,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d7-77b0-ab4f-a8a6114ca417-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                      "finish_reason": "length"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d7-77b0-ab4f-a8a6114ca417-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                        "finish_reason": "length"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "heuristic_routed_here",
+                "tier": "cheap",
+                "max_tokens": 20
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "length_heuristic"
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 0.007,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "tier": "cheap",
+                "question_length": 41,
+                "threshold": 50,
+                "reason": "41 characters is under the 50-character threshold"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "tier": "cheap",
+                  "question_length": 41,
+                  "threshold": 50,
+                  "reason": "41 characters is under the 50-character threshold"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 3,
+            "thread": "MainThread",
+            "elapsed_ms": 4.109,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "heuristic_routed_here",
+                "tier": "cheap",
+                "max_tokens": 20
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 4.069999999999999,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d7-77b0-ab4f-a8a6114ca417-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                      "finish_reason": "length"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d7-77b0-ab4f-a8a6114ca417-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                        "finish_reason": "length"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 4,
+                  "thread": "MainThread",
+                  "elapsed_ms": 4.069999999999999,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d7-77b0-ab4f-a8a6114ca417-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                        "finish_reason": "length"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "If some cats are pets, are all pets cats?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a078dc-87d7-77b0-ab4f-a8a6114ca417-0",
+                          "role": "ai",
+                          "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                          "finish_reason": "length"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "heuristic_routed_here",
+                  "tier": "cheap",
+                  "max_tokens": 20
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "the_short_question_was_actually_hard",
+            "tier_chosen": "cheap",
+            "finish_reason": "length",
+            "was_truncated": true,
+            "content": "No. \u201cSome cats are pets\u201d only tells us that at"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_structural_heuristic_does_better_but_still_guesses"
+      },
+      "seq": 5,
+      "thread": "MainThread",
+      "elapsed_ms": 0.38,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "better_at_one_thing_blind_to_another",
+          "math_question_routed_generous": true,
+          "math_question_finished_clean": true,
+          "hard_question_still_routed_cheap": true,
+          "hard_question_still_truncated": true
+        }
+      ],
+      "children": [
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "structural_heuristic",
+            "question": "Solve for x: 2x + 5 = 15"
+          },
+          "seq": 6,
+          "thread": "MainThread",
+          "elapsed_ms": 0.005,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "tier": "generous",
+              "matched": "math_pattern"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "tier": "generous",
+                "matched": "math_pattern"
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 7,
+          "thread": "MainThread",
+          "elapsed_ms": 0.18100000000000002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "structural_signal_matched",
+              "question": "Solve for x: 2x + 5 = 15"
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 8,
+              "thread": "MainThread",
+              "elapsed_ms": 0.166,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Solve for x: 2x + 5 = 15"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a078dc-87d8-7331-9203-5de80a898c8a-0",
+                    "role": "ai",
+                    "content": "x = 5",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Solve for x: 2x + 5 = 15"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5de80a898c8a-0",
+                      "role": "ai",
+                      "content": "x = 5",
+                      "finish_reason": "stop"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 8,
+                "thread": "MainThread",
+                "elapsed_ms": 0.166,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Solve for x: 2x + 5 = 15"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5de80a898c8a-0",
+                      "role": "ai",
+                      "content": "x = 5",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Solve for x: 2x + 5 = 15"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5de80a898c8a-0",
+                        "role": "ai",
+                        "content": "x = 5",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "structural_signal_matched",
+                "question": "Solve for x: 2x + 5 = 15"
+              }
+            }
+          ]
+        },
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "structural_heuristic",
+            "question": "If some cats are pets, are all pets cats?"
+          },
+          "seq": 9,
+          "thread": "MainThread",
+          "elapsed_ms": 0.01,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "tier": "cheap",
+              "matched": "no_pattern_matched"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "tier": "cheap",
+                "matched": "no_pattern_matched"
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 10,
+          "thread": "MainThread",
+          "elapsed_ms": 0.175,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "structural_signal_found_nothing",
+              "question": "If some cats are pets, are all pets cats?"
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 11,
+              "thread": "MainThread",
+              "elapsed_ms": 0.164,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "If some cats are pets, are all pets cats?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a078dc-87d8-7331-9203-5dfcf6c7c770-0",
+                    "role": "ai",
+                    "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                    "finish_reason": "length"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5dfcf6c7c770-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                      "finish_reason": "length"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 11,
+                "thread": "MainThread",
+                "elapsed_ms": 0.164,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5dfcf6c7c770-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                      "finish_reason": "length"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5dfcf6c7c770-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                        "finish_reason": "length"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "structural_signal_found_nothing",
+                "question": "If some cats are pets, are all pets cats?"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "structural_heuristic",
+              "question": "Solve for x: 2x + 5 = 15"
+            },
+            "seq": 6,
+            "thread": "MainThread",
+            "elapsed_ms": 0.005,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "tier": "generous",
+                "matched": "math_pattern"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "tier": "generous",
+                  "matched": "math_pattern"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 7,
+            "thread": "MainThread",
+            "elapsed_ms": 0.18100000000000002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "structural_signal_matched",
+                "question": "Solve for x: 2x + 5 = 15"
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 8,
+                "thread": "MainThread",
+                "elapsed_ms": 0.166,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Solve for x: 2x + 5 = 15"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5de80a898c8a-0",
+                      "role": "ai",
+                      "content": "x = 5",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Solve for x: 2x + 5 = 15"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5de80a898c8a-0",
+                        "role": "ai",
+                        "content": "x = 5",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 8,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.166,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Solve for x: 2x + 5 = 15"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5de80a898c8a-0",
+                        "role": "ai",
+                        "content": "x = 5",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Solve for x: 2x + 5 = 15"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a078dc-87d8-7331-9203-5de80a898c8a-0",
+                          "role": "ai",
+                          "content": "x = 5",
+                          "finish_reason": "stop"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "structural_signal_matched",
+                  "question": "Solve for x: 2x + 5 = 15"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "structural_heuristic",
+              "question": "If some cats are pets, are all pets cats?"
+            },
+            "seq": 9,
+            "thread": "MainThread",
+            "elapsed_ms": 0.01,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "tier": "cheap",
+                "matched": "no_pattern_matched"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "tier": "cheap",
+                  "matched": "no_pattern_matched"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 10,
+            "thread": "MainThread",
+            "elapsed_ms": 0.175,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "structural_signal_found_nothing",
+                "question": "If some cats are pets, are all pets cats?"
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 11,
+                "thread": "MainThread",
+                "elapsed_ms": 0.164,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5dfcf6c7c770-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                      "finish_reason": "length"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5dfcf6c7c770-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                        "finish_reason": "length"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 11,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.164,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5dfcf6c7c770-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                        "finish_reason": "length"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "If some cats are pets, are all pets cats?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a078dc-87d8-7331-9203-5dfcf6c7c770-0",
+                          "role": "ai",
+                          "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                          "finish_reason": "length"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "structural_signal_found_nothing",
+                  "question": "If some cats are pets, are all pets cats?"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "better_at_one_thing_blind_to_another",
+            "math_question_routed_generous": true,
+            "math_question_finished_clean": true,
+            "hard_question_still_routed_cheap": true,
+            "hard_question_still_truncated": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_cheap_models_own_uncertainty_escalates_correctly"
+      },
+      "seq": 12,
+      "thread": "MainThread",
+      "elapsed_ms": 0.24899999999999997,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "checked_the_result_instead_of_guessing_the_question",
+          "first_attempt_finish_reason": "length",
+          "escalated": true,
+          "final_finish_reason": "stop",
+          "final_content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats."
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 13,
+          "thread": "MainThread",
+          "elapsed_ms": 0.11900000000000001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "cheap_tier_attempt",
+              "finish_reason": "length"
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 14,
+              "thread": "MainThread",
+              "elapsed_ms": 0.11,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "If some cats are pets, are all pets cats?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a078dc-87d8-7331-9203-5e0013582f1b-0",
+                    "role": "ai",
+                    "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                    "finish_reason": "length"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5e0013582f1b-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                      "finish_reason": "length"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 14,
+                "thread": "MainThread",
+                "elapsed_ms": 0.11,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5e0013582f1b-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                      "finish_reason": "length"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5e0013582f1b-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                        "finish_reason": "length"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "cheap_tier_attempt",
+                "finish_reason": "length"
+              }
+            }
+          ]
+        },
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "check_the_result_after_the_fact"
+          },
+          "seq": 15,
+          "thread": "MainThread",
+          "elapsed_ms": 0.002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_after_calling_the_model_not_before",
+              "escalate": true,
+              "reason": "first attempt's finish_reason was 'length'"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_after_calling_the_model_not_before",
+                "escalate": true,
+                "reason": "first attempt's finish_reason was 'length'"
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 16,
+          "thread": "MainThread",
+          "elapsed_ms": 0.122,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "escalated_to_the_generous_tier",
+              "finish_reason": "stop"
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 17,
+              "thread": "MainThread",
+              "elapsed_ms": 0.11299999999999999,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "If some cats are pets, are all pets cats?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a078dc-87d8-7331-9203-5e1222a85bad-0",
+                    "role": "ai",
+                    "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5e1222a85bad-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 17,
+                "thread": "MainThread",
+                "elapsed_ms": 0.11299999999999999,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5e1222a85bad-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5e1222a85bad-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "escalated_to_the_generous_tier",
+                "finish_reason": "stop"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 13,
+            "thread": "MainThread",
+            "elapsed_ms": 0.11900000000000001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "cheap_tier_attempt",
+                "finish_reason": "length"
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 14,
+                "thread": "MainThread",
+                "elapsed_ms": 0.11,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5e0013582f1b-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                      "finish_reason": "length"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5e0013582f1b-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                        "finish_reason": "length"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 14,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.11,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5e0013582f1b-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                        "finish_reason": "length"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "If some cats are pets, are all pets cats?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a078dc-87d8-7331-9203-5e0013582f1b-0",
+                          "role": "ai",
+                          "content": "No. \u201cSome cats are pets\u201d only tells us that at",
+                          "finish_reason": "length"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "cheap_tier_attempt",
+                  "finish_reason": "length"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "check_the_result_after_the_fact"
+            },
+            "seq": 15,
+            "thread": "MainThread",
+            "elapsed_ms": 0.002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_after_calling_the_model_not_before",
+                "escalate": true,
+                "reason": "first attempt's finish_reason was 'length'"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_after_calling_the_model_not_before",
+                  "escalate": true,
+                  "reason": "first attempt's finish_reason was 'length'"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 16,
+            "thread": "MainThread",
+            "elapsed_ms": 0.122,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "escalated_to_the_generous_tier",
+                "finish_reason": "stop"
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 17,
+                "thread": "MainThread",
+                "elapsed_ms": 0.11299999999999999,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5e1222a85bad-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5e1222a85bad-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 17,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.11299999999999999,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5e1222a85bad-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "If some cats are pets, are all pets cats?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a078dc-87d8-7331-9203-5e1222a85bad-0",
+                          "role": "ai",
+                          "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                          "finish_reason": "stop"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "escalated_to_the_generous_tier",
+                  "finish_reason": "stop"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "checked_the_result_instead_of_guessing_the_question",
+            "first_attempt_finish_reason": "length",
+            "escalated": true,
+            "final_finish_reason": "stop",
+            "final_content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats."
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_simulated_learned_router_decides_with_no_visible_reason"
+      },
+      "seq": 18,
+      "thread": "MainThread",
+      "elapsed_ms": 0.27799999999999997,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "correct_decisions_with_no_readable_rationale",
+          "hard_question_routed_generous": true,
+          "hard_question_finished_clean": true,
+          "easy_question_routed_cheap": true,
+          "easy_question_finished_clean": true
+        }
+      ],
+      "children": [
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "simulated_learned_router",
+            "question": "If some cats are pets, are all pets cats?"
+          },
+          "seq": 19,
+          "thread": "MainThread",
+          "elapsed_ms": 0.001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "tier": "generous",
+              "reason": null,
+              "explainable": false
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "tier": "generous",
+                "reason": null,
+                "explainable": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "simulated_learned_router",
+            "question": "What is 2 + 2?"
+          },
+          "seq": 20,
+          "thread": "MainThread",
+          "elapsed_ms": 0.002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "tier": "cheap",
+              "reason": null,
+              "explainable": false
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "tier": "cheap",
+                "reason": null,
+                "explainable": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 21,
+          "thread": "MainThread",
+          "elapsed_ms": 0.11900000000000001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 22,
+              "thread": "MainThread",
+              "elapsed_ms": 0.112,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "If some cats are pets, are all pets cats?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a078dc-87d8-7331-9203-5e27e70e2f28-0",
+                    "role": "ai",
+                    "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5e27e70e2f28-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 22,
+                "thread": "MainThread",
+                "elapsed_ms": 0.112,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5e27e70e2f28-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5e27e70e2f28-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 23,
+          "thread": "MainThread",
+          "elapsed_ms": 0.148,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 24,
+              "thread": "MainThread",
+              "elapsed_ms": 0.13999999999999999,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "What is 2 + 2?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a078dc-87d9-74d2-a436-f0b307cccee1-0",
+                    "role": "ai",
+                    "content": "4",
+                    "finish_reason": "stop"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What is 2 + 2?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d9-74d2-a436-f0b307cccee1-0",
+                      "role": "ai",
+                      "content": "4",
+                      "finish_reason": "stop"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 24,
+                "thread": "MainThread",
+                "elapsed_ms": 0.13999999999999999,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What is 2 + 2?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d9-74d2-a436-f0b307cccee1-0",
+                      "role": "ai",
+                      "content": "4",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What is 2 + 2?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d9-74d2-a436-f0b307cccee1-0",
+                        "role": "ai",
+                        "content": "4",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "simulated_learned_router",
+              "question": "If some cats are pets, are all pets cats?"
+            },
+            "seq": 19,
+            "thread": "MainThread",
+            "elapsed_ms": 0.001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "tier": "generous",
+                "reason": null,
+                "explainable": false
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "tier": "generous",
+                  "reason": null,
+                  "explainable": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "simulated_learned_router",
+              "question": "What is 2 + 2?"
+            },
+            "seq": 20,
+            "thread": "MainThread",
+            "elapsed_ms": 0.002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "tier": "cheap",
+                "reason": null,
+                "explainable": false
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "tier": "cheap",
+                  "reason": null,
+                  "explainable": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 21,
+            "thread": "MainThread",
+            "elapsed_ms": 0.11900000000000001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 22,
+                "thread": "MainThread",
+                "elapsed_ms": 0.112,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "If some cats are pets, are all pets cats?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d8-7331-9203-5e27e70e2f28-0",
+                      "role": "ai",
+                      "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5e27e70e2f28-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 22,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.112,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "If some cats are pets, are all pets cats?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d8-7331-9203-5e27e70e2f28-0",
+                        "role": "ai",
+                        "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "If some cats are pets, are all pets cats?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a078dc-87d8-7331-9203-5e27e70e2f28-0",
+                          "role": "ai",
+                          "content": "No. \u201cSome cats are pets\u201d only tells us that at least one cat is a pet -- it says nothing about every pet being a cat. Dogs, goldfish, and parakeets are all pets too, and none of them are cats.",
+                          "finish_reason": "stop"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 23,
+            "thread": "MainThread",
+            "elapsed_ms": 0.148,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 24,
+                "thread": "MainThread",
+                "elapsed_ms": 0.13999999999999999,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What is 2 + 2?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a078dc-87d9-74d2-a436-f0b307cccee1-0",
+                      "role": "ai",
+                      "content": "4",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What is 2 + 2?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d9-74d2-a436-f0b307cccee1-0",
+                        "role": "ai",
+                        "content": "4",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 24,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.13999999999999999,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What is 2 + 2?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a078dc-87d9-74d2-a436-f0b307cccee1-0",
+                        "role": "ai",
+                        "content": "4",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "What is 2 + 2?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a078dc-87d9-74d2-a436-f0b307cccee1-0",
+                          "role": "ai",
+                          "content": "4",
+                          "finish_reason": "stop"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "correct_decisions_with_no_readable_rationale",
+            "hard_question_routed_generous": true,
+            "hard_question_finished_clean": true,
+            "easy_question_routed_cheap": true,
+            "easy_question_finished_clean": true
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1209 @@
+{
+  "chapter": "ch18_hooks",
+  "model_kind": "mock",
+  "source": "a27881ef26fd",
+  "summary": {
+    "turns": 7,
+    "messages": 0,
+    "ended": "success: ordered 2 x milk; success: ordered 2 x milk; error: ['place_order'] blocked before it ran: ['saffron'] is not in the catalog; success: 1.20 for milk [internal_ref=8821]; success: 1.20 for milk; error: ['price_of'] ran, but the result was withheld: price ['0.00 for milk'] is implausible; withheld; error: ['place_order'] blocked before it ran: ['chocolate milk'] is not in the catalog"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "tool_pre_observe"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 0.201,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "success: ordered 2 x milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "place_order",
+            "id": "c1"
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 0.011,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk",
+              "quantity": 2
+            },
+            {
+              "label": "hook",
+              "when": "pre",
+              "by": "note_if_a_write",
+              "note": "place_order is a write",
+              "veto": null,
+              "replacement": null
+            },
+            {
+              "label": "dispatched",
+              "value": "ordered 2 x milk"
+            },
+            {
+              "label": "result",
+              "value": "ordered 2 x milk"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk",
+                "quantity": 2
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "pre",
+                "by": "note_if_a_write",
+                "note": "place_order is a write",
+                "veto": null,
+                "replacement": null
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "dispatched",
+                "value": "ordered 2 x milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "ordered 2 x milk"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "place_order",
+              "id": "c1"
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 0.011,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk",
+                "quantity": 2
+              },
+              {
+                "label": "hook",
+                "when": "pre",
+                "by": "note_if_a_write",
+                "note": "place_order is a write",
+                "veto": null,
+                "replacement": null
+              },
+              {
+                "label": "dispatched",
+                "value": "ordered 2 x milk"
+              },
+              {
+                "label": "result",
+                "value": "ordered 2 x milk"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 2
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "pre",
+                  "by": "note_if_a_write",
+                  "note": "place_order is a write",
+                  "veto": null,
+                  "replacement": null
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "dispatched",
+                  "value": "ordered 2 x milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "ordered 2 x milk"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "success: ordered 2 x milk"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "tool_pre_modify"
+      },
+      "seq": 3,
+      "thread": "MainThread",
+      "elapsed_ms": 0.014,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "success: ordered 2 x milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "place_order",
+            "id": "c2"
+          },
+          "seq": 4,
+          "thread": "MainThread",
+          "elapsed_ms": 0.006,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "  Milk ",
+              "quantity": 2
+            },
+            {
+              "label": "hook",
+              "when": "pre",
+              "by": "normalize_item",
+              "note": null,
+              "veto": null,
+              "replacement": {
+                "item": "milk",
+                "quantity": 2
+              }
+            },
+            {
+              "label": "dispatched",
+              "value": "ordered 2 x milk"
+            },
+            {
+              "label": "result",
+              "value": "ordered 2 x milk"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "  Milk ",
+                "quantity": 2
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "pre",
+                "by": "normalize_item",
+                "note": null,
+                "veto": null,
+                "replacement": {
+                  "item": "milk",
+                  "quantity": 2
+                }
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "dispatched",
+                "value": "ordered 2 x milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "ordered 2 x milk"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "place_order",
+              "id": "c2"
+            },
+            "seq": 4,
+            "thread": "MainThread",
+            "elapsed_ms": 0.006,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "  Milk ",
+                "quantity": 2
+              },
+              {
+                "label": "hook",
+                "when": "pre",
+                "by": "normalize_item",
+                "note": null,
+                "veto": null,
+                "replacement": {
+                  "item": "milk",
+                  "quantity": 2
+                }
+              },
+              {
+                "label": "dispatched",
+                "value": "ordered 2 x milk"
+              },
+              {
+                "label": "result",
+                "value": "ordered 2 x milk"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "  Milk ",
+                  "quantity": 2
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "pre",
+                  "by": "normalize_item",
+                  "note": null,
+                  "veto": null,
+                  "replacement": {
+                    "item": "milk",
+                    "quantity": 2
+                  }
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "dispatched",
+                  "value": "ordered 2 x milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "ordered 2 x milk"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "success: ordered 2 x milk"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "tool_pre_veto"
+      },
+      "seq": 5,
+      "thread": "MainThread",
+      "elapsed_ms": 0.011,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "error: ['place_order'] blocked before it ran: ['saffron'] is not in the catalog"
+        }
+      ],
+      "children": [
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "place_order",
+            "id": "c3"
+          },
+          "seq": 6,
+          "thread": "MainThread",
+          "elapsed_ms": 0.008,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "saffron",
+              "quantity": 1
+            },
+            {
+              "label": "hook",
+              "when": "pre",
+              "by": "refuse_unlisted_items",
+              "note": null,
+              "veto": "['saffron'] is not in the catalog",
+              "replacement": null
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "saffron",
+                "quantity": 1
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_unlisted_items",
+                "note": null,
+                "veto": "['saffron'] is not in the catalog",
+                "replacement": null
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "place_order",
+              "id": "c3"
+            },
+            "seq": 6,
+            "thread": "MainThread",
+            "elapsed_ms": 0.008,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "saffron",
+                "quantity": 1
+              },
+              {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_unlisted_items",
+                "note": null,
+                "veto": "['saffron'] is not in the catalog",
+                "replacement": null
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "saffron",
+                  "quantity": 1
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "pre",
+                  "by": "refuse_unlisted_items",
+                  "note": null,
+                  "veto": "['saffron'] is not in the catalog",
+                  "replacement": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "error: ['place_order'] blocked before it ran: ['saffron'] is not in the catalog"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "tool_post_observe"
+      },
+      "seq": 7,
+      "thread": "MainThread",
+      "elapsed_ms": 0.009000000000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "success: 1.20 for milk [internal_ref=8821]"
+        }
+      ],
+      "children": [
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "price_of",
+            "id": "c4"
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.003,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "dispatched",
+              "value": "1.20 for milk [internal_ref=8821]"
+            },
+            {
+              "label": "hook",
+              "when": "post",
+              "by": "note_the_result",
+              "note": "result observed",
+              "veto": null,
+              "replacement": null
+            },
+            {
+              "label": "result",
+              "value": "1.20 for milk [internal_ref=8821]"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "dispatched",
+                "value": "1.20 for milk [internal_ref=8821]"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "post",
+                "by": "note_the_result",
+                "note": "result observed",
+                "veto": null,
+                "replacement": null
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "1.20 for milk [internal_ref=8821]"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "price_of",
+              "id": "c4"
+            },
+            "seq": 8,
+            "thread": "MainThread",
+            "elapsed_ms": 0.003,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk"
+              },
+              {
+                "label": "dispatched",
+                "value": "1.20 for milk [internal_ref=8821]"
+              },
+              {
+                "label": "hook",
+                "when": "post",
+                "by": "note_the_result",
+                "note": "result observed",
+                "veto": null,
+                "replacement": null
+              },
+              {
+                "label": "result",
+                "value": "1.20 for milk [internal_ref=8821]"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "dispatched",
+                  "value": "1.20 for milk [internal_ref=8821]"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "post",
+                  "by": "note_the_result",
+                  "note": "result observed",
+                  "veto": null,
+                  "replacement": null
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "1.20 for milk [internal_ref=8821]"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "success: 1.20 for milk [internal_ref=8821]"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "tool_post_modify"
+      },
+      "seq": 9,
+      "thread": "MainThread",
+      "elapsed_ms": 0.009000000000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "success: 1.20 for milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "price_of",
+            "id": "c5"
+          },
+          "seq": 10,
+          "thread": "MainThread",
+          "elapsed_ms": 0.004,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "dispatched",
+              "value": "1.20 for milk [internal_ref=8821]"
+            },
+            {
+              "label": "hook",
+              "when": "post",
+              "by": "redact_internal_reference",
+              "note": null,
+              "veto": null,
+              "replacement": {
+                "value": "1.20 for milk"
+              }
+            },
+            {
+              "label": "result",
+              "value": "1.20 for milk"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "dispatched",
+                "value": "1.20 for milk [internal_ref=8821]"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "post",
+                "by": "redact_internal_reference",
+                "note": null,
+                "veto": null,
+                "replacement": {
+                  "value": "1.20 for milk"
+                }
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "1.20 for milk"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "price_of",
+              "id": "c5"
+            },
+            "seq": 10,
+            "thread": "MainThread",
+            "elapsed_ms": 0.004,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk"
+              },
+              {
+                "label": "dispatched",
+                "value": "1.20 for milk [internal_ref=8821]"
+              },
+              {
+                "label": "hook",
+                "when": "post",
+                "by": "redact_internal_reference",
+                "note": null,
+                "veto": null,
+                "replacement": {
+                  "value": "1.20 for milk"
+                }
+              },
+              {
+                "label": "result",
+                "value": "1.20 for milk"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "dispatched",
+                  "value": "1.20 for milk [internal_ref=8821]"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "post",
+                  "by": "redact_internal_reference",
+                  "note": null,
+                  "veto": null,
+                  "replacement": {
+                    "value": "1.20 for milk"
+                  }
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "1.20 for milk"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "success: 1.20 for milk"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "tool_post_veto"
+      },
+      "seq": 11,
+      "thread": "MainThread",
+      "elapsed_ms": 0.007,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "error: ['price_of'] ran, but the result was withheld: price ['0.00 for milk'] is implausible; withheld"
+        }
+      ],
+      "children": [
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "price_of",
+            "id": "c6"
+          },
+          "seq": 12,
+          "thread": "MainThread",
+          "elapsed_ms": 0.005,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "dispatched",
+              "value": "0.00 for milk"
+            },
+            {
+              "label": "hook",
+              "when": "post",
+              "by": "refuse_implausible_price",
+              "note": null,
+              "veto": "price ['0.00 for milk'] is implausible; withheld",
+              "replacement": null
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "dispatched",
+                "value": "0.00 for milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "post",
+                "by": "refuse_implausible_price",
+                "note": null,
+                "veto": "price ['0.00 for milk'] is implausible; withheld",
+                "replacement": null
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "price_of",
+              "id": "c6"
+            },
+            "seq": 12,
+            "thread": "MainThread",
+            "elapsed_ms": 0.005,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk"
+              },
+              {
+                "label": "dispatched",
+                "value": "0.00 for milk"
+              },
+              {
+                "label": "hook",
+                "when": "post",
+                "by": "refuse_implausible_price",
+                "note": null,
+                "veto": "price ['0.00 for milk'] is implausible; withheld",
+                "replacement": null
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "dispatched",
+                  "value": "0.00 for milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "post",
+                  "by": "refuse_implausible_price",
+                  "note": null,
+                  "veto": "price ['0.00 for milk'] is implausible; withheld",
+                  "replacement": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "error: ['price_of'] ran, but the result was withheld: price ['0.00 for milk'] is implausible; withheld"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "pre_tool_hooks_compose"
+      },
+      "seq": 13,
+      "thread": "MainThread",
+      "elapsed_ms": 0.01,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "error: ['place_order'] blocked before it ran: ['chocolate milk'] is not in the catalog"
+        }
+      ],
+      "children": [
+        {
+          "name": "tool",
+          "attributes": {
+            "name": "place_order",
+            "id": "c7"
+          },
+          "seq": 14,
+          "thread": "MainThread",
+          "elapsed_ms": 0.007,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "  Chocolate Milk ",
+              "quantity": 1
+            },
+            {
+              "label": "hook",
+              "when": "pre",
+              "by": "note_if_a_write",
+              "note": "place_order is a write",
+              "veto": null,
+              "replacement": null
+            },
+            {
+              "label": "hook",
+              "when": "pre",
+              "by": "normalize_item",
+              "note": null,
+              "veto": null,
+              "replacement": {
+                "item": "chocolate milk",
+                "quantity": 1
+              }
+            },
+            {
+              "label": "hook",
+              "when": "pre",
+              "by": "refuse_unlisted_items",
+              "note": null,
+              "veto": "['chocolate milk'] is not in the catalog",
+              "replacement": null
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "  Chocolate Milk ",
+                "quantity": 1
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "pre",
+                "by": "note_if_a_write",
+                "note": "place_order is a write",
+                "veto": null,
+                "replacement": null
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "pre",
+                "by": "normalize_item",
+                "note": null,
+                "veto": null,
+                "replacement": {
+                  "item": "chocolate milk",
+                  "quantity": 1
+                }
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_unlisted_items",
+                "note": null,
+                "veto": "['chocolate milk'] is not in the catalog",
+                "replacement": null
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "tool",
+            "attributes": {
+              "name": "place_order",
+              "id": "c7"
+            },
+            "seq": 14,
+            "thread": "MainThread",
+            "elapsed_ms": 0.007,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "  Chocolate Milk ",
+                "quantity": 1
+              },
+              {
+                "label": "hook",
+                "when": "pre",
+                "by": "note_if_a_write",
+                "note": "place_order is a write",
+                "veto": null,
+                "replacement": null
+              },
+              {
+                "label": "hook",
+                "when": "pre",
+                "by": "normalize_item",
+                "note": null,
+                "veto": null,
+                "replacement": {
+                  "item": "chocolate milk",
+                  "quantity": 1
+                }
+              },
+              {
+                "label": "hook",
+                "when": "pre",
+                "by": "refuse_unlisted_items",
+                "note": null,
+                "veto": "['chocolate milk'] is not in the catalog",
+                "replacement": null
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "  Chocolate Milk ",
+                  "quantity": 1
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "pre",
+                  "by": "note_if_a_write",
+                  "note": "place_order is a write",
+                  "veto": null,
+                  "replacement": null
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "pre",
+                  "by": "normalize_item",
+                  "note": null,
+                  "veto": null,
+                  "replacement": {
+                    "item": "chocolate milk",
+                    "quantity": 1
+                  }
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "hook",
+                  "when": "pre",
+                  "by": "refuse_unlisted_items",
+                  "note": null,
+                  "veto": "['chocolate milk'] is not in the catalog",
+                  "replacement": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "error: ['place_order'] blocked before it ran: ['chocolate milk'] is not in the catalog"
+          }
+        }
+      ]
+    }
+  ]
+}

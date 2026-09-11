@@ -1,0 +1,2679 @@
+{
+  "chapter": "ch12_supervisor",
+  "model_kind": "live",
+  "source": "f579b61182ec",
+  "summary": {
+    "turns": 4,
+    "messages": 11,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "the_supervisor_delegates",
+        "tools": "consult_inventory_expert, consult_orders_expert",
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 6053.530000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 4825.843,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 1892.148,
+              "model_provider_ms": 1635.5965830087662,
+              "library_ms": 256.55141699123374,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 1025134789.815833,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "889",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "consult_inventory_expert",
+                          "description": "Ask the inventory expert about price or stock. It has its own tools.",
+                          "parameters": {
+                            "properties": {
+                              "question": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "question"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "consult_orders_expert",
+                          "description": "Ask the orders expert to place an order. It has its own tools.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 1025136425.412416,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 17:05:16 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 34abb90920639dc2e8b951629bb7d010.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "k9DnYu1z_d-k8Wtz6CyeQYb0laFCJZNzVJyufhpy6Qjs0Em8Pcc0Bw==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "f0d93fee6d2a242cf099d1e905125434"
+                  },
+                  "body": {
+                    "id": "4b076bf0-7872-4825-ac47-1eb3baf55f81",
+                    "object": "chat.completion",
+                    "created": 1788455116,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "The user asks how much milk is. I should consult the inventory expert for price.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_oI4nL45AfmvEbNfKwmTX8547",
+                              "type": "function",
+                              "function": {
+                                "name": "consult_inventory_expert",
+                                "arguments": "{\"question\": \"What is the price of milk?\"}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 490,
+                      "completion_tokens": 69,
+                      "total_tokens": 559,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 17
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 106
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a0683b-5b77-7652-84bc-7606d23c7717-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "consult_inventory_expert",
+                        "args": {
+                          "question": "What is the price of milk?"
+                        },
+                        "id": "call_00_oI4nL45AfmvEbNfKwmTX8547"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The user asks how much milk is. I should consult the inventory expert for price."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 490,
+                      "output_tokens": 69,
+                      "total_tokens": 559,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 17
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "consult_inventory_expert",
+                "id": "call_00_oI4nL45AfmvEbNfKwmTX8547"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 2933.608,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "question": "What is the price of milk?"
+                },
+                {
+                  "label": "result",
+                  "value": "The price of milk is \u00a31.20."
+                }
+              ],
+              "children": [
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 1
+                  },
+                  "seq": 5,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1648.511,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "live"
+                      },
+                      "seq": 6,
+                      "thread": "MainThread",
+                      "elapsed_ms": 1625.3329999999999,
+                      "model_provider_ms": 1602.554041981697,
+                      "library_ms": 22.778958018302774,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "What is the price of milk?"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "wire request",
+                          "attempt": 1,
+                          "at_ms": 1025136454.0610831,
+                          "method": "POST",
+                          "url": "https://api.deepseek.com/v1/chat/completions",
+                          "headers": {
+                            "accept": "application/json",
+                            "accept-encoding": "gzip, deflate, zstd",
+                            "authorization": null,
+                            "connection": "keep-alive",
+                            "content-length": "482",
+                            "content-type": "application/json",
+                            "host": "api.deepseek.com",
+                            "user-agent": "OpenAI/Python 3.6.0",
+                            "x-stainless-arch": "arm64",
+                            "x-stainless-async": "false",
+                            "x-stainless-lang": "python",
+                            "x-stainless-os": "MacOS",
+                            "x-stainless-package-version": "3.6.0",
+                            "x-stainless-raw-response": "true",
+                            "x-stainless-read-timeout": "60.0",
+                            "x-stainless-retry-count": "0",
+                            "x-stainless-runtime": "CPython",
+                            "x-stainless-runtime-version": "3.14.7"
+                          },
+                          "defaulted_by_model_provider": [
+                            "temperature",
+                            "max_tokens",
+                            "top_p",
+                            "stop",
+                            "seed",
+                            "tool_choice"
+                          ],
+                          "body": {
+                            "messages": [
+                              {
+                                "content": "You answer briefly and plainly. Use the tool you are given.",
+                                "role": "system"
+                              },
+                              {
+                                "content": "What is the price of milk?",
+                                "role": "user"
+                              }
+                            ],
+                            "model": "deepseek-v4-flash",
+                            "stream": false,
+                            "tools": [
+                              {
+                                "type": "function",
+                                "function": {
+                                  "name": "price_of",
+                                  "description": "The current shelf price of an item, in pounds. The expert's only tool.",
+                                  "parameters": {
+                                    "properties": {
+                                      "item": {
+                                        "enum": [
+                                          "bread",
+                                          "butter",
+                                          "chips",
+                                          "milk"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "item"
+                                    ],
+                                    "type": "object"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "label": "wire response",
+                          "at_ms": 1025138056.6151251,
+                          "status": 200,
+                          "headers": {
+                            "access-control-allow-credentials": "true",
+                            "connection": "keep-alive",
+                            "content-encoding": "gzip",
+                            "content-type": "application/json",
+                            "date": "Thu, 03 Sep 2026 17:05:17 GMT",
+                            "server": "elb",
+                            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                            "transfer-encoding": "chunked",
+                            "vary": "origin, access-control-request-method, access-control-request-headers",
+                            "via": "1.1 d367a81605c570be8f51546cf4468ece.cloudfront.net (CloudFront)",
+                            "x-amz-cf-id": "EGXWqoZ856p0FerpnqIjrTcWapl43jqhe1iVwznqCTYxItW_UIYtjw==",
+                            "x-amz-cf-pop": "DEN53-P4",
+                            "x-cache": "Miss from cloudfront",
+                            "x-content-type-options": "nosniff",
+                            "x-ds-trace-id": "3c968272e58caea9346b2c4d63676d59"
+                          },
+                          "body": {
+                            "id": "41a08738-38f4-47c7-8178-2158e5a8a819",
+                            "object": "chat.completion",
+                            "created": 1788455117,
+                            "model": "deepseek-v4-flash",
+                            "choices": [
+                              {
+                                "index": 0,
+                                "message": {
+                                  "role": "assistant",
+                                  "content": "",
+                                  "reasoning_content": "The user asks the price of milk. I'll use the tool.",
+                                  "tool_calls": [
+                                    {
+                                      "index": 0,
+                                      "id": "call_00_kKOOM52dgMXEIa5vjgIk1245",
+                                      "type": "function",
+                                      "function": {
+                                        "name": "price_of",
+                                        "arguments": "{\"item\": \"milk\"}"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "logprobs": null,
+                                "finish_reason": "tool_calls"
+                              }
+                            ],
+                            "usage": {
+                              "prompt_tokens": 399,
+                              "completion_tokens": 59,
+                              "total_tokens": 458,
+                              "prompt_tokens_details": {
+                                "cached_tokens": 384
+                              },
+                              "completion_tokens_details": {
+                                "reasoning_tokens": 14
+                              },
+                              "prompt_cache_hit_tokens": 384,
+                              "prompt_cache_miss_tokens": 15
+                            },
+                            "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                          }
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-6202-7210-a8a6-82997ea13dd5-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "call_00_kKOOM52dgMXEIa5vjgIk1245"
+                              }
+                            ],
+                            "additional_kwargs": {
+                              "refusal": null,
+                              "reasoning_content": "The user asks the price of milk. I'll use the tool."
+                            },
+                            "finish_reason": "tool_calls",
+                            "usage": {
+                              "input_tokens": 399,
+                              "output_tokens": 59,
+                              "total_tokens": 458,
+                              "input_token_details": {
+                                "cache_read": 384
+                              },
+                              "output_token_details": {
+                                "reasoning": 14
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "name": "tool",
+                      "attributes": {
+                        "name": "price_of",
+                        "id": "call_00_kKOOM52dgMXEIa5vjgIk1245"
+                      },
+                      "seq": 7,
+                      "thread": "MainThread",
+                      "elapsed_ms": 16.845,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "args",
+                          "item": "milk"
+                        },
+                        {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 2
+                  },
+                  "seq": 8,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1284.968,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "live"
+                      },
+                      "seq": 9,
+                      "thread": "MainThread",
+                      "elapsed_ms": 1284.929,
+                      "model_provider_ms": 1233.320750117302,
+                      "library_ms": 51.608249882698146,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "What is the price of milk?"
+                            },
+                            {
+                              "id": "lc_run--01a0683b-6202-7210-a8a6-82997ea13dd5-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "call_00_kKOOM52dgMXEIa5vjgIk1245"
+                                }
+                              ],
+                              "additional_kwargs": {
+                                "refusal": null,
+                                "reasoning_content": "The user asks the price of milk. I'll use the tool."
+                              },
+                              "finish_reason": "tool_calls",
+                              "usage": {
+                                "input_tokens": 399,
+                                "output_tokens": 59,
+                                "total_tokens": 458,
+                                "input_token_details": {
+                                  "cache_read": 384
+                                },
+                                "output_token_details": {
+                                  "reasoning": 14
+                                }
+                              }
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "call_00_kKOOM52dgMXEIa5vjgIk1245"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "wire request",
+                          "attempt": 1,
+                          "at_ms": 1025138137.7635,
+                          "method": "POST",
+                          "url": "https://api.deepseek.com/v1/chat/completions",
+                          "headers": {
+                            "accept": "application/json",
+                            "accept-encoding": "gzip, deflate, zstd",
+                            "authorization": null,
+                            "connection": "keep-alive",
+                            "content-length": "825",
+                            "content-type": "application/json",
+                            "host": "api.deepseek.com",
+                            "user-agent": "OpenAI/Python 3.6.0",
+                            "x-stainless-arch": "arm64",
+                            "x-stainless-async": "false",
+                            "x-stainless-lang": "python",
+                            "x-stainless-os": "MacOS",
+                            "x-stainless-package-version": "3.6.0",
+                            "x-stainless-raw-response": "true",
+                            "x-stainless-read-timeout": "60.0",
+                            "x-stainless-retry-count": "0",
+                            "x-stainless-runtime": "CPython",
+                            "x-stainless-runtime-version": "3.14.7"
+                          },
+                          "defaulted_by_model_provider": [
+                            "temperature",
+                            "max_tokens",
+                            "top_p",
+                            "stop",
+                            "seed",
+                            "tool_choice"
+                          ],
+                          "body": {
+                            "messages": [
+                              {
+                                "content": "You answer briefly and plainly. Use the tool you are given.",
+                                "role": "system"
+                              },
+                              {
+                                "content": "What is the price of milk?",
+                                "role": "user"
+                              },
+                              {
+                                "content": null,
+                                "role": "assistant",
+                                "tool_calls": [
+                                  {
+                                    "type": "function",
+                                    "id": "call_00_kKOOM52dgMXEIa5vjgIk1245",
+                                    "function": {
+                                      "name": "price_of",
+                                      "arguments": "{\"item\": \"milk\"}"
+                                    }
+                                  }
+                                ],
+                                "reasoning_content": "The user asks the price of milk. I'll use the tool."
+                              },
+                              {
+                                "content": "1.20 for milk",
+                                "role": "tool",
+                                "tool_call_id": "call_00_kKOOM52dgMXEIa5vjgIk1245"
+                              }
+                            ],
+                            "model": "deepseek-v4-flash",
+                            "stream": false,
+                            "tools": [
+                              {
+                                "type": "function",
+                                "function": {
+                                  "name": "price_of",
+                                  "description": "The current shelf price of an item, in pounds. The expert's only tool.",
+                                  "parameters": {
+                                    "properties": {
+                                      "item": {
+                                        "enum": [
+                                          "bread",
+                                          "butter",
+                                          "chips",
+                                          "milk"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "item"
+                                    ],
+                                    "type": "object"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "label": "wire response",
+                          "at_ms": 1025139371.0842501,
+                          "status": 200,
+                          "headers": {
+                            "access-control-allow-credentials": "true",
+                            "connection": "keep-alive",
+                            "content-encoding": "gzip",
+                            "content-type": "application/json",
+                            "date": "Thu, 03 Sep 2026 17:05:19 GMT",
+                            "server": "elb",
+                            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                            "transfer-encoding": "chunked",
+                            "vary": "origin, access-control-request-method, access-control-request-headers",
+                            "via": "1.1 1023ce3fdfbe06146e0996714c07ebcc.cloudfront.net (CloudFront)",
+                            "x-amz-cf-id": "GPWjV5uyH9xvu9liRTuH_KCXG2UThYkQ-HzK5H1lFM5_YStkOddM_A==",
+                            "x-amz-cf-pop": "DEN53-P3",
+                            "x-cache": "Miss from cloudfront",
+                            "x-content-type-options": "nosniff",
+                            "x-ds-trace-id": "cdaad59ce266b4df4ebc7142f7ed8ba2"
+                          },
+                          "body": {
+                            "id": "39f376ac-0090-45d0-b6fa-2ef24cb8846b",
+                            "object": "chat.completion",
+                            "created": 1788455119,
+                            "model": "deepseek-v4-flash",
+                            "choices": [
+                              {
+                                "index": 0,
+                                "message": {
+                                  "role": "assistant",
+                                  "content": "The price of milk is \u00a31.20.",
+                                  "reasoning_content": ""
+                                },
+                                "logprobs": null,
+                                "finish_reason": "stop"
+                              }
+                            ],
+                            "usage": {
+                              "prompt_tokens": 475,
+                              "completion_tokens": 11,
+                              "total_tokens": 486,
+                              "prompt_tokens_details": {
+                                "cached_tokens": 384
+                              },
+                              "completion_tokens_details": {
+                                "reasoning_tokens": 0
+                              },
+                              "prompt_cache_hit_tokens": 384,
+                              "prompt_cache_miss_tokens": 91
+                            },
+                            "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                          }
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-688d-7493-b243-5d5f43841572-0",
+                            "role": "ai",
+                            "content": "The price of milk is \u00a31.20.",
+                            "additional_kwargs": {
+                              "refusal": null,
+                              "reasoning_content": ""
+                            },
+                            "finish_reason": "stop",
+                            "usage": {
+                              "input_tokens": 475,
+                              "output_tokens": 11,
+                              "total_tokens": 486,
+                              "input_token_details": {
+                                "cache_read": 384
+                              },
+                              "output_token_details": {
+                                "reasoning": 0
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 10,
+          "thread": "MainThread",
+          "elapsed_ms": 1227.338,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 11,
+              "thread": "MainThread",
+              "elapsed_ms": 1227.2920000000001,
+              "model_provider_ms": 1211.894374847412,
+              "library_ms": 15.397625152588034,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    },
+                    {
+                      "id": "lc_run--01a0683b-5b77-7652-84bc-7606d23c7717-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "consult_inventory_expert",
+                          "args": {
+                            "question": "What is the price of milk?"
+                          },
+                          "id": "call_00_oI4nL45AfmvEbNfKwmTX8547"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The user asks how much milk is. I should consult the inventory expert for price."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 490,
+                        "output_tokens": 69,
+                        "total_tokens": 559,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 17
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "The price of milk is \u00a31.20.",
+                      "tool_call_id": "call_00_oI4nL45AfmvEbNfKwmTX8547"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 1025139386.710208,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1318",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk?",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_oI4nL45AfmvEbNfKwmTX8547",
+                            "function": {
+                              "name": "consult_inventory_expert",
+                              "arguments": "{\"question\": \"What is the price of milk?\"}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The user asks how much milk is. I should consult the inventory expert for price."
+                      },
+                      {
+                        "content": "The price of milk is \u00a31.20.",
+                        "role": "tool",
+                        "tool_call_id": "call_00_oI4nL45AfmvEbNfKwmTX8547"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "consult_inventory_expert",
+                          "description": "Ask the inventory expert about price or stock. It has its own tools.",
+                          "parameters": {
+                            "properties": {
+                              "question": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "question"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "consult_orders_expert",
+                          "description": "Ask the orders expert to place an order. It has its own tools.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 1025140598.6045829,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 17:05:20 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 1023ce3fdfbe06146e0996714c07ebcc.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "V9BARPzux2ZE8NOokesRImqwJjaj4e4PC9hgZ8BI3jrK5f6w9VkhaA==",
+                    "x-amz-cf-pop": "DEN53-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "1a624814917a7b4b6b603bce6f1b9c24"
+                  },
+                  "body": {
+                    "id": "b66c0e09-d889-4432-8665-d623af7917fb",
+                    "object": "chat.completion",
+                    "created": 1788455120,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "Milk is \u00a31.20.",
+                          "reasoning_content": ""
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 579,
+                      "completion_tokens": 9,
+                      "total_tokens": 588,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 512
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 0
+                      },
+                      "prompt_cache_hit_tokens": 512,
+                      "prompt_cache_miss_tokens": 67
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a0683b-6d76-7100-b7c3-ae562b87d1a3-0",
+                    "role": "ai",
+                    "content": "Milk is \u00a31.20.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": ""
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 579,
+                      "output_tokens": 9,
+                      "total_tokens": 588,
+                      "input_token_details": {
+                        "cache_read": 512
+                      },
+                      "output_token_details": {
+                        "reasoning": 0
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "the_supervisor_delegates_to_both",
+        "tools": "consult_inventory_expert, consult_orders_expert",
+        "max_tokens": null
+      },
+      "seq": 12,
+      "thread": "MainThread",
+      "elapsed_ms": 7362.304,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 13,
+          "thread": "MainThread",
+          "elapsed_ms": 6300.18,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 14,
+              "thread": "MainThread",
+              "elapsed_ms": 1834.417,
+              "model_provider_ms": 1819.9244171380997,
+              "library_ms": 14.492582861900246,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and please order 5 bottles."
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 1025140613.1722909,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "917",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk, and please order 5 bottles.",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "consult_inventory_expert",
+                          "description": "Ask the inventory expert about price or stock. It has its own tools.",
+                          "parameters": {
+                            "properties": {
+                              "question": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "question"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "consult_orders_expert",
+                          "description": "Ask the orders expert to place an order. It has its own tools.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 1025142433.096708,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 17:05:21 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 8e8ff6f69325d8196c02b63be536a6d0.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "w2m2T3M_cIiSn66jlflpw-UGUMeUUwmHPmqMpWYLUX5LEUPVSjwk9Q==",
+                    "x-amz-cf-pop": "DEN53-P1",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "dfde95a33dbfa4ca41bbfd222876aefd"
+                  },
+                  "body": {
+                    "id": "42818624-dbc9-463e-882f-bee901192a19",
+                    "object": "chat.completion",
+                    "created": 1788455121,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "I'll check the price of milk and place your order.",
+                          "reasoning_content": "The user asks two things: the price of milk, and ordering 5 bottles. Price/stock is handled by inventory expert. Order placement by orders expert. These are independent, so I can call both in parallel.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_y2JXB1tXL6bTLGNUiY6u7680",
+                              "type": "function",
+                              "function": {
+                                "name": "consult_inventory_expert",
+                                "arguments": "{\"question\": \"How much is milk?\"}"
+                              }
+                            },
+                            {
+                              "index": 1,
+                              "id": "call_01_tatxRz7n7rOpLRBeiqec2401",
+                              "type": "function",
+                              "function": {
+                                "name": "consult_orders_expert",
+                                "arguments": "{\"item\": \"milk\", \"quantity\": 5}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 497,
+                      "completion_tokens": 155,
+                      "total_tokens": 652,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 44
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 113
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a0683b-7241-7752-bb5c-c69766b528e5-0",
+                    "role": "ai",
+                    "content": "I'll check the price of milk and place your order.",
+                    "tool_calls": [
+                      {
+                        "name": "consult_inventory_expert",
+                        "args": {
+                          "question": "How much is milk?"
+                        },
+                        "id": "call_00_y2JXB1tXL6bTLGNUiY6u7680"
+                      },
+                      {
+                        "name": "consult_orders_expert",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 5
+                        },
+                        "id": "call_01_tatxRz7n7rOpLRBeiqec2401"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The user asks two things: the price of milk, and ordering 5 bottles. Price/stock is handled by inventory expert. Order placement by orders expert. These are independent, so I can call both in parallel."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 497,
+                      "output_tokens": 155,
+                      "total_tokens": 652,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 44
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "consult_inventory_expert",
+                "id": "call_00_y2JXB1tXL6bTLGNUiY6u7680"
+              },
+              "seq": 15,
+              "thread": "MainThread",
+              "elapsed_ms": 2048.422,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "question": "How much is milk?"
+                },
+                {
+                  "label": "result",
+                  "value": "Milk is \u00a31.20."
+                }
+              ],
+              "children": [
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 1
+                  },
+                  "seq": 16,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1232.672,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "live"
+                      },
+                      "seq": 17,
+                      "thread": "MainThread",
+                      "elapsed_ms": 1232.008,
+                      "model_provider_ms": 1219.8242079019547,
+                      "library_ms": 12.183792098045387,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "wire request",
+                          "attempt": 1,
+                          "at_ms": 1025142445.399708,
+                          "method": "POST",
+                          "url": "https://api.deepseek.com/v1/chat/completions",
+                          "headers": {
+                            "accept": "application/json",
+                            "accept-encoding": "gzip, deflate, zstd",
+                            "authorization": null,
+                            "connection": "keep-alive",
+                            "content-length": "473",
+                            "content-type": "application/json",
+                            "host": "api.deepseek.com",
+                            "user-agent": "OpenAI/Python 3.6.0",
+                            "x-stainless-arch": "arm64",
+                            "x-stainless-async": "false",
+                            "x-stainless-lang": "python",
+                            "x-stainless-os": "MacOS",
+                            "x-stainless-package-version": "3.6.0",
+                            "x-stainless-raw-response": "true",
+                            "x-stainless-read-timeout": "60.0",
+                            "x-stainless-retry-count": "0",
+                            "x-stainless-runtime": "CPython",
+                            "x-stainless-runtime-version": "3.14.7"
+                          },
+                          "defaulted_by_model_provider": [
+                            "temperature",
+                            "max_tokens",
+                            "top_p",
+                            "stop",
+                            "seed",
+                            "tool_choice"
+                          ],
+                          "body": {
+                            "messages": [
+                              {
+                                "content": "You answer briefly and plainly. Use the tool you are given.",
+                                "role": "system"
+                              },
+                              {
+                                "content": "How much is milk?",
+                                "role": "user"
+                              }
+                            ],
+                            "model": "deepseek-v4-flash",
+                            "stream": false,
+                            "tools": [
+                              {
+                                "type": "function",
+                                "function": {
+                                  "name": "price_of",
+                                  "description": "The current shelf price of an item, in pounds. The expert's only tool.",
+                                  "parameters": {
+                                    "properties": {
+                                      "item": {
+                                        "enum": [
+                                          "bread",
+                                          "butter",
+                                          "chips",
+                                          "milk"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "item"
+                                    ],
+                                    "type": "object"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "label": "wire response",
+                          "at_ms": 1025143665.2239159,
+                          "status": 200,
+                          "headers": {
+                            "access-control-allow-credentials": "true",
+                            "connection": "keep-alive",
+                            "content-encoding": "gzip",
+                            "content-type": "application/json",
+                            "date": "Thu, 03 Sep 2026 17:05:23 GMT",
+                            "server": "elb",
+                            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                            "transfer-encoding": "chunked",
+                            "vary": "origin, access-control-request-method, access-control-request-headers",
+                            "via": "1.1 0ecc9d4faf14441bafb84971a4117abc.cloudfront.net (CloudFront)",
+                            "x-amz-cf-id": "A-hYmdq0B-xJbDyDuJ0HgZzQQ5tfwfcVpdc4WB4r1dpuDk-nBOAp2g==",
+                            "x-amz-cf-pop": "DEN52-P2",
+                            "x-cache": "Miss from cloudfront",
+                            "x-content-type-options": "nosniff",
+                            "x-ds-trace-id": "02ba8f4c6c3f421b187af43abca25e45"
+                          },
+                          "body": {
+                            "id": "3189f5ca-cea4-4f97-b109-92fb9cd4e8e5",
+                            "object": "chat.completion",
+                            "created": 1788455123,
+                            "model": "deepseek-v4-flash",
+                            "choices": [
+                              {
+                                "index": 0,
+                                "message": {
+                                  "role": "assistant",
+                                  "content": "",
+                                  "reasoning_content": "The user asks \"How much is milk?\" I should use the price_of tool with item milk.",
+                                  "tool_calls": [
+                                    {
+                                      "index": 0,
+                                      "id": "call_00_65ESEW9xfGI8vcp5YS0v2555",
+                                      "type": "function",
+                                      "function": {
+                                        "name": "price_of",
+                                        "arguments": "{\"item\": \"milk\"}"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "logprobs": null,
+                                "finish_reason": "tool_calls"
+                              }
+                            ],
+                            "usage": {
+                              "prompt_tokens": 397,
+                              "completion_tokens": 65,
+                              "total_tokens": 462,
+                              "prompt_tokens_details": {
+                                "cached_tokens": 384
+                              },
+                              "completion_tokens_details": {
+                                "reasoning_tokens": 20
+                              },
+                              "prompt_cache_hit_tokens": 384,
+                              "prompt_cache_miss_tokens": 13
+                            },
+                            "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                          }
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-796a-7592-9907-4b69218532af-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "call_00_65ESEW9xfGI8vcp5YS0v2555"
+                              }
+                            ],
+                            "additional_kwargs": {
+                              "refusal": null,
+                              "reasoning_content": "The user asks \"How much is milk?\" I should use the price_of tool with item milk."
+                            },
+                            "finish_reason": "tool_calls",
+                            "usage": {
+                              "input_tokens": 397,
+                              "output_tokens": 65,
+                              "total_tokens": 462,
+                              "input_token_details": {
+                                "cache_read": 384
+                              },
+                              "output_token_details": {
+                                "reasoning": 20
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "name": "tool",
+                      "attributes": {
+                        "name": "price_of",
+                        "id": "call_00_65ESEW9xfGI8vcp5YS0v2555"
+                      },
+                      "seq": 18,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.616,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "args",
+                          "item": "milk"
+                        },
+                        {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 2
+                  },
+                  "seq": 19,
+                  "thread": "MainThread",
+                  "elapsed_ms": 815.669,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "live"
+                      },
+                      "seq": 20,
+                      "thread": "MainThread",
+                      "elapsed_ms": 815.645,
+                      "model_provider_ms": 799.6059160232544,
+                      "library_ms": 16.039083976745587,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            },
+                            {
+                              "id": "lc_run--01a0683b-796a-7592-9907-4b69218532af-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "call_00_65ESEW9xfGI8vcp5YS0v2555"
+                                }
+                              ],
+                              "additional_kwargs": {
+                                "refusal": null,
+                                "reasoning_content": "The user asks \"How much is milk?\" I should use the price_of tool with item milk."
+                              },
+                              "finish_reason": "tool_calls",
+                              "usage": {
+                                "input_tokens": 397,
+                                "output_tokens": 65,
+                                "total_tokens": 462,
+                                "input_token_details": {
+                                  "cache_read": 384
+                                },
+                                "output_token_details": {
+                                  "reasoning": 20
+                                }
+                              }
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "call_00_65ESEW9xfGI8vcp5YS0v2555"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "wire request",
+                          "attempt": 1,
+                          "at_ms": 1025143682.30725,
+                          "method": "POST",
+                          "url": "https://api.deepseek.com/v1/chat/completions",
+                          "headers": {
+                            "accept": "application/json",
+                            "accept-encoding": "gzip, deflate, zstd",
+                            "authorization": null,
+                            "connection": "keep-alive",
+                            "content-length": "847",
+                            "content-type": "application/json",
+                            "host": "api.deepseek.com",
+                            "user-agent": "OpenAI/Python 3.6.0",
+                            "x-stainless-arch": "arm64",
+                            "x-stainless-async": "false",
+                            "x-stainless-lang": "python",
+                            "x-stainless-os": "MacOS",
+                            "x-stainless-package-version": "3.6.0",
+                            "x-stainless-raw-response": "true",
+                            "x-stainless-read-timeout": "60.0",
+                            "x-stainless-retry-count": "0",
+                            "x-stainless-runtime": "CPython",
+                            "x-stainless-runtime-version": "3.14.7"
+                          },
+                          "defaulted_by_model_provider": [
+                            "temperature",
+                            "max_tokens",
+                            "top_p",
+                            "stop",
+                            "seed",
+                            "tool_choice"
+                          ],
+                          "body": {
+                            "messages": [
+                              {
+                                "content": "You answer briefly and plainly. Use the tool you are given.",
+                                "role": "system"
+                              },
+                              {
+                                "content": "How much is milk?",
+                                "role": "user"
+                              },
+                              {
+                                "content": null,
+                                "role": "assistant",
+                                "tool_calls": [
+                                  {
+                                    "type": "function",
+                                    "id": "call_00_65ESEW9xfGI8vcp5YS0v2555",
+                                    "function": {
+                                      "name": "price_of",
+                                      "arguments": "{\"item\": \"milk\"}"
+                                    }
+                                  }
+                                ],
+                                "reasoning_content": "The user asks \"How much is milk?\" I should use the price_of tool with item milk."
+                              },
+                              {
+                                "content": "1.20 for milk",
+                                "role": "tool",
+                                "tool_call_id": "call_00_65ESEW9xfGI8vcp5YS0v2555"
+                              }
+                            ],
+                            "model": "deepseek-v4-flash",
+                            "stream": false,
+                            "tools": [
+                              {
+                                "type": "function",
+                                "function": {
+                                  "name": "price_of",
+                                  "description": "The current shelf price of an item, in pounds. The expert's only tool.",
+                                  "parameters": {
+                                    "properties": {
+                                      "item": {
+                                        "enum": [
+                                          "bread",
+                                          "butter",
+                                          "chips",
+                                          "milk"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "item"
+                                    ],
+                                    "type": "object"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "label": "wire response",
+                          "at_ms": 1025144481.913166,
+                          "status": 200,
+                          "headers": {
+                            "access-control-allow-credentials": "true",
+                            "connection": "keep-alive",
+                            "content-encoding": "gzip",
+                            "content-type": "application/json",
+                            "date": "Thu, 03 Sep 2026 17:05:24 GMT",
+                            "server": "elb",
+                            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                            "transfer-encoding": "chunked",
+                            "vary": "origin, access-control-request-method, access-control-request-headers",
+                            "via": "1.1 c8eaab496487afbdb9029903afd8f5b2.cloudfront.net (CloudFront)",
+                            "x-amz-cf-id": "VASVYDeE083QR01-22QIAVgTVSxM1lCDyTYr50Hh_eOZHNxyx6AxCg==",
+                            "x-amz-cf-pop": "DEN53-P4",
+                            "x-cache": "Miss from cloudfront",
+                            "x-content-type-options": "nosniff",
+                            "x-ds-trace-id": "3460c6b9c67800b8877b92b9536eb35f"
+                          },
+                          "body": {
+                            "id": "338ab74d-cd4d-4d8d-b6b8-46c59cadca84",
+                            "object": "chat.completion",
+                            "created": 1788455124,
+                            "model": "deepseek-v4-flash",
+                            "choices": [
+                              {
+                                "index": 0,
+                                "message": {
+                                  "role": "assistant",
+                                  "content": "Milk is \u00a31.20.",
+                                  "reasoning_content": "The tool returned \"1.20 for milk\". Answer plainly."
+                                },
+                                "logprobs": null,
+                                "finish_reason": "stop"
+                              }
+                            ],
+                            "usage": {
+                              "prompt_tokens": 479,
+                              "completion_tokens": 22,
+                              "total_tokens": 501,
+                              "prompt_tokens_details": {
+                                "cached_tokens": 384
+                              },
+                              "completion_tokens_details": {
+                                "reasoning_tokens": 13
+                              },
+                              "prompt_cache_hit_tokens": 384,
+                              "prompt_cache_miss_tokens": 95
+                            },
+                            "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                          }
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-7e3e-7e50-bc8f-fc5db3eff742-0",
+                            "role": "ai",
+                            "content": "Milk is \u00a31.20.",
+                            "additional_kwargs": {
+                              "refusal": null,
+                              "reasoning_content": "The tool returned \"1.20 for milk\". Answer plainly."
+                            },
+                            "finish_reason": "stop",
+                            "usage": {
+                              "input_tokens": 479,
+                              "output_tokens": 22,
+                              "total_tokens": 501,
+                              "input_token_details": {
+                                "cache_read": 384
+                              },
+                              "output_token_details": {
+                                "reasoning": 13
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "consult_orders_expert",
+                "id": "call_01_tatxRz7n7rOpLRBeiqec2401"
+              },
+              "seq": 21,
+              "thread": "MainThread",
+              "elapsed_ms": 2417.254,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 5
+                },
+                {
+                  "label": "result",
+                  "value": "Ordered 5 milk."
+                }
+              ],
+              "children": [
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 1
+                  },
+                  "seq": 22,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1337.2649999999999,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "live"
+                      },
+                      "seq": 23,
+                      "thread": "MainThread",
+                      "elapsed_ms": 1335.617,
+                      "model_provider_ms": 1319.6612919569016,
+                      "library_ms": 15.955708043098412,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "Order 5 of milk."
+                            }
+                          ]
+                        },
+                        {
+                          "label": "wire request",
+                          "attempt": 1,
+                          "at_ms": 1025144497.635416,
+                          "method": "POST",
+                          "url": "https://api.deepseek.com/v1/chat/completions",
+                          "headers": {
+                            "accept": "application/json",
+                            "accept-encoding": "gzip, deflate, zstd",
+                            "authorization": null,
+                            "connection": "keep-alive",
+                            "content-length": "518",
+                            "content-type": "application/json",
+                            "host": "api.deepseek.com",
+                            "user-agent": "OpenAI/Python 3.6.0",
+                            "x-stainless-arch": "arm64",
+                            "x-stainless-async": "false",
+                            "x-stainless-lang": "python",
+                            "x-stainless-os": "MacOS",
+                            "x-stainless-package-version": "3.6.0",
+                            "x-stainless-raw-response": "true",
+                            "x-stainless-read-timeout": "60.0",
+                            "x-stainless-retry-count": "0",
+                            "x-stainless-runtime": "CPython",
+                            "x-stainless-runtime-version": "3.14.7"
+                          },
+                          "defaulted_by_model_provider": [
+                            "temperature",
+                            "max_tokens",
+                            "top_p",
+                            "stop",
+                            "seed",
+                            "tool_choice"
+                          ],
+                          "body": {
+                            "messages": [
+                              {
+                                "content": "You answer briefly and plainly. Use the tool you are given.",
+                                "role": "system"
+                              },
+                              {
+                                "content": "Order 5 of milk.",
+                                "role": "user"
+                              }
+                            ],
+                            "model": "deepseek-v4-flash",
+                            "stream": false,
+                            "tools": [
+                              {
+                                "type": "function",
+                                "function": {
+                                  "name": "place_order",
+                                  "description": "Order a quantity of an item, in the shop. The orders expert's only tool.",
+                                  "parameters": {
+                                    "properties": {
+                                      "item": {
+                                        "enum": [
+                                          "bread",
+                                          "butter",
+                                          "chips",
+                                          "milk"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      "quantity": {
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "required": [
+                                      "item",
+                                      "quantity"
+                                    ],
+                                    "type": "object"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "label": "wire response",
+                          "at_ms": 1025145817.296708,
+                          "status": 200,
+                          "headers": {
+                            "access-control-allow-credentials": "true",
+                            "connection": "keep-alive",
+                            "content-encoding": "gzip",
+                            "content-type": "application/json",
+                            "date": "Thu, 03 Sep 2026 17:05:25 GMT",
+                            "server": "elb",
+                            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                            "transfer-encoding": "chunked",
+                            "vary": "origin, access-control-request-method, access-control-request-headers",
+                            "via": "1.1 afe2a1120748a37da1066bf9f260ec02.cloudfront.net (CloudFront)",
+                            "x-amz-cf-id": "52ECn7C8MoOX2uR8xsP6YbE_GdzbAmqLg_pPbe-mMz6Xacm7p49AtA==",
+                            "x-amz-cf-pop": "DEN53-P1",
+                            "x-cache": "Miss from cloudfront",
+                            "x-content-type-options": "nosniff",
+                            "x-ds-trace-id": "3e7e8a93bd71a18de4fb2e3103914b25"
+                          },
+                          "body": {
+                            "id": "89331ea4-a89d-480d-aeaa-cd460aab95d8",
+                            "object": "chat.completion",
+                            "created": 1788455125,
+                            "model": "deepseek-v4-flash",
+                            "choices": [
+                              {
+                                "index": 0,
+                                "message": {
+                                  "role": "assistant",
+                                  "content": "",
+                                  "reasoning_content": "The user asks to order 5 of milk. Use place_order.",
+                                  "tool_calls": [
+                                    {
+                                      "index": 0,
+                                      "id": "call_00_EzswGbFhOPi5WuONsOlc3387",
+                                      "type": "function",
+                                      "function": {
+                                        "name": "place_order",
+                                        "arguments": "{\"item\": \"milk\", \"quantity\": 5}"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "logprobs": null,
+                                "finish_reason": "tool_calls"
+                              }
+                            ],
+                            "usage": {
+                              "prompt_tokens": 411,
+                              "completion_tokens": 75,
+                              "total_tokens": 486,
+                              "prompt_tokens_details": {
+                                "cached_tokens": 384
+                              },
+                              "completion_tokens_details": {
+                                "reasoning_tokens": 14
+                              },
+                              "prompt_cache_hit_tokens": 384,
+                              "prompt_cache_miss_tokens": 27
+                            },
+                            "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                          }
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-816e-7b92-b6d6-78b67bb04a72-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "milk",
+                                  "quantity": 5
+                                },
+                                "id": "call_00_EzswGbFhOPi5WuONsOlc3387"
+                              }
+                            ],
+                            "additional_kwargs": {
+                              "refusal": null,
+                              "reasoning_content": "The user asks to order 5 of milk. Use place_order."
+                            },
+                            "finish_reason": "tool_calls",
+                            "usage": {
+                              "input_tokens": 411,
+                              "output_tokens": 75,
+                              "total_tokens": 486,
+                              "input_token_details": {
+                                "cache_read": 384
+                              },
+                              "output_token_details": {
+                                "reasoning": 14
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "name": "tool",
+                      "attributes": {
+                        "name": "place_order",
+                        "id": "call_00_EzswGbFhOPi5WuONsOlc3387"
+                      },
+                      "seq": 24,
+                      "thread": "MainThread",
+                      "elapsed_ms": 1.535,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "args",
+                          "item": "milk",
+                          "quantity": 5
+                        },
+                        {
+                          "label": "result",
+                          "value": "ordered 5 x milk"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 2
+                  },
+                  "seq": 25,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1079.938,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "live"
+                      },
+                      "seq": 26,
+                      "thread": "MainThread",
+                      "elapsed_ms": 1079.912,
+                      "model_provider_ms": 1065.1437079906464,
+                      "library_ms": 14.768292009353672,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "Order 5 of milk."
+                            },
+                            {
+                              "id": "lc_run--01a0683b-816e-7b92-b6d6-78b67bb04a72-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "milk",
+                                    "quantity": 5
+                                  },
+                                  "id": "call_00_EzswGbFhOPi5WuONsOlc3387"
+                                }
+                              ],
+                              "additional_kwargs": {
+                                "refusal": null,
+                                "reasoning_content": "The user asks to order 5 of milk. Use place_order."
+                              },
+                              "finish_reason": "tool_calls",
+                              "usage": {
+                                "input_tokens": 411,
+                                "output_tokens": 75,
+                                "total_tokens": 486,
+                                "input_token_details": {
+                                  "cache_read": 384
+                                },
+                                "output_token_details": {
+                                  "reasoning": 14
+                                }
+                              }
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "ordered 5 x milk",
+                              "tool_call_id": "call_00_EzswGbFhOPi5WuONsOlc3387"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "wire request",
+                          "attempt": 1,
+                          "at_ms": 1025145833.132125,
+                          "method": "POST",
+                          "url": "https://api.deepseek.com/v1/chat/completions",
+                          "headers": {
+                            "accept": "application/json",
+                            "accept-encoding": "gzip, deflate, zstd",
+                            "authorization": null,
+                            "connection": "keep-alive",
+                            "content-length": "883",
+                            "content-type": "application/json",
+                            "host": "api.deepseek.com",
+                            "user-agent": "OpenAI/Python 3.6.0",
+                            "x-stainless-arch": "arm64",
+                            "x-stainless-async": "false",
+                            "x-stainless-lang": "python",
+                            "x-stainless-os": "MacOS",
+                            "x-stainless-package-version": "3.6.0",
+                            "x-stainless-raw-response": "true",
+                            "x-stainless-read-timeout": "60.0",
+                            "x-stainless-retry-count": "0",
+                            "x-stainless-runtime": "CPython",
+                            "x-stainless-runtime-version": "3.14.7"
+                          },
+                          "defaulted_by_model_provider": [
+                            "temperature",
+                            "max_tokens",
+                            "top_p",
+                            "stop",
+                            "seed",
+                            "tool_choice"
+                          ],
+                          "body": {
+                            "messages": [
+                              {
+                                "content": "You answer briefly and plainly. Use the tool you are given.",
+                                "role": "system"
+                              },
+                              {
+                                "content": "Order 5 of milk.",
+                                "role": "user"
+                              },
+                              {
+                                "content": null,
+                                "role": "assistant",
+                                "tool_calls": [
+                                  {
+                                    "type": "function",
+                                    "id": "call_00_EzswGbFhOPi5WuONsOlc3387",
+                                    "function": {
+                                      "name": "place_order",
+                                      "arguments": "{\"item\": \"milk\", \"quantity\": 5}"
+                                    }
+                                  }
+                                ],
+                                "reasoning_content": "The user asks to order 5 of milk. Use place_order."
+                              },
+                              {
+                                "content": "ordered 5 x milk",
+                                "role": "tool",
+                                "tool_call_id": "call_00_EzswGbFhOPi5WuONsOlc3387"
+                              }
+                            ],
+                            "model": "deepseek-v4-flash",
+                            "stream": false,
+                            "tools": [
+                              {
+                                "type": "function",
+                                "function": {
+                                  "name": "place_order",
+                                  "description": "Order a quantity of an item, in the shop. The orders expert's only tool.",
+                                  "parameters": {
+                                    "properties": {
+                                      "item": {
+                                        "enum": [
+                                          "bread",
+                                          "butter",
+                                          "chips",
+                                          "milk"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      "quantity": {
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "required": [
+                                      "item",
+                                      "quantity"
+                                    ],
+                                    "type": "object"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "label": "wire response",
+                          "at_ms": 1025146898.275833,
+                          "status": 200,
+                          "headers": {
+                            "access-control-allow-credentials": "true",
+                            "connection": "keep-alive",
+                            "content-encoding": "gzip",
+                            "content-type": "application/json",
+                            "date": "Thu, 03 Sep 2026 17:05:27 GMT",
+                            "server": "elb",
+                            "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                            "transfer-encoding": "chunked",
+                            "vary": "origin, access-control-request-method, access-control-request-headers",
+                            "via": "1.1 706548e2e8ccb2860757a9c147e29fe6.cloudfront.net (CloudFront)",
+                            "x-amz-cf-id": "45yITjMuClluvTQyipO9Bh3V3dXSRg_kg3H2XU7yDpxlgYga3zxGwA==",
+                            "x-amz-cf-pop": "DEN53-P4",
+                            "x-cache": "Miss from cloudfront",
+                            "x-content-type-options": "nosniff",
+                            "x-ds-trace-id": "c55bb352f3fc0b034e4248bba545f72c"
+                          },
+                          "body": {
+                            "id": "696766a5-01c0-4536-8646-c7d73dd42897",
+                            "object": "chat.completion",
+                            "created": 1788455126,
+                            "model": "deepseek-v4-flash",
+                            "choices": [
+                              {
+                                "index": 0,
+                                "message": {
+                                  "role": "assistant",
+                                  "content": "Ordered 5 milk.",
+                                  "reasoning_content": ""
+                                },
+                                "logprobs": null,
+                                "finish_reason": "stop"
+                              }
+                            ],
+                            "usage": {
+                              "prompt_tokens": 503,
+                              "completion_tokens": 7,
+                              "total_tokens": 510,
+                              "prompt_tokens_details": {
+                                "cached_tokens": 384
+                              },
+                              "completion_tokens_details": {
+                                "reasoning_tokens": 0
+                              },
+                              "prompt_cache_hit_tokens": 384,
+                              "prompt_cache_miss_tokens": 119
+                            },
+                            "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                          }
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-86a5-73d1-8892-6a81755426ef-0",
+                            "role": "ai",
+                            "content": "Ordered 5 milk.",
+                            "additional_kwargs": {
+                              "refusal": null,
+                              "reasoning_content": ""
+                            },
+                            "finish_reason": "stop",
+                            "usage": {
+                              "input_tokens": 503,
+                              "output_tokens": 7,
+                              "total_tokens": 510,
+                              "input_token_details": {
+                                "cache_read": 384
+                              },
+                              "output_token_details": {
+                                "reasoning": 0
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 27,
+          "thread": "MainThread",
+          "elapsed_ms": 1061.991,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 28,
+              "thread": "MainThread",
+              "elapsed_ms": 1061.963,
+              "model_provider_ms": 1048.9022499322891,
+              "library_ms": 13.060750067710842,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and please order 5 bottles."
+                    },
+                    {
+                      "id": "lc_run--01a0683b-7241-7752-bb5c-c69766b528e5-0",
+                      "role": "ai",
+                      "content": "I'll check the price of milk and place your order.",
+                      "tool_calls": [
+                        {
+                          "name": "consult_inventory_expert",
+                          "args": {
+                            "question": "How much is milk?"
+                          },
+                          "id": "call_00_y2JXB1tXL6bTLGNUiY6u7680"
+                        },
+                        {
+                          "name": "consult_orders_expert",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 5
+                          },
+                          "id": "call_01_tatxRz7n7rOpLRBeiqec2401"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The user asks two things: the price of milk, and ordering 5 bottles. Price/stock is handled by inventory expert. Order placement by orders expert. These are independent, so I can call both in parallel."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 497,
+                        "output_tokens": 155,
+                        "total_tokens": 652,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 44
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "Milk is \u00a31.20.",
+                      "tool_call_id": "call_00_y2JXB1tXL6bTLGNUiY6u7680"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "Ordered 5 milk.",
+                      "tool_call_id": "call_01_tatxRz7n7rOpLRBeiqec2401"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 1025146912.262541,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1743",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk, and please order 5 bottles.",
+                        "role": "user"
+                      },
+                      {
+                        "content": "I'll check the price of milk and place your order.",
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_y2JXB1tXL6bTLGNUiY6u7680",
+                            "function": {
+                              "name": "consult_inventory_expert",
+                              "arguments": "{\"question\": \"How much is milk?\"}"
+                            }
+                          },
+                          {
+                            "type": "function",
+                            "id": "call_01_tatxRz7n7rOpLRBeiqec2401",
+                            "function": {
+                              "name": "consult_orders_expert",
+                              "arguments": "{\"item\": \"milk\", \"quantity\": 5}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The user asks two things: the price of milk, and ordering 5 bottles. Price/stock is handled by inventory expert. Order placement by orders expert. These are independent, so I can call both in parallel."
+                      },
+                      {
+                        "content": "Milk is \u00a31.20.",
+                        "role": "tool",
+                        "tool_call_id": "call_00_y2JXB1tXL6bTLGNUiY6u7680"
+                      },
+                      {
+                        "content": "Ordered 5 milk.",
+                        "role": "tool",
+                        "tool_call_id": "call_01_tatxRz7n7rOpLRBeiqec2401"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "consult_inventory_expert",
+                          "description": "Ask the inventory expert about price or stock. It has its own tools.",
+                          "parameters": {
+                            "properties": {
+                              "question": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "question"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "consult_orders_expert",
+                          "description": "Ask the orders expert to place an order. It has its own tools.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 1025147961.164791,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 17:05:28 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 30deb42cd45095ca57ec57e8117c8d8a.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "WQSvCVgEfboQ_f611VYYecV0SpVxVFyyL5GUNq8j5rPcdcJsS4k8nw==",
+                    "x-amz-cf-pop": "DEN53-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "f8230efa980918438c6840acae7bd3a7"
+                  },
+                  "body": {
+                    "id": "a3053815-679f-445c-8e66-6d2c6014ab2b",
+                    "object": "chat.completion",
+                    "created": 1788455128,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "Milk is \u00a31.20 per bottle, and I've ordered 5 bottles for you.",
+                          "reasoning_content": ""
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 684,
+                      "completion_tokens": 21,
+                      "total_tokens": 705,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 640
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 0
+                      },
+                      "prompt_cache_hit_tokens": 640,
+                      "prompt_cache_miss_tokens": 44
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a0683b-8adc-70d0-a02a-7530554ca534-0",
+                    "role": "ai",
+                    "content": "Milk is \u00a31.20 per bottle, and I've ordered 5 bottles for you.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": ""
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 684,
+                      "output_tokens": 21,
+                      "total_tokens": 705,
+                      "input_token_details": {
+                        "cache_read": 640
+                      },
+                      "output_token_details": {
+                        "reasoning": 0
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

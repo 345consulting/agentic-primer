@@ -1,0 +1,2527 @@
+{
+  "chapter": "ch29_memory",
+  "model_kind": "mock",
+  "source": "864f0c8aa00e",
+  "summary": {
+    "turns": 0,
+    "messages": 0,
+    "ended": "n/a"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_fact_written_in_one_run_is_read_in_a_completely_separate_run"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 2.401,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "context_sent",
+          "messages": [
+            "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+            "Note about this customer: the customer prefers express shipping and pays the fee.",
+            "What shipping option should I use for this order?"
+          ]
+        },
+        {
+          "label": "final_answer",
+          "content": "Use express shipping -- the customer prefers it and covers the fee."
+        },
+        {
+          "label": "result",
+          "recalled_fact_used": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 2.219,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 2.21,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                    },
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "What shipping option should I use for this order?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 3,
+                  "roles": [
+                    "system",
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d83-ae10-74f0-bdd8-d77fdbe7aab3-0",
+                    "role": "ai",
+                    "content": "Use express shipping -- the customer prefers it and covers the fee."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What shipping option should I use for this order?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae10-74f0-bdd8-d77fdbe7aab3-0",
+                      "role": "ai",
+                      "content": "Use express shipping -- the customer prefers it and covers the fee."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 2.21,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What shipping option should I use for this order?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae10-74f0-bdd8-d77fdbe7aab3-0",
+                      "role": "ai",
+                      "content": "Use express shipping -- the customer prefers it and covers the fee."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What shipping option should I use for this order?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae10-74f0-bdd8-d77fdbe7aab3-0",
+                        "role": "ai",
+                        "content": "Use express shipping -- the customer prefers it and covers the fee."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "context_sent",
+            "messages": [
+              "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+              "Note about this customer: the customer prefers express shipping and pays the fee.",
+              "What shipping option should I use for this order?"
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 2.219,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 2.21,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What shipping option should I use for this order?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae10-74f0-bdd8-d77fdbe7aab3-0",
+                      "role": "ai",
+                      "content": "Use express shipping -- the customer prefers it and covers the fee."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What shipping option should I use for this order?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae10-74f0-bdd8-d77fdbe7aab3-0",
+                        "role": "ai",
+                        "content": "Use express shipping -- the customer prefers it and covers the fee."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 2.21,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What shipping option should I use for this order?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae10-74f0-bdd8-d77fdbe7aab3-0",
+                        "role": "ai",
+                        "content": "Use express shipping -- the customer prefers it and covers the fee."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                          },
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "What shipping option should I use for this order?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 3,
+                        "roles": [
+                          "system",
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d83-ae10-74f0-bdd8-d77fdbe7aab3-0",
+                          "role": "ai",
+                          "content": "Use express shipping -- the customer prefers it and covers the fee."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "final_answer",
+            "content": "Use express shipping -- the customer prefers it and covers the fee."
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "result",
+            "recalled_fact_used": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "an_unwritten_fact_is_not_hallucinated_as_remembered"
+      },
+      "seq": 4,
+      "thread": "MainThread",
+      "elapsed_ms": 0.22599999999999998,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "context_sent",
+          "messages": [
+            "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+            "What is the customer's favorite color?"
+          ]
+        },
+        {
+          "label": "final_answer",
+          "content": "I don't have that information -- it hasn't been mentioned."
+        },
+        {
+          "label": "nothing_relevant_found",
+          "found_none": true
+        },
+        {
+          "label": "reply_for_review",
+          "content": "I don't have that information -- it hasn't been mentioned."
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.176,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 0.171,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "What is the customer's favorite color?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d83-ae11-7810-a458-1efe88669b03-0",
+                    "role": "ai",
+                    "content": "I don't have that information -- it hasn't been mentioned."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What is the customer's favorite color?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1efe88669b03-0",
+                      "role": "ai",
+                      "content": "I don't have that information -- it hasn't been mentioned."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.171,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What is the customer's favorite color?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1efe88669b03-0",
+                      "role": "ai",
+                      "content": "I don't have that information -- it hasn't been mentioned."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What is the customer's favorite color?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1efe88669b03-0",
+                        "role": "ai",
+                        "content": "I don't have that information -- it hasn't been mentioned."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "context_sent",
+            "messages": [
+              "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+              "What is the customer's favorite color?"
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 0.176,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.171,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What is the customer's favorite color?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1efe88669b03-0",
+                      "role": "ai",
+                      "content": "I don't have that information -- it hasn't been mentioned."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What is the customer's favorite color?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1efe88669b03-0",
+                        "role": "ai",
+                        "content": "I don't have that information -- it hasn't been mentioned."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 6,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.171,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What is the customer's favorite color?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1efe88669b03-0",
+                        "role": "ai",
+                        "content": "I don't have that information -- it hasn't been mentioned."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "What is the customer's favorite color?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d83-ae11-7810-a458-1efe88669b03-0",
+                          "role": "ai",
+                          "content": "I don't have that information -- it hasn't been mentioned."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "final_answer",
+            "content": "I don't have that information -- it hasn't been mentioned."
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "nothing_relevant_found",
+            "found_none": true
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "reply_for_review",
+            "content": "I don't have that information -- it hasn't been mentioned."
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "retrieval_pulls_only_the_relevant_memory_not_everything_stored"
+      },
+      "seq": 7,
+      "thread": "MainThread",
+      "elapsed_ms": 0.178,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "context_sent",
+          "messages": [
+            "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+            "Note about this customer: the customer prefers express shipping and pays the fee.",
+            "What shipping option should I use for this order?"
+          ]
+        },
+        {
+          "label": "final_answer",
+          "content": "Use express shipping -- the customer prefers it and covers the fee."
+        },
+        {
+          "label": "result",
+          "stored_fact_count": 3,
+          "retrieved_key": "shipping_preference",
+          "other_facts_not_spliced": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.16699999999999998,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 9,
+              "thread": "MainThread",
+              "elapsed_ms": 0.163,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                    },
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "What shipping option should I use for this order?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 3,
+                  "roles": [
+                    "system",
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d83-ae11-7810-a458-1f0d76d2397c-0",
+                    "role": "ai",
+                    "content": "Use express shipping -- the customer prefers it and covers the fee."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What shipping option should I use for this order?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1f0d76d2397c-0",
+                      "role": "ai",
+                      "content": "Use express shipping -- the customer prefers it and covers the fee."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 9,
+                "thread": "MainThread",
+                "elapsed_ms": 0.163,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What shipping option should I use for this order?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1f0d76d2397c-0",
+                      "role": "ai",
+                      "content": "Use express shipping -- the customer prefers it and covers the fee."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What shipping option should I use for this order?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1f0d76d2397c-0",
+                        "role": "ai",
+                        "content": "Use express shipping -- the customer prefers it and covers the fee."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "context_sent",
+            "messages": [
+              "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+              "Note about this customer: the customer prefers express shipping and pays the fee.",
+              "What shipping option should I use for this order?"
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 8,
+            "thread": "MainThread",
+            "elapsed_ms": 0.16699999999999998,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 9,
+                "thread": "MainThread",
+                "elapsed_ms": 0.163,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What shipping option should I use for this order?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1f0d76d2397c-0",
+                      "role": "ai",
+                      "content": "Use express shipping -- the customer prefers it and covers the fee."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What shipping option should I use for this order?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1f0d76d2397c-0",
+                        "role": "ai",
+                        "content": "Use express shipping -- the customer prefers it and covers the fee."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 9,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.163,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What shipping option should I use for this order?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1f0d76d2397c-0",
+                        "role": "ai",
+                        "content": "Use express shipping -- the customer prefers it and covers the fee."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                          },
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "Note about this customer: the customer prefers express shipping and pays the fee."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "What shipping option should I use for this order?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 3,
+                        "roles": [
+                          "system",
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d83-ae11-7810-a458-1f0d76d2397c-0",
+                          "role": "ai",
+                          "content": "Use express shipping -- the customer prefers it and covers the fee."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "final_answer",
+            "content": "Use express shipping -- the customer prefers it and covers the fee."
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "result",
+            "stored_fact_count": 3,
+            "retrieved_key": "shipping_preference",
+            "other_facts_not_spliced": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "overwriting_a_memory_replaces_the_old_value"
+      },
+      "seq": 10,
+      "thread": "MainThread",
+      "elapsed_ms": 0.12999999999999998,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "context_sent",
+          "messages": [
+            "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+            "Note about this customer: the customer prefers to be contacted by SMS, not email.",
+            "How should I contact this customer?"
+          ]
+        },
+        {
+          "label": "final_answer",
+          "content": "Contact the customer by SMS, not email."
+        },
+        {
+          "label": "result",
+          "stored_value": "the customer prefers to be contacted by SMS, not email",
+          "only_one_value_ever_stored": true,
+          "mentions_sms": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 0.11900000000000001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 12,
+              "thread": "MainThread",
+              "elapsed_ms": 0.116,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                    },
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "Note about this customer: the customer prefers to be contacted by SMS, not email."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How should I contact this customer?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 3,
+                  "roles": [
+                    "system",
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d83-ae11-7810-a458-1f1f9d0866b9-0",
+                    "role": "ai",
+                    "content": "Contact the customer by SMS, not email."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: the customer prefers to be contacted by SMS, not email."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How should I contact this customer?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1f1f9d0866b9-0",
+                      "role": "ai",
+                      "content": "Contact the customer by SMS, not email."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.116,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: the customer prefers to be contacted by SMS, not email."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How should I contact this customer?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1f1f9d0866b9-0",
+                      "role": "ai",
+                      "content": "Contact the customer by SMS, not email."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: the customer prefers to be contacted by SMS, not email."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How should I contact this customer?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1f1f9d0866b9-0",
+                        "role": "ai",
+                        "content": "Contact the customer by SMS, not email."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "context_sent",
+            "messages": [
+              "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+              "Note about this customer: the customer prefers to be contacted by SMS, not email.",
+              "How should I contact this customer?"
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 11,
+            "thread": "MainThread",
+            "elapsed_ms": 0.11900000000000001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.116,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: the customer prefers to be contacted by SMS, not email."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How should I contact this customer?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1f1f9d0866b9-0",
+                      "role": "ai",
+                      "content": "Contact the customer by SMS, not email."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: the customer prefers to be contacted by SMS, not email."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How should I contact this customer?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1f1f9d0866b9-0",
+                        "role": "ai",
+                        "content": "Contact the customer by SMS, not email."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 12,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.116,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: the customer prefers to be contacted by SMS, not email."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How should I contact this customer?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1f1f9d0866b9-0",
+                        "role": "ai",
+                        "content": "Contact the customer by SMS, not email."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                          },
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "Note about this customer: the customer prefers to be contacted by SMS, not email."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How should I contact this customer?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 3,
+                        "roles": [
+                          "system",
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d83-ae11-7810-a458-1f1f9d0866b9-0",
+                          "role": "ai",
+                          "content": "Contact the customer by SMS, not email."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "final_answer",
+            "content": "Contact the customer by SMS, not email."
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "result",
+            "stored_value": "the customer prefers to be contacted by SMS, not email",
+            "only_one_value_ever_stored": true,
+            "mentions_sms": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "admission_is_a_decision_a_harness_makes"
+      },
+      "seq": 13,
+      "thread": "MainThread",
+      "elapsed_ms": 0.12999999999999998,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "context_sent",
+          "messages": [
+            "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+            "Note about this customer: my preferred contact method is SMS..",
+            "How should I contact this customer?"
+          ]
+        },
+        {
+          "label": "final_answer",
+          "content": "Contact the customer by SMS."
+        },
+        {
+          "label": "admission",
+          "said": [
+            "Remember: my preferred contact method is SMS.",
+            "It's raining here today, kind of a gloomy afternoon."
+          ],
+          "admitted_keys": [
+            "contact_preference"
+          ],
+          "stored_keys": [
+            "contact_preference"
+          ]
+        },
+        {
+          "label": "result",
+          "admitted_fact_recalled": true,
+          "non_admitted_fact_unrecoverable": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 14,
+          "thread": "MainThread",
+          "elapsed_ms": 0.11900000000000001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 15,
+              "thread": "MainThread",
+              "elapsed_ms": 0.116,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                    },
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "Note about this customer: my preferred contact method is SMS.."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How should I contact this customer?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 3,
+                  "roles": [
+                    "system",
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06d83-ae11-7810-a458-1f2fba86a3b1-0",
+                    "role": "ai",
+                    "content": "Contact the customer by SMS."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: my preferred contact method is SMS.."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How should I contact this customer?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1f2fba86a3b1-0",
+                      "role": "ai",
+                      "content": "Contact the customer by SMS."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 15,
+                "thread": "MainThread",
+                "elapsed_ms": 0.116,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: my preferred contact method is SMS.."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How should I contact this customer?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1f2fba86a3b1-0",
+                      "role": "ai",
+                      "content": "Contact the customer by SMS."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: my preferred contact method is SMS.."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How should I contact this customer?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1f2fba86a3b1-0",
+                        "role": "ai",
+                        "content": "Contact the customer by SMS."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "context_sent",
+            "messages": [
+              "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know.",
+              "Note about this customer: my preferred contact method is SMS..",
+              "How should I contact this customer?"
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 14,
+            "thread": "MainThread",
+            "elapsed_ms": 0.11900000000000001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 15,
+                "thread": "MainThread",
+                "elapsed_ms": 0.116,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                      },
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "Note about this customer: my preferred contact method is SMS.."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How should I contact this customer?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 3,
+                    "roles": [
+                      "system",
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a06d83-ae11-7810-a458-1f2fba86a3b1-0",
+                      "role": "ai",
+                      "content": "Contact the customer by SMS."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: my preferred contact method is SMS.."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How should I contact this customer?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1f2fba86a3b1-0",
+                        "role": "ai",
+                        "content": "Contact the customer by SMS."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 15,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.116,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                        },
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "Note about this customer: my preferred contact method is SMS.."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How should I contact this customer?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 3,
+                      "roles": [
+                        "system",
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06d83-ae11-7810-a458-1f2fba86a3b1-0",
+                        "role": "ai",
+                        "content": "Contact the customer by SMS."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Only state something as a known fact if you were told it in this conversation or given a note about the customer. If you were not told, say you don't know."
+                          },
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "Note about this customer: my preferred contact method is SMS.."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How should I contact this customer?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 3,
+                        "roles": [
+                          "system",
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a06d83-ae11-7810-a458-1f2fba86a3b1-0",
+                          "role": "ai",
+                          "content": "Contact the customer by SMS."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "final_answer",
+            "content": "Contact the customer by SMS."
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "admission",
+            "said": [
+              "Remember: my preferred contact method is SMS.",
+              "It's raining here today, kind of a gloomy afternoon."
+            ],
+            "admitted_keys": [
+              "contact_preference"
+            ],
+            "stored_keys": [
+              "contact_preference"
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "result",
+            "admitted_fact_recalled": true,
+            "non_admitted_fact_unrecoverable": true
+          }
+        }
+      ]
+    }
+  ]
+}

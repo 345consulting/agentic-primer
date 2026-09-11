@@ -1,0 +1,1129 @@
+{
+  "chapter": "ch05_loop_endings",
+  "model_kind": "live",
+  "source": "1354d8f9693d",
+  "summary": {
+    "turns": 4,
+    "messages": 10,
+    "ended": "answer_received (finish_reason = stop); tokens_exhausted (finish_reason = length)"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "within_token_limit",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 5793.6050000000005,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "answer_received (finish_reason = stop)"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 1905.53,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 1904.579,
+              "model_provider_ms": 1720.2004170417786,
+              "library_ms": 184.3785829582214,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975491240.910666,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "677",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "parameters": {
+                            "properties": {},
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975492961.111083,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:52 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 94d9d221defc9832eeda31acd3f6f552.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "UqbGkORAsr57cBWI5sxa5vymzx3h5J7tUtYmbSirghpY293uO5AeHA==",
+                    "x-amz-cf-pop": "DEN53-P1",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "ef6d3d7ba3e57f65929a298f99cdd447"
+                  },
+                  "body": {
+                    "id": "ec5868d3-9491-4253-a89d-d76901a858b4",
+                    "object": "chat.completion",
+                    "created": 1788405472,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "The user asks: \"Whatever we are lowest on -- what does one of them cost, and why is it low?\"\n\nWe need to:\n1. Find which item we are lowest on (lowest stock item)\n2. Get its price\n3. Explain why it is low (we don't have a tool for why; maybe infer? There is no tool for reason. We may have to state we don't have that info. But maybe \"why is it low\" could refer to stock level? We only have stock item tool. Let's call lowest_stock_item and price_of? But price depends on which item is lowest. Need to call lowest_stock_item first, then price_of for that item. So sequential.\n\nLet's call lowest_stock_item.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_QeUECSb8JFPUgfA6h2gh1470",
+                              "type": "function",
+                              "function": {
+                                "name": "lowest_stock_item",
+                                "arguments": "{}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 444,
+                      "completion_tokens": 187,
+                      "total_tokens": 631,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 156
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 60
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-db4c-77e1-81e1-37ccb51f3e65-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "lowest_stock_item",
+                        "args": {},
+                        "id": "call_00_QeUECSb8JFPUgfA6h2gh1470"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The user asks: \"Whatever we are lowest on -- what does one of them cost, and why is it low?\"\n\nWe need to:\n1. Find which item we are lowest on (lowest stock item)\n2. Get its price\n3. Explain why it is low (we don't have a tool for why; maybe infer? There is no tool for reason. We may have to state we don't have that info. But maybe \"why is it low\" could refer to stock level? We only have stock item tool. Let's call lowest_stock_item and price_of? But price depends on which item is lowest. Need to call lowest_stock_item first, then price_of for that item. So sequential.\n\nLet's call lowest_stock_item."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 444,
+                      "output_tokens": 187,
+                      "total_tokens": 631,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 156
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "lowest_stock_item",
+                "id": "call_00_QeUECSb8JFPUgfA6h2gh1470"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 0.861,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args"
+                },
+                {
+                  "label": "result",
+                  "value": "butter"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 1116.6529999999998,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 1115.799,
+              "model_provider_ms": 1103.7269591093063,
+              "library_ms": 12.072040890693643,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                    },
+                    {
+                      "id": "lc_run--01a06545-db4c-77e1-81e1-37ccb51f3e65-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "lowest_stock_item",
+                          "args": {},
+                          "id": "call_00_QeUECSb8JFPUgfA6h2gh1470"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The user asks: \"Whatever we are lowest on -- what does one of them cost, and why is it low?\"\n\nWe need to:\n1. Find which item we are lowest on (lowest stock item)\n2. Get its price\n3. Explain why it is low (we don't have a tool for why; maybe infer? There is no tool for reason. We may have to state we don't have that info. But maybe \"why is it low\" could refer to stock level? We only have stock item tool. Let's call lowest_stock_item and price_of? But price depends on which item is lowest. Need to call lowest_stock_item first, then price_of for that item. So sequential.\n\nLet's call lowest_stock_item."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 444,
+                        "output_tokens": 187,
+                        "total_tokens": 631,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 156
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "butter",
+                      "tool_call_id": "call_00_QeUECSb8JFPUgfA6h2gh1470"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975492985.513166,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1569",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_QeUECSb8JFPUgfA6h2gh1470",
+                            "function": {
+                              "name": "lowest_stock_item",
+                              "arguments": "{}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The user asks: \"Whatever we are lowest on -- what does one of them cost, and why is it low?\"\n\nWe need to:\n1. Find which item we are lowest on (lowest stock item)\n2. Get its price\n3. Explain why it is low (we don't have a tool for why; maybe infer? There is no tool for reason. We may have to state we don't have that info. But maybe \"why is it low\" could refer to stock level? We only have stock item tool. Let's call lowest_stock_item and price_of? But price depends on which item is lowest. Need to call lowest_stock_item first, then price_of for that item. So sequential.\n\nLet's call lowest_stock_item."
+                      },
+                      {
+                        "content": "butter",
+                        "role": "tool",
+                        "tool_call_id": "call_00_QeUECSb8JFPUgfA6h2gh1470"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "parameters": {
+                            "properties": {},
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975494089.2401251,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:54 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 9fb777b1e164ce8cae6e7a6e614d5c56.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "QTgWxK8YsQGCPWR-Rv1eKhjXC6dp4n8BYNSYv33c8dRa85SEj6x-ZA==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "25068ac7141f810c8e7fb37331d5bf2b"
+                  },
+                  "body": {
+                    "id": "916037dc-b71c-4be4-944d-44b9aad4e707",
+                    "object": "chat.completion",
+                    "created": 1788405474,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "The lowest stock item is butter. Now get price of butter.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_ti9kmDe7FQR1GTJnm2jg3167",
+                              "type": "function",
+                              "function": {
+                                "name": "price_of",
+                                "arguments": "{\"item\": \"butter\"}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 645,
+                      "completion_tokens": 58,
+                      "total_tokens": 703,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 512
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 13
+                      },
+                      "prompt_cache_hit_tokens": 512,
+                      "prompt_cache_miss_tokens": 133
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-e224-7b10-8c70-a6a6e65b65ce-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "butter"
+                        },
+                        "id": "call_00_ti9kmDe7FQR1GTJnm2jg3167"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The lowest stock item is butter. Now get price of butter."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 645,
+                      "output_tokens": 58,
+                      "total_tokens": 703,
+                      "input_token_details": {
+                        "cache_read": 512
+                      },
+                      "output_token_details": {
+                        "reasoning": 13
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "call_00_ti9kmDe7FQR1GTJnm2jg3167"
+              },
+              "seq": 7,
+              "thread": "MainThread",
+              "elapsed_ms": 0.784,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "butter"
+                },
+                {
+                  "label": "result",
+                  "value": "3.10"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 3
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 2771.2059999999997,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 9,
+              "thread": "MainThread",
+              "elapsed_ms": 2771.1730000000002,
+              "model_provider_ms": 2758.184583902359,
+              "library_ms": 12.98841609764122,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                    },
+                    {
+                      "id": "lc_run--01a06545-db4c-77e1-81e1-37ccb51f3e65-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "lowest_stock_item",
+                          "args": {},
+                          "id": "call_00_QeUECSb8JFPUgfA6h2gh1470"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The user asks: \"Whatever we are lowest on -- what does one of them cost, and why is it low?\"\n\nWe need to:\n1. Find which item we are lowest on (lowest stock item)\n2. Get its price\n3. Explain why it is low (we don't have a tool for why; maybe infer? There is no tool for reason. We may have to state we don't have that info. But maybe \"why is it low\" could refer to stock level? We only have stock item tool. Let's call lowest_stock_item and price_of? But price depends on which item is lowest. Need to call lowest_stock_item first, then price_of for that item. So sequential.\n\nLet's call lowest_stock_item."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 444,
+                        "output_tokens": 187,
+                        "total_tokens": 631,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 156
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "butter",
+                      "tool_call_id": "call_00_QeUECSb8JFPUgfA6h2gh1470"
+                    },
+                    {
+                      "id": "lc_run--01a06545-e224-7b10-8c70-a6a6e65b65ce-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "butter"
+                          },
+                          "id": "call_00_ti9kmDe7FQR1GTJnm2jg3167"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The lowest stock item is butter. Now get price of butter."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 645,
+                        "output_tokens": 58,
+                        "total_tokens": 703,
+                        "input_token_details": {
+                          "cache_read": 512
+                        },
+                        "output_token_details": {
+                          "reasoning": 13
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "3.10",
+                      "tool_call_id": "call_00_ti9kmDe7FQR1GTJnm2jg3167"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975494103.1900411,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1911",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_QeUECSb8JFPUgfA6h2gh1470",
+                            "function": {
+                              "name": "lowest_stock_item",
+                              "arguments": "{}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The user asks: \"Whatever we are lowest on -- what does one of them cost, and why is it low?\"\n\nWe need to:\n1. Find which item we are lowest on (lowest stock item)\n2. Get its price\n3. Explain why it is low (we don't have a tool for why; maybe infer? There is no tool for reason. We may have to state we don't have that info. But maybe \"why is it low\" could refer to stock level? We only have stock item tool. Let's call lowest_stock_item and price_of? But price depends on which item is lowest. Need to call lowest_stock_item first, then price_of for that item. So sequential.\n\nLet's call lowest_stock_item."
+                      },
+                      {
+                        "content": "butter",
+                        "role": "tool",
+                        "tool_call_id": "call_00_QeUECSb8JFPUgfA6h2gh1470"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_ti9kmDe7FQR1GTJnm2jg3167",
+                            "function": {
+                              "name": "price_of",
+                              "arguments": "{\"item\": \"butter\"}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The lowest stock item is butter. Now get price of butter."
+                      },
+                      {
+                        "content": "3.10",
+                        "role": "tool",
+                        "tool_call_id": "call_00_ti9kmDe7FQR1GTJnm2jg3167"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "parameters": {
+                            "properties": {},
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975496861.374625,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:55 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 0ce5ea6368e3c7ea57962fd7b4c5fe44.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "yfJp3YHZGluyBptIM1S-31CXdJGW2kD4w0POE6i2hfsSxwmucquXCg==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "9db8fcbf95e3ab11855e48827cf7887b"
+                  },
+                  "body": {
+                    "id": "b768277f-84c7-4211-b810-eb08f00f38f4",
+                    "object": "chat.completion",
+                    "created": 1788405475,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "The item we're lowest on is **butter**, and it costs **\u00a33.10**.\n\nAs for why it's low: I don't have data on stock reasons or pricing rationale, so I can't say why it's low \u2014 only that butter currently has the least stock.",
+                          "reasoning_content": "Butter is lowest in stock and costs \u00a33.10. The user asks \"why is it low?\" We don't have a tool that gives reason for stock level. We can say we don't have information on why, unless it's a low price? \"why is it low\" could refer to price? Actually wording: \"what does one of them cost, and why is it low?\" Could refer to cost being low (cheap). But we have no data on why price is low either. We can only report stock item and price. We should be honest: we don't have info on why stock is low or why price is low.\n\nMaybe \"why is it low\" refers to stock being low? Since tool says \"lowest on\" = lowest stock. We can say we don't know the reason from available data.\n\nAnswer plainly."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 718,
+                      "completion_tokens": 233,
+                      "total_tokens": 951,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 640
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 174
+                      },
+                      "prompt_cache_hit_tokens": 640,
+                      "prompt_cache_miss_tokens": 78
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-e681-79f2-9fcf-f882cac4dc95-0",
+                    "role": "ai",
+                    "content": "The item we're lowest on is **butter**, and it costs **\u00a33.10**.\n\nAs for why it's low: I don't have data on stock reasons or pricing rationale, so I can't say why it's low \u2014 only that butter currently has the least stock.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "Butter is lowest in stock and costs \u00a33.10. The user asks \"why is it low?\" We don't have a tool that gives reason for stock level. We can say we don't have information on why, unless it's a low price? \"why is it low\" could refer to price? Actually wording: \"what does one of them cost, and why is it low?\" Could refer to cost being low (cheap). But we have no data on why price is low either. We can only report stock item and price. We should be honest: we don't have info on why stock is low or why price is low.\n\nMaybe \"why is it low\" refers to stock being low? Since tool says \"lowest on\" = lowest stock. We can say we don't know the reason from available data.\n\nAnswer plainly."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 718,
+                      "output_tokens": 233,
+                      "total_tokens": 951,
+                      "input_token_details": {
+                        "cache_read": 640
+                      },
+                      "output_token_details": {
+                        "reasoning": 174
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "tokens_exhausted",
+        "tools": null,
+        "max_tokens": 24
+      },
+      "seq": 10,
+      "thread": "MainThread",
+      "elapsed_ms": 1011.594,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "tokens_exhausted (finish_reason = length)"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 1011.483,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 12,
+              "thread": "MainThread",
+              "elapsed_ms": 1011.0490000000001,
+              "model_provider_ms": 999.8934170007706,
+              "library_ms": 11.155582999229523,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975496873.214416,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "693",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "max_tokens": 24,
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "parameters": {
+                            "properties": {},
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975497873.107833,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:58 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 93a2323067b2c60f3b86c822765cf3d2.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "So1wW9mgeNb62b8sUUi09J4LanLjtd2gXm9F8G4xdbMZom9jS_nRFg==",
+                    "x-amz-cf-pop": "DEN53-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "4c4838cc40b5565345a227a69696efd2"
+                  },
+                  "body": {
+                    "id": "094dc29f-b9f4-4dfc-948e-2ba9af54ad6b",
+                    "object": "chat.completion",
+                    "created": 1788405477,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "We need answer user's question. Need interpret: \"Whatever we are lowest on -- what does one of them cost,"
+                        },
+                        "logprobs": null,
+                        "finish_reason": "length"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 444,
+                      "completion_tokens": 24,
+                      "total_tokens": 468,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 24
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 60
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-f155-7083-a036-59647bdbfa03-0",
+                    "role": "ai",
+                    "content": "",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "We need answer user's question. Need interpret: \"Whatever we are lowest on -- what does one of them cost,"
+                    },
+                    "finish_reason": "length",
+                    "usage": {
+                      "input_tokens": 444,
+                      "output_tokens": 24,
+                      "total_tokens": 468,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 24
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

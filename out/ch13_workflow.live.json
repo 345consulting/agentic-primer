@@ -1,0 +1,785 @@
+{
+  "chapter": "ch13_workflow",
+  "model_kind": "live",
+  "source": "93211f368bab",
+  "summary": {
+    "turns": 8,
+    "messages": 0,
+    "ended": "6 in stock; Milk costs \u00a31.20.; backordered 5 x milk; discounted to 1.08; reserved 2 x milk"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "single_step"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 0.14400000000000002,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "6 in stock"
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "check_stock",
+            "kind": "function"
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 0.009000000000000001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "chips"
+            },
+            {
+              "label": "result",
+              "value": 6
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "dual_in_sequence"
+      },
+      "seq": 3,
+      "thread": "MainThread",
+      "elapsed_ms": 0.033,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "discounted to 1.08"
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "get_price",
+            "kind": "function"
+          },
+          "seq": 4,
+          "thread": "MainThread",
+          "elapsed_ms": 0.003,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": "1.20"
+            }
+          ],
+          "children": []
+        },
+        {
+          "name": "step",
+          "attributes": {
+            "name": "apply_discount",
+            "kind": "function"
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 0.023,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "price": "1.20"
+            },
+            {
+              "label": "result",
+              "value": "1.08"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "three_steps_reserves"
+      },
+      "seq": 6,
+      "thread": "MainThread",
+      "elapsed_ms": 0.012,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "reserved 2 x milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "check_stock",
+            "kind": "function"
+          },
+          "seq": 7,
+          "thread": "MainThread",
+          "elapsed_ms": 0.003,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": 2
+            }
+          ],
+          "children": []
+        },
+        {
+          "name": "step",
+          "attributes": {
+            "name": "reserve_stock",
+            "kind": "function"
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk",
+              "quantity": 2
+            },
+            {
+              "label": "result",
+              "value": "reserved 2 x milk"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "three_steps_backorders"
+      },
+      "seq": 9,
+      "thread": "MainThread",
+      "elapsed_ms": 0.007,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "backordered 5 x milk"
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "check_stock",
+            "kind": "function"
+          },
+          "seq": 10,
+          "thread": "MainThread",
+          "elapsed_ms": 0.001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": 2
+            }
+          ],
+          "children": []
+        },
+        {
+          "name": "step",
+          "attributes": {
+            "name": "create_backorder",
+            "kind": "function"
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 0.001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk",
+              "quantity": 5
+            },
+            {
+              "label": "result",
+              "value": "backordered 5 x milk"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_step_can_be_an_agent"
+      },
+      "seq": 12,
+      "thread": "MainThread",
+      "elapsed_ms": 2685.59,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "Milk costs \u00a31.20."
+        }
+      ],
+      "children": [
+        {
+          "name": "step",
+          "attributes": {
+            "name": "check_price_via_agent",
+            "kind": "agent"
+          },
+          "seq": 13,
+          "thread": "MainThread",
+          "elapsed_ms": 2685.58,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "args",
+              "item": "milk"
+            },
+            {
+              "label": "result",
+              "value": "Milk costs \u00a31.20."
+            }
+          ],
+          "children": [
+            {
+              "name": "turn",
+              "attributes": {
+                "number": 1
+              },
+              "seq": 14,
+              "thread": "MainThread",
+              "elapsed_ms": 1667.875,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [],
+              "children": [
+                {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "live"
+                  },
+                  "seq": 15,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1667.189,
+                  "model_provider_ms": 1423.5196250677109,
+                  "library_ms": 243.6693749322892,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tool you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "wire request",
+                      "attempt": 1,
+                      "at_ms": 1026494118.389166,
+                      "method": "POST",
+                      "url": "https://api.deepseek.com/v1/chat/completions",
+                      "headers": {
+                        "accept": "application/json",
+                        "accept-encoding": "gzip, deflate, zstd",
+                        "authorization": null,
+                        "connection": "keep-alive",
+                        "content-length": "482",
+                        "content-type": "application/json",
+                        "host": "api.deepseek.com",
+                        "user-agent": "OpenAI/Python 3.6.0",
+                        "x-stainless-arch": "arm64",
+                        "x-stainless-async": "false",
+                        "x-stainless-lang": "python",
+                        "x-stainless-os": "MacOS",
+                        "x-stainless-package-version": "3.6.0",
+                        "x-stainless-raw-response": "true",
+                        "x-stainless-read-timeout": "60.0",
+                        "x-stainless-retry-count": "0",
+                        "x-stainless-runtime": "CPython",
+                        "x-stainless-runtime-version": "3.14.7"
+                      },
+                      "defaulted_by_model_provider": [
+                        "temperature",
+                        "max_tokens",
+                        "top_p",
+                        "stop",
+                        "seed",
+                        "tool_choice"
+                      ],
+                      "body": {
+                        "messages": [
+                          {
+                            "content": "You answer briefly and plainly. Use the tool you are given.",
+                            "role": "system"
+                          },
+                          {
+                            "content": "How much is milk?",
+                            "role": "user"
+                          }
+                        ],
+                        "model": "deepseek-v4-flash",
+                        "stream": false,
+                        "tools": [
+                          {
+                            "type": "function",
+                            "function": {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "parameters": {
+                                "properties": {
+                                  "item": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "type": "object"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "label": "wire response",
+                      "at_ms": 1026495541.9087911,
+                      "status": 200,
+                      "headers": {
+                        "access-control-allow-credentials": "true",
+                        "connection": "keep-alive",
+                        "content-encoding": "gzip",
+                        "content-type": "application/json",
+                        "date": "Thu, 03 Sep 2026 17:27:55 GMT",
+                        "server": "elb",
+                        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                        "transfer-encoding": "chunked",
+                        "vary": "origin, access-control-request-method, access-control-request-headers",
+                        "via": "1.1 708370555615eac6a25379c04fbdd8ea.cloudfront.net (CloudFront)",
+                        "x-amz-cf-id": "BwCeRqEKZrx2Lwjijj19XeObYMLW6GVOjbUyyPJVEgN4vMkSbe00HA==",
+                        "x-amz-cf-pop": "DEN53-P3",
+                        "x-cache": "Miss from cloudfront",
+                        "x-content-type-options": "nosniff",
+                        "x-ds-trace-id": "45e79911527950c65387471106a55a33"
+                      },
+                      "body": {
+                        "id": "d0475e58-2a0a-4b64-ac89-b72171391302",
+                        "object": "chat.completion",
+                        "created": 1788456475,
+                        "model": "deepseek-v4-flash",
+                        "choices": [
+                          {
+                            "index": 0,
+                            "message": {
+                              "role": "assistant",
+                              "content": "",
+                              "reasoning_content": "The user asks for the price of milk. I have a tool price_of. Let me call it.",
+                              "tool_calls": [
+                                {
+                                  "index": 0,
+                                  "id": "call_00_aeHR3QrisAuT3XdZAZKN6830",
+                                  "type": "function",
+                                  "function": {
+                                    "name": "price_of",
+                                    "arguments": "{\"item\": \"milk\"}"
+                                  }
+                                }
+                              ]
+                            },
+                            "logprobs": null,
+                            "finish_reason": "tool_calls"
+                          }
+                        ],
+                        "usage": {
+                          "prompt_tokens": 399,
+                          "completion_tokens": 66,
+                          "total_tokens": 465,
+                          "prompt_tokens_details": {
+                            "cached_tokens": 256
+                          },
+                          "completion_tokens_details": {
+                            "reasoning_tokens": 21
+                          },
+                          "prompt_cache_hit_tokens": 256,
+                          "prompt_cache_miss_tokens": 143
+                        },
+                        "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                      }
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06850-1956-7ac1-89dd-5da506611025-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_00_aeHR3QrisAuT3XdZAZKN6830"
+                          }
+                        ],
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "The user asks for the price of milk. I have a tool price_of. Let me call it."
+                        },
+                        "finish_reason": "tool_calls",
+                        "usage": {
+                          "input_tokens": 399,
+                          "output_tokens": 66,
+                          "total_tokens": 465,
+                          "input_token_details": {
+                            "cache_read": 256
+                          },
+                          "output_token_details": {
+                            "reasoning": 21
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "price_of",
+                    "id": "call_00_aeHR3QrisAuT3XdZAZKN6830"
+                  },
+                  "seq": 16,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.612,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "item": "milk"
+                    },
+                    {
+                      "label": "result",
+                      "value": "1.20 for milk"
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "turn",
+              "attributes": {
+                "number": 2
+              },
+              "seq": 17,
+              "thread": "MainThread",
+              "elapsed_ms": 1017.661,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [],
+              "children": [
+                {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "live"
+                  },
+                  "seq": 18,
+                  "thread": "MainThread",
+                  "elapsed_ms": 1017.626,
+                  "model_provider_ms": 1007.4256250858307,
+                  "library_ms": 10.200374914169288,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tool you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk?"
+                        },
+                        {
+                          "id": "lc_run--01a06850-1956-7ac1-89dd-5da506611025-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "call_00_aeHR3QrisAuT3XdZAZKN6830"
+                            }
+                          ],
+                          "additional_kwargs": {
+                            "refusal": null,
+                            "reasoning_content": "The user asks for the price of milk. I have a tool price_of. Let me call it."
+                          },
+                          "finish_reason": "tool_calls",
+                          "usage": {
+                            "input_tokens": 399,
+                            "output_tokens": 66,
+                            "total_tokens": 465,
+                            "input_token_details": {
+                              "cache_read": 256
+                            },
+                            "output_token_details": {
+                              "reasoning": 21
+                            }
+                          }
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "1.20 for milk",
+                          "tool_call_id": "call_00_aeHR3QrisAuT3XdZAZKN6830"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "wire request",
+                      "attempt": 1,
+                      "at_ms": 1026495560.6074159,
+                      "method": "POST",
+                      "url": "https://api.deepseek.com/v1/chat/completions",
+                      "headers": {
+                        "accept": "application/json",
+                        "accept-encoding": "gzip, deflate, zstd",
+                        "authorization": null,
+                        "connection": "keep-alive",
+                        "content-length": "850",
+                        "content-type": "application/json",
+                        "host": "api.deepseek.com",
+                        "user-agent": "OpenAI/Python 3.6.0",
+                        "x-stainless-arch": "arm64",
+                        "x-stainless-async": "false",
+                        "x-stainless-lang": "python",
+                        "x-stainless-os": "MacOS",
+                        "x-stainless-package-version": "3.6.0",
+                        "x-stainless-raw-response": "true",
+                        "x-stainless-read-timeout": "60.0",
+                        "x-stainless-retry-count": "0",
+                        "x-stainless-runtime": "CPython",
+                        "x-stainless-runtime-version": "3.14.7"
+                      },
+                      "defaulted_by_model_provider": [
+                        "temperature",
+                        "max_tokens",
+                        "top_p",
+                        "stop",
+                        "seed",
+                        "tool_choice"
+                      ],
+                      "body": {
+                        "messages": [
+                          {
+                            "content": "You answer briefly and plainly. Use the tool you are given.",
+                            "role": "system"
+                          },
+                          {
+                            "content": "How much is milk?",
+                            "role": "user"
+                          },
+                          {
+                            "content": null,
+                            "role": "assistant",
+                            "tool_calls": [
+                              {
+                                "type": "function",
+                                "id": "call_00_aeHR3QrisAuT3XdZAZKN6830",
+                                "function": {
+                                  "name": "price_of",
+                                  "arguments": "{\"item\": \"milk\"}"
+                                }
+                              }
+                            ],
+                            "reasoning_content": "The user asks for the price of milk. I have a tool price_of. Let me call it."
+                          },
+                          {
+                            "content": "1.20 for milk",
+                            "role": "tool",
+                            "tool_call_id": "call_00_aeHR3QrisAuT3XdZAZKN6830"
+                          }
+                        ],
+                        "model": "deepseek-v4-flash",
+                        "stream": false,
+                        "tools": [
+                          {
+                            "type": "function",
+                            "function": {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "parameters": {
+                                "properties": {
+                                  "item": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "type": "object"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "label": "wire response",
+                      "at_ms": 1026496568.033041,
+                      "status": 200,
+                      "headers": {
+                        "access-control-allow-credentials": "true",
+                        "connection": "keep-alive",
+                        "content-encoding": "gzip",
+                        "content-type": "application/json",
+                        "date": "Thu, 03 Sep 2026 17:27:56 GMT",
+                        "server": "elb",
+                        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                        "transfer-encoding": "chunked",
+                        "vary": "origin, access-control-request-method, access-control-request-headers",
+                        "via": "1.1 ebcfae1084a6f4b6ecf9ff045173381c.cloudfront.net (CloudFront)",
+                        "x-amz-cf-id": "gFEv0_fJJOXA-wJpSj8cRZA0T8q5Fmb8nCAPly4UAOI2berFL_DBkA==",
+                        "x-amz-cf-pop": "DEN53-P4",
+                        "x-cache": "Miss from cloudfront",
+                        "x-content-type-options": "nosniff",
+                        "x-ds-trace-id": "00e6b740debf51e2553b475575b1de37"
+                      },
+                      "body": {
+                        "id": "3b4b9ccd-193f-4756-9c65-859eae929ed1",
+                        "object": "chat.completion",
+                        "created": 1788456476,
+                        "model": "deepseek-v4-flash",
+                        "choices": [
+                          {
+                            "index": 0,
+                            "message": {
+                              "role": "assistant",
+                              "content": "Milk costs \u00a31.20.",
+                              "reasoning_content": ""
+                            },
+                            "logprobs": null,
+                            "finish_reason": "stop"
+                          }
+                        ],
+                        "usage": {
+                          "prompt_tokens": 482,
+                          "completion_tokens": 9,
+                          "total_tokens": 491,
+                          "prompt_tokens_details": {
+                            "cached_tokens": 384
+                          },
+                          "completion_tokens_details": {
+                            "reasoning_tokens": 0
+                          },
+                          "prompt_cache_hit_tokens": 384,
+                          "prompt_cache_miss_tokens": 98
+                        },
+                        "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                      }
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a06850-1f05-7192-bf49-c83fb407ac3e-0",
+                        "role": "ai",
+                        "content": "Milk costs \u00a31.20.",
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": ""
+                        },
+                        "finish_reason": "stop",
+                        "usage": {
+                          "input_tokens": 482,
+                          "output_tokens": 9,
+                          "total_tokens": 491,
+                          "input_token_details": {
+                            "cache_read": 384
+                          },
+                          "output_token_details": {
+                            "reasoning": 0
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

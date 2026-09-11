@@ -1,0 +1,204 @@
+{
+  "chapter": "ch01_single_call",
+  "model_kind": "live",
+  "source": "f6e5118a7916",
+  "summary": {
+    "turns": 1,
+    "messages": 3,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "agent_with_no_tool",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 1298.81,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 1298.6470000000002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 1298.6290000000001,
+              "model_provider_ms": 1054.3207498788834,
+              "library_ms": 244.30825012111677,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "In one sentence, and per The Hitchhiker's Guide to the Galaxy: what is the Answer to the Ultimate Question of Life, the Universe, and Everything?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975471345.9450411,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "293",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tools",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "In one sentence, and per The Hitchhiker's Guide to the Galaxy: what is the Answer to the Ultimate Question of Life, the Universe, and Everything?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975472400.2657909,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:32 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 3d0e42610dcaae09fca89f218dd914de.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "hlAJYCQaLDvt26YuQoxhkYLQhrSmuxjdZ26tc5lBO4XyQOg5ln4XXA==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "3664905ce26c2ebfc515436e2f98c802"
+                  },
+                  "body": {
+                    "id": "3385e3fa-8151-4821-9ef4-155b5e691a2e",
+                    "object": "chat.completion",
+                    "created": 1788405452,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "The Answer to the Ultimate Question of Life, the Universe, and Everything is 42.",
+                          "reasoning_content": "We need answer per HHGTTG. One sentence. Answer is 42."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 122,
+                      "completion_tokens": 36,
+                      "total_tokens": 158,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 0
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 17
+                      },
+                      "prompt_cache_hit_tokens": 0,
+                      "prompt_cache_miss_tokens": 122
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-8d93-75b3-8526-06fb2009845f-0",
+                    "role": "ai",
+                    "content": "The Answer to the Ultimate Question of Life, the Universe, and Everything is 42.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "We need answer per HHGTTG. One sentence. Answer is 42."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 122,
+                      "output_tokens": 36,
+                      "total_tokens": 158,
+                      "input_token_details": {
+                        "cache_read": 0
+                      },
+                      "output_token_details": {
+                        "reasoning": 17
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

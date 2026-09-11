@@ -1,0 +1,901 @@
+{
+  "chapter": "ch03_the_loop",
+  "model_kind": "live",
+  "source": "3d59b9a9d478",
+  "summary": {
+    "turns": 3,
+    "messages": 7,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "agent_with_tool_chain",
+        "tools": null,
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 3057.837,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 1284.935,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 1283.654,
+              "model_provider_ms": 1098.0088329315186,
+              "library_ms": 185.64516706848144,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975478198.8815,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "658",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Whatever we are lowest on -- what does one of them cost?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "parameters": {
+                            "properties": {},
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975479296.8903329,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:39 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 9fa42540eb8b0161c6acde61b2c9efbe.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "aWimYQB5sdrkT0EN0MEMbhv_fLIRuRm6jfe5u9_JjskDeQx74Cyfzg==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "ee625e74bb5e72ca106c4414c4bcccd3"
+                  },
+                  "body": {
+                    "id": "a17b025c-d249-4ad8-807a-cf7a320af00f",
+                    "object": "chat.completion",
+                    "created": 1788405459,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "We need answer: item lowest in stock, then price. Need call lowest_stock_item first to know item, then price_of. They are dependent? We need item before price. So call lowest_stock_item first.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_ighQAXv24v6tD0ZRYAFT3176",
+                              "type": "function",
+                              "function": {
+                                "name": "lowest_stock_item",
+                                "arguments": "{}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 438,
+                      "completion_tokens": 76,
+                      "total_tokens": 514,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 45
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 54
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-a85a-7463-a77c-65f06c609571-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "lowest_stock_item",
+                        "args": {},
+                        "id": "call_00_ighQAXv24v6tD0ZRYAFT3176"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "We need answer: item lowest in stock, then price. Need call lowest_stock_item first to know item, then price_of. They are dependent? We need item before price. So call lowest_stock_item first."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 438,
+                      "output_tokens": 76,
+                      "total_tokens": 514,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 45
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "lowest_stock_item",
+                "id": "call_00_ighQAXv24v6tD0ZRYAFT3176"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 1.209,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args"
+                },
+                {
+                  "label": "result",
+                  "value": "butter"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 1062.201,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 1061.526,
+              "model_provider_ms": 1048.5625,
+              "library_ms": 12.963500000000067,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost?"
+                    },
+                    {
+                      "id": "lc_run--01a06545-a85a-7463-a77c-65f06c609571-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "lowest_stock_item",
+                          "args": {},
+                          "id": "call_00_ighQAXv24v6tD0ZRYAFT3176"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "We need answer: item lowest in stock, then price. Need call lowest_stock_item first to know item, then price_of. They are dependent? We need item before price. So call lowest_stock_item first."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 438,
+                        "output_tokens": 76,
+                        "total_tokens": 514,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 45
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "butter",
+                      "tool_call_id": "call_00_ighQAXv24v6tD0ZRYAFT3176"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975479321.870083,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1126",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Whatever we are lowest on -- what does one of them cost?",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_ighQAXv24v6tD0ZRYAFT3176",
+                            "function": {
+                              "name": "lowest_stock_item",
+                              "arguments": "{}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "We need answer: item lowest in stock, then price. Need call lowest_stock_item first to know item, then price_of. They are dependent? We need item before price. So call lowest_stock_item first."
+                      },
+                      {
+                        "content": "butter",
+                        "role": "tool",
+                        "tool_call_id": "call_00_ighQAXv24v6tD0ZRYAFT3176"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "parameters": {
+                            "properties": {},
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975480370.432583,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:40 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 e1dbbcedf936fc7d0284466c9c65e78c.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "t8aRI8OKC9dBF5eGup67gklFZZqcx4G7zQv9cBW1uOCkFQiIL-TV8A==",
+                    "x-amz-cf-pop": "DEN53-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "04adeea323322de574cf9d59e9cff65a"
+                  },
+                  "body": {
+                    "id": "9b28b100-5377-4e14-9bc6-ebf3a03cdcc9",
+                    "object": "chat.completion",
+                    "created": 1788405460,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "Need price of butter.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_9YjRhIJAGntC4TY0bmye9567",
+                              "type": "function",
+                              "function": {
+                                "name": "price_of",
+                                "arguments": "{\"item\": \"butter\"}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 528,
+                      "completion_tokens": 50,
+                      "total_tokens": 578,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 5
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 144
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-acc5-7160-9eb9-856e912b3833-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "butter"
+                        },
+                        "id": "call_00_9YjRhIJAGntC4TY0bmye9567"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "Need price of butter."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 528,
+                      "output_tokens": 50,
+                      "total_tokens": 578,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 5
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "call_00_9YjRhIJAGntC4TY0bmye9567"
+              },
+              "seq": 7,
+              "thread": "MainThread",
+              "elapsed_ms": 0.624,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "butter"
+                },
+                {
+                  "label": "result",
+                  "value": "3.10"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 3
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 710.5160000000001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 9,
+              "thread": "MainThread",
+              "elapsed_ms": 710.5,
+              "model_provider_ms": 696.552041888237,
+              "library_ms": 13.947958111763,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Whatever we are lowest on -- what does one of them cost?"
+                    },
+                    {
+                      "id": "lc_run--01a06545-a85a-7463-a77c-65f06c609571-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "lowest_stock_item",
+                          "args": {},
+                          "id": "call_00_ighQAXv24v6tD0ZRYAFT3176"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "We need answer: item lowest in stock, then price. Need call lowest_stock_item first to know item, then price_of. They are dependent? We need item before price. So call lowest_stock_item first."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 438,
+                        "output_tokens": 76,
+                        "total_tokens": 514,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 45
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "butter",
+                      "tool_call_id": "call_00_ighQAXv24v6tD0ZRYAFT3176"
+                    },
+                    {
+                      "id": "lc_run--01a06545-acc5-7160-9eb9-856e912b3833-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "butter"
+                          },
+                          "id": "call_00_9YjRhIJAGntC4TY0bmye9567"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "Need price of butter."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 528,
+                        "output_tokens": 50,
+                        "total_tokens": 578,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 5
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "3.10",
+                      "tool_call_id": "call_00_9YjRhIJAGntC4TY0bmye9567"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 975480386.0305411,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1432",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Whatever we are lowest on -- what does one of them cost?",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_ighQAXv24v6tD0ZRYAFT3176",
+                            "function": {
+                              "name": "lowest_stock_item",
+                              "arguments": "{}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "We need answer: item lowest in stock, then price. Need call lowest_stock_item first to know item, then price_of. They are dependent? We need item before price. So call lowest_stock_item first."
+                      },
+                      {
+                        "content": "butter",
+                        "role": "tool",
+                        "tool_call_id": "call_00_ighQAXv24v6tD0ZRYAFT3176"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_9YjRhIJAGntC4TY0bmye9567",
+                            "function": {
+                              "name": "price_of",
+                              "arguments": "{\"item\": \"butter\"}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "Need price of butter."
+                      },
+                      {
+                        "content": "3.10",
+                        "role": "tool",
+                        "tool_call_id": "call_00_9YjRhIJAGntC4TY0bmye9567"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "parameters": {
+                            "properties": {},
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 975481082.582583,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:17:41 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 51185e40453f61916e037fc6db50766c.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "b5LjB7gRXrs_xcTNANm_39gimOwW74mI-jLZTZo6pZsLCh6w1DhfYg==",
+                    "x-amz-cf-pop": "DEN53-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "5e439eb645f0e728c37a14f6757951fb"
+                  },
+                  "body": {
+                    "id": "0795f36e-e2ab-4d78-84bf-4fcf1942411c",
+                    "object": "chat.completion",
+                    "created": 1788405461,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "We are lowest on **butter**, and one costs **\u00a33.10**.",
+                          "reasoning_content": ""
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 593,
+                      "completion_tokens": 18,
+                      "total_tokens": 611,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 512
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 0
+                      },
+                      "prompt_cache_hit_tokens": 512,
+                      "prompt_cache_miss_tokens": 81
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06545-b0ec-7fe3-b991-52b88af9f974-0",
+                    "role": "ai",
+                    "content": "We are lowest on **butter**, and one costs **\u00a33.10**.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": ""
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 593,
+                      "output_tokens": 18,
+                      "total_tokens": 611,
+                      "input_token_details": {
+                        "cache_read": 512
+                      },
+                      "output_token_details": {
+                        "reasoning": 0
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

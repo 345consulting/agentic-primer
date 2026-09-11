@@ -1,0 +1,267 @@
+<!doctype html><meta charset=utf-8><title>ch13_workflow</title><style>
+:root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
+/* The title and the column toggles stay put: at thirty-five chapters you are
+   always scrolled away from them, and hiding a column is something you want
+   to do from wherever you are. `Canvas` is the system background, so it
+   follows the viewer's theme without a token of its own. */
+header.top { position: sticky; top: 0; z-index: 2; background: Canvas;
+             padding: 1.25rem 0 .6rem; margin-bottom: 1rem;
+             border-bottom: 1px solid var(--line); }
+header.top h1 { display: inline; margin-right: .75rem; }
+/* The toggles get their own line: they are a control, and reading them as a
+   continuation of the subtitle is the first thing anyone notices. */
+header.top .toggles { display: block; margin-top: .5rem; }
+h1 { font-size: 1.1rem; margin: 0 0 .25rem; }
+.summary { color: var(--dim); margin-bottom: 1.5rem; }
+details { border-left: 1px solid var(--line); margin: 0 0 0 .5rem; padding-left: .75rem; }
+summary { cursor: pointer; padding: .15rem 0; }
+summary::marker { color: var(--dim); }
+.name { font-weight: 600; }
+.meta, .ms { color: var(--dim); font-weight: 400; }
+.note { margin: .35rem 0 .5rem 1rem; }
+.label { color: var(--dim); }
+table { border-collapse: collapse; margin: .25rem 0 .5rem; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: .2rem .5rem; text-align: left;
+         vertical-align: top; font-weight: 400; }
+th { color: var(--dim); font-size: .85em; }
+.role { white-space: nowrap; }
+.calls { color: #b26; }
+.content { white-space: pre-wrap; }
+input[type=checkbox] { display: none; }
+.toggles { margin-bottom: .75rem; color: var(--dim); }
+.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
+#hide-mock:checked ~ .toggles label[for=hide-mock],
+#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
+#hide-mock:checked ~ * .col-mock { display: none; }
+#hide-live:checked ~ * .col-live { display: none; }
+.row { display: flex; gap: 1.25rem; align-items: flex-start; }
+.row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
+.col { flex: 1 1 0; min-width: 0; }
+.col.missing { color: var(--dim); font-style: italic; padding: .5rem 0; }
+.turn { margin-bottom: 1.5rem; }
+.turnno { color: var(--dim); font-size: .85em; text-transform: uppercase;
+          letter-spacing: .06em; margin-bottom: .3rem; }
+.stale { color: #b26; font-weight: 600; }
+/* The outcome is what a reader is scanning for, so it is the one part of a
+   row at full strength. The name is a label and the rest is metadata. */
+.digest { color: inherit; }
+.name { font-weight: 400; color: var(--dim); }
+.dot { color: var(--line); }
+details.chapter > summary { padding: .6rem 0; border-top: 1px solid var(--line);
+                            font-size: 1rem; margin-top: 1rem; }
+details.chapter { border: 0; margin: 0; padding: 0; }
+details.chapter > summary .why { color: var(--dim); font-weight: 400; font-size: .9rem; }
+details.chapter > summary .facts { color: var(--dim); font-weight: 400; font-size: .85rem;
+                                   display: block; margin-left: 1rem; }
+h2 { font-size: 1rem; margin: 2rem 0 .25rem; padding-top: .75rem;
+     border-top: 1px solid var(--line); }
+h2 .why { color: var(--dim); font-weight: 400; }
+h2 a.top { color: var(--dim); font-weight: 400; font-size: .8em; float: right; }
+nav { margin: 0 0 1.5rem; }
+nav a { display: block; padding: .12rem 0; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .why { color: var(--dim); }
+nav .not-run { color: var(--dim); font-style: italic; }
+/* A wire note is a handful of short fields and one long one. As a run-on line
+   the long field swallows the rest, so each gets its own row and the keys
+   line up in a column you can scan down. */
+.wirefields { display: grid; grid-template-columns: max-content minmax(0, 1fr);
+              gap: .1rem .75rem; margin: .35rem 0; }
+.wirefields dt { color: var(--dim); white-space: nowrap; }
+.wirefields dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.wirefields dd.bulk { color: var(--dim); font-size: .92em; }
+.wirefields details { border: 0; margin: 0; padding: 0; }
+.wirefields summary { padding: 0; }
+table.headers { margin: .25rem 0 .5rem; }
+table.headers td { font-size: .92em; }
+table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
+table.headers td.hvalue { overflow-wrap: anywhere; }
+table.headers td.unrecorded { color: var(--dim); font-style: italic; }
+.wirefields dd.defaulted { color: #b26; }
+@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+/* Wrap rather than scroll: the page is read at whatever width the window is,
+   and a horizontal scrollbar inside a column hides the end of every line. */
+pre.wire .k { color: #06c; }
+pre.wire .s { color: #0a7; }
+pre.wire .n { color: #b26; }
+pre.wire .l { color: #a60; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  pre.wire .k { color: #7bf; } pre.wire .s { color: #6d9; }
+  pre.wire .n { color: #f9a; } pre.wire .l { color: #fc7; }
+}
+pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
+           white-space: pre-wrap; overflow-wrap: anywhere; }
+</style><input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live"><header class="top"><h1>ch13_workflow</h1><span class="summary"></span><span class="toggles">show: <label for="hide-mock">mock</label><label for="hide-live">live</label></span></header><div class="row head"><div class="col col-mock"><b>mock</b> <span class="meta">turns=8 · messages=0</span></div><div class="col col-live"><b>live</b> <span class="meta">turns=8 · messages=0</span></div></div><div class="turn"><div class="turnno">scenario single_step</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">single_step</span> <span class="dot">·</span> <span class="ms">0.3ms</span> <span class="dot">·</span> <span class="digest">1 step · ended: 6 in stock</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;6 in stock&quot;}</div><details><summary><span class="name">step</span> <span class="meta">check_stock · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=chips · returned: 6</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;chips&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: 6}</div></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">single_step</span> <span class="dot">·</span> <span class="ms">0.1ms</span> <span class="dot">·</span> <span class="digest">1 step · ended: 6 in stock</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;6 in stock&quot;}</div><details><summary><span class="name">step</span> <span class="meta">check_stock · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=chips · returned: 6</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;chips&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: 6}</div></details></details></div></div></div><div class="turn"><div class="turnno">scenario dual_in_sequence</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">dual_in_sequence</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">2 steps · ended: discounted to 1.08</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;discounted to 1.08&quot;}</div><details><summary><span class="name">step</span> <span class="meta">get_price · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.20&quot;}</div></details><details><summary><span class="name">step</span> <span class="meta">apply_discount · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: price=1.20 · returned: 1.08</span></summary><div class="note"><span class="label">args</span> {&quot;price&quot;: &quot;1.20&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.08&quot;}</div></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">dual_in_sequence</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">2 steps · ended: discounted to 1.08</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;discounted to 1.08&quot;}</div><details><summary><span class="name">step</span> <span class="meta">get_price · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.20&quot;}</div></details><details><summary><span class="name">step</span> <span class="meta">apply_discount · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: price=1.20 · returned: 1.08</span></summary><div class="note"><span class="label">args</span> {&quot;price&quot;: &quot;1.20&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.08&quot;}</div></details></details></div></div></div><div class="turn"><div class="turnno">scenario three_steps_reserves</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">three_steps_reserves</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">2 steps · ended: reserved 2 x milk</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;reserved 2 x milk&quot;}</div><details><summary><span class="name">step</span> <span class="meta">check_stock · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 2</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: 2}</div></details><details><summary><span class="name">step</span> <span class="meta">reserve_stock · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk, quantity=2 · returned: reserved 2 x milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 2}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;reserved 2 x milk&quot;}</div></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">three_steps_reserves</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">2 steps · ended: reserved 2 x milk</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;reserved 2 x milk&quot;}</div><details><summary><span class="name">step</span> <span class="meta">check_stock · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 2</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: 2}</div></details><details><summary><span class="name">step</span> <span class="meta">reserve_stock · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk, quantity=2 · returned: reserved 2 x milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 2}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;reserved 2 x milk&quot;}</div></details></details></div></div></div><div class="turn"><div class="turnno">scenario three_steps_backorders</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">three_steps_backorders</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">2 steps · ended: backordered 5 x milk</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;backordered 5 x milk&quot;}</div><details><summary><span class="name">step</span> <span class="meta">check_stock · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 2</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: 2}</div></details><details><summary><span class="name">step</span> <span class="meta">create_backorder · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk, quantity=5 · returned: backordered 5 x milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 5}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;backordered 5 x milk&quot;}</div></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">three_steps_backorders</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">2 steps · ended: backordered 5 x milk</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;backordered 5 x milk&quot;}</div><details><summary><span class="name">step</span> <span class="meta">check_stock · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 2</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: 2}</div></details><details><summary><span class="name">step</span> <span class="meta">create_backorder · kind=function</span> <span class="dot">·</span> <span class="ms">0.0ms</span> <span class="dot">·</span> <span class="digest">given: item=milk, quantity=5 · returned: backordered 5 x milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;, &quot;quantity&quot;: 5}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;backordered 5 x milk&quot;}</div></details></details></div></div></div><div class="turn"><div class="turnno">scenario a_step_can_be_an_agent</div><div class="row"><div class="col col-mock"><details><summary><span class="name">scenario</span> <span class="meta">a_step_can_be_an_agent</span> <span class="dot">·</span> <span class="ms">4.4ms</span> <span class="dot">·</span> <span class="digest">1 step · ended: Milk is 1.20 per bottle.</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;Milk is 1.20 per bottle.&quot;}</div><details><summary><span class="name">step</span> <span class="meta">check_price_via_agent · kind=agent</span> <span class="dot">·</span> <span class="ms">4.4ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: Milk is 1.20 per bottle.</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;Milk is 1.20 per bottle.&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">4.2ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">3.9ms</span> <span class="dot">·</span> <span class="digest">asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tool you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 2, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20 for milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.20 for milk&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20 per bottle.</span></summary><details><summary><span class="name">model</span> <span class="meta">mock</span> <span class="dot">·</span> <span class="ms">0.2ms</span> <span class="dot">·</span> <span class="digest">responded with: Milk is 1.20 per bottle.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tool you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20 for milk</td></tr></table></div><div class="note"><span class="label">tools declared to the mock model</span> {&quot;names&quot;: [&quot;price_of&quot;], &quot;consulted&quot;: false}</div><div class="note"><span class="label">context ignored by the mock model</span> {&quot;messages&quot;: 4, &quot;roles&quot;: [&quot;system&quot;, &quot;human&quot;, &quot;ai&quot;, &quot;tool&quot;]}</div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk is 1.20 per bottle.</td></tr></table></div></details></details></details></details></div><div class="col col-live"><details><summary><span class="name">scenario</span> <span class="meta">a_step_can_be_an_agent</span> <span class="dot">·</span> <span class="ms">2685.6ms</span> <span class="dot">·</span> <span class="digest">1 step · ended: Milk costs £1.20.</span></summary><div class="note"><span class="label">ended</span> {&quot;reason&quot;: &quot;Milk costs \u00a31.20.&quot;}</div><details><summary><span class="name">step</span> <span class="meta">check_price_via_agent · kind=agent</span> <span class="dot">·</span> <span class="ms">2685.6ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: Milk costs £1.20.</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;Milk costs \u00a31.20.&quot;}</div><details><summary><span class="name">turn</span> <span class="meta">1</span> <span class="dot">·</span> <span class="ms">1667.9ms</span> <span class="dot">·</span> <span class="digest">399 in / 66 out · asked for: price_of</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1667.2ms (model provider 1423.5 · library 243.7)</span> <span class="dot">·</span> <span class="digest">399 in / 66 out · asked for: price_of</span></summary><div class="note"><span class="label">context sent &mdash; 2 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tool you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">482</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tool you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds. The agent-kind step&#x27;s only tool.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 17:27:55 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 708370555615eac6a25379c04fbdd8ea.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">BwCeRqEKZrx2Lwjijj19XeObYMLW6GVOjbUyyPJVEgN4vMkSbe00HA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P3</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">45e79911527950c65387471106a55a33</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;d0475e58-2a0a-4b64-ac89-b72171391302&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788456475</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks for the price of milk. I have a tool price_of. Let me call it.&quot;</span>,
+        <span class="k">&quot;tool_calls&quot;</span>: [
+          {
+            <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+            <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_aeHR3QrisAuT3XdZAZKN6830&quot;</span>,
+            <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+            <span class="k">&quot;function&quot;</span>: {
+              <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+              <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+            }
+          }
+        ]
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;tool_calls&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">399</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">66</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">465</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">256</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">21</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">256</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">143</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr></table></div></details><details><summary><span class="name">tool</span> <span class="meta">price_of</span> <span class="dot">·</span> <span class="ms">0.6ms</span> <span class="dot">·</span> <span class="digest">given: item=milk · returned: 1.20 for milk</span></summary><div class="note"><span class="label">args</span> {&quot;item&quot;: &quot;milk&quot;}</div><div class="note"><span class="label">result</span> {&quot;value&quot;: &quot;1.20 for milk&quot;}</div></details></details><details><summary><span class="name">turn</span> <span class="meta">2</span> <span class="dot">·</span> <span class="ms">1017.7ms</span> <span class="dot">·</span> <span class="digest">482 in / 9 out · responded with: Milk costs £1.20.</span></summary><details><summary><span class="name">model</span> <span class="meta">live</span> <span class="dot">·</span> <span class="ms">1017.6ms (model provider 1007.4 · library 10.2)</span> <span class="dot">·</span> <span class="digest">482 in / 9 out · responded with: Milk costs £1.20.</span></summary><div class="note"><span class="label">context sent &mdash; 4 message(s)</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">system</td><td class="content">You answer briefly and plainly. Use the tool you are given.</td></tr><tr><td>[1]</td><td class="role">human</td><td class="content">How much is milk?</td></tr><tr><td>[2]</td><td class="role">ai</td><td class="content"><div class="calls">price_of({&quot;item&quot;: &quot;milk&quot;})</div></td></tr><tr><td>[3]</td><td class="role">tool</td><td class="content">1.20 for milk</td></tr></table></div><div class="note"><span class="label">wire request</span><dl class="wirefields"><dt>attempt</dt><dd>1</dd><dt>method</dt><dd>POST</dd><dt>url</dt><dd>https://api.deepseek.com/v1/chat/completions</dd><dt>defaulted (6)</dt><dd class="defaulted">temperature, max_tokens, top_p, stop, seed, tool_choice</dd><dt>headers (18)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">accept</td><td class="hvalue">application/json</td></tr><tr><td class="hname">accept-encoding</td><td class="hvalue">gzip, deflate, zstd</td></tr><tr><td class="hname">authorization</td><td class="hvalue unrecorded">not recorded</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-length</td><td class="hvalue">850</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">host</td><td class="hvalue">api.deepseek.com</td></tr><tr><td class="hname">user-agent</td><td class="hvalue">OpenAI/Python 3.6.0</td></tr><tr><td class="hname">x-stainless-arch</td><td class="hvalue">arm64</td></tr><tr><td class="hname">x-stainless-async</td><td class="hvalue">false</td></tr><tr><td class="hname">x-stainless-lang</td><td class="hvalue">python</td></tr><tr><td class="hname">x-stainless-os</td><td class="hvalue">MacOS</td></tr><tr><td class="hname">x-stainless-package-version</td><td class="hvalue">3.6.0</td></tr><tr><td class="hname">x-stainless-raw-response</td><td class="hvalue">true</td></tr><tr><td class="hname">x-stainless-read-timeout</td><td class="hvalue">60.0</td></tr><tr><td class="hname">x-stainless-retry-count</td><td class="hvalue">0</td></tr><tr><td class="hname">x-stainless-runtime</td><td class="hvalue">CPython</td></tr><tr><td class="hname">x-stainless-runtime-version</td><td class="hvalue">3.14.7</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;messages&quot;</span>: [
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;You answer briefly and plainly. Use the tool you are given.&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;system&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;How much is milk?&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;user&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+      <span class="k">&quot;tool_calls&quot;</span>: [
+        {
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+          <span class="k">&quot;id&quot;</span>: <span class="s">&quot;call_00_aeHR3QrisAuT3XdZAZKN6830&quot;</span>,
+          <span class="k">&quot;function&quot;</span>: {
+            <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+            <span class="k">&quot;arguments&quot;</span>: <span class="s">&quot;{\&quot;item\&quot;: \&quot;milk\&quot;}&quot;</span>
+          }
+        }
+      ],
+      <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;The user asks for the price of milk. I have a tool price_of. Let me call it.&quot;</span>
+    },
+    {
+      <span class="k">&quot;content&quot;</span>: <span class="s">&quot;1.20 for milk&quot;</span>,
+      <span class="k">&quot;role&quot;</span>: <span class="s">&quot;tool&quot;</span>,
+      <span class="k">&quot;tool_call_id&quot;</span>: <span class="s">&quot;call_00_aeHR3QrisAuT3XdZAZKN6830&quot;</span>
+    }
+  ],
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;stream&quot;</span>: <span class="l">false</span>,
+  <span class="k">&quot;tools&quot;</span>: [
+    {
+      <span class="k">&quot;type&quot;</span>: <span class="s">&quot;function&quot;</span>,
+      <span class="k">&quot;function&quot;</span>: {
+        <span class="k">&quot;name&quot;</span>: <span class="s">&quot;price_of&quot;</span>,
+        <span class="k">&quot;description&quot;</span>: <span class="s">&quot;The current shelf price of an item, in pounds. The agent-kind step&#x27;s only tool.&quot;</span>,
+        <span class="k">&quot;parameters&quot;</span>: {
+          <span class="k">&quot;properties&quot;</span>: {
+            <span class="k">&quot;item&quot;</span>: {
+              <span class="k">&quot;enum&quot;</span>: [
+                <span class="s">&quot;bread&quot;</span>,
+                <span class="s">&quot;butter&quot;</span>,
+                <span class="s">&quot;chips&quot;</span>,
+                <span class="s">&quot;milk&quot;</span>
+              ],
+              <span class="k">&quot;type&quot;</span>: <span class="s">&quot;string&quot;</span>
+            }
+          },
+          <span class="k">&quot;required&quot;</span>: [
+            <span class="s">&quot;item&quot;</span>
+          ],
+          <span class="k">&quot;type&quot;</span>: <span class="s">&quot;object&quot;</span>
+        }
+      }
+    }
+  ]
+}</pre></div><div class="note"><span class="label">wire response</span><dl class="wirefields"><dt>status</dt><dd>200</dd><dt>headers (15)</dt><dd><details><summary>show</summary><table class="headers"><tr><td class="hname">access-control-allow-credentials</td><td class="hvalue">true</td></tr><tr><td class="hname">connection</td><td class="hvalue">keep-alive</td></tr><tr><td class="hname">content-encoding</td><td class="hvalue">gzip</td></tr><tr><td class="hname">content-type</td><td class="hvalue">application/json</td></tr><tr><td class="hname">date</td><td class="hvalue">Thu, 03 Sep 2026 17:27:56 GMT</td></tr><tr><td class="hname">server</td><td class="hvalue">elb</td></tr><tr><td class="hname">strict-transport-security</td><td class="hvalue">max-age=31536000; includeSubDomains; preload</td></tr><tr><td class="hname">transfer-encoding</td><td class="hvalue">chunked</td></tr><tr><td class="hname">vary</td><td class="hvalue">origin, access-control-request-method, access-control-request-headers</td></tr><tr><td class="hname">via</td><td class="hvalue">1.1 ebcfae1084a6f4b6ecf9ff045173381c.cloudfront.net (CloudFront)</td></tr><tr><td class="hname">x-amz-cf-id</td><td class="hvalue">gFEv0_fJJOXA-wJpSj8cRZA0T8q5Fmb8nCAPly4UAOI2berFL_DBkA==</td></tr><tr><td class="hname">x-amz-cf-pop</td><td class="hvalue">DEN53-P4</td></tr><tr><td class="hname">x-cache</td><td class="hvalue">Miss from cloudfront</td></tr><tr><td class="hname">x-content-type-options</td><td class="hvalue">nosniff</td></tr><tr><td class="hname">x-ds-trace-id</td><td class="hvalue">00e6b740debf51e2553b475575b1de37</td></tr></table></details></dd></dl><pre class="wire">{
+  <span class="k">&quot;id&quot;</span>: <span class="s">&quot;3b4b9ccd-193f-4756-9c65-859eae929ed1&quot;</span>,
+  <span class="k">&quot;object&quot;</span>: <span class="s">&quot;chat.completion&quot;</span>,
+  <span class="k">&quot;created&quot;</span>: <span class="n">1788456476</span>,
+  <span class="k">&quot;model&quot;</span>: <span class="s">&quot;deepseek-v4-flash&quot;</span>,
+  <span class="k">&quot;choices&quot;</span>: [
+    {
+      <span class="k">&quot;index&quot;</span>: <span class="n">0</span>,
+      <span class="k">&quot;message&quot;</span>: {
+        <span class="k">&quot;role&quot;</span>: <span class="s">&quot;assistant&quot;</span>,
+        <span class="k">&quot;content&quot;</span>: <span class="s">&quot;Milk costs \u00a31.20.&quot;</span>,
+        <span class="k">&quot;reasoning_content&quot;</span>: <span class="s">&quot;&quot;</span>
+      },
+      <span class="k">&quot;logprobs&quot;</span>: <span class="l">null</span>,
+      <span class="k">&quot;finish_reason&quot;</span>: <span class="s">&quot;stop&quot;</span>
+    }
+  ],
+  <span class="k">&quot;usage&quot;</span>: {
+    <span class="k">&quot;prompt_tokens&quot;</span>: <span class="n">482</span>,
+    <span class="k">&quot;completion_tokens&quot;</span>: <span class="n">9</span>,
+    <span class="k">&quot;total_tokens&quot;</span>: <span class="n">491</span>,
+    <span class="k">&quot;prompt_tokens_details&quot;</span>: {
+      <span class="k">&quot;cached_tokens&quot;</span>: <span class="n">384</span>
+    },
+    <span class="k">&quot;completion_tokens_details&quot;</span>: {
+      <span class="k">&quot;reasoning_tokens&quot;</span>: <span class="n">0</span>
+    },
+    <span class="k">&quot;prompt_cache_hit_tokens&quot;</span>: <span class="n">384</span>,
+    <span class="k">&quot;prompt_cache_miss_tokens&quot;</span>: <span class="n">98</span>
+  },
+  <span class="k">&quot;system_fingerprint&quot;</span>: <span class="s">&quot;a26a7955944dc5c60445bff77fac9c8e&quot;</span>
+}</pre></div><div class="note"><span class="label">reply</span><table><tr><th></th><th>role</th><th>content</th></tr><tr><td>[0]</td><td class="role">ai</td><td class="content">Milk costs £1.20.</td></tr></table></div></details></details></details></details></div></div></div>

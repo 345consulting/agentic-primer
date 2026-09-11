@@ -1,0 +1,3367 @@
+{
+  "chapter": "ch41_result_cache",
+  "model_kind": "mock",
+  "source": "3edb687978d5",
+  "summary": {
+    "turns": 0,
+    "messages": 0,
+    "ended": "n/a"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "an_exact_match_hits_and_skips_the_call_entirely"
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 5.191999999999999,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "the_second_call_never_happened",
+          "served_from_cache": "Returns are accepted within 30 days of purchase.",
+          "model_spans_after_first_question": 1,
+          "model_spans_after_second_question": 1,
+          "skipped_entirely": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 5.039,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 5.005,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "What is our return policy?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07908-e500-75a2-a20a-eb534b2eec51-0",
+                    "role": "ai",
+                    "content": "Returns are accepted within 30 days of purchase."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What is our return policy?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e500-75a2-a20a-eb534b2eec51-0",
+                      "role": "ai",
+                      "content": "Returns are accepted within 30 days of purchase."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 5.005,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What is our return policy?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e500-75a2-a20a-eb534b2eec51-0",
+                      "role": "ai",
+                      "content": "Returns are accepted within 30 days of purchase."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What is our return policy?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e500-75a2-a20a-eb534b2eec51-0",
+                        "role": "ai",
+                        "content": "Returns are accepted within 30 days of purchase."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "exact_match"
+          },
+          "seq": 4,
+          "thread": "MainThread",
+          "elapsed_ms": 0.004,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "hit": true,
+              "reason": "identical question already in the exact-match cache"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "hit": true,
+                "reason": "identical question already in the exact-match cache"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 5.039,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 5.005,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "What is our return policy?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e500-75a2-a20a-eb534b2eec51-0",
+                      "role": "ai",
+                      "content": "Returns are accepted within 30 days of purchase."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What is our return policy?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e500-75a2-a20a-eb534b2eec51-0",
+                        "role": "ai",
+                        "content": "Returns are accepted within 30 days of purchase."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 5.005,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "What is our return policy?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e500-75a2-a20a-eb534b2eec51-0",
+                        "role": "ai",
+                        "content": "Returns are accepted within 30 days of purchase."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "What is our return policy?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07908-e500-75a2-a20a-eb534b2eec51-0",
+                          "role": "ai",
+                          "content": "Returns are accepted within 30 days of purchase."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "exact_match"
+            },
+            "seq": 4,
+            "thread": "MainThread",
+            "elapsed_ms": 0.004,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "hit": true,
+                "reason": "identical question already in the exact-match cache"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "hit": true,
+                  "reason": "identical question already in the exact-match cache"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "the_second_call_never_happened",
+            "served_from_cache": "Returns are accepted within 30 days of purchase.",
+            "model_spans_after_first_question": 1,
+            "model_spans_after_second_question": 1,
+            "skipped_entirely": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_paraphrase_misses_exact_match_but_hits_semantically"
+      },
+      "seq": 5,
+      "thread": "MainThread",
+      "elapsed_ms": 0.325,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "exact_missed_semantic_caught_it",
+          "exact_match_hit": false,
+          "similarity": 0.57,
+          "served_from_cache": true,
+          "cached_answer": "Click 'forgot password' on the login page."
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 6,
+          "thread": "MainThread",
+          "elapsed_ms": 0.199,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 7,
+              "thread": "MainThread",
+              "elapsed_ms": 0.184,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How do I reset my password?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07908-e501-7163-8a09-404390b5d079-0",
+                    "role": "ai",
+                    "content": "Click 'forgot password' on the login page."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-404390b5d079-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 7,
+                "thread": "MainThread",
+                "elapsed_ms": 0.184,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-404390b5d079-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-404390b5d079-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "exact_match"
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 0.002,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "hit": false
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "hit": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "embed",
+          "attributes": {
+            "questions": [
+              "How do I reset my password?",
+              "How can I reset my password if I forgot it?"
+            ]
+          },
+          "seq": 9,
+          "thread": "MainThread",
+          "elapsed_ms": 0.09899999999999999,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "embedded_together",
+              "term_counts": [
+                6,
+                9
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "embedded_together",
+                "term_counts": [
+                  6,
+                  9
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "semantic_match_three_zone"
+          },
+          "seq": 10,
+          "thread": "MainThread",
+          "elapsed_ms": 0.013,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "similarity": 0.57,
+              "zone": "serve"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "similarity": 0.57,
+                "zone": "serve"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 6,
+            "thread": "MainThread",
+            "elapsed_ms": 0.199,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 7,
+                "thread": "MainThread",
+                "elapsed_ms": 0.184,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-404390b5d079-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-404390b5d079-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 7,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.184,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-404390b5d079-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How do I reset my password?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07908-e501-7163-8a09-404390b5d079-0",
+                          "role": "ai",
+                          "content": "Click 'forgot password' on the login page."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "exact_match"
+            },
+            "seq": 8,
+            "thread": "MainThread",
+            "elapsed_ms": 0.002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "hit": false
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "hit": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "embed",
+            "attributes": {
+              "questions": [
+                "How do I reset my password?",
+                "How can I reset my password if I forgot it?"
+              ]
+            },
+            "seq": 9,
+            "thread": "MainThread",
+            "elapsed_ms": 0.09899999999999999,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "embedded_together",
+                "term_counts": [
+                  6,
+                  9
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "embedded_together",
+                  "term_counts": [
+                    6,
+                    9
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "semantic_match_three_zone"
+            },
+            "seq": 10,
+            "thread": "MainThread",
+            "elapsed_ms": 0.013,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "similarity": 0.57,
+                "zone": "serve"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "similarity": 0.57,
+                  "zone": "serve"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "exact_missed_semantic_caught_it",
+            "exact_match_hit": false,
+            "similarity": 0.57,
+            "served_from_cache": true,
+            "cached_answer": "Click 'forgot password' on the login page."
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_naive_single_threshold_serves_a_confidently_wrong_answer"
+      },
+      "seq": 11,
+      "thread": "MainThread",
+      "elapsed_ms": 0.17300000000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "a_different_question_got_the_wrong_cached_answer",
+          "similarity": 0.385,
+          "served_from_cache": true,
+          "served_answer_was_actually_about": "resetting a password",
+          "asked_question_was_actually_about": "being unable to log in at all"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 12,
+          "thread": "MainThread",
+          "elapsed_ms": 0.13999999999999999,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 13,
+              "thread": "MainThread",
+              "elapsed_ms": 0.131,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How do I reset my password?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07908-e501-7163-8a09-405a22ff2f93-0",
+                    "role": "ai",
+                    "content": "Click 'forgot password' on the login page."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-405a22ff2f93-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 13,
+                "thread": "MainThread",
+                "elapsed_ms": 0.131,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-405a22ff2f93-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-405a22ff2f93-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "embed",
+          "attributes": {
+            "questions": [
+              "How do I reset my password?",
+              "I forgot how to log in, what do I do?"
+            ]
+          },
+          "seq": 14,
+          "thread": "MainThread",
+          "elapsed_ms": 0.019,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "embedded_together",
+              "term_counts": [
+                6,
+                8
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "embedded_together",
+                "term_counts": [
+                  6,
+                  8
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "naive_single_threshold"
+          },
+          "seq": 15,
+          "thread": "MainThread",
+          "elapsed_ms": 0.006,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "similarity": 0.385,
+              "threshold": 0.35,
+              "served": true,
+              "would_have_been_correctly_rejected_at": 0.4
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "similarity": 0.385,
+                "threshold": 0.35,
+                "served": true,
+                "would_have_been_correctly_rejected_at": 0.4
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 12,
+            "thread": "MainThread",
+            "elapsed_ms": 0.13999999999999999,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 13,
+                "thread": "MainThread",
+                "elapsed_ms": 0.131,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-405a22ff2f93-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-405a22ff2f93-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 13,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.131,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-405a22ff2f93-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How do I reset my password?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07908-e501-7163-8a09-405a22ff2f93-0",
+                          "role": "ai",
+                          "content": "Click 'forgot password' on the login page."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "embed",
+            "attributes": {
+              "questions": [
+                "How do I reset my password?",
+                "I forgot how to log in, what do I do?"
+              ]
+            },
+            "seq": 14,
+            "thread": "MainThread",
+            "elapsed_ms": 0.019,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "embedded_together",
+                "term_counts": [
+                  6,
+                  8
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "embedded_together",
+                  "term_counts": [
+                    6,
+                    8
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "naive_single_threshold"
+            },
+            "seq": 15,
+            "thread": "MainThread",
+            "elapsed_ms": 0.006,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "similarity": 0.385,
+                "threshold": 0.35,
+                "served": true,
+                "would_have_been_correctly_rejected_at": 0.4
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "similarity": 0.385,
+                  "threshold": 0.35,
+                  "served": true,
+                  "would_have_been_correctly_rejected_at": 0.4
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "a_different_question_got_the_wrong_cached_answer",
+            "similarity": 0.385,
+            "served_from_cache": true,
+            "served_answer_was_actually_about": "resetting a password",
+            "asked_question_was_actually_about": "being unable to log in at all"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_confident_match_past_its_sources_ttl_still_asks"
+      },
+      "seq": 16,
+      "thread": "MainThread",
+      "elapsed_ms": 0.285,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ttl_overrode_an_otherwise_confident_match",
+          "similarity": 0.57,
+          "high_confidence": true,
+          "source_was_fresh": false,
+          "asked_for_confirmation": true,
+          "fresh_answer": "Click 'Forgot password?' on the sign-in page and check your email for a reset link.",
+          "fresh_answer_differs_from_stale_cache": true
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 17,
+          "thread": "MainThread",
+          "elapsed_ms": 0.124,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 18,
+              "thread": "MainThread",
+              "elapsed_ms": 0.116,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How do I reset my password?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07908-e501-7163-8a09-406b133cf11e-0",
+                    "role": "ai",
+                    "content": "Click 'forgot password' on the login page."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-406b133cf11e-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 18,
+                "thread": "MainThread",
+                "elapsed_ms": 0.116,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-406b133cf11e-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-406b133cf11e-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "embed",
+          "attributes": {
+            "questions": [
+              "How do I reset my password?",
+              "How can I reset my password if I forgot it?"
+            ]
+          },
+          "seq": 19,
+          "thread": "MainThread",
+          "elapsed_ms": 0.017,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "embedded_together",
+              "term_counts": [
+                6,
+                9
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "embedded_together",
+                "term_counts": [
+                  6,
+                  9
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "semantic_match_plus_ttl"
+          },
+          "seq": 20,
+          "thread": "MainThread",
+          "elapsed_ms": 0.008,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "similarity": 0.57,
+              "high_confidence": true,
+              "source": "inventory_system",
+              "ttl": "0:05:00",
+              "fresh": false,
+              "outcome": "ask_despite_high_confidence"
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "similarity": 0.57,
+                "high_confidence": true,
+                "source": "inventory_system",
+                "ttl": "0:05:00",
+                "fresh": false,
+                "outcome": "ask_despite_high_confidence"
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 21,
+          "thread": "MainThread",
+          "elapsed_ms": 0.126,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "called_fresh_because_nothing_was_served",
+              "question": "How can I reset my password if I forgot it?"
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 22,
+              "thread": "MainThread",
+              "elapsed_ms": 0.11699999999999999,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How can I reset my password if I forgot it?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07908-e501-7163-8a09-4071bdb10f0e-0",
+                    "role": "ai",
+                    "content": "Click 'Forgot password?' on the sign-in page and check your email for a reset link."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How can I reset my password if I forgot it?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-4071bdb10f0e-0",
+                      "role": "ai",
+                      "content": "Click 'Forgot password?' on the sign-in page and check your email for a reset link."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 22,
+                "thread": "MainThread",
+                "elapsed_ms": 0.11699999999999999,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How can I reset my password if I forgot it?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-4071bdb10f0e-0",
+                      "role": "ai",
+                      "content": "Click 'Forgot password?' on the sign-in page and check your email for a reset link."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How can I reset my password if I forgot it?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-4071bdb10f0e-0",
+                        "role": "ai",
+                        "content": "Click 'Forgot password?' on the sign-in page and check your email for a reset link."
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "called_fresh_because_nothing_was_served",
+                "question": "How can I reset my password if I forgot it?"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 17,
+            "thread": "MainThread",
+            "elapsed_ms": 0.124,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 18,
+                "thread": "MainThread",
+                "elapsed_ms": 0.116,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-406b133cf11e-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-406b133cf11e-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 18,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.116,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-406b133cf11e-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How do I reset my password?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07908-e501-7163-8a09-406b133cf11e-0",
+                          "role": "ai",
+                          "content": "Click 'forgot password' on the login page."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "embed",
+            "attributes": {
+              "questions": [
+                "How do I reset my password?",
+                "How can I reset my password if I forgot it?"
+              ]
+            },
+            "seq": 19,
+            "thread": "MainThread",
+            "elapsed_ms": 0.017,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "embedded_together",
+                "term_counts": [
+                  6,
+                  9
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "embedded_together",
+                  "term_counts": [
+                    6,
+                    9
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "semantic_match_plus_ttl"
+            },
+            "seq": 20,
+            "thread": "MainThread",
+            "elapsed_ms": 0.008,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "similarity": 0.57,
+                "high_confidence": true,
+                "source": "inventory_system",
+                "ttl": "0:05:00",
+                "fresh": false,
+                "outcome": "ask_despite_high_confidence"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "similarity": 0.57,
+                  "high_confidence": true,
+                  "source": "inventory_system",
+                  "ttl": "0:05:00",
+                  "fresh": false,
+                  "outcome": "ask_despite_high_confidence"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 21,
+            "thread": "MainThread",
+            "elapsed_ms": 0.126,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "called_fresh_because_nothing_was_served",
+                "question": "How can I reset my password if I forgot it?"
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 22,
+                "thread": "MainThread",
+                "elapsed_ms": 0.11699999999999999,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How can I reset my password if I forgot it?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e501-7163-8a09-4071bdb10f0e-0",
+                      "role": "ai",
+                      "content": "Click 'Forgot password?' on the sign-in page and check your email for a reset link."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How can I reset my password if I forgot it?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-4071bdb10f0e-0",
+                        "role": "ai",
+                        "content": "Click 'Forgot password?' on the sign-in page and check your email for a reset link."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 22,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.11699999999999999,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How can I reset my password if I forgot it?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e501-7163-8a09-4071bdb10f0e-0",
+                        "role": "ai",
+                        "content": "Click 'Forgot password?' on the sign-in page and check your email for a reset link."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How can I reset my password if I forgot it?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07908-e501-7163-8a09-4071bdb10f0e-0",
+                          "role": "ai",
+                          "content": "Click 'Forgot password?' on the sign-in page and check your email for a reset link."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "called_fresh_because_nothing_was_served",
+                  "question": "How can I reset my password if I forgot it?"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ttl_overrode_an_otherwise_confident_match",
+            "similarity": 0.57,
+            "high_confidence": true,
+            "source_was_fresh": false,
+            "asked_for_confirmation": true,
+            "fresh_answer": "Click 'Forgot password?' on the sign-in page and check your email for a reset link.",
+            "fresh_answer_differs_from_stale_cache": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "a_weak_match_within_ttl_also_asks_instead_of_guessing"
+      },
+      "seq": 23,
+      "thread": "MainThread",
+      "elapsed_ms": 0.265,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "the_ambiguous_middle_asks_rather_than_guesses",
+          "similarity": 0.45,
+          "zone": "ask",
+          "neither_served_nor_missed": true,
+          "fresh_answer": "You can check your order status from the 'My Orders' page."
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 24,
+          "thread": "MainThread",
+          "elapsed_ms": 0.11699999999999999,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 25,
+              "thread": "MainThread",
+              "elapsed_ms": 0.10900000000000001,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How do I reset my password?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07908-e502-72a2-9361-52b0b1531005-0",
+                    "role": "ai",
+                    "content": "Click 'forgot password' on the login page."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e502-72a2-9361-52b0b1531005-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 25,
+                "thread": "MainThread",
+                "elapsed_ms": 0.10900000000000001,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e502-72a2-9361-52b0b1531005-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e502-72a2-9361-52b0b1531005-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "embed",
+          "attributes": {
+            "questions": [
+              "How do I reset my password?",
+              "How do I check my order status?"
+            ]
+          },
+          "seq": 26,
+          "thread": "MainThread",
+          "elapsed_ms": 0.016,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "embedded_together",
+              "term_counts": [
+                6,
+                7
+              ]
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "embedded_together",
+                "term_counts": [
+                  6,
+                  7
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "decision",
+          "attributes": {
+            "mechanism": "semantic_match_three_zone"
+          },
+          "seq": 27,
+          "thread": "MainThread",
+          "elapsed_ms": 0.006,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "decided_before_calling_the_model",
+              "similarity": 0.45,
+              "zone": "ask",
+              "source_fresh": true
+            }
+          ],
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "decided_before_calling_the_model",
+                "similarity": 0.45,
+                "zone": "ask",
+                "source_fresh": true
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 28,
+          "thread": "MainThread",
+          "elapsed_ms": 0.118,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [
+            {
+              "label": "called_fresh_because_nothing_was_served",
+              "question": "How do I check my order status?"
+            }
+          ],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 29,
+              "thread": "MainThread",
+              "elapsed_ms": 0.111,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How do I check my order status?"
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a07908-e502-72a2-9361-52c82a0e9ed3-0",
+                    "role": "ai",
+                    "content": "You can check your order status from the 'My Orders' page."
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I check my order status?"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e502-72a2-9361-52c82a0e9ed3-0",
+                      "role": "ai",
+                      "content": "You can check your order status from the 'My Orders' page."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 29,
+                "thread": "MainThread",
+                "elapsed_ms": 0.111,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I check my order status?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e502-72a2-9361-52c82a0e9ed3-0",
+                      "role": "ai",
+                      "content": "You can check your order status from the 'My Orders' page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I check my order status?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e502-72a2-9361-52c82a0e9ed3-0",
+                        "role": "ai",
+                        "content": "You can check your order status from the 'My Orders' page."
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "called_fresh_because_nothing_was_served",
+                "question": "How do I check my order status?"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 24,
+            "thread": "MainThread",
+            "elapsed_ms": 0.11699999999999999,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 25,
+                "thread": "MainThread",
+                "elapsed_ms": 0.10900000000000001,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I reset my password?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e502-72a2-9361-52b0b1531005-0",
+                      "role": "ai",
+                      "content": "Click 'forgot password' on the login page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e502-72a2-9361-52b0b1531005-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 25,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.10900000000000001,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I reset my password?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e502-72a2-9361-52b0b1531005-0",
+                        "role": "ai",
+                        "content": "Click 'forgot password' on the login page."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How do I reset my password?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07908-e502-72a2-9361-52b0b1531005-0",
+                          "role": "ai",
+                          "content": "Click 'forgot password' on the login page."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "embed",
+            "attributes": {
+              "questions": [
+                "How do I reset my password?",
+                "How do I check my order status?"
+              ]
+            },
+            "seq": 26,
+            "thread": "MainThread",
+            "elapsed_ms": 0.016,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "embedded_together",
+                "term_counts": [
+                  6,
+                  7
+                ]
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "embedded_together",
+                  "term_counts": [
+                    6,
+                    7
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "decision",
+            "attributes": {
+              "mechanism": "semantic_match_three_zone"
+            },
+            "seq": 27,
+            "thread": "MainThread",
+            "elapsed_ms": 0.006,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "decided_before_calling_the_model",
+                "similarity": 0.45,
+                "zone": "ask",
+                "source_fresh": true
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "decided_before_calling_the_model",
+                  "similarity": 0.45,
+                  "zone": "ask",
+                  "source_fresh": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 28,
+            "thread": "MainThread",
+            "elapsed_ms": 0.118,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "called_fresh_because_nothing_was_served",
+                "question": "How do I check my order status?"
+              }
+            ],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 29,
+                "thread": "MainThread",
+                "elapsed_ms": 0.111,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How do I check my order status?"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a07908-e502-72a2-9361-52c82a0e9ed3-0",
+                      "role": "ai",
+                      "content": "You can check your order status from the 'My Orders' page."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I check my order status?"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e502-72a2-9361-52c82a0e9ed3-0",
+                        "role": "ai",
+                        "content": "You can check your order status from the 'My Orders' page."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 29,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.111,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How do I check my order status?"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a07908-e502-72a2-9361-52c82a0e9ed3-0",
+                        "role": "ai",
+                        "content": "You can check your order status from the 'My Orders' page."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How do I check my order status?"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a07908-e502-72a2-9361-52c82a0e9ed3-0",
+                          "role": "ai",
+                          "content": "You can check your order status from the 'My Orders' page."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "called_fresh_because_nothing_was_served",
+                  "question": "How do I check my order status?"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "the_ambiguous_middle_asks_rather_than_guesses",
+            "similarity": 0.45,
+            "zone": "ask",
+            "neither_served_nor_missed": true,
+            "fresh_answer": "You can check your order status from the 'My Orders' page."
+          }
+        }
+      ]
+    }
+  ]
+}

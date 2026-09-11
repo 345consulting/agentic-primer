@@ -1,0 +1,1041 @@
+{
+  "chapter": "ch12_supervisor",
+  "model_kind": "mock",
+  "source": "f579b61182ec",
+  "summary": {
+    "turns": 4,
+    "messages": 11,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "the_supervisor_delegates",
+        "tools": "consult_inventory_expert, consult_orders_expert",
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 5.13,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 4.804,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 3.9630000000000005,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "consult_inventory_expert",
+                    "consult_orders_expert"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a0683b-433f-73c2-85d0-3ead4d4bcaa1-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "consult_inventory_expert",
+                        "args": {
+                          "question": "How much is milk?"
+                        },
+                        "id": "c1"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "consult_inventory_expert",
+                "id": "c1"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 0.825,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "question": "How much is milk?"
+                },
+                {
+                  "label": "result",
+                  "value": "Milk costs 1.20 per bottle."
+                }
+              ],
+              "children": [
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 1
+                  },
+                  "seq": 5,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.612,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 6,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.357,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 2,
+                          "roles": [
+                            "system",
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-4340-73d2-b70a-959fc8044e6d-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "i1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "name": "tool",
+                      "attributes": {
+                        "name": "price_of",
+                        "id": "i1"
+                      },
+                      "seq": 7,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.23900000000000002,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "args",
+                          "item": "milk"
+                        },
+                        {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 2
+                  },
+                  "seq": 8,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.166,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 9,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.161,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            },
+                            {
+                              "id": "lc_run--01a0683b-4340-73d2-b70a-959fc8044e6d-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "i1"
+                                }
+                              ]
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "i1"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 4,
+                          "roles": [
+                            "system",
+                            "human",
+                            "ai",
+                            "tool"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-4341-7c63-973e-ddc654aa5712-0",
+                            "role": "ai",
+                            "content": "Milk costs 1.20 per bottle."
+                          }
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 10,
+          "thread": "MainThread",
+          "elapsed_ms": 0.193,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 11,
+              "thread": "MainThread",
+              "elapsed_ms": 0.189,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    },
+                    {
+                      "id": "lc_run--01a0683b-433f-73c2-85d0-3ead4d4bcaa1-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "consult_inventory_expert",
+                          "args": {
+                            "question": "How much is milk?"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "Milk costs 1.20 per bottle.",
+                      "tool_call_id": "c1"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "consult_inventory_expert",
+                    "consult_orders_expert"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 4,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a0683b-4341-7c63-973e-dddc15f6a42e-0",
+                    "role": "ai",
+                    "content": "Milk is 1.20."
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "the_supervisor_delegates_to_both",
+        "tools": "consult_inventory_expert, consult_orders_expert",
+        "max_tokens": null
+      },
+      "seq": 12,
+      "thread": "MainThread",
+      "elapsed_ms": 1.436,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 13,
+          "thread": "MainThread",
+          "elapsed_ms": 1.26,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 14,
+              "thread": "MainThread",
+              "elapsed_ms": 0.16699999999999998,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and please order 5 bottles."
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "consult_inventory_expert",
+                    "consult_orders_expert"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a0683b-4341-7c63-973e-ddecd87e58fc-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "consult_inventory_expert",
+                        "args": {
+                          "question": "How much is milk?"
+                        },
+                        "id": "c1"
+                      },
+                      {
+                        "name": "consult_orders_expert",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 5
+                        },
+                        "id": "c2"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "consult_inventory_expert",
+                "id": "c1"
+              },
+              "seq": 15,
+              "thread": "MainThread",
+              "elapsed_ms": 0.545,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "question": "How much is milk?"
+                },
+                {
+                  "label": "result",
+                  "value": "Milk costs 1.20 per bottle."
+                }
+              ],
+              "children": [
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 1
+                  },
+                  "seq": 16,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.337,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 17,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.175,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 2,
+                          "roles": [
+                            "system",
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-4340-73d2-b70a-959fc8044e6d-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "i1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "name": "tool",
+                      "attributes": {
+                        "name": "price_of",
+                        "id": "i1"
+                      },
+                      "seq": 18,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.152,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "args",
+                          "item": "milk"
+                        },
+                        {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 2
+                  },
+                  "seq": 19,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.196,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 20,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.192,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            },
+                            {
+                              "id": "lc_run--01a0683b-4340-73d2-b70a-959fc8044e6d-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "i1"
+                                }
+                              ]
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "i1"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 4,
+                          "roles": [
+                            "system",
+                            "human",
+                            "ai",
+                            "tool"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-4341-7c63-973e-ddc654aa5712-0",
+                            "role": "ai",
+                            "content": "Milk costs 1.20 per bottle."
+                          }
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "consult_orders_expert",
+                "id": "c2"
+              },
+              "seq": 21,
+              "thread": "MainThread",
+              "elapsed_ms": 0.533,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 5
+                },
+                {
+                  "label": "result",
+                  "value": "Ordered 5 bottles of milk."
+                }
+              ],
+              "children": [
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 1
+                  },
+                  "seq": 22,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.355,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 23,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.161,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "Order 5 of milk."
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 2,
+                          "roles": [
+                            "system",
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-4342-72b0-9d97-880692f93da2-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "milk",
+                                  "quantity": 5
+                                },
+                                "id": "o1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "name": "tool",
+                      "attributes": {
+                        "name": "place_order",
+                        "id": "o1"
+                      },
+                      "seq": 24,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.183,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "args",
+                          "item": "milk",
+                          "quantity": 5
+                        },
+                        {
+                          "label": "result",
+                          "value": "ordered 5 x milk"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 2
+                  },
+                  "seq": 25,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.165,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 26,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.161,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "Order 5 of milk."
+                            },
+                            {
+                              "id": "lc_run--01a0683b-4342-72b0-9d97-880692f93da2-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "place_order",
+                                  "args": {
+                                    "item": "milk",
+                                    "quantity": 5
+                                  },
+                                  "id": "o1"
+                                }
+                              ]
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "ordered 5 x milk",
+                              "tool_call_id": "o1"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "place_order"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 4,
+                          "roles": [
+                            "system",
+                            "human",
+                            "ai",
+                            "tool"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a0683b-4342-72b0-9d97-882712bb99e6-0",
+                            "role": "ai",
+                            "content": "Ordered 5 bottles of milk."
+                          }
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 27,
+          "thread": "MainThread",
+          "elapsed_ms": 0.165,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 28,
+              "thread": "MainThread",
+              "elapsed_ms": 0.161,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. You have no pricing or ordering knowledge of your own -- consult the inventory expert for price or stock, and the orders expert to place an order."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk, and please order 5 bottles."
+                    },
+                    {
+                      "id": "lc_run--01a0683b-4341-7c63-973e-ddecd87e58fc-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "consult_inventory_expert",
+                          "args": {
+                            "question": "How much is milk?"
+                          },
+                          "id": "c1"
+                        },
+                        {
+                          "name": "consult_orders_expert",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 5
+                          },
+                          "id": "c2"
+                        }
+                      ]
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "Milk costs 1.20 per bottle.",
+                      "tool_call_id": "c1"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "Ordered 5 bottles of milk.",
+                      "tool_call_id": "c2"
+                    }
+                  ]
+                },
+                {
+                  "label": "tools declared to the mock model",
+                  "names": [
+                    "consult_inventory_expert",
+                    "consult_orders_expert"
+                  ],
+                  "consulted": false
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 5,
+                  "roles": [
+                    "system",
+                    "human",
+                    "ai",
+                    "tool",
+                    "tool"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a0683b-4342-72b0-9d97-88366bcddb2d-0",
+                    "role": "ai",
+                    "content": "Milk is 1.20 each; ordered 5 bottles."
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3068 @@
+{
+  "chapter": "ch09_who_retries",
+  "model_kind": "live",
+  "source": "b8f67c7687ac",
+  "summary": {
+    "turns": 9,
+    "messages": 23,
+    "ended": "no_tool_calls"
+  },
+  "spans": [
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "service_is_busy",
+        "tools": "place_order, price_of",
+        "max_tokens": null
+      },
+      "seq": 1,
+      "thread": "MainThread",
+      "elapsed_ms": 2792.895,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 2,
+          "thread": "MainThread",
+          "elapsed_ms": 2079.4199999999996,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 3,
+              "thread": "MainThread",
+              "elapsed_ms": 1576.834,
+              "model_provider_ms": 1336.2127078771591,
+              "library_ms": 240.62129212284094,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976666107.1508751,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "769",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. Placing an order twice orders it twice.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976667443.363583,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:27 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 f0a2a95cb4d25b2414a9c1a7a754943e.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "tVSYmFS-Ij6qhvOPTm6zS_k17zKhosg3I0yhDFKC2v2p9-I7vNfdRQ==",
+                    "x-amz-cf-pop": "DEN52-P2",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "ca9e4de7d9edfa28f88ecec36495d928"
+                  },
+                  "body": {
+                    "id": "a55292f4-4a26-4481-af40-ec82675c5e4e",
+                    "object": "chat.completion",
+                    "created": 1788406647,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "The user asks \"How much is milk?\" I can check price using price_of tool.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_sLXKev261LlmF023aHLH2550",
+                              "type": "function",
+                              "function": {
+                                "name": "price_of",
+                                "arguments": "{\"item\": \"milk\"}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 479,
+                      "completion_tokens": 63,
+                      "total_tokens": 542,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 18
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 95
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06557-c8a7-7723-bb21-0aa384b1d18e-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "call_00_sLXKev261LlmF023aHLH2550"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The user asks \"How much is milk?\" I can check price using price_of tool."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 479,
+                      "output_tokens": 63,
+                      "total_tokens": 542,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 18
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "call_00_sLXKev261LlmF023aHLH2550"
+              },
+              "seq": 4,
+              "thread": "MainThread",
+              "elapsed_ms": 502.42299999999994,
+              "model_provider_ms": 225.50266706943512,
+              "library_ms": 276.9203329305648,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976667466.461458,
+                  "method": "GET",
+                  "url": "https://httpbin.org/status/429?item=milk",
+                  "headers": {
+                    "accept": "*/*",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "host": "httpbin.org",
+                    "user-agent": "python-httpx/0.28.1"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tools",
+                    "tool_choice"
+                  ],
+                  "body": null
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976667691.964125,
+                  "status": 429,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "access-control-allow-origin": "*",
+                    "connection": "keep-alive",
+                    "content-length": "0",
+                    "content-type": "text/html; charset=utf-8",
+                    "date": "Thu, 03 Sep 2026 03:37:28 GMT",
+                    "server": "gunicorn/19.9.0"
+                  },
+                  "body": null
+                },
+                {
+                  "label": "attempt",
+                  "number": 1,
+                  "message": "['https://httpbin.org'] answered ['429']",
+                  "retryable": true,
+                  "idempotent": true,
+                  "caller_can_fix": false
+                },
+                {
+                  "label": "backoff",
+                  "seconds": 0.05,
+                  "before_attempt": 2
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976667753.7851659,
+                  "method": "GET",
+                  "url": "https://httpbin.org/get?item=milk",
+                  "headers": {
+                    "accept": "*/*",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "host": "httpbin.org",
+                    "user-agent": "python-httpx/0.28.1"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tools",
+                    "tool_choice"
+                  ],
+                  "body": null
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976667961.185958,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "access-control-allow-origin": "*",
+                    "connection": "keep-alive",
+                    "content-length": "390",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:28 GMT",
+                    "server": "gunicorn/19.9.0"
+                  },
+                  "body": {
+                    "args": {
+                      "item": "milk"
+                    },
+                    "headers": {
+                      "Accept": "*/*",
+                      "Accept-Encoding": "gzip, deflate, zstd",
+                      "Authorization": "Bearer primer-demo-key",
+                      "Host": "httpbin.org",
+                      "User-Agent": "python-httpx/0.28.1",
+                      "X-Amzn-Trace-Id": "Root=1-6a98eb78-092a20e642b02cc6125a7d5f"
+                    },
+                    "origin": "71.218.120.63",
+                    "url": "https://httpbin.org/get?item=milk"
+                  }
+                },
+                {
+                  "label": "attempt",
+                  "number": 2
+                },
+                {
+                  "label": "result",
+                  "value": "1.20"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 5,
+          "thread": "MainThread",
+          "elapsed_ms": 713.279,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 6,
+              "thread": "MainThread",
+              "elapsed_ms": 713.247,
+              "model_provider_ms": 697.210667014122,
+              "library_ms": 16.036332985877948,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    },
+                    {
+                      "id": "lc_run--01a06557-c8a7-7723-bb21-0aa384b1d18e-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_00_sLXKev261LlmF023aHLH2550"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The user asks \"How much is milk?\" I can check price using price_of tool."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 479,
+                        "output_tokens": 63,
+                        "total_tokens": 542,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 18
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "1.20",
+                      "tool_call_id": "call_00_sLXKev261LlmF023aHLH2550"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976667976.558041,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1126",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk?",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_sLXKev261LlmF023aHLH2550",
+                            "function": {
+                              "name": "price_of",
+                              "arguments": "{\"item\": \"milk\"}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The user asks \"How much is milk?\" I can check price using price_of tool."
+                      },
+                      {
+                        "content": "1.20",
+                        "role": "tool",
+                        "tool_call_id": "call_00_sLXKev261LlmF023aHLH2550"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. Placing an order twice orders it twice.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976668673.768708,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:29 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 a0b647da77edd97cca88fb4c4b1a9d08.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "oZLc1vp-CabdPYB7ptnxv9LD2OdL2udK8-3ZJMqR8II4nJq6NlgFZw==",
+                    "x-amz-cf-pop": "DEN52-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "9b8d366ea05af96107fc6812e7bd55ae"
+                  },
+                  "body": {
+                    "id": "40169185-b7dc-412c-91ad-e8b42bf62f08",
+                    "object": "chat.completion",
+                    "created": 1788406649,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "Milk is \u00a31.20.",
+                          "reasoning_content": "The price is \u00a31.20."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 557,
+                      "completion_tokens": 17,
+                      "total_tokens": 574,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 512
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 8
+                      },
+                      "prompt_cache_hit_tokens": 512,
+                      "prompt_cache_miss_tokens": 45
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06557-cffc-7952-9b23-335192c29182-0",
+                    "role": "ai",
+                    "content": "Milk is \u00a31.20.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The price is \u00a31.20."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 557,
+                      "output_tokens": 17,
+                      "total_tokens": 574,
+                      "input_token_details": {
+                        "cache_read": 512
+                      },
+                      "output_token_details": {
+                        "reasoning": 8
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "order_may_have_landed",
+        "tools": "place_order, price_of",
+        "max_tokens": null
+      },
+      "seq": 7,
+      "thread": "MainThread",
+      "elapsed_ms": 4970.036999999999,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 8,
+          "thread": "MainThread",
+          "elapsed_ms": 3548.61,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 9,
+              "thread": "MainThread",
+              "elapsed_ms": 1386.368,
+              "model_provider_ms": 1373.0597500801086,
+              "library_ms": 13.308249919891296,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order 2 bottles of milk."
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976668687.213916,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "776",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Order 2 bottles of milk.",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. Placing an order twice orders it twice.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976670060.273666,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:29 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 9b688924e5b0f0b5e4c639d19cb145f0.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "W8yti_g7TdmUpsyv72S9iy_-7c6d95PHtJbTSbw7TXSkyFsWsInIxg==",
+                    "x-amz-cf-pop": "DEN52-P2",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "c61acdd544c718d28b68a5ca37628294"
+                  },
+                  "body": {
+                    "id": "6c5f87ea-9afd-474c-a8cb-918b6f5c94ae",
+                    "object": "chat.completion",
+                    "created": 1788406649,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "The user wants to order 2 bottles of milk. The item is \"milk\" and quantity 2. There's no need to check price. I'll place the order.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_3jajGqbPlJAwFyd2y8H25813",
+                              "type": "function",
+                              "function": {
+                                "name": "place_order",
+                                "arguments": "{\"item\": \"milk\", \"quantity\": 2}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 481,
+                      "completion_tokens": 98,
+                      "total_tokens": 579,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 37
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 97
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06557-d2c3-7db0-a71c-b1ba9593d4a9-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 2
+                        },
+                        "id": "call_00_3jajGqbPlJAwFyd2y8H25813"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The user wants to order 2 bottles of milk. The item is \"milk\" and quantity 2. There's no need to check price. I'll place the order."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 481,
+                      "output_tokens": 98,
+                      "total_tokens": 579,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 37
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "place_order",
+                "id": "call_00_3jajGqbPlJAwFyd2y8H25813"
+              },
+              "seq": 10,
+              "thread": "MainThread",
+              "elapsed_ms": 2162.191,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 2
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976670070.017833,
+                  "method": "GET",
+                  "url": "https://httpbin.org/delay/10?item=milk&quantity=2",
+                  "headers": {
+                    "accept": "*/*",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "host": "httpbin.org",
+                    "user-agent": "python-httpx/0.28.1"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tools",
+                    "tool_choice"
+                  ],
+                  "body": null
+                },
+                {
+                  "label": "attempt",
+                  "number": 1,
+                  "message": "['https://httpbin.org'] did not answer in time, and the call may have been received",
+                  "retryable": true,
+                  "idempotent": false,
+                  "caller_can_fix": false
+                },
+                {
+                  "label": "failed",
+                  "message": "['https://httpbin.org'] did not answer in time, and the call may have been received",
+                  "retryable": true,
+                  "idempotent": false,
+                  "caller_can_fix": false
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 11,
+          "thread": "MainThread",
+          "elapsed_ms": 1421.347,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 12,
+              "thread": "MainThread",
+              "elapsed_ms": 1421.298,
+              "model_provider_ms": 1403.0557919740677,
+              "library_ms": 18.242208025932314,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order 2 bottles of milk."
+                    },
+                    {
+                      "id": "lc_run--01a06557-d2c3-7db0-a71c-b1ba9593d4a9-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 2
+                          },
+                          "id": "call_00_3jajGqbPlJAwFyd2y8H25813"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The user wants to order 2 bottles of milk. The item is \"milk\" and quantity 2. There's no need to check price. I'll place the order."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 481,
+                        "output_tokens": 98,
+                        "total_tokens": 579,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 37
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "['place_order'] did not confirm: ['https://httpbin.org'] did not answer in time, and the call may have been received. It may have taken effect. Do not call it again; say what is uncertain.",
+                      "tool_call_id": "call_00_3jajGqbPlJAwFyd2y8H25813"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976672240.942791,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1396",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Order 2 bottles of milk.",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_3jajGqbPlJAwFyd2y8H25813",
+                            "function": {
+                              "name": "place_order",
+                              "arguments": "{\"item\": \"milk\", \"quantity\": 2}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The user wants to order 2 bottles of milk. The item is \"milk\" and quantity 2. There's no need to check price. I'll place the order."
+                      },
+                      {
+                        "content": "['place_order'] did not confirm: ['https://httpbin.org'] did not answer in time, and the call may have been received. It may have taken effect. Do not call it again; say what is uncertain.",
+                        "role": "tool",
+                        "tool_call_id": "call_00_3jajGqbPlJAwFyd2y8H25813"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. Placing an order twice orders it twice.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976673643.998583,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:33 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 3fc2177a4dd115307e9fe96ea7fefd84.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "Vo76B6zj3r9ZLdGuzv5cPR19hEXHcp_RKveSY6VJbMECPJ-U-Lpo5Q==",
+                    "x-amz-cf-pop": "DEN53-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "a3c4b725447ecf974ff4892f64c95e92"
+                  },
+                  "body": {
+                    "id": "d39b992a-d39c-4c2a-9b7e-cbf4bfa00f78",
+                    "object": "chat.completion",
+                    "created": 1788406653,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "Your order for 2 bottles of milk may or may not have gone through \u2014 the order service timed out without confirming. I did not place a duplicate order. Please check whether the order was received, or let me know if you'd like me to try again.",
+                          "reasoning_content": "The order did not confirm due to a timeout. It may have taken effect. I should not call again. I should say what's uncertain."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 636,
+                      "completion_tokens": 83,
+                      "total_tokens": 719,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 512
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 29
+                      },
+                      "prompt_cache_hit_tokens": 512,
+                      "prompt_cache_miss_tokens": 124
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06557-e0a5-7732-a159-c9f4258355fa-0",
+                    "role": "ai",
+                    "content": "Your order for 2 bottles of milk may or may not have gone through \u2014 the order service timed out without confirming. I did not place a duplicate order. Please check whether the order was received, or let me know if you'd like me to try again.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The order did not confirm due to a timeout. It may have taken effect. I should not call again. I should say what's uncertain."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 636,
+                      "output_tokens": 83,
+                      "total_tokens": 719,
+                      "input_token_details": {
+                        "cache_read": 512
+                      },
+                      "output_token_details": {
+                        "reasoning": 29
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "arguments_are_wrong",
+        "tools": "place_order, price_of",
+        "max_tokens": null
+      },
+      "seq": 13,
+      "thread": "MainThread",
+      "elapsed_ms": 3942.325,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 14,
+          "thread": "MainThread",
+          "elapsed_ms": 1330.434,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 15,
+              "thread": "MainThread",
+              "elapsed_ms": 1330.332,
+              "model_provider_ms": 1317.5502078533173,
+              "library_ms": 12.781792146682847,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order 20 bottles of milk."
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976673656.817458,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "777",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Order 20 bottles of milk.",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. Placing an order twice orders it twice.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976674974.3676659,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:34 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 66fbb9efab6146079af1497f336edf9e.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "dOjoiHe8PGeM6dcCrrMFr88T1CzGBN0xJNLKZYQmumGEGp0xaC8qcg==",
+                    "x-amz-cf-pop": "DEN52-P3",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "d014b6511811c96636d86c967860f25d"
+                  },
+                  "body": {
+                    "id": "52ba2429-b984-4f88-9338-457f06764d66",
+                    "object": "chat.completion",
+                    "created": 1788406654,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "The user asks to order 20 bottles of milk. The tool place_order takes item and quantity. Item enum includes \"milk\". I should order quantity 20 of milk. There is no need to price check, but maybe could check? User says order. Just place order.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_0gNWKEzfkxW7tpmTalxA2476",
+                              "type": "function",
+                              "function": {
+                                "name": "place_order",
+                                "arguments": "{\"item\": \"milk\", \"quantity\": 20}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 481,
+                      "completion_tokens": 118,
+                      "total_tokens": 599,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 57
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 97
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06557-e62d-7fc2-ab61-6a24e9dc507e-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 20
+                        },
+                        "id": "call_00_0gNWKEzfkxW7tpmTalxA2476"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The user asks to order 20 bottles of milk. The tool place_order takes item and quantity. Item enum includes \"milk\". I should order quantity 20 of milk. There is no need to price check, but maybe could check? User says order. Just place order."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 481,
+                      "output_tokens": 118,
+                      "total_tokens": 599,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 57
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "place_order",
+                "id": "call_00_0gNWKEzfkxW7tpmTalxA2476"
+              },
+              "seq": 16,
+              "thread": "MainThread",
+              "elapsed_ms": 0.051,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 20
+                },
+                {
+                  "label": "attempt",
+                  "number": 1,
+                  "message": "quantity ['20'] must be between 1 and 12",
+                  "retryable": false,
+                  "idempotent": false,
+                  "caller_can_fix": true
+                },
+                {
+                  "label": "failed",
+                  "message": "quantity ['20'] must be between 1 and 12",
+                  "retryable": false,
+                  "idempotent": false,
+                  "caller_can_fix": true
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 17,
+          "thread": "MainThread",
+          "elapsed_ms": 1779.641,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 18,
+              "thread": "MainThread",
+              "elapsed_ms": 1378.309,
+              "model_provider_ms": 1362.7460000514984,
+              "library_ms": 15.562999948501556,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order 20 bottles of milk."
+                    },
+                    {
+                      "id": "lc_run--01a06557-e62d-7fc2-ab61-6a24e9dc507e-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 20
+                          },
+                          "id": "call_00_0gNWKEzfkxW7tpmTalxA2476"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The user asks to order 20 bottles of milk. The tool place_order takes item and quantity. Item enum includes \"milk\". I should order quantity 20 of milk. There is no need to price check, but maybe could check? User says order. Just place order."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 481,
+                        "output_tokens": 118,
+                        "total_tokens": 599,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 57
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "['place_order'] rejected the arguments: quantity ['20'] must be between 1 and 12. Correct them and call it again.",
+                      "tool_call_id": "call_00_0gNWKEzfkxW7tpmTalxA2476"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976674989.7942079,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1434",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Order 20 bottles of milk.",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_0gNWKEzfkxW7tpmTalxA2476",
+                            "function": {
+                              "name": "place_order",
+                              "arguments": "{\"item\": \"milk\", \"quantity\": 20}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The user asks to order 20 bottles of milk. The tool place_order takes item and quantity. Item enum includes \"milk\". I should order quantity 20 of milk. There is no need to price check, but maybe could check? User says order. Just place order."
+                      },
+                      {
+                        "content": "['place_order'] rejected the arguments: quantity ['20'] must be between 1 and 12. Correct them and call it again.",
+                        "role": "tool",
+                        "tool_call_id": "call_00_0gNWKEzfkxW7tpmTalxA2476"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. Placing an order twice orders it twice.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976676352.540208,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:36 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 31667d33ae27ae30b347b8856ce52276.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "0RWZeKAZS9-us0X_Wmpsbq-R5nWgQB7bDxT54wcQuy-9rHJBibUKkw==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "79f871958d0a2ed24ab5bd8aa363e58d"
+                  },
+                  "body": {
+                    "id": "8c156b6e-e45c-4d16-8042-f9e82b20af7d",
+                    "object": "chat.completion",
+                    "created": 1788406656,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "The order was rejected because quantity must be between 1 and 12. I need to order 20 bottles but max per order is 12. I could place two orders: 12 and 8. The instructions say placing an order twice orders it twice. So place 12 milk and 8 milk.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_Js38KPKCbv4a3i0dapaT6179",
+                              "type": "function",
+                              "function": {
+                                "name": "place_order",
+                                "arguments": "{\"item\": \"milk\", \"quantity\": 12}"
+                              }
+                            },
+                            {
+                              "index": 1,
+                              "id": "call_01_LAKUVXxjFM2Okl9q7beD9778",
+                              "type": "function",
+                              "function": {
+                                "name": "place_order",
+                                "arguments": "{\"item\": \"milk\", \"quantity\": 8}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 638,
+                      "completion_tokens": 171,
+                      "total_tokens": 809,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 512
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 63
+                      },
+                      "prompt_cache_hit_tokens": 512,
+                      "prompt_cache_miss_tokens": 126
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06557-eb62-7022-8071-8b5050123cd5-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 12
+                        },
+                        "id": "call_00_Js38KPKCbv4a3i0dapaT6179"
+                      },
+                      {
+                        "name": "place_order",
+                        "args": {
+                          "item": "milk",
+                          "quantity": 8
+                        },
+                        "id": "call_01_LAKUVXxjFM2Okl9q7beD9778"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The order was rejected because quantity must be between 1 and 12. I need to order 20 bottles but max per order is 12. I could place two orders: 12 and 8. The instructions say placing an order twice orders it twice. So place 12 milk and 8 milk."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 638,
+                      "output_tokens": 171,
+                      "total_tokens": 809,
+                      "input_token_details": {
+                        "cache_read": 512
+                      },
+                      "output_token_details": {
+                        "reasoning": 63
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "place_order",
+                "id": "call_00_Js38KPKCbv4a3i0dapaT6179"
+              },
+              "seq": 19,
+              "thread": "MainThread",
+              "elapsed_ms": 208.514,
+              "model_provider_ms": 199.40670800209045,
+              "library_ms": 9.107291997909556,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 12
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976676362.5791249,
+                  "method": "GET",
+                  "url": "https://httpbin.org/get?item=milk&quantity=12",
+                  "headers": {
+                    "accept": "*/*",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "host": "httpbin.org",
+                    "user-agent": "python-httpx/0.28.1"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tools",
+                    "tool_choice"
+                  ],
+                  "body": null
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976676561.9858329,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "access-control-allow-origin": "*",
+                    "connection": "keep-alive",
+                    "content-length": "425",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:37 GMT",
+                    "server": "gunicorn/19.9.0"
+                  },
+                  "body": {
+                    "args": {
+                      "item": "milk",
+                      "quantity": "12"
+                    },
+                    "headers": {
+                      "Accept": "*/*",
+                      "Accept-Encoding": "gzip, deflate, zstd",
+                      "Authorization": "Bearer primer-demo-key",
+                      "Host": "httpbin.org",
+                      "User-Agent": "python-httpx/0.28.1",
+                      "X-Amzn-Trace-Id": "Root=1-6a98eb81-578374216bb47d903799d375"
+                    },
+                    "origin": "71.218.120.63",
+                    "url": "https://httpbin.org/get?item=milk&quantity=12"
+                  }
+                },
+                {
+                  "label": "attempt",
+                  "number": 1
+                },
+                {
+                  "label": "result",
+                  "value": "ordered 12 x milk"
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "place_order",
+                "id": "call_01_LAKUVXxjFM2Okl9q7beD9778"
+              },
+              "seq": 20,
+              "thread": "MainThread",
+              "elapsed_ms": 192.654,
+              "model_provider_ms": 184.3385419845581,
+              "library_ms": 8.315458015441891,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 8
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976676570.119041,
+                  "method": "GET",
+                  "url": "https://httpbin.org/get?item=milk&quantity=8",
+                  "headers": {
+                    "accept": "*/*",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "host": "httpbin.org",
+                    "user-agent": "python-httpx/0.28.1"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tools",
+                    "tool_choice"
+                  ],
+                  "body": null
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976676754.457583,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "access-control-allow-origin": "*",
+                    "connection": "keep-alive",
+                    "content-length": "423",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:37 GMT",
+                    "server": "gunicorn/19.9.0"
+                  },
+                  "body": {
+                    "args": {
+                      "item": "milk",
+                      "quantity": "8"
+                    },
+                    "headers": {
+                      "Accept": "*/*",
+                      "Accept-Encoding": "gzip, deflate, zstd",
+                      "Authorization": "Bearer primer-demo-key",
+                      "Host": "httpbin.org",
+                      "User-Agent": "python-httpx/0.28.1",
+                      "X-Amzn-Trace-Id": "Root=1-6a98eb81-00c7f58247887e7012696d60"
+                    },
+                    "origin": "71.218.120.63",
+                    "url": "https://httpbin.org/get?item=milk&quantity=8"
+                  }
+                },
+                {
+                  "label": "attempt",
+                  "number": 1
+                },
+                {
+                  "label": "result",
+                  "value": "ordered 8 x milk"
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 3
+          },
+          "seq": 21,
+          "thread": "MainThread",
+          "elapsed_ms": 832.001,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 22,
+              "thread": "MainThread",
+              "elapsed_ms": 831.92,
+              "model_provider_ms": 817.913666009903,
+              "library_ms": 14.006333990097005,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Order 20 bottles of milk."
+                    },
+                    {
+                      "id": "lc_run--01a06557-e62d-7fc2-ab61-6a24e9dc507e-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 20
+                          },
+                          "id": "call_00_0gNWKEzfkxW7tpmTalxA2476"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The user asks to order 20 bottles of milk. The tool place_order takes item and quantity. Item enum includes \"milk\". I should order quantity 20 of milk. There is no need to price check, but maybe could check? User says order. Just place order."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 481,
+                        "output_tokens": 118,
+                        "total_tokens": 599,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 57
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "['place_order'] rejected the arguments: quantity ['20'] must be between 1 and 12. Correct them and call it again.",
+                      "tool_call_id": "call_00_0gNWKEzfkxW7tpmTalxA2476"
+                    },
+                    {
+                      "id": "lc_run--01a06557-eb62-7022-8071-8b5050123cd5-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 12
+                          },
+                          "id": "call_00_Js38KPKCbv4a3i0dapaT6179"
+                        },
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 8
+                          },
+                          "id": "call_01_LAKUVXxjFM2Okl9q7beD9778"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The order was rejected because quantity must be between 1 and 12. I need to order 20 bottles but max per order is 12. I could place two orders: 12 and 8. The instructions say placing an order twice orders it twice. So place 12 milk and 8 milk."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 638,
+                        "output_tokens": 171,
+                        "total_tokens": 809,
+                        "input_token_details": {
+                          "cache_read": 512
+                        },
+                        "output_token_details": {
+                          "reasoning": 63
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "ordered 12 x milk",
+                      "tool_call_id": "call_00_Js38KPKCbv4a3i0dapaT6179"
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "ordered 8 x milk",
+                      "tool_call_id": "call_01_LAKUVXxjFM2Okl9q7beD9778"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976676768.1732501,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "2235",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "Order 20 bottles of milk.",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_0gNWKEzfkxW7tpmTalxA2476",
+                            "function": {
+                              "name": "place_order",
+                              "arguments": "{\"item\": \"milk\", \"quantity\": 20}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The user asks to order 20 bottles of milk. The tool place_order takes item and quantity. Item enum includes \"milk\". I should order quantity 20 of milk. There is no need to price check, but maybe could check? User says order. Just place order."
+                      },
+                      {
+                        "content": "['place_order'] rejected the arguments: quantity ['20'] must be between 1 and 12. Correct them and call it again.",
+                        "role": "tool",
+                        "tool_call_id": "call_00_0gNWKEzfkxW7tpmTalxA2476"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_Js38KPKCbv4a3i0dapaT6179",
+                            "function": {
+                              "name": "place_order",
+                              "arguments": "{\"item\": \"milk\", \"quantity\": 12}"
+                            }
+                          },
+                          {
+                            "type": "function",
+                            "id": "call_01_LAKUVXxjFM2Okl9q7beD9778",
+                            "function": {
+                              "name": "place_order",
+                              "arguments": "{\"item\": \"milk\", \"quantity\": 8}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The order was rejected because quantity must be between 1 and 12. I need to order 20 bottles but max per order is 12. I could place two orders: 12 and 8. The instructions say placing an order twice orders it twice. So place 12 milk and 8 milk."
+                      },
+                      {
+                        "content": "ordered 12 x milk",
+                        "role": "tool",
+                        "tool_call_id": "call_00_Js38KPKCbv4a3i0dapaT6179"
+                      },
+                      {
+                        "content": "ordered 8 x milk",
+                        "role": "tool",
+                        "tool_call_id": "call_01_LAKUVXxjFM2Okl9q7beD9778"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. Placing an order twice orders it twice.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976677586.0869161,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:37 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 2909646f89d966029e8e630552d19c46.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "F4ut-ebkTMt3v-m0yejbqrAXQf_nOESUuJc42dWZ5kFz9OObzeZY5Q==",
+                    "x-amz-cf-pop": "DEN53-P1",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "b90f55b4cc351ef9054f8beeb66c806a"
+                  },
+                  "body": {
+                    "id": "851117e6-c489-4ecb-886f-480013556f7a",
+                    "object": "chat.completion",
+                    "created": 1788406657,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "Ordered 20 bottles of milk: 12 in one order and 8 in another, since each order is limited to a maximum of 12.",
+                          "reasoning_content": ""
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 839,
+                      "completion_tokens": 32,
+                      "total_tokens": 871,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 768
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 0
+                      },
+                      "prompt_cache_hit_tokens": 768,
+                      "prompt_cache_miss_tokens": 71
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06557-f253-7780-81cf-b4a810cab258-0",
+                    "role": "ai",
+                    "content": "Ordered 20 bottles of milk: 12 in one order and 8 in another, since each order is limited to a maximum of 12.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": ""
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 839,
+                      "output_tokens": 32,
+                      "total_tokens": 871,
+                      "input_token_details": {
+                        "cache_read": 768
+                      },
+                      "output_token_details": {
+                        "reasoning": 0
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "attributes": {
+        "name": "service_says_no",
+        "tools": "place_order, price_of",
+        "max_tokens": null
+      },
+      "seq": 23,
+      "thread": "MainThread",
+      "elapsed_ms": 3121.735,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "ended",
+          "reason": "no_tool_calls"
+        }
+      ],
+      "children": [
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 24,
+          "thread": "MainThread",
+          "elapsed_ms": 1889.014,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 25,
+              "thread": "MainThread",
+              "elapsed_ms": 1225.261,
+              "model_provider_ms": 1210.7394169569016,
+              "library_ms": 14.521583043098417,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976677600.480333,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "769",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk?",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. Placing an order twice orders it twice.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976678811.2197499,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:38 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 c8eaab496487afbdb9029903afd8f5b2.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "42KLLo1PHTA-wFi23lmcBK35NYuJQdp3Llyl5OASuHR8xEgOwVh3Jg==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "b1776159a282ddb19435c6a898235fc8"
+                  },
+                  "body": {
+                    "id": "20a90779-3420-46c2-a7ea-16cd2814e0c3",
+                    "object": "chat.completion",
+                    "created": 1788406658,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "",
+                          "reasoning_content": "The user asks \"How much is milk?\" I can use price_of tool.",
+                          "tool_calls": [
+                            {
+                              "index": 0,
+                              "id": "call_00_uDXvVQyCwkNdHgTVxp3s8693",
+                              "type": "function",
+                              "function": {
+                                "name": "price_of",
+                                "arguments": "{\"item\": \"milk\"}"
+                              }
+                            }
+                          ]
+                        },
+                        "logprobs": null,
+                        "finish_reason": "tool_calls"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 479,
+                      "completion_tokens": 61,
+                      "total_tokens": 540,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 384
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 16
+                      },
+                      "prompt_cache_hit_tokens": 384,
+                      "prompt_cache_miss_tokens": 95
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06557-f595-7d01-bb45-ad6d93493154-0",
+                    "role": "ai",
+                    "content": "",
+                    "tool_calls": [
+                      {
+                        "name": "price_of",
+                        "args": {
+                          "item": "milk"
+                        },
+                        "id": "call_00_uDXvVQyCwkNdHgTVxp3s8693"
+                      }
+                    ],
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The user asks \"How much is milk?\" I can use price_of tool."
+                    },
+                    "finish_reason": "tool_calls",
+                    "usage": {
+                      "input_tokens": 479,
+                      "output_tokens": 61,
+                      "total_tokens": 540,
+                      "input_token_details": {
+                        "cache_read": 384
+                      },
+                      "output_token_details": {
+                        "reasoning": 16
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "price_of",
+                "id": "call_00_uDXvVQyCwkNdHgTVxp3s8693"
+              },
+              "seq": 26,
+              "thread": "MainThread",
+              "elapsed_ms": 663.693,
+              "model_provider_ms": 653.647707939148,
+              "library_ms": 10.045292060852034,
+              "notes": [
+                {
+                  "label": "args",
+                  "item": "milk"
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976678822.374083,
+                  "method": "GET",
+                  "url": "https://httpbin.org/status/404?item=milk",
+                  "headers": {
+                    "accept": "*/*",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "host": "httpbin.org",
+                    "user-agent": "python-httpx/0.28.1"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tools",
+                    "tool_choice"
+                  ],
+                  "body": null
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976679476.021791,
+                  "status": 404,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "access-control-allow-origin": "*",
+                    "connection": "keep-alive",
+                    "content-length": "0",
+                    "content-type": "text/html; charset=utf-8",
+                    "date": "Thu, 03 Sep 2026 03:37:40 GMT",
+                    "server": "gunicorn/19.9.0"
+                  },
+                  "body": null
+                },
+                {
+                  "label": "attempt",
+                  "number": 1,
+                  "message": "['https://httpbin.org'] answered ['404']",
+                  "retryable": false,
+                  "idempotent": true,
+                  "caller_can_fix": false
+                },
+                {
+                  "label": "failed",
+                  "message": "['https://httpbin.org'] answered ['404']",
+                  "retryable": false,
+                  "idempotent": true,
+                  "caller_can_fix": false
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 2
+          },
+          "seq": 27,
+          "thread": "MainThread",
+          "elapsed_ms": 1232.5759999999998,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "live"
+              },
+              "seq": 28,
+              "thread": "MainThread",
+              "elapsed_ms": 1232.539,
+              "model_provider_ms": 1217.5960410833359,
+              "library_ms": 14.94295891666411,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly. Use the tools you are given."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    },
+                    {
+                      "id": "lc_run--01a06557-f595-7d01-bb45-ad6d93493154-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_00_uDXvVQyCwkNdHgTVxp3s8693"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "The user asks \"How much is milk?\" I can use price_of tool."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 479,
+                        "output_tokens": 61,
+                        "total_tokens": 540,
+                        "input_token_details": {
+                          "cache_read": 384
+                        },
+                        "output_token_details": {
+                          "reasoning": 16
+                        }
+                      }
+                    },
+                    {
+                      "id": null,
+                      "role": "tool",
+                      "content": "['price_of'] failed: ['https://httpbin.org'] answered ['404']. It will not succeed. Answer without it.",
+                      "tool_call_id": "call_00_uDXvVQyCwkNdHgTVxp3s8693"
+                    }
+                  ]
+                },
+                {
+                  "label": "wire request",
+                  "attempt": 1,
+                  "at_ms": 976679490.40825,
+                  "method": "POST",
+                  "url": "https://api.deepseek.com/v1/chat/completions",
+                  "headers": {
+                    "accept": "application/json",
+                    "accept-encoding": "gzip, deflate, zstd",
+                    "authorization": null,
+                    "connection": "keep-alive",
+                    "content-length": "1210",
+                    "content-type": "application/json",
+                    "host": "api.deepseek.com",
+                    "user-agent": "OpenAI/Python 3.6.0",
+                    "x-stainless-arch": "arm64",
+                    "x-stainless-async": "false",
+                    "x-stainless-lang": "python",
+                    "x-stainless-os": "MacOS",
+                    "x-stainless-package-version": "3.6.0",
+                    "x-stainless-raw-response": "true",
+                    "x-stainless-read-timeout": "60.0",
+                    "x-stainless-retry-count": "0",
+                    "x-stainless-runtime": "CPython",
+                    "x-stainless-runtime-version": "3.14.7"
+                  },
+                  "defaulted_by_model_provider": [
+                    "temperature",
+                    "max_tokens",
+                    "top_p",
+                    "stop",
+                    "seed",
+                    "tool_choice"
+                  ],
+                  "body": {
+                    "messages": [
+                      {
+                        "content": "You answer briefly and plainly. Use the tools you are given.",
+                        "role": "system"
+                      },
+                      {
+                        "content": "How much is milk?",
+                        "role": "user"
+                      },
+                      {
+                        "content": null,
+                        "role": "assistant",
+                        "tool_calls": [
+                          {
+                            "type": "function",
+                            "id": "call_00_uDXvVQyCwkNdHgTVxp3s8693",
+                            "function": {
+                              "name": "price_of",
+                              "arguments": "{\"item\": \"milk\"}"
+                            }
+                          }
+                        ],
+                        "reasoning_content": "The user asks \"How much is milk?\" I can use price_of tool."
+                      },
+                      {
+                        "content": "['price_of'] failed: ['https://httpbin.org'] answered ['404']. It will not succeed. Answer without it.",
+                        "role": "tool",
+                        "tool_call_id": "call_00_uDXvVQyCwkNdHgTVxp3s8693"
+                      }
+                    ],
+                    "model": "deepseek-v4-flash",
+                    "stream": false,
+                    "tools": [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. Placing an order twice orders it twice.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "parameters": {
+                            "properties": {
+                              "item": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "wire response",
+                  "at_ms": 976680708.004291,
+                  "status": 200,
+                  "headers": {
+                    "access-control-allow-credentials": "true",
+                    "connection": "keep-alive",
+                    "content-encoding": "gzip",
+                    "content-type": "application/json",
+                    "date": "Thu, 03 Sep 2026 03:37:40 GMT",
+                    "server": "elb",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "vary": "origin, access-control-request-method, access-control-request-headers",
+                    "via": "1.1 8b9292a3a907c0814dfd42d54fb3ab62.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "CnFeOs_gP2pT7TVUeyVUK-weJ5AoTSRrD5ckM1bzZpOdE_U9JnkXgw==",
+                    "x-amz-cf-pop": "DEN53-P4",
+                    "x-cache": "Miss from cloudfront",
+                    "x-content-type-options": "nosniff",
+                    "x-ds-trace-id": "ba375541b39da10e4f096d10619b169a"
+                  },
+                  "body": {
+                    "id": "f8aa4468-d308-4aea-8be8-42f318f0785a",
+                    "object": "chat.completion",
+                    "created": 1788406660,
+                    "model": "deepseek-v4-flash",
+                    "choices": [
+                      {
+                        "index": 0,
+                        "message": {
+                          "role": "assistant",
+                          "content": "I'm unable to retrieve the current price of milk right now. Please try again later.",
+                          "reasoning_content": "The price_of tool failed. I need to answer without it. I don't have price info. Maybe I can try again? It says \"It will not succeed. Answer without it.\" So I should answer that I cannot determine the price."
+                        },
+                        "logprobs": null,
+                        "finish_reason": "stop"
+                      }
+                    ],
+                    "usage": {
+                      "prompt_tokens": 577,
+                      "completion_tokens": 68,
+                      "total_tokens": 645,
+                      "prompt_tokens_details": {
+                        "cached_tokens": 512
+                      },
+                      "completion_tokens_details": {
+                        "reasoning_tokens": 49
+                      },
+                      "prompt_cache_hit_tokens": 512,
+                      "prompt_cache_miss_tokens": 65
+                    },
+                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                  }
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a06557-fcf6-71e1-8124-42c8efbcc107-0",
+                    "role": "ai",
+                    "content": "I'm unable to retrieve the current price of milk right now. Please try again later.",
+                    "additional_kwargs": {
+                      "refusal": null,
+                      "reasoning_content": "The price_of tool failed. I need to answer without it. I don't have price info. Maybe I can try again? It says \"It will not succeed. Answer without it.\" So I should answer that I cannot determine the price."
+                    },
+                    "finish_reason": "stop",
+                    "usage": {
+                      "input_tokens": 577,
+                      "output_tokens": 68,
+                      "total_tokens": 645,
+                      "input_token_details": {
+                        "cache_read": 512
+                      },
+                      "output_token_details": {
+                        "reasoning": 49
+                      }
+                    }
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
