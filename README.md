@@ -1,5 +1,7 @@
 # The agentic primer — the mechanics of an agentic harness
 
+Read it live: **[345consulting.github.io/agentic-primer](https://345consulting.github.io/agentic-primer/out/)**
+
 ## The definition
 
 > **An agent is a loop whose exit condition is set by the model.**
