@@ -1,6 +1,6 @@
 # The agentic primer — the mechanics of an agentic harness
 
-Read it live: **[345consulting.github.io/agentic-primer](https://345consulting.github.io/agentic-primer/out/)**
+Read it live: **[345consulting.github.io/agentic-primer](https://345consulting.github.io/agentic-primer/)**
 
 ## The definition
 
