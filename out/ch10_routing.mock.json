@@ -1,7 +1,7 @@
 {
   "chapter": "ch10_routing",
   "model_kind": "mock",
-  "source": "9cf35e01cb20",
+  "source": "17d2c6285077",
   "summary": {
     "turns": 5,
     "messages": 11,
@@ -17,7 +17,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 0.179,
+      "elapsed_ms": 0.188,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -34,7 +34,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 0.006,
+          "elapsed_ms": 0.008,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -44,7 +44,58 @@
               "value": "bread, butter, chips, milk"
             }
           ],
-          "children": []
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "answered directly",
+                "because": "the catalog is a known fact",
+                "value": "bread, butter, chips, milk"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 0.008,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "answered directly",
+                "because": "the catalog is a known fact",
+                "value": "bread, butter, chips, milk"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "answered directly",
+                  "because": "the catalog is a known fact",
+                  "value": "bread, butter, chips, milk"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "answered_without_a_model"
+          }
         }
       ]
     },
@@ -57,7 +108,7 @@
       },
       "seq": 3,
       "thread": "MainThread",
-      "elapsed_ms": 4.505,
+      "elapsed_ms": 5.043,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -74,7 +125,7 @@
           },
           "seq": 4,
           "thread": "MainThread",
-          "elapsed_ms": 4.248,
+          "elapsed_ms": 4.662,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -86,7 +137,7 @@
               },
               "seq": 5,
               "thread": "MainThread",
-              "elapsed_ms": 3.935,
+              "elapsed_ms": 4.13,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -102,6 +153,69 @@
                       "id": null,
                       "role": "human",
                       "content": "Order 2 bottles of milk."
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
+                    },
+                    {
+                      "name": "price_of",
+                      "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          }
+                        },
+                        "required": [
+                          "item"
+                        ],
+                        "title": "price_of",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -124,7 +238,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a067de-2895-77a0-9dfe-79f5c6f0cab5-0",
+                    "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -140,7 +254,133 @@
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order 2 bottles of milk."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 2
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
             },
             {
               "name": "tool",
@@ -150,7 +390,7 @@
               },
               "seq": 6,
               "thread": "MainThread",
-              "elapsed_ms": 0.29300000000000004,
+              "elapsed_ms": 0.49299999999999994,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -172,7 +412,361 @@
                   "value": "ordered 2 x milk"
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "item": "milk",
+                    "quantity": 2
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "routed",
+                    "to": "confirm_before_dispatch"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "confirmed",
+                    "summary": "2 x milk"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "ordered 2 x milk"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 5,
+                "thread": "MainThread",
+                "elapsed_ms": 4.13,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order 2 bottles of milk."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 2
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order 2 bottles of milk."
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 2
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "place_order",
+                  "id": "c1"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.49299999999999994,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk",
+                    "quantity": 2
+                  },
+                  {
+                    "label": "routed",
+                    "to": "confirm_before_dispatch"
+                  },
+                  {
+                    "label": "confirmed",
+                    "summary": "2 x milk"
+                  },
+                  {
+                    "label": "result",
+                    "value": "ordered 2 x milk"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk",
+                      "quantity": 2
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "routed",
+                      "to": "confirm_before_dispatch"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "confirmed",
+                      "summary": "2 x milk"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "ordered 2 x milk"
+                    }
+                  }
+                ]
+              }
             }
           ]
         },
@@ -183,7 +777,7 @@
           },
           "seq": 7,
           "thread": "MainThread",
-          "elapsed_ms": 0.236,
+          "elapsed_ms": 0.34900000000000003,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -195,7 +789,7 @@
               },
               "seq": 8,
               "thread": "MainThread",
-              "elapsed_ms": 0.23,
+              "elapsed_ms": 0.33799999999999997,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -213,7 +807,7 @@
                       "content": "Order 2 bottles of milk."
                     },
                     {
-                      "id": "lc_run--01a067de-2895-77a0-9dfe-79f5c6f0cab5-0",
+                      "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -232,6 +826,69 @@
                       "role": "tool",
                       "content": "ordered 2 x milk",
                       "tool_call_id": "c1"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
+                    },
+                    {
+                      "name": "price_of",
+                      "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          }
+                        },
+                        "required": [
+                          "item"
+                        ],
+                        "title": "price_of",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -256,15 +913,1679 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a067de-2896-7ea1-8e42-0bf1d930d0be-0",
+                    "id": "lc_run--01a09c8f-391f-7721-9569-84658334b876-0",
                     "role": "ai",
                     "content": "Ordered 2 bottles of milk."
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order 2 bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 2
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "ordered 2 x milk",
+                        "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-391f-7721-9569-84658334b876-0",
+                      "role": "ai",
+                      "content": "Ordered 2 bottles of milk."
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 8,
+                "thread": "MainThread",
+                "elapsed_ms": 0.33799999999999997,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order 2 bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 2
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "ordered 2 x milk",
+                        "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-391f-7721-9569-84658334b876-0",
+                      "role": "ai",
+                      "content": "Ordered 2 bottles of milk."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order 2 bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 2
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "ordered 2 x milk",
+                          "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-391f-7721-9569-84658334b876-0",
+                        "role": "ai",
+                        "content": "Ordered 2 bottles of milk."
+                      }
+                    }
+                  }
+                ]
+              }
             }
           ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 4,
+            "thread": "MainThread",
+            "elapsed_ms": 4.662,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 5,
+                "thread": "MainThread",
+                "elapsed_ms": 4.13,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order 2 bottles of milk."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "place_order",
+                          "args": {
+                            "item": "milk",
+                            "quantity": 2
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order 2 bottles of milk."
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 2
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "place_order",
+                  "id": "c1"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.49299999999999994,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk",
+                    "quantity": 2
+                  },
+                  {
+                    "label": "routed",
+                    "to": "confirm_before_dispatch"
+                  },
+                  {
+                    "label": "confirmed",
+                    "summary": "2 x milk"
+                  },
+                  {
+                    "label": "result",
+                    "value": "ordered 2 x milk"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk",
+                      "quantity": 2
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "routed",
+                      "to": "confirm_before_dispatch"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "confirmed",
+                      "summary": "2 x milk"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "ordered 2 x milk"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 5,
+                  "thread": "MainThread",
+                  "elapsed_ms": 4.13,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order 2 bottles of milk."
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 2
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Order 2 bottles of milk."
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          },
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order",
+                          "price_of"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 2
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "place_order",
+                    "id": "c1"
+                  },
+                  "seq": 6,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.49299999999999994,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "item": "milk",
+                      "quantity": 2
+                    },
+                    {
+                      "label": "routed",
+                      "to": "confirm_before_dispatch"
+                    },
+                    {
+                      "label": "confirmed",
+                      "summary": "2 x milk"
+                    },
+                    {
+                      "label": "result",
+                      "value": "ordered 2 x milk"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "item": "milk",
+                        "quantity": 2
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "routed",
+                        "to": "confirm_before_dispatch"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "confirmed",
+                        "summary": "2 x milk"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "ordered 2 x milk"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 7,
+            "thread": "MainThread",
+            "elapsed_ms": 0.34900000000000003,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 8,
+                "thread": "MainThread",
+                "elapsed_ms": 0.33799999999999997,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Order 2 bottles of milk."
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "place_order",
+                            "args": {
+                              "item": "milk",
+                              "quantity": 2
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "ordered 2 x milk",
+                        "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-391f-7721-9569-84658334b876-0",
+                      "role": "ai",
+                      "content": "Ordered 2 bottles of milk."
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order 2 bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 2
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "ordered 2 x milk",
+                          "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-391f-7721-9569-84658334b876-0",
+                        "role": "ai",
+                        "content": "Ordered 2 bottles of milk."
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 8,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.33799999999999997,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Order 2 bottles of milk."
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "place_order",
+                              "args": {
+                                "item": "milk",
+                                "quantity": 2
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "ordered 2 x milk",
+                          "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-391f-7721-9569-84658334b876-0",
+                        "role": "ai",
+                        "content": "Ordered 2 bottles of milk."
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Order 2 bottles of milk."
+                          },
+                          {
+                            "id": "lc_run--01a09c8f-391e-7c92-bc29-0203a004cfb9-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "place_order",
+                                "args": {
+                                  "item": "milk",
+                                  "quantity": 2
+                                },
+                                "id": "c1"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "ordered 2 x milk",
+                            "tool_call_id": "c1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          },
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order",
+                          "price_of"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-391f-7721-9569-84658334b876-0",
+                          "role": "ai",
+                          "content": "Ordered 2 bottles of milk."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "no_tool_calls"
+          }
         }
       ]
     },
@@ -277,7 +2598,7 @@
       },
       "seq": 9,
       "thread": "MainThread",
-      "elapsed_ms": 0.388,
+      "elapsed_ms": 0.46599999999999997,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -294,7 +2615,7 @@
           },
           "seq": 10,
           "thread": "MainThread",
-          "elapsed_ms": 0.374,
+          "elapsed_ms": 0.44,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -306,7 +2627,7 @@
               },
               "seq": 11,
               "thread": "MainThread",
-              "elapsed_ms": 0.18000000000000002,
+              "elapsed_ms": 0.232,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -322,6 +2643,69 @@
                       "id": null,
                       "role": "human",
                       "content": "How much is milk, and how much are chips?"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
+                    },
+                    {
+                      "name": "price_of",
+                      "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          }
+                        },
+                        "required": [
+                          "item"
+                        ],
+                        "title": "price_of",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -344,7 +2728,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a067de-2896-7ea1-8e42-0c0d2350171c-0",
+                    "id": "lc_run--01a09c8f-391f-7721-9569-847580a4ee53-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -359,7 +2743,132 @@
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How much is milk, and how much are chips?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-391f-7721-9569-847580a4ee53-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
             },
             {
               "name": "tool",
@@ -369,7 +2878,7 @@
               },
               "seq": 12,
               "thread": "MainThread",
-              "elapsed_ms": 0.182,
+              "elapsed_ms": 0.191,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -386,7 +2895,338 @@
                   "value": "1.20 for milk"
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "item": "milk"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "routed",
+                    "to": "dispatch_directly"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "1.20 for milk"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 11,
+                "thread": "MainThread",
+                "elapsed_ms": 0.232,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How much is milk, and how much are chips?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-391f-7721-9569-847580a4ee53-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk, and how much are chips?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-391f-7721-9569-847580a4ee53-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "price_of",
+                  "id": "c1"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.191,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk"
+                  },
+                  {
+                    "label": "routed",
+                    "to": "dispatch_directly"
+                  },
+                  {
+                    "label": "result",
+                    "value": "1.20 for milk"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "routed",
+                      "to": "dispatch_directly"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "1.20 for milk"
+                    }
+                  }
+                ]
+              }
             }
           ]
         },
@@ -397,7 +3237,7 @@
           },
           "seq": 13,
           "thread": "MainThread",
-          "elapsed_ms": 0.003,
+          "elapsed_ms": 0.005,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -407,7 +3247,683 @@
               "value": "Here's what I found before running out of turns: 1.20 for milk"
             }
           ],
-          "children": []
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "wrapped up",
+                "because": "no turns left to ask again",
+                "value": "Here's what I found before running out of turns: 1.20 for milk"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 10,
+            "thread": "MainThread",
+            "elapsed_ms": 0.44,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 11,
+                "thread": "MainThread",
+                "elapsed_ms": 0.232,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "How much is milk, and how much are chips?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "place_order",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-391f-7721-9569-847580a4ee53-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "c1"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk, and how much are chips?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-391f-7721-9569-847580a4ee53-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "price_of",
+                  "id": "c1"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.191,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk"
+                  },
+                  {
+                    "label": "routed",
+                    "to": "dispatch_directly"
+                  },
+                  {
+                    "label": "result",
+                    "value": "1.20 for milk"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "routed",
+                      "to": "dispatch_directly"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "1.20 for milk"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 11,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.232,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "How much is milk, and how much are chips?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "place_order",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-391f-7721-9569-847580a4ee53-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "c1"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk, and how much are chips?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item. A write: routed through confirmation first.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          },
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. A read: routed directly.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "place_order",
+                          "price_of"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-391f-7721-9569-847580a4ee53-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "c1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "price_of",
+                    "id": "c1"
+                  },
+                  "seq": 12,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.191,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "item": "milk"
+                    },
+                    {
+                      "label": "routed",
+                      "to": "dispatch_directly"
+                    },
+                    {
+                      "label": "result",
+                      "value": "1.20 for milk"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "item": "milk"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "routed",
+                        "to": "dispatch_directly"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "1.20 for milk"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 13,
+            "thread": "MainThread",
+            "elapsed_ms": 0.005,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "wrapped up",
+                "because": "no turns left to ask again",
+                "value": "Here's what I found before running out of turns: 1.20 for milk"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "wrapped up",
+                  "because": "no turns left to ask again",
+                  "value": "Here's what I found before running out of turns: 1.20 for milk"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "wrapped_up_early"
+          }
         }
       ]
     }

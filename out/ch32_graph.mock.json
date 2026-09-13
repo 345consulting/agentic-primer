@@ -1,7 +1,7 @@
 {
   "chapter": "ch32_graph",
   "model_kind": "mock",
-  "source": "5eb7f7d1b9e9",
+  "source": "529d1124d058",
   "summary": {
     "turns": 0,
     "messages": 0,
@@ -15,7 +15,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 2.87,
+      "elapsed_ms": 2.691,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -33,7 +33,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 0.46299999999999997,
+          "elapsed_ms": 0.372,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -45,7 +45,7 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 0.439,
+              "elapsed_ms": 0.35300000000000004,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -53,12 +53,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "78cb81c0-8d8f-4873-bbad-3ed11e8a2a4f",
+                      "id": "325d43c7-31df-41bb-8e54-c88a3242b1c7",
                       "role": "system",
                       "content": "You answer briefly and plainly. Use the tools you are given."
                     },
                     {
-                      "id": "ecacfea7-e9e8-4725-a156-2ebdae41b130",
+                      "id": "b904b598-485c-4946-b0a5-500181d60436",
                       "role": "human",
                       "content": "Say hello, briefly."
                     }
@@ -76,7 +76,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06dc9-8189-7513-84dd-b52da875ca13-0",
+                    "id": "lc_run--01a09c8f-838e-7703-8548-2e36ec1a899d-0",
                     "role": "ai",
                     "content": "Hello there."
                   }
@@ -90,12 +90,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "78cb81c0-8d8f-4873-bbad-3ed11e8a2a4f",
+                        "id": "325d43c7-31df-41bb-8e54-c88a3242b1c7",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "ecacfea7-e9e8-4725-a156-2ebdae41b130",
+                        "id": "b904b598-485c-4946-b0a5-500181d60436",
                         "role": "human",
                         "content": "Say hello, briefly."
                       }
@@ -119,7 +119,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-8189-7513-84dd-b52da875ca13-0",
+                      "id": "lc_run--01a09c8f-838e-7703-8548-2e36ec1a899d-0",
                       "role": "ai",
                       "content": "Hello there."
                     }
@@ -138,7 +138,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 0.439,
+                "elapsed_ms": 0.35300000000000004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -146,12 +146,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "78cb81c0-8d8f-4873-bbad-3ed11e8a2a4f",
+                        "id": "325d43c7-31df-41bb-8e54-c88a3242b1c7",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "ecacfea7-e9e8-4725-a156-2ebdae41b130",
+                        "id": "b904b598-485c-4946-b0a5-500181d60436",
                         "role": "human",
                         "content": "Say hello, briefly."
                       }
@@ -169,7 +169,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-8189-7513-84dd-b52da875ca13-0",
+                      "id": "lc_run--01a09c8f-838e-7703-8548-2e36ec1a899d-0",
                       "role": "ai",
                       "content": "Hello there."
                     }
@@ -183,12 +183,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "78cb81c0-8d8f-4873-bbad-3ed11e8a2a4f",
+                          "id": "325d43c7-31df-41bb-8e54-c88a3242b1c7",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "ecacfea7-e9e8-4725-a156-2ebdae41b130",
+                          "id": "b904b598-485c-4946-b0a5-500181d60436",
                           "role": "human",
                           "content": "Say hello, briefly."
                         }
@@ -212,7 +212,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-8189-7513-84dd-b52da875ca13-0",
+                        "id": "lc_run--01a09c8f-838e-7703-8548-2e36ec1a899d-0",
                         "role": "ai",
                         "content": "Hello there."
                       }
@@ -234,7 +234,7 @@
             },
             "seq": 2,
             "thread": "MainThread",
-            "elapsed_ms": 0.46299999999999997,
+            "elapsed_ms": 0.372,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -246,7 +246,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 0.439,
+                "elapsed_ms": 0.35300000000000004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -254,12 +254,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "78cb81c0-8d8f-4873-bbad-3ed11e8a2a4f",
+                        "id": "325d43c7-31df-41bb-8e54-c88a3242b1c7",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "ecacfea7-e9e8-4725-a156-2ebdae41b130",
+                        "id": "b904b598-485c-4946-b0a5-500181d60436",
                         "role": "human",
                         "content": "Say hello, briefly."
                       }
@@ -277,7 +277,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-8189-7513-84dd-b52da875ca13-0",
+                      "id": "lc_run--01a09c8f-838e-7703-8548-2e36ec1a899d-0",
                       "role": "ai",
                       "content": "Hello there."
                     }
@@ -291,12 +291,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "78cb81c0-8d8f-4873-bbad-3ed11e8a2a4f",
+                          "id": "325d43c7-31df-41bb-8e54-c88a3242b1c7",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "ecacfea7-e9e8-4725-a156-2ebdae41b130",
+                          "id": "b904b598-485c-4946-b0a5-500181d60436",
                           "role": "human",
                           "content": "Say hello, briefly."
                         }
@@ -320,7 +320,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-8189-7513-84dd-b52da875ca13-0",
+                        "id": "lc_run--01a09c8f-838e-7703-8548-2e36ec1a899d-0",
                         "role": "ai",
                         "content": "Hello there."
                       }
@@ -339,7 +339,7 @@
                   },
                   "seq": 3,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.439,
+                  "elapsed_ms": 0.35300000000000004,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -347,12 +347,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "78cb81c0-8d8f-4873-bbad-3ed11e8a2a4f",
+                          "id": "325d43c7-31df-41bb-8e54-c88a3242b1c7",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "ecacfea7-e9e8-4725-a156-2ebdae41b130",
+                          "id": "b904b598-485c-4946-b0a5-500181d60436",
                           "role": "human",
                           "content": "Say hello, briefly."
                         }
@@ -370,7 +370,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-8189-7513-84dd-b52da875ca13-0",
+                        "id": "lc_run--01a09c8f-838e-7703-8548-2e36ec1a899d-0",
                         "role": "ai",
                         "content": "Hello there."
                       }
@@ -384,12 +384,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "78cb81c0-8d8f-4873-bbad-3ed11e8a2a4f",
+                            "id": "325d43c7-31df-41bb-8e54-c88a3242b1c7",
                             "role": "system",
                             "content": "You answer briefly and plainly. Use the tools you are given."
                           },
                           {
-                            "id": "ecacfea7-e9e8-4725-a156-2ebdae41b130",
+                            "id": "b904b598-485c-4946-b0a5-500181d60436",
                             "role": "human",
                             "content": "Say hello, briefly."
                           }
@@ -413,7 +413,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06dc9-8189-7513-84dd-b52da875ca13-0",
+                          "id": "lc_run--01a09c8f-838e-7703-8548-2e36ec1a899d-0",
                           "role": "ai",
                           "content": "Hello there."
                         }
@@ -442,7 +442,7 @@
       },
       "seq": 4,
       "thread": "MainThread",
-      "elapsed_ms": 2.68,
+      "elapsed_ms": 2.332,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -465,7 +465,7 @@
           },
           "seq": 5,
           "thread": "MainThread",
-          "elapsed_ms": 0.722,
+          "elapsed_ms": 0.651,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -477,7 +477,7 @@
               },
               "seq": 6,
               "thread": "MainThread",
-              "elapsed_ms": 0.704,
+              "elapsed_ms": 0.633,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -485,12 +485,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "e2d4a73e-e511-4172-857c-83b08c25e6e0",
+                      "id": "702a5c01-142a-4150-8dd9-c29fc8c1d73d",
                       "role": "system",
                       "content": "You answer briefly and plainly. Use the tools you are given."
                     },
                     {
-                      "id": "26d55b59-089b-454e-a123-c28fb4d4e903",
+                      "id": "45e8b92b-5d0b-4a0a-93d5-6fa7716a0542",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     }
@@ -534,7 +534,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06dc9-818c-70f0-a956-4176110b60e4-0",
+                    "id": "lc_run--01a09c8f-8390-7412-8448-8902a4821405-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -557,12 +557,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "e2d4a73e-e511-4172-857c-83b08c25e6e0",
+                        "id": "702a5c01-142a-4150-8dd9-c29fc8c1d73d",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "26d55b59-089b-454e-a123-c28fb4d4e903",
+                        "id": "45e8b92b-5d0b-4a0a-93d5-6fa7716a0542",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -615,7 +615,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818c-70f0-a956-4176110b60e4-0",
+                      "id": "lc_run--01a09c8f-8390-7412-8448-8902a4821405-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -643,7 +643,7 @@
                 },
                 "seq": 6,
                 "thread": "MainThread",
-                "elapsed_ms": 0.704,
+                "elapsed_ms": 0.633,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -651,12 +651,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "e2d4a73e-e511-4172-857c-83b08c25e6e0",
+                        "id": "702a5c01-142a-4150-8dd9-c29fc8c1d73d",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "26d55b59-089b-454e-a123-c28fb4d4e903",
+                        "id": "45e8b92b-5d0b-4a0a-93d5-6fa7716a0542",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -700,7 +700,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818c-70f0-a956-4176110b60e4-0",
+                      "id": "lc_run--01a09c8f-8390-7412-8448-8902a4821405-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -723,12 +723,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "e2d4a73e-e511-4172-857c-83b08c25e6e0",
+                          "id": "702a5c01-142a-4150-8dd9-c29fc8c1d73d",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "26d55b59-089b-454e-a123-c28fb4d4e903",
+                          "id": "45e8b92b-5d0b-4a0a-93d5-6fa7716a0542",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -781,7 +781,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818c-70f0-a956-4176110b60e4-0",
+                        "id": "lc_run--01a09c8f-8390-7412-8448-8902a4821405-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -809,7 +809,7 @@
           },
           "seq": 7,
           "thread": "MainThread",
-          "elapsed_ms": 0.213,
+          "elapsed_ms": 0.178,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -851,7 +851,7 @@
             },
             "seq": 5,
             "thread": "MainThread",
-            "elapsed_ms": 0.722,
+            "elapsed_ms": 0.651,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -863,7 +863,7 @@
                 },
                 "seq": 6,
                 "thread": "MainThread",
-                "elapsed_ms": 0.704,
+                "elapsed_ms": 0.633,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -871,12 +871,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "e2d4a73e-e511-4172-857c-83b08c25e6e0",
+                        "id": "702a5c01-142a-4150-8dd9-c29fc8c1d73d",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "26d55b59-089b-454e-a123-c28fb4d4e903",
+                        "id": "45e8b92b-5d0b-4a0a-93d5-6fa7716a0542",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -920,7 +920,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818c-70f0-a956-4176110b60e4-0",
+                      "id": "lc_run--01a09c8f-8390-7412-8448-8902a4821405-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -943,12 +943,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "e2d4a73e-e511-4172-857c-83b08c25e6e0",
+                          "id": "702a5c01-142a-4150-8dd9-c29fc8c1d73d",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "26d55b59-089b-454e-a123-c28fb4d4e903",
+                          "id": "45e8b92b-5d0b-4a0a-93d5-6fa7716a0542",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -1001,7 +1001,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818c-70f0-a956-4176110b60e4-0",
+                        "id": "lc_run--01a09c8f-8390-7412-8448-8902a4821405-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1029,7 +1029,7 @@
                   },
                   "seq": 6,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.704,
+                  "elapsed_ms": 0.633,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1037,12 +1037,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "e2d4a73e-e511-4172-857c-83b08c25e6e0",
+                          "id": "702a5c01-142a-4150-8dd9-c29fc8c1d73d",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "26d55b59-089b-454e-a123-c28fb4d4e903",
+                          "id": "45e8b92b-5d0b-4a0a-93d5-6fa7716a0542",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -1086,7 +1086,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818c-70f0-a956-4176110b60e4-0",
+                        "id": "lc_run--01a09c8f-8390-7412-8448-8902a4821405-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1109,12 +1109,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "e2d4a73e-e511-4172-857c-83b08c25e6e0",
+                            "id": "702a5c01-142a-4150-8dd9-c29fc8c1d73d",
                             "role": "system",
                             "content": "You answer briefly and plainly. Use the tools you are given."
                           },
                           {
-                            "id": "26d55b59-089b-454e-a123-c28fb4d4e903",
+                            "id": "45e8b92b-5d0b-4a0a-93d5-6fa7716a0542",
                             "role": "human",
                             "content": "What's the status of order A100?"
                           }
@@ -1167,7 +1167,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06dc9-818c-70f0-a956-4176110b60e4-0",
+                          "id": "lc_run--01a09c8f-8390-7412-8448-8902a4821405-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1198,7 +1198,7 @@
             },
             "seq": 7,
             "thread": "MainThread",
-            "elapsed_ms": 0.213,
+            "elapsed_ms": 0.178,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -1252,7 +1252,7 @@
       },
       "seq": 8,
       "thread": "MainThread",
-      "elapsed_ms": 3.233,
+      "elapsed_ms": 2.994,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -1271,7 +1271,7 @@
           },
           "seq": 9,
           "thread": "MainThread",
-          "elapsed_ms": 0.521,
+          "elapsed_ms": 0.453,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1283,7 +1283,7 @@
               },
               "seq": 10,
               "thread": "MainThread",
-              "elapsed_ms": 0.516,
+              "elapsed_ms": 0.449,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1291,12 +1291,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                      "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                       "role": "system",
                       "content": "You answer briefly and plainly. Use the tools you are given."
                     },
                     {
-                      "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                      "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                       "role": "human",
                       "content": "What's the status of order A100, and do we have widgets in stock?"
                     }
@@ -1359,7 +1359,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                    "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -1382,12 +1382,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                        "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                        "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                         "role": "human",
                         "content": "What's the status of order A100, and do we have widgets in stock?"
                       }
@@ -1459,7 +1459,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                      "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -1487,7 +1487,7 @@
                 },
                 "seq": 10,
                 "thread": "MainThread",
-                "elapsed_ms": 0.516,
+                "elapsed_ms": 0.449,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1495,12 +1495,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                        "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                        "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                         "role": "human",
                         "content": "What's the status of order A100, and do we have widgets in stock?"
                       }
@@ -1563,7 +1563,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                      "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -1586,12 +1586,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                          "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                          "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                           "role": "human",
                           "content": "What's the status of order A100, and do we have widgets in stock?"
                         }
@@ -1663,7 +1663,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                        "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1691,7 +1691,7 @@
           },
           "seq": 11,
           "thread": "MainThread",
-          "elapsed_ms": 0.192,
+          "elapsed_ms": 0.14100000000000001,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -1729,7 +1729,7 @@
           },
           "seq": 12,
           "thread": "MainThread",
-          "elapsed_ms": 0.189,
+          "elapsed_ms": 0.192,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1741,7 +1741,7 @@
               },
               "seq": 13,
               "thread": "MainThread",
-              "elapsed_ms": 0.184,
+              "elapsed_ms": 0.187,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1749,17 +1749,17 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                      "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                       "role": "system",
                       "content": "You answer briefly and plainly. Use the tools you are given."
                     },
                     {
-                      "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                      "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                       "role": "human",
                       "content": "What's the status of order A100, and do we have widgets in stock?"
                     },
                     {
-                      "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                      "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -1773,7 +1773,7 @@
                       ]
                     },
                     {
-                      "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                      "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                       "role": "tool",
                       "content": "order A100: shipped",
                       "tool_call_id": "c1"
@@ -1839,7 +1839,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                    "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -1862,17 +1862,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                        "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                        "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                         "role": "human",
                         "content": "What's the status of order A100, and do we have widgets in stock?"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                        "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1886,7 +1886,7 @@
                         ]
                       },
                       {
-                        "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                        "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -1961,7 +1961,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -1989,7 +1989,7 @@
                 },
                 "seq": 13,
                 "thread": "MainThread",
-                "elapsed_ms": 0.184,
+                "elapsed_ms": 0.187,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1997,17 +1997,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                        "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                        "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                         "role": "human",
                         "content": "What's the status of order A100, and do we have widgets in stock?"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                        "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2021,7 +2021,7 @@
                         ]
                       },
                       {
-                        "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                        "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -2087,7 +2087,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2110,17 +2110,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                          "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                          "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                           "role": "human",
                           "content": "What's the status of order A100, and do we have widgets in stock?"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                          "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -2134,7 +2134,7 @@
                           ]
                         },
                         {
-                          "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                          "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -2209,7 +2209,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2237,7 +2237,7 @@
           },
           "seq": 14,
           "thread": "MainThread",
-          "elapsed_ms": 0.129,
+          "elapsed_ms": 0.128,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -2275,7 +2275,7 @@
           },
           "seq": 15,
           "thread": "MainThread",
-          "elapsed_ms": 0.212,
+          "elapsed_ms": 0.194,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -2287,7 +2287,7 @@
               },
               "seq": 16,
               "thread": "MainThread",
-              "elapsed_ms": 0.208,
+              "elapsed_ms": 0.189,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2295,17 +2295,17 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                      "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                       "role": "system",
                       "content": "You answer briefly and plainly. Use the tools you are given."
                     },
                     {
-                      "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                      "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                       "role": "human",
                       "content": "What's the status of order A100, and do we have widgets in stock?"
                     },
                     {
-                      "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                      "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2319,13 +2319,13 @@
                       ]
                     },
                     {
-                      "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                      "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                       "role": "tool",
                       "content": "order A100: shipped",
                       "tool_call_id": "c1"
                     },
                     {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2339,7 +2339,7 @@
                       ]
                     },
                     {
-                      "id": "510a1749-ec61-401a-a690-f8c6840c7fc8",
+                      "id": "2940c878-25a7-4ab1-9de1-ea11df414cfa",
                       "role": "tool",
                       "content": "widget: 12 in stock",
                       "tool_call_id": "c2"
@@ -2407,7 +2407,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06dc9-818f-7892-b858-4efcae8508ab-0",
+                    "id": "lc_run--01a09c8f-8393-7042-a197-a29a62537dc1-0",
                     "role": "ai",
                     "content": "Order A100 has shipped, and we have 12 widgets in stock."
                   }
@@ -2421,17 +2421,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                        "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                        "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                         "role": "human",
                         "content": "What's the status of order A100, and do we have widgets in stock?"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                        "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2445,13 +2445,13 @@
                         ]
                       },
                       {
-                        "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                        "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2465,7 +2465,7 @@
                         ]
                       },
                       {
-                        "id": "510a1749-ec61-401a-a690-f8c6840c7fc8",
+                        "id": "2940c878-25a7-4ab1-9de1-ea11df414cfa",
                         "role": "tool",
                         "content": "widget: 12 in stock",
                         "tool_call_id": "c2"
@@ -2542,7 +2542,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4efcae8508ab-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a29a62537dc1-0",
                       "role": "ai",
                       "content": "Order A100 has shipped, and we have 12 widgets in stock."
                     }
@@ -2561,7 +2561,7 @@
                 },
                 "seq": 16,
                 "thread": "MainThread",
-                "elapsed_ms": 0.208,
+                "elapsed_ms": 0.189,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2569,17 +2569,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                        "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                        "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                         "role": "human",
                         "content": "What's the status of order A100, and do we have widgets in stock?"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                        "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2593,13 +2593,13 @@
                         ]
                       },
                       {
-                        "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                        "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2613,7 +2613,7 @@
                         ]
                       },
                       {
-                        "id": "510a1749-ec61-401a-a690-f8c6840c7fc8",
+                        "id": "2940c878-25a7-4ab1-9de1-ea11df414cfa",
                         "role": "tool",
                         "content": "widget: 12 in stock",
                         "tool_call_id": "c2"
@@ -2681,7 +2681,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4efcae8508ab-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a29a62537dc1-0",
                       "role": "ai",
                       "content": "Order A100 has shipped, and we have 12 widgets in stock."
                     }
@@ -2695,17 +2695,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                          "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                          "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                           "role": "human",
                           "content": "What's the status of order A100, and do we have widgets in stock?"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                          "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -2719,13 +2719,13 @@
                           ]
                         },
                         {
-                          "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                          "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                          "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -2739,7 +2739,7 @@
                           ]
                         },
                         {
-                          "id": "510a1749-ec61-401a-a690-f8c6840c7fc8",
+                          "id": "2940c878-25a7-4ab1-9de1-ea11df414cfa",
                           "role": "tool",
                           "content": "widget: 12 in stock",
                           "tool_call_id": "c2"
@@ -2816,7 +2816,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4efcae8508ab-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a29a62537dc1-0",
                         "role": "ai",
                         "content": "Order A100 has shipped, and we have 12 widgets in stock."
                       }
@@ -2838,7 +2838,7 @@
             },
             "seq": 9,
             "thread": "MainThread",
-            "elapsed_ms": 0.521,
+            "elapsed_ms": 0.453,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -2850,7 +2850,7 @@
                 },
                 "seq": 10,
                 "thread": "MainThread",
-                "elapsed_ms": 0.516,
+                "elapsed_ms": 0.449,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2858,12 +2858,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                        "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                        "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                         "role": "human",
                         "content": "What's the status of order A100, and do we have widgets in stock?"
                       }
@@ -2926,7 +2926,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                      "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2949,12 +2949,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                          "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                          "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                           "role": "human",
                           "content": "What's the status of order A100, and do we have widgets in stock?"
                         }
@@ -3026,7 +3026,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                        "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3054,7 +3054,7 @@
                   },
                   "seq": 10,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.516,
+                  "elapsed_ms": 0.449,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -3062,12 +3062,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                          "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                          "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                           "role": "human",
                           "content": "What's the status of order A100, and do we have widgets in stock?"
                         }
@@ -3130,7 +3130,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                        "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3153,12 +3153,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                            "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                             "role": "system",
                             "content": "You answer briefly and plainly. Use the tools you are given."
                           },
                           {
-                            "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                            "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                             "role": "human",
                             "content": "What's the status of order A100, and do we have widgets in stock?"
                           }
@@ -3230,7 +3230,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                          "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3261,7 +3261,7 @@
             },
             "seq": 11,
             "thread": "MainThread",
-            "elapsed_ms": 0.192,
+            "elapsed_ms": 0.14100000000000001,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -3302,7 +3302,7 @@
             },
             "seq": 12,
             "thread": "MainThread",
-            "elapsed_ms": 0.189,
+            "elapsed_ms": 0.192,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -3314,7 +3314,7 @@
                 },
                 "seq": 13,
                 "thread": "MainThread",
-                "elapsed_ms": 0.184,
+                "elapsed_ms": 0.187,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3322,17 +3322,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                        "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                        "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                         "role": "human",
                         "content": "What's the status of order A100, and do we have widgets in stock?"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                        "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3346,7 +3346,7 @@
                         ]
                       },
                       {
-                        "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                        "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -3412,7 +3412,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3435,17 +3435,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                          "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                          "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                           "role": "human",
                           "content": "What's the status of order A100, and do we have widgets in stock?"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                          "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3459,7 +3459,7 @@
                           ]
                         },
                         {
-                          "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                          "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -3534,7 +3534,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3562,7 +3562,7 @@
                   },
                   "seq": 13,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.184,
+                  "elapsed_ms": 0.187,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -3570,17 +3570,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                          "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                          "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                           "role": "human",
                           "content": "What's the status of order A100, and do we have widgets in stock?"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                          "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3594,7 +3594,7 @@
                           ]
                         },
                         {
-                          "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                          "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -3660,7 +3660,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3683,17 +3683,17 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                            "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                             "role": "system",
                             "content": "You answer briefly and plainly. Use the tools you are given."
                           },
                           {
-                            "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                            "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                             "role": "human",
                             "content": "What's the status of order A100, and do we have widgets in stock?"
                           },
                           {
-                            "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                            "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -3707,7 +3707,7 @@
                             ]
                           },
                           {
-                            "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                            "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                             "role": "tool",
                             "content": "order A100: shipped",
                             "tool_call_id": "c1"
@@ -3782,7 +3782,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                          "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3813,7 +3813,7 @@
             },
             "seq": 14,
             "thread": "MainThread",
-            "elapsed_ms": 0.129,
+            "elapsed_ms": 0.128,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -3854,7 +3854,7 @@
             },
             "seq": 15,
             "thread": "MainThread",
-            "elapsed_ms": 0.212,
+            "elapsed_ms": 0.194,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -3866,7 +3866,7 @@
                 },
                 "seq": 16,
                 "thread": "MainThread",
-                "elapsed_ms": 0.208,
+                "elapsed_ms": 0.189,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3874,17 +3874,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                        "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                         "role": "system",
                         "content": "You answer briefly and plainly. Use the tools you are given."
                       },
                       {
-                        "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                        "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                         "role": "human",
                         "content": "What's the status of order A100, and do we have widgets in stock?"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                        "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3898,13 +3898,13 @@
                         ]
                       },
                       {
-                        "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                        "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3918,7 +3918,7 @@
                         ]
                       },
                       {
-                        "id": "510a1749-ec61-401a-a690-f8c6840c7fc8",
+                        "id": "2940c878-25a7-4ab1-9de1-ea11df414cfa",
                         "role": "tool",
                         "content": "widget: 12 in stock",
                         "tool_call_id": "c2"
@@ -3986,7 +3986,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4efcae8508ab-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a29a62537dc1-0",
                       "role": "ai",
                       "content": "Order A100 has shipped, and we have 12 widgets in stock."
                     }
@@ -4000,17 +4000,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                          "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                          "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                           "role": "human",
                           "content": "What's the status of order A100, and do we have widgets in stock?"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                          "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4024,13 +4024,13 @@
                           ]
                         },
                         {
-                          "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                          "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                          "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4044,7 +4044,7 @@
                           ]
                         },
                         {
-                          "id": "510a1749-ec61-401a-a690-f8c6840c7fc8",
+                          "id": "2940c878-25a7-4ab1-9de1-ea11df414cfa",
                           "role": "tool",
                           "content": "widget: 12 in stock",
                           "tool_call_id": "c2"
@@ -4121,7 +4121,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4efcae8508ab-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a29a62537dc1-0",
                         "role": "ai",
                         "content": "Order A100 has shipped, and we have 12 widgets in stock."
                       }
@@ -4140,7 +4140,7 @@
                   },
                   "seq": 16,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.208,
+                  "elapsed_ms": 0.189,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4148,17 +4148,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                          "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                           "role": "system",
                           "content": "You answer briefly and plainly. Use the tools you are given."
                         },
                         {
-                          "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                          "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                           "role": "human",
                           "content": "What's the status of order A100, and do we have widgets in stock?"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                          "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4172,13 +4172,13 @@
                           ]
                         },
                         {
-                          "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                          "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                          "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4192,7 +4192,7 @@
                           ]
                         },
                         {
-                          "id": "510a1749-ec61-401a-a690-f8c6840c7fc8",
+                          "id": "2940c878-25a7-4ab1-9de1-ea11df414cfa",
                           "role": "tool",
                           "content": "widget: 12 in stock",
                           "tool_call_id": "c2"
@@ -4260,7 +4260,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4efcae8508ab-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a29a62537dc1-0",
                         "role": "ai",
                         "content": "Order A100 has shipped, and we have 12 widgets in stock."
                       }
@@ -4274,17 +4274,17 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "479f9dad-de54-4ae8-9594-e6c0f496e076",
+                            "id": "e133147d-2a8f-4c64-ae80-079485fe23af",
                             "role": "system",
                             "content": "You answer briefly and plainly. Use the tools you are given."
                           },
                           {
-                            "id": "e563fe4c-10e6-4f87-a21a-cc25b155f59d",
+                            "id": "9dfe0c3c-4750-43f8-821e-074e4a43992f",
                             "role": "human",
                             "content": "What's the status of order A100, and do we have widgets in stock?"
                           },
                           {
-                            "id": "lc_run--01a06dc9-818e-75a0-b3fd-32377932d10f-0",
+                            "id": "lc_run--01a09c8f-8392-7693-9e80-9b20957b8aea-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -4298,13 +4298,13 @@
                             ]
                           },
                           {
-                            "id": "c92b2416-29ab-4f3b-9883-3b1f18f610d3",
+                            "id": "fdca7b20-e826-4077-affa-7345b78fc2ff",
                             "role": "tool",
                             "content": "order A100: shipped",
                             "tool_call_id": "c1"
                           },
                           {
-                            "id": "lc_run--01a06dc9-818f-7892-b858-4eab98a4da9f-0",
+                            "id": "lc_run--01a09c8f-8393-7042-a197-a248a2add3fa-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -4318,7 +4318,7 @@
                             ]
                           },
                           {
-                            "id": "510a1749-ec61-401a-a690-f8c6840c7fc8",
+                            "id": "2940c878-25a7-4ab1-9de1-ea11df414cfa",
                             "role": "tool",
                             "content": "widget: 12 in stock",
                             "tool_call_id": "c2"
@@ -4395,7 +4395,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06dc9-818f-7892-b858-4efcae8508ab-0",
+                          "id": "lc_run--01a09c8f-8393-7042-a197-a29a62537dc1-0",
                           "role": "ai",
                           "content": "Order A100 has shipped, and we have 12 widgets in stock."
                         }
@@ -4425,7 +4425,7 @@
       },
       "seq": 17,
       "thread": "MainThread",
-      "elapsed_ms": 2.484,
+      "elapsed_ms": 2.4450000000000003,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -4446,7 +4446,7 @@
           },
           "seq": 18,
           "thread": "MainThread",
-          "elapsed_ms": 0.27799999999999997,
+          "elapsed_ms": 0.311,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4458,7 +4458,7 @@
               },
               "seq": 19,
               "thread": "MainThread",
-              "elapsed_ms": 0.16,
+              "elapsed_ms": 0.18100000000000002,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4515,7 +4515,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                    "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -4596,7 +4596,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -4621,7 +4621,7 @@
               },
               "seq": 20,
               "thread": "MainThread",
-              "elapsed_ms": 0.107,
+              "elapsed_ms": 0.118,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4663,7 +4663,7 @@
                 },
                 "seq": 19,
                 "thread": "MainThread",
-                "elapsed_ms": 0.16,
+                "elapsed_ms": 0.18100000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4720,7 +4720,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -4801,7 +4801,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4829,7 +4829,7 @@
                 },
                 "seq": 20,
                 "thread": "MainThread",
-                "elapsed_ms": 0.107,
+                "elapsed_ms": 0.118,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4870,7 +4870,7 @@
           },
           "seq": 21,
           "thread": "MainThread",
-          "elapsed_ms": 0.214,
+          "elapsed_ms": 0.17,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4882,7 +4882,7 @@
               },
               "seq": 22,
               "thread": "MainThread",
-              "elapsed_ms": 0.211,
+              "elapsed_ms": 0.166,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4900,7 +4900,7 @@
                       "content": "What's the status of order A100?"
                     },
                     {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -4961,7 +4961,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                    "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                     "role": "ai",
                     "content": "Order A100 has shipped."
                   }
@@ -4985,7 +4985,7 @@
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5055,7 +5055,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                      "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                       "role": "ai",
                       "content": "Order A100 has shipped."
                     }
@@ -5074,7 +5074,7 @@
                 },
                 "seq": 22,
                 "thread": "MainThread",
-                "elapsed_ms": 0.211,
+                "elapsed_ms": 0.166,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5092,7 +5092,7 @@
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5153,7 +5153,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                      "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                       "role": "ai",
                       "content": "Order A100 has shipped."
                     }
@@ -5177,7 +5177,7 @@
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                          "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5247,7 +5247,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                        "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                         "role": "ai",
                         "content": "Order A100 has shipped."
                       }
@@ -5265,7 +5265,7 @@
           },
           "seq": 23,
           "thread": "MainThread",
-          "elapsed_ms": 0.159,
+          "elapsed_ms": 0.17200000000000001,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -5273,12 +5273,12 @@
               "label": "context",
               "messages": [
                 {
-                  "id": "2d576791-ac99-4579-a4ce-69fda5567779",
+                  "id": "96329122-ef2b-4a27-b061-64f369ad4e58",
                   "role": "system",
                   "content": "You answer briefly and plainly. Use the tools you are given."
                 },
                 {
-                  "id": "3493855b-e9e6-4883-adca-874cdc2346d8",
+                  "id": "46eead3c-7723-42f3-aa37-3705908d3a8c",
                   "role": "human",
                   "content": "What's the status of order A100?"
                 }
@@ -5322,7 +5322,7 @@
             {
               "label": "reply",
               "message": {
-                "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                 "role": "ai",
                 "content": "",
                 "tool_calls": [
@@ -5345,12 +5345,12 @@
                 "label": "context",
                 "messages": [
                   {
-                    "id": "2d576791-ac99-4579-a4ce-69fda5567779",
+                    "id": "96329122-ef2b-4a27-b061-64f369ad4e58",
                     "role": "system",
                     "content": "You answer briefly and plainly. Use the tools you are given."
                   },
                   {
-                    "id": "3493855b-e9e6-4883-adca-874cdc2346d8",
+                    "id": "46eead3c-7723-42f3-aa37-3705908d3a8c",
                     "role": "human",
                     "content": "What's the status of order A100?"
                   }
@@ -5403,7 +5403,7 @@
               "value": {
                 "label": "reply",
                 "message": {
-                  "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                  "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                   "role": "ai",
                   "content": "",
                   "tool_calls": [
@@ -5428,7 +5428,7 @@
           },
           "seq": 24,
           "thread": "MainThread",
-          "elapsed_ms": 0.148,
+          "elapsed_ms": 0.13999999999999999,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -5466,7 +5466,7 @@
           },
           "seq": 25,
           "thread": "MainThread",
-          "elapsed_ms": 0.18000000000000002,
+          "elapsed_ms": 0.153,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -5474,17 +5474,17 @@
               "label": "context",
               "messages": [
                 {
-                  "id": "2d576791-ac99-4579-a4ce-69fda5567779",
+                  "id": "96329122-ef2b-4a27-b061-64f369ad4e58",
                   "role": "system",
                   "content": "You answer briefly and plainly. Use the tools you are given."
                 },
                 {
-                  "id": "3493855b-e9e6-4883-adca-874cdc2346d8",
+                  "id": "46eead3c-7723-42f3-aa37-3705908d3a8c",
                   "role": "human",
                   "content": "What's the status of order A100?"
                 },
                 {
-                  "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                  "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                   "role": "ai",
                   "content": "",
                   "tool_calls": [
@@ -5498,7 +5498,7 @@
                   ]
                 },
                 {
-                  "id": "2ea4e4ea-c96f-4e40-acd7-7ba81c3896ea",
+                  "id": "7eb73dfb-a694-472a-8222-27eb07f17ba0",
                   "role": "tool",
                   "content": "order A100: shipped",
                   "tool_call_id": "c1"
@@ -5545,7 +5545,7 @@
             {
               "label": "reply",
               "message": {
-                "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                 "role": "ai",
                 "content": "Order A100 has shipped."
               }
@@ -5559,17 +5559,17 @@
                 "label": "context",
                 "messages": [
                   {
-                    "id": "2d576791-ac99-4579-a4ce-69fda5567779",
+                    "id": "96329122-ef2b-4a27-b061-64f369ad4e58",
                     "role": "system",
                     "content": "You answer briefly and plainly. Use the tools you are given."
                   },
                   {
-                    "id": "3493855b-e9e6-4883-adca-874cdc2346d8",
+                    "id": "46eead3c-7723-42f3-aa37-3705908d3a8c",
                     "role": "human",
                     "content": "What's the status of order A100?"
                   },
                   {
-                    "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                    "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -5583,7 +5583,7 @@
                     ]
                   },
                   {
-                    "id": "2ea4e4ea-c96f-4e40-acd7-7ba81c3896ea",
+                    "id": "7eb73dfb-a694-472a-8222-27eb07f17ba0",
                     "role": "tool",
                     "content": "order A100: shipped",
                     "tool_call_id": "c1"
@@ -5639,7 +5639,7 @@
               "value": {
                 "label": "reply",
                 "message": {
-                  "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                  "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                   "role": "ai",
                   "content": "Order A100 has shipped."
                 }
@@ -5658,7 +5658,7 @@
             },
             "seq": 18,
             "thread": "MainThread",
-            "elapsed_ms": 0.27799999999999997,
+            "elapsed_ms": 0.311,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -5670,7 +5670,7 @@
                 },
                 "seq": 19,
                 "thread": "MainThread",
-                "elapsed_ms": 0.16,
+                "elapsed_ms": 0.18100000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5727,7 +5727,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -5808,7 +5808,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5833,7 +5833,7 @@
                 },
                 "seq": 20,
                 "thread": "MainThread",
-                "elapsed_ms": 0.107,
+                "elapsed_ms": 0.118,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5875,7 +5875,7 @@
                   },
                   "seq": 19,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.16,
+                  "elapsed_ms": 0.18100000000000002,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -5932,7 +5932,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -6013,7 +6013,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                          "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -6041,7 +6041,7 @@
                   },
                   "seq": 20,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.107,
+                  "elapsed_ms": 0.118,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -6085,7 +6085,7 @@
             },
             "seq": 21,
             "thread": "MainThread",
-            "elapsed_ms": 0.214,
+            "elapsed_ms": 0.17,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -6097,7 +6097,7 @@
                 },
                 "seq": 22,
                 "thread": "MainThread",
-                "elapsed_ms": 0.211,
+                "elapsed_ms": 0.166,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -6115,7 +6115,7 @@
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                        "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -6176,7 +6176,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                      "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                       "role": "ai",
                       "content": "Order A100 has shipped."
                     }
@@ -6200,7 +6200,7 @@
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                          "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -6270,7 +6270,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                        "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                         "role": "ai",
                         "content": "Order A100 has shipped."
                       }
@@ -6289,7 +6289,7 @@
                   },
                   "seq": 22,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.211,
+                  "elapsed_ms": 0.166,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -6307,7 +6307,7 @@
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                          "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -6368,7 +6368,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                        "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                         "role": "ai",
                         "content": "Order A100 has shipped."
                       }
@@ -6392,7 +6392,7 @@
                             "content": "What's the status of order A100?"
                           },
                           {
-                            "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                            "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -6462,7 +6462,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                          "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                           "role": "ai",
                           "content": "Order A100 has shipped."
                         }
@@ -6483,7 +6483,7 @@
             },
             "seq": 23,
             "thread": "MainThread",
-            "elapsed_ms": 0.159,
+            "elapsed_ms": 0.17200000000000001,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -6491,12 +6491,12 @@
                 "label": "context",
                 "messages": [
                   {
-                    "id": "2d576791-ac99-4579-a4ce-69fda5567779",
+                    "id": "96329122-ef2b-4a27-b061-64f369ad4e58",
                     "role": "system",
                     "content": "You answer briefly and plainly. Use the tools you are given."
                   },
                   {
-                    "id": "3493855b-e9e6-4883-adca-874cdc2346d8",
+                    "id": "46eead3c-7723-42f3-aa37-3705908d3a8c",
                     "role": "human",
                     "content": "What's the status of order A100?"
                   }
@@ -6540,7 +6540,7 @@
               {
                 "label": "reply",
                 "message": {
-                  "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                  "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                   "role": "ai",
                   "content": "",
                   "tool_calls": [
@@ -6563,12 +6563,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "2d576791-ac99-4579-a4ce-69fda5567779",
+                      "id": "96329122-ef2b-4a27-b061-64f369ad4e58",
                       "role": "system",
                       "content": "You answer briefly and plainly. Use the tools you are given."
                     },
                     {
-                      "id": "3493855b-e9e6-4883-adca-874cdc2346d8",
+                      "id": "46eead3c-7723-42f3-aa37-3705908d3a8c",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     }
@@ -6621,7 +6621,7 @@
                 "value": {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                    "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -6649,7 +6649,7 @@
             },
             "seq": 24,
             "thread": "MainThread",
-            "elapsed_ms": 0.148,
+            "elapsed_ms": 0.13999999999999999,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -6690,7 +6690,7 @@
             },
             "seq": 25,
             "thread": "MainThread",
-            "elapsed_ms": 0.18000000000000002,
+            "elapsed_ms": 0.153,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -6698,17 +6698,17 @@
                 "label": "context",
                 "messages": [
                   {
-                    "id": "2d576791-ac99-4579-a4ce-69fda5567779",
+                    "id": "96329122-ef2b-4a27-b061-64f369ad4e58",
                     "role": "system",
                     "content": "You answer briefly and plainly. Use the tools you are given."
                   },
                   {
-                    "id": "3493855b-e9e6-4883-adca-874cdc2346d8",
+                    "id": "46eead3c-7723-42f3-aa37-3705908d3a8c",
                     "role": "human",
                     "content": "What's the status of order A100?"
                   },
                   {
-                    "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                    "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -6722,7 +6722,7 @@
                     ]
                   },
                   {
-                    "id": "2ea4e4ea-c96f-4e40-acd7-7ba81c3896ea",
+                    "id": "7eb73dfb-a694-472a-8222-27eb07f17ba0",
                     "role": "tool",
                     "content": "order A100: shipped",
                     "tool_call_id": "c1"
@@ -6769,7 +6769,7 @@
               {
                 "label": "reply",
                 "message": {
-                  "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                  "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                   "role": "ai",
                   "content": "Order A100 has shipped."
                 }
@@ -6783,17 +6783,17 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "2d576791-ac99-4579-a4ce-69fda5567779",
+                      "id": "96329122-ef2b-4a27-b061-64f369ad4e58",
                       "role": "system",
                       "content": "You answer briefly and plainly. Use the tools you are given."
                     },
                     {
-                      "id": "3493855b-e9e6-4883-adca-874cdc2346d8",
+                      "id": "46eead3c-7723-42f3-aa37-3705908d3a8c",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     },
                     {
-                      "id": "lc_run--01a06dc9-818f-7892-b858-4f16a21d3e1c-0",
+                      "id": "lc_run--01a09c8f-8393-7042-a197-a2b46fa0450c-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -6807,7 +6807,7 @@
                       ]
                     },
                     {
-                      "id": "2ea4e4ea-c96f-4e40-acd7-7ba81c3896ea",
+                      "id": "7eb73dfb-a694-472a-8222-27eb07f17ba0",
                       "role": "tool",
                       "content": "order A100: shipped",
                       "tool_call_id": "c1"
@@ -6863,7 +6863,7 @@
                 "value": {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06dc9-8190-7a02-bb79-8fa217ab376d-0",
+                    "id": "lc_run--01a09c8f-8394-79d3-adca-3cc188e6cd18-0",
                     "role": "ai",
                     "content": "Order A100 has shipped."
                   }
@@ -6892,7 +6892,7 @@
       },
       "seq": 26,
       "thread": "MainThread",
-      "elapsed_ms": 1.131,
+      "elapsed_ms": 1.1720000000000002,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [

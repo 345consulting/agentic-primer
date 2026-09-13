@@ -1,7 +1,7 @@
 {
   "chapter": "ch14_stream",
   "model_kind": "mock",
-  "source": "7428d20fc813",
+  "source": "64020c087e4f",
   "summary": {
     "turns": 1,
     "messages": 2,
@@ -15,7 +15,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 3.221,
+      "elapsed_ms": 4.509,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -32,7 +32,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 3.081,
+          "elapsed_ms": 4.35,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -49,7 +49,8 @@
                   "role": "human",
                   "content": "How much is milk?"
                 }
-              ]
+              ],
+              "tools": []
             },
             {
               "label": "context ignored by the mock model",
@@ -62,7 +63,7 @@
             {
               "label": "reply",
               "message": {
-                "id": "lc_run--01a068c7-870f-7421-a096-d96d31633d0d",
+                "id": "lc_run--01a09c8f-47fd-7f20-9b56-ea341ea3b848",
                 "role": "ai",
                 "content": "Milk is 1.20."
               }
@@ -74,40 +75,477 @@
               "attributes": {},
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 2.964,
+              "elapsed_ms": 4.22,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
                 {
                   "label": "chunk",
                   "text": "Milk ",
-                  "at_ms": 1034320951.4219581
+                  "at_ms": 1903049384.149625
                 },
                 {
                   "label": "chunk",
                   "text": "is ",
-                  "at_ms": 1034320951.433333
+                  "at_ms": 1903049384.161333
                 },
                 {
                   "label": "chunk",
                   "text": "1.20.",
-                  "at_ms": 1034320951.440166
+                  "at_ms": 1903049384.1686661
                 },
                 {
                   "label": "chunk",
                   "text": "",
-                  "at_ms": 1034320951.4487079
+                  "at_ms": 1903049384.1781662
                 },
                 {
                   "label": "streamed",
                   "chunks": 4,
-                  "first_token_ms": 2.8758751153945923,
-                  "last_token_ms": 2.9026249647140503
+                  "first_token_ms": 4.1257922649383545,
+                  "last_token_ms": 4.1543333530426025
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "chunk",
+                    "text": "Milk ",
+                    "at_ms": 1903049384.149625
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "chunk",
+                    "text": "is ",
+                    "at_ms": 1903049384.161333
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "chunk",
+                    "text": "1.20.",
+                    "at_ms": 1903049384.1686661
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "chunk",
+                    "text": "",
+                    "at_ms": 1903049384.1781662
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "streamed",
+                    "chunks": 4,
+                    "first_token_ms": 4.1257922649383545,
+                    "last_token_ms": 4.1543333530426025
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "context",
+                "messages": [
+                  {
+                    "id": null,
+                    "role": "system",
+                    "content": "You answer briefly and plainly."
+                  },
+                  {
+                    "id": null,
+                    "role": "human",
+                    "content": "How much is milk?"
+                  }
+                ],
+                "tools": []
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "stream",
+                "attributes": {},
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 4.22,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "chunk",
+                    "text": "Milk ",
+                    "at_ms": 1903049384.149625
+                  },
+                  {
+                    "label": "chunk",
+                    "text": "is ",
+                    "at_ms": 1903049384.161333
+                  },
+                  {
+                    "label": "chunk",
+                    "text": "1.20.",
+                    "at_ms": 1903049384.1686661
+                  },
+                  {
+                    "label": "chunk",
+                    "text": "",
+                    "at_ms": 1903049384.1781662
+                  },
+                  {
+                    "label": "streamed",
+                    "chunks": 4,
+                    "first_token_ms": 4.1257922649383545,
+                    "last_token_ms": 4.1543333530426025
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "chunk",
+                      "text": "Milk ",
+                      "at_ms": 1903049384.149625
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "chunk",
+                      "text": "is ",
+                      "at_ms": 1903049384.161333
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "chunk",
+                      "text": "1.20.",
+                      "at_ms": 1903049384.1686661
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "chunk",
+                      "text": "",
+                      "at_ms": 1903049384.1781662
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "streamed",
+                      "chunks": 4,
+                      "first_token_ms": 4.1257922649383545,
+                      "last_token_ms": 4.1543333530426025
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "context ignored by the mock model",
+                "messages": 2,
+                "roles": [
+                  "system",
+                  "human"
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "reply",
+                "message": {
+                  "id": "lc_run--01a09c8f-47fd-7f20-9b56-ea341ea3b848",
+                  "role": "ai",
+                  "content": "Milk is 1.20."
+                }
+              }
             }
           ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "model",
+            "attributes": {
+              "model_kind": "mock"
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 4.35,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "context",
+                "messages": [
+                  {
+                    "id": null,
+                    "role": "system",
+                    "content": "You answer briefly and plainly."
+                  },
+                  {
+                    "id": null,
+                    "role": "human",
+                    "content": "How much is milk?"
+                  }
+                ],
+                "tools": []
+              },
+              {
+                "label": "context ignored by the mock model",
+                "messages": 2,
+                "roles": [
+                  "system",
+                  "human"
+                ]
+              },
+              {
+                "label": "reply",
+                "message": {
+                  "id": "lc_run--01a09c8f-47fd-7f20-9b56-ea341ea3b848",
+                  "role": "ai",
+                  "content": "Milk is 1.20."
+                }
+              }
+            ],
+            "children": [
+              {
+                "name": "stream",
+                "attributes": {},
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 4.22,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "chunk",
+                    "text": "Milk ",
+                    "at_ms": 1903049384.149625
+                  },
+                  {
+                    "label": "chunk",
+                    "text": "is ",
+                    "at_ms": 1903049384.161333
+                  },
+                  {
+                    "label": "chunk",
+                    "text": "1.20.",
+                    "at_ms": 1903049384.1686661
+                  },
+                  {
+                    "label": "chunk",
+                    "text": "",
+                    "at_ms": 1903049384.1781662
+                  },
+                  {
+                    "label": "streamed",
+                    "chunks": 4,
+                    "first_token_ms": 4.1257922649383545,
+                    "last_token_ms": 4.1543333530426025
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "chunk",
+                      "text": "Milk ",
+                      "at_ms": 1903049384.149625
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "chunk",
+                      "text": "is ",
+                      "at_ms": 1903049384.161333
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "chunk",
+                      "text": "1.20.",
+                      "at_ms": 1903049384.1686661
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "chunk",
+                      "text": "",
+                      "at_ms": 1903049384.1781662
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "streamed",
+                      "chunks": 4,
+                      "first_token_ms": 4.1257922649383545,
+                      "last_token_ms": 4.1543333530426025
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "system",
+                      "content": "You answer briefly and plainly."
+                    },
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "How much is milk?"
+                    }
+                  ],
+                  "tools": []
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "stream",
+                  "attributes": {},
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 4.22,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "chunk",
+                      "text": "Milk ",
+                      "at_ms": 1903049384.149625
+                    },
+                    {
+                      "label": "chunk",
+                      "text": "is ",
+                      "at_ms": 1903049384.161333
+                    },
+                    {
+                      "label": "chunk",
+                      "text": "1.20.",
+                      "at_ms": 1903049384.1686661
+                    },
+                    {
+                      "label": "chunk",
+                      "text": "",
+                      "at_ms": 1903049384.1781662
+                    },
+                    {
+                      "label": "streamed",
+                      "chunks": 4,
+                      "first_token_ms": 4.1257922649383545,
+                      "last_token_ms": 4.1543333530426025
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "chunk",
+                        "text": "Milk ",
+                        "at_ms": 1903049384.149625
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "chunk",
+                        "text": "is ",
+                        "at_ms": 1903049384.161333
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "chunk",
+                        "text": "1.20.",
+                        "at_ms": 1903049384.1686661
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "chunk",
+                        "text": "",
+                        "at_ms": 1903049384.1781662
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "streamed",
+                        "chunks": 4,
+                        "first_token_ms": 4.1257922649383545,
+                        "last_token_ms": 4.1543333530426025
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "context ignored by the mock model",
+                  "messages": 2,
+                  "roles": [
+                    "system",
+                    "human"
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a09c8f-47fd-7f20-9b56-ea341ea3b848",
+                    "role": "ai",
+                    "content": "Milk is 1.20."
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "Milk is 1.20."
+          }
         }
       ]
     }

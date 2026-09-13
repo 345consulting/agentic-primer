@@ -142,7 +142,7 @@ def a_real_otel_span_carries_the_gen_ai_attributes(trace: Trace, model_kind: Mod
             trace.span("turn", number=1),
         ):
             model_span.set_attribute(gen_ai.GEN_AI_SYSTEM, "deepseek")
-            model_span.set_attribute(gen_ai.GEN_AI_REQUEST_MODEL, "deepseek-v4-flash")
+            model_span.set_attribute(gen_ai.GEN_AI_REQUEST_MODEL, "deepseek-flash")
             # The real call happens inside the span, not after it -- the
             # span's own start/end times what actually ran, the same way
             # ch01's model span always has.

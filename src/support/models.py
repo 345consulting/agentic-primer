@@ -29,10 +29,10 @@ from langchain_core.messages.tool import tool_call_chunk
 from langchain_core.outputs import ChatGeneration, ChatGenerationChunk, ChatResult
 from langchain_deepseek import ChatDeepSeek
 
-# Cheap enough that running a chapter live is routine rather than an event,
-# and the 0731 retrain is tuned for tool calling -- which is the subject from
-# chapter 2 onward.
-LIVE_MODEL = "deepseek-v4-flash"
+# Cheap enough that running a chapter live is routine rather than an event.
+# `deepseek-v4-flash` and `deepseek-v4-flash-vision-exp` were both retired
+# and consolidated into this name, backed by DeepSeek-V4.1-Flash.
+LIVE_MODEL = "deepseek-flash"
 
 LIVE_KEY = "DEEPSEEK_API_KEY"
 

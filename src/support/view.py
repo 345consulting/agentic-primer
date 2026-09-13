@@ -46,14 +46,23 @@ th { color: var(--dim); font-size: .85em; }
 .role { white-space: nowrap; }
 .calls { color: #b26; }
 .content { white-space: pre-wrap; }
-input[type=checkbox] { display: none; }
 .toggles { margin-bottom: .75rem; color: var(--dim); }
-.toggles label { cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
-                 padding: .1rem .5rem; margin-left: .4rem; user-select: none; }
-#hide-mock:checked ~ .toggles label[for=hide-mock],
-#hide-live:checked ~ .toggles label[for=hide-live] { opacity: .35; text-decoration: line-through; }
-#hide-mock:checked ~ * .col-mock { display: none; }
-#hide-live:checked ~ * .col-live { display: none; }
+.toggles input[type=checkbox] { display: none; }
+/* A button, not a bare checkbox -- `:has()` reaches the checkbox nested
+   inside its own label directly, checked or not, which is what the earlier
+   sibling-combinator version of this never actually managed to do. */
+.toggles label { cursor: pointer; user-select: none; margin-left: .4rem;
+                 border: 1px solid var(--line); border-radius: 3px; padding: .1rem .5rem; }
+.toggles label:has(input:checked)::after { content: " · on"; }
+.toggles label:has(input:not(:checked))::after { content: " · off"; }
+/* A real, visible checkbox: checked is on, unchecked is off, no CSS trick
+   required to read the state. `:has()` finds the checkbox by id wherever it
+   sits in the document, so hiding a column never depends on exactly how
+   deep the checkbox is nested relative to it -- the sibling-combinator
+   version of this broke silently the moment the checkboxes moved inside
+   `header.top` and stopped being direct siblings of anything. */
+body:has(#show-mock:not(:checked)) .col-mock { display: none; }
+body:has(#show-live:not(:checked)) .col-live { display: none; }
 .row { display: flex; gap: 1.25rem; align-items: flex-start; }
 .row.head { border-bottom: 1px solid var(--line); padding-bottom: .4rem; margin-bottom: .75rem; }
 .col { flex: 1 1 0; min-width: 0; }
@@ -114,6 +123,58 @@ table.headers td.unrecorded { color: var(--dim); font-style: italic; }
 }
 pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
            white-space: pre-wrap; overflow-wrap: anywhere; }
+/* The book shell: a fixed-height app, not a page that scrolls past its own
+   header. Only `.chapters` and `.reader` scroll -- the shell itself never
+   does, so the header needs no `sticky` trick here the way a chapter page's
+   does. `body.book` overrides the plain `body` rule above by specificity. */
+body.book { margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+body.book header.top { flex: 0 0 auto; position: static; margin-bottom: 0; }
+.book-body { flex: 1 1 auto; min-height: 0; display: flex; }
+#collapse-nav { display: none; }
+#collapse-nav:checked ~ .chapters { display: none; }
+.chapters { flex: 0 0 22rem; min-width: 12rem; overflow-y: auto; padding: .75rem;
+            border-right: 1px solid var(--line); }
+.chapters .search input { width: 100%; font: inherit; padding: .3rem .5rem; color: inherit;
+                          background: transparent; border: 1px solid var(--line);
+                          border-radius: 3px; position: sticky; top: 0; margin-bottom: .5rem; }
+/* The toggle lives outside `.chapters`, never inside the thing it hides --
+   collapsing the panel must never take its own reopen control down with it.
+   One label, no script: the glyph flips by reading the checkbox's own state
+   through the sibling combinator, `<` collapses it and `>` reopens it. */
+.collapse-toggle { flex: 0 0 auto; align-self: flex-start; margin-top: .75rem; width: 1rem;
+                   height: 3rem; border: 1px solid var(--line); border-left: 0;
+                   border-radius: 0 5px 5px 0; display: flex; align-items: center;
+                   justify-content: center; cursor: pointer; color: var(--dim); user-select: none; }
+.collapse-toggle:hover { background: #8882; color: inherit; }
+.collapse-toggle::before { content: "\\2039"; }
+#collapse-nav:checked ~ .collapse-toggle::before { content: "\\203a"; }
+.chapters ul { list-style: none; margin: 0; padding: 0; }
+.chapter-row { border-left: 0; margin: 0; padding: 0; }
+.chapter-row.hidden { display: none; }
+.chapter-row a, .chapter-row .not-run { display: block; padding: .3rem .2rem; text-decoration: none;
+                                        border-radius: 3px; }
+.chapter-row a:hover { background: #8882; }
+.chapter-row .not-run { color: var(--dim); font-style: italic; }
+.chapter-row .why { display: block; color: var(--dim); font-weight: 400; }
+/* `.name` is dimmed everywhere else on purpose -- a turn digest is what a
+   reader scans for, not its label. Here the name *is* what a reader scans
+   for, so it gets full-strength text back, the same override `.digest`
+   already uses for the same reason. */
+.chapter-row .name { color: inherit; }
+.reader { flex: 1 1 auto; width: 100%; height: 100%; border: 0; }
+"""
+
+_SEARCH_SCRIPT = """
+(function () {
+  var input = document.getElementById("search");
+  var rows = document.querySelectorAll(".chapter-row");
+  input.addEventListener("input", function () {
+    var term = input.value.toLowerCase();
+    rows.forEach(function (row) {
+      row.classList.toggle("hidden", term !== "" && row.dataset.search.indexOf(term) === -1);
+    });
+  });
+})();
 """
 
 
@@ -127,40 +188,73 @@ _TOKENS = re.compile(
 
 
 def write_book(out: Path = Path("out")) -> Path:
-    """Every chapter that has been run, on one page, in reading order.
+    """Every chapter reachable from one page -- the list is the search index.
 
-    The order and the summaries come from the chapter files themselves, so a
-    chapter that exists is listed the moment it is written, before it has ever
-    been run.
+    A chapter's content used to be inlined here, all forty-two at once; the
+    page paid for that on every load, whether you read one chapter or none.
+    Now the left panel holds only a name and a one-line summary per chapter --
+    cheap enough to keep all forty-two in the DOM always -- and the right
+    panel loads exactly one chapter's own page on demand, in an iframe, so
+    opening one never costs what opening all of them used to.
     """
     out.mkdir(parents=True, exist_ok=True)
-    sections = []
+    rows = []
+    first_run = None
     for chapter, why in chapters():
         traces = _load(chapter, out)
         # Two states. A chapter with no trace has been written and not run --
         # there is no third state any more, because the list comes from the
         # files, so a chapter that is listed exists by definition.
-        if traces:
-            state, body = "", _render_chapter(chapter, traces)
-        else:
-            state = "not run"
-            body = f'<div class="col missing">{state} &mdash; just run {chapter}</div>'
-        sections.append(
-            f'<details class="chapter" id="{chapter}">'
-            # The count goes on its own line under the name and summary:
-            # a chapter's row is a title, and the size of it is a caption.
-            f"<summary>{html.escape(chapter)} "
+        state = "" if traces else "not run"
+        facts = _facts(traces, state)
+        # "chXX_name: 1 scenario" -- the count sits with the name because it
+        # answers the same glance ("is this worth opening"), not the summary.
+        name = f"{chapter}: {facts}" if facts else chapter
+        label = (
+            f'<span class="name">{html.escape(name)}</span>'
             f'<span class="why">{html.escape(why)}</span>'
-            f'<span class="facts">{_facts(traces, state)}</span></summary>'
-            f"{body}</details>"
         )
+        # Search matches the same two facts a reader scans by eye -- name and
+        # summary -- plus the facts line, so "not run" itself is findable.
+        needle = html.escape(f"{chapter} {why} {facts}".lower())
+        if traces:
+            # The reading order's own first entry with a trace opens by
+            # default, so the reader lands on a chapter rather than a blank
+            # panel -- the same chapter `just book` would have led with.
+            first_run = first_run or chapter
+            row = f'<a href="{chapter}.html" target="reader">{label}</a>'
+        else:
+            row = f'<span class="not-run">{label}</span>'
+        rows.append(f'<li class="chapter-row" data-search="{needle}">{row}</li>')
+
+    default_reader = (
+        f'<iframe name="reader" class="reader" src="{first_run}.html"></iframe>'
+        if first_run
+        else (
+            '<iframe name="reader" class="reader" '
+            'srcdoc="&lt;body style=&quot;font:13px ui-monospace,monospace;'
+            'color:GrayText;margin:2rem&quot;&gt;select a chapter&lt;/body&gt;">'
+            "</iframe>"
+        )
+    )
 
     page = out / "index.html"
     page.write_text(
         f"<!doctype html><meta charset=utf-8><title>the agentic primer</title>"
-        f"<style>{_STYLE}</style>{_render_toggles()}"
-        f"{_render_header('the agentic primer', 'every chapter that has been run, in order')}"
-        f"{''.join(sections)}"
+        f"<style>{_STYLE}</style>"
+        f'<body class="book">'
+        f'<header class="top"><h1>the agentic primer</h1>'
+        f'<span class="summary">every chapter that has been run, in order</span></header>'
+        f'<div class="book-body">'
+        f'<input type="checkbox" id="collapse-nav">'
+        f'<nav class="chapters">'
+        f'<div class="search"><input id="search" type="search" placeholder="search chapters"></div>'
+        f"<ul>{''.join(rows)}</ul>"
+        f"</nav>"
+        f'<label for="collapse-nav" class="collapse-toggle" title="toggle chapter list"></label>'
+        f"{default_reader}"
+        f"</div>"
+        f"<script>{_SEARCH_SCRIPT}</script>"
     )
     return page
 
@@ -176,7 +270,7 @@ def render(traces: dict[str, Json]) -> str:
     return (
         f"<!doctype html><meta charset=utf-8>"
         f"<title>{html.escape(chapter)}</title><style>{_STYLE}</style>"
-        f"{_render_toggles()}{_render_header(chapter, '')}"
+        f"{_render_header(chapter, '')}"
         f"{_render_chapter(chapter, traces)}"
     )
 
@@ -384,7 +478,7 @@ def _render_messages(messages: list[Json]) -> str:
         asked = (
             '<div class="calls">'
             + "<br>".join(
-                f"{html.escape(c['name'])}({html.escape(json.dumps(c['args']))})" for c in calls
+                f"{html.escape(c['name'])}({_highlight(json.dumps(c['args']))})" for c in calls
             )
             + "</div>"
             if calls
@@ -410,7 +504,7 @@ def _render_declared_tools(tools: list[Json]) -> str:
     rows = [
         f"<tr><td>{html.escape(t['name'])}</td>"
         f"<td>{html.escape(t['description'])}</td>"
-        f"<td>{html.escape(json.dumps(t['schema']))}</td></tr>"
+        f"<td>{_highlight(json.dumps(t['schema']))}</td></tr>"
         for t in tools
     ]
     head = "<tr><th>tool</th><th>description</th><th>schema</th></tr>"
@@ -670,27 +764,21 @@ def _render_timing(span: Json) -> str:
     )
 
 
-def _render_toggles() -> str:
-    """The checkboxes alone.
-
-    Hiding a column is CSS on a sibling selector rather than script, so these
-    must precede every column they hide and cannot move into the header. Their
-    labels can: `for=` reaches an input from anywhere on the page.
-    """
-    return '<input type="checkbox" id="hide-mock"><input type="checkbox" id="hide-live">'
-
-
 def _render_header(title: str, subtitle: str) -> str:
     """Title and column toggles, stuck to the top of the window.
 
     At thirty-five chapters you are always scrolled away from them, and
-    hiding a column is something you want to do from wherever you are.
+    hiding a column is something you want to do from wherever you are. The
+    checkboxes are real and visible -- checked is on, unchecked is off -- so
+    the state needs no separate indicator; `:has()` in the stylesheet finds
+    them by id regardless of where in the page they sit.
     """
     return (
         f'<header class="top"><h1>{html.escape(title)}</h1>'
         f'<span class="summary">{html.escape(subtitle)}</span>'
         f'<span class="toggles">show: '
-        f'<label for="hide-mock">mock</label><label for="hide-live">live</label>'
+        f'<label><input type="checkbox" id="show-mock" checked> mock</label>'
+        f'<label><input type="checkbox" id="show-live" checked> live</label>'
         f"</span></header>"
     )
 

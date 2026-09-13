@@ -1,7 +1,7 @@
 {
   "chapter": "ch34_checkpoint",
   "model_kind": "mock",
-  "source": "3c257bbf7b48",
+  "source": "3222b209d3d9",
   "summary": {
     "turns": 0,
     "messages": 0,
@@ -15,7 +15,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 4.6610000000000005,
+      "elapsed_ms": 4.647,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -34,7 +34,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 0.376,
+          "elapsed_ms": 0.357,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -46,7 +46,7 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 0.37,
+              "elapsed_ms": 0.35,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -54,12 +54,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                      "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                      "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                       "role": "human",
                       "content": "Say something."
                     }
@@ -77,7 +77,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                    "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                     "role": "ai",
                     "content": "This is turn one."
                   }
@@ -91,12 +91,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                         "role": "human",
                         "content": "Say something."
                       }
@@ -120,7 +120,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                      "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                       "role": "ai",
                       "content": "This is turn one."
                     }
@@ -139,7 +139,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 0.37,
+                "elapsed_ms": 0.35,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -147,12 +147,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                         "role": "human",
                         "content": "Say something."
                       }
@@ -170,7 +170,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                      "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                       "role": "ai",
                       "content": "This is turn one."
                     }
@@ -184,12 +184,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                           "role": "human",
                           "content": "Say something."
                         }
@@ -213,7 +213,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                         "role": "ai",
                         "content": "This is turn one."
                       }
@@ -232,7 +232,7 @@
           },
           "seq": 4,
           "thread": "MainThread",
-          "elapsed_ms": 0.163,
+          "elapsed_ms": 0.11699999999999999,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -270,7 +270,7 @@
           },
           "seq": 5,
           "thread": "MainThread",
-          "elapsed_ms": 0.057,
+          "elapsed_ms": 0.053,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -307,7 +307,7 @@
           },
           "seq": 6,
           "thread": "MainThread",
-          "elapsed_ms": 0.201,
+          "elapsed_ms": 0.217,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -319,7 +319,7 @@
               },
               "seq": 7,
               "thread": "MainThread",
-              "elapsed_ms": 0.19699999999999998,
+              "elapsed_ms": 0.212,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -327,22 +327,22 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                      "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                      "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                       "role": "human",
                       "content": "Say something."
                     },
                     {
-                      "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                      "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                       "role": "ai",
                       "content": "This is turn one."
                     },
                     {
-                      "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                      "id": "32e6bfdc-a560-4608-87f7-4fd430582da5",
                       "role": "human",
                       "content": "What did I just say?"
                     }
@@ -362,7 +362,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                    "id": "lc_run--01a09c8f-8b0b-7d60-96d9-b3754fcf6ab9-0",
                     "role": "ai",
                     "content": "You already asked me something, in turn one."
                   }
@@ -376,22 +376,22 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                         "role": "human",
                         "content": "Say something."
                       },
                       {
-                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                         "role": "ai",
                         "content": "This is turn one."
                       },
                       {
-                        "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                        "id": "32e6bfdc-a560-4608-87f7-4fd430582da5",
                         "role": "human",
                         "content": "What did I just say?"
                       }
@@ -417,7 +417,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                      "id": "lc_run--01a09c8f-8b0b-7d60-96d9-b3754fcf6ab9-0",
                       "role": "ai",
                       "content": "You already asked me something, in turn one."
                     }
@@ -436,7 +436,7 @@
                 },
                 "seq": 7,
                 "thread": "MainThread",
-                "elapsed_ms": 0.19699999999999998,
+                "elapsed_ms": 0.212,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -444,22 +444,22 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                         "role": "human",
                         "content": "Say something."
                       },
                       {
-                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                         "role": "ai",
                         "content": "This is turn one."
                       },
                       {
-                        "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                        "id": "32e6bfdc-a560-4608-87f7-4fd430582da5",
                         "role": "human",
                         "content": "What did I just say?"
                       }
@@ -479,7 +479,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                      "id": "lc_run--01a09c8f-8b0b-7d60-96d9-b3754fcf6ab9-0",
                       "role": "ai",
                       "content": "You already asked me something, in turn one."
                     }
@@ -493,22 +493,22 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                           "role": "human",
                           "content": "Say something."
                         },
                         {
-                          "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                          "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                           "role": "ai",
                           "content": "This is turn one."
                         },
                         {
-                          "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                          "id": "32e6bfdc-a560-4608-87f7-4fd430582da5",
                           "role": "human",
                           "content": "What did I just say?"
                         }
@@ -534,7 +534,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                        "id": "lc_run--01a09c8f-8b0b-7d60-96d9-b3754fcf6ab9-0",
                         "role": "ai",
                         "content": "You already asked me something, in turn one."
                       }
@@ -553,7 +553,7 @@
           },
           "seq": 8,
           "thread": "MainThread",
-          "elapsed_ms": 0.094,
+          "elapsed_ms": 0.089,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -598,7 +598,7 @@
             },
             "seq": 2,
             "thread": "MainThread",
-            "elapsed_ms": 0.376,
+            "elapsed_ms": 0.357,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -610,7 +610,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 0.37,
+                "elapsed_ms": 0.35,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -618,12 +618,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                         "role": "human",
                         "content": "Say something."
                       }
@@ -641,7 +641,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                      "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                       "role": "ai",
                       "content": "This is turn one."
                     }
@@ -655,12 +655,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                           "role": "human",
                           "content": "Say something."
                         }
@@ -684,7 +684,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                         "role": "ai",
                         "content": "This is turn one."
                       }
@@ -703,7 +703,7 @@
                   },
                   "seq": 3,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.37,
+                  "elapsed_ms": 0.35,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -711,12 +711,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                           "role": "human",
                           "content": "Say something."
                         }
@@ -734,7 +734,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                         "role": "ai",
                         "content": "This is turn one."
                       }
@@ -748,12 +748,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                            "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                            "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                             "role": "human",
                             "content": "Say something."
                           }
@@ -777,7 +777,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                          "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                           "role": "ai",
                           "content": "This is turn one."
                         }
@@ -799,7 +799,7 @@
             },
             "seq": 4,
             "thread": "MainThread",
-            "elapsed_ms": 0.163,
+            "elapsed_ms": 0.11699999999999999,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -840,7 +840,7 @@
             },
             "seq": 5,
             "thread": "MainThread",
-            "elapsed_ms": 0.057,
+            "elapsed_ms": 0.053,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -880,7 +880,7 @@
             },
             "seq": 6,
             "thread": "MainThread",
-            "elapsed_ms": 0.201,
+            "elapsed_ms": 0.217,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -892,7 +892,7 @@
                 },
                 "seq": 7,
                 "thread": "MainThread",
-                "elapsed_ms": 0.19699999999999998,
+                "elapsed_ms": 0.212,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -900,22 +900,22 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                        "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                        "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                         "role": "human",
                         "content": "Say something."
                       },
                       {
-                        "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                        "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                         "role": "ai",
                         "content": "This is turn one."
                       },
                       {
-                        "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                        "id": "32e6bfdc-a560-4608-87f7-4fd430582da5",
                         "role": "human",
                         "content": "What did I just say?"
                       }
@@ -935,7 +935,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                      "id": "lc_run--01a09c8f-8b0b-7d60-96d9-b3754fcf6ab9-0",
                       "role": "ai",
                       "content": "You already asked me something, in turn one."
                     }
@@ -949,22 +949,22 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                           "role": "human",
                           "content": "Say something."
                         },
                         {
-                          "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                          "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                           "role": "ai",
                           "content": "This is turn one."
                         },
                         {
-                          "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                          "id": "32e6bfdc-a560-4608-87f7-4fd430582da5",
                           "role": "human",
                           "content": "What did I just say?"
                         }
@@ -990,7 +990,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                        "id": "lc_run--01a09c8f-8b0b-7d60-96d9-b3754fcf6ab9-0",
                         "role": "ai",
                         "content": "You already asked me something, in turn one."
                       }
@@ -1009,7 +1009,7 @@
                   },
                   "seq": 7,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.19699999999999998,
+                  "elapsed_ms": 0.212,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1017,22 +1017,22 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                          "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                          "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                           "role": "human",
                           "content": "Say something."
                         },
                         {
-                          "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                          "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                           "role": "ai",
                           "content": "This is turn one."
                         },
                         {
-                          "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                          "id": "32e6bfdc-a560-4608-87f7-4fd430582da5",
                           "role": "human",
                           "content": "What did I just say?"
                         }
@@ -1052,7 +1052,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                        "id": "lc_run--01a09c8f-8b0b-7d60-96d9-b3754fcf6ab9-0",
                         "role": "ai",
                         "content": "You already asked me something, in turn one."
                       }
@@ -1066,22 +1066,22 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "a79200cd-00dd-4a28-ab3d-121b5bac73f1",
+                            "id": "dcdbc40f-4196-4253-a366-d6b3051e5774",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "956b7eef-0244-4a4b-a419-38f1152d2794",
+                            "id": "3be9e9f7-49ea-4be0-b3f7-cac23fcb8611",
                             "role": "human",
                             "content": "Say something."
                           },
                           {
-                            "id": "lc_run--01a06f66-6ab5-76d1-9043-a126aa3c1537-0",
+                            "id": "lc_run--01a09c8f-8b0a-7c31-a340-c6db8a2636aa-0",
                             "role": "ai",
                             "content": "This is turn one."
                           },
                           {
-                            "id": "f0121a3c-3ed3-4861-a2cf-c72ccdeed2b4",
+                            "id": "32e6bfdc-a560-4608-87f7-4fd430582da5",
                             "role": "human",
                             "content": "What did I just say?"
                           }
@@ -1107,7 +1107,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f66-6ab6-7f41-b882-e3dba40d83a5-0",
+                          "id": "lc_run--01a09c8f-8b0b-7d60-96d9-b3754fcf6ab9-0",
                           "role": "ai",
                           "content": "You already asked me something, in turn one."
                         }
@@ -1129,7 +1129,7 @@
             },
             "seq": 8,
             "thread": "MainThread",
-            "elapsed_ms": 0.094,
+            "elapsed_ms": 0.089,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -1182,7 +1182,7 @@
       },
       "seq": 9,
       "thread": "MainThread",
-      "elapsed_ms": 2.395,
+      "elapsed_ms": 2.457,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -1200,7 +1200,7 @@
           },
           "seq": 10,
           "thread": "MainThread",
-          "elapsed_ms": 0.166,
+          "elapsed_ms": 0.16799999999999998,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1212,7 +1212,7 @@
               },
               "seq": 11,
               "thread": "MainThread",
-              "elapsed_ms": 0.157,
+              "elapsed_ms": 0.158,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1220,12 +1220,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                      "id": "ab8d2e7c-a172-4f95-9044-8f62f21dcaac",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                      "id": "2e58028e-da89-45fb-afe7-1e9a2d6bc424",
                       "role": "human",
                       "content": "My order is A100."
                     }
@@ -1243,7 +1243,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                    "id": "lc_run--01a09c8f-8b0d-7e33-a69b-c866fd8b46de-0",
                     "role": "ai",
                     "content": "noted."
                   }
@@ -1257,12 +1257,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                        "id": "ab8d2e7c-a172-4f95-9044-8f62f21dcaac",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                        "id": "2e58028e-da89-45fb-afe7-1e9a2d6bc424",
                         "role": "human",
                         "content": "My order is A100."
                       }
@@ -1286,7 +1286,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                      "id": "lc_run--01a09c8f-8b0d-7e33-a69b-c866fd8b46de-0",
                       "role": "ai",
                       "content": "noted."
                     }
@@ -1305,7 +1305,7 @@
                 },
                 "seq": 11,
                 "thread": "MainThread",
-                "elapsed_ms": 0.157,
+                "elapsed_ms": 0.158,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1313,12 +1313,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                        "id": "ab8d2e7c-a172-4f95-9044-8f62f21dcaac",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                        "id": "2e58028e-da89-45fb-afe7-1e9a2d6bc424",
                         "role": "human",
                         "content": "My order is A100."
                       }
@@ -1336,7 +1336,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                      "id": "lc_run--01a09c8f-8b0d-7e33-a69b-c866fd8b46de-0",
                       "role": "ai",
                       "content": "noted."
                     }
@@ -1350,12 +1350,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                          "id": "ab8d2e7c-a172-4f95-9044-8f62f21dcaac",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                          "id": "2e58028e-da89-45fb-afe7-1e9a2d6bc424",
                           "role": "human",
                           "content": "My order is A100."
                         }
@@ -1379,7 +1379,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                        "id": "lc_run--01a09c8f-8b0d-7e33-a69b-c866fd8b46de-0",
                         "role": "ai",
                         "content": "noted."
                       }
@@ -1436,7 +1436,7 @@
           },
           "seq": 13,
           "thread": "MainThread",
-          "elapsed_ms": 0.009000000000000001,
+          "elapsed_ms": 0.008,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -1465,7 +1465,7 @@
           },
           "seq": 14,
           "thread": "MainThread",
-          "elapsed_ms": 0.15100000000000002,
+          "elapsed_ms": 0.153,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1477,7 +1477,7 @@
               },
               "seq": 15,
               "thread": "MainThread",
-              "elapsed_ms": 0.14200000000000002,
+              "elapsed_ms": 0.145,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1485,7 +1485,7 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                      "id": "2a15a22d-a262-494b-8b64-d699cda5e202",
                       "role": "human",
                       "content": "What's my order number?"
                     }
@@ -1502,7 +1502,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                    "id": "lc_run--01a09c8f-8b0e-71e3-a6f3-48dfba47ad83-0",
                     "role": "ai",
                     "content": "noted."
                   }
@@ -1516,7 +1516,7 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                        "id": "2a15a22d-a262-494b-8b64-d699cda5e202",
                         "role": "human",
                         "content": "What's my order number?"
                       }
@@ -1539,7 +1539,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                      "id": "lc_run--01a09c8f-8b0e-71e3-a6f3-48dfba47ad83-0",
                       "role": "ai",
                       "content": "noted."
                     }
@@ -1558,7 +1558,7 @@
                 },
                 "seq": 15,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.145,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1566,7 +1566,7 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                        "id": "2a15a22d-a262-494b-8b64-d699cda5e202",
                         "role": "human",
                         "content": "What's my order number?"
                       }
@@ -1583,7 +1583,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                      "id": "lc_run--01a09c8f-8b0e-71e3-a6f3-48dfba47ad83-0",
                       "role": "ai",
                       "content": "noted."
                     }
@@ -1597,7 +1597,7 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                          "id": "2a15a22d-a262-494b-8b64-d699cda5e202",
                           "role": "human",
                           "content": "What's my order number?"
                         }
@@ -1620,7 +1620,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                        "id": "lc_run--01a09c8f-8b0e-71e3-a6f3-48dfba47ad83-0",
                         "role": "ai",
                         "content": "noted."
                       }
@@ -1642,7 +1642,7 @@
             },
             "seq": 10,
             "thread": "MainThread",
-            "elapsed_ms": 0.166,
+            "elapsed_ms": 0.16799999999999998,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1654,7 +1654,7 @@
                 },
                 "seq": 11,
                 "thread": "MainThread",
-                "elapsed_ms": 0.157,
+                "elapsed_ms": 0.158,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1662,12 +1662,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                        "id": "ab8d2e7c-a172-4f95-9044-8f62f21dcaac",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                        "id": "2e58028e-da89-45fb-afe7-1e9a2d6bc424",
                         "role": "human",
                         "content": "My order is A100."
                       }
@@ -1685,7 +1685,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                      "id": "lc_run--01a09c8f-8b0d-7e33-a69b-c866fd8b46de-0",
                       "role": "ai",
                       "content": "noted."
                     }
@@ -1699,12 +1699,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                          "id": "ab8d2e7c-a172-4f95-9044-8f62f21dcaac",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                          "id": "2e58028e-da89-45fb-afe7-1e9a2d6bc424",
                           "role": "human",
                           "content": "My order is A100."
                         }
@@ -1728,7 +1728,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                        "id": "lc_run--01a09c8f-8b0d-7e33-a69b-c866fd8b46de-0",
                         "role": "ai",
                         "content": "noted."
                       }
@@ -1747,7 +1747,7 @@
                   },
                   "seq": 11,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.157,
+                  "elapsed_ms": 0.158,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1755,12 +1755,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                          "id": "ab8d2e7c-a172-4f95-9044-8f62f21dcaac",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                          "id": "2e58028e-da89-45fb-afe7-1e9a2d6bc424",
                           "role": "human",
                           "content": "My order is A100."
                         }
@@ -1778,7 +1778,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                        "id": "lc_run--01a09c8f-8b0d-7e33-a69b-c866fd8b46de-0",
                         "role": "ai",
                         "content": "noted."
                       }
@@ -1792,12 +1792,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "1a6ccd26-8c49-4801-ab83-661b0b6c1609",
+                            "id": "ab8d2e7c-a172-4f95-9044-8f62f21dcaac",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "1514040b-37d3-447f-a7af-b13b14d6889e",
+                            "id": "2e58028e-da89-45fb-afe7-1e9a2d6bc424",
                             "role": "human",
                             "content": "My order is A100."
                           }
@@ -1821,7 +1821,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f66-6ab8-7450-889a-d521f11950f2-0",
+                          "id": "lc_run--01a09c8f-8b0d-7e33-a69b-c866fd8b46de-0",
                           "role": "ai",
                           "content": "noted."
                         }
@@ -1884,7 +1884,7 @@
             },
             "seq": 13,
             "thread": "MainThread",
-            "elapsed_ms": 0.009000000000000001,
+            "elapsed_ms": 0.008,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -1916,7 +1916,7 @@
             },
             "seq": 14,
             "thread": "MainThread",
-            "elapsed_ms": 0.15100000000000002,
+            "elapsed_ms": 0.153,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1928,7 +1928,7 @@
                 },
                 "seq": 15,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.145,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1936,7 +1936,7 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                        "id": "2a15a22d-a262-494b-8b64-d699cda5e202",
                         "role": "human",
                         "content": "What's my order number?"
                       }
@@ -1953,7 +1953,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                      "id": "lc_run--01a09c8f-8b0e-71e3-a6f3-48dfba47ad83-0",
                       "role": "ai",
                       "content": "noted."
                     }
@@ -1967,7 +1967,7 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                          "id": "2a15a22d-a262-494b-8b64-d699cda5e202",
                           "role": "human",
                           "content": "What's my order number?"
                         }
@@ -1990,7 +1990,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                        "id": "lc_run--01a09c8f-8b0e-71e3-a6f3-48dfba47ad83-0",
                         "role": "ai",
                         "content": "noted."
                       }
@@ -2009,7 +2009,7 @@
                   },
                   "seq": 15,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.14200000000000002,
+                  "elapsed_ms": 0.145,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -2017,7 +2017,7 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                          "id": "2a15a22d-a262-494b-8b64-d699cda5e202",
                           "role": "human",
                           "content": "What's my order number?"
                         }
@@ -2034,7 +2034,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                        "id": "lc_run--01a09c8f-8b0e-71e3-a6f3-48dfba47ad83-0",
                         "role": "ai",
                         "content": "noted."
                       }
@@ -2048,7 +2048,7 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "151ce3ca-320f-4fcc-b64d-7809abde4d83",
+                            "id": "2a15a22d-a262-494b-8b64-d699cda5e202",
                             "role": "human",
                             "content": "What's my order number?"
                           }
@@ -2071,7 +2071,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f66-6ab9-7100-9934-4cd6db9f69d1-0",
+                          "id": "lc_run--01a09c8f-8b0e-71e3-a6f3-48dfba47ad83-0",
                           "role": "ai",
                           "content": "noted."
                         }
@@ -2100,7 +2100,7 @@
       },
       "seq": 16,
       "thread": "MainThread",
-      "elapsed_ms": 3.79,
+      "elapsed_ms": 3.95,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -2121,7 +2121,7 @@
           },
           "seq": 17,
           "thread": "MainThread",
-          "elapsed_ms": 0.6489999999999999,
+          "elapsed_ms": 0.6719999999999999,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -2133,7 +2133,7 @@
               },
               "seq": 18,
               "thread": "MainThread",
-              "elapsed_ms": 0.633,
+              "elapsed_ms": 0.655,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2141,12 +2141,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                      "id": "97ba1739-c607-4ed3-9e2c-f7e44c867f99",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                      "id": "5e35ae30-8acc-4b5e-a497-2ca23b9d7528",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     }
@@ -2190,7 +2190,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                    "id": "lc_run--01a09c8f-8b11-76e0-8875-64ee505d7343-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -2213,12 +2213,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                        "id": "97ba1739-c607-4ed3-9e2c-f7e44c867f99",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                        "id": "5e35ae30-8acc-4b5e-a497-2ca23b9d7528",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -2271,7 +2271,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                      "id": "lc_run--01a09c8f-8b11-76e0-8875-64ee505d7343-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2299,7 +2299,7 @@
                 },
                 "seq": 18,
                 "thread": "MainThread",
-                "elapsed_ms": 0.633,
+                "elapsed_ms": 0.655,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2307,12 +2307,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                        "id": "97ba1739-c607-4ed3-9e2c-f7e44c867f99",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                        "id": "5e35ae30-8acc-4b5e-a497-2ca23b9d7528",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -2356,7 +2356,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                      "id": "lc_run--01a09c8f-8b11-76e0-8875-64ee505d7343-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2379,12 +2379,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                          "id": "97ba1739-c607-4ed3-9e2c-f7e44c867f99",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                          "id": "5e35ae30-8acc-4b5e-a497-2ca23b9d7528",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -2437,7 +2437,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                        "id": "lc_run--01a09c8f-8b11-76e0-8875-64ee505d7343-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2479,7 +2479,7 @@
           },
           "seq": 20,
           "thread": "MainThread",
-          "elapsed_ms": 0.094,
+          "elapsed_ms": 0.135,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -2516,7 +2516,7 @@
           },
           "seq": 21,
           "thread": "MainThread",
-          "elapsed_ms": 0.186,
+          "elapsed_ms": 0.193,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -2529,7 +2529,7 @@
               },
               "seq": 22,
               "thread": "MainThread",
-              "elapsed_ms": 0.174,
+              "elapsed_ms": 0.18100000000000002,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2572,7 +2572,7 @@
                 },
                 "seq": 22,
                 "thread": "MainThread",
-                "elapsed_ms": 0.174,
+                "elapsed_ms": 0.18100000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2614,7 +2614,7 @@
           },
           "seq": 23,
           "thread": "MainThread",
-          "elapsed_ms": 0.064,
+          "elapsed_ms": 0.068,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -2657,7 +2657,7 @@
             },
             "seq": 17,
             "thread": "MainThread",
-            "elapsed_ms": 0.6489999999999999,
+            "elapsed_ms": 0.6719999999999999,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -2669,7 +2669,7 @@
                 },
                 "seq": 18,
                 "thread": "MainThread",
-                "elapsed_ms": 0.633,
+                "elapsed_ms": 0.655,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2677,12 +2677,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                        "id": "97ba1739-c607-4ed3-9e2c-f7e44c867f99",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                        "id": "5e35ae30-8acc-4b5e-a497-2ca23b9d7528",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -2726,7 +2726,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                      "id": "lc_run--01a09c8f-8b11-76e0-8875-64ee505d7343-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2749,12 +2749,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                          "id": "97ba1739-c607-4ed3-9e2c-f7e44c867f99",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                          "id": "5e35ae30-8acc-4b5e-a497-2ca23b9d7528",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -2807,7 +2807,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                        "id": "lc_run--01a09c8f-8b11-76e0-8875-64ee505d7343-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2835,7 +2835,7 @@
                   },
                   "seq": 18,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.633,
+                  "elapsed_ms": 0.655,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -2843,12 +2843,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                          "id": "97ba1739-c607-4ed3-9e2c-f7e44c867f99",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                          "id": "5e35ae30-8acc-4b5e-a497-2ca23b9d7528",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -2892,7 +2892,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                        "id": "lc_run--01a09c8f-8b11-76e0-8875-64ee505d7343-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2915,12 +2915,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "f024f7f2-2ff8-428f-8002-ac9ea3b1d14d",
+                            "id": "97ba1739-c607-4ed3-9e2c-f7e44c867f99",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "c5fcac84-914e-4c58-884f-287d986edca3",
+                            "id": "5e35ae30-8acc-4b5e-a497-2ca23b9d7528",
                             "role": "human",
                             "content": "What's the status of order A100?"
                           }
@@ -2973,7 +2973,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f66-6abb-72c1-a138-52d8f583cd77-0",
+                          "id": "lc_run--01a09c8f-8b11-76e0-8875-64ee505d7343-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3021,7 +3021,7 @@
             },
             "seq": 20,
             "thread": "MainThread",
-            "elapsed_ms": 0.094,
+            "elapsed_ms": 0.135,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -3061,7 +3061,7 @@
             },
             "seq": 21,
             "thread": "MainThread",
-            "elapsed_ms": 0.186,
+            "elapsed_ms": 0.193,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -3074,7 +3074,7 @@
                 },
                 "seq": 22,
                 "thread": "MainThread",
-                "elapsed_ms": 0.174,
+                "elapsed_ms": 0.18100000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3117,7 +3117,7 @@
                   },
                   "seq": 22,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.174,
+                  "elapsed_ms": 0.18100000000000002,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -3162,7 +3162,7 @@
             },
             "seq": 23,
             "thread": "MainThread",
-            "elapsed_ms": 0.064,
+            "elapsed_ms": 0.068,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -3215,7 +3215,7 @@
       },
       "seq": 24,
       "thread": "MainThread",
-      "elapsed_ms": 1.281,
+      "elapsed_ms": 1.438,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -3233,7 +3233,7 @@
           },
           "seq": 25,
           "thread": "MainThread",
-          "elapsed_ms": 0.15100000000000002,
+          "elapsed_ms": 0.16899999999999998,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -3245,7 +3245,7 @@
               },
               "seq": 26,
               "thread": "MainThread",
-              "elapsed_ms": 0.14200000000000002,
+              "elapsed_ms": 0.157,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3253,12 +3253,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                      "id": "04b1083f-f045-47ad-9282-6f269eba7ff4",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                      "id": "26a21749-2a45-405a-842b-a14d5d07c087",
                       "role": "human",
                       "content": "My favorite color is teal."
                     }
@@ -3276,7 +3276,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                    "id": "lc_run--01a09c8f-8b13-70c0-b31f-0954d1c2c6fd-0",
                     "role": "ai",
                     "content": "I don't know that."
                   }
@@ -3290,12 +3290,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                        "id": "04b1083f-f045-47ad-9282-6f269eba7ff4",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                        "id": "26a21749-2a45-405a-842b-a14d5d07c087",
                         "role": "human",
                         "content": "My favorite color is teal."
                       }
@@ -3319,7 +3319,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                      "id": "lc_run--01a09c8f-8b13-70c0-b31f-0954d1c2c6fd-0",
                       "role": "ai",
                       "content": "I don't know that."
                     }
@@ -3338,7 +3338,7 @@
                 },
                 "seq": 26,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.157,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3346,12 +3346,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                        "id": "04b1083f-f045-47ad-9282-6f269eba7ff4",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                        "id": "26a21749-2a45-405a-842b-a14d5d07c087",
                         "role": "human",
                         "content": "My favorite color is teal."
                       }
@@ -3369,7 +3369,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                      "id": "lc_run--01a09c8f-8b13-70c0-b31f-0954d1c2c6fd-0",
                       "role": "ai",
                       "content": "I don't know that."
                     }
@@ -3383,12 +3383,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                          "id": "04b1083f-f045-47ad-9282-6f269eba7ff4",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                          "id": "26a21749-2a45-405a-842b-a14d5d07c087",
                           "role": "human",
                           "content": "My favorite color is teal."
                         }
@@ -3412,7 +3412,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                        "id": "lc_run--01a09c8f-8b13-70c0-b31f-0954d1c2c6fd-0",
                         "role": "ai",
                         "content": "I don't know that."
                       }
@@ -3469,7 +3469,7 @@
           },
           "seq": 28,
           "thread": "MainThread",
-          "elapsed_ms": 0.007,
+          "elapsed_ms": 0.008,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -3502,7 +3502,7 @@
             },
             "seq": 25,
             "thread": "MainThread",
-            "elapsed_ms": 0.15100000000000002,
+            "elapsed_ms": 0.16899999999999998,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -3514,7 +3514,7 @@
                 },
                 "seq": 26,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.157,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3522,12 +3522,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                        "id": "04b1083f-f045-47ad-9282-6f269eba7ff4",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                        "id": "26a21749-2a45-405a-842b-a14d5d07c087",
                         "role": "human",
                         "content": "My favorite color is teal."
                       }
@@ -3545,7 +3545,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                      "id": "lc_run--01a09c8f-8b13-70c0-b31f-0954d1c2c6fd-0",
                       "role": "ai",
                       "content": "I don't know that."
                     }
@@ -3559,12 +3559,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                          "id": "04b1083f-f045-47ad-9282-6f269eba7ff4",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                          "id": "26a21749-2a45-405a-842b-a14d5d07c087",
                           "role": "human",
                           "content": "My favorite color is teal."
                         }
@@ -3588,7 +3588,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                        "id": "lc_run--01a09c8f-8b13-70c0-b31f-0954d1c2c6fd-0",
                         "role": "ai",
                         "content": "I don't know that."
                       }
@@ -3607,7 +3607,7 @@
                   },
                   "seq": 26,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.14200000000000002,
+                  "elapsed_ms": 0.157,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -3615,12 +3615,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                          "id": "04b1083f-f045-47ad-9282-6f269eba7ff4",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                          "id": "26a21749-2a45-405a-842b-a14d5d07c087",
                           "role": "human",
                           "content": "My favorite color is teal."
                         }
@@ -3638,7 +3638,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                        "id": "lc_run--01a09c8f-8b13-70c0-b31f-0954d1c2c6fd-0",
                         "role": "ai",
                         "content": "I don't know that."
                       }
@@ -3652,12 +3652,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "eae8fa04-f5c2-420b-a94c-1ae209454820",
+                            "id": "04b1083f-f045-47ad-9282-6f269eba7ff4",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "61de1d34-fd2f-4cd2-b837-0105ece3ecf3",
+                            "id": "26a21749-2a45-405a-842b-a14d5d07c087",
                             "role": "human",
                             "content": "My favorite color is teal."
                           }
@@ -3681,7 +3681,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f66-6abe-7ba0-a899-06f519855f7c-0",
+                          "id": "lc_run--01a09c8f-8b13-70c0-b31f-0954d1c2c6fd-0",
                           "role": "ai",
                           "content": "I don't know that."
                         }
@@ -3744,7 +3744,7 @@
             },
             "seq": 28,
             "thread": "MainThread",
-            "elapsed_ms": 0.007,
+            "elapsed_ms": 0.008,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -3784,7 +3784,7 @@
       },
       "seq": 29,
       "thread": "MainThread",
-      "elapsed_ms": 3.3240000000000003,
+      "elapsed_ms": 3.899,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -3807,7 +3807,7 @@
           },
           "seq": 30,
           "thread": "MainThread",
-          "elapsed_ms": 0.192,
+          "elapsed_ms": 0.156,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -3819,7 +3819,7 @@
               },
               "seq": 31,
               "thread": "MainThread",
-              "elapsed_ms": 0.179,
+              "elapsed_ms": 0.147,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3827,12 +3827,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                      "id": "d280cc68-40d3-44e0-9df0-18bf06952682",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                      "id": "8344999e-ac30-426a-869a-0cc90f471cfc",
                       "role": "human",
                       "content": "Remember: A100."
                     }
@@ -3850,7 +3850,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                    "id": "lc_run--01a09c8f-8b15-7bb1-8ee6-0510032e0e05-0",
                     "role": "ai",
                     "content": "noted, on disk now."
                   }
@@ -3864,12 +3864,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                        "id": "d280cc68-40d3-44e0-9df0-18bf06952682",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                        "id": "8344999e-ac30-426a-869a-0cc90f471cfc",
                         "role": "human",
                         "content": "Remember: A100."
                       }
@@ -3893,7 +3893,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                      "id": "lc_run--01a09c8f-8b15-7bb1-8ee6-0510032e0e05-0",
                       "role": "ai",
                       "content": "noted, on disk now."
                     }
@@ -3912,7 +3912,7 @@
                 },
                 "seq": 31,
                 "thread": "MainThread",
-                "elapsed_ms": 0.179,
+                "elapsed_ms": 0.147,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3920,12 +3920,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                        "id": "d280cc68-40d3-44e0-9df0-18bf06952682",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                        "id": "8344999e-ac30-426a-869a-0cc90f471cfc",
                         "role": "human",
                         "content": "Remember: A100."
                       }
@@ -3943,7 +3943,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                      "id": "lc_run--01a09c8f-8b15-7bb1-8ee6-0510032e0e05-0",
                       "role": "ai",
                       "content": "noted, on disk now."
                     }
@@ -3957,12 +3957,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                          "id": "d280cc68-40d3-44e0-9df0-18bf06952682",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                          "id": "8344999e-ac30-426a-869a-0cc90f471cfc",
                           "role": "human",
                           "content": "Remember: A100."
                         }
@@ -3986,7 +3986,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                        "id": "lc_run--01a09c8f-8b15-7bb1-8ee6-0510032e0e05-0",
                         "role": "ai",
                         "content": "noted, on disk now."
                       }
@@ -4004,7 +4004,7 @@
           },
           "seq": 32,
           "thread": "MainThread",
-          "elapsed_ms": 0.164,
+          "elapsed_ms": 0.395,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4016,7 +4016,7 @@
               },
               "seq": 33,
               "thread": "MainThread",
-              "elapsed_ms": 0.154,
+              "elapsed_ms": 0.386,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4024,22 +4024,22 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                      "id": "677aefa1-0020-4a22-bbff-c9cf2bf5d9e3",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                      "id": "0232f9d9-30bc-495f-ac8e-9ea2dcdc5e4b",
                       "role": "human",
                       "content": "Remember: A100."
                     },
                     {
-                      "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                      "id": "de92d0a4-af20-4465-8e11-55f716447713",
                       "role": "ai",
                       "content": "noted, on disk now."
                     },
                     {
-                      "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                      "id": "cd29e9c9-2985-4c14-8f5d-d7fc6c74b2e8",
                       "role": "human",
                       "content": "What did I ask you?"
                     }
@@ -4059,7 +4059,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                    "id": "lc_run--01a09c8f-8b17-7150-a188-46f548b060a7-0",
                     "role": "ai",
                     "content": "noted, on disk now."
                   }
@@ -4073,22 +4073,22 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                        "id": "677aefa1-0020-4a22-bbff-c9cf2bf5d9e3",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                        "id": "0232f9d9-30bc-495f-ac8e-9ea2dcdc5e4b",
                         "role": "human",
                         "content": "Remember: A100."
                       },
                       {
-                        "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                        "id": "de92d0a4-af20-4465-8e11-55f716447713",
                         "role": "ai",
                         "content": "noted, on disk now."
                       },
                       {
-                        "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                        "id": "cd29e9c9-2985-4c14-8f5d-d7fc6c74b2e8",
                         "role": "human",
                         "content": "What did I ask you?"
                       }
@@ -4114,7 +4114,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                      "id": "lc_run--01a09c8f-8b17-7150-a188-46f548b060a7-0",
                       "role": "ai",
                       "content": "noted, on disk now."
                     }
@@ -4133,7 +4133,7 @@
                 },
                 "seq": 33,
                 "thread": "MainThread",
-                "elapsed_ms": 0.154,
+                "elapsed_ms": 0.386,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4141,22 +4141,22 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                        "id": "677aefa1-0020-4a22-bbff-c9cf2bf5d9e3",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                        "id": "0232f9d9-30bc-495f-ac8e-9ea2dcdc5e4b",
                         "role": "human",
                         "content": "Remember: A100."
                       },
                       {
-                        "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                        "id": "de92d0a4-af20-4465-8e11-55f716447713",
                         "role": "ai",
                         "content": "noted, on disk now."
                       },
                       {
-                        "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                        "id": "cd29e9c9-2985-4c14-8f5d-d7fc6c74b2e8",
                         "role": "human",
                         "content": "What did I ask you?"
                       }
@@ -4176,7 +4176,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                      "id": "lc_run--01a09c8f-8b17-7150-a188-46f548b060a7-0",
                       "role": "ai",
                       "content": "noted, on disk now."
                     }
@@ -4190,22 +4190,22 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                          "id": "677aefa1-0020-4a22-bbff-c9cf2bf5d9e3",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                          "id": "0232f9d9-30bc-495f-ac8e-9ea2dcdc5e4b",
                           "role": "human",
                           "content": "Remember: A100."
                         },
                         {
-                          "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                          "id": "de92d0a4-af20-4465-8e11-55f716447713",
                           "role": "ai",
                           "content": "noted, on disk now."
                         },
                         {
-                          "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                          "id": "cd29e9c9-2985-4c14-8f5d-d7fc6c74b2e8",
                           "role": "human",
                           "content": "What did I ask you?"
                         }
@@ -4231,7 +4231,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                        "id": "lc_run--01a09c8f-8b17-7150-a188-46f548b060a7-0",
                         "role": "ai",
                         "content": "noted, on disk now."
                       }
@@ -4253,7 +4253,7 @@
             },
             "seq": 30,
             "thread": "MainThread",
-            "elapsed_ms": 0.192,
+            "elapsed_ms": 0.156,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -4265,7 +4265,7 @@
                 },
                 "seq": 31,
                 "thread": "MainThread",
-                "elapsed_ms": 0.179,
+                "elapsed_ms": 0.147,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4273,12 +4273,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                        "id": "d280cc68-40d3-44e0-9df0-18bf06952682",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                        "id": "8344999e-ac30-426a-869a-0cc90f471cfc",
                         "role": "human",
                         "content": "Remember: A100."
                       }
@@ -4296,7 +4296,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                      "id": "lc_run--01a09c8f-8b15-7bb1-8ee6-0510032e0e05-0",
                       "role": "ai",
                       "content": "noted, on disk now."
                     }
@@ -4310,12 +4310,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                          "id": "d280cc68-40d3-44e0-9df0-18bf06952682",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                          "id": "8344999e-ac30-426a-869a-0cc90f471cfc",
                           "role": "human",
                           "content": "Remember: A100."
                         }
@@ -4339,7 +4339,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                        "id": "lc_run--01a09c8f-8b15-7bb1-8ee6-0510032e0e05-0",
                         "role": "ai",
                         "content": "noted, on disk now."
                       }
@@ -4358,7 +4358,7 @@
                   },
                   "seq": 31,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.179,
+                  "elapsed_ms": 0.147,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4366,12 +4366,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                          "id": "d280cc68-40d3-44e0-9df0-18bf06952682",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                          "id": "8344999e-ac30-426a-869a-0cc90f471cfc",
                           "role": "human",
                           "content": "Remember: A100."
                         }
@@ -4389,7 +4389,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                        "id": "lc_run--01a09c8f-8b15-7bb1-8ee6-0510032e0e05-0",
                         "role": "ai",
                         "content": "noted, on disk now."
                       }
@@ -4403,12 +4403,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "bfaf6513-f69c-495a-81d5-b8cdc4d1ecd7",
+                            "id": "d280cc68-40d3-44e0-9df0-18bf06952682",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "20e814a1-6c60-48fb-bffd-f25a999b4fe4",
+                            "id": "8344999e-ac30-426a-869a-0cc90f471cfc",
                             "role": "human",
                             "content": "Remember: A100."
                           }
@@ -4432,7 +4432,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f66-6abf-7272-a047-925c28d51e7c-0",
+                          "id": "lc_run--01a09c8f-8b15-7bb1-8ee6-0510032e0e05-0",
                           "role": "ai",
                           "content": "noted, on disk now."
                         }
@@ -4460,7 +4460,7 @@
             },
             "seq": 32,
             "thread": "MainThread",
-            "elapsed_ms": 0.164,
+            "elapsed_ms": 0.395,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -4472,7 +4472,7 @@
                 },
                 "seq": 33,
                 "thread": "MainThread",
-                "elapsed_ms": 0.154,
+                "elapsed_ms": 0.386,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4480,22 +4480,22 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                        "id": "677aefa1-0020-4a22-bbff-c9cf2bf5d9e3",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                        "id": "0232f9d9-30bc-495f-ac8e-9ea2dcdc5e4b",
                         "role": "human",
                         "content": "Remember: A100."
                       },
                       {
-                        "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                        "id": "de92d0a4-af20-4465-8e11-55f716447713",
                         "role": "ai",
                         "content": "noted, on disk now."
                       },
                       {
-                        "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                        "id": "cd29e9c9-2985-4c14-8f5d-d7fc6c74b2e8",
                         "role": "human",
                         "content": "What did I ask you?"
                       }
@@ -4515,7 +4515,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                      "id": "lc_run--01a09c8f-8b17-7150-a188-46f548b060a7-0",
                       "role": "ai",
                       "content": "noted, on disk now."
                     }
@@ -4529,22 +4529,22 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                          "id": "677aefa1-0020-4a22-bbff-c9cf2bf5d9e3",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                          "id": "0232f9d9-30bc-495f-ac8e-9ea2dcdc5e4b",
                           "role": "human",
                           "content": "Remember: A100."
                         },
                         {
-                          "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                          "id": "de92d0a4-af20-4465-8e11-55f716447713",
                           "role": "ai",
                           "content": "noted, on disk now."
                         },
                         {
-                          "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                          "id": "cd29e9c9-2985-4c14-8f5d-d7fc6c74b2e8",
                           "role": "human",
                           "content": "What did I ask you?"
                         }
@@ -4570,7 +4570,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                        "id": "lc_run--01a09c8f-8b17-7150-a188-46f548b060a7-0",
                         "role": "ai",
                         "content": "noted, on disk now."
                       }
@@ -4589,7 +4589,7 @@
                   },
                   "seq": 33,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.154,
+                  "elapsed_ms": 0.386,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4597,22 +4597,22 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                          "id": "677aefa1-0020-4a22-bbff-c9cf2bf5d9e3",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                          "id": "0232f9d9-30bc-495f-ac8e-9ea2dcdc5e4b",
                           "role": "human",
                           "content": "Remember: A100."
                         },
                         {
-                          "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                          "id": "de92d0a4-af20-4465-8e11-55f716447713",
                           "role": "ai",
                           "content": "noted, on disk now."
                         },
                         {
-                          "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                          "id": "cd29e9c9-2985-4c14-8f5d-d7fc6c74b2e8",
                           "role": "human",
                           "content": "What did I ask you?"
                         }
@@ -4632,7 +4632,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                        "id": "lc_run--01a09c8f-8b17-7150-a188-46f548b060a7-0",
                         "role": "ai",
                         "content": "noted, on disk now."
                       }
@@ -4646,22 +4646,22 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "a1ac717c-331a-4520-a4ce-607bd2080607",
+                            "id": "677aefa1-0020-4a22-bbff-c9cf2bf5d9e3",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "29636eb9-9cb1-4b14-a4c2-6e4d2d242399",
+                            "id": "0232f9d9-30bc-495f-ac8e-9ea2dcdc5e4b",
                             "role": "human",
                             "content": "Remember: A100."
                           },
                           {
-                            "id": "c79468ca-7f53-4903-9845-a317c7e576e2",
+                            "id": "de92d0a4-af20-4465-8e11-55f716447713",
                             "role": "ai",
                             "content": "noted, on disk now."
                           },
                           {
-                            "id": "b98ed0c9-7d41-49ba-93fe-ab6cef1ec5f3",
+                            "id": "cd29e9c9-2985-4c14-8f5d-d7fc6c74b2e8",
                             "role": "human",
                             "content": "What did I ask you?"
                           }
@@ -4687,7 +4687,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f66-6ac1-7123-a720-20f366d8f76f-0",
+                          "id": "lc_run--01a09c8f-8b17-7150-a188-46f548b060a7-0",
                           "role": "ai",
                           "content": "noted, on disk now."
                         }

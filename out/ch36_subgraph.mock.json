@@ -1,7 +1,7 @@
 {
   "chapter": "ch36_subgraph",
   "model_kind": "mock",
-  "source": "dd10811e61a4",
+  "source": "97eaeb62a6d9",
   "summary": {
     "turns": 0,
     "messages": 0,
@@ -15,7 +15,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 5.281,
+      "elapsed_ms": 5.381,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -39,7 +39,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 0.873,
+          "elapsed_ms": 0.915,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -51,7 +51,7 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 0.867,
+              "elapsed_ms": 0.907,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -59,12 +59,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                      "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                      "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     }
@@ -108,7 +108,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                    "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -131,12 +131,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                        "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                        "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -189,7 +189,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                      "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -217,7 +217,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 0.867,
+                "elapsed_ms": 0.907,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -225,12 +225,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                        "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                        "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -274,7 +274,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                      "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -297,12 +297,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                          "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                          "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -355,7 +355,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                        "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -382,7 +382,7 @@
           },
           "seq": 4,
           "thread": "MainThread",
-          "elapsed_ms": 0.224,
+          "elapsed_ms": 0.23,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -395,7 +395,7 @@
               },
               "seq": 5,
               "thread": "MainThread",
-              "elapsed_ms": 0.212,
+              "elapsed_ms": 0.21800000000000003,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -438,7 +438,7 @@
                 },
                 "seq": 5,
                 "thread": "MainThread",
-                "elapsed_ms": 0.212,
+                "elapsed_ms": 0.21800000000000003,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -479,7 +479,7 @@
           },
           "seq": 6,
           "thread": "MainThread",
-          "elapsed_ms": 0.19799999999999998,
+          "elapsed_ms": 0.23,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -491,7 +491,7 @@
               },
               "seq": 7,
               "thread": "MainThread",
-              "elapsed_ms": 0.193,
+              "elapsed_ms": 0.194,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -499,17 +499,17 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                      "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                      "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     },
                     {
-                      "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                      "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -523,7 +523,7 @@
                       ]
                     },
                     {
-                      "id": "dcccb0bb-f740-4dc1-85c7-15e8b385102f",
+                      "id": "fa85f5db-4a05-48d5-89f4-7dc9bf7ca8ee",
                       "role": "tool",
                       "content": "order A100: shipped",
                       "tool_call_id": "c1"
@@ -570,7 +570,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f73-9537-7763-8f88-3eabda03726c-0",
+                    "id": "lc_run--01a09c8f-9288-7333-a9c6-0ae4c383e471-0",
                     "role": "ai",
                     "content": "Order A100 has shipped."
                   }
@@ -584,17 +584,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                        "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                        "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                        "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -608,7 +608,7 @@
                         ]
                       },
                       {
-                        "id": "dcccb0bb-f740-4dc1-85c7-15e8b385102f",
+                        "id": "fa85f5db-4a05-48d5-89f4-7dc9bf7ca8ee",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -664,7 +664,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9537-7763-8f88-3eabda03726c-0",
+                      "id": "lc_run--01a09c8f-9288-7333-a9c6-0ae4c383e471-0",
                       "role": "ai",
                       "content": "Order A100 has shipped."
                     }
@@ -683,7 +683,7 @@
                 },
                 "seq": 7,
                 "thread": "MainThread",
-                "elapsed_ms": 0.193,
+                "elapsed_ms": 0.194,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -691,17 +691,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                        "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                        "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                        "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -715,7 +715,7 @@
                         ]
                       },
                       {
-                        "id": "dcccb0bb-f740-4dc1-85c7-15e8b385102f",
+                        "id": "fa85f5db-4a05-48d5-89f4-7dc9bf7ca8ee",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -762,7 +762,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9537-7763-8f88-3eabda03726c-0",
+                      "id": "lc_run--01a09c8f-9288-7333-a9c6-0ae4c383e471-0",
                       "role": "ai",
                       "content": "Order A100 has shipped."
                     }
@@ -776,17 +776,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                          "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                          "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                          "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -800,7 +800,7 @@
                           ]
                         },
                         {
-                          "id": "dcccb0bb-f740-4dc1-85c7-15e8b385102f",
+                          "id": "fa85f5db-4a05-48d5-89f4-7dc9bf7ca8ee",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -856,7 +856,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9537-7763-8f88-3eabda03726c-0",
+                        "id": "lc_run--01a09c8f-9288-7333-a9c6-0ae4c383e471-0",
                         "role": "ai",
                         "content": "Order A100 has shipped."
                       }
@@ -878,7 +878,7 @@
             },
             "seq": 2,
             "thread": "MainThread",
-            "elapsed_ms": 0.873,
+            "elapsed_ms": 0.915,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -890,7 +890,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 0.867,
+                "elapsed_ms": 0.907,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -898,12 +898,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                        "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                        "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -947,7 +947,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                      "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -970,12 +970,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                          "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                          "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -1028,7 +1028,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                        "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1056,7 +1056,7 @@
                   },
                   "seq": 3,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.867,
+                  "elapsed_ms": 0.907,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1064,12 +1064,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                          "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                          "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -1113,7 +1113,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                        "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1136,12 +1136,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                            "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                            "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                             "role": "human",
                             "content": "What's the status of order A100?"
                           }
@@ -1194,7 +1194,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                          "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1224,7 +1224,7 @@
             },
             "seq": 4,
             "thread": "MainThread",
-            "elapsed_ms": 0.224,
+            "elapsed_ms": 0.23,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1237,7 +1237,7 @@
                 },
                 "seq": 5,
                 "thread": "MainThread",
-                "elapsed_ms": 0.212,
+                "elapsed_ms": 0.21800000000000003,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1280,7 +1280,7 @@
                   },
                   "seq": 5,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.212,
+                  "elapsed_ms": 0.21800000000000003,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1324,7 +1324,7 @@
             },
             "seq": 6,
             "thread": "MainThread",
-            "elapsed_ms": 0.19799999999999998,
+            "elapsed_ms": 0.23,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1336,7 +1336,7 @@
                 },
                 "seq": 7,
                 "thread": "MainThread",
-                "elapsed_ms": 0.193,
+                "elapsed_ms": 0.194,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1344,17 +1344,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                        "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                        "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                        "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1368,7 +1368,7 @@
                         ]
                       },
                       {
-                        "id": "dcccb0bb-f740-4dc1-85c7-15e8b385102f",
+                        "id": "fa85f5db-4a05-48d5-89f4-7dc9bf7ca8ee",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -1415,7 +1415,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9537-7763-8f88-3eabda03726c-0",
+                      "id": "lc_run--01a09c8f-9288-7333-a9c6-0ae4c383e471-0",
                       "role": "ai",
                       "content": "Order A100 has shipped."
                     }
@@ -1429,17 +1429,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                          "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                          "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                          "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1453,7 +1453,7 @@
                           ]
                         },
                         {
-                          "id": "dcccb0bb-f740-4dc1-85c7-15e8b385102f",
+                          "id": "fa85f5db-4a05-48d5-89f4-7dc9bf7ca8ee",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -1509,7 +1509,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9537-7763-8f88-3eabda03726c-0",
+                        "id": "lc_run--01a09c8f-9288-7333-a9c6-0ae4c383e471-0",
                         "role": "ai",
                         "content": "Order A100 has shipped."
                       }
@@ -1528,7 +1528,7 @@
                   },
                   "seq": 7,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.193,
+                  "elapsed_ms": 0.194,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1536,17 +1536,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                          "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                          "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                          "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1560,7 +1560,7 @@
                           ]
                         },
                         {
-                          "id": "dcccb0bb-f740-4dc1-85c7-15e8b385102f",
+                          "id": "fa85f5db-4a05-48d5-89f4-7dc9bf7ca8ee",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -1607,7 +1607,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9537-7763-8f88-3eabda03726c-0",
+                        "id": "lc_run--01a09c8f-9288-7333-a9c6-0ae4c383e471-0",
                         "role": "ai",
                         "content": "Order A100 has shipped."
                       }
@@ -1621,17 +1621,17 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "7d0c6a65-fffd-49e9-9810-e5385550e4ca",
+                            "id": "39d5b5e3-f486-4edc-9419-fa196e66bc17",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "05ac30f4-c03d-41c0-b2cf-0e13e01962ae",
+                            "id": "61f07f02-9d80-4421-b991-dfc61520252c",
                             "role": "human",
                             "content": "What's the status of order A100?"
                           },
                           {
-                            "id": "lc_run--01a06f73-9536-7cf1-b2d9-d9d61bd99737-0",
+                            "id": "lc_run--01a09c8f-9287-7c81-bee9-913f62555f57-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -1645,7 +1645,7 @@
                             ]
                           },
                           {
-                            "id": "dcccb0bb-f740-4dc1-85c7-15e8b385102f",
+                            "id": "fa85f5db-4a05-48d5-89f4-7dc9bf7ca8ee",
                             "role": "tool",
                             "content": "order A100: shipped",
                             "tool_call_id": "c1"
@@ -1701,7 +1701,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f73-9537-7763-8f88-3eabda03726c-0",
+                          "id": "lc_run--01a09c8f-9288-7333-a9c6-0ae4c383e471-0",
                           "role": "ai",
                           "content": "Order A100 has shipped."
                         }
@@ -1736,7 +1736,7 @@
       },
       "seq": 8,
       "thread": "MainThread",
-      "elapsed_ms": 1.018,
+      "elapsed_ms": 1.087,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -1775,7 +1775,7 @@
       },
       "seq": 9,
       "thread": "MainThread",
-      "elapsed_ms": 3.266,
+      "elapsed_ms": 3.226,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -1793,7 +1793,7 @@
           },
           "seq": 10,
           "thread": "MainThread",
-          "elapsed_ms": 0.513,
+          "elapsed_ms": 0.5640000000000001,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1806,7 +1806,7 @@
               },
               "seq": 11,
               "thread": "MainThread",
-              "elapsed_ms": 0.508,
+              "elapsed_ms": 0.558,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1826,7 +1826,7 @@
                   },
                   "seq": 12,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.33399999999999996,
+                  "elapsed_ms": 0.38499999999999995,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [],
@@ -1838,7 +1838,7 @@
                       },
                       "seq": 13,
                       "thread": "MainThread",
-                      "elapsed_ms": 0.196,
+                      "elapsed_ms": 0.213,
                       "model_provider_ms": null,
                       "library_ms": null,
                       "notes": [
@@ -1895,7 +1895,7 @@
                         {
                           "label": "reply",
                           "message": {
-                            "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                            "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -1976,7 +1976,7 @@
                           "value": {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                               "role": "ai",
                               "content": "",
                               "tool_calls": [
@@ -2001,7 +2001,7 @@
                       },
                       "seq": 14,
                       "thread": "MainThread",
-                      "elapsed_ms": 0.127,
+                      "elapsed_ms": 0.16,
                       "model_provider_ms": null,
                       "library_ms": null,
                       "notes": [
@@ -2043,7 +2043,7 @@
                         },
                         "seq": 13,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.196,
+                        "elapsed_ms": 0.213,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -2100,7 +2100,7 @@
                           {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                               "role": "ai",
                               "content": "",
                               "tool_calls": [
@@ -2181,7 +2181,7 @@
                             "value": {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -2209,7 +2209,7 @@
                         },
                         "seq": 14,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.127,
+                        "elapsed_ms": 0.16,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -2250,7 +2250,7 @@
                   },
                   "seq": 15,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.164,
+                  "elapsed_ms": 0.162,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [],
@@ -2262,7 +2262,7 @@
                       },
                       "seq": 16,
                       "thread": "MainThread",
-                      "elapsed_ms": 0.159,
+                      "elapsed_ms": 0.157,
                       "model_provider_ms": null,
                       "library_ms": null,
                       "notes": [
@@ -2280,7 +2280,7 @@
                               "content": "What's the status of order A100?"
                             },
                             {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                               "role": "ai",
                               "content": "",
                               "tool_calls": [
@@ -2341,7 +2341,7 @@
                         {
                           "label": "reply",
                           "message": {
-                            "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                            "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                             "role": "ai",
                             "content": "Order A100 has shipped."
                           }
@@ -2365,7 +2365,7 @@
                                 "content": "What's the status of order A100?"
                               },
                               {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -2435,7 +2435,7 @@
                           "value": {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                               "role": "ai",
                               "content": "Order A100 has shipped."
                             }
@@ -2454,7 +2454,7 @@
                         },
                         "seq": 16,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.159,
+                        "elapsed_ms": 0.157,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -2472,7 +2472,7 @@
                                 "content": "What's the status of order A100?"
                               },
                               {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -2533,7 +2533,7 @@
                           {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                               "role": "ai",
                               "content": "Order A100 has shipped."
                             }
@@ -2557,7 +2557,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -2627,7 +2627,7 @@
                             "value": {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -2655,7 +2655,7 @@
                     },
                     "seq": 12,
                     "thread": "MainThread",
-                    "elapsed_ms": 0.33399999999999996,
+                    "elapsed_ms": 0.38499999999999995,
                     "model_provider_ms": null,
                     "library_ms": null,
                     "notes": [],
@@ -2667,7 +2667,7 @@
                         },
                         "seq": 13,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.196,
+                        "elapsed_ms": 0.213,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -2724,7 +2724,7 @@
                           {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                               "role": "ai",
                               "content": "",
                               "tool_calls": [
@@ -2805,7 +2805,7 @@
                             "value": {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -2830,7 +2830,7 @@
                         },
                         "seq": 14,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.127,
+                        "elapsed_ms": 0.16,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -2872,7 +2872,7 @@
                           },
                           "seq": 13,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.196,
+                          "elapsed_ms": 0.213,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -2929,7 +2929,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -3010,7 +3010,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -3038,7 +3038,7 @@
                           },
                           "seq": 14,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.127,
+                          "elapsed_ms": 0.16,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -3082,7 +3082,7 @@
                     },
                     "seq": 15,
                     "thread": "MainThread",
-                    "elapsed_ms": 0.164,
+                    "elapsed_ms": 0.162,
                     "model_provider_ms": null,
                     "library_ms": null,
                     "notes": [],
@@ -3094,7 +3094,7 @@
                         },
                         "seq": 16,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.159,
+                        "elapsed_ms": 0.157,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -3112,7 +3112,7 @@
                                 "content": "What's the status of order A100?"
                               },
                               {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -3173,7 +3173,7 @@
                           {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                               "role": "ai",
                               "content": "Order A100 has shipped."
                             }
@@ -3197,7 +3197,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -3267,7 +3267,7 @@
                             "value": {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -3286,7 +3286,7 @@
                           },
                           "seq": 16,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.159,
+                          "elapsed_ms": 0.157,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -3304,7 +3304,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -3365,7 +3365,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -3389,7 +3389,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -3459,7 +3459,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -3492,7 +3492,7 @@
                 },
                 "seq": 11,
                 "thread": "MainThread",
-                "elapsed_ms": 0.508,
+                "elapsed_ms": 0.558,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3512,7 +3512,7 @@
                     },
                     "seq": 12,
                     "thread": "MainThread",
-                    "elapsed_ms": 0.33399999999999996,
+                    "elapsed_ms": 0.38499999999999995,
                     "model_provider_ms": null,
                     "library_ms": null,
                     "notes": [],
@@ -3524,7 +3524,7 @@
                         },
                         "seq": 13,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.196,
+                        "elapsed_ms": 0.213,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -3581,7 +3581,7 @@
                           {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                               "role": "ai",
                               "content": "",
                               "tool_calls": [
@@ -3662,7 +3662,7 @@
                             "value": {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -3687,7 +3687,7 @@
                         },
                         "seq": 14,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.127,
+                        "elapsed_ms": 0.16,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -3729,7 +3729,7 @@
                           },
                           "seq": 13,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.196,
+                          "elapsed_ms": 0.213,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -3786,7 +3786,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -3867,7 +3867,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -3895,7 +3895,7 @@
                           },
                           "seq": 14,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.127,
+                          "elapsed_ms": 0.16,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -3936,7 +3936,7 @@
                     },
                     "seq": 15,
                     "thread": "MainThread",
-                    "elapsed_ms": 0.164,
+                    "elapsed_ms": 0.162,
                     "model_provider_ms": null,
                     "library_ms": null,
                     "notes": [],
@@ -3948,7 +3948,7 @@
                         },
                         "seq": 16,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.159,
+                        "elapsed_ms": 0.157,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -3966,7 +3966,7 @@
                                 "content": "What's the status of order A100?"
                               },
                               {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -4027,7 +4027,7 @@
                           {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                               "role": "ai",
                               "content": "Order A100 has shipped."
                             }
@@ -4051,7 +4051,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -4121,7 +4121,7 @@
                             "value": {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -4140,7 +4140,7 @@
                           },
                           "seq": 16,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.159,
+                          "elapsed_ms": 0.157,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -4158,7 +4158,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -4219,7 +4219,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -4243,7 +4243,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -4313,7 +4313,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -4341,7 +4341,7 @@
                       },
                       "seq": 12,
                       "thread": "MainThread",
-                      "elapsed_ms": 0.33399999999999996,
+                      "elapsed_ms": 0.38499999999999995,
                       "model_provider_ms": null,
                       "library_ms": null,
                       "notes": [],
@@ -4353,7 +4353,7 @@
                           },
                           "seq": 13,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.196,
+                          "elapsed_ms": 0.213,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -4410,7 +4410,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -4491,7 +4491,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -4516,7 +4516,7 @@
                           },
                           "seq": 14,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.127,
+                          "elapsed_ms": 0.16,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -4558,7 +4558,7 @@
                             },
                             "seq": 13,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.196,
+                            "elapsed_ms": 0.213,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -4615,7 +4615,7 @@
                               {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -4696,7 +4696,7 @@
                                 "value": {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -4724,7 +4724,7 @@
                             },
                             "seq": 14,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.127,
+                            "elapsed_ms": 0.16,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -4768,7 +4768,7 @@
                       },
                       "seq": 15,
                       "thread": "MainThread",
-                      "elapsed_ms": 0.164,
+                      "elapsed_ms": 0.162,
                       "model_provider_ms": null,
                       "library_ms": null,
                       "notes": [],
@@ -4780,7 +4780,7 @@
                           },
                           "seq": 16,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.159,
+                          "elapsed_ms": 0.157,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -4798,7 +4798,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -4859,7 +4859,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -4883,7 +4883,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -4953,7 +4953,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -4972,7 +4972,7 @@
                             },
                             "seq": 16,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.159,
+                            "elapsed_ms": 0.157,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -4990,7 +4990,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -5051,7 +5051,7 @@
                               {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -5075,7 +5075,7 @@
                                       "content": "What's the status of order A100?"
                                     },
                                     {
-                                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                       "role": "ai",
                                       "content": "",
                                       "tool_calls": [
@@ -5145,7 +5145,7 @@
                                 "value": {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                     "role": "ai",
                                     "content": "Order A100 has shipped."
                                   }
@@ -5176,7 +5176,7 @@
           },
           "seq": 17,
           "thread": "MainThread",
-          "elapsed_ms": 0.21000000000000002,
+          "elapsed_ms": 0.203,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -5188,7 +5188,7 @@
               },
               "seq": 18,
               "thread": "MainThread",
-              "elapsed_ms": 0.205,
+              "elapsed_ms": 0.2,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -5196,12 +5196,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                      "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                      "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     }
@@ -5245,7 +5245,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -5268,12 +5268,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                        "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                        "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -5326,7 +5326,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -5354,7 +5354,7 @@
                 },
                 "seq": 18,
                 "thread": "MainThread",
-                "elapsed_ms": 0.205,
+                "elapsed_ms": 0.2,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5362,12 +5362,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                        "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                        "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -5411,7 +5411,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -5434,12 +5434,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                          "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                          "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -5492,7 +5492,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                        "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5519,7 +5519,7 @@
           },
           "seq": 19,
           "thread": "MainThread",
-          "elapsed_ms": 0.132,
+          "elapsed_ms": 0.161,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -5532,7 +5532,7 @@
               },
               "seq": 20,
               "thread": "MainThread",
-              "elapsed_ms": 0.124,
+              "elapsed_ms": 0.153,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -5575,7 +5575,7 @@
                 },
                 "seq": 20,
                 "thread": "MainThread",
-                "elapsed_ms": 0.124,
+                "elapsed_ms": 0.153,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5616,7 +5616,7 @@
           },
           "seq": 21,
           "thread": "MainThread",
-          "elapsed_ms": 0.221,
+          "elapsed_ms": 0.162,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -5628,7 +5628,7 @@
               },
               "seq": 22,
               "thread": "MainThread",
-              "elapsed_ms": 0.217,
+              "elapsed_ms": 0.158,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -5636,17 +5636,17 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                      "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                      "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     },
                     {
-                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -5660,7 +5660,7 @@
                       ]
                     },
                     {
-                      "id": "ef5a0220-e6c4-42d2-ba7f-2c3fe5d06259",
+                      "id": "a999bda0-750a-492c-bef2-e815453d05b6",
                       "role": "tool",
                       "content": "order A100: shipped",
                       "tool_call_id": "c1"
@@ -5707,7 +5707,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                    "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                     "role": "ai",
                     "content": "Order A100 has shipped."
                   }
@@ -5721,17 +5721,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                        "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                        "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                        "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5745,7 +5745,7 @@
                         ]
                       },
                       {
-                        "id": "ef5a0220-e6c4-42d2-ba7f-2c3fe5d06259",
+                        "id": "a999bda0-750a-492c-bef2-e815453d05b6",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -5801,7 +5801,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                      "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                       "role": "ai",
                       "content": "Order A100 has shipped."
                     }
@@ -5820,7 +5820,7 @@
                 },
                 "seq": 22,
                 "thread": "MainThread",
-                "elapsed_ms": 0.217,
+                "elapsed_ms": 0.158,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5828,17 +5828,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                        "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                        "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                        "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5852,7 +5852,7 @@
                         ]
                       },
                       {
-                        "id": "ef5a0220-e6c4-42d2-ba7f-2c3fe5d06259",
+                        "id": "a999bda0-750a-492c-bef2-e815453d05b6",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -5899,7 +5899,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                      "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                       "role": "ai",
                       "content": "Order A100 has shipped."
                     }
@@ -5913,17 +5913,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                          "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                          "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                          "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5937,7 +5937,7 @@
                           ]
                         },
                         {
-                          "id": "ef5a0220-e6c4-42d2-ba7f-2c3fe5d06259",
+                          "id": "a999bda0-750a-492c-bef2-e815453d05b6",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -5993,7 +5993,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                        "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                         "role": "ai",
                         "content": "Order A100 has shipped."
                       }
@@ -6015,7 +6015,7 @@
             },
             "seq": 10,
             "thread": "MainThread",
-            "elapsed_ms": 0.513,
+            "elapsed_ms": 0.5640000000000001,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -6028,7 +6028,7 @@
                 },
                 "seq": 11,
                 "thread": "MainThread",
-                "elapsed_ms": 0.508,
+                "elapsed_ms": 0.558,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -6048,7 +6048,7 @@
                     },
                     "seq": 12,
                     "thread": "MainThread",
-                    "elapsed_ms": 0.33399999999999996,
+                    "elapsed_ms": 0.38499999999999995,
                     "model_provider_ms": null,
                     "library_ms": null,
                     "notes": [],
@@ -6060,7 +6060,7 @@
                         },
                         "seq": 13,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.196,
+                        "elapsed_ms": 0.213,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -6117,7 +6117,7 @@
                           {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                               "role": "ai",
                               "content": "",
                               "tool_calls": [
@@ -6198,7 +6198,7 @@
                             "value": {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -6223,7 +6223,7 @@
                         },
                         "seq": 14,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.127,
+                        "elapsed_ms": 0.16,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -6265,7 +6265,7 @@
                           },
                           "seq": 13,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.196,
+                          "elapsed_ms": 0.213,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -6322,7 +6322,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -6403,7 +6403,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -6431,7 +6431,7 @@
                           },
                           "seq": 14,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.127,
+                          "elapsed_ms": 0.16,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -6472,7 +6472,7 @@
                     },
                     "seq": 15,
                     "thread": "MainThread",
-                    "elapsed_ms": 0.164,
+                    "elapsed_ms": 0.162,
                     "model_provider_ms": null,
                     "library_ms": null,
                     "notes": [],
@@ -6484,7 +6484,7 @@
                         },
                         "seq": 16,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.159,
+                        "elapsed_ms": 0.157,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [
@@ -6502,7 +6502,7 @@
                                 "content": "What's the status of order A100?"
                               },
                               {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -6563,7 +6563,7 @@
                           {
                             "label": "reply",
                             "message": {
-                              "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                              "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                               "role": "ai",
                               "content": "Order A100 has shipped."
                             }
@@ -6587,7 +6587,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -6657,7 +6657,7 @@
                             "value": {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -6676,7 +6676,7 @@
                           },
                           "seq": 16,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.159,
+                          "elapsed_ms": 0.157,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -6694,7 +6694,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -6755,7 +6755,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -6779,7 +6779,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -6849,7 +6849,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -6877,7 +6877,7 @@
                       },
                       "seq": 12,
                       "thread": "MainThread",
-                      "elapsed_ms": 0.33399999999999996,
+                      "elapsed_ms": 0.38499999999999995,
                       "model_provider_ms": null,
                       "library_ms": null,
                       "notes": [],
@@ -6889,7 +6889,7 @@
                           },
                           "seq": 13,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.196,
+                          "elapsed_ms": 0.213,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -6946,7 +6946,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -7027,7 +7027,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -7052,7 +7052,7 @@
                           },
                           "seq": 14,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.127,
+                          "elapsed_ms": 0.16,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -7094,7 +7094,7 @@
                             },
                             "seq": 13,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.196,
+                            "elapsed_ms": 0.213,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -7151,7 +7151,7 @@
                               {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -7232,7 +7232,7 @@
                                 "value": {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -7260,7 +7260,7 @@
                             },
                             "seq": 14,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.127,
+                            "elapsed_ms": 0.16,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -7304,7 +7304,7 @@
                       },
                       "seq": 15,
                       "thread": "MainThread",
-                      "elapsed_ms": 0.164,
+                      "elapsed_ms": 0.162,
                       "model_provider_ms": null,
                       "library_ms": null,
                       "notes": [],
@@ -7316,7 +7316,7 @@
                           },
                           "seq": 16,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.159,
+                          "elapsed_ms": 0.157,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -7334,7 +7334,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -7395,7 +7395,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -7419,7 +7419,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -7489,7 +7489,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -7508,7 +7508,7 @@
                             },
                             "seq": 16,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.159,
+                            "elapsed_ms": 0.157,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -7526,7 +7526,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -7587,7 +7587,7 @@
                               {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -7611,7 +7611,7 @@
                                       "content": "What's the status of order A100?"
                                     },
                                     {
-                                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                       "role": "ai",
                                       "content": "",
                                       "tool_calls": [
@@ -7681,7 +7681,7 @@
                                 "value": {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                     "role": "ai",
                                     "content": "Order A100 has shipped."
                                   }
@@ -7714,7 +7714,7 @@
                   },
                   "seq": 11,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.508,
+                  "elapsed_ms": 0.558,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -7734,7 +7734,7 @@
                       },
                       "seq": 12,
                       "thread": "MainThread",
-                      "elapsed_ms": 0.33399999999999996,
+                      "elapsed_ms": 0.38499999999999995,
                       "model_provider_ms": null,
                       "library_ms": null,
                       "notes": [],
@@ -7746,7 +7746,7 @@
                           },
                           "seq": 13,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.196,
+                          "elapsed_ms": 0.213,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -7803,7 +7803,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                 "role": "ai",
                                 "content": "",
                                 "tool_calls": [
@@ -7884,7 +7884,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -7909,7 +7909,7 @@
                           },
                           "seq": 14,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.127,
+                          "elapsed_ms": 0.16,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -7951,7 +7951,7 @@
                             },
                             "seq": 13,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.196,
+                            "elapsed_ms": 0.213,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -8008,7 +8008,7 @@
                               {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -8089,7 +8089,7 @@
                                 "value": {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -8117,7 +8117,7 @@
                             },
                             "seq": 14,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.127,
+                            "elapsed_ms": 0.16,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -8158,7 +8158,7 @@
                       },
                       "seq": 15,
                       "thread": "MainThread",
-                      "elapsed_ms": 0.164,
+                      "elapsed_ms": 0.162,
                       "model_provider_ms": null,
                       "library_ms": null,
                       "notes": [],
@@ -8170,7 +8170,7 @@
                           },
                           "seq": 16,
                           "thread": "MainThread",
-                          "elapsed_ms": 0.159,
+                          "elapsed_ms": 0.157,
                           "model_provider_ms": null,
                           "library_ms": null,
                           "notes": [
@@ -8188,7 +8188,7 @@
                                   "content": "What's the status of order A100?"
                                 },
                                 {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -8249,7 +8249,7 @@
                             {
                               "label": "reply",
                               "message": {
-                                "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                 "role": "ai",
                                 "content": "Order A100 has shipped."
                               }
@@ -8273,7 +8273,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -8343,7 +8343,7 @@
                               "value": {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -8362,7 +8362,7 @@
                             },
                             "seq": 16,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.159,
+                            "elapsed_ms": 0.157,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -8380,7 +8380,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -8441,7 +8441,7 @@
                               {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -8465,7 +8465,7 @@
                                       "content": "What's the status of order A100?"
                                     },
                                     {
-                                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                       "role": "ai",
                                       "content": "",
                                       "tool_calls": [
@@ -8535,7 +8535,7 @@
                                 "value": {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                     "role": "ai",
                                     "content": "Order A100 has shipped."
                                   }
@@ -8563,7 +8563,7 @@
                         },
                         "seq": 12,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.33399999999999996,
+                        "elapsed_ms": 0.38499999999999995,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [],
@@ -8575,7 +8575,7 @@
                             },
                             "seq": 13,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.196,
+                            "elapsed_ms": 0.213,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -8632,7 +8632,7 @@
                               {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                   "role": "ai",
                                   "content": "",
                                   "tool_calls": [
@@ -8713,7 +8713,7 @@
                                 "value": {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -8738,7 +8738,7 @@
                             },
                             "seq": 14,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.127,
+                            "elapsed_ms": 0.16,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -8780,7 +8780,7 @@
                               },
                               "seq": 13,
                               "thread": "MainThread",
-                              "elapsed_ms": 0.196,
+                              "elapsed_ms": 0.213,
                               "model_provider_ms": null,
                               "library_ms": null,
                               "notes": [
@@ -8837,7 +8837,7 @@
                                 {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -8918,7 +8918,7 @@
                                   "value": {
                                     "label": "reply",
                                     "message": {
-                                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                       "role": "ai",
                                       "content": "",
                                       "tool_calls": [
@@ -8946,7 +8946,7 @@
                               },
                               "seq": 14,
                               "thread": "MainThread",
-                              "elapsed_ms": 0.127,
+                              "elapsed_ms": 0.16,
                               "model_provider_ms": null,
                               "library_ms": null,
                               "notes": [
@@ -8990,7 +8990,7 @@
                         },
                         "seq": 15,
                         "thread": "MainThread",
-                        "elapsed_ms": 0.164,
+                        "elapsed_ms": 0.162,
                         "model_provider_ms": null,
                         "library_ms": null,
                         "notes": [],
@@ -9002,7 +9002,7 @@
                             },
                             "seq": 16,
                             "thread": "MainThread",
-                            "elapsed_ms": 0.159,
+                            "elapsed_ms": 0.157,
                             "model_provider_ms": null,
                             "library_ms": null,
                             "notes": [
@@ -9020,7 +9020,7 @@
                                     "content": "What's the status of order A100?"
                                   },
                                   {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                     "role": "ai",
                                     "content": "",
                                     "tool_calls": [
@@ -9081,7 +9081,7 @@
                               {
                                 "label": "reply",
                                 "message": {
-                                  "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                  "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                   "role": "ai",
                                   "content": "Order A100 has shipped."
                                 }
@@ -9105,7 +9105,7 @@
                                       "content": "What's the status of order A100?"
                                     },
                                     {
-                                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                       "role": "ai",
                                       "content": "",
                                       "tool_calls": [
@@ -9175,7 +9175,7 @@
                                 "value": {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                     "role": "ai",
                                     "content": "Order A100 has shipped."
                                   }
@@ -9194,7 +9194,7 @@
                               },
                               "seq": 16,
                               "thread": "MainThread",
-                              "elapsed_ms": 0.159,
+                              "elapsed_ms": 0.157,
                               "model_provider_ms": null,
                               "library_ms": null,
                               "notes": [
@@ -9212,7 +9212,7 @@
                                       "content": "What's the status of order A100?"
                                     },
                                     {
-                                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                       "role": "ai",
                                       "content": "",
                                       "tool_calls": [
@@ -9273,7 +9273,7 @@
                                 {
                                   "label": "reply",
                                   "message": {
-                                    "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                    "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                     "role": "ai",
                                     "content": "Order A100 has shipped."
                                   }
@@ -9297,7 +9297,7 @@
                                         "content": "What's the status of order A100?"
                                       },
                                       {
-                                        "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                                        "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                                         "role": "ai",
                                         "content": "",
                                         "tool_calls": [
@@ -9367,7 +9367,7 @@
                                   "value": {
                                     "label": "reply",
                                     "message": {
-                                      "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                                      "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                                       "role": "ai",
                                       "content": "Order A100 has shipped."
                                     }
@@ -9401,7 +9401,7 @@
             },
             "seq": 17,
             "thread": "MainThread",
-            "elapsed_ms": 0.21000000000000002,
+            "elapsed_ms": 0.203,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -9413,7 +9413,7 @@
                 },
                 "seq": 18,
                 "thread": "MainThread",
-                "elapsed_ms": 0.205,
+                "elapsed_ms": 0.2,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -9421,12 +9421,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                        "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                        "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -9470,7 +9470,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                      "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -9493,12 +9493,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                          "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                          "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -9551,7 +9551,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                        "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -9579,7 +9579,7 @@
                   },
                   "seq": 18,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.205,
+                  "elapsed_ms": 0.2,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -9587,12 +9587,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                          "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                          "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -9636,7 +9636,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                        "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -9659,12 +9659,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                            "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                            "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                             "role": "human",
                             "content": "What's the status of order A100?"
                           }
@@ -9717,7 +9717,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                          "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -9747,7 +9747,7 @@
             },
             "seq": 19,
             "thread": "MainThread",
-            "elapsed_ms": 0.132,
+            "elapsed_ms": 0.161,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -9760,7 +9760,7 @@
                 },
                 "seq": 20,
                 "thread": "MainThread",
-                "elapsed_ms": 0.124,
+                "elapsed_ms": 0.153,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -9803,7 +9803,7 @@
                   },
                   "seq": 20,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.124,
+                  "elapsed_ms": 0.153,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -9847,7 +9847,7 @@
             },
             "seq": 21,
             "thread": "MainThread",
-            "elapsed_ms": 0.221,
+            "elapsed_ms": 0.162,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -9859,7 +9859,7 @@
                 },
                 "seq": 22,
                 "thread": "MainThread",
-                "elapsed_ms": 0.217,
+                "elapsed_ms": 0.158,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -9867,17 +9867,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                        "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                        "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                        "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -9891,7 +9891,7 @@
                         ]
                       },
                       {
-                        "id": "ef5a0220-e6c4-42d2-ba7f-2c3fe5d06259",
+                        "id": "a999bda0-750a-492c-bef2-e815453d05b6",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -9938,7 +9938,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                      "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                       "role": "ai",
                       "content": "Order A100 has shipped."
                     }
@@ -9952,17 +9952,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                          "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                          "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                          "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -9976,7 +9976,7 @@
                           ]
                         },
                         {
-                          "id": "ef5a0220-e6c4-42d2-ba7f-2c3fe5d06259",
+                          "id": "a999bda0-750a-492c-bef2-e815453d05b6",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -10032,7 +10032,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                        "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                         "role": "ai",
                         "content": "Order A100 has shipped."
                       }
@@ -10051,7 +10051,7 @@
                   },
                   "seq": 22,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.217,
+                  "elapsed_ms": 0.158,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -10059,17 +10059,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                          "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                          "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                          "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -10083,7 +10083,7 @@
                           ]
                         },
                         {
-                          "id": "ef5a0220-e6c4-42d2-ba7f-2c3fe5d06259",
+                          "id": "a999bda0-750a-492c-bef2-e815453d05b6",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -10130,7 +10130,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                        "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                         "role": "ai",
                         "content": "Order A100 has shipped."
                       }
@@ -10144,17 +10144,17 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "9821ce82-2198-41af-9d4a-01e275cada4e",
+                            "id": "637ff8a2-d379-4fb2-88ec-88d62ec33ffe",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "36bf26c6-0bc2-4ee9-9de3-419e5befe33e",
+                            "id": "20a71ff6-e46d-44c9-8674-f0d49e972049",
                             "role": "human",
                             "content": "What's the status of order A100?"
                           },
                           {
-                            "id": "lc_run--01a06f73-9539-7f33-8676-0c1bc9023fff-0",
+                            "id": "lc_run--01a09c8f-928a-79a0-be43-fd8465bf139d-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -10168,7 +10168,7 @@
                             ]
                           },
                           {
-                            "id": "ef5a0220-e6c4-42d2-ba7f-2c3fe5d06259",
+                            "id": "a999bda0-750a-492c-bef2-e815453d05b6",
                             "role": "tool",
                             "content": "order A100: shipped",
                             "tool_call_id": "c1"
@@ -10224,7 +10224,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f73-9539-7f33-8676-0c3134ddebb9-0",
+                          "id": "lc_run--01a09c8f-928a-79a0-be43-fda4f486402a-0",
                           "role": "ai",
                           "content": "Order A100 has shipped."
                         }
@@ -10253,7 +10253,7 @@
       },
       "seq": 23,
       "thread": "MainThread",
-      "elapsed_ms": 2.902,
+      "elapsed_ms": 2.9450000000000003,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -10270,7 +10270,7 @@
           },
           "seq": 24,
           "thread": "MainThread",
-          "elapsed_ms": 0.192,
+          "elapsed_ms": 0.166,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -10282,7 +10282,7 @@
               },
               "seq": 25,
               "thread": "MainThread",
-              "elapsed_ms": 0.189,
+              "elapsed_ms": 0.161,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -10290,12 +10290,12 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                      "id": "4b402174-478d-4bfb-b609-dab864e46705",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                      "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     }
@@ -10339,7 +10339,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                    "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -10362,12 +10362,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                        "id": "4b402174-478d-4bfb-b609-dab864e46705",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                        "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -10420,7 +10420,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                      "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -10448,7 +10448,7 @@
                 },
                 "seq": 25,
                 "thread": "MainThread",
-                "elapsed_ms": 0.189,
+                "elapsed_ms": 0.161,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -10456,12 +10456,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                        "id": "4b402174-478d-4bfb-b609-dab864e46705",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                        "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -10505,7 +10505,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                      "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -10528,12 +10528,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                          "id": "4b402174-478d-4bfb-b609-dab864e46705",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                          "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -10586,7 +10586,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                        "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -10613,7 +10613,7 @@
           },
           "seq": 26,
           "thread": "MainThread",
-          "elapsed_ms": 0.124,
+          "elapsed_ms": 0.12999999999999998,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -10626,7 +10626,7 @@
               },
               "seq": 27,
               "thread": "MainThread",
-              "elapsed_ms": 0.11699999999999999,
+              "elapsed_ms": 0.122,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -10669,7 +10669,7 @@
                 },
                 "seq": 27,
                 "thread": "MainThread",
-                "elapsed_ms": 0.11699999999999999,
+                "elapsed_ms": 0.122,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -10710,7 +10710,7 @@
           },
           "seq": 28,
           "thread": "MainThread",
-          "elapsed_ms": 0.156,
+          "elapsed_ms": 0.23399999999999999,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -10722,7 +10722,7 @@
               },
               "seq": 29,
               "thread": "MainThread",
-              "elapsed_ms": 0.153,
+              "elapsed_ms": 0.23,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -10730,17 +10730,17 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                      "id": "4b402174-478d-4bfb-b609-dab864e46705",
                       "role": "system",
                       "content": "Answer briefly."
                     },
                     {
-                      "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                      "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                       "role": "human",
                       "content": "What's the status of order A100?"
                     },
                     {
-                      "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                      "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -10754,7 +10754,7 @@
                       ]
                     },
                     {
-                      "id": "dc102dd9-f01a-4df1-b38c-ed615e7e4036",
+                      "id": "40439cc0-c34a-49c4-8005-52b8778dcb8a",
                       "role": "tool",
                       "content": "order A100: shipped",
                       "tool_call_id": "c1"
@@ -10801,7 +10801,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06f73-953e-7492-a08a-7b17c1b2d901-0",
+                    "id": "lc_run--01a09c8f-9290-70c2-aba3-7b2b9e4983f4-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -10824,17 +10824,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                        "id": "4b402174-478d-4bfb-b609-dab864e46705",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                        "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                        "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -10848,7 +10848,7 @@
                         ]
                       },
                       {
-                        "id": "dc102dd9-f01a-4df1-b38c-ed615e7e4036",
+                        "id": "40439cc0-c34a-49c4-8005-52b8778dcb8a",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -10904,7 +10904,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-953e-7492-a08a-7b17c1b2d901-0",
+                      "id": "lc_run--01a09c8f-9290-70c2-aba3-7b2b9e4983f4-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -10932,7 +10932,7 @@
                 },
                 "seq": 29,
                 "thread": "MainThread",
-                "elapsed_ms": 0.153,
+                "elapsed_ms": 0.23,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -10940,17 +10940,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                        "id": "4b402174-478d-4bfb-b609-dab864e46705",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                        "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                        "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -10964,7 +10964,7 @@
                         ]
                       },
                       {
-                        "id": "dc102dd9-f01a-4df1-b38c-ed615e7e4036",
+                        "id": "40439cc0-c34a-49c4-8005-52b8778dcb8a",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -11011,7 +11011,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-953e-7492-a08a-7b17c1b2d901-0",
+                      "id": "lc_run--01a09c8f-9290-70c2-aba3-7b2b9e4983f4-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -11034,17 +11034,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                          "id": "4b402174-478d-4bfb-b609-dab864e46705",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                          "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                          "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -11058,7 +11058,7 @@
                           ]
                         },
                         {
-                          "id": "dc102dd9-f01a-4df1-b38c-ed615e7e4036",
+                          "id": "40439cc0-c34a-49c4-8005-52b8778dcb8a",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -11114,7 +11114,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-953e-7492-a08a-7b17c1b2d901-0",
+                        "id": "lc_run--01a09c8f-9290-70c2-aba3-7b2b9e4983f4-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -11141,7 +11141,7 @@
           },
           "seq": 30,
           "thread": "MainThread",
-          "elapsed_ms": 0.176,
+          "elapsed_ms": 0.11900000000000001,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -11154,7 +11154,7 @@
               },
               "seq": 31,
               "thread": "MainThread",
-              "elapsed_ms": 0.14200000000000002,
+              "elapsed_ms": 0.112,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -11197,7 +11197,7 @@
                 },
                 "seq": 31,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.112,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -11242,7 +11242,7 @@
             },
             "seq": 24,
             "thread": "MainThread",
-            "elapsed_ms": 0.192,
+            "elapsed_ms": 0.166,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -11254,7 +11254,7 @@
                 },
                 "seq": 25,
                 "thread": "MainThread",
-                "elapsed_ms": 0.189,
+                "elapsed_ms": 0.161,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -11262,12 +11262,12 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                        "id": "4b402174-478d-4bfb-b609-dab864e46705",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                        "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       }
@@ -11311,7 +11311,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                      "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -11334,12 +11334,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                          "id": "4b402174-478d-4bfb-b609-dab864e46705",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                          "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -11392,7 +11392,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                        "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -11420,7 +11420,7 @@
                   },
                   "seq": 25,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.189,
+                  "elapsed_ms": 0.161,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -11428,12 +11428,12 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                          "id": "4b402174-478d-4bfb-b609-dab864e46705",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                          "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         }
@@ -11477,7 +11477,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                        "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -11500,12 +11500,12 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                            "id": "4b402174-478d-4bfb-b609-dab864e46705",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                            "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                             "role": "human",
                             "content": "What's the status of order A100?"
                           }
@@ -11558,7 +11558,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                          "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -11588,7 +11588,7 @@
             },
             "seq": 26,
             "thread": "MainThread",
-            "elapsed_ms": 0.124,
+            "elapsed_ms": 0.12999999999999998,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -11601,7 +11601,7 @@
                 },
                 "seq": 27,
                 "thread": "MainThread",
-                "elapsed_ms": 0.11699999999999999,
+                "elapsed_ms": 0.122,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -11644,7 +11644,7 @@
                   },
                   "seq": 27,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.11699999999999999,
+                  "elapsed_ms": 0.122,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -11688,7 +11688,7 @@
             },
             "seq": 28,
             "thread": "MainThread",
-            "elapsed_ms": 0.156,
+            "elapsed_ms": 0.23399999999999999,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -11700,7 +11700,7 @@
                 },
                 "seq": 29,
                 "thread": "MainThread",
-                "elapsed_ms": 0.153,
+                "elapsed_ms": 0.23,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -11708,17 +11708,17 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                        "id": "4b402174-478d-4bfb-b609-dab864e46705",
                         "role": "system",
                         "content": "Answer briefly."
                       },
                       {
-                        "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                        "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                         "role": "human",
                         "content": "What's the status of order A100?"
                       },
                       {
-                        "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                        "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -11732,7 +11732,7 @@
                         ]
                       },
                       {
-                        "id": "dc102dd9-f01a-4df1-b38c-ed615e7e4036",
+                        "id": "40439cc0-c34a-49c4-8005-52b8778dcb8a",
                         "role": "tool",
                         "content": "order A100: shipped",
                         "tool_call_id": "c1"
@@ -11779,7 +11779,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06f73-953e-7492-a08a-7b17c1b2d901-0",
+                      "id": "lc_run--01a09c8f-9290-70c2-aba3-7b2b9e4983f4-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -11802,17 +11802,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                          "id": "4b402174-478d-4bfb-b609-dab864e46705",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                          "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                          "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -11826,7 +11826,7 @@
                           ]
                         },
                         {
-                          "id": "dc102dd9-f01a-4df1-b38c-ed615e7e4036",
+                          "id": "40439cc0-c34a-49c4-8005-52b8778dcb8a",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -11882,7 +11882,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-953e-7492-a08a-7b17c1b2d901-0",
+                        "id": "lc_run--01a09c8f-9290-70c2-aba3-7b2b9e4983f4-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -11910,7 +11910,7 @@
                   },
                   "seq": 29,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.153,
+                  "elapsed_ms": 0.23,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -11918,17 +11918,17 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                          "id": "4b402174-478d-4bfb-b609-dab864e46705",
                           "role": "system",
                           "content": "Answer briefly."
                         },
                         {
-                          "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                          "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                           "role": "human",
                           "content": "What's the status of order A100?"
                         },
                         {
-                          "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                          "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -11942,7 +11942,7 @@
                           ]
                         },
                         {
-                          "id": "dc102dd9-f01a-4df1-b38c-ed615e7e4036",
+                          "id": "40439cc0-c34a-49c4-8005-52b8778dcb8a",
                           "role": "tool",
                           "content": "order A100: shipped",
                           "tool_call_id": "c1"
@@ -11989,7 +11989,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06f73-953e-7492-a08a-7b17c1b2d901-0",
+                        "id": "lc_run--01a09c8f-9290-70c2-aba3-7b2b9e4983f4-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -12012,17 +12012,17 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "01fc8d50-fdcd-48a1-9daa-bb65cc352d80",
+                            "id": "4b402174-478d-4bfb-b609-dab864e46705",
                             "role": "system",
                             "content": "Answer briefly."
                           },
                           {
-                            "id": "9fe24202-8597-4a98-8901-01a780be0c73",
+                            "id": "7da23c56-5f74-4e92-ab92-cf534a01178d",
                             "role": "human",
                             "content": "What's the status of order A100?"
                           },
                           {
-                            "id": "lc_run--01a06f73-953e-7492-a08a-7ac1f8c9195f-0",
+                            "id": "lc_run--01a09c8f-928f-70f2-a6bf-bdec5a0b7665-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -12036,7 +12036,7 @@
                             ]
                           },
                           {
-                            "id": "dc102dd9-f01a-4df1-b38c-ed615e7e4036",
+                            "id": "40439cc0-c34a-49c4-8005-52b8778dcb8a",
                             "role": "tool",
                             "content": "order A100: shipped",
                             "tool_call_id": "c1"
@@ -12092,7 +12092,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06f73-953e-7492-a08a-7b17c1b2d901-0",
+                          "id": "lc_run--01a09c8f-9290-70c2-aba3-7b2b9e4983f4-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -12122,7 +12122,7 @@
             },
             "seq": 30,
             "thread": "MainThread",
-            "elapsed_ms": 0.176,
+            "elapsed_ms": 0.11900000000000001,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -12135,7 +12135,7 @@
                 },
                 "seq": 31,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.112,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -12178,7 +12178,7 @@
                   },
                   "seq": 31,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.14200000000000002,
+                  "elapsed_ms": 0.112,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [

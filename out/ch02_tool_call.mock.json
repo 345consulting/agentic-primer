@@ -1,7 +1,7 @@
 {
   "chapter": "ch02_tool_call",
   "model_kind": "mock",
-  "source": "9994cb1e5d0a",
+  "source": "565f74db5ec6",
   "summary": {
     "turns": 2,
     "messages": 5,
@@ -17,7 +17,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 3.211,
+      "elapsed_ms": 2.678,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -34,7 +34,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 2.818,
+          "elapsed_ms": 2.297,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -46,7 +46,7 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 2.502,
+              "elapsed_ms": 2.0300000000000002,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -63,7 +63,8 @@
                       "role": "human",
                       "content": "Do we have enough milk for the week? We need four."
                     }
-                  ]
+                  ],
+                  "tools": []
                 },
                 {
                   "label": "tools declared to the mock model",
@@ -83,7 +84,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06545-9511-71d2-ab5e-7139418b4762-0",
+                    "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -99,7 +100,70 @@
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "stock_on_hand"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "stock_on_hand",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    }
+                  }
+                }
+              ]
             },
             {
               "name": "tool",
@@ -109,7 +173,7 @@
               },
               "seq": 4,
               "thread": "MainThread",
-              "elapsed_ms": 0.294,
+              "elapsed_ms": 0.247,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -122,7 +186,196 @@
                   "value": 2
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "item": "milk"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 2.0300000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "stock_on_hand"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "stock_on_hand",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "stock_on_hand"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "stock_on_hand",
+                  "id": "call_1"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 0.247,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk"
+                  },
+                  {
+                    "label": "result",
+                    "value": 2
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": 2
+                    }
+                  }
+                ]
+              }
             }
           ]
         },
@@ -133,7 +386,7 @@
           },
           "seq": 5,
           "thread": "MainThread",
-          "elapsed_ms": 0.225,
+          "elapsed_ms": 0.231,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -145,7 +398,7 @@
               },
               "seq": 6,
               "thread": "MainThread",
-              "elapsed_ms": 0.221,
+              "elapsed_ms": 0.22599999999999998,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -163,7 +416,7 @@
                       "content": "Do we have enough milk for the week? We need four."
                     },
                     {
-                      "id": "lc_run--01a06545-9511-71d2-ab5e-7139418b4762-0",
+                      "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -183,7 +436,8 @@
                       "content": "2",
                       "tool_call_id": "call_1"
                     }
-                  ]
+                  ],
+                  "tools": []
                 },
                 {
                   "label": "tools declared to the mock model",
@@ -205,16 +459,946 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06545-9512-7723-9199-81bff08399f2-0",
+                    "id": "lc_run--01a09c8f-1910-7333-864d-3c7dd68cb18f-0",
                     "role": "ai",
                     "content": "No -- there are two in the fridge, so you are two short.",
                     "finish_reason": "stop"
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "2",
+                        "tool_call_id": "call_1"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "stock_on_hand"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-1910-7333-864d-3c7dd68cb18f-0",
+                      "role": "ai",
+                      "content": "No -- there are two in the fridge, so you are two short.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.22599999999999998,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "2",
+                        "tool_call_id": "call_1"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "stock_on_hand"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-1910-7333-864d-3c7dd68cb18f-0",
+                      "role": "ai",
+                      "content": "No -- there are two in the fridge, so you are two short.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "stock_on_hand",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "2",
+                          "tool_call_id": "call_1"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "stock_on_hand"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-1910-7333-864d-3c7dd68cb18f-0",
+                        "role": "ai",
+                        "content": "No -- there are two in the fridge, so you are two short.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
             }
           ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 2.297,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 2.0300000000000002,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "stock_on_hand"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "stock_on_hand",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "stock_on_hand"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "stock_on_hand",
+                  "id": "call_1"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 0.247,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk"
+                  },
+                  {
+                    "label": "result",
+                    "value": 2
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": 2
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 2.0300000000000002,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "stock_on_hand"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Do we have enough milk for the week? We need four."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "stock_on_hand"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "stock_on_hand",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "stock_on_hand",
+                    "id": "call_1"
+                  },
+                  "seq": 4,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.247,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "item": "milk"
+                    },
+                    {
+                      "label": "result",
+                      "value": 2
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "item": "milk"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": 2
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 0.231,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.22599999999999998,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "2",
+                        "tool_call_id": "call_1"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "stock_on_hand"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-1910-7333-864d-3c7dd68cb18f-0",
+                      "role": "ai",
+                      "content": "No -- there are two in the fridge, so you are two short.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "stock_on_hand",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "2",
+                          "tool_call_id": "call_1"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "stock_on_hand"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-1910-7333-864d-3c7dd68cb18f-0",
+                        "role": "ai",
+                        "content": "No -- there are two in the fridge, so you are two short.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 6,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.22599999999999998,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "stock_on_hand",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "2",
+                          "tool_call_id": "call_1"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "stock_on_hand"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-1910-7333-864d-3c7dd68cb18f-0",
+                        "role": "ai",
+                        "content": "No -- there are two in the fridge, so you are two short.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Do we have enough milk for the week? We need four."
+                          },
+                          {
+                            "id": "lc_run--01a09c8f-190f-75e2-bad5-018b671ea339-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "stock_on_hand",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "call_1"
+                              }
+                            ],
+                            "finish_reason": "tool_calls"
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "2",
+                            "tool_call_id": "call_1"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "stock_on_hand"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-1910-7333-864d-3c7dd68cb18f-0",
+                          "role": "ai",
+                          "content": "No -- there are two in the fridge, so you are two short.",
+                          "finish_reason": "stop"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "no_tool_calls"
+          }
         }
       ]
     }

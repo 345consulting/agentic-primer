@@ -1,7 +1,7 @@
 {
   "chapter": "ch21_judge",
   "model_kind": "mock",
-  "source": "39ddea2b13ab",
+  "source": "5fc366a3f5b3",
   "summary": {
     "turns": 3,
     "messages": 0,
@@ -15,7 +15,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 3.592,
+      "elapsed_ms": 4.6499999999999995,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -32,7 +32,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 3.455,
+          "elapsed_ms": 4.47,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -57,7 +57,7 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 3.222,
+              "elapsed_ms": 4.197,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -73,6 +73,41 @@
                       "id": null,
                       "role": "human",
                       "content": "Order a couple bottles of milk."
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -94,7 +129,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                    "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -127,6 +162,41 @@
                         "role": "human",
                         "content": "Order a couple bottles of milk."
                       }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      }
                     ]
                   }
                 },
@@ -156,7 +226,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                      "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -181,7 +251,7 @@
               },
               "seq": 4,
               "thread": "MainThread",
-              "elapsed_ms": 0.196,
+              "elapsed_ms": 0.231,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -199,7 +269,7 @@
                       "content": "Order a couple bottles of milk."
                     },
                     {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                      "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -218,6 +288,41 @@
                       "role": "tool",
                       "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                       "tool_call_id": "c1"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -241,7 +346,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                    "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e7d8143eb2d-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -275,7 +380,7 @@
                         "content": "Order a couple bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -294,6 +399,41 @@
                         "role": "tool",
                         "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   }
@@ -326,7 +466,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e7d8143eb2d-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -352,7 +492,7 @@
               },
               "seq": 5,
               "thread": "MainThread",
-              "elapsed_ms": 0.003,
+              "elapsed_ms": 0.005,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -396,7 +536,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 3.222,
+                "elapsed_ms": 4.197,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -412,6 +552,41 @@
                         "id": null,
                         "role": "human",
                         "content": "Order a couple bottles of milk."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -433,7 +608,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                      "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -466,6 +641,41 @@
                           "role": "human",
                           "content": "Order a couple bottles of milk."
                         }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
                       ]
                     }
                   },
@@ -495,7 +705,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -532,7 +742,7 @@
                 },
                 "seq": 4,
                 "thread": "MainThread",
-                "elapsed_ms": 0.196,
+                "elapsed_ms": 0.231,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -550,7 +760,7 @@
                         "content": "Order a couple bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -569,6 +779,41 @@
                         "role": "tool",
                         "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -592,7 +837,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e7d8143eb2d-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -626,7 +871,7 @@
                           "content": "Order a couple bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                          "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -645,6 +890,41 @@
                           "role": "tool",
                           "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -677,7 +957,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e7d8143eb2d-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -715,7 +995,7 @@
                 },
                 "seq": 5,
                 "thread": "MainThread",
-                "elapsed_ms": 0.003,
+                "elapsed_ms": 0.005,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -762,7 +1042,7 @@
             },
             "seq": 2,
             "thread": "MainThread",
-            "elapsed_ms": 3.455,
+            "elapsed_ms": 4.47,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -787,7 +1067,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 3.222,
+                "elapsed_ms": 4.197,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -803,6 +1083,41 @@
                         "id": null,
                         "role": "human",
                         "content": "Order a couple bottles of milk."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -824,7 +1139,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                      "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -857,6 +1172,41 @@
                           "role": "human",
                           "content": "Order a couple bottles of milk."
                         }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
                       ]
                     }
                   },
@@ -886,7 +1236,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -911,7 +1261,7 @@
                 },
                 "seq": 4,
                 "thread": "MainThread",
-                "elapsed_ms": 0.196,
+                "elapsed_ms": 0.231,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -929,7 +1279,7 @@
                         "content": "Order a couple bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -948,6 +1298,41 @@
                         "role": "tool",
                         "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -971,7 +1356,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e7d8143eb2d-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -1005,7 +1390,7 @@
                           "content": "Order a couple bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                          "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1024,6 +1409,41 @@
                           "role": "tool",
                           "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -1056,7 +1476,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e7d8143eb2d-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1082,7 +1502,7 @@
                 },
                 "seq": 5,
                 "thread": "MainThread",
-                "elapsed_ms": 0.003,
+                "elapsed_ms": 0.005,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1126,7 +1546,7 @@
                   },
                   "seq": 3,
                   "thread": "MainThread",
-                  "elapsed_ms": 3.222,
+                  "elapsed_ms": 4.197,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1142,6 +1562,41 @@
                           "id": null,
                           "role": "human",
                           "content": "Order a couple bottles of milk."
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -1163,7 +1618,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                        "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1196,6 +1651,41 @@
                             "role": "human",
                             "content": "Order a couple bottles of milk."
                           }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
                         ]
                       }
                     },
@@ -1225,7 +1715,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                          "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1262,7 +1752,7 @@
                   },
                   "seq": 4,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.196,
+                  "elapsed_ms": 0.231,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1280,7 +1770,7 @@
                           "content": "Order a couple bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                          "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1299,6 +1789,41 @@
                           "role": "tool",
                           "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -1322,7 +1847,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e7d8143eb2d-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1356,7 +1881,7 @@
                             "content": "Order a couple bottles of milk."
                           },
                           {
-                            "id": "lc_run--01a06914-01cd-70a1-99f3-c42c29716533-0",
+                            "id": "lc_run--01a09c8f-5c0a-7ec2-be10-e6793f3f205e-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -1375,6 +1900,41 @@
                             "role": "tool",
                             "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                             "tool_call_id": "c1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
                           }
                         ]
                       }
@@ -1407,7 +1967,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c43dc869feb4-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e7d8143eb2d-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1445,7 +2005,7 @@
                   },
                   "seq": 5,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.003,
+                  "elapsed_ms": 0.005,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1498,7 +2058,7 @@
       },
       "seq": 6,
       "thread": "MainThread",
-      "elapsed_ms": 0.333,
+      "elapsed_ms": 0.27799999999999997,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -1515,7 +2075,7 @@
           },
           "seq": 7,
           "thread": "MainThread",
-          "elapsed_ms": 0.324,
+          "elapsed_ms": 0.26699999999999996,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -1540,7 +2100,7 @@
               },
               "seq": 8,
               "thread": "MainThread",
-              "elapsed_ms": 0.156,
+              "elapsed_ms": 0.12999999999999998,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1557,7 +2117,8 @@
                       "role": "human",
                       "content": "How much is milk?"
                     }
-                  ]
+                  ],
+                  "tools": []
                 },
                 {
                   "label": "context ignored by the mock model",
@@ -1570,7 +2131,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                    "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                     "role": "ai",
                     "content": "Sure, happy to help with grocery questions."
                   }
@@ -1593,7 +2154,8 @@
                         "role": "human",
                         "content": "How much is milk?"
                       }
-                    ]
+                    ],
+                    "tools": []
                   }
                 },
                 {
@@ -1612,7 +2174,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                       "role": "ai",
                       "content": "Sure, happy to help with grocery questions."
                     }
@@ -1627,7 +2189,7 @@
               },
               "seq": 9,
               "thread": "MainThread",
-              "elapsed_ms": 0.121,
+              "elapsed_ms": 0.118,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1645,7 +2207,7 @@
                       "content": "How much is milk?"
                     },
                     {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                       "role": "ai",
                       "content": "Sure, happy to help with grocery questions."
                     },
@@ -1654,7 +2216,8 @@
                       "role": "human",
                       "content": "That does not work: answer does not mention 'milk'. Try again."
                     }
-                  ]
+                  ],
+                  "tools": []
                 },
                 {
                   "label": "context ignored by the mock model",
@@ -1669,7 +2232,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                    "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e9960d8a93c-0",
                     "role": "ai",
                     "content": "Milk is 1.20 per bottle."
                   }
@@ -1693,7 +2256,7 @@
                         "content": "How much is milk?"
                       },
                       {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                         "role": "ai",
                         "content": "Sure, happy to help with grocery questions."
                       },
@@ -1702,7 +2265,8 @@
                         "role": "human",
                         "content": "That does not work: answer does not mention 'milk'. Try again."
                       }
-                    ]
+                    ],
+                    "tools": []
                   }
                 },
                 {
@@ -1723,7 +2287,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e9960d8a93c-0",
                       "role": "ai",
                       "content": "Milk is 1.20 per bottle."
                     }
@@ -1742,7 +2306,7 @@
                 },
                 "seq": 8,
                 "thread": "MainThread",
-                "elapsed_ms": 0.156,
+                "elapsed_ms": 0.12999999999999998,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1759,7 +2323,8 @@
                         "role": "human",
                         "content": "How much is milk?"
                       }
-                    ]
+                    ],
+                    "tools": []
                   },
                   {
                     "label": "context ignored by the mock model",
@@ -1772,7 +2337,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                       "role": "ai",
                       "content": "Sure, happy to help with grocery questions."
                     }
@@ -1795,7 +2360,8 @@
                           "role": "human",
                           "content": "How much is milk?"
                         }
-                      ]
+                      ],
+                      "tools": []
                     }
                   },
                   {
@@ -1814,7 +2380,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                         "role": "ai",
                         "content": "Sure, happy to help with grocery questions."
                       }
@@ -1841,7 +2407,7 @@
                 },
                 "seq": 9,
                 "thread": "MainThread",
-                "elapsed_ms": 0.121,
+                "elapsed_ms": 0.118,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1859,7 +2425,7 @@
                         "content": "How much is milk?"
                       },
                       {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                         "role": "ai",
                         "content": "Sure, happy to help with grocery questions."
                       },
@@ -1868,7 +2434,8 @@
                         "role": "human",
                         "content": "That does not work: answer does not mention 'milk'. Try again."
                       }
-                    ]
+                    ],
+                    "tools": []
                   },
                   {
                     "label": "context ignored by the mock model",
@@ -1883,7 +2450,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e9960d8a93c-0",
                       "role": "ai",
                       "content": "Milk is 1.20 per bottle."
                     }
@@ -1907,7 +2474,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                           "role": "ai",
                           "content": "Sure, happy to help with grocery questions."
                         },
@@ -1916,7 +2483,8 @@
                           "role": "human",
                           "content": "That does not work: answer does not mention 'milk'. Try again."
                         }
-                      ]
+                      ],
+                      "tools": []
                     }
                   },
                   {
@@ -1937,7 +2505,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e9960d8a93c-0",
                         "role": "ai",
                         "content": "Milk is 1.20 per bottle."
                       }
@@ -1968,7 +2536,7 @@
             },
             "seq": 7,
             "thread": "MainThread",
-            "elapsed_ms": 0.324,
+            "elapsed_ms": 0.26699999999999996,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -1993,7 +2561,7 @@
                 },
                 "seq": 8,
                 "thread": "MainThread",
-                "elapsed_ms": 0.156,
+                "elapsed_ms": 0.12999999999999998,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2010,7 +2578,8 @@
                         "role": "human",
                         "content": "How much is milk?"
                       }
-                    ]
+                    ],
+                    "tools": []
                   },
                   {
                     "label": "context ignored by the mock model",
@@ -2023,7 +2592,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                       "role": "ai",
                       "content": "Sure, happy to help with grocery questions."
                     }
@@ -2046,7 +2615,8 @@
                           "role": "human",
                           "content": "How much is milk?"
                         }
-                      ]
+                      ],
+                      "tools": []
                     }
                   },
                   {
@@ -2065,7 +2635,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                         "role": "ai",
                         "content": "Sure, happy to help with grocery questions."
                       }
@@ -2080,7 +2650,7 @@
                 },
                 "seq": 9,
                 "thread": "MainThread",
-                "elapsed_ms": 0.121,
+                "elapsed_ms": 0.118,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2098,7 +2668,7 @@
                         "content": "How much is milk?"
                       },
                       {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                         "role": "ai",
                         "content": "Sure, happy to help with grocery questions."
                       },
@@ -2107,7 +2677,8 @@
                         "role": "human",
                         "content": "That does not work: answer does not mention 'milk'. Try again."
                       }
-                    ]
+                    ],
+                    "tools": []
                   },
                   {
                     "label": "context ignored by the mock model",
@@ -2122,7 +2693,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e9960d8a93c-0",
                       "role": "ai",
                       "content": "Milk is 1.20 per bottle."
                     }
@@ -2146,7 +2717,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                           "role": "ai",
                           "content": "Sure, happy to help with grocery questions."
                         },
@@ -2155,7 +2726,8 @@
                           "role": "human",
                           "content": "That does not work: answer does not mention 'milk'. Try again."
                         }
-                      ]
+                      ],
+                      "tools": []
                     }
                   },
                   {
@@ -2176,7 +2748,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e9960d8a93c-0",
                         "role": "ai",
                         "content": "Milk is 1.20 per bottle."
                       }
@@ -2195,7 +2767,7 @@
                   },
                   "seq": 8,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.156,
+                  "elapsed_ms": 0.12999999999999998,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -2212,7 +2784,8 @@
                           "role": "human",
                           "content": "How much is milk?"
                         }
-                      ]
+                      ],
+                      "tools": []
                     },
                     {
                       "label": "context ignored by the mock model",
@@ -2225,7 +2798,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                         "role": "ai",
                         "content": "Sure, happy to help with grocery questions."
                       }
@@ -2248,7 +2821,8 @@
                             "role": "human",
                             "content": "How much is milk?"
                           }
-                        ]
+                        ],
+                        "tools": []
                       }
                     },
                     {
@@ -2267,7 +2841,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                           "role": "ai",
                           "content": "Sure, happy to help with grocery questions."
                         }
@@ -2294,7 +2868,7 @@
                   },
                   "seq": 9,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.121,
+                  "elapsed_ms": 0.118,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -2312,7 +2886,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                           "role": "ai",
                           "content": "Sure, happy to help with grocery questions."
                         },
@@ -2321,7 +2895,8 @@
                           "role": "human",
                           "content": "That does not work: answer does not mention 'milk'. Try again."
                         }
-                      ]
+                      ],
+                      "tools": []
                     },
                     {
                       "label": "context ignored by the mock model",
@@ -2336,7 +2911,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e9960d8a93c-0",
                         "role": "ai",
                         "content": "Milk is 1.20 per bottle."
                       }
@@ -2360,7 +2935,7 @@
                             "content": "How much is milk?"
                           },
                           {
-                            "id": "lc_run--01a06914-01cd-70a1-99f3-c44634f046f5-0",
+                            "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e8367703c3d-0",
                             "role": "ai",
                             "content": "Sure, happy to help with grocery questions."
                           },
@@ -2369,7 +2944,8 @@
                             "role": "human",
                             "content": "That does not work: answer does not mention 'milk'. Try again."
                           }
-                        ]
+                        ],
+                        "tools": []
                       }
                     },
                     {
@@ -2390,7 +2966,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06914-01cd-70a1-99f3-c45bbc3b4220-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9e9960d8a93c-0",
                           "role": "ai",
                           "content": "Milk is 1.20 per bottle."
                         }
@@ -2427,7 +3003,7 @@
       },
       "seq": 10,
       "thread": "MainThread",
-      "elapsed_ms": 0.539,
+      "elapsed_ms": 0.5289999999999999,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -2444,7 +3020,7 @@
           },
           "seq": 11,
           "thread": "MainThread",
-          "elapsed_ms": 0.532,
+          "elapsed_ms": 0.522,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -2475,7 +3051,7 @@
               },
               "seq": 12,
               "thread": "MainThread",
-              "elapsed_ms": 0.14200000000000002,
+              "elapsed_ms": 0.20900000000000002,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2491,6 +3067,41 @@
                       "id": null,
                       "role": "human",
                       "content": "Order a couple bottles of milk."
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -2512,7 +3123,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                    "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -2545,6 +3156,41 @@
                         "role": "human",
                         "content": "Order a couple bottles of milk."
                       }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      }
                     ]
                   }
                 },
@@ -2574,7 +3220,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2599,7 +3245,7 @@
               },
               "seq": 13,
               "thread": "MainThread",
-              "elapsed_ms": 0.182,
+              "elapsed_ms": 0.14200000000000002,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2617,7 +3263,7 @@
                       "content": "Order a couple bottles of milk."
                     },
                     {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2636,6 +3282,41 @@
                       "role": "tool",
                       "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                       "tool_call_id": "c1"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -2659,7 +3340,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                    "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -2693,7 +3374,7 @@
                         "content": "Order a couple bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2712,6 +3393,41 @@
                         "role": "tool",
                         "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   }
@@ -2744,7 +3460,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2769,7 +3485,7 @@
               },
               "seq": 14,
               "thread": "MainThread",
-              "elapsed_ms": 0.183,
+              "elapsed_ms": 0.145,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2787,7 +3503,7 @@
                       "content": "Order a couple bottles of milk."
                     },
                     {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2808,7 +3524,7 @@
                       "tool_call_id": "c1"
                     },
                     {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2827,6 +3543,41 @@
                       "role": "tool",
                       "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                       "tool_call_id": "c2"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -2852,7 +3603,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                    "id": "lc_run--01a09c8f-5c0c-77b1-85de-1be1839d6622-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -2886,7 +3637,7 @@
                         "content": "Order a couple bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2907,7 +3658,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2926,6 +3677,41 @@
                         "role": "tool",
                         "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                         "tool_call_id": "c2"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   }
@@ -2960,7 +3746,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                      "id": "lc_run--01a09c8f-5c0c-77b1-85de-1be1839d6622-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2989,7 +3775,7 @@
                 },
                 "seq": 12,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.20900000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3005,6 +3791,41 @@
                         "id": null,
                         "role": "human",
                         "content": "Order a couple bottles of milk."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -3026,7 +3847,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3059,6 +3880,41 @@
                           "role": "human",
                           "content": "Order a couple bottles of milk."
                         }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
                       ]
                     }
                   },
@@ -3088,7 +3944,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3125,7 +3981,7 @@
                 },
                 "seq": 13,
                 "thread": "MainThread",
-                "elapsed_ms": 0.182,
+                "elapsed_ms": 0.14200000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3143,7 +3999,7 @@
                         "content": "Order a couple bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3162,6 +4018,41 @@
                         "role": "tool",
                         "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -3185,7 +4076,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3219,7 +4110,7 @@
                           "content": "Order a couple bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3238,6 +4129,41 @@
                           "role": "tool",
                           "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -3270,7 +4196,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3307,7 +4233,7 @@
                 },
                 "seq": 14,
                 "thread": "MainThread",
-                "elapsed_ms": 0.183,
+                "elapsed_ms": 0.145,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3325,7 +4251,7 @@
                         "content": "Order a couple bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3346,7 +4272,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3365,6 +4291,41 @@
                         "role": "tool",
                         "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                         "tool_call_id": "c2"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -3390,7 +4351,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                      "id": "lc_run--01a09c8f-5c0c-77b1-85de-1be1839d6622-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3424,7 +4385,7 @@
                           "content": "Order a couple bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3445,7 +4406,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3464,6 +4425,41 @@
                           "role": "tool",
                           "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                           "tool_call_id": "c2"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -3498,7 +4494,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                        "id": "lc_run--01a09c8f-5c0c-77b1-85de-1be1839d6622-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3539,7 +4535,7 @@
             },
             "seq": 11,
             "thread": "MainThread",
-            "elapsed_ms": 0.532,
+            "elapsed_ms": 0.522,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -3570,7 +4566,7 @@
                 },
                 "seq": 12,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.20900000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3586,6 +4582,41 @@
                         "id": null,
                         "role": "human",
                         "content": "Order a couple bottles of milk."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -3607,7 +4638,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3640,6 +4671,41 @@
                           "role": "human",
                           "content": "Order a couple bottles of milk."
                         }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
                       ]
                     }
                   },
@@ -3669,7 +4735,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3694,7 +4760,7 @@
                 },
                 "seq": 13,
                 "thread": "MainThread",
-                "elapsed_ms": 0.182,
+                "elapsed_ms": 0.14200000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3712,7 +4778,7 @@
                         "content": "Order a couple bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3731,6 +4797,41 @@
                         "role": "tool",
                         "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -3754,7 +4855,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                      "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3788,7 +4889,7 @@
                           "content": "Order a couple bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3807,6 +4908,41 @@
                           "role": "tool",
                           "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -3839,7 +4975,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3864,7 +5000,7 @@
                 },
                 "seq": 14,
                 "thread": "MainThread",
-                "elapsed_ms": 0.183,
+                "elapsed_ms": 0.145,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3882,7 +5018,7 @@
                         "content": "Order a couple bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3903,7 +5039,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3922,6 +5058,41 @@
                         "role": "tool",
                         "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                         "tool_call_id": "c2"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -3947,7 +5118,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                      "id": "lc_run--01a09c8f-5c0c-77b1-85de-1be1839d6622-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3981,7 +5152,7 @@
                           "content": "Order a couple bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4002,7 +5173,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4021,6 +5192,41 @@
                           "role": "tool",
                           "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                           "tool_call_id": "c2"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -4055,7 +5261,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                        "id": "lc_run--01a09c8f-5c0c-77b1-85de-1be1839d6622-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4084,7 +5290,7 @@
                   },
                   "seq": 12,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.14200000000000002,
+                  "elapsed_ms": 0.20900000000000002,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4100,6 +5306,41 @@
                           "id": null,
                           "role": "human",
                           "content": "Order a couple bottles of milk."
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -4121,7 +5362,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4154,6 +5395,41 @@
                             "role": "human",
                             "content": "Order a couple bottles of milk."
                           }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
                         ]
                       }
                     },
@@ -4183,7 +5459,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4220,7 +5496,7 @@
                   },
                   "seq": 13,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.182,
+                  "elapsed_ms": 0.14200000000000002,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4238,7 +5514,7 @@
                           "content": "Order a couple bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4257,6 +5533,41 @@
                           "role": "tool",
                           "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -4280,7 +5591,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                        "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4314,7 +5625,7 @@
                             "content": "Order a couple bottles of milk."
                           },
                           {
-                            "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                            "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -4333,6 +5644,41 @@
                             "role": "tool",
                             "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                             "tool_call_id": "c1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
                           }
                         ]
                       }
@@ -4365,7 +5711,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4402,7 +5748,7 @@
                   },
                   "seq": 14,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.183,
+                  "elapsed_ms": 0.145,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4420,7 +5766,7 @@
                           "content": "Order a couple bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4441,7 +5787,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                          "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4460,6 +5806,41 @@
                           "role": "tool",
                           "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                           "tool_call_id": "c2"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -4485,7 +5866,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                        "id": "lc_run--01a09c8f-5c0c-77b1-85de-1be1839d6622-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4519,7 +5900,7 @@
                             "content": "Order a couple bottles of milk."
                           },
                           {
-                            "id": "lc_run--01a06914-01ce-7692-a948-b8699e014ddb-0",
+                            "id": "lc_run--01a09c8f-5c0b-7a63-9399-9eade18c0c60-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -4540,7 +5921,7 @@
                             "tool_call_id": "c1"
                           },
                           {
-                            "id": "lc_run--01a06914-01ce-7692-a948-b87825f83fd0-0",
+                            "id": "lc_run--01a09c8f-5c0b-7a63-9399-9ebffc283bcb-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -4559,6 +5940,41 @@
                             "role": "tool",
                             "content": "rejected: 500 is not reasonable for 'a couple'. Try different arguments.",
                             "tool_call_id": "c2"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
                           }
                         ]
                       }
@@ -4593,7 +6009,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a06914-01ce-7692-a948-b885eea94a08-0",
+                          "id": "lc_run--01a09c8f-5c0c-77b1-85de-1be1839d6622-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [

@@ -1,7 +1,7 @@
 {
   "chapter": "ch38_reducers",
   "model_kind": "mock",
-  "source": "4445b59fcbbb",
+  "source": "a2bdbb02fe01",
   "summary": {
     "turns": 0,
     "messages": 0,
@@ -15,7 +15,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 3.9839999999999995,
+      "elapsed_ms": 2.505,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -32,7 +32,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 0.006,
+          "elapsed_ms": 0.007,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -90,7 +90,7 @@
             },
             "seq": 2,
             "thread": "MainThread",
-            "elapsed_ms": 0.006,
+            "elapsed_ms": 0.007,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -157,7 +157,7 @@
       },
       "seq": 4,
       "thread": "MainThread",
-      "elapsed_ms": 3.285,
+      "elapsed_ms": 3.767,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -185,7 +185,7 @@
           },
           "seq": 5,
           "thread": "MainThread",
-          "elapsed_ms": 0.012,
+          "elapsed_ms": 0.014,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -214,7 +214,7 @@
           },
           "seq": 6,
           "thread": "MainThread",
-          "elapsed_ms": 0.007,
+          "elapsed_ms": 0.008,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -255,7 +255,7 @@
             },
             "seq": 5,
             "thread": "MainThread",
-            "elapsed_ms": 0.012,
+            "elapsed_ms": 0.014,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -287,7 +287,7 @@
             },
             "seq": 6,
             "thread": "MainThread",
-            "elapsed_ms": 0.007,
+            "elapsed_ms": 0.008,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -332,7 +332,7 @@
       },
       "seq": 7,
       "thread": "MainThread",
-      "elapsed_ms": 1.296,
+      "elapsed_ms": 1.3179999999999998,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -376,7 +376,7 @@
           },
           "seq": 9,
           "thread": "MainThread",
-          "elapsed_ms": 0.001,
+          "elapsed_ms": 0.003,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -437,7 +437,7 @@
             },
             "seq": 9,
             "thread": "MainThread",
-            "elapsed_ms": 0.001,
+            "elapsed_ms": 0.003,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -474,7 +474,7 @@
       },
       "seq": 10,
       "thread": "MainThread",
-      "elapsed_ms": 1.213,
+      "elapsed_ms": 1.194,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -638,7 +638,7 @@
       },
       "seq": 13,
       "thread": "MainThread",
-      "elapsed_ms": 1.964,
+      "elapsed_ms": 1.823,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -658,66 +658,7 @@
           "total": 11
         }
       ],
-      "children": [
-        {
-          "name": "node",
-          "attributes": {
-            "name": "left"
-          },
-          "seq": 14,
-          "thread": "ThreadPoolExecutor-5_0",
-          "elapsed_ms": 0.015000000000000001,
-          "model_provider_ms": null,
-          "library_ms": null,
-          "notes": [
-            {
-              "label": "wrote",
-              "message": "left branch",
-              "total": 1
-            }
-          ],
-          "children": [],
-          "body": [
-            {
-              "kind": "note",
-              "value": {
-                "label": "wrote",
-                "message": "left branch",
-                "total": 1
-              }
-            }
-          ]
-        },
-        {
-          "name": "node",
-          "attributes": {
-            "name": "right"
-          },
-          "seq": 15,
-          "thread": "ThreadPoolExecutor-5_0",
-          "elapsed_ms": 0.007,
-          "model_provider_ms": null,
-          "library_ms": null,
-          "notes": [
-            {
-              "label": "wrote",
-              "message": "right branch",
-              "total": 10
-            }
-          ],
-          "children": [],
-          "body": [
-            {
-              "kind": "note",
-              "value": {
-                "label": "wrote",
-                "message": "right branch",
-                "total": 10
-              }
-            }
-          ]
-        }
-      ],
+      "children": [],
       "body": [
         {
           "kind": "note",
@@ -725,70 +666,6 @@
             "label": "seed_passed_to_invoke",
             "message": "go",
             "total": 0
-          }
-        },
-        {
-          "kind": "span",
-          "value": {
-            "name": "node",
-            "attributes": {
-              "name": "left"
-            },
-            "seq": 14,
-            "thread": "ThreadPoolExecutor-5_0",
-            "elapsed_ms": 0.015000000000000001,
-            "model_provider_ms": null,
-            "library_ms": null,
-            "notes": [
-              {
-                "label": "wrote",
-                "message": "left branch",
-                "total": 1
-              }
-            ],
-            "children": [],
-            "body": [
-              {
-                "kind": "note",
-                "value": {
-                  "label": "wrote",
-                  "message": "left branch",
-                  "total": 1
-                }
-              }
-            ]
-          }
-        },
-        {
-          "kind": "span",
-          "value": {
-            "name": "node",
-            "attributes": {
-              "name": "right"
-            },
-            "seq": 15,
-            "thread": "ThreadPoolExecutor-5_0",
-            "elapsed_ms": 0.007,
-            "model_provider_ms": null,
-            "library_ms": null,
-            "notes": [
-              {
-                "label": "wrote",
-                "message": "right branch",
-                "total": 10
-              }
-            ],
-            "children": [],
-            "body": [
-              {
-                "kind": "note",
-                "value": {
-                  "label": "wrote",
-                  "message": "right branch",
-                  "total": 10
-                }
-              }
-            ]
           }
         },
         {
@@ -802,6 +679,64 @@
             ],
             "both_branches_present": true,
             "total": 11
+          }
+        }
+      ]
+    },
+    {
+      "name": "node",
+      "attributes": {
+        "name": "left"
+      },
+      "seq": 14,
+      "thread": "ThreadPoolExecutor-5_0",
+      "elapsed_ms": 0.015000000000000001,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "wrote",
+          "message": "left branch",
+          "total": 1
+        }
+      ],
+      "children": [],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "wrote",
+            "message": "left branch",
+            "total": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "node",
+      "attributes": {
+        "name": "right"
+      },
+      "seq": 15,
+      "thread": "ThreadPoolExecutor-5_0",
+      "elapsed_ms": 0.007,
+      "model_provider_ms": null,
+      "library_ms": null,
+      "notes": [
+        {
+          "label": "wrote",
+          "message": "right branch",
+          "total": 10
+        }
+      ],
+      "children": [],
+      "body": [
+        {
+          "kind": "note",
+          "value": {
+            "label": "wrote",
+            "message": "right branch",
+            "total": 10
           }
         }
       ]

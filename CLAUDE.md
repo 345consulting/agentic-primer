@@ -426,7 +426,7 @@ order, and the ladder below has been renumbered four times in one day.
 
 ## Model
 
-`deepseek-v4-flash`, chosen for price: cheap enough that running a chapter live
+`deepseek-flash`, chosen for price: cheap enough that running a chapter live
 is routine rather than an event. Live runs need `DEEPSEEK_API_KEY` in the
 environment and there is no fallback — absent the key, the run fails.
 

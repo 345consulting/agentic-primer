@@ -1,7 +1,7 @@
 {
   "chapter": "ch05_loop_endings",
   "model_kind": "mock",
-  "source": "1354d8f9693d",
+  "source": "d90450c8f7a9",
   "summary": {
     "turns": 4,
     "messages": 10,
@@ -17,7 +17,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 3.133,
+      "elapsed_ms": 4.248,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -34,7 +34,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 2.276,
+          "elapsed_ms": 3.3400000000000003,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -46,7 +46,7 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 2.0860000000000003,
+              "elapsed_ms": 3.155,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -62,6 +62,46 @@
                       "id": null,
                       "role": "human",
                       "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "lowest_stock_item",
+                      "description": "Which item there is least of in stock.",
+                      "schema": {
+                        "description": "Which item there is least of in stock.",
+                        "properties": {},
+                        "title": "lowest_stock_item",
+                        "type": "object"
+                      }
+                    },
+                    {
+                      "name": "price_of",
+                      "description": "The current shelf price of one of an item, in pounds.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          }
+                        },
+                        "required": [
+                          "item"
+                        ],
+                        "title": "price_of",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -84,7 +124,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06545-d7bd-7f42-bfc8-c63fca99a257-0",
+                    "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -98,7 +138,108 @@
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "lowest_stock_item",
+                          "args": {},
+                          "id": "call_1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    }
+                  }
+                }
+              ]
             },
             {
               "name": "tool",
@@ -108,7 +249,7 @@
               },
               "seq": 4,
               "thread": "MainThread",
-              "elapsed_ms": 0.171,
+              "elapsed_ms": 0.161,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -120,7 +261,269 @@
                   "value": "butter"
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "butter"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 3.155,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "lowest_stock_item",
+                          "args": {},
+                          "id": "call_1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "lowest_stock_item",
+                            "args": {},
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "lowest_stock_item",
+                  "id": "call_1"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 0.161,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args"
+                  },
+                  {
+                    "label": "result",
+                    "value": "butter"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "butter"
+                    }
+                  }
+                ]
+              }
             }
           ]
         },
@@ -131,7 +534,7 @@
           },
           "seq": 5,
           "thread": "MainThread",
-          "elapsed_ms": 0.455,
+          "elapsed_ms": 0.44499999999999995,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -143,7 +546,7 @@
               },
               "seq": 6,
               "thread": "MainThread",
-              "elapsed_ms": 0.275,
+              "elapsed_ms": 0.258,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -161,7 +564,7 @@
                       "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
                     },
                     {
-                      "id": "lc_run--01a06545-d7bd-7f42-bfc8-c63fca99a257-0",
+                      "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -178,6 +581,46 @@
                       "role": "tool",
                       "content": "butter",
                       "tool_call_id": "call_1"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "lowest_stock_item",
+                      "description": "Which item there is least of in stock.",
+                      "schema": {
+                        "description": "Which item there is least of in stock.",
+                        "properties": {},
+                        "title": "lowest_stock_item",
+                        "type": "object"
+                      }
+                    },
+                    {
+                      "name": "price_of",
+                      "description": "The current shelf price of one of an item, in pounds.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          }
+                        },
+                        "required": [
+                          "item"
+                        ],
+                        "title": "price_of",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -202,7 +645,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06545-d7be-77e0-9475-7f48cc15258e-0",
+                    "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -218,7 +661,131 @@
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "lowest_stock_item",
+                            "args": {},
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "butter",
+                        "tool_call_id": "call_1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "butter"
+                          },
+                          "id": "call_2"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    }
+                  }
+                }
+              ]
             },
             {
               "name": "tool",
@@ -228,7 +795,7 @@
               },
               "seq": 7,
               "thread": "MainThread",
-              "elapsed_ms": 0.16699999999999998,
+              "elapsed_ms": 0.175,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -241,7 +808,318 @@
                   "value": "3.10"
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "item": "butter"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "3.10"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.258,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "lowest_stock_item",
+                            "args": {},
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "butter",
+                        "tool_call_id": "call_1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "butter"
+                          },
+                          "id": "call_2"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "lowest_stock_item",
+                              "args": {},
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "butter",
+                          "tool_call_id": "call_1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "butter"
+                            },
+                            "id": "call_2"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "price_of",
+                  "id": "call_2"
+                },
+                "seq": 7,
+                "thread": "MainThread",
+                "elapsed_ms": 0.175,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "butter"
+                  },
+                  {
+                    "label": "result",
+                    "value": "3.10"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "butter"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "3.10"
+                    }
+                  }
+                ]
+              }
             }
           ]
         },
@@ -252,7 +1130,7 @@
           },
           "seq": 8,
           "thread": "MainThread",
-          "elapsed_ms": 0.179,
+          "elapsed_ms": 0.263,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -264,7 +1142,7 @@
               },
               "seq": 9,
               "thread": "MainThread",
-              "elapsed_ms": 0.174,
+              "elapsed_ms": 0.257,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -282,7 +1160,7 @@
                       "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
                     },
                     {
-                      "id": "lc_run--01a06545-d7bd-7f42-bfc8-c63fca99a257-0",
+                      "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -301,7 +1179,7 @@
                       "tool_call_id": "call_1"
                     },
                     {
-                      "id": "lc_run--01a06545-d7be-77e0-9475-7f48cc15258e-0",
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -320,6 +1198,46 @@
                       "role": "tool",
                       "content": "3.10",
                       "tool_call_id": "call_2"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "lowest_stock_item",
+                      "description": "Which item there is least of in stock.",
+                      "schema": {
+                        "description": "Which item there is least of in stock.",
+                        "properties": {},
+                        "title": "lowest_stock_item",
+                        "type": "object"
+                      }
+                    },
+                    {
+                      "name": "price_of",
+                      "description": "The current shelf price of one of an item, in pounds.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          }
+                        },
+                        "required": [
+                          "item"
+                        ],
+                        "title": "price_of",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -346,16 +1264,2120 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06545-d7be-77e0-9475-7f6ab732f4e8-0",
+                    "id": "lc_run--01a09c8f-26a0-7370-aa7f-fab980692027-0",
                     "role": "ai",
                     "content": "Butter, at 3.10 -- there is only one left, so it is the lowest we hold.",
                     "finish_reason": "stop"
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "lowest_stock_item",
+                            "args": {},
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "butter",
+                        "tool_call_id": "call_1"
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "butter"
+                            },
+                            "id": "call_2"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "3.10",
+                        "tool_call_id": "call_2"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 6,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool",
+                      "ai",
+                      "tool"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fab980692027-0",
+                      "role": "ai",
+                      "content": "Butter, at 3.10 -- there is only one left, so it is the lowest we hold.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 9,
+                "thread": "MainThread",
+                "elapsed_ms": 0.257,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "lowest_stock_item",
+                            "args": {},
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "butter",
+                        "tool_call_id": "call_1"
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "butter"
+                            },
+                            "id": "call_2"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "3.10",
+                        "tool_call_id": "call_2"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 6,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fab980692027-0",
+                      "role": "ai",
+                      "content": "Butter, at 3.10 -- there is only one left, so it is the lowest we hold.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "lowest_stock_item",
+                              "args": {},
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "butter",
+                          "tool_call_id": "call_1"
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "butter"
+                              },
+                              "id": "call_2"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "3.10",
+                          "tool_call_id": "call_2"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 6,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fab980692027-0",
+                        "role": "ai",
+                        "content": "Butter, at 3.10 -- there is only one left, so it is the lowest we hold.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
             }
           ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 3.3400000000000003,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 3.155,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "lowest_stock_item",
+                          "args": {},
+                          "id": "call_1"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "lowest_stock_item",
+                            "args": {},
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "lowest_stock_item",
+                  "id": "call_1"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 0.161,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args"
+                  },
+                  {
+                    "label": "result",
+                    "value": "butter"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "butter"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 3.155,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "lowest_stock_item",
+                            "args": {},
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "lowest_stock_item",
+                            "description": "Which item there is least of in stock.",
+                            "schema": {
+                              "description": "Which item there is least of in stock.",
+                              "properties": {},
+                              "title": "lowest_stock_item",
+                              "type": "object"
+                            }
+                          },
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of one of an item, in pounds.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "lowest_stock_item",
+                          "price_of"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "lowest_stock_item",
+                              "args": {},
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "lowest_stock_item",
+                    "id": "call_1"
+                  },
+                  "seq": 4,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.161,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args"
+                    },
+                    {
+                      "label": "result",
+                      "value": "butter"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "butter"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 0.44499999999999995,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 0.258,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "lowest_stock_item",
+                            "args": {},
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "butter",
+                        "tool_call_id": "call_1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 4,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "price_of",
+                          "args": {
+                            "item": "butter"
+                          },
+                          "id": "call_2"
+                        }
+                      ],
+                      "finish_reason": "tool_calls"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "lowest_stock_item",
+                              "args": {},
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "butter",
+                          "tool_call_id": "call_1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "butter"
+                            },
+                            "id": "call_2"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "price_of",
+                  "id": "call_2"
+                },
+                "seq": 7,
+                "thread": "MainThread",
+                "elapsed_ms": 0.175,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "butter"
+                  },
+                  {
+                    "label": "result",
+                    "value": "3.10"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "butter"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "3.10"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 6,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.258,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "lowest_stock_item",
+                              "args": {},
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "butter",
+                          "tool_call_id": "call_1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 4,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "butter"
+                            },
+                            "id": "call_2"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                          },
+                          {
+                            "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "lowest_stock_item",
+                                "args": {},
+                                "id": "call_1"
+                              }
+                            ],
+                            "finish_reason": "tool_calls"
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "butter",
+                            "tool_call_id": "call_1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "lowest_stock_item",
+                            "description": "Which item there is least of in stock.",
+                            "schema": {
+                              "description": "Which item there is least of in stock.",
+                              "properties": {},
+                              "title": "lowest_stock_item",
+                              "type": "object"
+                            }
+                          },
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of one of an item, in pounds.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "lowest_stock_item",
+                          "price_of"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "butter"
+                              },
+                              "id": "call_2"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "price_of",
+                    "id": "call_2"
+                  },
+                  "seq": 7,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.175,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "item": "butter"
+                    },
+                    {
+                      "label": "result",
+                      "value": "3.10"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "item": "butter"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "3.10"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 3
+            },
+            "seq": 8,
+            "thread": "MainThread",
+            "elapsed_ms": 0.263,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 9,
+                "thread": "MainThread",
+                "elapsed_ms": 0.257,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "lowest_stock_item",
+                            "args": {},
+                            "id": "call_1"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "butter",
+                        "tool_call_id": "call_1"
+                      },
+                      {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "price_of",
+                            "args": {
+                              "item": "butter"
+                            },
+                            "id": "call_2"
+                          }
+                        ],
+                        "finish_reason": "tool_calls"
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "3.10",
+                        "tool_call_id": "call_2"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 6,
+                    "roles": [
+                      "system",
+                      "human",
+                      "ai",
+                      "tool",
+                      "ai",
+                      "tool"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fab980692027-0",
+                      "role": "ai",
+                      "content": "Butter, at 3.10 -- there is only one left, so it is the lowest we hold.",
+                      "finish_reason": "stop"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "lowest_stock_item",
+                              "args": {},
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "butter",
+                          "tool_call_id": "call_1"
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "butter"
+                              },
+                              "id": "call_2"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "3.10",
+                          "tool_call_id": "call_2"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 6,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool",
+                        "ai",
+                        "tool"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fab980692027-0",
+                        "role": "ai",
+                        "content": "Butter, at 3.10 -- there is only one left, so it is the lowest we hold.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 9,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.257,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "lowest_stock_item",
+                              "args": {},
+                              "id": "call_1"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "butter",
+                          "tool_call_id": "call_1"
+                        },
+                        {
+                          "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "butter"
+                              },
+                              "id": "call_2"
+                            }
+                          ],
+                          "finish_reason": "tool_calls"
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "3.10",
+                          "tool_call_id": "call_2"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 6,
+                      "roles": [
+                        "system",
+                        "human",
+                        "ai",
+                        "tool",
+                        "ai",
+                        "tool"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fab980692027-0",
+                        "role": "ai",
+                        "content": "Butter, at 3.10 -- there is only one left, so it is the lowest we hold.",
+                        "finish_reason": "stop"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                          },
+                          {
+                            "id": "lc_run--01a09c8f-269f-7da1-b00a-55da4b6ff69b-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "lowest_stock_item",
+                                "args": {},
+                                "id": "call_1"
+                              }
+                            ],
+                            "finish_reason": "tool_calls"
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "butter",
+                            "tool_call_id": "call_1"
+                          },
+                          {
+                            "id": "lc_run--01a09c8f-26a0-7370-aa7f-fa993e401807-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "butter"
+                                },
+                                "id": "call_2"
+                              }
+                            ],
+                            "finish_reason": "tool_calls"
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "3.10",
+                            "tool_call_id": "call_2"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "lowest_stock_item",
+                            "description": "Which item there is least of in stock.",
+                            "schema": {
+                              "description": "Which item there is least of in stock.",
+                              "properties": {},
+                              "title": "lowest_stock_item",
+                              "type": "object"
+                            }
+                          },
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of one of an item, in pounds.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "lowest_stock_item",
+                          "price_of"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 6,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool",
+                          "ai",
+                          "tool"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-26a0-7370-aa7f-fab980692027-0",
+                          "role": "ai",
+                          "content": "Butter, at 3.10 -- there is only one left, so it is the lowest we hold.",
+                          "finish_reason": "stop"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "answer_received (finish_reason = stop)"
+          }
         }
       ]
     },
@@ -368,7 +3390,7 @@
       },
       "seq": 10,
       "thread": "MainThread",
-      "elapsed_ms": 0.165,
+      "elapsed_ms": 0.332,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -385,7 +3407,7 @@
           },
           "seq": 11,
           "thread": "MainThread",
-          "elapsed_ms": 0.158,
+          "elapsed_ms": 0.323,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -397,7 +3419,7 @@
               },
               "seq": 12,
               "thread": "MainThread",
-              "elapsed_ms": 0.153,
+              "elapsed_ms": 0.318,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -413,6 +3435,46 @@
                       "id": null,
                       "role": "human",
                       "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "lowest_stock_item",
+                      "description": "Which item there is least of in stock.",
+                      "schema": {
+                        "description": "Which item there is least of in stock.",
+                        "properties": {},
+                        "title": "lowest_stock_item",
+                        "type": "object"
+                      }
+                    },
+                    {
+                      "name": "price_of",
+                      "description": "The current shelf price of one of an item, in pounds.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          }
+                        },
+                        "required": [
+                          "item"
+                        ],
+                        "title": "price_of",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -435,16 +3497,710 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a06545-d7bf-7aa2-b957-c91ddd549646-0",
+                    "id": "lc_run--01a09c8f-26a0-7370-aa7f-fac7af69eb0a-0",
                     "role": "ai",
                     "content": "",
                     "finish_reason": "length"
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fac7af69eb0a-0",
+                      "role": "ai",
+                      "content": "",
+                      "finish_reason": "length"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.318,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fac7af69eb0a-0",
+                      "role": "ai",
+                      "content": "",
+                      "finish_reason": "length"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fac7af69eb0a-0",
+                        "role": "ai",
+                        "content": "",
+                        "finish_reason": "length"
+                      }
+                    }
+                  }
+                ]
+              }
             }
           ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 11,
+            "thread": "MainThread",
+            "elapsed_ms": 0.323,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 12,
+                "thread": "MainThread",
+                "elapsed_ms": 0.318,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "lowest_stock_item",
+                        "description": "Which item there is least of in stock.",
+                        "schema": {
+                          "description": "Which item there is least of in stock.",
+                          "properties": {},
+                          "title": "lowest_stock_item",
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "name": "price_of",
+                        "description": "The current shelf price of one of an item, in pounds.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            }
+                          },
+                          "required": [
+                            "item"
+                          ],
+                          "title": "price_of",
+                          "type": "object"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "tools declared to the mock model",
+                    "names": [
+                      "lowest_stock_item",
+                      "price_of"
+                    ],
+                    "consulted": false
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 2,
+                    "roles": [
+                      "system",
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-26a0-7370-aa7f-fac7af69eb0a-0",
+                      "role": "ai",
+                      "content": "",
+                      "finish_reason": "length"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fac7af69eb0a-0",
+                        "role": "ai",
+                        "content": "",
+                        "finish_reason": "length"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 12,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.318,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "lowest_stock_item",
+                          "description": "Which item there is least of in stock.",
+                          "schema": {
+                            "description": "Which item there is least of in stock.",
+                            "properties": {},
+                            "title": "lowest_stock_item",
+                            "type": "object"
+                          }
+                        },
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of one of an item, in pounds.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "tools declared to the mock model",
+                      "names": [
+                        "lowest_stock_item",
+                        "price_of"
+                      ],
+                      "consulted": false
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 2,
+                      "roles": [
+                        "system",
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-26a0-7370-aa7f-fac7af69eb0a-0",
+                        "role": "ai",
+                        "content": "",
+                        "finish_reason": "length"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Whatever we are lowest on -- what does one of them cost, and why is it low?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "lowest_stock_item",
+                            "description": "Which item there is least of in stock.",
+                            "schema": {
+                              "description": "Which item there is least of in stock.",
+                              "properties": {},
+                              "title": "lowest_stock_item",
+                              "type": "object"
+                            }
+                          },
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of one of an item, in pounds.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of one of an item, in pounds.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "lowest_stock_item",
+                          "price_of"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-26a0-7370-aa7f-fac7af69eb0a-0",
+                          "role": "ai",
+                          "content": "",
+                          "finish_reason": "length"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "tokens_exhausted (finish_reason = length)"
+          }
         }
       ]
     }

@@ -21,7 +21,7 @@ will out-score it every time, whether or not it is also carrying an
 attack. Confirmed directly below, not asserted: the hostile document scores
 10 against the query's terms; the legitimate one scores 5.
 
-Five scenarios, the same shape `ch24` used for a different point in the
+Six scenarios, the same shape `ch24` used for a different point in the
 request:
 
     retrieval_returns_the_relevant_document
@@ -45,12 +45,12 @@ request:
         distinct, typed content block inside the message, not a flattened
         string, which is the one case where "no indicator" is not quite
         true (the indicator says which decoder to use, not what to trust)
-    pdf_or_docx_uses_the_generic_file_block
-        a PDF (or a DOCX -- same block, different MIME type in the data
-        URI) is not its own content type either -- it rides the same
-        generic `file` block a real client would use, and the provider's
-        schema is closed: a guessed type name that isn't `text`,
-        `image_url`, or `file` is rejected outright, live, not assumed
+    a_pdf_is_rasterized_to_images_not_sent_as_a_file
+        a second, distinct way to send the same image -- the generic
+        `file` block, not `image_url` -- succeeds once its shape matches
+        DeepSeek's own schema rather than OpenAI's. A PDF through that
+        same, correctly-shaped block is still rejected: the block is
+        image-only, and a real client rasterizes a PDF's pages first
 
 **The guard sits between retrieval and the splice, not inside the
 retriever.** `ch24`'s `screen_declarations` ran before `_proxy_from_schema`
@@ -72,24 +72,41 @@ document survived the cut. A veto is safe and less useful; a sanitizer, at
 least here, is both.
 
 **The fifth scenario is not about injection succeeding -- it is about the
-request having a different shape.** `deepseek-v4-flash` accepted a message
-carrying an `image_url` content block without error and, honestly, could
-not see it: "I can't see the image." That reply is the finding, not a
-failure to hide -- it proves the request really was sent with the image in
-a structurally distinct place from the text scenarios above, live, whether
-or not the model does anything useful with it. Every content note above
+request having a different shape.** `deepseek-flash` accepted a message
+carrying an `image_url` content block and correctly named the pixel's real
+colour: "The reference image appears to be black." That is a changed
+finding, not a stale one left uncorrected -- the model this chapter was
+first checked against genuinely could not see the image at all; DeepSeek
+retired it and folded vision into `deepseek-flash` on 2026-09-10, and the
+identical request now succeeds. Whether the model can see it was never
+this scenario's point either time: what it proves, both times, is that the
+request really was sent with the image in a structurally distinct place
+from the text scenarios above, live, not assumed. Every content note above
 recorded a plain string; this one's message content is a list of typed
 dicts, checkable directly rather than asserted.
 
-**The sixth scenario's failure is the point, not an accident to hide.**
-Probing this chapter's own build, `type: "document"` and `type: "input_file"`
-both came back `400`, the error naming exactly what the schema accepts:
-`` "expected one of `text`, `image_url`, `file`" ``. `type: "file"` is the
-one that works, and it is generic -- the same block carries a PDF or a
-DOCX, distinguished only by the MIME type inside the data URI, so this
-chapter builds one scenario for both rather than a near-duplicate for each.
-Live, not mock: the mock model never touches a wire, so it cannot reject
-anything -- this scenario's rejection note only has content under `live`.
+**The sixth scenario found a different provider than the one that wrote
+it.** Probing this chapter's own build, `type: "document"` and
+`type: "input_file"` both came back `400`, the error naming exactly what
+the schema accepts: `` "expected one of `text`, `image_url`, `file`" ``.
+`type: "file"` -- nested under a `file` key, matching OpenAI's own docs --
+carried a PDF and worked, live. DeepSeek retired that model on
+2026-09-10, folding it and its vision variant into `deepseek-flash`
+(DeepSeek-V4.1-Flash); the identical request then started failing --
+`"file must have a file_id or file_data"`, even with `file_data` present.
+Asked directly, DeepSeek confirmed the real schema is flat -- `file_id`
+and `file_data` are siblings of `type`, never nested -- and that the
+block is image-only: a PDF is rasterized to images first, live, not this
+chapter's own guess. This chapter's shape was copied from OpenAI's docs
+without checking DeepSeek's own, and that bug was hidden behind a second
+one -- a retired model tolerating the wrong shape anyway -- until the
+model underneath a pinned name changed and both broke at once. Fixed now:
+the shape matches DeepSeek's schema, an image rides it as the rasterized
+page a real client would send, and the same PDF through that corrected
+shape is still rejected -- proving the boundary is the content type, not
+the JSON this chapter got wrong the first time. Live, not mock: the mock
+model never touches a wire, so it cannot reject anything -- this
+scenario's rejection note only has content under `live`.
 """
 
 from support.agent import ask_model, run_turns
@@ -276,7 +293,7 @@ def guard_sanitizes_the_retrieved_document(trace: Trace, model_kind: ModelKind) 
         _ask_and_check(trace, model_kind, span, screened)
 
 
-# A 1x1 red PNG -- kept this small so the trace and the page carry it
+# A 1x1 black PNG -- kept this small so the trace and the page carry it
 # without bloating either. The point is the content block's shape, not the
 # image's content.
 _TINY_PNG_BASE64 = (
@@ -302,7 +319,7 @@ def non_text_content_is_a_typed_block(trace: Trace, model_kind: ModelKind) -> No
         )
         span.add_note("spliced_content_shape", content_type=type(image_message.content).__name__)
         messages: list[BaseMessage] = [SystemMessage(SYSTEM_PROMPT), image_message]
-        mock_replies = [AIMessage("The image is red.")]
+        mock_replies = [AIMessage("The image is black.")]
 
         def ask(turn: int, so_far: list[BaseMessage]) -> AIMessage:
             return ask_model(trace, model_kind, mock_replies[turn - 1 :], so_far, [])
@@ -324,30 +341,34 @@ _TINY_PDF_BASE64 = base64.b64encode(
 ).decode()
 
 
-def pdf_or_docx_uses_the_generic_file_block(trace: Trace, model_kind: ModelKind) -> None:
-    """A PDF (or a DOCX -- same block, different MIME type) rides the
-    generic `file` content type, proven live alongside proof the schema is
-    closed: `type: "document"` is rejected outright, live only -- the mock
-    model never touches a wire, so it has nothing to reject.
+def a_pdf_is_rasterized_to_images_not_sent_as_a_file(trace: Trace, model_kind: ModelKind) -> None:
+    """DeepSeek's own answer, asked directly: the `file` block takes
+    `file_id`/`file_data` as siblings of `type`, not nested under a `file`
+    key the way OpenAI's docs show it -- and it is image-only. A PDF's
+    page is rasterized to an image first; that image, not the PDF, is
+    what actually rides the block. The tiny PNG above stands in for the
+    rasterized page, since this chapter's PDF has no content to render.
+
+    The PDF itself, sent through the same correctly-shaped block, is
+    still rejected live -- the boundary is the content type, not the
+    JSON shape this chapter got wrong the first time.
     """
-    name = "pdf_or_docx_uses_the_generic_file_block"
+    name = "a_pdf_is_rasterized_to_images_not_sent_as_a_file"
     with trace.span("scenario", name=name) as span:
-        span.add_note("retrieved", kind="pdf", mime_type="application/pdf")
+        span.add_note("retrieved", kind="rasterized_pdf_page", mime_type="image/png")
         file_message = HumanMessage(
             content=[
-                {"type": "text", "text": "What does this PDF say?"},
+                {"type": "text", "text": "What color is this page?"},
                 {
                     "type": "file",
-                    "file": {
-                        "filename": "doc.pdf",
-                        "file_data": f"data:application/pdf;base64,{_TINY_PDF_BASE64}",
-                    },
+                    "filename": "page-1.png",
+                    "file_data": f"data:image/png;base64,{_TINY_PNG_BASE64}",
                 },
             ]
         )
         span.add_note("spliced_content_shape", content_type=type(file_message.content).__name__)
         messages: list[BaseMessage] = [SystemMessage(SYSTEM_PROMPT), file_message]
-        mock_replies = [AIMessage("The PDF cannot be read in this mock.")]
+        mock_replies = [AIMessage("The rasterized page is black.")]
 
         def ask(turn: int, so_far: list[BaseMessage]) -> AIMessage:
             return ask_model(trace, model_kind, mock_replies[turn - 1 :], so_far, [])
@@ -357,23 +378,18 @@ def pdf_or_docx_uses_the_generic_file_block(trace: Trace, model_kind: ModelKind)
         span.add_note("model_reply", content=str(model_span.reply["content"]))
 
         if model_kind == "live":
-            invalid_message = HumanMessage(
+            pdf_message = HumanMessage(
                 content=[
                     {"type": "text", "text": "What does this PDF say?"},
                     {
-                        "type": "document",
-                        "source": {
-                            "type": "base64",
-                            "media_type": "application/pdf",
-                            "data": _TINY_PDF_BASE64,
-                        },
+                        "type": "file",
+                        "filename": "doc.pdf",
+                        "file_data": f"data:application/pdf;base64,{_TINY_PDF_BASE64}",
                     },
                 ]
             )
             try:
-                ask_model(
-                    trace, model_kind, [], [SystemMessage(SYSTEM_PROMPT), invalid_message], []
-                )
+                ask_model(trace, model_kind, [], [SystemMessage(SYSTEM_PROMPT), pdf_message], [])
                 span.add_note("rejected_variant", accepted=True, error=None)
             except OpenAIInvalidRequestError as rejection:
                 span.add_note("rejected_variant", accepted=False, error=str(rejection)[:300])
@@ -389,7 +405,7 @@ def run(model_kind: ModelKind = "mock") -> Trace:
     guard_vetoes_the_retrieved_document(trace, model_kind)
     guard_sanitizes_the_retrieved_document(trace, model_kind)
     non_text_content_is_a_typed_block(trace, model_kind)
-    pdf_or_docx_uses_the_generic_file_block(trace, model_kind)
+    a_pdf_is_rasterized_to_images_not_sent_as_a_file(trace, model_kind)
 
     trace.close(turns=0, messages=0, ended="n/a")
     return trace

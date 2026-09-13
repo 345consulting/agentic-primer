@@ -1,7 +1,7 @@
 {
   "chapter": "ch02_tool_call",
   "model_kind": "live",
-  "source": "9994cb1e5d0a",
+  "source": "565f74db5ec6",
   "summary": {
     "turns": 2,
     "messages": 5,
@@ -17,7 +17,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 2354.4559999999997,
+      "elapsed_ms": 1695.5240000000001,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -34,7 +34,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 1450.43,
+          "elapsed_ms": 970.7130000000001,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -46,9 +46,9 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 1448.951,
-              "model_provider_ms": 1211.0695840120316,
-              "library_ms": 237.88141598796847,
+              "elapsed_ms": 969.961,
+              "model_provider_ms": 789.4583327770233,
+              "library_ms": 180.5026672229767,
               "notes": [
                 {
                   "label": "context",
@@ -63,12 +63,13 @@
                       "role": "human",
                       "content": "Do we have enough milk for the week? We need four."
                     }
-                  ]
+                  ],
+                  "tools": []
                 },
                 {
                   "label": "wire request",
                   "attempt": 1,
-                  "at_ms": 1035088027.396291,
+                  "at_ms": 1906291523.377875,
                   "method": "POST",
                   "url": "https://api.deepseek.com/v1/chat/completions",
                   "headers": {
@@ -76,7 +77,7 @@
                     "accept-encoding": "gzip, deflate, zstd",
                     "authorization": null,
                     "connection": "keep-alive",
-                    "content-length": "485",
+                    "content-length": "482",
                     "content-type": "application/json",
                     "host": "api.deepseek.com",
                     "user-agent": "OpenAI/Python 3.6.0",
@@ -110,7 +111,7 @@
                         "role": "user"
                       }
                     ],
-                    "model": "deepseek-v4-flash",
+                    "model": "deepseek-flash",
                     "stream": false,
                     "tools": [
                       {
@@ -142,41 +143,41 @@
                 },
                 {
                   "label": "wire response",
-                  "at_ms": 1035089238.465875,
+                  "at_ms": 1906292312.8362079,
                   "status": 200,
                   "headers": {
                     "access-control-allow-credentials": "true",
                     "connection": "keep-alive",
                     "content-encoding": "gzip",
                     "content-type": "application/json",
-                    "date": "Thu, 03 Sep 2026 19:51:09 GMT",
+                    "date": "Sun, 13 Sep 2026 21:51:13 GMT",
                     "server": "elb",
                     "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
                     "transfer-encoding": "chunked",
                     "vary": "origin, access-control-request-method, access-control-request-headers",
-                    "via": "1.1 c913b0cdc6eda18dcda37ba786f8a1b6.cloudfront.net (CloudFront)",
-                    "x-amz-cf-id": "y4lf9lwogtQ0kS9KWCdryRXc9TyCm3LzQb_0qkqd9Fyc8d-PY0u6XQ==",
-                    "x-amz-cf-pop": "DEN53-P4",
+                    "via": "1.1 59b91fa5bb1f56f1a653604439afb430.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "QDH82BFwtYnluViZvRD-OuoBuRt1XLoC3mYDeR2x9tFEg3Sxk_A6Dg==",
+                    "x-amz-cf-pop": "DEN53-P6",
                     "x-cache": "Miss from cloudfront",
                     "x-content-type-options": "nosniff",
-                    "x-ds-trace-id": "7d840e42e44919fc78516d87a6ee8b98"
+                    "x-ds-trace-id": "bbf2ca13b6b7d3468b5e1af76e936e28"
                   },
                   "body": {
-                    "id": "532ddf8b-87ca-46ef-970d-3be1dc67ce41",
+                    "id": "73f40e73-db48-4b05-ba0e-9dbe1f8a7115",
                     "object": "chat.completion",
-                    "created": 1788465069,
-                    "model": "deepseek-v4-flash",
+                    "created": 1789336273,
+                    "model": "deepseek-flash",
                     "choices": [
                       {
                         "index": 0,
                         "message": {
                           "role": "assistant",
                           "content": "",
-                          "reasoning_content": "We need answer. Need check stock milk. \"need four\" likely need four milk? Ask stock.",
+                          "reasoning_content": "We need to check stock of milk.",
                           "tool_calls": [
                             {
                               "index": 0,
-                              "id": "call_00_GgHVgKEu1Hqjo0CN2Bvw9888",
+                              "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
                               "type": "function",
                               "function": {
                                 "name": "stock_on_hand",
@@ -190,25 +191,25 @@
                       }
                     ],
                     "usage": {
-                      "prompt_tokens": 400,
-                      "completion_tokens": 68,
-                      "total_tokens": 468,
+                      "prompt_tokens": 337,
+                      "completion_tokens": 49,
+                      "total_tokens": 386,
                       "prompt_tokens_details": {
-                        "cached_tokens": 384
+                        "cached_tokens": 128
                       },
                       "completion_tokens_details": {
-                        "reasoning_tokens": 21
+                        "reasoning_tokens": 8
                       },
-                      "prompt_cache_hit_tokens": 384,
-                      "prompt_cache_miss_tokens": 16
+                      "prompt_cache_hit_tokens": 128,
+                      "prompt_cache_miss_tokens": 209
                     },
-                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                    "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
                   }
                 },
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a068d3-3b4f-7471-b1a1-d77bcc0b2f8e-0",
+                    "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -217,39 +218,242 @@
                         "args": {
                           "item": "milk"
                         },
-                        "id": "call_00_GgHVgKEu1Hqjo0CN2Bvw9888"
+                        "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
                       }
                     ],
                     "additional_kwargs": {
                       "refusal": null,
-                      "reasoning_content": "We need answer. Need check stock milk. \"need four\" likely need four milk? Ask stock."
+                      "reasoning_content": "We need to check stock of milk."
                     },
                     "finish_reason": "tool_calls",
                     "usage": {
-                      "input_tokens": 400,
-                      "output_tokens": 68,
-                      "total_tokens": 468,
+                      "input_tokens": 337,
+                      "output_tokens": 49,
+                      "total_tokens": 386,
                       "input_token_details": {
-                        "cache_read": 384
+                        "cache_read": 128
                       },
                       "output_token_details": {
-                        "reasoning": 21
+                        "reasoning": 8
                       }
                     }
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "wire request",
+                    "attempt": 1,
+                    "at_ms": 1906291523.377875,
+                    "method": "POST",
+                    "url": "https://api.deepseek.com/v1/chat/completions",
+                    "headers": {
+                      "accept": "application/json",
+                      "accept-encoding": "gzip, deflate, zstd",
+                      "authorization": null,
+                      "connection": "keep-alive",
+                      "content-length": "482",
+                      "content-type": "application/json",
+                      "host": "api.deepseek.com",
+                      "user-agent": "OpenAI/Python 3.6.0",
+                      "x-stainless-arch": "arm64",
+                      "x-stainless-async": "false",
+                      "x-stainless-lang": "python",
+                      "x-stainless-os": "MacOS",
+                      "x-stainless-package-version": "3.6.0",
+                      "x-stainless-raw-response": "true",
+                      "x-stainless-read-timeout": "60.0",
+                      "x-stainless-retry-count": "0",
+                      "x-stainless-runtime": "CPython",
+                      "x-stainless-runtime-version": "3.14.7"
+                    },
+                    "defaulted_by_model_provider": [
+                      "temperature",
+                      "max_tokens",
+                      "top_p",
+                      "stop",
+                      "seed",
+                      "tool_choice"
+                    ],
+                    "body": {
+                      "messages": [
+                        {
+                          "content": "You answer briefly and plainly. Use the tools you are given.",
+                          "role": "system"
+                        },
+                        {
+                          "content": "Do we have enough milk for the week? We need four.",
+                          "role": "user"
+                        }
+                      ],
+                      "model": "deepseek-flash",
+                      "stream": false,
+                      "tools": [
+                        {
+                          "type": "function",
+                          "function": {
+                            "name": "stock_on_hand",
+                            "description": "How many of an item are currently in stock.",
+                            "parameters": {
+                              "properties": {
+                                "item": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "type": "object"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "wire response",
+                    "at_ms": 1906292312.8362079,
+                    "status": 200,
+                    "headers": {
+                      "access-control-allow-credentials": "true",
+                      "connection": "keep-alive",
+                      "content-encoding": "gzip",
+                      "content-type": "application/json",
+                      "date": "Sun, 13 Sep 2026 21:51:13 GMT",
+                      "server": "elb",
+                      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                      "transfer-encoding": "chunked",
+                      "vary": "origin, access-control-request-method, access-control-request-headers",
+                      "via": "1.1 59b91fa5bb1f56f1a653604439afb430.cloudfront.net (CloudFront)",
+                      "x-amz-cf-id": "QDH82BFwtYnluViZvRD-OuoBuRt1XLoC3mYDeR2x9tFEg3Sxk_A6Dg==",
+                      "x-amz-cf-pop": "DEN53-P6",
+                      "x-cache": "Miss from cloudfront",
+                      "x-content-type-options": "nosniff",
+                      "x-ds-trace-id": "bbf2ca13b6b7d3468b5e1af76e936e28"
+                    },
+                    "body": {
+                      "id": "73f40e73-db48-4b05-ba0e-9dbe1f8a7115",
+                      "object": "chat.completion",
+                      "created": 1789336273,
+                      "model": "deepseek-flash",
+                      "choices": [
+                        {
+                          "index": 0,
+                          "message": {
+                            "role": "assistant",
+                            "content": "",
+                            "reasoning_content": "We need to check stock of milk.",
+                            "tool_calls": [
+                              {
+                                "index": 0,
+                                "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                "type": "function",
+                                "function": {
+                                  "name": "stock_on_hand",
+                                  "arguments": "{\"item\": \"milk\"}"
+                                }
+                              }
+                            ]
+                          },
+                          "logprobs": null,
+                          "finish_reason": "tool_calls"
+                        }
+                      ],
+                      "usage": {
+                        "prompt_tokens": 337,
+                        "completion_tokens": 49,
+                        "total_tokens": 386,
+                        "prompt_tokens_details": {
+                          "cached_tokens": 128
+                        },
+                        "completion_tokens_details": {
+                          "reasoning_tokens": 8
+                        },
+                        "prompt_cache_hit_tokens": 128,
+                        "prompt_cache_miss_tokens": 209
+                      },
+                      "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                    }
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "stock_on_hand",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "We need to check stock of milk."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 337,
+                        "output_tokens": 49,
+                        "total_tokens": 386,
+                        "input_token_details": {
+                          "cache_read": 128
+                        },
+                        "output_token_details": {
+                          "reasoning": 8
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
             },
             {
               "name": "tool",
               "attributes": {
                 "name": "stock_on_hand",
-                "id": "call_00_GgHVgKEu1Hqjo0CN2Bvw9888"
+                "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
               },
               "seq": 4,
               "thread": "MainThread",
-              "elapsed_ms": 1.39,
+              "elapsed_ms": 0.718,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -262,7 +466,476 @@
                   "value": 2
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "item": "milk"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "live"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 969.961,
+                "model_provider_ms": 789.4583327770233,
+                "library_ms": 180.5026672229767,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "wire request",
+                    "attempt": 1,
+                    "at_ms": 1906291523.377875,
+                    "method": "POST",
+                    "url": "https://api.deepseek.com/v1/chat/completions",
+                    "headers": {
+                      "accept": "application/json",
+                      "accept-encoding": "gzip, deflate, zstd",
+                      "authorization": null,
+                      "connection": "keep-alive",
+                      "content-length": "482",
+                      "content-type": "application/json",
+                      "host": "api.deepseek.com",
+                      "user-agent": "OpenAI/Python 3.6.0",
+                      "x-stainless-arch": "arm64",
+                      "x-stainless-async": "false",
+                      "x-stainless-lang": "python",
+                      "x-stainless-os": "MacOS",
+                      "x-stainless-package-version": "3.6.0",
+                      "x-stainless-raw-response": "true",
+                      "x-stainless-read-timeout": "60.0",
+                      "x-stainless-retry-count": "0",
+                      "x-stainless-runtime": "CPython",
+                      "x-stainless-runtime-version": "3.14.7"
+                    },
+                    "defaulted_by_model_provider": [
+                      "temperature",
+                      "max_tokens",
+                      "top_p",
+                      "stop",
+                      "seed",
+                      "tool_choice"
+                    ],
+                    "body": {
+                      "messages": [
+                        {
+                          "content": "You answer briefly and plainly. Use the tools you are given.",
+                          "role": "system"
+                        },
+                        {
+                          "content": "Do we have enough milk for the week? We need four.",
+                          "role": "user"
+                        }
+                      ],
+                      "model": "deepseek-flash",
+                      "stream": false,
+                      "tools": [
+                        {
+                          "type": "function",
+                          "function": {
+                            "name": "stock_on_hand",
+                            "description": "How many of an item are currently in stock.",
+                            "parameters": {
+                              "properties": {
+                                "item": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "type": "object"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "label": "wire response",
+                    "at_ms": 1906292312.8362079,
+                    "status": 200,
+                    "headers": {
+                      "access-control-allow-credentials": "true",
+                      "connection": "keep-alive",
+                      "content-encoding": "gzip",
+                      "content-type": "application/json",
+                      "date": "Sun, 13 Sep 2026 21:51:13 GMT",
+                      "server": "elb",
+                      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                      "transfer-encoding": "chunked",
+                      "vary": "origin, access-control-request-method, access-control-request-headers",
+                      "via": "1.1 59b91fa5bb1f56f1a653604439afb430.cloudfront.net (CloudFront)",
+                      "x-amz-cf-id": "QDH82BFwtYnluViZvRD-OuoBuRt1XLoC3mYDeR2x9tFEg3Sxk_A6Dg==",
+                      "x-amz-cf-pop": "DEN53-P6",
+                      "x-cache": "Miss from cloudfront",
+                      "x-content-type-options": "nosniff",
+                      "x-ds-trace-id": "bbf2ca13b6b7d3468b5e1af76e936e28"
+                    },
+                    "body": {
+                      "id": "73f40e73-db48-4b05-ba0e-9dbe1f8a7115",
+                      "object": "chat.completion",
+                      "created": 1789336273,
+                      "model": "deepseek-flash",
+                      "choices": [
+                        {
+                          "index": 0,
+                          "message": {
+                            "role": "assistant",
+                            "content": "",
+                            "reasoning_content": "We need to check stock of milk.",
+                            "tool_calls": [
+                              {
+                                "index": 0,
+                                "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                "type": "function",
+                                "function": {
+                                  "name": "stock_on_hand",
+                                  "arguments": "{\"item\": \"milk\"}"
+                                }
+                              }
+                            ]
+                          },
+                          "logprobs": null,
+                          "finish_reason": "tool_calls"
+                        }
+                      ],
+                      "usage": {
+                        "prompt_tokens": 337,
+                        "completion_tokens": 49,
+                        "total_tokens": 386,
+                        "prompt_tokens_details": {
+                          "cached_tokens": 128
+                        },
+                        "completion_tokens_details": {
+                          "reasoning_tokens": 8
+                        },
+                        "prompt_cache_hit_tokens": 128,
+                        "prompt_cache_miss_tokens": 209
+                      },
+                      "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                    }
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "stock_on_hand",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "We need to check stock of milk."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 337,
+                        "output_tokens": 49,
+                        "total_tokens": 386,
+                        "input_token_details": {
+                          "cache_read": 128
+                        },
+                        "output_token_details": {
+                          "reasoning": 8
+                        }
+                      }
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "wire request",
+                      "attempt": 1,
+                      "at_ms": 1906291523.377875,
+                      "method": "POST",
+                      "url": "https://api.deepseek.com/v1/chat/completions",
+                      "headers": {
+                        "accept": "application/json",
+                        "accept-encoding": "gzip, deflate, zstd",
+                        "authorization": null,
+                        "connection": "keep-alive",
+                        "content-length": "482",
+                        "content-type": "application/json",
+                        "host": "api.deepseek.com",
+                        "user-agent": "OpenAI/Python 3.6.0",
+                        "x-stainless-arch": "arm64",
+                        "x-stainless-async": "false",
+                        "x-stainless-lang": "python",
+                        "x-stainless-os": "MacOS",
+                        "x-stainless-package-version": "3.6.0",
+                        "x-stainless-raw-response": "true",
+                        "x-stainless-read-timeout": "60.0",
+                        "x-stainless-retry-count": "0",
+                        "x-stainless-runtime": "CPython",
+                        "x-stainless-runtime-version": "3.14.7"
+                      },
+                      "defaulted_by_model_provider": [
+                        "temperature",
+                        "max_tokens",
+                        "top_p",
+                        "stop",
+                        "seed",
+                        "tool_choice"
+                      ],
+                      "body": {
+                        "messages": [
+                          {
+                            "content": "You answer briefly and plainly. Use the tools you are given.",
+                            "role": "system"
+                          },
+                          {
+                            "content": "Do we have enough milk for the week? We need four.",
+                            "role": "user"
+                          }
+                        ],
+                        "model": "deepseek-flash",
+                        "stream": false,
+                        "tools": [
+                          {
+                            "type": "function",
+                            "function": {
+                              "name": "stock_on_hand",
+                              "description": "How many of an item are currently in stock.",
+                              "parameters": {
+                                "properties": {
+                                  "item": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "type": "object"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "wire response",
+                      "at_ms": 1906292312.8362079,
+                      "status": 200,
+                      "headers": {
+                        "access-control-allow-credentials": "true",
+                        "connection": "keep-alive",
+                        "content-encoding": "gzip",
+                        "content-type": "application/json",
+                        "date": "Sun, 13 Sep 2026 21:51:13 GMT",
+                        "server": "elb",
+                        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                        "transfer-encoding": "chunked",
+                        "vary": "origin, access-control-request-method, access-control-request-headers",
+                        "via": "1.1 59b91fa5bb1f56f1a653604439afb430.cloudfront.net (CloudFront)",
+                        "x-amz-cf-id": "QDH82BFwtYnluViZvRD-OuoBuRt1XLoC3mYDeR2x9tFEg3Sxk_A6Dg==",
+                        "x-amz-cf-pop": "DEN53-P6",
+                        "x-cache": "Miss from cloudfront",
+                        "x-content-type-options": "nosniff",
+                        "x-ds-trace-id": "bbf2ca13b6b7d3468b5e1af76e936e28"
+                      },
+                      "body": {
+                        "id": "73f40e73-db48-4b05-ba0e-9dbe1f8a7115",
+                        "object": "chat.completion",
+                        "created": 1789336273,
+                        "model": "deepseek-flash",
+                        "choices": [
+                          {
+                            "index": 0,
+                            "message": {
+                              "role": "assistant",
+                              "content": "",
+                              "reasoning_content": "We need to check stock of milk.",
+                              "tool_calls": [
+                                {
+                                  "index": 0,
+                                  "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                  "type": "function",
+                                  "function": {
+                                    "name": "stock_on_hand",
+                                    "arguments": "{\"item\": \"milk\"}"
+                                  }
+                                }
+                              ]
+                            },
+                            "logprobs": null,
+                            "finish_reason": "tool_calls"
+                          }
+                        ],
+                        "usage": {
+                          "prompt_tokens": 337,
+                          "completion_tokens": 49,
+                          "total_tokens": 386,
+                          "prompt_tokens_details": {
+                            "cached_tokens": 128
+                          },
+                          "completion_tokens_details": {
+                            "reasoning_tokens": 8
+                          },
+                          "prompt_cache_hit_tokens": 128,
+                          "prompt_cache_miss_tokens": 209
+                        },
+                        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                      }
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "We need to check stock of milk."
+                        },
+                        "finish_reason": "tool_calls",
+                        "usage": {
+                          "input_tokens": 337,
+                          "output_tokens": 49,
+                          "total_tokens": 386,
+                          "input_token_details": {
+                            "cache_read": 128
+                          },
+                          "output_token_details": {
+                            "reasoning": 8
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "stock_on_hand",
+                  "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 0.718,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk"
+                  },
+                  {
+                    "label": "result",
+                    "value": 2
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": 2
+                    }
+                  }
+                ]
+              }
             }
           ]
         },
@@ -273,7 +946,7 @@
           },
           "seq": 5,
           "thread": "MainThread",
-          "elapsed_ms": 903.822,
+          "elapsed_ms": 724.5930000000001,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -285,9 +958,9 @@
               },
               "seq": 6,
               "thread": "MainThread",
-              "elapsed_ms": 903.79,
-              "model_provider_ms": 889.9150840044022,
-              "library_ms": 13.874915995597803,
+              "elapsed_ms": 724.583,
+              "model_provider_ms": 715.7689168453217,
+              "library_ms": 8.814083154678315,
               "notes": [
                 {
                   "label": "context",
@@ -303,7 +976,7 @@
                       "content": "Do we have enough milk for the week? We need four."
                     },
                     {
-                      "id": "lc_run--01a068d3-3b4f-7471-b1a1-d77bcc0b2f8e-0",
+                      "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -312,23 +985,23 @@
                           "args": {
                             "item": "milk"
                           },
-                          "id": "call_00_GgHVgKEu1Hqjo0CN2Bvw9888"
+                          "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
                         }
                       ],
                       "additional_kwargs": {
                         "refusal": null,
-                        "reasoning_content": "We need answer. Need check stock milk. \"need four\" likely need four milk? Ask stock."
+                        "reasoning_content": "We need to check stock of milk."
                       },
                       "finish_reason": "tool_calls",
                       "usage": {
-                        "input_tokens": 400,
-                        "output_tokens": 68,
-                        "total_tokens": 468,
+                        "input_tokens": 337,
+                        "output_tokens": 49,
+                        "total_tokens": 386,
                         "input_token_details": {
-                          "cache_read": 384
+                          "cache_read": 128
                         },
                         "output_token_details": {
-                          "reasoning": 21
+                          "reasoning": 8
                         }
                       }
                     },
@@ -336,14 +1009,15 @@
                       "id": null,
                       "role": "tool",
                       "content": "2",
-                      "tool_call_id": "call_00_GgHVgKEu1Hqjo0CN2Bvw9888"
+                      "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
                     }
-                  ]
+                  ],
+                  "tools": []
                 },
                 {
                   "label": "wire request",
                   "attempt": 1,
-                  "at_ms": 1035089266.779166,
+                  "at_ms": 1906292328.891458,
                   "method": "POST",
                   "url": "https://api.deepseek.com/v1/chat/completions",
                   "headers": {
@@ -351,7 +1025,7 @@
                     "accept-encoding": "gzip, deflate, zstd",
                     "authorization": null,
                     "connection": "keep-alive",
-                    "content-length": "856",
+                    "content-length": "798",
                     "content-type": "application/json",
                     "host": "api.deepseek.com",
                     "user-agent": "OpenAI/Python 3.6.0",
@@ -390,22 +1064,22 @@
                         "tool_calls": [
                           {
                             "type": "function",
-                            "id": "call_00_GgHVgKEu1Hqjo0CN2Bvw9888",
+                            "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
                             "function": {
                               "name": "stock_on_hand",
                               "arguments": "{\"item\": \"milk\"}"
                             }
                           }
                         ],
-                        "reasoning_content": "We need answer. Need check stock milk. \"need four\" likely need four milk? Ask stock."
+                        "reasoning_content": "We need to check stock of milk."
                       },
                       {
                         "content": "2",
                         "role": "tool",
-                        "tool_call_id": "call_00_GgHVgKEu1Hqjo0CN2Bvw9888"
+                        "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
                       }
                     ],
-                    "model": "deepseek-v4-flash",
+                    "model": "deepseek-flash",
                     "stream": false,
                     "tools": [
                       {
@@ -437,86 +1111,2710 @@
                 },
                 {
                   "label": "wire response",
-                  "at_ms": 1035090156.69425,
+                  "at_ms": 1906293044.6603749,
                   "status": 200,
                   "headers": {
                     "access-control-allow-credentials": "true",
                     "connection": "keep-alive",
                     "content-encoding": "gzip",
                     "content-type": "application/json",
-                    "date": "Thu, 03 Sep 2026 19:51:10 GMT",
+                    "date": "Sun, 13 Sep 2026 21:51:14 GMT",
                     "server": "elb",
                     "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
                     "transfer-encoding": "chunked",
                     "vary": "origin, access-control-request-method, access-control-request-headers",
-                    "via": "1.1 eff74a7ae5e8f882896afa9f99bfa6e6.cloudfront.net (CloudFront)",
-                    "x-amz-cf-id": "NGDbaLBGRqypSZ1X9Tz7_8kCEaWW1uZqCDMqAze41SPjZmoNJ4calA==",
-                    "x-amz-cf-pop": "DEN53-P3",
+                    "via": "1.1 d9978c4c79926d2f68f210859236f550.cloudfront.net (CloudFront)",
+                    "x-amz-cf-id": "3yIKt0LKdn7XvUX5wC3CUjIYUdq7K7_485vP-d_fAbnQQlBEHI6QJg==",
+                    "x-amz-cf-pop": "DEN53-P2",
                     "x-cache": "Miss from cloudfront",
                     "x-content-type-options": "nosniff",
-                    "x-ds-trace-id": "e0ac14b09de76016f4f70662aeb8c84f"
+                    "x-ds-trace-id": "acdc1d4b9999f6ed556ea3876a0bccc6"
                   },
                   "body": {
-                    "id": "3e614672-4900-4842-b7db-c7b2b50348e9",
+                    "id": "46805f7d-e01d-4e53-9df5-47924de68c9d",
                     "object": "chat.completion",
-                    "created": 1788465070,
-                    "model": "deepseek-v4-flash",
+                    "created": 1789336274,
+                    "model": "deepseek-flash",
                     "choices": [
                       {
                         "index": 0,
                         "message": {
                           "role": "assistant",
-                          "content": "No \u2014 we have 2 milk, and you need 4 for the week. We\u2019re short by 2.",
-                          "reasoning_content": "We have 2 milk, need 4, not enough. Need brief."
+                          "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                          "reasoning_content": "Stock is 2, need 4. Not enough."
                         },
                         "logprobs": null,
                         "finish_reason": "stop"
                       }
                     ],
                     "usage": {
-                      "prompt_tokens": 481,
-                      "completion_tokens": 42,
-                      "total_tokens": 523,
+                      "prompt_tokens": 399,
+                      "completion_tokens": 37,
+                      "total_tokens": 436,
                       "prompt_tokens_details": {
-                        "cached_tokens": 384
+                        "cached_tokens": 256
                       },
                       "completion_tokens_details": {
-                        "reasoning_tokens": 16
+                        "reasoning_tokens": 12
                       },
-                      "prompt_cache_hit_tokens": 384,
-                      "prompt_cache_miss_tokens": 97
+                      "prompt_cache_hit_tokens": 256,
+                      "prompt_cache_miss_tokens": 143
                     },
-                    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e"
+                    "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
                   }
                 },
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a068d3-402f-7c03-beff-6f6bcae98aa4-0",
+                    "id": "lc_run--01a09cc0-c400-74d2-886b-218dd538a277-0",
                     "role": "ai",
-                    "content": "No \u2014 we have 2 milk, and you need 4 for the week. We\u2019re short by 2.",
+                    "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
                     "additional_kwargs": {
                       "refusal": null,
-                      "reasoning_content": "We have 2 milk, need 4, not enough. Need brief."
+                      "reasoning_content": "Stock is 2, need 4. Not enough."
                     },
                     "finish_reason": "stop",
                     "usage": {
-                      "input_tokens": 481,
-                      "output_tokens": 42,
-                      "total_tokens": 523,
+                      "input_tokens": 399,
+                      "output_tokens": 37,
+                      "total_tokens": 436,
                       "input_token_details": {
-                        "cache_read": 384
+                        "cache_read": 256
                       },
                       "output_token_details": {
-                        "reasoning": 16
+                        "reasoning": 12
                       }
                     }
                   }
                 }
               ],
-              "children": []
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      },
+                      {
+                        "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "We need to check stock of milk."
+                        },
+                        "finish_reason": "tool_calls",
+                        "usage": {
+                          "input_tokens": 337,
+                          "output_tokens": 49,
+                          "total_tokens": 386,
+                          "input_token_details": {
+                            "cache_read": 128
+                          },
+                          "output_token_details": {
+                            "reasoning": 8
+                          }
+                        }
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "2",
+                        "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "wire request",
+                    "attempt": 1,
+                    "at_ms": 1906292328.891458,
+                    "method": "POST",
+                    "url": "https://api.deepseek.com/v1/chat/completions",
+                    "headers": {
+                      "accept": "application/json",
+                      "accept-encoding": "gzip, deflate, zstd",
+                      "authorization": null,
+                      "connection": "keep-alive",
+                      "content-length": "798",
+                      "content-type": "application/json",
+                      "host": "api.deepseek.com",
+                      "user-agent": "OpenAI/Python 3.6.0",
+                      "x-stainless-arch": "arm64",
+                      "x-stainless-async": "false",
+                      "x-stainless-lang": "python",
+                      "x-stainless-os": "MacOS",
+                      "x-stainless-package-version": "3.6.0",
+                      "x-stainless-raw-response": "true",
+                      "x-stainless-read-timeout": "60.0",
+                      "x-stainless-retry-count": "0",
+                      "x-stainless-runtime": "CPython",
+                      "x-stainless-runtime-version": "3.14.7"
+                    },
+                    "defaulted_by_model_provider": [
+                      "temperature",
+                      "max_tokens",
+                      "top_p",
+                      "stop",
+                      "seed",
+                      "tool_choice"
+                    ],
+                    "body": {
+                      "messages": [
+                        {
+                          "content": "You answer briefly and plainly. Use the tools you are given.",
+                          "role": "system"
+                        },
+                        {
+                          "content": "Do we have enough milk for the week? We need four.",
+                          "role": "user"
+                        },
+                        {
+                          "content": null,
+                          "role": "assistant",
+                          "tool_calls": [
+                            {
+                              "type": "function",
+                              "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                              "function": {
+                                "name": "stock_on_hand",
+                                "arguments": "{\"item\": \"milk\"}"
+                              }
+                            }
+                          ],
+                          "reasoning_content": "We need to check stock of milk."
+                        },
+                        {
+                          "content": "2",
+                          "role": "tool",
+                          "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                        }
+                      ],
+                      "model": "deepseek-flash",
+                      "stream": false,
+                      "tools": [
+                        {
+                          "type": "function",
+                          "function": {
+                            "name": "stock_on_hand",
+                            "description": "How many of an item are currently in stock.",
+                            "parameters": {
+                              "properties": {
+                                "item": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "type": "object"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "wire response",
+                    "at_ms": 1906293044.6603749,
+                    "status": 200,
+                    "headers": {
+                      "access-control-allow-credentials": "true",
+                      "connection": "keep-alive",
+                      "content-encoding": "gzip",
+                      "content-type": "application/json",
+                      "date": "Sun, 13 Sep 2026 21:51:14 GMT",
+                      "server": "elb",
+                      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                      "transfer-encoding": "chunked",
+                      "vary": "origin, access-control-request-method, access-control-request-headers",
+                      "via": "1.1 d9978c4c79926d2f68f210859236f550.cloudfront.net (CloudFront)",
+                      "x-amz-cf-id": "3yIKt0LKdn7XvUX5wC3CUjIYUdq7K7_485vP-d_fAbnQQlBEHI6QJg==",
+                      "x-amz-cf-pop": "DEN53-P2",
+                      "x-cache": "Miss from cloudfront",
+                      "x-content-type-options": "nosniff",
+                      "x-ds-trace-id": "acdc1d4b9999f6ed556ea3876a0bccc6"
+                    },
+                    "body": {
+                      "id": "46805f7d-e01d-4e53-9df5-47924de68c9d",
+                      "object": "chat.completion",
+                      "created": 1789336274,
+                      "model": "deepseek-flash",
+                      "choices": [
+                        {
+                          "index": 0,
+                          "message": {
+                            "role": "assistant",
+                            "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                            "reasoning_content": "Stock is 2, need 4. Not enough."
+                          },
+                          "logprobs": null,
+                          "finish_reason": "stop"
+                        }
+                      ],
+                      "usage": {
+                        "prompt_tokens": 399,
+                        "completion_tokens": 37,
+                        "total_tokens": 436,
+                        "prompt_tokens_details": {
+                          "cached_tokens": 256
+                        },
+                        "completion_tokens_details": {
+                          "reasoning_tokens": 12
+                        },
+                        "prompt_cache_hit_tokens": 256,
+                        "prompt_cache_miss_tokens": 143
+                      },
+                      "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                    }
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09cc0-c400-74d2-886b-218dd538a277-0",
+                      "role": "ai",
+                      "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "Stock is 2, need 4. Not enough."
+                      },
+                      "finish_reason": "stop",
+                      "usage": {
+                        "input_tokens": 399,
+                        "output_tokens": 37,
+                        "total_tokens": 436,
+                        "input_token_details": {
+                          "cache_read": 256
+                        },
+                        "output_token_details": {
+                          "reasoning": 12
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "live"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 724.583,
+                "model_provider_ms": 715.7689168453217,
+                "library_ms": 8.814083154678315,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      },
+                      {
+                        "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "We need to check stock of milk."
+                        },
+                        "finish_reason": "tool_calls",
+                        "usage": {
+                          "input_tokens": 337,
+                          "output_tokens": 49,
+                          "total_tokens": 386,
+                          "input_token_details": {
+                            "cache_read": 128
+                          },
+                          "output_token_details": {
+                            "reasoning": 8
+                          }
+                        }
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "2",
+                        "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "wire request",
+                    "attempt": 1,
+                    "at_ms": 1906292328.891458,
+                    "method": "POST",
+                    "url": "https://api.deepseek.com/v1/chat/completions",
+                    "headers": {
+                      "accept": "application/json",
+                      "accept-encoding": "gzip, deflate, zstd",
+                      "authorization": null,
+                      "connection": "keep-alive",
+                      "content-length": "798",
+                      "content-type": "application/json",
+                      "host": "api.deepseek.com",
+                      "user-agent": "OpenAI/Python 3.6.0",
+                      "x-stainless-arch": "arm64",
+                      "x-stainless-async": "false",
+                      "x-stainless-lang": "python",
+                      "x-stainless-os": "MacOS",
+                      "x-stainless-package-version": "3.6.0",
+                      "x-stainless-raw-response": "true",
+                      "x-stainless-read-timeout": "60.0",
+                      "x-stainless-retry-count": "0",
+                      "x-stainless-runtime": "CPython",
+                      "x-stainless-runtime-version": "3.14.7"
+                    },
+                    "defaulted_by_model_provider": [
+                      "temperature",
+                      "max_tokens",
+                      "top_p",
+                      "stop",
+                      "seed",
+                      "tool_choice"
+                    ],
+                    "body": {
+                      "messages": [
+                        {
+                          "content": "You answer briefly and plainly. Use the tools you are given.",
+                          "role": "system"
+                        },
+                        {
+                          "content": "Do we have enough milk for the week? We need four.",
+                          "role": "user"
+                        },
+                        {
+                          "content": null,
+                          "role": "assistant",
+                          "tool_calls": [
+                            {
+                              "type": "function",
+                              "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                              "function": {
+                                "name": "stock_on_hand",
+                                "arguments": "{\"item\": \"milk\"}"
+                              }
+                            }
+                          ],
+                          "reasoning_content": "We need to check stock of milk."
+                        },
+                        {
+                          "content": "2",
+                          "role": "tool",
+                          "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                        }
+                      ],
+                      "model": "deepseek-flash",
+                      "stream": false,
+                      "tools": [
+                        {
+                          "type": "function",
+                          "function": {
+                            "name": "stock_on_hand",
+                            "description": "How many of an item are currently in stock.",
+                            "parameters": {
+                              "properties": {
+                                "item": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "type": "object"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "label": "wire response",
+                    "at_ms": 1906293044.6603749,
+                    "status": 200,
+                    "headers": {
+                      "access-control-allow-credentials": "true",
+                      "connection": "keep-alive",
+                      "content-encoding": "gzip",
+                      "content-type": "application/json",
+                      "date": "Sun, 13 Sep 2026 21:51:14 GMT",
+                      "server": "elb",
+                      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                      "transfer-encoding": "chunked",
+                      "vary": "origin, access-control-request-method, access-control-request-headers",
+                      "via": "1.1 d9978c4c79926d2f68f210859236f550.cloudfront.net (CloudFront)",
+                      "x-amz-cf-id": "3yIKt0LKdn7XvUX5wC3CUjIYUdq7K7_485vP-d_fAbnQQlBEHI6QJg==",
+                      "x-amz-cf-pop": "DEN53-P2",
+                      "x-cache": "Miss from cloudfront",
+                      "x-content-type-options": "nosniff",
+                      "x-ds-trace-id": "acdc1d4b9999f6ed556ea3876a0bccc6"
+                    },
+                    "body": {
+                      "id": "46805f7d-e01d-4e53-9df5-47924de68c9d",
+                      "object": "chat.completion",
+                      "created": 1789336274,
+                      "model": "deepseek-flash",
+                      "choices": [
+                        {
+                          "index": 0,
+                          "message": {
+                            "role": "assistant",
+                            "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                            "reasoning_content": "Stock is 2, need 4. Not enough."
+                          },
+                          "logprobs": null,
+                          "finish_reason": "stop"
+                        }
+                      ],
+                      "usage": {
+                        "prompt_tokens": 399,
+                        "completion_tokens": 37,
+                        "total_tokens": 436,
+                        "prompt_tokens_details": {
+                          "cached_tokens": 256
+                        },
+                        "completion_tokens_details": {
+                          "reasoning_tokens": 12
+                        },
+                        "prompt_cache_hit_tokens": 256,
+                        "prompt_cache_miss_tokens": 143
+                      },
+                      "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                    }
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09cc0-c400-74d2-886b-218dd538a277-0",
+                      "role": "ai",
+                      "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "Stock is 2, need 4. Not enough."
+                      },
+                      "finish_reason": "stop",
+                      "usage": {
+                        "input_tokens": 399,
+                        "output_tokens": 37,
+                        "total_tokens": 436,
+                        "input_token_details": {
+                          "cache_read": 256
+                        },
+                        "output_token_details": {
+                          "reasoning": 12
+                        }
+                      }
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        },
+                        {
+                          "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "stock_on_hand",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                            }
+                          ],
+                          "additional_kwargs": {
+                            "refusal": null,
+                            "reasoning_content": "We need to check stock of milk."
+                          },
+                          "finish_reason": "tool_calls",
+                          "usage": {
+                            "input_tokens": 337,
+                            "output_tokens": 49,
+                            "total_tokens": 386,
+                            "input_token_details": {
+                              "cache_read": 128
+                            },
+                            "output_token_details": {
+                              "reasoning": 8
+                            }
+                          }
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "2",
+                          "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "wire request",
+                      "attempt": 1,
+                      "at_ms": 1906292328.891458,
+                      "method": "POST",
+                      "url": "https://api.deepseek.com/v1/chat/completions",
+                      "headers": {
+                        "accept": "application/json",
+                        "accept-encoding": "gzip, deflate, zstd",
+                        "authorization": null,
+                        "connection": "keep-alive",
+                        "content-length": "798",
+                        "content-type": "application/json",
+                        "host": "api.deepseek.com",
+                        "user-agent": "OpenAI/Python 3.6.0",
+                        "x-stainless-arch": "arm64",
+                        "x-stainless-async": "false",
+                        "x-stainless-lang": "python",
+                        "x-stainless-os": "MacOS",
+                        "x-stainless-package-version": "3.6.0",
+                        "x-stainless-raw-response": "true",
+                        "x-stainless-read-timeout": "60.0",
+                        "x-stainless-retry-count": "0",
+                        "x-stainless-runtime": "CPython",
+                        "x-stainless-runtime-version": "3.14.7"
+                      },
+                      "defaulted_by_model_provider": [
+                        "temperature",
+                        "max_tokens",
+                        "top_p",
+                        "stop",
+                        "seed",
+                        "tool_choice"
+                      ],
+                      "body": {
+                        "messages": [
+                          {
+                            "content": "You answer briefly and plainly. Use the tools you are given.",
+                            "role": "system"
+                          },
+                          {
+                            "content": "Do we have enough milk for the week? We need four.",
+                            "role": "user"
+                          },
+                          {
+                            "content": null,
+                            "role": "assistant",
+                            "tool_calls": [
+                              {
+                                "type": "function",
+                                "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                "function": {
+                                  "name": "stock_on_hand",
+                                  "arguments": "{\"item\": \"milk\"}"
+                                }
+                              }
+                            ],
+                            "reasoning_content": "We need to check stock of milk."
+                          },
+                          {
+                            "content": "2",
+                            "role": "tool",
+                            "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "model": "deepseek-flash",
+                        "stream": false,
+                        "tools": [
+                          {
+                            "type": "function",
+                            "function": {
+                              "name": "stock_on_hand",
+                              "description": "How many of an item are currently in stock.",
+                              "parameters": {
+                                "properties": {
+                                  "item": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "type": "object"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "wire response",
+                      "at_ms": 1906293044.6603749,
+                      "status": 200,
+                      "headers": {
+                        "access-control-allow-credentials": "true",
+                        "connection": "keep-alive",
+                        "content-encoding": "gzip",
+                        "content-type": "application/json",
+                        "date": "Sun, 13 Sep 2026 21:51:14 GMT",
+                        "server": "elb",
+                        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                        "transfer-encoding": "chunked",
+                        "vary": "origin, access-control-request-method, access-control-request-headers",
+                        "via": "1.1 d9978c4c79926d2f68f210859236f550.cloudfront.net (CloudFront)",
+                        "x-amz-cf-id": "3yIKt0LKdn7XvUX5wC3CUjIYUdq7K7_485vP-d_fAbnQQlBEHI6QJg==",
+                        "x-amz-cf-pop": "DEN53-P2",
+                        "x-cache": "Miss from cloudfront",
+                        "x-content-type-options": "nosniff",
+                        "x-ds-trace-id": "acdc1d4b9999f6ed556ea3876a0bccc6"
+                      },
+                      "body": {
+                        "id": "46805f7d-e01d-4e53-9df5-47924de68c9d",
+                        "object": "chat.completion",
+                        "created": 1789336274,
+                        "model": "deepseek-flash",
+                        "choices": [
+                          {
+                            "index": 0,
+                            "message": {
+                              "role": "assistant",
+                              "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                              "reasoning_content": "Stock is 2, need 4. Not enough."
+                            },
+                            "logprobs": null,
+                            "finish_reason": "stop"
+                          }
+                        ],
+                        "usage": {
+                          "prompt_tokens": 399,
+                          "completion_tokens": 37,
+                          "total_tokens": 436,
+                          "prompt_tokens_details": {
+                            "cached_tokens": 256
+                          },
+                          "completion_tokens_details": {
+                            "reasoning_tokens": 12
+                          },
+                          "prompt_cache_hit_tokens": 256,
+                          "prompt_cache_miss_tokens": 143
+                        },
+                        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                      }
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09cc0-c400-74d2-886b-218dd538a277-0",
+                        "role": "ai",
+                        "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "Stock is 2, need 4. Not enough."
+                        },
+                        "finish_reason": "stop",
+                        "usage": {
+                          "input_tokens": 399,
+                          "output_tokens": 37,
+                          "total_tokens": 436,
+                          "input_token_details": {
+                            "cache_read": 256
+                          },
+                          "output_token_details": {
+                            "reasoning": 12
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
             }
           ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 970.7130000000001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "live"
+                },
+                "seq": 3,
+                "thread": "MainThread",
+                "elapsed_ms": 969.961,
+                "model_provider_ms": 789.4583327770233,
+                "library_ms": 180.5026672229767,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "wire request",
+                    "attempt": 1,
+                    "at_ms": 1906291523.377875,
+                    "method": "POST",
+                    "url": "https://api.deepseek.com/v1/chat/completions",
+                    "headers": {
+                      "accept": "application/json",
+                      "accept-encoding": "gzip, deflate, zstd",
+                      "authorization": null,
+                      "connection": "keep-alive",
+                      "content-length": "482",
+                      "content-type": "application/json",
+                      "host": "api.deepseek.com",
+                      "user-agent": "OpenAI/Python 3.6.0",
+                      "x-stainless-arch": "arm64",
+                      "x-stainless-async": "false",
+                      "x-stainless-lang": "python",
+                      "x-stainless-os": "MacOS",
+                      "x-stainless-package-version": "3.6.0",
+                      "x-stainless-raw-response": "true",
+                      "x-stainless-read-timeout": "60.0",
+                      "x-stainless-retry-count": "0",
+                      "x-stainless-runtime": "CPython",
+                      "x-stainless-runtime-version": "3.14.7"
+                    },
+                    "defaulted_by_model_provider": [
+                      "temperature",
+                      "max_tokens",
+                      "top_p",
+                      "stop",
+                      "seed",
+                      "tool_choice"
+                    ],
+                    "body": {
+                      "messages": [
+                        {
+                          "content": "You answer briefly and plainly. Use the tools you are given.",
+                          "role": "system"
+                        },
+                        {
+                          "content": "Do we have enough milk for the week? We need four.",
+                          "role": "user"
+                        }
+                      ],
+                      "model": "deepseek-flash",
+                      "stream": false,
+                      "tools": [
+                        {
+                          "type": "function",
+                          "function": {
+                            "name": "stock_on_hand",
+                            "description": "How many of an item are currently in stock.",
+                            "parameters": {
+                              "properties": {
+                                "item": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "type": "object"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "label": "wire response",
+                    "at_ms": 1906292312.8362079,
+                    "status": 200,
+                    "headers": {
+                      "access-control-allow-credentials": "true",
+                      "connection": "keep-alive",
+                      "content-encoding": "gzip",
+                      "content-type": "application/json",
+                      "date": "Sun, 13 Sep 2026 21:51:13 GMT",
+                      "server": "elb",
+                      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                      "transfer-encoding": "chunked",
+                      "vary": "origin, access-control-request-method, access-control-request-headers",
+                      "via": "1.1 59b91fa5bb1f56f1a653604439afb430.cloudfront.net (CloudFront)",
+                      "x-amz-cf-id": "QDH82BFwtYnluViZvRD-OuoBuRt1XLoC3mYDeR2x9tFEg3Sxk_A6Dg==",
+                      "x-amz-cf-pop": "DEN53-P6",
+                      "x-cache": "Miss from cloudfront",
+                      "x-content-type-options": "nosniff",
+                      "x-ds-trace-id": "bbf2ca13b6b7d3468b5e1af76e936e28"
+                    },
+                    "body": {
+                      "id": "73f40e73-db48-4b05-ba0e-9dbe1f8a7115",
+                      "object": "chat.completion",
+                      "created": 1789336273,
+                      "model": "deepseek-flash",
+                      "choices": [
+                        {
+                          "index": 0,
+                          "message": {
+                            "role": "assistant",
+                            "content": "",
+                            "reasoning_content": "We need to check stock of milk.",
+                            "tool_calls": [
+                              {
+                                "index": 0,
+                                "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                "type": "function",
+                                "function": {
+                                  "name": "stock_on_hand",
+                                  "arguments": "{\"item\": \"milk\"}"
+                                }
+                              }
+                            ]
+                          },
+                          "logprobs": null,
+                          "finish_reason": "tool_calls"
+                        }
+                      ],
+                      "usage": {
+                        "prompt_tokens": 337,
+                        "completion_tokens": 49,
+                        "total_tokens": 386,
+                        "prompt_tokens_details": {
+                          "cached_tokens": 128
+                        },
+                        "completion_tokens_details": {
+                          "reasoning_tokens": 8
+                        },
+                        "prompt_cache_hit_tokens": 128,
+                        "prompt_cache_miss_tokens": 209
+                      },
+                      "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                    }
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                      "role": "ai",
+                      "content": "",
+                      "tool_calls": [
+                        {
+                          "name": "stock_on_hand",
+                          "args": {
+                            "item": "milk"
+                          },
+                          "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                        }
+                      ],
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "We need to check stock of milk."
+                      },
+                      "finish_reason": "tool_calls",
+                      "usage": {
+                        "input_tokens": 337,
+                        "output_tokens": 49,
+                        "total_tokens": 386,
+                        "input_token_details": {
+                          "cache_read": 128
+                        },
+                        "output_token_details": {
+                          "reasoning": 8
+                        }
+                      }
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "wire request",
+                      "attempt": 1,
+                      "at_ms": 1906291523.377875,
+                      "method": "POST",
+                      "url": "https://api.deepseek.com/v1/chat/completions",
+                      "headers": {
+                        "accept": "application/json",
+                        "accept-encoding": "gzip, deflate, zstd",
+                        "authorization": null,
+                        "connection": "keep-alive",
+                        "content-length": "482",
+                        "content-type": "application/json",
+                        "host": "api.deepseek.com",
+                        "user-agent": "OpenAI/Python 3.6.0",
+                        "x-stainless-arch": "arm64",
+                        "x-stainless-async": "false",
+                        "x-stainless-lang": "python",
+                        "x-stainless-os": "MacOS",
+                        "x-stainless-package-version": "3.6.0",
+                        "x-stainless-raw-response": "true",
+                        "x-stainless-read-timeout": "60.0",
+                        "x-stainless-retry-count": "0",
+                        "x-stainless-runtime": "CPython",
+                        "x-stainless-runtime-version": "3.14.7"
+                      },
+                      "defaulted_by_model_provider": [
+                        "temperature",
+                        "max_tokens",
+                        "top_p",
+                        "stop",
+                        "seed",
+                        "tool_choice"
+                      ],
+                      "body": {
+                        "messages": [
+                          {
+                            "content": "You answer briefly and plainly. Use the tools you are given.",
+                            "role": "system"
+                          },
+                          {
+                            "content": "Do we have enough milk for the week? We need four.",
+                            "role": "user"
+                          }
+                        ],
+                        "model": "deepseek-flash",
+                        "stream": false,
+                        "tools": [
+                          {
+                            "type": "function",
+                            "function": {
+                              "name": "stock_on_hand",
+                              "description": "How many of an item are currently in stock.",
+                              "parameters": {
+                                "properties": {
+                                  "item": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "type": "object"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "wire response",
+                      "at_ms": 1906292312.8362079,
+                      "status": 200,
+                      "headers": {
+                        "access-control-allow-credentials": "true",
+                        "connection": "keep-alive",
+                        "content-encoding": "gzip",
+                        "content-type": "application/json",
+                        "date": "Sun, 13 Sep 2026 21:51:13 GMT",
+                        "server": "elb",
+                        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                        "transfer-encoding": "chunked",
+                        "vary": "origin, access-control-request-method, access-control-request-headers",
+                        "via": "1.1 59b91fa5bb1f56f1a653604439afb430.cloudfront.net (CloudFront)",
+                        "x-amz-cf-id": "QDH82BFwtYnluViZvRD-OuoBuRt1XLoC3mYDeR2x9tFEg3Sxk_A6Dg==",
+                        "x-amz-cf-pop": "DEN53-P6",
+                        "x-cache": "Miss from cloudfront",
+                        "x-content-type-options": "nosniff",
+                        "x-ds-trace-id": "bbf2ca13b6b7d3468b5e1af76e936e28"
+                      },
+                      "body": {
+                        "id": "73f40e73-db48-4b05-ba0e-9dbe1f8a7115",
+                        "object": "chat.completion",
+                        "created": 1789336273,
+                        "model": "deepseek-flash",
+                        "choices": [
+                          {
+                            "index": 0,
+                            "message": {
+                              "role": "assistant",
+                              "content": "",
+                              "reasoning_content": "We need to check stock of milk.",
+                              "tool_calls": [
+                                {
+                                  "index": 0,
+                                  "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                  "type": "function",
+                                  "function": {
+                                    "name": "stock_on_hand",
+                                    "arguments": "{\"item\": \"milk\"}"
+                                  }
+                                }
+                              ]
+                            },
+                            "logprobs": null,
+                            "finish_reason": "tool_calls"
+                          }
+                        ],
+                        "usage": {
+                          "prompt_tokens": 337,
+                          "completion_tokens": 49,
+                          "total_tokens": 386,
+                          "prompt_tokens_details": {
+                            "cached_tokens": 128
+                          },
+                          "completion_tokens_details": {
+                            "reasoning_tokens": 8
+                          },
+                          "prompt_cache_hit_tokens": 128,
+                          "prompt_cache_miss_tokens": 209
+                        },
+                        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                      }
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "We need to check stock of milk."
+                        },
+                        "finish_reason": "tool_calls",
+                        "usage": {
+                          "input_tokens": 337,
+                          "output_tokens": 49,
+                          "total_tokens": 386,
+                          "input_token_details": {
+                            "cache_read": 128
+                          },
+                          "output_token_details": {
+                            "reasoning": 8
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "stock_on_hand",
+                  "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                },
+                "seq": 4,
+                "thread": "MainThread",
+                "elapsed_ms": 0.718,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "item": "milk"
+                  },
+                  {
+                    "label": "result",
+                    "value": 2
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "item": "milk"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": 2
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "live"
+                  },
+                  "seq": 3,
+                  "thread": "MainThread",
+                  "elapsed_ms": 969.961,
+                  "model_provider_ms": 789.4583327770233,
+                  "library_ms": 180.5026672229767,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "wire request",
+                      "attempt": 1,
+                      "at_ms": 1906291523.377875,
+                      "method": "POST",
+                      "url": "https://api.deepseek.com/v1/chat/completions",
+                      "headers": {
+                        "accept": "application/json",
+                        "accept-encoding": "gzip, deflate, zstd",
+                        "authorization": null,
+                        "connection": "keep-alive",
+                        "content-length": "482",
+                        "content-type": "application/json",
+                        "host": "api.deepseek.com",
+                        "user-agent": "OpenAI/Python 3.6.0",
+                        "x-stainless-arch": "arm64",
+                        "x-stainless-async": "false",
+                        "x-stainless-lang": "python",
+                        "x-stainless-os": "MacOS",
+                        "x-stainless-package-version": "3.6.0",
+                        "x-stainless-raw-response": "true",
+                        "x-stainless-read-timeout": "60.0",
+                        "x-stainless-retry-count": "0",
+                        "x-stainless-runtime": "CPython",
+                        "x-stainless-runtime-version": "3.14.7"
+                      },
+                      "defaulted_by_model_provider": [
+                        "temperature",
+                        "max_tokens",
+                        "top_p",
+                        "stop",
+                        "seed",
+                        "tool_choice"
+                      ],
+                      "body": {
+                        "messages": [
+                          {
+                            "content": "You answer briefly and plainly. Use the tools you are given.",
+                            "role": "system"
+                          },
+                          {
+                            "content": "Do we have enough milk for the week? We need four.",
+                            "role": "user"
+                          }
+                        ],
+                        "model": "deepseek-flash",
+                        "stream": false,
+                        "tools": [
+                          {
+                            "type": "function",
+                            "function": {
+                              "name": "stock_on_hand",
+                              "description": "How many of an item are currently in stock.",
+                              "parameters": {
+                                "properties": {
+                                  "item": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "type": "object"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "label": "wire response",
+                      "at_ms": 1906292312.8362079,
+                      "status": 200,
+                      "headers": {
+                        "access-control-allow-credentials": "true",
+                        "connection": "keep-alive",
+                        "content-encoding": "gzip",
+                        "content-type": "application/json",
+                        "date": "Sun, 13 Sep 2026 21:51:13 GMT",
+                        "server": "elb",
+                        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                        "transfer-encoding": "chunked",
+                        "vary": "origin, access-control-request-method, access-control-request-headers",
+                        "via": "1.1 59b91fa5bb1f56f1a653604439afb430.cloudfront.net (CloudFront)",
+                        "x-amz-cf-id": "QDH82BFwtYnluViZvRD-OuoBuRt1XLoC3mYDeR2x9tFEg3Sxk_A6Dg==",
+                        "x-amz-cf-pop": "DEN53-P6",
+                        "x-cache": "Miss from cloudfront",
+                        "x-content-type-options": "nosniff",
+                        "x-ds-trace-id": "bbf2ca13b6b7d3468b5e1af76e936e28"
+                      },
+                      "body": {
+                        "id": "73f40e73-db48-4b05-ba0e-9dbe1f8a7115",
+                        "object": "chat.completion",
+                        "created": 1789336273,
+                        "model": "deepseek-flash",
+                        "choices": [
+                          {
+                            "index": 0,
+                            "message": {
+                              "role": "assistant",
+                              "content": "",
+                              "reasoning_content": "We need to check stock of milk.",
+                              "tool_calls": [
+                                {
+                                  "index": 0,
+                                  "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                  "type": "function",
+                                  "function": {
+                                    "name": "stock_on_hand",
+                                    "arguments": "{\"item\": \"milk\"}"
+                                  }
+                                }
+                              ]
+                            },
+                            "logprobs": null,
+                            "finish_reason": "tool_calls"
+                          }
+                        ],
+                        "usage": {
+                          "prompt_tokens": 337,
+                          "completion_tokens": 49,
+                          "total_tokens": 386,
+                          "prompt_tokens_details": {
+                            "cached_tokens": 128
+                          },
+                          "completion_tokens_details": {
+                            "reasoning_tokens": 8
+                          },
+                          "prompt_cache_hit_tokens": 128,
+                          "prompt_cache_miss_tokens": 209
+                        },
+                        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                      }
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "We need to check stock of milk."
+                        },
+                        "finish_reason": "tool_calls",
+                        "usage": {
+                          "input_tokens": 337,
+                          "output_tokens": 49,
+                          "total_tokens": 386,
+                          "input_token_details": {
+                            "cache_read": 128
+                          },
+                          "output_token_details": {
+                            "reasoning": 8
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Do we have enough milk for the week? We need four."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "wire request",
+                        "attempt": 1,
+                        "at_ms": 1906291523.377875,
+                        "method": "POST",
+                        "url": "https://api.deepseek.com/v1/chat/completions",
+                        "headers": {
+                          "accept": "application/json",
+                          "accept-encoding": "gzip, deflate, zstd",
+                          "authorization": null,
+                          "connection": "keep-alive",
+                          "content-length": "482",
+                          "content-type": "application/json",
+                          "host": "api.deepseek.com",
+                          "user-agent": "OpenAI/Python 3.6.0",
+                          "x-stainless-arch": "arm64",
+                          "x-stainless-async": "false",
+                          "x-stainless-lang": "python",
+                          "x-stainless-os": "MacOS",
+                          "x-stainless-package-version": "3.6.0",
+                          "x-stainless-raw-response": "true",
+                          "x-stainless-read-timeout": "60.0",
+                          "x-stainless-retry-count": "0",
+                          "x-stainless-runtime": "CPython",
+                          "x-stainless-runtime-version": "3.14.7"
+                        },
+                        "defaulted_by_model_provider": [
+                          "temperature",
+                          "max_tokens",
+                          "top_p",
+                          "stop",
+                          "seed",
+                          "tool_choice"
+                        ],
+                        "body": {
+                          "messages": [
+                            {
+                              "content": "You answer briefly and plainly. Use the tools you are given.",
+                              "role": "system"
+                            },
+                            {
+                              "content": "Do we have enough milk for the week? We need four.",
+                              "role": "user"
+                            }
+                          ],
+                          "model": "deepseek-flash",
+                          "stream": false,
+                          "tools": [
+                            {
+                              "type": "function",
+                              "function": {
+                                "name": "stock_on_hand",
+                                "description": "How many of an item are currently in stock.",
+                                "parameters": {
+                                  "properties": {
+                                    "item": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "type": "object"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "wire response",
+                        "at_ms": 1906292312.8362079,
+                        "status": 200,
+                        "headers": {
+                          "access-control-allow-credentials": "true",
+                          "connection": "keep-alive",
+                          "content-encoding": "gzip",
+                          "content-type": "application/json",
+                          "date": "Sun, 13 Sep 2026 21:51:13 GMT",
+                          "server": "elb",
+                          "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                          "transfer-encoding": "chunked",
+                          "vary": "origin, access-control-request-method, access-control-request-headers",
+                          "via": "1.1 59b91fa5bb1f56f1a653604439afb430.cloudfront.net (CloudFront)",
+                          "x-amz-cf-id": "QDH82BFwtYnluViZvRD-OuoBuRt1XLoC3mYDeR2x9tFEg3Sxk_A6Dg==",
+                          "x-amz-cf-pop": "DEN53-P6",
+                          "x-cache": "Miss from cloudfront",
+                          "x-content-type-options": "nosniff",
+                          "x-ds-trace-id": "bbf2ca13b6b7d3468b5e1af76e936e28"
+                        },
+                        "body": {
+                          "id": "73f40e73-db48-4b05-ba0e-9dbe1f8a7115",
+                          "object": "chat.completion",
+                          "created": 1789336273,
+                          "model": "deepseek-flash",
+                          "choices": [
+                            {
+                              "index": 0,
+                              "message": {
+                                "role": "assistant",
+                                "content": "",
+                                "reasoning_content": "We need to check stock of milk.",
+                                "tool_calls": [
+                                  {
+                                    "index": 0,
+                                    "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                    "type": "function",
+                                    "function": {
+                                      "name": "stock_on_hand",
+                                      "arguments": "{\"item\": \"milk\"}"
+                                    }
+                                  }
+                                ]
+                              },
+                              "logprobs": null,
+                              "finish_reason": "tool_calls"
+                            }
+                          ],
+                          "usage": {
+                            "prompt_tokens": 337,
+                            "completion_tokens": 49,
+                            "total_tokens": 386,
+                            "prompt_tokens_details": {
+                              "cached_tokens": 128
+                            },
+                            "completion_tokens_details": {
+                              "reasoning_tokens": 8
+                            },
+                            "prompt_cache_hit_tokens": 128,
+                            "prompt_cache_miss_tokens": 209
+                          },
+                          "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "stock_on_hand",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                            }
+                          ],
+                          "additional_kwargs": {
+                            "refusal": null,
+                            "reasoning_content": "We need to check stock of milk."
+                          },
+                          "finish_reason": "tool_calls",
+                          "usage": {
+                            "input_tokens": 337,
+                            "output_tokens": 49,
+                            "total_tokens": 386,
+                            "input_token_details": {
+                              "cache_read": 128
+                            },
+                            "output_token_details": {
+                              "reasoning": 8
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "stock_on_hand",
+                    "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                  },
+                  "seq": 4,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.718,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "item": "milk"
+                    },
+                    {
+                      "label": "result",
+                      "value": 2
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "item": "milk"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": 2
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 2
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 724.5930000000001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "live"
+                },
+                "seq": 6,
+                "thread": "MainThread",
+                "elapsed_ms": 724.583,
+                "model_provider_ms": 715.7689168453217,
+                "library_ms": 8.814083154678315,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "system",
+                        "content": "You answer briefly and plainly. Use the tools you are given."
+                      },
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Do we have enough milk for the week? We need four."
+                      },
+                      {
+                        "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                        "role": "ai",
+                        "content": "",
+                        "tool_calls": [
+                          {
+                            "name": "stock_on_hand",
+                            "args": {
+                              "item": "milk"
+                            },
+                            "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "We need to check stock of milk."
+                        },
+                        "finish_reason": "tool_calls",
+                        "usage": {
+                          "input_tokens": 337,
+                          "output_tokens": 49,
+                          "total_tokens": 386,
+                          "input_token_details": {
+                            "cache_read": 128
+                          },
+                          "output_token_details": {
+                            "reasoning": 8
+                          }
+                        }
+                      },
+                      {
+                        "id": null,
+                        "role": "tool",
+                        "content": "2",
+                        "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "wire request",
+                    "attempt": 1,
+                    "at_ms": 1906292328.891458,
+                    "method": "POST",
+                    "url": "https://api.deepseek.com/v1/chat/completions",
+                    "headers": {
+                      "accept": "application/json",
+                      "accept-encoding": "gzip, deflate, zstd",
+                      "authorization": null,
+                      "connection": "keep-alive",
+                      "content-length": "798",
+                      "content-type": "application/json",
+                      "host": "api.deepseek.com",
+                      "user-agent": "OpenAI/Python 3.6.0",
+                      "x-stainless-arch": "arm64",
+                      "x-stainless-async": "false",
+                      "x-stainless-lang": "python",
+                      "x-stainless-os": "MacOS",
+                      "x-stainless-package-version": "3.6.0",
+                      "x-stainless-raw-response": "true",
+                      "x-stainless-read-timeout": "60.0",
+                      "x-stainless-retry-count": "0",
+                      "x-stainless-runtime": "CPython",
+                      "x-stainless-runtime-version": "3.14.7"
+                    },
+                    "defaulted_by_model_provider": [
+                      "temperature",
+                      "max_tokens",
+                      "top_p",
+                      "stop",
+                      "seed",
+                      "tool_choice"
+                    ],
+                    "body": {
+                      "messages": [
+                        {
+                          "content": "You answer briefly and plainly. Use the tools you are given.",
+                          "role": "system"
+                        },
+                        {
+                          "content": "Do we have enough milk for the week? We need four.",
+                          "role": "user"
+                        },
+                        {
+                          "content": null,
+                          "role": "assistant",
+                          "tool_calls": [
+                            {
+                              "type": "function",
+                              "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                              "function": {
+                                "name": "stock_on_hand",
+                                "arguments": "{\"item\": \"milk\"}"
+                              }
+                            }
+                          ],
+                          "reasoning_content": "We need to check stock of milk."
+                        },
+                        {
+                          "content": "2",
+                          "role": "tool",
+                          "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                        }
+                      ],
+                      "model": "deepseek-flash",
+                      "stream": false,
+                      "tools": [
+                        {
+                          "type": "function",
+                          "function": {
+                            "name": "stock_on_hand",
+                            "description": "How many of an item are currently in stock.",
+                            "parameters": {
+                              "properties": {
+                                "item": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "type": "object"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "label": "wire response",
+                    "at_ms": 1906293044.6603749,
+                    "status": 200,
+                    "headers": {
+                      "access-control-allow-credentials": "true",
+                      "connection": "keep-alive",
+                      "content-encoding": "gzip",
+                      "content-type": "application/json",
+                      "date": "Sun, 13 Sep 2026 21:51:14 GMT",
+                      "server": "elb",
+                      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                      "transfer-encoding": "chunked",
+                      "vary": "origin, access-control-request-method, access-control-request-headers",
+                      "via": "1.1 d9978c4c79926d2f68f210859236f550.cloudfront.net (CloudFront)",
+                      "x-amz-cf-id": "3yIKt0LKdn7XvUX5wC3CUjIYUdq7K7_485vP-d_fAbnQQlBEHI6QJg==",
+                      "x-amz-cf-pop": "DEN53-P2",
+                      "x-cache": "Miss from cloudfront",
+                      "x-content-type-options": "nosniff",
+                      "x-ds-trace-id": "acdc1d4b9999f6ed556ea3876a0bccc6"
+                    },
+                    "body": {
+                      "id": "46805f7d-e01d-4e53-9df5-47924de68c9d",
+                      "object": "chat.completion",
+                      "created": 1789336274,
+                      "model": "deepseek-flash",
+                      "choices": [
+                        {
+                          "index": 0,
+                          "message": {
+                            "role": "assistant",
+                            "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                            "reasoning_content": "Stock is 2, need 4. Not enough."
+                          },
+                          "logprobs": null,
+                          "finish_reason": "stop"
+                        }
+                      ],
+                      "usage": {
+                        "prompt_tokens": 399,
+                        "completion_tokens": 37,
+                        "total_tokens": 436,
+                        "prompt_tokens_details": {
+                          "cached_tokens": 256
+                        },
+                        "completion_tokens_details": {
+                          "reasoning_tokens": 12
+                        },
+                        "prompt_cache_hit_tokens": 256,
+                        "prompt_cache_miss_tokens": 143
+                      },
+                      "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                    }
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09cc0-c400-74d2-886b-218dd538a277-0",
+                      "role": "ai",
+                      "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                      "additional_kwargs": {
+                        "refusal": null,
+                        "reasoning_content": "Stock is 2, need 4. Not enough."
+                      },
+                      "finish_reason": "stop",
+                      "usage": {
+                        "input_tokens": 399,
+                        "output_tokens": 37,
+                        "total_tokens": 436,
+                        "input_token_details": {
+                          "cache_read": 256
+                        },
+                        "output_token_details": {
+                          "reasoning": 12
+                        }
+                      }
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        },
+                        {
+                          "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "stock_on_hand",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                            }
+                          ],
+                          "additional_kwargs": {
+                            "refusal": null,
+                            "reasoning_content": "We need to check stock of milk."
+                          },
+                          "finish_reason": "tool_calls",
+                          "usage": {
+                            "input_tokens": 337,
+                            "output_tokens": 49,
+                            "total_tokens": 386,
+                            "input_token_details": {
+                              "cache_read": 128
+                            },
+                            "output_token_details": {
+                              "reasoning": 8
+                            }
+                          }
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "2",
+                          "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "wire request",
+                      "attempt": 1,
+                      "at_ms": 1906292328.891458,
+                      "method": "POST",
+                      "url": "https://api.deepseek.com/v1/chat/completions",
+                      "headers": {
+                        "accept": "application/json",
+                        "accept-encoding": "gzip, deflate, zstd",
+                        "authorization": null,
+                        "connection": "keep-alive",
+                        "content-length": "798",
+                        "content-type": "application/json",
+                        "host": "api.deepseek.com",
+                        "user-agent": "OpenAI/Python 3.6.0",
+                        "x-stainless-arch": "arm64",
+                        "x-stainless-async": "false",
+                        "x-stainless-lang": "python",
+                        "x-stainless-os": "MacOS",
+                        "x-stainless-package-version": "3.6.0",
+                        "x-stainless-raw-response": "true",
+                        "x-stainless-read-timeout": "60.0",
+                        "x-stainless-retry-count": "0",
+                        "x-stainless-runtime": "CPython",
+                        "x-stainless-runtime-version": "3.14.7"
+                      },
+                      "defaulted_by_model_provider": [
+                        "temperature",
+                        "max_tokens",
+                        "top_p",
+                        "stop",
+                        "seed",
+                        "tool_choice"
+                      ],
+                      "body": {
+                        "messages": [
+                          {
+                            "content": "You answer briefly and plainly. Use the tools you are given.",
+                            "role": "system"
+                          },
+                          {
+                            "content": "Do we have enough milk for the week? We need four.",
+                            "role": "user"
+                          },
+                          {
+                            "content": null,
+                            "role": "assistant",
+                            "tool_calls": [
+                              {
+                                "type": "function",
+                                "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                "function": {
+                                  "name": "stock_on_hand",
+                                  "arguments": "{\"item\": \"milk\"}"
+                                }
+                              }
+                            ],
+                            "reasoning_content": "We need to check stock of milk."
+                          },
+                          {
+                            "content": "2",
+                            "role": "tool",
+                            "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "model": "deepseek-flash",
+                        "stream": false,
+                        "tools": [
+                          {
+                            "type": "function",
+                            "function": {
+                              "name": "stock_on_hand",
+                              "description": "How many of an item are currently in stock.",
+                              "parameters": {
+                                "properties": {
+                                  "item": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "type": "object"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "wire response",
+                      "at_ms": 1906293044.6603749,
+                      "status": 200,
+                      "headers": {
+                        "access-control-allow-credentials": "true",
+                        "connection": "keep-alive",
+                        "content-encoding": "gzip",
+                        "content-type": "application/json",
+                        "date": "Sun, 13 Sep 2026 21:51:14 GMT",
+                        "server": "elb",
+                        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                        "transfer-encoding": "chunked",
+                        "vary": "origin, access-control-request-method, access-control-request-headers",
+                        "via": "1.1 d9978c4c79926d2f68f210859236f550.cloudfront.net (CloudFront)",
+                        "x-amz-cf-id": "3yIKt0LKdn7XvUX5wC3CUjIYUdq7K7_485vP-d_fAbnQQlBEHI6QJg==",
+                        "x-amz-cf-pop": "DEN53-P2",
+                        "x-cache": "Miss from cloudfront",
+                        "x-content-type-options": "nosniff",
+                        "x-ds-trace-id": "acdc1d4b9999f6ed556ea3876a0bccc6"
+                      },
+                      "body": {
+                        "id": "46805f7d-e01d-4e53-9df5-47924de68c9d",
+                        "object": "chat.completion",
+                        "created": 1789336274,
+                        "model": "deepseek-flash",
+                        "choices": [
+                          {
+                            "index": 0,
+                            "message": {
+                              "role": "assistant",
+                              "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                              "reasoning_content": "Stock is 2, need 4. Not enough."
+                            },
+                            "logprobs": null,
+                            "finish_reason": "stop"
+                          }
+                        ],
+                        "usage": {
+                          "prompt_tokens": 399,
+                          "completion_tokens": 37,
+                          "total_tokens": 436,
+                          "prompt_tokens_details": {
+                            "cached_tokens": 256
+                          },
+                          "completion_tokens_details": {
+                            "reasoning_tokens": 12
+                          },
+                          "prompt_cache_hit_tokens": 256,
+                          "prompt_cache_miss_tokens": 143
+                        },
+                        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                      }
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09cc0-c400-74d2-886b-218dd538a277-0",
+                        "role": "ai",
+                        "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "Stock is 2, need 4. Not enough."
+                        },
+                        "finish_reason": "stop",
+                        "usage": {
+                          "input_tokens": 399,
+                          "output_tokens": 37,
+                          "total_tokens": 436,
+                          "input_token_details": {
+                            "cache_read": 256
+                          },
+                          "output_token_details": {
+                            "reasoning": 12
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "live"
+                  },
+                  "seq": 6,
+                  "thread": "MainThread",
+                  "elapsed_ms": 724.583,
+                  "model_provider_ms": 715.7689168453217,
+                  "library_ms": 8.814083154678315,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "system",
+                          "content": "You answer briefly and plainly. Use the tools you are given."
+                        },
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Do we have enough milk for the week? We need four."
+                        },
+                        {
+                          "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "stock_on_hand",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                            }
+                          ],
+                          "additional_kwargs": {
+                            "refusal": null,
+                            "reasoning_content": "We need to check stock of milk."
+                          },
+                          "finish_reason": "tool_calls",
+                          "usage": {
+                            "input_tokens": 337,
+                            "output_tokens": 49,
+                            "total_tokens": 386,
+                            "input_token_details": {
+                              "cache_read": 128
+                            },
+                            "output_token_details": {
+                              "reasoning": 8
+                            }
+                          }
+                        },
+                        {
+                          "id": null,
+                          "role": "tool",
+                          "content": "2",
+                          "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "wire request",
+                      "attempt": 1,
+                      "at_ms": 1906292328.891458,
+                      "method": "POST",
+                      "url": "https://api.deepseek.com/v1/chat/completions",
+                      "headers": {
+                        "accept": "application/json",
+                        "accept-encoding": "gzip, deflate, zstd",
+                        "authorization": null,
+                        "connection": "keep-alive",
+                        "content-length": "798",
+                        "content-type": "application/json",
+                        "host": "api.deepseek.com",
+                        "user-agent": "OpenAI/Python 3.6.0",
+                        "x-stainless-arch": "arm64",
+                        "x-stainless-async": "false",
+                        "x-stainless-lang": "python",
+                        "x-stainless-os": "MacOS",
+                        "x-stainless-package-version": "3.6.0",
+                        "x-stainless-raw-response": "true",
+                        "x-stainless-read-timeout": "60.0",
+                        "x-stainless-retry-count": "0",
+                        "x-stainless-runtime": "CPython",
+                        "x-stainless-runtime-version": "3.14.7"
+                      },
+                      "defaulted_by_model_provider": [
+                        "temperature",
+                        "max_tokens",
+                        "top_p",
+                        "stop",
+                        "seed",
+                        "tool_choice"
+                      ],
+                      "body": {
+                        "messages": [
+                          {
+                            "content": "You answer briefly and plainly. Use the tools you are given.",
+                            "role": "system"
+                          },
+                          {
+                            "content": "Do we have enough milk for the week? We need four.",
+                            "role": "user"
+                          },
+                          {
+                            "content": null,
+                            "role": "assistant",
+                            "tool_calls": [
+                              {
+                                "type": "function",
+                                "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                "function": {
+                                  "name": "stock_on_hand",
+                                  "arguments": "{\"item\": \"milk\"}"
+                                }
+                              }
+                            ],
+                            "reasoning_content": "We need to check stock of milk."
+                          },
+                          {
+                            "content": "2",
+                            "role": "tool",
+                            "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "model": "deepseek-flash",
+                        "stream": false,
+                        "tools": [
+                          {
+                            "type": "function",
+                            "function": {
+                              "name": "stock_on_hand",
+                              "description": "How many of an item are currently in stock.",
+                              "parameters": {
+                                "properties": {
+                                  "item": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "type": "object"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "label": "wire response",
+                      "at_ms": 1906293044.6603749,
+                      "status": 200,
+                      "headers": {
+                        "access-control-allow-credentials": "true",
+                        "connection": "keep-alive",
+                        "content-encoding": "gzip",
+                        "content-type": "application/json",
+                        "date": "Sun, 13 Sep 2026 21:51:14 GMT",
+                        "server": "elb",
+                        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                        "transfer-encoding": "chunked",
+                        "vary": "origin, access-control-request-method, access-control-request-headers",
+                        "via": "1.1 d9978c4c79926d2f68f210859236f550.cloudfront.net (CloudFront)",
+                        "x-amz-cf-id": "3yIKt0LKdn7XvUX5wC3CUjIYUdq7K7_485vP-d_fAbnQQlBEHI6QJg==",
+                        "x-amz-cf-pop": "DEN53-P2",
+                        "x-cache": "Miss from cloudfront",
+                        "x-content-type-options": "nosniff",
+                        "x-ds-trace-id": "acdc1d4b9999f6ed556ea3876a0bccc6"
+                      },
+                      "body": {
+                        "id": "46805f7d-e01d-4e53-9df5-47924de68c9d",
+                        "object": "chat.completion",
+                        "created": 1789336274,
+                        "model": "deepseek-flash",
+                        "choices": [
+                          {
+                            "index": 0,
+                            "message": {
+                              "role": "assistant",
+                              "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                              "reasoning_content": "Stock is 2, need 4. Not enough."
+                            },
+                            "logprobs": null,
+                            "finish_reason": "stop"
+                          }
+                        ],
+                        "usage": {
+                          "prompt_tokens": 399,
+                          "completion_tokens": 37,
+                          "total_tokens": 436,
+                          "prompt_tokens_details": {
+                            "cached_tokens": 256
+                          },
+                          "completion_tokens_details": {
+                            "reasoning_tokens": 12
+                          },
+                          "prompt_cache_hit_tokens": 256,
+                          "prompt_cache_miss_tokens": 143
+                        },
+                        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                      }
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09cc0-c400-74d2-886b-218dd538a277-0",
+                        "role": "ai",
+                        "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                        "additional_kwargs": {
+                          "refusal": null,
+                          "reasoning_content": "Stock is 2, need 4. Not enough."
+                        },
+                        "finish_reason": "stop",
+                        "usage": {
+                          "input_tokens": 399,
+                          "output_tokens": 37,
+                          "total_tokens": 436,
+                          "input_token_details": {
+                            "cache_read": 256
+                          },
+                          "output_token_details": {
+                            "reasoning": 12
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tools you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Do we have enough milk for the week? We need four."
+                          },
+                          {
+                            "id": "lc_run--01a09cc0-c0d2-7802-97df-4b21d2af9064-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "stock_on_hand",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                              }
+                            ],
+                            "additional_kwargs": {
+                              "refusal": null,
+                              "reasoning_content": "We need to check stock of milk."
+                            },
+                            "finish_reason": "tool_calls",
+                            "usage": {
+                              "input_tokens": 337,
+                              "output_tokens": 49,
+                              "total_tokens": 386,
+                              "input_token_details": {
+                                "cache_read": 128
+                              },
+                              "output_token_details": {
+                                "reasoning": 8
+                              }
+                            }
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "2",
+                            "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "wire request",
+                        "attempt": 1,
+                        "at_ms": 1906292328.891458,
+                        "method": "POST",
+                        "url": "https://api.deepseek.com/v1/chat/completions",
+                        "headers": {
+                          "accept": "application/json",
+                          "accept-encoding": "gzip, deflate, zstd",
+                          "authorization": null,
+                          "connection": "keep-alive",
+                          "content-length": "798",
+                          "content-type": "application/json",
+                          "host": "api.deepseek.com",
+                          "user-agent": "OpenAI/Python 3.6.0",
+                          "x-stainless-arch": "arm64",
+                          "x-stainless-async": "false",
+                          "x-stainless-lang": "python",
+                          "x-stainless-os": "MacOS",
+                          "x-stainless-package-version": "3.6.0",
+                          "x-stainless-raw-response": "true",
+                          "x-stainless-read-timeout": "60.0",
+                          "x-stainless-retry-count": "0",
+                          "x-stainless-runtime": "CPython",
+                          "x-stainless-runtime-version": "3.14.7"
+                        },
+                        "defaulted_by_model_provider": [
+                          "temperature",
+                          "max_tokens",
+                          "top_p",
+                          "stop",
+                          "seed",
+                          "tool_choice"
+                        ],
+                        "body": {
+                          "messages": [
+                            {
+                              "content": "You answer briefly and plainly. Use the tools you are given.",
+                              "role": "system"
+                            },
+                            {
+                              "content": "Do we have enough milk for the week? We need four.",
+                              "role": "user"
+                            },
+                            {
+                              "content": null,
+                              "role": "assistant",
+                              "tool_calls": [
+                                {
+                                  "type": "function",
+                                  "id": "call_00_p5QV28xb2Cl1yVNTgtFG4108",
+                                  "function": {
+                                    "name": "stock_on_hand",
+                                    "arguments": "{\"item\": \"milk\"}"
+                                  }
+                                }
+                              ],
+                              "reasoning_content": "We need to check stock of milk."
+                            },
+                            {
+                              "content": "2",
+                              "role": "tool",
+                              "tool_call_id": "call_00_p5QV28xb2Cl1yVNTgtFG4108"
+                            }
+                          ],
+                          "model": "deepseek-flash",
+                          "stream": false,
+                          "tools": [
+                            {
+                              "type": "function",
+                              "function": {
+                                "name": "stock_on_hand",
+                                "description": "How many of an item are currently in stock.",
+                                "parameters": {
+                                  "properties": {
+                                    "item": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "type": "object"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "wire response",
+                        "at_ms": 1906293044.6603749,
+                        "status": 200,
+                        "headers": {
+                          "access-control-allow-credentials": "true",
+                          "connection": "keep-alive",
+                          "content-encoding": "gzip",
+                          "content-type": "application/json",
+                          "date": "Sun, 13 Sep 2026 21:51:14 GMT",
+                          "server": "elb",
+                          "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                          "transfer-encoding": "chunked",
+                          "vary": "origin, access-control-request-method, access-control-request-headers",
+                          "via": "1.1 d9978c4c79926d2f68f210859236f550.cloudfront.net (CloudFront)",
+                          "x-amz-cf-id": "3yIKt0LKdn7XvUX5wC3CUjIYUdq7K7_485vP-d_fAbnQQlBEHI6QJg==",
+                          "x-amz-cf-pop": "DEN53-P2",
+                          "x-cache": "Miss from cloudfront",
+                          "x-content-type-options": "nosniff",
+                          "x-ds-trace-id": "acdc1d4b9999f6ed556ea3876a0bccc6"
+                        },
+                        "body": {
+                          "id": "46805f7d-e01d-4e53-9df5-47924de68c9d",
+                          "object": "chat.completion",
+                          "created": 1789336274,
+                          "model": "deepseek-flash",
+                          "choices": [
+                            {
+                              "index": 0,
+                              "message": {
+                                "role": "assistant",
+                                "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                                "reasoning_content": "Stock is 2, need 4. Not enough."
+                              },
+                              "logprobs": null,
+                              "finish_reason": "stop"
+                            }
+                          ],
+                          "usage": {
+                            "prompt_tokens": 399,
+                            "completion_tokens": 37,
+                            "total_tokens": 436,
+                            "prompt_tokens_details": {
+                              "cached_tokens": 256
+                            },
+                            "completion_tokens_details": {
+                              "reasoning_tokens": 12
+                            },
+                            "prompt_cache_hit_tokens": 256,
+                            "prompt_cache_miss_tokens": 143
+                          },
+                          "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09cc0-c400-74d2-886b-218dd538a277-0",
+                          "role": "ai",
+                          "content": "Not enough. You have 2 milks in stock and need 4 \u2014 so you're short by 2.",
+                          "additional_kwargs": {
+                            "refusal": null,
+                            "reasoning_content": "Stock is 2, need 4. Not enough."
+                          },
+                          "finish_reason": "stop",
+                          "usage": {
+                            "input_tokens": 399,
+                            "output_tokens": 37,
+                            "total_tokens": 436,
+                            "input_token_details": {
+                              "cache_read": 256
+                            },
+                            "output_token_details": {
+                              "reasoning": 12
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "no_tool_calls"
+          }
         }
       ]
     }

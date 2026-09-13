@@ -1,7 +1,7 @@
 {
   "chapter": "ch37_parallel",
   "model_kind": "mock",
-  "source": "503c2c13aa22",
+  "source": "260bf7a9e3be",
   "summary": {
     "turns": 0,
     "messages": 0,
@@ -15,7 +15,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 3.499,
+      "elapsed_ms": 3.1229999999999998,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -47,7 +47,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 2.281,
+          "elapsed_ms": 1.9189999999999998,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -59,7 +59,7 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 0.006,
+              "elapsed_ms": 0.005,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -106,7 +106,7 @@
               },
               "seq": 5,
               "thread": "ThreadPoolExecutor-1_0",
-              "elapsed_ms": 0.002,
+              "elapsed_ms": 0.003,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [],
@@ -124,7 +124,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 0.006,
+                "elapsed_ms": 0.005,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -177,7 +177,7 @@
                 },
                 "seq": 5,
                 "thread": "ThreadPoolExecutor-1_0",
-                "elapsed_ms": 0.002,
+                "elapsed_ms": 0.003,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -194,7 +194,7 @@
           },
           "seq": 6,
           "thread": "MainThread",
-          "elapsed_ms": 1.073,
+          "elapsed_ms": 1.049,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -206,7 +206,7 @@
               },
               "seq": 7,
               "thread": "MainThread",
-              "elapsed_ms": 0.005,
+              "elapsed_ms": 0.004,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -243,7 +243,7 @@
               },
               "seq": 8,
               "thread": "ThreadPoolExecutor-2_0",
-              "elapsed_ms": 0.007,
+              "elapsed_ms": 0.004,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [],
@@ -257,7 +257,7 @@
               },
               "seq": 9,
               "thread": "ThreadPoolExecutor-2_1",
-              "elapsed_ms": 0.006,
+              "elapsed_ms": 0.005,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [],
@@ -271,7 +271,7 @@
               },
               "seq": 10,
               "thread": "ThreadPoolExecutor-2_0",
-              "elapsed_ms": 0.004,
+              "elapsed_ms": 0.002,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [],
@@ -285,7 +285,7 @@
               },
               "seq": 11,
               "thread": "ThreadPoolExecutor-2_1",
-              "elapsed_ms": 0.002,
+              "elapsed_ms": 0.003,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [],
@@ -303,7 +303,7 @@
                 },
                 "seq": 7,
                 "thread": "MainThread",
-                "elapsed_ms": 0.005,
+                "elapsed_ms": 0.004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -343,7 +343,7 @@
                 },
                 "seq": 8,
                 "thread": "ThreadPoolExecutor-2_0",
-                "elapsed_ms": 0.007,
+                "elapsed_ms": 0.004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -360,7 +360,7 @@
                 },
                 "seq": 9,
                 "thread": "ThreadPoolExecutor-2_1",
-                "elapsed_ms": 0.006,
+                "elapsed_ms": 0.005,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -377,7 +377,7 @@
                 },
                 "seq": 10,
                 "thread": "ThreadPoolExecutor-2_0",
-                "elapsed_ms": 0.004,
+                "elapsed_ms": 0.002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -394,7 +394,7 @@
                 },
                 "seq": 11,
                 "thread": "ThreadPoolExecutor-2_1",
-                "elapsed_ms": 0.002,
+                "elapsed_ms": 0.003,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -415,7 +415,7 @@
             },
             "seq": 2,
             "thread": "MainThread",
-            "elapsed_ms": 2.281,
+            "elapsed_ms": 1.9189999999999998,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -427,7 +427,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 0.006,
+                "elapsed_ms": 0.005,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -474,7 +474,7 @@
                 },
                 "seq": 5,
                 "thread": "ThreadPoolExecutor-1_0",
-                "elapsed_ms": 0.002,
+                "elapsed_ms": 0.003,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -492,7 +492,7 @@
                   },
                   "seq": 3,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.006,
+                  "elapsed_ms": 0.005,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -545,7 +545,7 @@
                   },
                   "seq": 5,
                   "thread": "ThreadPoolExecutor-1_0",
-                  "elapsed_ms": 0.002,
+                  "elapsed_ms": 0.003,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [],
@@ -565,7 +565,7 @@
             },
             "seq": 6,
             "thread": "MainThread",
-            "elapsed_ms": 1.073,
+            "elapsed_ms": 1.049,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -577,7 +577,7 @@
                 },
                 "seq": 7,
                 "thread": "MainThread",
-                "elapsed_ms": 0.005,
+                "elapsed_ms": 0.004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -614,7 +614,7 @@
                 },
                 "seq": 8,
                 "thread": "ThreadPoolExecutor-2_0",
-                "elapsed_ms": 0.007,
+                "elapsed_ms": 0.004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -628,7 +628,7 @@
                 },
                 "seq": 9,
                 "thread": "ThreadPoolExecutor-2_1",
-                "elapsed_ms": 0.006,
+                "elapsed_ms": 0.005,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -642,7 +642,7 @@
                 },
                 "seq": 10,
                 "thread": "ThreadPoolExecutor-2_0",
-                "elapsed_ms": 0.004,
+                "elapsed_ms": 0.002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -656,7 +656,7 @@
                 },
                 "seq": 11,
                 "thread": "ThreadPoolExecutor-2_1",
-                "elapsed_ms": 0.002,
+                "elapsed_ms": 0.003,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [],
@@ -674,7 +674,7 @@
                   },
                   "seq": 7,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.005,
+                  "elapsed_ms": 0.004,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -714,7 +714,7 @@
                   },
                   "seq": 8,
                   "thread": "ThreadPoolExecutor-2_0",
-                  "elapsed_ms": 0.007,
+                  "elapsed_ms": 0.004,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [],
@@ -731,7 +731,7 @@
                   },
                   "seq": 9,
                   "thread": "ThreadPoolExecutor-2_1",
-                  "elapsed_ms": 0.006,
+                  "elapsed_ms": 0.005,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [],
@@ -748,7 +748,7 @@
                   },
                   "seq": 10,
                   "thread": "ThreadPoolExecutor-2_0",
-                  "elapsed_ms": 0.004,
+                  "elapsed_ms": 0.002,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [],
@@ -765,7 +765,7 @@
                   },
                   "seq": 11,
                   "thread": "ThreadPoolExecutor-2_1",
-                  "elapsed_ms": 0.002,
+                  "elapsed_ms": 0.003,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [],
@@ -807,13 +807,13 @@
       },
       "seq": 12,
       "thread": "MainThread",
-      "elapsed_ms": 303.262,
+      "elapsed_ms": 304.236,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
         {
           "label": "elapsed_matches_the_slowest_branch_not_the_sum",
-          "elapsed_seconds": 0.303,
+          "elapsed_seconds": 0.304,
           "slowest_branch_seconds": 0.3,
           "sum_of_all_branches_seconds": 0.5,
           "faster_than_the_sum": true
@@ -828,7 +828,7 @@
           },
           "seq": 13,
           "thread": "ThreadPoolExecutor-3_0",
-          "elapsed_ms": 302.375,
+          "elapsed_ms": 302.464,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -843,7 +843,7 @@
           },
           "seq": 14,
           "thread": "ThreadPoolExecutor-3_1",
-          "elapsed_ms": 51.467,
+          "elapsed_ms": 51.724,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -858,7 +858,7 @@
           },
           "seq": 15,
           "thread": "ThreadPoolExecutor-3_2",
-          "elapsed_ms": 150.07999999999998,
+          "elapsed_ms": 150.32899999999998,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -877,7 +877,7 @@
             },
             "seq": 13,
             "thread": "ThreadPoolExecutor-3_0",
-            "elapsed_ms": 302.375,
+            "elapsed_ms": 302.464,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -895,7 +895,7 @@
             },
             "seq": 14,
             "thread": "ThreadPoolExecutor-3_1",
-            "elapsed_ms": 51.467,
+            "elapsed_ms": 51.724,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -913,7 +913,7 @@
             },
             "seq": 15,
             "thread": "ThreadPoolExecutor-3_2",
-            "elapsed_ms": 150.07999999999998,
+            "elapsed_ms": 150.32899999999998,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -925,7 +925,7 @@
           "kind": "note",
           "value": {
             "label": "elapsed_matches_the_slowest_branch_not_the_sum",
-            "elapsed_seconds": 0.303,
+            "elapsed_seconds": 0.304,
             "slowest_branch_seconds": 0.3,
             "sum_of_all_branches_seconds": 0.5,
             "faster_than_the_sum": true
@@ -940,7 +940,7 @@
       },
       "seq": 16,
       "thread": "MainThread",
-      "elapsed_ms": 204.421,
+      "elapsed_ms": 203.631,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -973,7 +973,7 @@
           },
           "seq": 17,
           "thread": "ThreadPoolExecutor-4_0",
-          "elapsed_ms": 203.456,
+          "elapsed_ms": 200.84199999999998,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -988,7 +988,7 @@
           },
           "seq": 18,
           "thread": "ThreadPoolExecutor-4_1",
-          "elapsed_ms": 24.655,
+          "elapsed_ms": 23.317,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1003,7 +1003,7 @@
           },
           "seq": 19,
           "thread": "ThreadPoolExecutor-4_2",
-          "elapsed_ms": 101.66799999999999,
+          "elapsed_ms": 104.34599999999999,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1022,7 +1022,7 @@
             },
             "seq": 17,
             "thread": "ThreadPoolExecutor-4_0",
-            "elapsed_ms": 203.456,
+            "elapsed_ms": 200.84199999999998,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1040,7 +1040,7 @@
             },
             "seq": 18,
             "thread": "ThreadPoolExecutor-4_1",
-            "elapsed_ms": 24.655,
+            "elapsed_ms": 23.317,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1058,7 +1058,7 @@
             },
             "seq": 19,
             "thread": "ThreadPoolExecutor-4_2",
-            "elapsed_ms": 101.66799999999999,
+            "elapsed_ms": 104.34599999999999,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1097,7 +1097,7 @@
       },
       "seq": 20,
       "thread": "MainThread",
-      "elapsed_ms": 3.193,
+      "elapsed_ms": 6.35,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -1119,7 +1119,7 @@
           },
           "seq": 21,
           "thread": "ThreadPoolExecutor-5_0",
-          "elapsed_ms": 0.306,
+          "elapsed_ms": 0.852,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1132,7 +1132,7 @@
               },
               "seq": 22,
               "thread": "ThreadPoolExecutor-5_0",
-              "elapsed_ms": 0.28600000000000003,
+              "elapsed_ms": 0.794,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1175,7 +1175,7 @@
                 },
                 "seq": 22,
                 "thread": "ThreadPoolExecutor-5_0",
-                "elapsed_ms": 0.28600000000000003,
+                "elapsed_ms": 0.794,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1212,11 +1212,11 @@
         {
           "name": "branch",
           "attributes": {
-            "order_id": "A200"
+            "order_id": "A300"
           },
           "seq": 23,
-          "thread": "ThreadPoolExecutor-5_0",
-          "elapsed_ms": 0.22599999999999998,
+          "thread": "ThreadPoolExecutor-5_1",
+          "elapsed_ms": 0.46299999999999997,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1228,105 +1228,8 @@
                 "id": "c1"
               },
               "seq": 24,
-              "thread": "ThreadPoolExecutor-5_0",
-              "elapsed_ms": 0.212,
-              "model_provider_ms": null,
-              "library_ms": null,
-              "notes": [
-                {
-                  "label": "args",
-                  "order_id": "A200"
-                },
-                {
-                  "label": "result",
-                  "value": "order A200: shipped"
-                }
-              ],
-              "children": [],
-              "body": [
-                {
-                  "kind": "note",
-                  "value": {
-                    "label": "args",
-                    "order_id": "A200"
-                  }
-                },
-                {
-                  "kind": "note",
-                  "value": {
-                    "label": "result",
-                    "value": "order A200: shipped"
-                  }
-                }
-              ]
-            }
-          ],
-          "body": [
-            {
-              "kind": "span",
-              "value": {
-                "name": "tool",
-                "attributes": {
-                  "name": "check_order",
-                  "id": "c1"
-                },
-                "seq": 24,
-                "thread": "ThreadPoolExecutor-5_0",
-                "elapsed_ms": 0.212,
-                "model_provider_ms": null,
-                "library_ms": null,
-                "notes": [
-                  {
-                    "label": "args",
-                    "order_id": "A200"
-                  },
-                  {
-                    "label": "result",
-                    "value": "order A200: shipped"
-                  }
-                ],
-                "children": [],
-                "body": [
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "args",
-                      "order_id": "A200"
-                    }
-                  },
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "result",
-                      "value": "order A200: shipped"
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "branch",
-          "attributes": {
-            "order_id": "A300"
-          },
-          "seq": 25,
-          "thread": "ThreadPoolExecutor-5_0",
-          "elapsed_ms": 0.154,
-          "model_provider_ms": null,
-          "library_ms": null,
-          "notes": [],
-          "children": [
-            {
-              "name": "tool",
-              "attributes": {
-                "name": "check_order",
-                "id": "c1"
-              },
-              "seq": 26,
-              "thread": "ThreadPoolExecutor-5_0",
-              "elapsed_ms": 0.146,
+              "thread": "ThreadPoolExecutor-5_1",
+              "elapsed_ms": 0.429,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1367,9 +1270,9 @@
                   "name": "check_order",
                   "id": "c1"
                 },
-                "seq": 26,
-                "thread": "ThreadPoolExecutor-5_0",
-                "elapsed_ms": 0.146,
+                "seq": 24,
+                "thread": "ThreadPoolExecutor-5_1",
+                "elapsed_ms": 0.429,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1404,13 +1307,110 @@
           ]
         },
         {
+          "name": "branch",
+          "attributes": {
+            "order_id": "A200"
+          },
+          "seq": 25,
+          "thread": "ThreadPoolExecutor-5_0",
+          "elapsed_ms": 0.34,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "tool",
+              "attributes": {
+                "name": "check_order",
+                "id": "c1"
+              },
+              "seq": 26,
+              "thread": "ThreadPoolExecutor-5_0",
+              "elapsed_ms": 0.323,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "args",
+                  "order_id": "A200"
+                },
+                {
+                  "label": "result",
+                  "value": "order A200: shipped"
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "args",
+                    "order_id": "A200"
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "result",
+                    "value": "order A200: shipped"
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "tool",
+                "attributes": {
+                  "name": "check_order",
+                  "id": "c1"
+                },
+                "seq": 26,
+                "thread": "ThreadPoolExecutor-5_0",
+                "elapsed_ms": 0.323,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "order_id": "A200"
+                  },
+                  {
+                    "label": "result",
+                    "value": "order A200: shipped"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "order_id": "A200"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "order A200: shipped"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
           "name": "turn",
           "attributes": {
             "number": 1
           },
           "seq": 27,
           "thread": "MainThread",
-          "elapsed_ms": 1.2429999999999999,
+          "elapsed_ms": 1.302,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1422,7 +1422,7 @@
               },
               "seq": 28,
               "thread": "MainThread",
-              "elapsed_ms": 1.224,
+              "elapsed_ms": 1.24,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1430,7 +1430,7 @@
                   "label": "context",
                   "messages": [
                     {
-                      "id": "722805b3-ec84-4b8d-be2e-5f8df9553e92",
+                      "id": "067d0c48-b619-4dc9-9c14-63de4ab4692a",
                       "role": "human",
                       "content": "Check the status of orders A100, A200, A300."
                     },
@@ -1453,7 +1453,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed8d-7da0-917a-c079370eb023-0",
+                    "id": "lc_run--01a09c8f-9845-7210-be0e-169013b48178-0",
                     "role": "ai",
                     "content": "All checked: order A100: shipped; order A200: shipped; order A300: shipped."
                   }
@@ -1467,7 +1467,7 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "722805b3-ec84-4b8d-be2e-5f8df9553e92",
+                        "id": "067d0c48-b619-4dc9-9c14-63de4ab4692a",
                         "role": "human",
                         "content": "Check the status of orders A100, A200, A300."
                       },
@@ -1496,7 +1496,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed8d-7da0-917a-c079370eb023-0",
+                      "id": "lc_run--01a09c8f-9845-7210-be0e-169013b48178-0",
                       "role": "ai",
                       "content": "All checked: order A100: shipped; order A200: shipped; order A300: shipped."
                     }
@@ -1515,7 +1515,7 @@
                 },
                 "seq": 28,
                 "thread": "MainThread",
-                "elapsed_ms": 1.224,
+                "elapsed_ms": 1.24,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1523,7 +1523,7 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "722805b3-ec84-4b8d-be2e-5f8df9553e92",
+                        "id": "067d0c48-b619-4dc9-9c14-63de4ab4692a",
                         "role": "human",
                         "content": "Check the status of orders A100, A200, A300."
                       },
@@ -1546,7 +1546,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed8d-7da0-917a-c079370eb023-0",
+                      "id": "lc_run--01a09c8f-9845-7210-be0e-169013b48178-0",
                       "role": "ai",
                       "content": "All checked: order A100: shipped; order A200: shipped; order A300: shipped."
                     }
@@ -1560,7 +1560,7 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "722805b3-ec84-4b8d-be2e-5f8df9553e92",
+                          "id": "067d0c48-b619-4dc9-9c14-63de4ab4692a",
                           "role": "human",
                           "content": "Check the status of orders A100, A200, A300."
                         },
@@ -1589,7 +1589,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed8d-7da0-917a-c079370eb023-0",
+                        "id": "lc_run--01a09c8f-9845-7210-be0e-169013b48178-0",
                         "role": "ai",
                         "content": "All checked: order A100: shipped; order A200: shipped; order A300: shipped."
                       }
@@ -1611,7 +1611,7 @@
             },
             "seq": 21,
             "thread": "ThreadPoolExecutor-5_0",
-            "elapsed_ms": 0.306,
+            "elapsed_ms": 0.852,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1624,7 +1624,7 @@
                 },
                 "seq": 22,
                 "thread": "ThreadPoolExecutor-5_0",
-                "elapsed_ms": 0.28600000000000003,
+                "elapsed_ms": 0.794,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1667,7 +1667,7 @@
                   },
                   "seq": 22,
                   "thread": "ThreadPoolExecutor-5_0",
-                  "elapsed_ms": 0.28600000000000003,
+                  "elapsed_ms": 0.794,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1707,11 +1707,11 @@
           "value": {
             "name": "branch",
             "attributes": {
-              "order_id": "A200"
+              "order_id": "A300"
             },
             "seq": 23,
-            "thread": "ThreadPoolExecutor-5_0",
-            "elapsed_ms": 0.22599999999999998,
+            "thread": "ThreadPoolExecutor-5_1",
+            "elapsed_ms": 0.46299999999999997,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1723,108 +1723,8 @@
                   "id": "c1"
                 },
                 "seq": 24,
-                "thread": "ThreadPoolExecutor-5_0",
-                "elapsed_ms": 0.212,
-                "model_provider_ms": null,
-                "library_ms": null,
-                "notes": [
-                  {
-                    "label": "args",
-                    "order_id": "A200"
-                  },
-                  {
-                    "label": "result",
-                    "value": "order A200: shipped"
-                  }
-                ],
-                "children": [],
-                "body": [
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "args",
-                      "order_id": "A200"
-                    }
-                  },
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "result",
-                      "value": "order A200: shipped"
-                    }
-                  }
-                ]
-              }
-            ],
-            "body": [
-              {
-                "kind": "span",
-                "value": {
-                  "name": "tool",
-                  "attributes": {
-                    "name": "check_order",
-                    "id": "c1"
-                  },
-                  "seq": 24,
-                  "thread": "ThreadPoolExecutor-5_0",
-                  "elapsed_ms": 0.212,
-                  "model_provider_ms": null,
-                  "library_ms": null,
-                  "notes": [
-                    {
-                      "label": "args",
-                      "order_id": "A200"
-                    },
-                    {
-                      "label": "result",
-                      "value": "order A200: shipped"
-                    }
-                  ],
-                  "children": [],
-                  "body": [
-                    {
-                      "kind": "note",
-                      "value": {
-                        "label": "args",
-                        "order_id": "A200"
-                      }
-                    },
-                    {
-                      "kind": "note",
-                      "value": {
-                        "label": "result",
-                        "value": "order A200: shipped"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "kind": "span",
-          "value": {
-            "name": "branch",
-            "attributes": {
-              "order_id": "A300"
-            },
-            "seq": 25,
-            "thread": "ThreadPoolExecutor-5_0",
-            "elapsed_ms": 0.154,
-            "model_provider_ms": null,
-            "library_ms": null,
-            "notes": [],
-            "children": [
-              {
-                "name": "tool",
-                "attributes": {
-                  "name": "check_order",
-                  "id": "c1"
-                },
-                "seq": 26,
-                "thread": "ThreadPoolExecutor-5_0",
-                "elapsed_ms": 0.146,
+                "thread": "ThreadPoolExecutor-5_1",
+                "elapsed_ms": 0.429,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1865,9 +1765,9 @@
                     "name": "check_order",
                     "id": "c1"
                   },
-                  "seq": 26,
-                  "thread": "ThreadPoolExecutor-5_0",
-                  "elapsed_ms": 0.146,
+                  "seq": 24,
+                  "thread": "ThreadPoolExecutor-5_1",
+                  "elapsed_ms": 0.429,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1905,13 +1805,113 @@
         {
           "kind": "span",
           "value": {
+            "name": "branch",
+            "attributes": {
+              "order_id": "A200"
+            },
+            "seq": 25,
+            "thread": "ThreadPoolExecutor-5_0",
+            "elapsed_ms": 0.34,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "tool",
+                "attributes": {
+                  "name": "check_order",
+                  "id": "c1"
+                },
+                "seq": 26,
+                "thread": "ThreadPoolExecutor-5_0",
+                "elapsed_ms": 0.323,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "args",
+                    "order_id": "A200"
+                  },
+                  {
+                    "label": "result",
+                    "value": "order A200: shipped"
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "args",
+                      "order_id": "A200"
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "result",
+                      "value": "order A200: shipped"
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "tool",
+                  "attributes": {
+                    "name": "check_order",
+                    "id": "c1"
+                  },
+                  "seq": 26,
+                  "thread": "ThreadPoolExecutor-5_0",
+                  "elapsed_ms": 0.323,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "args",
+                      "order_id": "A200"
+                    },
+                    {
+                      "label": "result",
+                      "value": "order A200: shipped"
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "order_id": "A200"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "order A200: shipped"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
             "name": "turn",
             "attributes": {
               "number": 1
             },
             "seq": 27,
             "thread": "MainThread",
-            "elapsed_ms": 1.2429999999999999,
+            "elapsed_ms": 1.302,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1923,7 +1923,7 @@
                 },
                 "seq": 28,
                 "thread": "MainThread",
-                "elapsed_ms": 1.224,
+                "elapsed_ms": 1.24,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1931,7 +1931,7 @@
                     "label": "context",
                     "messages": [
                       {
-                        "id": "722805b3-ec84-4b8d-be2e-5f8df9553e92",
+                        "id": "067d0c48-b619-4dc9-9c14-63de4ab4692a",
                         "role": "human",
                         "content": "Check the status of orders A100, A200, A300."
                       },
@@ -1954,7 +1954,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed8d-7da0-917a-c079370eb023-0",
+                      "id": "lc_run--01a09c8f-9845-7210-be0e-169013b48178-0",
                       "role": "ai",
                       "content": "All checked: order A100: shipped; order A200: shipped; order A300: shipped."
                     }
@@ -1968,7 +1968,7 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "722805b3-ec84-4b8d-be2e-5f8df9553e92",
+                          "id": "067d0c48-b619-4dc9-9c14-63de4ab4692a",
                           "role": "human",
                           "content": "Check the status of orders A100, A200, A300."
                         },
@@ -1997,7 +1997,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed8d-7da0-917a-c079370eb023-0",
+                        "id": "lc_run--01a09c8f-9845-7210-be0e-169013b48178-0",
                         "role": "ai",
                         "content": "All checked: order A100: shipped; order A200: shipped; order A300: shipped."
                       }
@@ -2016,7 +2016,7 @@
                   },
                   "seq": 28,
                   "thread": "MainThread",
-                  "elapsed_ms": 1.224,
+                  "elapsed_ms": 1.24,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -2024,7 +2024,7 @@
                       "label": "context",
                       "messages": [
                         {
-                          "id": "722805b3-ec84-4b8d-be2e-5f8df9553e92",
+                          "id": "067d0c48-b619-4dc9-9c14-63de4ab4692a",
                           "role": "human",
                           "content": "Check the status of orders A100, A200, A300."
                         },
@@ -2047,7 +2047,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed8d-7da0-917a-c079370eb023-0",
+                        "id": "lc_run--01a09c8f-9845-7210-be0e-169013b48178-0",
                         "role": "ai",
                         "content": "All checked: order A100: shipped; order A200: shipped; order A300: shipped."
                       }
@@ -2061,7 +2061,7 @@
                         "label": "context",
                         "messages": [
                           {
-                            "id": "722805b3-ec84-4b8d-be2e-5f8df9553e92",
+                            "id": "067d0c48-b619-4dc9-9c14-63de4ab4692a",
                             "role": "human",
                             "content": "Check the status of orders A100, A200, A300."
                           },
@@ -2090,7 +2090,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed8d-7da0-917a-c079370eb023-0",
+                          "id": "lc_run--01a09c8f-9845-7210-be0e-169013b48178-0",
                           "role": "ai",
                           "content": "All checked: order A100: shipped; order A200: shipped; order A300: shipped."
                         }
@@ -2123,7 +2123,7 @@
       },
       "seq": 29,
       "thread": "MainThread",
-      "elapsed_ms": 12.315,
+      "elapsed_ms": 21.108999999999998,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -2148,7 +2148,7 @@
           },
           "seq": 30,
           "thread": "ThreadPoolExecutor-6_0",
-          "elapsed_ms": 0.299,
+          "elapsed_ms": 0.39,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -2160,7 +2160,7 @@
               },
               "seq": 31,
               "thread": "ThreadPoolExecutor-6_0",
-              "elapsed_ms": 0.27399999999999997,
+              "elapsed_ms": 0.34900000000000003,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2185,7 +2185,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed92-7862-874b-6bbd8c2b20ca-0",
+                    "id": "lc_run--01a09c8f-984e-7bd0-84b8-b26835e82a7f-0",
                     "role": "ai",
                     "content": "order A100: bad"
                   }
@@ -2222,7 +2222,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed92-7862-874b-6bbd8c2b20ca-0",
+                      "id": "lc_run--01a09c8f-984e-7bd0-84b8-b26835e82a7f-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -2241,7 +2241,7 @@
                 },
                 "seq": 31,
                 "thread": "ThreadPoolExecutor-6_0",
-                "elapsed_ms": 0.27399999999999997,
+                "elapsed_ms": 0.34900000000000003,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2266,7 +2266,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed92-7862-874b-6bbd8c2b20ca-0",
+                      "id": "lc_run--01a09c8f-984e-7bd0-84b8-b26835e82a7f-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -2303,7 +2303,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed92-7862-874b-6bbd8c2b20ca-0",
+                        "id": "lc_run--01a09c8f-984e-7bd0-84b8-b26835e82a7f-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -2320,8 +2320,8 @@
             "number": 1
           },
           "seq": 32,
-          "thread": "ThreadPoolExecutor-6_1",
-          "elapsed_ms": 0.164,
+          "thread": "ThreadPoolExecutor-6_0",
+          "elapsed_ms": 0.305,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -2332,181 +2332,8 @@
                 "model_kind": "mock"
               },
               "seq": 33,
-              "thread": "ThreadPoolExecutor-6_1",
-              "elapsed_ms": 0.15,
-              "model_provider_ms": null,
-              "library_ms": null,
-              "notes": [
-                {
-                  "label": "context",
-                  "messages": [
-                    {
-                      "id": null,
-                      "role": "human",
-                      "content": "Summarize order A300."
-                    }
-                  ],
-                  "tools": []
-                },
-                {
-                  "label": "context ignored by the mock model",
-                  "messages": 1,
-                  "roles": [
-                    "human"
-                  ]
-                },
-                {
-                  "label": "reply",
-                  "message": {
-                    "id": "lc_run--01a077cc-ed92-7862-874b-6bdda9c80301-0",
-                    "role": "ai",
-                    "content": "order A300: bad"
-                  }
-                }
-              ],
-              "children": [],
-              "body": [
-                {
-                  "kind": "note",
-                  "value": {
-                    "label": "context",
-                    "messages": [
-                      {
-                        "id": null,
-                        "role": "human",
-                        "content": "Summarize order A300."
-                      }
-                    ],
-                    "tools": []
-                  }
-                },
-                {
-                  "kind": "note",
-                  "value": {
-                    "label": "context ignored by the mock model",
-                    "messages": 1,
-                    "roles": [
-                      "human"
-                    ]
-                  }
-                },
-                {
-                  "kind": "note",
-                  "value": {
-                    "label": "reply",
-                    "message": {
-                      "id": "lc_run--01a077cc-ed92-7862-874b-6bdda9c80301-0",
-                      "role": "ai",
-                      "content": "order A300: bad"
-                    }
-                  }
-                }
-              ]
-            }
-          ],
-          "body": [
-            {
-              "kind": "span",
-              "value": {
-                "name": "model",
-                "attributes": {
-                  "model_kind": "mock"
-                },
-                "seq": 33,
-                "thread": "ThreadPoolExecutor-6_1",
-                "elapsed_ms": 0.15,
-                "model_provider_ms": null,
-                "library_ms": null,
-                "notes": [
-                  {
-                    "label": "context",
-                    "messages": [
-                      {
-                        "id": null,
-                        "role": "human",
-                        "content": "Summarize order A300."
-                      }
-                    ],
-                    "tools": []
-                  },
-                  {
-                    "label": "context ignored by the mock model",
-                    "messages": 1,
-                    "roles": [
-                      "human"
-                    ]
-                  },
-                  {
-                    "label": "reply",
-                    "message": {
-                      "id": "lc_run--01a077cc-ed92-7862-874b-6bdda9c80301-0",
-                      "role": "ai",
-                      "content": "order A300: bad"
-                    }
-                  }
-                ],
-                "children": [],
-                "body": [
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "context",
-                      "messages": [
-                        {
-                          "id": null,
-                          "role": "human",
-                          "content": "Summarize order A300."
-                        }
-                      ],
-                      "tools": []
-                    }
-                  },
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "context ignored by the mock model",
-                      "messages": 1,
-                      "roles": [
-                        "human"
-                      ]
-                    }
-                  },
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "reply",
-                      "message": {
-                        "id": "lc_run--01a077cc-ed92-7862-874b-6bdda9c80301-0",
-                        "role": "ai",
-                        "content": "order A300: bad"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "turn",
-          "attributes": {
-            "number": 1
-          },
-          "seq": 34,
-          "thread": "ThreadPoolExecutor-6_0",
-          "elapsed_ms": 0.14300000000000002,
-          "model_provider_ms": null,
-          "library_ms": null,
-          "notes": [],
-          "children": [
-            {
-              "name": "model",
-              "attributes": {
-                "model_kind": "mock"
-              },
-              "seq": 35,
               "thread": "ThreadPoolExecutor-6_0",
-              "elapsed_ms": 0.133,
+              "elapsed_ms": 0.275,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2531,7 +2358,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed92-7862-874b-6bf8a1b5a91b-0",
+                    "id": "lc_run--01a09c8f-984f-7e12-acad-6179373e0d97-0",
                     "role": "ai",
                     "content": "order A200: bad"
                   }
@@ -2568,7 +2395,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed92-7862-874b-6bf8a1b5a91b-0",
+                      "id": "lc_run--01a09c8f-984f-7e12-acad-6179373e0d97-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -2585,9 +2412,9 @@
                 "attributes": {
                   "model_kind": "mock"
                 },
-                "seq": 35,
+                "seq": 33,
                 "thread": "ThreadPoolExecutor-6_0",
-                "elapsed_ms": 0.133,
+                "elapsed_ms": 0.275,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2612,7 +2439,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed92-7862-874b-6bf8a1b5a91b-0",
+                      "id": "lc_run--01a09c8f-984f-7e12-acad-6179373e0d97-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -2649,9 +2476,182 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed92-7862-874b-6bf8a1b5a91b-0",
+                        "id": "lc_run--01a09c8f-984f-7e12-acad-6179373e0d97-0",
                         "role": "ai",
                         "content": "order A200: bad"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "turn",
+          "attributes": {
+            "number": 1
+          },
+          "seq": 34,
+          "thread": "ThreadPoolExecutor-6_0",
+          "elapsed_ms": 0.176,
+          "model_provider_ms": null,
+          "library_ms": null,
+          "notes": [],
+          "children": [
+            {
+              "name": "model",
+              "attributes": {
+                "model_kind": "mock"
+              },
+              "seq": 35,
+              "thread": "ThreadPoolExecutor-6_0",
+              "elapsed_ms": 0.163,
+              "model_provider_ms": null,
+              "library_ms": null,
+              "notes": [
+                {
+                  "label": "context",
+                  "messages": [
+                    {
+                      "id": null,
+                      "role": "human",
+                      "content": "Summarize order A300."
+                    }
+                  ],
+                  "tools": []
+                },
+                {
+                  "label": "context ignored by the mock model",
+                  "messages": 1,
+                  "roles": [
+                    "human"
+                  ]
+                },
+                {
+                  "label": "reply",
+                  "message": {
+                    "id": "lc_run--01a09c8f-984f-7e12-acad-619969f049f2-0",
+                    "role": "ai",
+                    "content": "order A300: bad"
+                  }
+                }
+              ],
+              "children": [],
+              "body": [
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Summarize order A300."
+                      }
+                    ],
+                    "tools": []
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  }
+                },
+                {
+                  "kind": "note",
+                  "value": {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-984f-7e12-acad-619969f049f2-0",
+                      "role": "ai",
+                      "content": "order A300: bad"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "body": [
+            {
+              "kind": "span",
+              "value": {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 35,
+                "thread": "ThreadPoolExecutor-6_0",
+                "elapsed_ms": 0.163,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Summarize order A300."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-984f-7e12-acad-619969f049f2-0",
+                      "role": "ai",
+                      "content": "order A300: bad"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Summarize order A300."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-984f-7e12-acad-619969f049f2-0",
+                        "role": "ai",
+                        "content": "order A300: bad"
                       }
                     }
                   }
@@ -2667,7 +2667,7 @@
           },
           "seq": 36,
           "thread": "MainThread",
-          "elapsed_ms": 0.003,
+          "elapsed_ms": 0.004,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -2704,7 +2704,7 @@
           },
           "seq": 37,
           "thread": "ThreadPoolExecutor-6_2",
-          "elapsed_ms": 0.155,
+          "elapsed_ms": 0.354,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -2716,7 +2716,7 @@
               },
               "seq": 38,
               "thread": "ThreadPoolExecutor-6_2",
-              "elapsed_ms": 0.14200000000000002,
+              "elapsed_ms": 0.322,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2741,7 +2741,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed93-7052-8599-abbcca6a58b8-0",
+                    "id": "lc_run--01a09c8f-9851-7453-8809-a2fc900828fe-0",
                     "role": "ai",
                     "content": "order A300: bad"
                   }
@@ -2778,7 +2778,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed93-7052-8599-abbcca6a58b8-0",
+                      "id": "lc_run--01a09c8f-9851-7453-8809-a2fc900828fe-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -2797,7 +2797,7 @@
                 },
                 "seq": 38,
                 "thread": "ThreadPoolExecutor-6_2",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.322,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2822,7 +2822,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed93-7052-8599-abbcca6a58b8-0",
+                      "id": "lc_run--01a09c8f-9851-7453-8809-a2fc900828fe-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -2859,7 +2859,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed93-7052-8599-abbcca6a58b8-0",
+                        "id": "lc_run--01a09c8f-9851-7453-8809-a2fc900828fe-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -2876,8 +2876,8 @@
             "number": 2
           },
           "seq": 39,
-          "thread": "ThreadPoolExecutor-6_0",
-          "elapsed_ms": 0.13999999999999999,
+          "thread": "ThreadPoolExecutor-6_1",
+          "elapsed_ms": 0.175,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -2888,8 +2888,8 @@
                 "model_kind": "mock"
               },
               "seq": 40,
-              "thread": "ThreadPoolExecutor-6_0",
-              "elapsed_ms": 0.131,
+              "thread": "ThreadPoolExecutor-6_1",
+              "elapsed_ms": 0.161,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2914,7 +2914,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed93-7052-8599-abd9acfe840a-0",
+                    "id": "lc_run--01a09c8f-9851-7453-8809-a317aad21e6a-0",
                     "role": "ai",
                     "content": "order A200: bad"
                   }
@@ -2951,7 +2951,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed93-7052-8599-abd9acfe840a-0",
+                      "id": "lc_run--01a09c8f-9851-7453-8809-a317aad21e6a-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -2969,8 +2969,8 @@
                   "model_kind": "mock"
                 },
                 "seq": 40,
-                "thread": "ThreadPoolExecutor-6_0",
-                "elapsed_ms": 0.131,
+                "thread": "ThreadPoolExecutor-6_1",
+                "elapsed_ms": 0.161,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2995,7 +2995,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed93-7052-8599-abd9acfe840a-0",
+                      "id": "lc_run--01a09c8f-9851-7453-8809-a317aad21e6a-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -3032,7 +3032,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed93-7052-8599-abd9acfe840a-0",
+                        "id": "lc_run--01a09c8f-9851-7453-8809-a317aad21e6a-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -3049,8 +3049,8 @@
             "number": 2
           },
           "seq": 41,
-          "thread": "ThreadPoolExecutor-6_1",
-          "elapsed_ms": 0.16699999999999998,
+          "thread": "ThreadPoolExecutor-6_0",
+          "elapsed_ms": 0.201,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -3061,8 +3061,8 @@
                 "model_kind": "mock"
               },
               "seq": 42,
-              "thread": "ThreadPoolExecutor-6_1",
-              "elapsed_ms": 0.158,
+              "thread": "ThreadPoolExecutor-6_0",
+              "elapsed_ms": 0.189,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3087,7 +3087,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed94-7e53-aeca-2634bc78ea38-0",
+                    "id": "lc_run--01a09c8f-9851-7453-8809-a33c7b904ed8-0",
                     "role": "ai",
                     "content": "order A100: bad"
                   }
@@ -3124,7 +3124,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed94-7e53-aeca-2634bc78ea38-0",
+                      "id": "lc_run--01a09c8f-9851-7453-8809-a33c7b904ed8-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -3142,8 +3142,8 @@
                   "model_kind": "mock"
                 },
                 "seq": 42,
-                "thread": "ThreadPoolExecutor-6_1",
-                "elapsed_ms": 0.158,
+                "thread": "ThreadPoolExecutor-6_0",
+                "elapsed_ms": 0.189,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3168,7 +3168,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed94-7e53-aeca-2634bc78ea38-0",
+                      "id": "lc_run--01a09c8f-9851-7453-8809-a33c7b904ed8-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -3205,7 +3205,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed94-7e53-aeca-2634bc78ea38-0",
+                        "id": "lc_run--01a09c8f-9851-7453-8809-a33c7b904ed8-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -3260,7 +3260,7 @@
           },
           "seq": 44,
           "thread": "ThreadPoolExecutor-6_2",
-          "elapsed_ms": 0.14300000000000002,
+          "elapsed_ms": 0.316,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -3272,7 +3272,7 @@
               },
               "seq": 45,
               "thread": "ThreadPoolExecutor-6_2",
-              "elapsed_ms": 0.133,
+              "elapsed_ms": 0.3,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3297,7 +3297,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed94-7e53-aeca-269835554995-0",
+                    "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aa82e8a27bd1-0",
                     "role": "ai",
                     "content": "order A100: good"
                   }
@@ -3334,7 +3334,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed94-7e53-aeca-269835554995-0",
+                      "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aa82e8a27bd1-0",
                       "role": "ai",
                       "content": "order A100: good"
                     }
@@ -3353,7 +3353,7 @@
                 },
                 "seq": 45,
                 "thread": "ThreadPoolExecutor-6_2",
-                "elapsed_ms": 0.133,
+                "elapsed_ms": 0.3,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3378,7 +3378,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed94-7e53-aeca-269835554995-0",
+                      "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aa82e8a27bd1-0",
                       "role": "ai",
                       "content": "order A100: good"
                     }
@@ -3415,7 +3415,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed94-7e53-aeca-269835554995-0",
+                        "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aa82e8a27bd1-0",
                         "role": "ai",
                         "content": "order A100: good"
                       }
@@ -3432,8 +3432,8 @@
             "number": 3
           },
           "seq": 46,
-          "thread": "ThreadPoolExecutor-6_0",
-          "elapsed_ms": 0.136,
+          "thread": "ThreadPoolExecutor-6_1",
+          "elapsed_ms": 0.256,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -3444,8 +3444,8 @@
                 "model_kind": "mock"
               },
               "seq": 47,
-              "thread": "ThreadPoolExecutor-6_0",
-              "elapsed_ms": 0.127,
+              "thread": "ThreadPoolExecutor-6_1",
+              "elapsed_ms": 0.237,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3470,7 +3470,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed94-7e53-aeca-26b944d453ef-0",
+                    "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aaa157767ef5-0",
                     "role": "ai",
                     "content": "order A200: good"
                   }
@@ -3507,7 +3507,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed94-7e53-aeca-26b944d453ef-0",
+                      "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aaa157767ef5-0",
                       "role": "ai",
                       "content": "order A200: good"
                     }
@@ -3525,8 +3525,8 @@
                   "model_kind": "mock"
                 },
                 "seq": 47,
-                "thread": "ThreadPoolExecutor-6_0",
-                "elapsed_ms": 0.127,
+                "thread": "ThreadPoolExecutor-6_1",
+                "elapsed_ms": 0.237,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3551,7 +3551,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed94-7e53-aeca-26b944d453ef-0",
+                      "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aaa157767ef5-0",
                       "role": "ai",
                       "content": "order A200: good"
                     }
@@ -3588,7 +3588,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed94-7e53-aeca-26b944d453ef-0",
+                        "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aaa157767ef5-0",
                         "role": "ai",
                         "content": "order A200: good"
                       }
@@ -3605,8 +3605,8 @@
             "number": 3
           },
           "seq": 48,
-          "thread": "ThreadPoolExecutor-6_1",
-          "elapsed_ms": 0.136,
+          "thread": "ThreadPoolExecutor-6_0",
+          "elapsed_ms": 0.358,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -3617,8 +3617,8 @@
                 "model_kind": "mock"
               },
               "seq": 49,
-              "thread": "ThreadPoolExecutor-6_1",
-              "elapsed_ms": 0.127,
+              "thread": "ThreadPoolExecutor-6_0",
+              "elapsed_ms": 0.312,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3643,7 +3643,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed95-78c1-8a13-8dba7839d6e7-0",
+                    "id": "lc_run--01a09c8f-9853-7a91-bef7-175e365aacd6-0",
                     "role": "ai",
                     "content": "order A300: good"
                   }
@@ -3680,7 +3680,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed95-78c1-8a13-8dba7839d6e7-0",
+                      "id": "lc_run--01a09c8f-9853-7a91-bef7-175e365aacd6-0",
                       "role": "ai",
                       "content": "order A300: good"
                     }
@@ -3698,8 +3698,8 @@
                   "model_kind": "mock"
                 },
                 "seq": 49,
-                "thread": "ThreadPoolExecutor-6_1",
-                "elapsed_ms": 0.127,
+                "thread": "ThreadPoolExecutor-6_0",
+                "elapsed_ms": 0.312,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3724,7 +3724,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed95-78c1-8a13-8dba7839d6e7-0",
+                      "id": "lc_run--01a09c8f-9853-7a91-bef7-175e365aacd6-0",
                       "role": "ai",
                       "content": "order A300: good"
                     }
@@ -3761,7 +3761,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed95-78c1-8a13-8dba7839d6e7-0",
+                        "id": "lc_run--01a09c8f-9853-7a91-bef7-175e365aacd6-0",
                         "role": "ai",
                         "content": "order A300: good"
                       }
@@ -3779,7 +3779,7 @@
           },
           "seq": 50,
           "thread": "MainThread",
-          "elapsed_ms": 0.002,
+          "elapsed_ms": 0.003,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -3816,7 +3816,7 @@
           },
           "seq": 51,
           "thread": "ThreadPoolExecutor-7_0",
-          "elapsed_ms": 0.21000000000000002,
+          "elapsed_ms": 0.219,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -3828,7 +3828,7 @@
               },
               "seq": 52,
               "thread": "ThreadPoolExecutor-7_0",
-              "elapsed_ms": 0.19,
+              "elapsed_ms": 0.199,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3853,7 +3853,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed97-7882-9ef3-8a2dae9bfb28-0",
+                    "id": "lc_run--01a09c8f-9857-75a3-8e53-aab0c55bf53f-0",
                     "role": "ai",
                     "content": "order A100: bad"
                   }
@@ -3890,7 +3890,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed97-7882-9ef3-8a2dae9bfb28-0",
+                      "id": "lc_run--01a09c8f-9857-75a3-8e53-aab0c55bf53f-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -3909,7 +3909,7 @@
                 },
                 "seq": 52,
                 "thread": "ThreadPoolExecutor-7_0",
-                "elapsed_ms": 0.19,
+                "elapsed_ms": 0.199,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3934,7 +3934,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed97-7882-9ef3-8a2dae9bfb28-0",
+                      "id": "lc_run--01a09c8f-9857-75a3-8e53-aab0c55bf53f-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -3971,7 +3971,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed97-7882-9ef3-8a2dae9bfb28-0",
+                        "id": "lc_run--01a09c8f-9857-75a3-8e53-aab0c55bf53f-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -3989,7 +3989,7 @@
           },
           "seq": 53,
           "thread": "ThreadPoolExecutor-7_1",
-          "elapsed_ms": 0.212,
+          "elapsed_ms": 0.191,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4001,7 +4001,7 @@
               },
               "seq": 54,
               "thread": "ThreadPoolExecutor-7_1",
-              "elapsed_ms": 0.16899999999999998,
+              "elapsed_ms": 0.175,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4026,7 +4026,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed98-7ab3-8365-ffe1b10da0dd-0",
+                    "id": "lc_run--01a09c8f-9858-7292-88a9-3cb5b570232a-0",
                     "role": "ai",
                     "content": "order A300: bad"
                   }
@@ -4063,7 +4063,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed98-7ab3-8365-ffe1b10da0dd-0",
+                      "id": "lc_run--01a09c8f-9858-7292-88a9-3cb5b570232a-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -4082,7 +4082,7 @@
                 },
                 "seq": 54,
                 "thread": "ThreadPoolExecutor-7_1",
-                "elapsed_ms": 0.16899999999999998,
+                "elapsed_ms": 0.175,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4107,7 +4107,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed98-7ab3-8365-ffe1b10da0dd-0",
+                      "id": "lc_run--01a09c8f-9858-7292-88a9-3cb5b570232a-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -4144,7 +4144,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed98-7ab3-8365-ffe1b10da0dd-0",
+                        "id": "lc_run--01a09c8f-9858-7292-88a9-3cb5b570232a-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -4162,7 +4162,7 @@
           },
           "seq": 55,
           "thread": "ThreadPoolExecutor-7_0",
-          "elapsed_ms": 0.14200000000000002,
+          "elapsed_ms": 0.17,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4174,7 +4174,7 @@
               },
               "seq": 56,
               "thread": "ThreadPoolExecutor-7_0",
-              "elapsed_ms": 0.132,
+              "elapsed_ms": 0.157,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4199,7 +4199,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed98-7ab3-8366-0007e8f7ac88-0",
+                    "id": "lc_run--01a09c8f-9858-7292-88a9-3cdf37d87be8-0",
                     "role": "ai",
                     "content": "order A200: bad"
                   }
@@ -4236,7 +4236,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed98-7ab3-8366-0007e8f7ac88-0",
+                      "id": "lc_run--01a09c8f-9858-7292-88a9-3cdf37d87be8-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -4255,7 +4255,7 @@
                 },
                 "seq": 56,
                 "thread": "ThreadPoolExecutor-7_0",
-                "elapsed_ms": 0.132,
+                "elapsed_ms": 0.157,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4280,7 +4280,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed98-7ab3-8366-0007e8f7ac88-0",
+                      "id": "lc_run--01a09c8f-9858-7292-88a9-3cdf37d87be8-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -4317,7 +4317,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed98-7ab3-8366-0007e8f7ac88-0",
+                        "id": "lc_run--01a09c8f-9858-7292-88a9-3cdf37d87be8-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -4335,7 +4335,7 @@
           },
           "seq": 57,
           "thread": "MainThread",
-          "elapsed_ms": 0.003,
+          "elapsed_ms": 0.005,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -4372,7 +4372,7 @@
           },
           "seq": 58,
           "thread": "ThreadPoolExecutor-7_2",
-          "elapsed_ms": 0.179,
+          "elapsed_ms": 0.215,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4384,7 +4384,7 @@
               },
               "seq": 59,
               "thread": "ThreadPoolExecutor-7_2",
-              "elapsed_ms": 0.166,
+              "elapsed_ms": 0.199,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4409,7 +4409,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed99-7541-b858-fd8e53e36829-0",
+                    "id": "lc_run--01a09c8f-9859-7882-b0a7-9a5053df1e9b-0",
                     "role": "ai",
                     "content": "order A300: bad"
                   }
@@ -4446,7 +4446,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed99-7541-b858-fd8e53e36829-0",
+                      "id": "lc_run--01a09c8f-9859-7882-b0a7-9a5053df1e9b-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -4465,7 +4465,7 @@
                 },
                 "seq": 59,
                 "thread": "ThreadPoolExecutor-7_2",
-                "elapsed_ms": 0.166,
+                "elapsed_ms": 0.199,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4490,7 +4490,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed99-7541-b858-fd8e53e36829-0",
+                      "id": "lc_run--01a09c8f-9859-7882-b0a7-9a5053df1e9b-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -4527,7 +4527,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed99-7541-b858-fd8e53e36829-0",
+                        "id": "lc_run--01a09c8f-9859-7882-b0a7-9a5053df1e9b-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -4545,7 +4545,7 @@
           },
           "seq": 60,
           "thread": "ThreadPoolExecutor-7_0",
-          "elapsed_ms": 0.132,
+          "elapsed_ms": 0.16699999999999998,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4557,7 +4557,7 @@
               },
               "seq": 61,
               "thread": "ThreadPoolExecutor-7_0",
-              "elapsed_ms": 0.122,
+              "elapsed_ms": 0.155,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4582,7 +4582,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed99-7541-b858-fda45319d189-0",
+                    "id": "lc_run--01a09c8f-9859-7882-b0a7-9a77a172c5d3-0",
                     "role": "ai",
                     "content": "order A200: bad"
                   }
@@ -4619,7 +4619,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed99-7541-b858-fda45319d189-0",
+                      "id": "lc_run--01a09c8f-9859-7882-b0a7-9a77a172c5d3-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -4638,7 +4638,7 @@
                 },
                 "seq": 61,
                 "thread": "ThreadPoolExecutor-7_0",
-                "elapsed_ms": 0.122,
+                "elapsed_ms": 0.155,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4663,7 +4663,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed99-7541-b858-fda45319d189-0",
+                      "id": "lc_run--01a09c8f-9859-7882-b0a7-9a77a172c5d3-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -4700,7 +4700,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed99-7541-b858-fda45319d189-0",
+                        "id": "lc_run--01a09c8f-9859-7882-b0a7-9a77a172c5d3-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -4718,7 +4718,7 @@
           },
           "seq": 62,
           "thread": "ThreadPoolExecutor-7_1",
-          "elapsed_ms": 0.13699999999999998,
+          "elapsed_ms": 0.23399999999999999,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4730,7 +4730,7 @@
               },
               "seq": 63,
               "thread": "ThreadPoolExecutor-7_1",
-              "elapsed_ms": 0.128,
+              "elapsed_ms": 0.222,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4755,7 +4755,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed99-7541-b858-fdc9a6a17fbb-0",
+                    "id": "lc_run--01a09c8f-985a-7a13-a4d4-93afb205529c-0",
                     "role": "ai",
                     "content": "order A100: bad"
                   }
@@ -4792,7 +4792,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed99-7541-b858-fdc9a6a17fbb-0",
+                      "id": "lc_run--01a09c8f-985a-7a13-a4d4-93afb205529c-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -4811,7 +4811,7 @@
                 },
                 "seq": 63,
                 "thread": "ThreadPoolExecutor-7_1",
-                "elapsed_ms": 0.128,
+                "elapsed_ms": 0.222,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4836,7 +4836,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed99-7541-b858-fdc9a6a17fbb-0",
+                      "id": "lc_run--01a09c8f-985a-7a13-a4d4-93afb205529c-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -4873,7 +4873,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed99-7541-b858-fdc9a6a17fbb-0",
+                        "id": "lc_run--01a09c8f-985a-7a13-a4d4-93afb205529c-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -4928,7 +4928,7 @@
           },
           "seq": 65,
           "thread": "ThreadPoolExecutor-7_2",
-          "elapsed_ms": 0.146,
+          "elapsed_ms": 0.178,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4940,7 +4940,7 @@
               },
               "seq": 66,
               "thread": "ThreadPoolExecutor-7_2",
-              "elapsed_ms": 0.136,
+              "elapsed_ms": 0.162,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4965,7 +4965,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b33273bcd952-0",
+                    "id": "lc_run--01a09c8f-985a-7a13-a4d4-9401ede4bc7b-0",
                     "role": "ai",
                     "content": "order A100: bad"
                   }
@@ -5002,7 +5002,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b33273bcd952-0",
+                      "id": "lc_run--01a09c8f-985a-7a13-a4d4-9401ede4bc7b-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -5021,7 +5021,7 @@
                 },
                 "seq": 66,
                 "thread": "ThreadPoolExecutor-7_2",
-                "elapsed_ms": 0.136,
+                "elapsed_ms": 0.162,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5046,7 +5046,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b33273bcd952-0",
+                      "id": "lc_run--01a09c8f-985a-7a13-a4d4-9401ede4bc7b-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -5083,7 +5083,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b33273bcd952-0",
+                        "id": "lc_run--01a09c8f-985a-7a13-a4d4-9401ede4bc7b-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -5101,7 +5101,7 @@
           },
           "seq": 67,
           "thread": "ThreadPoolExecutor-7_0",
-          "elapsed_ms": 0.135,
+          "elapsed_ms": 0.272,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -5113,7 +5113,7 @@
               },
               "seq": 68,
               "thread": "ThreadPoolExecutor-7_0",
-              "elapsed_ms": 0.126,
+              "elapsed_ms": 0.23,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -5138,7 +5138,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b359c7758fb4-0",
+                    "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09a31290450b-0",
                     "role": "ai",
                     "content": "order A200: bad"
                   }
@@ -5175,7 +5175,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b359c7758fb4-0",
+                      "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09a31290450b-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -5194,7 +5194,7 @@
                 },
                 "seq": 68,
                 "thread": "ThreadPoolExecutor-7_0",
-                "elapsed_ms": 0.126,
+                "elapsed_ms": 0.23,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5219,7 +5219,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b359c7758fb4-0",
+                      "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09a31290450b-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -5256,7 +5256,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b359c7758fb4-0",
+                        "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09a31290450b-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -5274,7 +5274,7 @@
           },
           "seq": 69,
           "thread": "ThreadPoolExecutor-7_1",
-          "elapsed_ms": 0.133,
+          "elapsed_ms": 0.326,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -5286,7 +5286,7 @@
               },
               "seq": 70,
               "thread": "ThreadPoolExecutor-7_1",
-              "elapsed_ms": 0.125,
+              "elapsed_ms": 0.307,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -5311,7 +5311,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b375237d8ae5-0",
+                    "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09c431eac48b-0",
                     "role": "ai",
                     "content": "order A300: bad"
                   }
@@ -5348,7 +5348,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b375237d8ae5-0",
+                      "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09c431eac48b-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -5367,7 +5367,7 @@
                 },
                 "seq": 70,
                 "thread": "ThreadPoolExecutor-7_1",
-                "elapsed_ms": 0.125,
+                "elapsed_ms": 0.307,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5392,7 +5392,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b375237d8ae5-0",
+                      "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09c431eac48b-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -5429,7 +5429,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b375237d8ae5-0",
+                        "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09c431eac48b-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -5488,7 +5488,7 @@
             },
             "seq": 30,
             "thread": "ThreadPoolExecutor-6_0",
-            "elapsed_ms": 0.299,
+            "elapsed_ms": 0.39,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -5500,7 +5500,7 @@
                 },
                 "seq": 31,
                 "thread": "ThreadPoolExecutor-6_0",
-                "elapsed_ms": 0.27399999999999997,
+                "elapsed_ms": 0.34900000000000003,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5525,7 +5525,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed92-7862-874b-6bbd8c2b20ca-0",
+                      "id": "lc_run--01a09c8f-984e-7bd0-84b8-b26835e82a7f-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -5562,7 +5562,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed92-7862-874b-6bbd8c2b20ca-0",
+                        "id": "lc_run--01a09c8f-984e-7bd0-84b8-b26835e82a7f-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -5581,7 +5581,7 @@
                   },
                   "seq": 31,
                   "thread": "ThreadPoolExecutor-6_0",
-                  "elapsed_ms": 0.27399999999999997,
+                  "elapsed_ms": 0.34900000000000003,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -5606,7 +5606,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed92-7862-874b-6bbd8c2b20ca-0",
+                        "id": "lc_run--01a09c8f-984e-7bd0-84b8-b26835e82a7f-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -5643,7 +5643,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed92-7862-874b-6bbd8c2b20ca-0",
+                          "id": "lc_run--01a09c8f-984e-7bd0-84b8-b26835e82a7f-0",
                           "role": "ai",
                           "content": "order A100: bad"
                         }
@@ -5663,8 +5663,8 @@
               "number": 1
             },
             "seq": 32,
-            "thread": "ThreadPoolExecutor-6_1",
-            "elapsed_ms": 0.164,
+            "thread": "ThreadPoolExecutor-6_0",
+            "elapsed_ms": 0.305,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -5675,184 +5675,8 @@
                   "model_kind": "mock"
                 },
                 "seq": 33,
-                "thread": "ThreadPoolExecutor-6_1",
-                "elapsed_ms": 0.15,
-                "model_provider_ms": null,
-                "library_ms": null,
-                "notes": [
-                  {
-                    "label": "context",
-                    "messages": [
-                      {
-                        "id": null,
-                        "role": "human",
-                        "content": "Summarize order A300."
-                      }
-                    ],
-                    "tools": []
-                  },
-                  {
-                    "label": "context ignored by the mock model",
-                    "messages": 1,
-                    "roles": [
-                      "human"
-                    ]
-                  },
-                  {
-                    "label": "reply",
-                    "message": {
-                      "id": "lc_run--01a077cc-ed92-7862-874b-6bdda9c80301-0",
-                      "role": "ai",
-                      "content": "order A300: bad"
-                    }
-                  }
-                ],
-                "children": [],
-                "body": [
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "context",
-                      "messages": [
-                        {
-                          "id": null,
-                          "role": "human",
-                          "content": "Summarize order A300."
-                        }
-                      ],
-                      "tools": []
-                    }
-                  },
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "context ignored by the mock model",
-                      "messages": 1,
-                      "roles": [
-                        "human"
-                      ]
-                    }
-                  },
-                  {
-                    "kind": "note",
-                    "value": {
-                      "label": "reply",
-                      "message": {
-                        "id": "lc_run--01a077cc-ed92-7862-874b-6bdda9c80301-0",
-                        "role": "ai",
-                        "content": "order A300: bad"
-                      }
-                    }
-                  }
-                ]
-              }
-            ],
-            "body": [
-              {
-                "kind": "span",
-                "value": {
-                  "name": "model",
-                  "attributes": {
-                    "model_kind": "mock"
-                  },
-                  "seq": 33,
-                  "thread": "ThreadPoolExecutor-6_1",
-                  "elapsed_ms": 0.15,
-                  "model_provider_ms": null,
-                  "library_ms": null,
-                  "notes": [
-                    {
-                      "label": "context",
-                      "messages": [
-                        {
-                          "id": null,
-                          "role": "human",
-                          "content": "Summarize order A300."
-                        }
-                      ],
-                      "tools": []
-                    },
-                    {
-                      "label": "context ignored by the mock model",
-                      "messages": 1,
-                      "roles": [
-                        "human"
-                      ]
-                    },
-                    {
-                      "label": "reply",
-                      "message": {
-                        "id": "lc_run--01a077cc-ed92-7862-874b-6bdda9c80301-0",
-                        "role": "ai",
-                        "content": "order A300: bad"
-                      }
-                    }
-                  ],
-                  "children": [],
-                  "body": [
-                    {
-                      "kind": "note",
-                      "value": {
-                        "label": "context",
-                        "messages": [
-                          {
-                            "id": null,
-                            "role": "human",
-                            "content": "Summarize order A300."
-                          }
-                        ],
-                        "tools": []
-                      }
-                    },
-                    {
-                      "kind": "note",
-                      "value": {
-                        "label": "context ignored by the mock model",
-                        "messages": 1,
-                        "roles": [
-                          "human"
-                        ]
-                      }
-                    },
-                    {
-                      "kind": "note",
-                      "value": {
-                        "label": "reply",
-                        "message": {
-                          "id": "lc_run--01a077cc-ed92-7862-874b-6bdda9c80301-0",
-                          "role": "ai",
-                          "content": "order A300: bad"
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "kind": "span",
-          "value": {
-            "name": "turn",
-            "attributes": {
-              "number": 1
-            },
-            "seq": 34,
-            "thread": "ThreadPoolExecutor-6_0",
-            "elapsed_ms": 0.14300000000000002,
-            "model_provider_ms": null,
-            "library_ms": null,
-            "notes": [],
-            "children": [
-              {
-                "name": "model",
-                "attributes": {
-                  "model_kind": "mock"
-                },
-                "seq": 35,
                 "thread": "ThreadPoolExecutor-6_0",
-                "elapsed_ms": 0.133,
+                "elapsed_ms": 0.275,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5877,7 +5701,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed92-7862-874b-6bf8a1b5a91b-0",
+                      "id": "lc_run--01a09c8f-984f-7e12-acad-6179373e0d97-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -5914,7 +5738,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed92-7862-874b-6bf8a1b5a91b-0",
+                        "id": "lc_run--01a09c8f-984f-7e12-acad-6179373e0d97-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -5931,9 +5755,9 @@
                   "attributes": {
                     "model_kind": "mock"
                   },
-                  "seq": 35,
+                  "seq": 33,
                   "thread": "ThreadPoolExecutor-6_0",
-                  "elapsed_ms": 0.133,
+                  "elapsed_ms": 0.275,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -5958,7 +5782,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed92-7862-874b-6bf8a1b5a91b-0",
+                        "id": "lc_run--01a09c8f-984f-7e12-acad-6179373e0d97-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -5995,9 +5819,185 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed92-7862-874b-6bf8a1b5a91b-0",
+                          "id": "lc_run--01a09c8f-984f-7e12-acad-6179373e0d97-0",
                           "role": "ai",
                           "content": "order A200: bad"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "turn",
+            "attributes": {
+              "number": 1
+            },
+            "seq": 34,
+            "thread": "ThreadPoolExecutor-6_0",
+            "elapsed_ms": 0.176,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [],
+            "children": [
+              {
+                "name": "model",
+                "attributes": {
+                  "model_kind": "mock"
+                },
+                "seq": 35,
+                "thread": "ThreadPoolExecutor-6_0",
+                "elapsed_ms": 0.163,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [
+                  {
+                    "label": "context",
+                    "messages": [
+                      {
+                        "id": null,
+                        "role": "human",
+                        "content": "Summarize order A300."
+                      }
+                    ],
+                    "tools": []
+                  },
+                  {
+                    "label": "context ignored by the mock model",
+                    "messages": 1,
+                    "roles": [
+                      "human"
+                    ]
+                  },
+                  {
+                    "label": "reply",
+                    "message": {
+                      "id": "lc_run--01a09c8f-984f-7e12-acad-619969f049f2-0",
+                      "role": "ai",
+                      "content": "order A300: bad"
+                    }
+                  }
+                ],
+                "children": [],
+                "body": [
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Summarize order A300."
+                        }
+                      ],
+                      "tools": []
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "note",
+                    "value": {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-984f-7e12-acad-619969f049f2-0",
+                        "role": "ai",
+                        "content": "order A300: bad"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "span",
+                "value": {
+                  "name": "model",
+                  "attributes": {
+                    "model_kind": "mock"
+                  },
+                  "seq": 35,
+                  "thread": "ThreadPoolExecutor-6_0",
+                  "elapsed_ms": 0.163,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [
+                    {
+                      "label": "context",
+                      "messages": [
+                        {
+                          "id": null,
+                          "role": "human",
+                          "content": "Summarize order A300."
+                        }
+                      ],
+                      "tools": []
+                    },
+                    {
+                      "label": "context ignored by the mock model",
+                      "messages": 1,
+                      "roles": [
+                        "human"
+                      ]
+                    },
+                    {
+                      "label": "reply",
+                      "message": {
+                        "id": "lc_run--01a09c8f-984f-7e12-acad-619969f049f2-0",
+                        "role": "ai",
+                        "content": "order A300: bad"
+                      }
+                    }
+                  ],
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "Summarize order A300."
+                          }
+                        ],
+                        "tools": []
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 1,
+                        "roles": [
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-984f-7e12-acad-619969f049f2-0",
+                          "role": "ai",
+                          "content": "order A300: bad"
                         }
                       }
                     }
@@ -6016,7 +6016,7 @@
             },
             "seq": 36,
             "thread": "MainThread",
-            "elapsed_ms": 0.003,
+            "elapsed_ms": 0.004,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -6056,7 +6056,7 @@
             },
             "seq": 37,
             "thread": "ThreadPoolExecutor-6_2",
-            "elapsed_ms": 0.155,
+            "elapsed_ms": 0.354,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -6068,7 +6068,7 @@
                 },
                 "seq": 38,
                 "thread": "ThreadPoolExecutor-6_2",
-                "elapsed_ms": 0.14200000000000002,
+                "elapsed_ms": 0.322,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -6093,7 +6093,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed93-7052-8599-abbcca6a58b8-0",
+                      "id": "lc_run--01a09c8f-9851-7453-8809-a2fc900828fe-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -6130,7 +6130,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed93-7052-8599-abbcca6a58b8-0",
+                        "id": "lc_run--01a09c8f-9851-7453-8809-a2fc900828fe-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -6149,7 +6149,7 @@
                   },
                   "seq": 38,
                   "thread": "ThreadPoolExecutor-6_2",
-                  "elapsed_ms": 0.14200000000000002,
+                  "elapsed_ms": 0.322,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -6174,7 +6174,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed93-7052-8599-abbcca6a58b8-0",
+                        "id": "lc_run--01a09c8f-9851-7453-8809-a2fc900828fe-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -6211,7 +6211,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed93-7052-8599-abbcca6a58b8-0",
+                          "id": "lc_run--01a09c8f-9851-7453-8809-a2fc900828fe-0",
                           "role": "ai",
                           "content": "order A300: bad"
                         }
@@ -6231,8 +6231,8 @@
               "number": 2
             },
             "seq": 39,
-            "thread": "ThreadPoolExecutor-6_0",
-            "elapsed_ms": 0.13999999999999999,
+            "thread": "ThreadPoolExecutor-6_1",
+            "elapsed_ms": 0.175,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -6243,8 +6243,8 @@
                   "model_kind": "mock"
                 },
                 "seq": 40,
-                "thread": "ThreadPoolExecutor-6_0",
-                "elapsed_ms": 0.131,
+                "thread": "ThreadPoolExecutor-6_1",
+                "elapsed_ms": 0.161,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -6269,7 +6269,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed93-7052-8599-abd9acfe840a-0",
+                      "id": "lc_run--01a09c8f-9851-7453-8809-a317aad21e6a-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -6306,7 +6306,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed93-7052-8599-abd9acfe840a-0",
+                        "id": "lc_run--01a09c8f-9851-7453-8809-a317aad21e6a-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -6324,8 +6324,8 @@
                     "model_kind": "mock"
                   },
                   "seq": 40,
-                  "thread": "ThreadPoolExecutor-6_0",
-                  "elapsed_ms": 0.131,
+                  "thread": "ThreadPoolExecutor-6_1",
+                  "elapsed_ms": 0.161,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -6350,7 +6350,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed93-7052-8599-abd9acfe840a-0",
+                        "id": "lc_run--01a09c8f-9851-7453-8809-a317aad21e6a-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -6387,7 +6387,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed93-7052-8599-abd9acfe840a-0",
+                          "id": "lc_run--01a09c8f-9851-7453-8809-a317aad21e6a-0",
                           "role": "ai",
                           "content": "order A200: bad"
                         }
@@ -6407,8 +6407,8 @@
               "number": 2
             },
             "seq": 41,
-            "thread": "ThreadPoolExecutor-6_1",
-            "elapsed_ms": 0.16699999999999998,
+            "thread": "ThreadPoolExecutor-6_0",
+            "elapsed_ms": 0.201,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -6419,8 +6419,8 @@
                   "model_kind": "mock"
                 },
                 "seq": 42,
-                "thread": "ThreadPoolExecutor-6_1",
-                "elapsed_ms": 0.158,
+                "thread": "ThreadPoolExecutor-6_0",
+                "elapsed_ms": 0.189,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -6445,7 +6445,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed94-7e53-aeca-2634bc78ea38-0",
+                      "id": "lc_run--01a09c8f-9851-7453-8809-a33c7b904ed8-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -6482,7 +6482,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed94-7e53-aeca-2634bc78ea38-0",
+                        "id": "lc_run--01a09c8f-9851-7453-8809-a33c7b904ed8-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -6500,8 +6500,8 @@
                     "model_kind": "mock"
                   },
                   "seq": 42,
-                  "thread": "ThreadPoolExecutor-6_1",
-                  "elapsed_ms": 0.158,
+                  "thread": "ThreadPoolExecutor-6_0",
+                  "elapsed_ms": 0.189,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -6526,7 +6526,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed94-7e53-aeca-2634bc78ea38-0",
+                        "id": "lc_run--01a09c8f-9851-7453-8809-a33c7b904ed8-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -6563,7 +6563,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed94-7e53-aeca-2634bc78ea38-0",
+                          "id": "lc_run--01a09c8f-9851-7453-8809-a33c7b904ed8-0",
                           "role": "ai",
                           "content": "order A100: bad"
                         }
@@ -6624,7 +6624,7 @@
             },
             "seq": 44,
             "thread": "ThreadPoolExecutor-6_2",
-            "elapsed_ms": 0.14300000000000002,
+            "elapsed_ms": 0.316,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -6636,7 +6636,7 @@
                 },
                 "seq": 45,
                 "thread": "ThreadPoolExecutor-6_2",
-                "elapsed_ms": 0.133,
+                "elapsed_ms": 0.3,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -6661,7 +6661,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed94-7e53-aeca-269835554995-0",
+                      "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aa82e8a27bd1-0",
                       "role": "ai",
                       "content": "order A100: good"
                     }
@@ -6698,7 +6698,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed94-7e53-aeca-269835554995-0",
+                        "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aa82e8a27bd1-0",
                         "role": "ai",
                         "content": "order A100: good"
                       }
@@ -6717,7 +6717,7 @@
                   },
                   "seq": 45,
                   "thread": "ThreadPoolExecutor-6_2",
-                  "elapsed_ms": 0.133,
+                  "elapsed_ms": 0.3,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -6742,7 +6742,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed94-7e53-aeca-269835554995-0",
+                        "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aa82e8a27bd1-0",
                         "role": "ai",
                         "content": "order A100: good"
                       }
@@ -6779,7 +6779,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed94-7e53-aeca-269835554995-0",
+                          "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aa82e8a27bd1-0",
                           "role": "ai",
                           "content": "order A100: good"
                         }
@@ -6799,8 +6799,8 @@
               "number": 3
             },
             "seq": 46,
-            "thread": "ThreadPoolExecutor-6_0",
-            "elapsed_ms": 0.136,
+            "thread": "ThreadPoolExecutor-6_1",
+            "elapsed_ms": 0.256,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -6811,8 +6811,8 @@
                   "model_kind": "mock"
                 },
                 "seq": 47,
-                "thread": "ThreadPoolExecutor-6_0",
-                "elapsed_ms": 0.127,
+                "thread": "ThreadPoolExecutor-6_1",
+                "elapsed_ms": 0.237,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -6837,7 +6837,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed94-7e53-aeca-26b944d453ef-0",
+                      "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aaa157767ef5-0",
                       "role": "ai",
                       "content": "order A200: good"
                     }
@@ -6874,7 +6874,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed94-7e53-aeca-26b944d453ef-0",
+                        "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aaa157767ef5-0",
                         "role": "ai",
                         "content": "order A200: good"
                       }
@@ -6892,8 +6892,8 @@
                     "model_kind": "mock"
                   },
                   "seq": 47,
-                  "thread": "ThreadPoolExecutor-6_0",
-                  "elapsed_ms": 0.127,
+                  "thread": "ThreadPoolExecutor-6_1",
+                  "elapsed_ms": 0.237,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -6918,7 +6918,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed94-7e53-aeca-26b944d453ef-0",
+                        "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aaa157767ef5-0",
                         "role": "ai",
                         "content": "order A200: good"
                       }
@@ -6955,7 +6955,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed94-7e53-aeca-26b944d453ef-0",
+                          "id": "lc_run--01a09c8f-9852-7ce2-bcd4-aaa157767ef5-0",
                           "role": "ai",
                           "content": "order A200: good"
                         }
@@ -6975,8 +6975,8 @@
               "number": 3
             },
             "seq": 48,
-            "thread": "ThreadPoolExecutor-6_1",
-            "elapsed_ms": 0.136,
+            "thread": "ThreadPoolExecutor-6_0",
+            "elapsed_ms": 0.358,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -6987,8 +6987,8 @@
                   "model_kind": "mock"
                 },
                 "seq": 49,
-                "thread": "ThreadPoolExecutor-6_1",
-                "elapsed_ms": 0.127,
+                "thread": "ThreadPoolExecutor-6_0",
+                "elapsed_ms": 0.312,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -7013,7 +7013,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed95-78c1-8a13-8dba7839d6e7-0",
+                      "id": "lc_run--01a09c8f-9853-7a91-bef7-175e365aacd6-0",
                       "role": "ai",
                       "content": "order A300: good"
                     }
@@ -7050,7 +7050,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed95-78c1-8a13-8dba7839d6e7-0",
+                        "id": "lc_run--01a09c8f-9853-7a91-bef7-175e365aacd6-0",
                         "role": "ai",
                         "content": "order A300: good"
                       }
@@ -7068,8 +7068,8 @@
                     "model_kind": "mock"
                   },
                   "seq": 49,
-                  "thread": "ThreadPoolExecutor-6_1",
-                  "elapsed_ms": 0.127,
+                  "thread": "ThreadPoolExecutor-6_0",
+                  "elapsed_ms": 0.312,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -7094,7 +7094,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed95-78c1-8a13-8dba7839d6e7-0",
+                        "id": "lc_run--01a09c8f-9853-7a91-bef7-175e365aacd6-0",
                         "role": "ai",
                         "content": "order A300: good"
                       }
@@ -7131,7 +7131,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed95-78c1-8a13-8dba7839d6e7-0",
+                          "id": "lc_run--01a09c8f-9853-7a91-bef7-175e365aacd6-0",
                           "role": "ai",
                           "content": "order A300: good"
                         }
@@ -7152,7 +7152,7 @@
             },
             "seq": 50,
             "thread": "MainThread",
-            "elapsed_ms": 0.002,
+            "elapsed_ms": 0.003,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -7201,7 +7201,7 @@
             },
             "seq": 51,
             "thread": "ThreadPoolExecutor-7_0",
-            "elapsed_ms": 0.21000000000000002,
+            "elapsed_ms": 0.219,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -7213,7 +7213,7 @@
                 },
                 "seq": 52,
                 "thread": "ThreadPoolExecutor-7_0",
-                "elapsed_ms": 0.19,
+                "elapsed_ms": 0.199,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -7238,7 +7238,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed97-7882-9ef3-8a2dae9bfb28-0",
+                      "id": "lc_run--01a09c8f-9857-75a3-8e53-aab0c55bf53f-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -7275,7 +7275,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed97-7882-9ef3-8a2dae9bfb28-0",
+                        "id": "lc_run--01a09c8f-9857-75a3-8e53-aab0c55bf53f-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -7294,7 +7294,7 @@
                   },
                   "seq": 52,
                   "thread": "ThreadPoolExecutor-7_0",
-                  "elapsed_ms": 0.19,
+                  "elapsed_ms": 0.199,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -7319,7 +7319,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed97-7882-9ef3-8a2dae9bfb28-0",
+                        "id": "lc_run--01a09c8f-9857-75a3-8e53-aab0c55bf53f-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -7356,7 +7356,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed97-7882-9ef3-8a2dae9bfb28-0",
+                          "id": "lc_run--01a09c8f-9857-75a3-8e53-aab0c55bf53f-0",
                           "role": "ai",
                           "content": "order A100: bad"
                         }
@@ -7377,7 +7377,7 @@
             },
             "seq": 53,
             "thread": "ThreadPoolExecutor-7_1",
-            "elapsed_ms": 0.212,
+            "elapsed_ms": 0.191,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -7389,7 +7389,7 @@
                 },
                 "seq": 54,
                 "thread": "ThreadPoolExecutor-7_1",
-                "elapsed_ms": 0.16899999999999998,
+                "elapsed_ms": 0.175,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -7414,7 +7414,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed98-7ab3-8365-ffe1b10da0dd-0",
+                      "id": "lc_run--01a09c8f-9858-7292-88a9-3cb5b570232a-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -7451,7 +7451,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed98-7ab3-8365-ffe1b10da0dd-0",
+                        "id": "lc_run--01a09c8f-9858-7292-88a9-3cb5b570232a-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -7470,7 +7470,7 @@
                   },
                   "seq": 54,
                   "thread": "ThreadPoolExecutor-7_1",
-                  "elapsed_ms": 0.16899999999999998,
+                  "elapsed_ms": 0.175,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -7495,7 +7495,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed98-7ab3-8365-ffe1b10da0dd-0",
+                        "id": "lc_run--01a09c8f-9858-7292-88a9-3cb5b570232a-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -7532,7 +7532,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed98-7ab3-8365-ffe1b10da0dd-0",
+                          "id": "lc_run--01a09c8f-9858-7292-88a9-3cb5b570232a-0",
                           "role": "ai",
                           "content": "order A300: bad"
                         }
@@ -7553,7 +7553,7 @@
             },
             "seq": 55,
             "thread": "ThreadPoolExecutor-7_0",
-            "elapsed_ms": 0.14200000000000002,
+            "elapsed_ms": 0.17,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -7565,7 +7565,7 @@
                 },
                 "seq": 56,
                 "thread": "ThreadPoolExecutor-7_0",
-                "elapsed_ms": 0.132,
+                "elapsed_ms": 0.157,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -7590,7 +7590,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed98-7ab3-8366-0007e8f7ac88-0",
+                      "id": "lc_run--01a09c8f-9858-7292-88a9-3cdf37d87be8-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -7627,7 +7627,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed98-7ab3-8366-0007e8f7ac88-0",
+                        "id": "lc_run--01a09c8f-9858-7292-88a9-3cdf37d87be8-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -7646,7 +7646,7 @@
                   },
                   "seq": 56,
                   "thread": "ThreadPoolExecutor-7_0",
-                  "elapsed_ms": 0.132,
+                  "elapsed_ms": 0.157,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -7671,7 +7671,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed98-7ab3-8366-0007e8f7ac88-0",
+                        "id": "lc_run--01a09c8f-9858-7292-88a9-3cdf37d87be8-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -7708,7 +7708,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed98-7ab3-8366-0007e8f7ac88-0",
+                          "id": "lc_run--01a09c8f-9858-7292-88a9-3cdf37d87be8-0",
                           "role": "ai",
                           "content": "order A200: bad"
                         }
@@ -7729,7 +7729,7 @@
             },
             "seq": 57,
             "thread": "MainThread",
-            "elapsed_ms": 0.003,
+            "elapsed_ms": 0.005,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [
@@ -7769,7 +7769,7 @@
             },
             "seq": 58,
             "thread": "ThreadPoolExecutor-7_2",
-            "elapsed_ms": 0.179,
+            "elapsed_ms": 0.215,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -7781,7 +7781,7 @@
                 },
                 "seq": 59,
                 "thread": "ThreadPoolExecutor-7_2",
-                "elapsed_ms": 0.166,
+                "elapsed_ms": 0.199,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -7806,7 +7806,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed99-7541-b858-fd8e53e36829-0",
+                      "id": "lc_run--01a09c8f-9859-7882-b0a7-9a5053df1e9b-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -7843,7 +7843,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed99-7541-b858-fd8e53e36829-0",
+                        "id": "lc_run--01a09c8f-9859-7882-b0a7-9a5053df1e9b-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -7862,7 +7862,7 @@
                   },
                   "seq": 59,
                   "thread": "ThreadPoolExecutor-7_2",
-                  "elapsed_ms": 0.166,
+                  "elapsed_ms": 0.199,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -7887,7 +7887,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed99-7541-b858-fd8e53e36829-0",
+                        "id": "lc_run--01a09c8f-9859-7882-b0a7-9a5053df1e9b-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -7924,7 +7924,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed99-7541-b858-fd8e53e36829-0",
+                          "id": "lc_run--01a09c8f-9859-7882-b0a7-9a5053df1e9b-0",
                           "role": "ai",
                           "content": "order A300: bad"
                         }
@@ -7945,7 +7945,7 @@
             },
             "seq": 60,
             "thread": "ThreadPoolExecutor-7_0",
-            "elapsed_ms": 0.132,
+            "elapsed_ms": 0.16699999999999998,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -7957,7 +7957,7 @@
                 },
                 "seq": 61,
                 "thread": "ThreadPoolExecutor-7_0",
-                "elapsed_ms": 0.122,
+                "elapsed_ms": 0.155,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -7982,7 +7982,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed99-7541-b858-fda45319d189-0",
+                      "id": "lc_run--01a09c8f-9859-7882-b0a7-9a77a172c5d3-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -8019,7 +8019,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed99-7541-b858-fda45319d189-0",
+                        "id": "lc_run--01a09c8f-9859-7882-b0a7-9a77a172c5d3-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -8038,7 +8038,7 @@
                   },
                   "seq": 61,
                   "thread": "ThreadPoolExecutor-7_0",
-                  "elapsed_ms": 0.122,
+                  "elapsed_ms": 0.155,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -8063,7 +8063,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed99-7541-b858-fda45319d189-0",
+                        "id": "lc_run--01a09c8f-9859-7882-b0a7-9a77a172c5d3-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -8100,7 +8100,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed99-7541-b858-fda45319d189-0",
+                          "id": "lc_run--01a09c8f-9859-7882-b0a7-9a77a172c5d3-0",
                           "role": "ai",
                           "content": "order A200: bad"
                         }
@@ -8121,7 +8121,7 @@
             },
             "seq": 62,
             "thread": "ThreadPoolExecutor-7_1",
-            "elapsed_ms": 0.13699999999999998,
+            "elapsed_ms": 0.23399999999999999,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -8133,7 +8133,7 @@
                 },
                 "seq": 63,
                 "thread": "ThreadPoolExecutor-7_1",
-                "elapsed_ms": 0.128,
+                "elapsed_ms": 0.222,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -8158,7 +8158,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed99-7541-b858-fdc9a6a17fbb-0",
+                      "id": "lc_run--01a09c8f-985a-7a13-a4d4-93afb205529c-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -8195,7 +8195,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed99-7541-b858-fdc9a6a17fbb-0",
+                        "id": "lc_run--01a09c8f-985a-7a13-a4d4-93afb205529c-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -8214,7 +8214,7 @@
                   },
                   "seq": 63,
                   "thread": "ThreadPoolExecutor-7_1",
-                  "elapsed_ms": 0.128,
+                  "elapsed_ms": 0.222,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -8239,7 +8239,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed99-7541-b858-fdc9a6a17fbb-0",
+                        "id": "lc_run--01a09c8f-985a-7a13-a4d4-93afb205529c-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -8276,7 +8276,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed99-7541-b858-fdc9a6a17fbb-0",
+                          "id": "lc_run--01a09c8f-985a-7a13-a4d4-93afb205529c-0",
                           "role": "ai",
                           "content": "order A100: bad"
                         }
@@ -8337,7 +8337,7 @@
             },
             "seq": 65,
             "thread": "ThreadPoolExecutor-7_2",
-            "elapsed_ms": 0.146,
+            "elapsed_ms": 0.178,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -8349,7 +8349,7 @@
                 },
                 "seq": 66,
                 "thread": "ThreadPoolExecutor-7_2",
-                "elapsed_ms": 0.136,
+                "elapsed_ms": 0.162,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -8374,7 +8374,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b33273bcd952-0",
+                      "id": "lc_run--01a09c8f-985a-7a13-a4d4-9401ede4bc7b-0",
                       "role": "ai",
                       "content": "order A100: bad"
                     }
@@ -8411,7 +8411,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b33273bcd952-0",
+                        "id": "lc_run--01a09c8f-985a-7a13-a4d4-9401ede4bc7b-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -8430,7 +8430,7 @@
                   },
                   "seq": 66,
                   "thread": "ThreadPoolExecutor-7_2",
-                  "elapsed_ms": 0.136,
+                  "elapsed_ms": 0.162,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -8455,7 +8455,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b33273bcd952-0",
+                        "id": "lc_run--01a09c8f-985a-7a13-a4d4-9401ede4bc7b-0",
                         "role": "ai",
                         "content": "order A100: bad"
                       }
@@ -8492,7 +8492,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b33273bcd952-0",
+                          "id": "lc_run--01a09c8f-985a-7a13-a4d4-9401ede4bc7b-0",
                           "role": "ai",
                           "content": "order A100: bad"
                         }
@@ -8513,7 +8513,7 @@
             },
             "seq": 67,
             "thread": "ThreadPoolExecutor-7_0",
-            "elapsed_ms": 0.135,
+            "elapsed_ms": 0.272,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -8525,7 +8525,7 @@
                 },
                 "seq": 68,
                 "thread": "ThreadPoolExecutor-7_0",
-                "elapsed_ms": 0.126,
+                "elapsed_ms": 0.23,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -8550,7 +8550,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b359c7758fb4-0",
+                      "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09a31290450b-0",
                       "role": "ai",
                       "content": "order A200: bad"
                     }
@@ -8587,7 +8587,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b359c7758fb4-0",
+                        "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09a31290450b-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -8606,7 +8606,7 @@
                   },
                   "seq": 68,
                   "thread": "ThreadPoolExecutor-7_0",
-                  "elapsed_ms": 0.126,
+                  "elapsed_ms": 0.23,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -8631,7 +8631,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b359c7758fb4-0",
+                        "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09a31290450b-0",
                         "role": "ai",
                         "content": "order A200: bad"
                       }
@@ -8668,7 +8668,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b359c7758fb4-0",
+                          "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09a31290450b-0",
                           "role": "ai",
                           "content": "order A200: bad"
                         }
@@ -8689,7 +8689,7 @@
             },
             "seq": 69,
             "thread": "ThreadPoolExecutor-7_1",
-            "elapsed_ms": 0.133,
+            "elapsed_ms": 0.326,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -8701,7 +8701,7 @@
                 },
                 "seq": 70,
                 "thread": "ThreadPoolExecutor-7_1",
-                "elapsed_ms": 0.125,
+                "elapsed_ms": 0.307,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -8726,7 +8726,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b375237d8ae5-0",
+                      "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09c431eac48b-0",
                       "role": "ai",
                       "content": "order A300: bad"
                     }
@@ -8763,7 +8763,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b375237d8ae5-0",
+                        "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09c431eac48b-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -8782,7 +8782,7 @@
                   },
                   "seq": 70,
                   "thread": "ThreadPoolExecutor-7_1",
-                  "elapsed_ms": 0.125,
+                  "elapsed_ms": 0.307,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -8807,7 +8807,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b375237d8ae5-0",
+                        "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09c431eac48b-0",
                         "role": "ai",
                         "content": "order A300: bad"
                       }
@@ -8844,7 +8844,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a077cc-ed9a-71e2-a4e1-b375237d8ae5-0",
+                          "id": "lc_run--01a09c8f-985b-7ac2-ad5d-09c431eac48b-0",
                           "role": "ai",
                           "content": "order A300: bad"
                         }

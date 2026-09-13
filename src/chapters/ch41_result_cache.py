@@ -11,8 +11,9 @@ before, exact or close enough.
 
 **No neural embedding here, and that absence is itself a finding.**
 DeepSeek's API -- checked against its own docs, not assumed -- offers
-exactly three models (`deepseek-v4-flash`, `deepseek-v4-pro`,
-`deepseek-v4-flash-vision-exp`), none of them an embeddings endpoint.
+exactly two models (`deepseek-flash`, `deepseek-v4-pro` -- the former
+absorbed `deepseek-v4-flash-vision-exp` on retirement), neither an
+embeddings endpoint.
 The obvious local alternative, `sentence-transformers`, was checked
 against its own PyPI metadata and turned out to need `torch`,
 `transformers`, `scikit-learn`, and `scipy` unconditionally -- the exact

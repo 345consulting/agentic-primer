@@ -1,7 +1,7 @@
 {
   "chapter": "ch13_workflow",
   "model_kind": "mock",
-  "source": "93211f368bab",
+  "source": "afbb0163c027",
   "summary": {
     "turns": 8,
     "messages": 0,
@@ -15,7 +15,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 0.283,
+      "elapsed_ms": 0.15,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -46,7 +46,74 @@
               "value": 6
             }
           ],
-          "children": []
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "chips"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": 6
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "step",
+            "attributes": {
+              "name": "check_stock",
+              "kind": "function"
+            },
+            "seq": 2,
+            "thread": "MainThread",
+            "elapsed_ms": 0.007,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "chips"
+              },
+              {
+                "label": "result",
+                "value": 6
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "chips"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": 6
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "6 in stock"
+          }
         }
       ]
     },
@@ -57,7 +124,7 @@
       },
       "seq": 3,
       "thread": "MainThread",
-      "elapsed_ms": 0.013,
+      "elapsed_ms": 0.014,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -75,7 +142,7 @@
           },
           "seq": 4,
           "thread": "MainThread",
-          "elapsed_ms": 0.002,
+          "elapsed_ms": 0.003,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -88,7 +155,23 @@
               "value": "1.20"
             }
           ],
-          "children": []
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "1.20"
+              }
+            }
+          ]
         },
         {
           "name": "step",
@@ -98,7 +181,7 @@
           },
           "seq": 5,
           "thread": "MainThread",
-          "elapsed_ms": 0.005,
+          "elapsed_ms": 0.006,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -111,7 +194,116 @@
               "value": "1.08"
             }
           ],
-          "children": []
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "price": "1.20"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "1.08"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "step",
+            "attributes": {
+              "name": "get_price",
+              "kind": "function"
+            },
+            "seq": 4,
+            "thread": "MainThread",
+            "elapsed_ms": 0.003,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk"
+              },
+              {
+                "label": "result",
+                "value": "1.20"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "1.20"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "step",
+            "attributes": {
+              "name": "apply_discount",
+              "kind": "function"
+            },
+            "seq": 5,
+            "thread": "MainThread",
+            "elapsed_ms": 0.006,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "price": "1.20"
+              },
+              {
+                "label": "result",
+                "value": "1.08"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "price": "1.20"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "1.08"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "discounted to 1.08"
+          }
         }
       ]
     },
@@ -122,7 +314,7 @@
       },
       "seq": 6,
       "thread": "MainThread",
-      "elapsed_ms": 0.008,
+      "elapsed_ms": 0.007,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -153,7 +345,23 @@
               "value": 2
             }
           ],
-          "children": []
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": 2
+              }
+            }
+          ]
         },
         {
           "name": "step",
@@ -177,7 +385,119 @@
               "value": "reserved 2 x milk"
             }
           ],
-          "children": []
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk",
+                "quantity": 2
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "reserved 2 x milk"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "step",
+            "attributes": {
+              "name": "check_stock",
+              "kind": "function"
+            },
+            "seq": 7,
+            "thread": "MainThread",
+            "elapsed_ms": 0.001,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk"
+              },
+              {
+                "label": "result",
+                "value": 2
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": 2
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "step",
+            "attributes": {
+              "name": "reserve_stock",
+              "kind": "function"
+            },
+            "seq": 8,
+            "thread": "MainThread",
+            "elapsed_ms": 0.002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk",
+                "quantity": 2
+              },
+              {
+                "label": "result",
+                "value": "reserved 2 x milk"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 2
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "reserved 2 x milk"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "reserved 2 x milk"
+          }
         }
       ]
     },
@@ -188,7 +508,7 @@
       },
       "seq": 9,
       "thread": "MainThread",
-      "elapsed_ms": 0.007,
+      "elapsed_ms": 0.006,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -206,7 +526,7 @@
           },
           "seq": 10,
           "thread": "MainThread",
-          "elapsed_ms": 0.001,
+          "elapsed_ms": 0.002,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -219,7 +539,23 @@
               "value": 2
             }
           ],
-          "children": []
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk"
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": 2
+              }
+            }
+          ]
         },
         {
           "name": "step",
@@ -243,7 +579,119 @@
               "value": "backordered 5 x milk"
             }
           ],
-          "children": []
+          "children": [],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk",
+                "quantity": 5
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "backordered 5 x milk"
+              }
+            }
+          ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "step",
+            "attributes": {
+              "name": "check_stock",
+              "kind": "function"
+            },
+            "seq": 10,
+            "thread": "MainThread",
+            "elapsed_ms": 0.002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk"
+              },
+              {
+                "label": "result",
+                "value": 2
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk"
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": 2
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "span",
+          "value": {
+            "name": "step",
+            "attributes": {
+              "name": "create_backorder",
+              "kind": "function"
+            },
+            "seq": 11,
+            "thread": "MainThread",
+            "elapsed_ms": 0.002,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk",
+                "quantity": 5
+              },
+              {
+                "label": "result",
+                "value": "backordered 5 x milk"
+              }
+            ],
+            "children": [],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk",
+                  "quantity": 5
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "backordered 5 x milk"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "backordered 5 x milk"
+          }
         }
       ]
     },
@@ -254,7 +702,7 @@
       },
       "seq": 12,
       "thread": "MainThread",
-      "elapsed_ms": 4.393,
+      "elapsed_ms": 4.821,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -272,7 +720,7 @@
           },
           "seq": 13,
           "thread": "MainThread",
-          "elapsed_ms": 4.391,
+          "elapsed_ms": 4.8180000000000005,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [
@@ -293,7 +741,7 @@
               },
               "seq": 14,
               "thread": "MainThread",
-              "elapsed_ms": 4.172000000000001,
+              "elapsed_ms": 4.599,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [],
@@ -305,7 +753,7 @@
                   },
                   "seq": 15,
                   "thread": "MainThread",
-                  "elapsed_ms": 3.921,
+                  "elapsed_ms": 4.337,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -321,6 +769,36 @@
                           "id": null,
                           "role": "human",
                           "content": "How much is milk?"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -342,7 +820,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0684f-61ac-7f21-9b95-860026436212-0",
+                        "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -357,7 +835,98 @@
                       }
                     }
                   ],
-                  "children": []
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tool you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "price_of"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "a1"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
                 },
                 {
                   "name": "tool",
@@ -367,7 +936,7 @@
                   },
                   "seq": 16,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.23299999999999998,
+                  "elapsed_ms": 0.243,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -380,7 +949,252 @@
                       "value": "1.20 for milk"
                     }
                   ],
-                  "children": []
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "args",
+                        "item": "milk"
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "result",
+                        "value": "1.20 for milk"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "body": [
+                {
+                  "kind": "span",
+                  "value": {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 15,
+                    "thread": "MainThread",
+                    "elapsed_ms": 4.337,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tool you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "price_of"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "a1"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 2,
+                          "roles": [
+                            "system",
+                            "human"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "kind": "span",
+                  "value": {
+                    "name": "tool",
+                    "attributes": {
+                      "name": "price_of",
+                      "id": "a1"
+                    },
+                    "seq": 16,
+                    "thread": "MainThread",
+                    "elapsed_ms": 0.243,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "args",
+                        "item": "milk"
+                      },
+                      {
+                        "label": "result",
+                        "value": "1.20 for milk"
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "args",
+                          "item": "milk"
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -391,7 +1205,7 @@
               },
               "seq": 17,
               "thread": "MainThread",
-              "elapsed_ms": 0.2,
+              "elapsed_ms": 0.19799999999999998,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [],
@@ -403,7 +1217,7 @@
                   },
                   "seq": 18,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.195,
+                  "elapsed_ms": 0.192,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -421,7 +1235,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a0684f-61ac-7f21-9b95-860026436212-0",
+                          "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -439,6 +1253,36 @@
                           "role": "tool",
                           "content": "1.20 for milk",
                           "tool_call_id": "a1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "price_of",
+                          "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              }
+                            },
+                            "required": [
+                              "item"
+                            ],
+                            "title": "price_of",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -462,17 +1306,3111 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0684f-61ad-73d1-bef4-354abc0c2679-0",
+                        "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
                         "role": "ai",
                         "content": "Milk is 1.20 per bottle."
                       }
                     }
                   ],
-                  "children": []
+                  "children": [],
+                  "body": [
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tool you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          },
+                          {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "1.20 for milk",
+                            "tool_call_id": "a1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "price_of"
+                        ],
+                        "consulted": false
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "note",
+                      "value": {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                          "role": "ai",
+                          "content": "Milk is 1.20 per bottle."
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "body": [
+                {
+                  "kind": "span",
+                  "value": {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 18,
+                    "thread": "MainThread",
+                    "elapsed_ms": 0.192,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tool you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          },
+                          {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "1.20 for milk",
+                            "tool_call_id": "a1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "price_of"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                          "role": "ai",
+                          "content": "Milk is 1.20 per bottle."
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            },
+                            {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "a1"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 4,
+                          "roles": [
+                            "system",
+                            "human",
+                            "ai",
+                            "tool"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                            "role": "ai",
+                            "content": "Milk is 1.20 per bottle."
+                          }
+                        }
+                      }
+                    ]
+                  }
                 }
               ]
             }
+          ],
+          "body": [
+            {
+              "kind": "note",
+              "value": {
+                "label": "args",
+                "item": "milk"
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "turn",
+                "attributes": {
+                  "number": 1
+                },
+                "seq": 14,
+                "thread": "MainThread",
+                "elapsed_ms": 4.599,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [],
+                "children": [
+                  {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 15,
+                    "thread": "MainThread",
+                    "elapsed_ms": 4.337,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tool you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "price_of"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "a1"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 2,
+                          "roles": [
+                            "system",
+                            "human"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "tool",
+                    "attributes": {
+                      "name": "price_of",
+                      "id": "a1"
+                    },
+                    "seq": 16,
+                    "thread": "MainThread",
+                    "elapsed_ms": 0.243,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "args",
+                        "item": "milk"
+                      },
+                      {
+                        "label": "result",
+                        "value": "1.20 for milk"
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "args",
+                          "item": "milk"
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "body": [
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 15,
+                      "thread": "MainThread",
+                      "elapsed_ms": 4.337,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 2,
+                          "roles": [
+                            "system",
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": null,
+                                "role": "system",
+                                "content": "You answer briefly and plainly. Use the tool you are given."
+                              },
+                              {
+                                "id": null,
+                                "role": "human",
+                                "content": "How much is milk?"
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "price_of",
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "schema": {
+                                  "$defs": {
+                                    "GroceryItem": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "properties": {
+                                    "item": {
+                                      "$ref": "#/$defs/GroceryItem"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "title": "price_of",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "price_of"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 2,
+                            "roles": [
+                              "system",
+                              "human"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "tool",
+                      "attributes": {
+                        "name": "price_of",
+                        "id": "a1"
+                      },
+                      "seq": 16,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.243,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "args",
+                          "item": "milk"
+                        },
+                        {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "args",
+                            "item": "milk"
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "result",
+                            "value": "1.20 for milk"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "span",
+              "value": {
+                "name": "turn",
+                "attributes": {
+                  "number": 2
+                },
+                "seq": 17,
+                "thread": "MainThread",
+                "elapsed_ms": 0.19799999999999998,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [],
+                "children": [
+                  {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 18,
+                    "thread": "MainThread",
+                    "elapsed_ms": 0.192,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tool you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          },
+                          {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "1.20 for milk",
+                            "tool_call_id": "a1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "price_of"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                          "role": "ai",
+                          "content": "Milk is 1.20 per bottle."
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            },
+                            {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "a1"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 4,
+                          "roles": [
+                            "system",
+                            "human",
+                            "ai",
+                            "tool"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                            "role": "ai",
+                            "content": "Milk is 1.20 per bottle."
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "body": [
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 18,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.192,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            },
+                            {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "a1"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 4,
+                          "roles": [
+                            "system",
+                            "human",
+                            "ai",
+                            "tool"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                            "role": "ai",
+                            "content": "Milk is 1.20 per bottle."
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": null,
+                                "role": "system",
+                                "content": "You answer briefly and plainly. Use the tool you are given."
+                              },
+                              {
+                                "id": null,
+                                "role": "human",
+                                "content": "How much is milk?"
+                              },
+                              {
+                                "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                                "role": "ai",
+                                "content": "",
+                                "tool_calls": [
+                                  {
+                                    "name": "price_of",
+                                    "args": {
+                                      "item": "milk"
+                                    },
+                                    "id": "a1"
+                                  }
+                                ]
+                              },
+                              {
+                                "id": null,
+                                "role": "tool",
+                                "content": "1.20 for milk",
+                                "tool_call_id": "a1"
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "price_of",
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "schema": {
+                                  "$defs": {
+                                    "GroceryItem": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "properties": {
+                                    "item": {
+                                      "$ref": "#/$defs/GroceryItem"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "title": "price_of",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "price_of"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 4,
+                            "roles": [
+                              "system",
+                              "human",
+                              "ai",
+                              "tool"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                              "role": "ai",
+                              "content": "Milk is 1.20 per bottle."
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "note",
+              "value": {
+                "label": "result",
+                "value": "Milk is 1.20 per bottle."
+              }
+            }
           ]
+        }
+      ],
+      "body": [
+        {
+          "kind": "span",
+          "value": {
+            "name": "step",
+            "attributes": {
+              "name": "check_price_via_agent",
+              "kind": "agent"
+            },
+            "seq": 13,
+            "thread": "MainThread",
+            "elapsed_ms": 4.8180000000000005,
+            "model_provider_ms": null,
+            "library_ms": null,
+            "notes": [
+              {
+                "label": "args",
+                "item": "milk"
+              },
+              {
+                "label": "result",
+                "value": "Milk is 1.20 per bottle."
+              }
+            ],
+            "children": [
+              {
+                "name": "turn",
+                "attributes": {
+                  "number": 1
+                },
+                "seq": 14,
+                "thread": "MainThread",
+                "elapsed_ms": 4.599,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [],
+                "children": [
+                  {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 15,
+                    "thread": "MainThread",
+                    "elapsed_ms": 4.337,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tool you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "price_of"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 2,
+                        "roles": [
+                          "system",
+                          "human"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                          "role": "ai",
+                          "content": "",
+                          "tool_calls": [
+                            {
+                              "name": "price_of",
+                              "args": {
+                                "item": "milk"
+                              },
+                              "id": "a1"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 2,
+                          "roles": [
+                            "system",
+                            "human"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "tool",
+                    "attributes": {
+                      "name": "price_of",
+                      "id": "a1"
+                    },
+                    "seq": 16,
+                    "thread": "MainThread",
+                    "elapsed_ms": 0.243,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "args",
+                        "item": "milk"
+                      },
+                      {
+                        "label": "result",
+                        "value": "1.20 for milk"
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "args",
+                          "item": "milk"
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "body": [
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 15,
+                      "thread": "MainThread",
+                      "elapsed_ms": 4.337,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 2,
+                          "roles": [
+                            "system",
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": null,
+                                "role": "system",
+                                "content": "You answer briefly and plainly. Use the tool you are given."
+                              },
+                              {
+                                "id": null,
+                                "role": "human",
+                                "content": "How much is milk?"
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "price_of",
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "schema": {
+                                  "$defs": {
+                                    "GroceryItem": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "properties": {
+                                    "item": {
+                                      "$ref": "#/$defs/GroceryItem"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "title": "price_of",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "price_of"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 2,
+                            "roles": [
+                              "system",
+                              "human"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "tool",
+                      "attributes": {
+                        "name": "price_of",
+                        "id": "a1"
+                      },
+                      "seq": 16,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.243,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "args",
+                          "item": "milk"
+                        },
+                        {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "args",
+                            "item": "milk"
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "result",
+                            "value": "1.20 for milk"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "turn",
+                "attributes": {
+                  "number": 2
+                },
+                "seq": 17,
+                "thread": "MainThread",
+                "elapsed_ms": 0.19799999999999998,
+                "model_provider_ms": null,
+                "library_ms": null,
+                "notes": [],
+                "children": [
+                  {
+                    "name": "model",
+                    "attributes": {
+                      "model_kind": "mock"
+                    },
+                    "seq": 18,
+                    "thread": "MainThread",
+                    "elapsed_ms": 0.192,
+                    "model_provider_ms": null,
+                    "library_ms": null,
+                    "notes": [
+                      {
+                        "label": "context",
+                        "messages": [
+                          {
+                            "id": null,
+                            "role": "system",
+                            "content": "You answer briefly and plainly. Use the tool you are given."
+                          },
+                          {
+                            "id": null,
+                            "role": "human",
+                            "content": "How much is milk?"
+                          },
+                          {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          },
+                          {
+                            "id": null,
+                            "role": "tool",
+                            "content": "1.20 for milk",
+                            "tool_call_id": "a1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "price_of",
+                            "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                }
+                              },
+                              "required": [
+                                "item"
+                              ],
+                              "title": "price_of",
+                              "type": "object"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "label": "tools declared to the mock model",
+                        "names": [
+                          "price_of"
+                        ],
+                        "consulted": false
+                      },
+                      {
+                        "label": "context ignored by the mock model",
+                        "messages": 4,
+                        "roles": [
+                          "system",
+                          "human",
+                          "ai",
+                          "tool"
+                        ]
+                      },
+                      {
+                        "label": "reply",
+                        "message": {
+                          "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                          "role": "ai",
+                          "content": "Milk is 1.20 per bottle."
+                        }
+                      }
+                    ],
+                    "children": [],
+                    "body": [
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            },
+                            {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "a1"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "context ignored by the mock model",
+                          "messages": 4,
+                          "roles": [
+                            "system",
+                            "human",
+                            "ai",
+                            "tool"
+                          ]
+                        }
+                      },
+                      {
+                        "kind": "note",
+                        "value": {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                            "role": "ai",
+                            "content": "Milk is 1.20 per bottle."
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "body": [
+                  {
+                    "kind": "span",
+                    "value": {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 18,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.192,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            },
+                            {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "a1"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 4,
+                          "roles": [
+                            "system",
+                            "human",
+                            "ai",
+                            "tool"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                            "role": "ai",
+                            "content": "Milk is 1.20 per bottle."
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": null,
+                                "role": "system",
+                                "content": "You answer briefly and plainly. Use the tool you are given."
+                              },
+                              {
+                                "id": null,
+                                "role": "human",
+                                "content": "How much is milk?"
+                              },
+                              {
+                                "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                                "role": "ai",
+                                "content": "",
+                                "tool_calls": [
+                                  {
+                                    "name": "price_of",
+                                    "args": {
+                                      "item": "milk"
+                                    },
+                                    "id": "a1"
+                                  }
+                                ]
+                              },
+                              {
+                                "id": null,
+                                "role": "tool",
+                                "content": "1.20 for milk",
+                                "tool_call_id": "a1"
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "price_of",
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "schema": {
+                                  "$defs": {
+                                    "GroceryItem": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "properties": {
+                                    "item": {
+                                      "$ref": "#/$defs/GroceryItem"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "title": "price_of",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "price_of"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 4,
+                            "roles": [
+                              "system",
+                              "human",
+                              "ai",
+                              "tool"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                              "role": "ai",
+                              "content": "Milk is 1.20 per bottle."
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "body": [
+              {
+                "kind": "note",
+                "value": {
+                  "label": "args",
+                  "item": "milk"
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 1
+                  },
+                  "seq": 14,
+                  "thread": "MainThread",
+                  "elapsed_ms": 4.599,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 15,
+                      "thread": "MainThread",
+                      "elapsed_ms": 4.337,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 2,
+                          "roles": [
+                            "system",
+                            "human"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                            "role": "ai",
+                            "content": "",
+                            "tool_calls": [
+                              {
+                                "name": "price_of",
+                                "args": {
+                                  "item": "milk"
+                                },
+                                "id": "a1"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": null,
+                                "role": "system",
+                                "content": "You answer briefly and plainly. Use the tool you are given."
+                              },
+                              {
+                                "id": null,
+                                "role": "human",
+                                "content": "How much is milk?"
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "price_of",
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "schema": {
+                                  "$defs": {
+                                    "GroceryItem": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "properties": {
+                                    "item": {
+                                      "$ref": "#/$defs/GroceryItem"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "title": "price_of",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "price_of"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 2,
+                            "roles": [
+                              "system",
+                              "human"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "tool",
+                      "attributes": {
+                        "name": "price_of",
+                        "id": "a1"
+                      },
+                      "seq": 16,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.243,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "args",
+                          "item": "milk"
+                        },
+                        {
+                          "label": "result",
+                          "value": "1.20 for milk"
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "args",
+                            "item": "milk"
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "result",
+                            "value": "1.20 for milk"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "body": [
+                    {
+                      "kind": "span",
+                      "value": {
+                        "name": "model",
+                        "attributes": {
+                          "model_kind": "mock"
+                        },
+                        "seq": 15,
+                        "thread": "MainThread",
+                        "elapsed_ms": 4.337,
+                        "model_provider_ms": null,
+                        "library_ms": null,
+                        "notes": [
+                          {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": null,
+                                "role": "system",
+                                "content": "You answer briefly and plainly. Use the tool you are given."
+                              },
+                              {
+                                "id": null,
+                                "role": "human",
+                                "content": "How much is milk?"
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "price_of",
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "schema": {
+                                  "$defs": {
+                                    "GroceryItem": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "properties": {
+                                    "item": {
+                                      "$ref": "#/$defs/GroceryItem"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "title": "price_of",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "price_of"
+                            ],
+                            "consulted": false
+                          },
+                          {
+                            "label": "context ignored by the mock model",
+                            "messages": 2,
+                            "roles": [
+                              "system",
+                              "human"
+                            ]
+                          },
+                          {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "children": [],
+                        "body": [
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "context",
+                              "messages": [
+                                {
+                                  "id": null,
+                                  "role": "system",
+                                  "content": "You answer briefly and plainly. Use the tool you are given."
+                                },
+                                {
+                                  "id": null,
+                                  "role": "human",
+                                  "content": "How much is milk?"
+                                }
+                              ],
+                              "tools": [
+                                {
+                                  "name": "price_of",
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "schema": {
+                                    "$defs": {
+                                      "GroceryItem": {
+                                        "enum": [
+                                          "bread",
+                                          "butter",
+                                          "chips",
+                                          "milk"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                    "properties": {
+                                      "item": {
+                                        "$ref": "#/$defs/GroceryItem"
+                                      }
+                                    },
+                                    "required": [
+                                      "item"
+                                    ],
+                                    "title": "price_of",
+                                    "type": "object"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "tools declared to the mock model",
+                              "names": [
+                                "price_of"
+                              ],
+                              "consulted": false
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "context ignored by the mock model",
+                              "messages": 2,
+                              "roles": [
+                                "system",
+                                "human"
+                              ]
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "reply",
+                              "message": {
+                                "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                                "role": "ai",
+                                "content": "",
+                                "tool_calls": [
+                                  {
+                                    "name": "price_of",
+                                    "args": {
+                                      "item": "milk"
+                                    },
+                                    "id": "a1"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "kind": "span",
+                      "value": {
+                        "name": "tool",
+                        "attributes": {
+                          "name": "price_of",
+                          "id": "a1"
+                        },
+                        "seq": 16,
+                        "thread": "MainThread",
+                        "elapsed_ms": 0.243,
+                        "model_provider_ms": null,
+                        "library_ms": null,
+                        "notes": [
+                          {
+                            "label": "args",
+                            "item": "milk"
+                          },
+                          {
+                            "label": "result",
+                            "value": "1.20 for milk"
+                          }
+                        ],
+                        "children": [],
+                        "body": [
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "args",
+                              "item": "milk"
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "result",
+                              "value": "1.20 for milk"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "span",
+                "value": {
+                  "name": "turn",
+                  "attributes": {
+                    "number": 2
+                  },
+                  "seq": 17,
+                  "thread": "MainThread",
+                  "elapsed_ms": 0.19799999999999998,
+                  "model_provider_ms": null,
+                  "library_ms": null,
+                  "notes": [],
+                  "children": [
+                    {
+                      "name": "model",
+                      "attributes": {
+                        "model_kind": "mock"
+                      },
+                      "seq": 18,
+                      "thread": "MainThread",
+                      "elapsed_ms": 0.192,
+                      "model_provider_ms": null,
+                      "library_ms": null,
+                      "notes": [
+                        {
+                          "label": "context",
+                          "messages": [
+                            {
+                              "id": null,
+                              "role": "system",
+                              "content": "You answer briefly and plainly. Use the tool you are given."
+                            },
+                            {
+                              "id": null,
+                              "role": "human",
+                              "content": "How much is milk?"
+                            },
+                            {
+                              "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                              "role": "ai",
+                              "content": "",
+                              "tool_calls": [
+                                {
+                                  "name": "price_of",
+                                  "args": {
+                                    "item": "milk"
+                                  },
+                                  "id": "a1"
+                                }
+                              ]
+                            },
+                            {
+                              "id": null,
+                              "role": "tool",
+                              "content": "1.20 for milk",
+                              "tool_call_id": "a1"
+                            }
+                          ],
+                          "tools": [
+                            {
+                              "name": "price_of",
+                              "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                              "schema": {
+                                "$defs": {
+                                  "GroceryItem": {
+                                    "enum": [
+                                      "bread",
+                                      "butter",
+                                      "chips",
+                                      "milk"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "properties": {
+                                  "item": {
+                                    "$ref": "#/$defs/GroceryItem"
+                                  }
+                                },
+                                "required": [
+                                  "item"
+                                ],
+                                "title": "price_of",
+                                "type": "object"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "label": "tools declared to the mock model",
+                          "names": [
+                            "price_of"
+                          ],
+                          "consulted": false
+                        },
+                        {
+                          "label": "context ignored by the mock model",
+                          "messages": 4,
+                          "roles": [
+                            "system",
+                            "human",
+                            "ai",
+                            "tool"
+                          ]
+                        },
+                        {
+                          "label": "reply",
+                          "message": {
+                            "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                            "role": "ai",
+                            "content": "Milk is 1.20 per bottle."
+                          }
+                        }
+                      ],
+                      "children": [],
+                      "body": [
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": null,
+                                "role": "system",
+                                "content": "You answer briefly and plainly. Use the tool you are given."
+                              },
+                              {
+                                "id": null,
+                                "role": "human",
+                                "content": "How much is milk?"
+                              },
+                              {
+                                "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                                "role": "ai",
+                                "content": "",
+                                "tool_calls": [
+                                  {
+                                    "name": "price_of",
+                                    "args": {
+                                      "item": "milk"
+                                    },
+                                    "id": "a1"
+                                  }
+                                ]
+                              },
+                              {
+                                "id": null,
+                                "role": "tool",
+                                "content": "1.20 for milk",
+                                "tool_call_id": "a1"
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "price_of",
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "schema": {
+                                  "$defs": {
+                                    "GroceryItem": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "properties": {
+                                    "item": {
+                                      "$ref": "#/$defs/GroceryItem"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "title": "price_of",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "price_of"
+                            ],
+                            "consulted": false
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "context ignored by the mock model",
+                            "messages": 4,
+                            "roles": [
+                              "system",
+                              "human",
+                              "ai",
+                              "tool"
+                            ]
+                          }
+                        },
+                        {
+                          "kind": "note",
+                          "value": {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                              "role": "ai",
+                              "content": "Milk is 1.20 per bottle."
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "body": [
+                    {
+                      "kind": "span",
+                      "value": {
+                        "name": "model",
+                        "attributes": {
+                          "model_kind": "mock"
+                        },
+                        "seq": 18,
+                        "thread": "MainThread",
+                        "elapsed_ms": 0.192,
+                        "model_provider_ms": null,
+                        "library_ms": null,
+                        "notes": [
+                          {
+                            "label": "context",
+                            "messages": [
+                              {
+                                "id": null,
+                                "role": "system",
+                                "content": "You answer briefly and plainly. Use the tool you are given."
+                              },
+                              {
+                                "id": null,
+                                "role": "human",
+                                "content": "How much is milk?"
+                              },
+                              {
+                                "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                                "role": "ai",
+                                "content": "",
+                                "tool_calls": [
+                                  {
+                                    "name": "price_of",
+                                    "args": {
+                                      "item": "milk"
+                                    },
+                                    "id": "a1"
+                                  }
+                                ]
+                              },
+                              {
+                                "id": null,
+                                "role": "tool",
+                                "content": "1.20 for milk",
+                                "tool_call_id": "a1"
+                              }
+                            ],
+                            "tools": [
+                              {
+                                "name": "price_of",
+                                "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                "schema": {
+                                  "$defs": {
+                                    "GroceryItem": {
+                                      "enum": [
+                                        "bread",
+                                        "butter",
+                                        "chips",
+                                        "milk"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "properties": {
+                                    "item": {
+                                      "$ref": "#/$defs/GroceryItem"
+                                    }
+                                  },
+                                  "required": [
+                                    "item"
+                                  ],
+                                  "title": "price_of",
+                                  "type": "object"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "label": "tools declared to the mock model",
+                            "names": [
+                              "price_of"
+                            ],
+                            "consulted": false
+                          },
+                          {
+                            "label": "context ignored by the mock model",
+                            "messages": 4,
+                            "roles": [
+                              "system",
+                              "human",
+                              "ai",
+                              "tool"
+                            ]
+                          },
+                          {
+                            "label": "reply",
+                            "message": {
+                              "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                              "role": "ai",
+                              "content": "Milk is 1.20 per bottle."
+                            }
+                          }
+                        ],
+                        "children": [],
+                        "body": [
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "context",
+                              "messages": [
+                                {
+                                  "id": null,
+                                  "role": "system",
+                                  "content": "You answer briefly and plainly. Use the tool you are given."
+                                },
+                                {
+                                  "id": null,
+                                  "role": "human",
+                                  "content": "How much is milk?"
+                                },
+                                {
+                                  "id": "lc_run--01a09c8f-448a-7b93-91af-b8e05d0dbd74-0",
+                                  "role": "ai",
+                                  "content": "",
+                                  "tool_calls": [
+                                    {
+                                      "name": "price_of",
+                                      "args": {
+                                        "item": "milk"
+                                      },
+                                      "id": "a1"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": null,
+                                  "role": "tool",
+                                  "content": "1.20 for milk",
+                                  "tool_call_id": "a1"
+                                }
+                              ],
+                              "tools": [
+                                {
+                                  "name": "price_of",
+                                  "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                  "schema": {
+                                    "$defs": {
+                                      "GroceryItem": {
+                                        "enum": [
+                                          "bread",
+                                          "butter",
+                                          "chips",
+                                          "milk"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "description": "The current shelf price of an item, in pounds. The agent-kind step's only tool.",
+                                    "properties": {
+                                      "item": {
+                                        "$ref": "#/$defs/GroceryItem"
+                                      }
+                                    },
+                                    "required": [
+                                      "item"
+                                    ],
+                                    "title": "price_of",
+                                    "type": "object"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "tools declared to the mock model",
+                              "names": [
+                                "price_of"
+                              ],
+                              "consulted": false
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "context ignored by the mock model",
+                              "messages": 4,
+                              "roles": [
+                                "system",
+                                "human",
+                                "ai",
+                                "tool"
+                              ]
+                            }
+                          },
+                          {
+                            "kind": "note",
+                            "value": {
+                              "label": "reply",
+                              "message": {
+                                "id": "lc_run--01a09c8f-448b-77f1-9d1a-e838fc656f7e-0",
+                                "role": "ai",
+                                "content": "Milk is 1.20 per bottle."
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "note",
+                "value": {
+                  "label": "result",
+                  "value": "Milk is 1.20 per bottle."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "note",
+          "value": {
+            "label": "ended",
+            "reason": "Milk is 1.20 per bottle."
+          }
         }
       ]
     }

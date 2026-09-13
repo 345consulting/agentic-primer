@@ -1,7 +1,7 @@
 {
   "chapter": "ch20_loop_veto",
   "model_kind": "mock",
-  "source": "f63ccf3f154a",
+  "source": "19e1f0fc4b4a",
   "summary": {
     "turns": 6,
     "messages": 15,
@@ -15,7 +15,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 4.029999999999999,
+      "elapsed_ms": 3.263,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -32,7 +32,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 3.6670000000000003,
+          "elapsed_ms": 2.822,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -44,7 +44,7 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 3.639,
+              "elapsed_ms": 2.79,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -60,6 +60,41 @@
                       "id": null,
                       "role": "human",
                       "content": "Order 8 bottles of milk, then order 8 more."
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -81,7 +116,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                    "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -114,6 +149,41 @@
                         "role": "human",
                         "content": "Order 8 bottles of milk, then order 8 more."
                       }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      }
                     ]
                   }
                 },
@@ -143,7 +213,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -169,7 +239,7 @@
               },
               "seq": 4,
               "thread": "MainThread",
-              "elapsed_ms": 0.008,
+              "elapsed_ms": 0.01,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -262,7 +332,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 3.639,
+                "elapsed_ms": 2.79,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -278,6 +348,41 @@
                         "id": null,
                         "role": "human",
                         "content": "Order 8 bottles of milk, then order 8 more."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -299,7 +404,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -332,6 +437,41 @@
                           "role": "human",
                           "content": "Order 8 bottles of milk, then order 8 more."
                         }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
                       ]
                     }
                   },
@@ -361,7 +501,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -390,7 +530,7 @@
                 },
                 "seq": 4,
                 "thread": "MainThread",
-                "elapsed_ms": 0.008,
+                "elapsed_ms": 0.01,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -482,7 +622,7 @@
           },
           "seq": 5,
           "thread": "MainThread",
-          "elapsed_ms": 0.219,
+          "elapsed_ms": 0.27599999999999997,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -494,7 +634,7 @@
               },
               "seq": 6,
               "thread": "MainThread",
-              "elapsed_ms": 0.201,
+              "elapsed_ms": 0.255,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -512,7 +652,7 @@
                       "content": "Order 8 bottles of milk, then order 8 more."
                     },
                     {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -531,6 +671,41 @@
                       "role": "tool",
                       "content": "ordered 8 x milk",
                       "tool_call_id": "c1"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -554,7 +729,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0690f-6896-7143-a208-4c4cbdafa80d-0",
+                    "id": "lc_run--01a09c8f-5877-7f53-9239-73138eb11327-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -588,7 +763,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -607,6 +782,41 @@
                         "role": "tool",
                         "content": "ordered 8 x milk",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   }
@@ -639,7 +849,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c4cbdafa80d-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-73138eb11327-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -665,7 +875,7 @@
               },
               "seq": 7,
               "thread": "MainThread",
-              "elapsed_ms": 0.01,
+              "elapsed_ms": 0.012,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -717,7 +927,7 @@
                 },
                 "seq": 6,
                 "thread": "MainThread",
-                "elapsed_ms": 0.201,
+                "elapsed_ms": 0.255,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -735,7 +945,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -754,6 +964,41 @@
                         "role": "tool",
                         "content": "ordered 8 x milk",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -777,7 +1022,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c4cbdafa80d-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-73138eb11327-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -811,7 +1056,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -830,6 +1075,41 @@
                           "role": "tool",
                           "content": "ordered 8 x milk",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -862,7 +1142,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c4cbdafa80d-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-73138eb11327-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -891,7 +1171,7 @@
                 },
                 "seq": 7,
                 "thread": "MainThread",
-                "elapsed_ms": 0.01,
+                "elapsed_ms": 0.012,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -946,7 +1226,7 @@
             },
             "seq": 2,
             "thread": "MainThread",
-            "elapsed_ms": 3.6670000000000003,
+            "elapsed_ms": 2.822,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -958,7 +1238,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 3.639,
+                "elapsed_ms": 2.79,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -974,6 +1254,41 @@
                         "id": null,
                         "role": "human",
                         "content": "Order 8 bottles of milk, then order 8 more."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -995,7 +1310,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -1028,6 +1343,41 @@
                           "role": "human",
                           "content": "Order 8 bottles of milk, then order 8 more."
                         }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
                       ]
                     }
                   },
@@ -1057,7 +1407,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1083,7 +1433,7 @@
                 },
                 "seq": 4,
                 "thread": "MainThread",
-                "elapsed_ms": 0.008,
+                "elapsed_ms": 0.01,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1176,7 +1526,7 @@
                   },
                   "seq": 3,
                   "thread": "MainThread",
-                  "elapsed_ms": 3.639,
+                  "elapsed_ms": 2.79,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1192,6 +1542,41 @@
                           "id": null,
                           "role": "human",
                           "content": "Order 8 bottles of milk, then order 8 more."
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -1213,7 +1598,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1246,6 +1631,41 @@
                             "role": "human",
                             "content": "Order 8 bottles of milk, then order 8 more."
                           }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
                         ]
                       }
                     },
@@ -1275,7 +1695,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1304,7 +1724,7 @@
                   },
                   "seq": 4,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.008,
+                  "elapsed_ms": 0.01,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1399,7 +1819,7 @@
             },
             "seq": 5,
             "thread": "MainThread",
-            "elapsed_ms": 0.219,
+            "elapsed_ms": 0.27599999999999997,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1411,7 +1831,7 @@
                 },
                 "seq": 6,
                 "thread": "MainThread",
-                "elapsed_ms": 0.201,
+                "elapsed_ms": 0.255,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1429,7 +1849,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1448,6 +1868,41 @@
                         "role": "tool",
                         "content": "ordered 8 x milk",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -1471,7 +1926,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c4cbdafa80d-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-73138eb11327-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -1505,7 +1960,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1524,6 +1979,41 @@
                           "role": "tool",
                           "content": "ordered 8 x milk",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -1556,7 +2046,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c4cbdafa80d-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-73138eb11327-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1582,7 +2072,7 @@
                 },
                 "seq": 7,
                 "thread": "MainThread",
-                "elapsed_ms": 0.01,
+                "elapsed_ms": 0.012,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1634,7 +2124,7 @@
                   },
                   "seq": 6,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.201,
+                  "elapsed_ms": 0.255,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1652,7 +2142,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1671,6 +2161,41 @@
                           "role": "tool",
                           "content": "ordered 8 x milk",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -1694,7 +2219,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c4cbdafa80d-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-73138eb11327-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1728,7 +2253,7 @@
                             "content": "Order 8 bottles of milk, then order 8 more."
                           },
                           {
-                            "id": "lc_run--01a0690f-6896-7143-a208-4c3accdb2d1f-0",
+                            "id": "lc_run--01a09c8f-5877-7f53-9239-730c70a3eb68-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -1747,6 +2272,41 @@
                             "role": "tool",
                             "content": "ordered 8 x milk",
                             "tool_call_id": "c1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
                           }
                         ]
                       }
@@ -1779,7 +2339,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c4cbdafa80d-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-73138eb11327-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1808,7 +2368,7 @@
                   },
                   "seq": 7,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.01,
+                  "elapsed_ms": 0.012,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -1869,7 +2429,7 @@
       },
       "seq": 8,
       "thread": "MainThread",
-      "elapsed_ms": 0.71,
+      "elapsed_ms": 0.9,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -1886,7 +2446,7 @@
           },
           "seq": 9,
           "thread": "MainThread",
-          "elapsed_ms": 0.202,
+          "elapsed_ms": 0.297,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1898,7 +2458,7 @@
               },
               "seq": 10,
               "thread": "MainThread",
-              "elapsed_ms": 0.187,
+              "elapsed_ms": 0.24899999999999997,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1914,6 +2474,41 @@
                       "id": null,
                       "role": "human",
                       "content": "Order 8 bottles of milk, then order 8 more."
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -1935,7 +2530,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                    "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -1968,6 +2563,41 @@
                         "role": "human",
                         "content": "Order 8 bottles of milk, then order 8 more."
                       }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
+                      }
                     ]
                   }
                 },
@@ -1997,7 +2627,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2023,7 +2653,7 @@
               },
               "seq": 11,
               "thread": "MainThread",
-              "elapsed_ms": 0.006,
+              "elapsed_ms": 0.007,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2116,7 +2746,7 @@
                 },
                 "seq": 10,
                 "thread": "MainThread",
-                "elapsed_ms": 0.187,
+                "elapsed_ms": 0.24899999999999997,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2132,6 +2762,41 @@
                         "id": null,
                         "role": "human",
                         "content": "Order 8 bottles of milk, then order 8 more."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -2153,7 +2818,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2186,6 +2851,41 @@
                           "role": "human",
                           "content": "Order 8 bottles of milk, then order 8 more."
                         }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
                       ]
                     }
                   },
@@ -2215,7 +2915,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2244,7 +2944,7 @@
                 },
                 "seq": 11,
                 "thread": "MainThread",
-                "elapsed_ms": 0.006,
+                "elapsed_ms": 0.007,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2336,7 +3036,7 @@
           },
           "seq": 12,
           "thread": "MainThread",
-          "elapsed_ms": 0.177,
+          "elapsed_ms": 0.202,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -2348,7 +3048,7 @@
               },
               "seq": 13,
               "thread": "MainThread",
-              "elapsed_ms": 0.164,
+              "elapsed_ms": 0.187,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2366,7 +3066,7 @@
                       "content": "Order 8 bottles of milk, then order 8 more."
                     },
                     {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2385,6 +3085,41 @@
                       "role": "tool",
                       "content": "ordered 8 x milk",
                       "tool_call_id": "c1"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -2408,7 +3143,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                    "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -2442,7 +3177,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2461,6 +3196,41 @@
                         "role": "tool",
                         "content": "ordered 8 x milk",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   }
@@ -2493,7 +3263,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2519,7 +3289,7 @@
               },
               "seq": 14,
               "thread": "MainThread",
-              "elapsed_ms": 0.007,
+              "elapsed_ms": 0.008,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2571,7 +3341,7 @@
                 },
                 "seq": 13,
                 "thread": "MainThread",
-                "elapsed_ms": 0.164,
+                "elapsed_ms": 0.187,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2589,7 +3359,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2608,6 +3378,41 @@
                         "role": "tool",
                         "content": "ordered 8 x milk",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -2631,7 +3436,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2665,7 +3470,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -2684,6 +3489,41 @@
                           "role": "tool",
                           "content": "ordered 8 x milk",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -2716,7 +3556,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2745,7 +3585,7 @@
                 },
                 "seq": 14,
                 "thread": "MainThread",
-                "elapsed_ms": 0.007,
+                "elapsed_ms": 0.008,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2796,7 +3636,7 @@
           },
           "seq": 15,
           "thread": "MainThread",
-          "elapsed_ms": 0.165,
+          "elapsed_ms": 0.204,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -2808,7 +3648,7 @@
               },
               "seq": 16,
               "thread": "MainThread",
-              "elapsed_ms": 0.153,
+              "elapsed_ms": 0.191,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -2826,7 +3666,7 @@
                       "content": "Order 8 bottles of milk, then order 8 more."
                     },
                     {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2847,7 +3687,7 @@
                       "tool_call_id": "c1"
                     },
                     {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -2866,6 +3706,41 @@
                       "role": "tool",
                       "content": "['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12",
                       "tool_call_id": "c2"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -2891,7 +3766,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                    "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -2925,7 +3800,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2946,7 +3821,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2965,6 +3840,41 @@
                         "role": "tool",
                         "content": "['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12",
                         "tool_call_id": "c2"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   }
@@ -2999,7 +3909,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3025,7 +3935,7 @@
               },
               "seq": 17,
               "thread": "MainThread",
-              "elapsed_ms": 0.005,
+              "elapsed_ms": 0.004,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3118,7 +4028,7 @@
                 },
                 "seq": 16,
                 "thread": "MainThread",
-                "elapsed_ms": 0.153,
+                "elapsed_ms": 0.191,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3136,7 +4046,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3157,7 +4067,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3176,6 +4086,41 @@
                         "role": "tool",
                         "content": "['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12",
                         "tool_call_id": "c2"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -3201,7 +4146,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3235,7 +4180,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3256,7 +4201,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3275,6 +4220,41 @@
                           "role": "tool",
                           "content": "['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12",
                           "tool_call_id": "c2"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -3309,7 +4289,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3338,7 +4318,7 @@
                 },
                 "seq": 17,
                 "thread": "MainThread",
-                "elapsed_ms": 0.005,
+                "elapsed_ms": 0.004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3430,7 +4410,7 @@
           },
           "seq": 18,
           "thread": "MainThread",
-          "elapsed_ms": 0.15100000000000002,
+          "elapsed_ms": 0.18100000000000002,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -3442,7 +4422,7 @@
               },
               "seq": 19,
               "thread": "MainThread",
-              "elapsed_ms": 0.147,
+              "elapsed_ms": 0.178,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3460,7 +4440,7 @@
                       "content": "Order 8 bottles of milk, then order 8 more."
                     },
                     {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3481,7 +4461,7 @@
                       "tool_call_id": "c1"
                     },
                     {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3502,7 +4482,7 @@
                       "tool_call_id": "c2"
                     },
                     {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3521,6 +4501,41 @@
                       "role": "tool",
                       "content": "ordered 4 x milk",
                       "tool_call_id": "c3"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "name": "place_order",
+                      "description": "Order a quantity of an item.",
+                      "schema": {
+                        "$defs": {
+                          "GroceryItem": {
+                            "enum": [
+                              "bread",
+                              "butter",
+                              "chips",
+                              "milk"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Order a quantity of an item.",
+                        "properties": {
+                          "item": {
+                            "$ref": "#/$defs/GroceryItem"
+                          },
+                          "quantity": {
+                            "title": "Quantity",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "item",
+                          "quantity"
+                        ],
+                        "title": "place_order",
+                        "type": "object"
+                      }
                     }
                   ]
                 },
@@ -3548,7 +4563,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0690f-6897-7df2-86d4-567ec335180f-0",
+                    "id": "lc_run--01a09c8f-5878-75f0-bc04-6b018ebba2bb-0",
                     "role": "ai",
                     "content": "Ordered 8, then 4 more after the second 8 was refused -- 12 in total, at the limit."
                   }
@@ -3572,7 +4587,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3593,7 +4608,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3614,7 +4629,7 @@
                         "tool_call_id": "c2"
                       },
                       {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3633,6 +4648,41 @@
                         "role": "tool",
                         "content": "ordered 4 x milk",
                         "tool_call_id": "c3"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   }
@@ -3669,7 +4719,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-567ec335180f-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6b018ebba2bb-0",
                       "role": "ai",
                       "content": "Ordered 8, then 4 more after the second 8 was refused -- 12 in total, at the limit."
                     }
@@ -3688,7 +4738,7 @@
                 },
                 "seq": 19,
                 "thread": "MainThread",
-                "elapsed_ms": 0.147,
+                "elapsed_ms": 0.178,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3706,7 +4756,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3727,7 +4777,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3748,7 +4798,7 @@
                         "tool_call_id": "c2"
                       },
                       {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3767,6 +4817,41 @@
                         "role": "tool",
                         "content": "ordered 4 x milk",
                         "tool_call_id": "c3"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -3794,7 +4879,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-567ec335180f-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6b018ebba2bb-0",
                       "role": "ai",
                       "content": "Ordered 8, then 4 more after the second 8 was refused -- 12 in total, at the limit."
                     }
@@ -3818,7 +4903,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3839,7 +4924,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3860,7 +4945,7 @@
                           "tool_call_id": "c2"
                         },
                         {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3879,6 +4964,41 @@
                           "role": "tool",
                           "content": "ordered 4 x milk",
                           "tool_call_id": "c3"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -3915,7 +5035,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-567ec335180f-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6b018ebba2bb-0",
                         "role": "ai",
                         "content": "Ordered 8, then 4 more after the second 8 was refused -- 12 in total, at the limit."
                       }
@@ -3937,7 +5057,7 @@
             },
             "seq": 9,
             "thread": "MainThread",
-            "elapsed_ms": 0.202,
+            "elapsed_ms": 0.297,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -3949,7 +5069,7 @@
                 },
                 "seq": 10,
                 "thread": "MainThread",
-                "elapsed_ms": 0.187,
+                "elapsed_ms": 0.24899999999999997,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3965,6 +5085,41 @@
                         "id": null,
                         "role": "human",
                         "content": "Order 8 bottles of milk, then order 8 more."
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -3986,7 +5141,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                      "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -4019,6 +5174,41 @@
                           "role": "human",
                           "content": "Order 8 bottles of milk, then order 8 more."
                         }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
+                        }
                       ]
                     }
                   },
@@ -4048,7 +5238,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4074,7 +5264,7 @@
                 },
                 "seq": 11,
                 "thread": "MainThread",
-                "elapsed_ms": 0.006,
+                "elapsed_ms": 0.007,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4167,7 +5357,7 @@
                   },
                   "seq": 10,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.187,
+                  "elapsed_ms": 0.24899999999999997,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4183,6 +5373,41 @@
                           "id": null,
                           "role": "human",
                           "content": "Order 8 bottles of milk, then order 8 more."
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -4204,7 +5429,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4237,6 +5462,41 @@
                             "role": "human",
                             "content": "Order 8 bottles of milk, then order 8 more."
                           }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
+                          }
                         ]
                       }
                     },
@@ -4266,7 +5526,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4295,7 +5555,7 @@
                   },
                   "seq": 11,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.006,
+                  "elapsed_ms": 0.007,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4390,7 +5650,7 @@
             },
             "seq": 12,
             "thread": "MainThread",
-            "elapsed_ms": 0.177,
+            "elapsed_ms": 0.202,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -4402,7 +5662,7 @@
                 },
                 "seq": 13,
                 "thread": "MainThread",
-                "elapsed_ms": 0.164,
+                "elapsed_ms": 0.187,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4420,7 +5680,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4439,6 +5699,41 @@
                         "role": "tool",
                         "content": "ordered 8 x milk",
                         "tool_call_id": "c1"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -4462,7 +5757,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -4496,7 +5791,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4515,6 +5810,41 @@
                           "role": "tool",
                           "content": "ordered 8 x milk",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -4547,7 +5877,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4573,7 +5903,7 @@
                 },
                 "seq": 14,
                 "thread": "MainThread",
-                "elapsed_ms": 0.007,
+                "elapsed_ms": 0.008,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4625,7 +5955,7 @@
                   },
                   "seq": 13,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.164,
+                  "elapsed_ms": 0.187,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4643,7 +5973,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4662,6 +5992,41 @@
                           "role": "tool",
                           "content": "ordered 8 x milk",
                           "tool_call_id": "c1"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -4685,7 +6050,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4719,7 +6084,7 @@
                             "content": "Order 8 bottles of milk, then order 8 more."
                           },
                           {
-                            "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                            "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -4738,6 +6103,41 @@
                             "role": "tool",
                             "content": "ordered 8 x milk",
                             "tool_call_id": "c1"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
                           }
                         ]
                       }
@@ -4770,7 +6170,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4799,7 +6199,7 @@
                   },
                   "seq": 14,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.007,
+                  "elapsed_ms": 0.008,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -4853,7 +6253,7 @@
             },
             "seq": 15,
             "thread": "MainThread",
-            "elapsed_ms": 0.165,
+            "elapsed_ms": 0.204,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -4865,7 +6265,7 @@
                 },
                 "seq": 16,
                 "thread": "MainThread",
-                "elapsed_ms": 0.153,
+                "elapsed_ms": 0.191,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4883,7 +6283,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4904,7 +6304,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4923,6 +6323,41 @@
                         "role": "tool",
                         "content": "['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12",
                         "tool_call_id": "c2"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -4948,7 +6383,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -4982,7 +6417,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5003,7 +6438,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5022,6 +6457,41 @@
                           "role": "tool",
                           "content": "['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12",
                           "tool_call_id": "c2"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -5056,7 +6526,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5082,7 +6552,7 @@
                 },
                 "seq": 17,
                 "thread": "MainThread",
-                "elapsed_ms": 0.005,
+                "elapsed_ms": 0.004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5175,7 +6645,7 @@
                   },
                   "seq": 16,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.153,
+                  "elapsed_ms": 0.191,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -5193,7 +6663,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5214,7 +6684,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5233,6 +6703,41 @@
                           "role": "tool",
                           "content": "['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12",
                           "tool_call_id": "c2"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -5258,7 +6763,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5292,7 +6797,7 @@
                             "content": "Order 8 bottles of milk, then order 8 more."
                           },
                           {
-                            "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                            "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -5313,7 +6818,7 @@
                             "tool_call_id": "c1"
                           },
                           {
-                            "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                            "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -5332,6 +6837,41 @@
                             "role": "tool",
                             "content": "['place_order'] blocked before it ran: 8 already ordered this run; 8 more would be 16, over the budget of 12",
                             "tool_call_id": "c2"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
                           }
                         ]
                       }
@@ -5366,7 +6906,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5395,7 +6935,7 @@
                   },
                   "seq": 17,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.005,
+                  "elapsed_ms": 0.004,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -5490,7 +7030,7 @@
             },
             "seq": 18,
             "thread": "MainThread",
-            "elapsed_ms": 0.15100000000000002,
+            "elapsed_ms": 0.18100000000000002,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -5502,7 +7042,7 @@
                 },
                 "seq": 19,
                 "thread": "MainThread",
-                "elapsed_ms": 0.147,
+                "elapsed_ms": 0.178,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5520,7 +7060,7 @@
                         "content": "Order 8 bottles of milk, then order 8 more."
                       },
                       {
-                        "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                        "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5541,7 +7081,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5562,7 +7102,7 @@
                         "tool_call_id": "c2"
                       },
                       {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5581,6 +7121,41 @@
                         "role": "tool",
                         "content": "ordered 4 x milk",
                         "tool_call_id": "c3"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "name": "place_order",
+                        "description": "Order a quantity of an item.",
+                        "schema": {
+                          "$defs": {
+                            "GroceryItem": {
+                              "enum": [
+                                "bread",
+                                "butter",
+                                "chips",
+                                "milk"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "description": "Order a quantity of an item.",
+                          "properties": {
+                            "item": {
+                              "$ref": "#/$defs/GroceryItem"
+                            },
+                            "quantity": {
+                              "title": "Quantity",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "item",
+                            "quantity"
+                          ],
+                          "title": "place_order",
+                          "type": "object"
+                        }
                       }
                     ]
                   },
@@ -5608,7 +7183,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0690f-6897-7df2-86d4-567ec335180f-0",
+                      "id": "lc_run--01a09c8f-5878-75f0-bc04-6b018ebba2bb-0",
                       "role": "ai",
                       "content": "Ordered 8, then 4 more after the second 8 was refused -- 12 in total, at the limit."
                     }
@@ -5632,7 +7207,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5653,7 +7228,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5674,7 +7249,7 @@
                           "tool_call_id": "c2"
                         },
                         {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5693,6 +7268,41 @@
                           "role": "tool",
                           "content": "ordered 4 x milk",
                           "tool_call_id": "c3"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     }
@@ -5729,7 +7339,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-567ec335180f-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6b018ebba2bb-0",
                         "role": "ai",
                         "content": "Ordered 8, then 4 more after the second 8 was refused -- 12 in total, at the limit."
                       }
@@ -5748,7 +7358,7 @@
                   },
                   "seq": 19,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.147,
+                  "elapsed_ms": 0.178,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -5766,7 +7376,7 @@
                           "content": "Order 8 bottles of milk, then order 8 more."
                         },
                         {
-                          "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                          "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5787,7 +7397,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5808,7 +7418,7 @@
                           "tool_call_id": "c2"
                         },
                         {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5827,6 +7437,41 @@
                           "role": "tool",
                           "content": "ordered 4 x milk",
                           "tool_call_id": "c3"
+                        }
+                      ],
+                      "tools": [
+                        {
+                          "name": "place_order",
+                          "description": "Order a quantity of an item.",
+                          "schema": {
+                            "$defs": {
+                              "GroceryItem": {
+                                "enum": [
+                                  "bread",
+                                  "butter",
+                                  "chips",
+                                  "milk"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "description": "Order a quantity of an item.",
+                            "properties": {
+                              "item": {
+                                "$ref": "#/$defs/GroceryItem"
+                              },
+                              "quantity": {
+                                "title": "Quantity",
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "item",
+                              "quantity"
+                            ],
+                            "title": "place_order",
+                            "type": "object"
+                          }
                         }
                       ]
                     },
@@ -5854,7 +7499,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0690f-6897-7df2-86d4-567ec335180f-0",
+                        "id": "lc_run--01a09c8f-5878-75f0-bc04-6b018ebba2bb-0",
                         "role": "ai",
                         "content": "Ordered 8, then 4 more after the second 8 was refused -- 12 in total, at the limit."
                       }
@@ -5878,7 +7523,7 @@
                             "content": "Order 8 bottles of milk, then order 8 more."
                           },
                           {
-                            "id": "lc_run--01a0690f-6896-7143-a208-4c581050f804-0",
+                            "id": "lc_run--01a09c8f-5877-7f53-9239-732eea6f240f-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -5899,7 +7544,7 @@
                             "tool_call_id": "c1"
                           },
                           {
-                            "id": "lc_run--01a0690f-6897-7df2-86d4-565a75fdba09-0",
+                            "id": "lc_run--01a09c8f-5878-75f0-bc04-6ae91aae0f79-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -5920,7 +7565,7 @@
                             "tool_call_id": "c2"
                           },
                           {
-                            "id": "lc_run--01a0690f-6897-7df2-86d4-566b24347b6c-0",
+                            "id": "lc_run--01a09c8f-5878-75f0-bc04-6af303fc2fbb-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -5939,6 +7584,41 @@
                             "role": "tool",
                             "content": "ordered 4 x milk",
                             "tool_call_id": "c3"
+                          }
+                        ],
+                        "tools": [
+                          {
+                            "name": "place_order",
+                            "description": "Order a quantity of an item.",
+                            "schema": {
+                              "$defs": {
+                                "GroceryItem": {
+                                  "enum": [
+                                    "bread",
+                                    "butter",
+                                    "chips",
+                                    "milk"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Order a quantity of an item.",
+                              "properties": {
+                                "item": {
+                                  "$ref": "#/$defs/GroceryItem"
+                                },
+                                "quantity": {
+                                  "title": "Quantity",
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "item",
+                                "quantity"
+                              ],
+                              "title": "place_order",
+                              "type": "object"
+                            }
                           }
                         ]
                       }
@@ -5975,7 +7655,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0690f-6897-7df2-86d4-567ec335180f-0",
+                          "id": "lc_run--01a09c8f-5878-75f0-bc04-6b018ebba2bb-0",
                           "role": "ai",
                           "content": "Ordered 8, then 4 more after the second 8 was refused -- 12 in total, at the limit."
                         }

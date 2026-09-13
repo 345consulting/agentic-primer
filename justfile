@@ -1,4 +1,4 @@
-# Copyright (c) 2026 345 Consulting, LLC.
+# Copyright (c) 2022-2026 345 Consulting, LLC
 # Licensed under the MIT License. See LICENSE in the project root.
 #
 # Run every recipe from THIS directory.

@@ -110,14 +110,14 @@ def test_every_text_scenario_content_is_a_plain_string_by_contrast() -> None:
             assert isinstance(m["content"], str)
 
 
-def test_the_pdf_scenario_content_is_also_a_typed_block() -> None:
-    span = scenario_span("pdf_or_docx_uses_the_generic_file_block")
+def test_the_file_block_scenario_content_is_also_a_typed_block() -> None:
+    span = scenario_span("a_pdf_is_rasterized_to_images_not_sent_as_a_file")
     note = span.require("spliced_content_shape")
     assert note.payload["content_type"] == "list"
 
 
-def test_the_pdf_scenario_skips_the_rejection_probe_under_mock() -> None:
-    span = scenario_span("pdf_or_docx_uses_the_generic_file_block")
+def test_the_file_block_scenario_skips_the_rejection_probe_under_mock() -> None:
+    span = scenario_span("a_pdf_is_rasterized_to_images_not_sent_as_a_file")
     note = span.require("rejected_variant")
     assert note.payload["accepted"] is None
     assert note.payload["error"] == "not applicable under mock"

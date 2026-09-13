@@ -1,7 +1,7 @@
 {
   "chapter": "ch09_who_retries",
   "model_kind": "mock",
-  "source": "b8f67c7687ac",
+  "source": "64050815201c",
   "summary": {
     "turns": 9,
     "messages": 22,
@@ -17,7 +17,7 @@
       },
       "seq": 1,
       "thread": "MainThread",
-      "elapsed_ms": 56.471000000000004,
+      "elapsed_ms": 59.5,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -34,7 +34,7 @@
           },
           "seq": 2,
           "thread": "MainThread",
-          "elapsed_ms": 55.957,
+          "elapsed_ms": 58.833000000000006,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -46,7 +46,7 @@
               },
               "seq": 3,
               "thread": "MainThread",
-              "elapsed_ms": 4.079,
+              "elapsed_ms": 3.1270000000000002,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -147,7 +147,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                    "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -273,7 +273,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                      "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -299,9 +299,9 @@
               },
               "seq": 4,
               "thread": "MainThread",
-              "elapsed_ms": 51.854,
-              "model_provider_ms": 0.16904187202453613,
-              "library_ms": 51.68495812797546,
+              "elapsed_ms": 55.643,
+              "model_provider_ms": 0.14179110527038574,
+              "library_ms": 55.501208894729615,
               "notes": [
                 {
                   "label": "args",
@@ -310,7 +310,7 @@
                 {
                   "label": "wire request",
                   "attempt": 1,
-                  "at_ms": 1048157200.853541,
+                  "at_ms": 1903044456.137625,
                   "method": "GET",
                   "url": "https://httpbin.org/status/429?item=milk",
                   "headers": {
@@ -334,7 +334,7 @@
                 },
                 {
                   "label": "wire response",
-                  "at_ms": 1048157201.0225829,
+                  "at_ms": 1903044456.279416,
                   "status": 429,
                   "headers": {
                     "content-length": "0",
@@ -359,7 +359,7 @@
                 {
                   "label": "wire request",
                   "attempt": 1,
-                  "at_ms": 1048157252.432375,
+                  "at_ms": 1903044511.4635,
                   "method": "GET",
                   "url": "https://httpbin.org/get?item=milk",
                   "headers": {
@@ -383,7 +383,7 @@
                 },
                 {
                   "label": "wire response",
-                  "at_ms": 1048157252.4982079,
+                  "at_ms": 1903044511.568916,
                   "status": 200,
                   "headers": {
                     "content-length": "39",
@@ -419,7 +419,7 @@
                   "value": {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157200.853541,
+                    "at_ms": 1903044456.137625,
                     "method": "GET",
                     "url": "https://httpbin.org/status/429?item=milk",
                     "headers": {
@@ -446,7 +446,7 @@
                   "kind": "note",
                   "value": {
                     "label": "wire response",
-                    "at_ms": 1048157201.0225829,
+                    "at_ms": 1903044456.279416,
                     "status": 429,
                     "headers": {
                       "content-length": "0",
@@ -480,7 +480,7 @@
                   "value": {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157252.432375,
+                    "at_ms": 1903044511.4635,
                     "method": "GET",
                     "url": "https://httpbin.org/get?item=milk",
                     "headers": {
@@ -507,7 +507,7 @@
                   "kind": "note",
                   "value": {
                     "label": "wire response",
-                    "at_ms": 1048157252.4982079,
+                    "at_ms": 1903044511.568916,
                     "status": 200,
                     "headers": {
                       "content-length": "39",
@@ -548,7 +548,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 4.079,
+                "elapsed_ms": 3.1270000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -649,7 +649,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                      "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -775,7 +775,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -804,9 +804,9 @@
                 },
                 "seq": 4,
                 "thread": "MainThread",
-                "elapsed_ms": 51.854,
-                "model_provider_ms": 0.16904187202453613,
-                "library_ms": 51.68495812797546,
+                "elapsed_ms": 55.643,
+                "model_provider_ms": 0.14179110527038574,
+                "library_ms": 55.501208894729615,
                 "notes": [
                   {
                     "label": "args",
@@ -815,7 +815,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157200.853541,
+                    "at_ms": 1903044456.137625,
                     "method": "GET",
                     "url": "https://httpbin.org/status/429?item=milk",
                     "headers": {
@@ -839,7 +839,7 @@
                   },
                   {
                     "label": "wire response",
-                    "at_ms": 1048157201.0225829,
+                    "at_ms": 1903044456.279416,
                     "status": 429,
                     "headers": {
                       "content-length": "0",
@@ -864,7 +864,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157252.432375,
+                    "at_ms": 1903044511.4635,
                     "method": "GET",
                     "url": "https://httpbin.org/get?item=milk",
                     "headers": {
@@ -888,7 +888,7 @@
                   },
                   {
                     "label": "wire response",
-                    "at_ms": 1048157252.4982079,
+                    "at_ms": 1903044511.568916,
                     "status": 200,
                     "headers": {
                       "content-length": "39",
@@ -924,7 +924,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157200.853541,
+                      "at_ms": 1903044456.137625,
                       "method": "GET",
                       "url": "https://httpbin.org/status/429?item=milk",
                       "headers": {
@@ -951,7 +951,7 @@
                     "kind": "note",
                     "value": {
                       "label": "wire response",
-                      "at_ms": 1048157201.0225829,
+                      "at_ms": 1903044456.279416,
                       "status": 429,
                       "headers": {
                         "content-length": "0",
@@ -985,7 +985,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157252.432375,
+                      "at_ms": 1903044511.4635,
                       "method": "GET",
                       "url": "https://httpbin.org/get?item=milk",
                       "headers": {
@@ -1012,7 +1012,7 @@
                     "kind": "note",
                     "value": {
                       "label": "wire response",
-                      "at_ms": 1048157252.4982079,
+                      "at_ms": 1903044511.568916,
                       "status": 200,
                       "headers": {
                         "content-length": "39",
@@ -1052,7 +1052,7 @@
           },
           "seq": 5,
           "thread": "MainThread",
-          "elapsed_ms": 0.33799999999999997,
+          "elapsed_ms": 0.443,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -1064,7 +1064,7 @@
               },
               "seq": 6,
               "thread": "MainThread",
-              "elapsed_ms": 0.33,
+              "elapsed_ms": 0.434,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -1082,7 +1082,7 @@
                       "content": "How much is milk?"
                     },
                     {
-                      "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                      "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -1188,7 +1188,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0699a-a70a-7c33-8249-df1070d00fae-0",
+                    "id": "lc_run--01a09c8f-34f5-7401-a6fe-e5dbf55c65df-0",
                     "role": "ai",
                     "content": "Milk is 1.20.",
                     "finish_reason": "stop"
@@ -1213,7 +1213,7 @@
                         "content": "How much is milk?"
                       },
                       {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1328,7 +1328,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70a-7c33-8249-df1070d00fae-0",
+                      "id": "lc_run--01a09c8f-34f5-7401-a6fe-e5dbf55c65df-0",
                       "role": "ai",
                       "content": "Milk is 1.20.",
                       "finish_reason": "stop"
@@ -1348,7 +1348,7 @@
                 },
                 "seq": 6,
                 "thread": "MainThread",
-                "elapsed_ms": 0.33,
+                "elapsed_ms": 0.434,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1366,7 +1366,7 @@
                         "content": "How much is milk?"
                       },
                       {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1472,7 +1472,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70a-7c33-8249-df1070d00fae-0",
+                      "id": "lc_run--01a09c8f-34f5-7401-a6fe-e5dbf55c65df-0",
                       "role": "ai",
                       "content": "Milk is 1.20.",
                       "finish_reason": "stop"
@@ -1497,7 +1497,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                          "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -1612,7 +1612,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70a-7c33-8249-df1070d00fae-0",
+                        "id": "lc_run--01a09c8f-34f5-7401-a6fe-e5dbf55c65df-0",
                         "role": "ai",
                         "content": "Milk is 1.20.",
                         "finish_reason": "stop"
@@ -1635,7 +1635,7 @@
             },
             "seq": 2,
             "thread": "MainThread",
-            "elapsed_ms": 55.957,
+            "elapsed_ms": 58.833000000000006,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -1647,7 +1647,7 @@
                 },
                 "seq": 3,
                 "thread": "MainThread",
-                "elapsed_ms": 4.079,
+                "elapsed_ms": 3.1270000000000002,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -1748,7 +1748,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                      "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -1874,7 +1874,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -1900,9 +1900,9 @@
                 },
                 "seq": 4,
                 "thread": "MainThread",
-                "elapsed_ms": 51.854,
-                "model_provider_ms": 0.16904187202453613,
-                "library_ms": 51.68495812797546,
+                "elapsed_ms": 55.643,
+                "model_provider_ms": 0.14179110527038574,
+                "library_ms": 55.501208894729615,
                 "notes": [
                   {
                     "label": "args",
@@ -1911,7 +1911,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157200.853541,
+                    "at_ms": 1903044456.137625,
                     "method": "GET",
                     "url": "https://httpbin.org/status/429?item=milk",
                     "headers": {
@@ -1935,7 +1935,7 @@
                   },
                   {
                     "label": "wire response",
-                    "at_ms": 1048157201.0225829,
+                    "at_ms": 1903044456.279416,
                     "status": 429,
                     "headers": {
                       "content-length": "0",
@@ -1960,7 +1960,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157252.432375,
+                    "at_ms": 1903044511.4635,
                     "method": "GET",
                     "url": "https://httpbin.org/get?item=milk",
                     "headers": {
@@ -1984,7 +1984,7 @@
                   },
                   {
                     "label": "wire response",
-                    "at_ms": 1048157252.4982079,
+                    "at_ms": 1903044511.568916,
                     "status": 200,
                     "headers": {
                       "content-length": "39",
@@ -2020,7 +2020,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157200.853541,
+                      "at_ms": 1903044456.137625,
                       "method": "GET",
                       "url": "https://httpbin.org/status/429?item=milk",
                       "headers": {
@@ -2047,7 +2047,7 @@
                     "kind": "note",
                     "value": {
                       "label": "wire response",
-                      "at_ms": 1048157201.0225829,
+                      "at_ms": 1903044456.279416,
                       "status": 429,
                       "headers": {
                         "content-length": "0",
@@ -2081,7 +2081,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157252.432375,
+                      "at_ms": 1903044511.4635,
                       "method": "GET",
                       "url": "https://httpbin.org/get?item=milk",
                       "headers": {
@@ -2108,7 +2108,7 @@
                     "kind": "note",
                     "value": {
                       "label": "wire response",
-                      "at_ms": 1048157252.4982079,
+                      "at_ms": 1903044511.568916,
                       "status": 200,
                       "headers": {
                         "content-length": "39",
@@ -2149,7 +2149,7 @@
                   },
                   "seq": 3,
                   "thread": "MainThread",
-                  "elapsed_ms": 4.079,
+                  "elapsed_ms": 3.1270000000000002,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -2250,7 +2250,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2376,7 +2376,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                          "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -2405,9 +2405,9 @@
                   },
                   "seq": 4,
                   "thread": "MainThread",
-                  "elapsed_ms": 51.854,
-                  "model_provider_ms": 0.16904187202453613,
-                  "library_ms": 51.68495812797546,
+                  "elapsed_ms": 55.643,
+                  "model_provider_ms": 0.14179110527038574,
+                  "library_ms": 55.501208894729615,
                   "notes": [
                     {
                       "label": "args",
@@ -2416,7 +2416,7 @@
                     {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157200.853541,
+                      "at_ms": 1903044456.137625,
                       "method": "GET",
                       "url": "https://httpbin.org/status/429?item=milk",
                       "headers": {
@@ -2440,7 +2440,7 @@
                     },
                     {
                       "label": "wire response",
-                      "at_ms": 1048157201.0225829,
+                      "at_ms": 1903044456.279416,
                       "status": 429,
                       "headers": {
                         "content-length": "0",
@@ -2465,7 +2465,7 @@
                     {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157252.432375,
+                      "at_ms": 1903044511.4635,
                       "method": "GET",
                       "url": "https://httpbin.org/get?item=milk",
                       "headers": {
@@ -2489,7 +2489,7 @@
                     },
                     {
                       "label": "wire response",
-                      "at_ms": 1048157252.4982079,
+                      "at_ms": 1903044511.568916,
                       "status": 200,
                       "headers": {
                         "content-length": "39",
@@ -2525,7 +2525,7 @@
                       "value": {
                         "label": "wire request",
                         "attempt": 1,
-                        "at_ms": 1048157200.853541,
+                        "at_ms": 1903044456.137625,
                         "method": "GET",
                         "url": "https://httpbin.org/status/429?item=milk",
                         "headers": {
@@ -2552,7 +2552,7 @@
                       "kind": "note",
                       "value": {
                         "label": "wire response",
-                        "at_ms": 1048157201.0225829,
+                        "at_ms": 1903044456.279416,
                         "status": 429,
                         "headers": {
                           "content-length": "0",
@@ -2586,7 +2586,7 @@
                       "value": {
                         "label": "wire request",
                         "attempt": 1,
-                        "at_ms": 1048157252.432375,
+                        "at_ms": 1903044511.4635,
                         "method": "GET",
                         "url": "https://httpbin.org/get?item=milk",
                         "headers": {
@@ -2613,7 +2613,7 @@
                       "kind": "note",
                       "value": {
                         "label": "wire response",
-                        "at_ms": 1048157252.4982079,
+                        "at_ms": 1903044511.568916,
                         "status": 200,
                         "headers": {
                           "content-length": "39",
@@ -2656,7 +2656,7 @@
             },
             "seq": 5,
             "thread": "MainThread",
-            "elapsed_ms": 0.33799999999999997,
+            "elapsed_ms": 0.443,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -2668,7 +2668,7 @@
                 },
                 "seq": 6,
                 "thread": "MainThread",
-                "elapsed_ms": 0.33,
+                "elapsed_ms": 0.434,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -2686,7 +2686,7 @@
                         "content": "How much is milk?"
                       },
                       {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -2792,7 +2792,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70a-7c33-8249-df1070d00fae-0",
+                      "id": "lc_run--01a09c8f-34f5-7401-a6fe-e5dbf55c65df-0",
                       "role": "ai",
                       "content": "Milk is 1.20.",
                       "finish_reason": "stop"
@@ -2817,7 +2817,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                          "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -2932,7 +2932,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70a-7c33-8249-df1070d00fae-0",
+                        "id": "lc_run--01a09c8f-34f5-7401-a6fe-e5dbf55c65df-0",
                         "role": "ai",
                         "content": "Milk is 1.20.",
                         "finish_reason": "stop"
@@ -2952,7 +2952,7 @@
                   },
                   "seq": 6,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.33,
+                  "elapsed_ms": 0.434,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -2970,7 +2970,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                          "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -3076,7 +3076,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70a-7c33-8249-df1070d00fae-0",
+                        "id": "lc_run--01a09c8f-34f5-7401-a6fe-e5dbf55c65df-0",
                         "role": "ai",
                         "content": "Milk is 1.20.",
                         "finish_reason": "stop"
@@ -3101,7 +3101,7 @@
                             "content": "How much is milk?"
                           },
                           {
-                            "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                            "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -3216,7 +3216,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0699a-a70a-7c33-8249-df1070d00fae-0",
+                          "id": "lc_run--01a09c8f-34f5-7401-a6fe-e5dbf55c65df-0",
                           "role": "ai",
                           "content": "Milk is 1.20.",
                           "finish_reason": "stop"
@@ -3247,7 +3247,7 @@
       },
       "seq": 7,
       "thread": "MainThread",
-      "elapsed_ms": 0.651,
+      "elapsed_ms": 0.7829999999999999,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -3264,7 +3264,7 @@
           },
           "seq": 8,
           "thread": "MainThread",
-          "elapsed_ms": 0.399,
+          "elapsed_ms": 0.455,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -3276,7 +3276,7 @@
               },
               "seq": 9,
               "thread": "MainThread",
-              "elapsed_ms": 0.253,
+              "elapsed_ms": 0.26899999999999996,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3377,7 +3377,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                    "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -3504,7 +3504,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                      "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3531,7 +3531,7 @@
               },
               "seq": 10,
               "thread": "MainThread",
-              "elapsed_ms": 0.13699999999999998,
+              "elapsed_ms": 0.176,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -3543,7 +3543,7 @@
                 {
                   "label": "wire request",
                   "attempt": 1,
-                  "at_ms": 1048157253.2785001,
+                  "at_ms": 1903044512.548916,
                   "method": "GET",
                   "url": "https://httpbin.org/delay/10?item=milk&quantity=2",
                   "headers": {
@@ -3596,7 +3596,7 @@
                   "value": {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157253.2785001,
+                    "at_ms": 1903044512.548916,
                     "method": "GET",
                     "url": "https://httpbin.org/delay/10?item=milk&quantity=2",
                     "headers": {
@@ -3653,7 +3653,7 @@
                 },
                 "seq": 9,
                 "thread": "MainThread",
-                "elapsed_ms": 0.253,
+                "elapsed_ms": 0.26899999999999996,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3754,7 +3754,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                      "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -3881,7 +3881,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                        "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -3911,7 +3911,7 @@
                 },
                 "seq": 10,
                 "thread": "MainThread",
-                "elapsed_ms": 0.13699999999999998,
+                "elapsed_ms": 0.176,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -3923,7 +3923,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157253.2785001,
+                    "at_ms": 1903044512.548916,
                     "method": "GET",
                     "url": "https://httpbin.org/delay/10?item=milk&quantity=2",
                     "headers": {
@@ -3976,7 +3976,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157253.2785001,
+                      "at_ms": 1903044512.548916,
                       "method": "GET",
                       "url": "https://httpbin.org/delay/10?item=milk&quantity=2",
                       "headers": {
@@ -4032,7 +4032,7 @@
           },
           "seq": 11,
           "thread": "MainThread",
-          "elapsed_ms": 0.237,
+          "elapsed_ms": 0.311,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -4044,7 +4044,7 @@
               },
               "seq": 12,
               "thread": "MainThread",
-              "elapsed_ms": 0.232,
+              "elapsed_ms": 0.305,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -4062,7 +4062,7 @@
                       "content": "Order 2 bottles of milk."
                     },
                     {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                      "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -4169,7 +4169,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0699a-a70b-7d31-b4f8-65562ad07d55-0",
+                    "id": "lc_run--01a09c8f-34f6-7293-a512-66e5fc49650a-0",
                     "role": "ai",
                     "content": "The order may or may not have been placed. Please check before ordering again.",
                     "finish_reason": "stop"
@@ -4194,7 +4194,7 @@
                         "content": "Order 2 bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                        "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4310,7 +4310,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-65562ad07d55-0",
+                      "id": "lc_run--01a09c8f-34f6-7293-a512-66e5fc49650a-0",
                       "role": "ai",
                       "content": "The order may or may not have been placed. Please check before ordering again.",
                       "finish_reason": "stop"
@@ -4330,7 +4330,7 @@
                 },
                 "seq": 12,
                 "thread": "MainThread",
-                "elapsed_ms": 0.232,
+                "elapsed_ms": 0.305,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4348,7 +4348,7 @@
                         "content": "Order 2 bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                        "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4455,7 +4455,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-65562ad07d55-0",
+                      "id": "lc_run--01a09c8f-34f6-7293-a512-66e5fc49650a-0",
                       "role": "ai",
                       "content": "The order may or may not have been placed. Please check before ordering again.",
                       "finish_reason": "stop"
@@ -4480,7 +4480,7 @@
                           "content": "Order 2 bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                          "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -4596,7 +4596,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-65562ad07d55-0",
+                        "id": "lc_run--01a09c8f-34f6-7293-a512-66e5fc49650a-0",
                         "role": "ai",
                         "content": "The order may or may not have been placed. Please check before ordering again.",
                         "finish_reason": "stop"
@@ -4619,7 +4619,7 @@
             },
             "seq": 8,
             "thread": "MainThread",
-            "elapsed_ms": 0.399,
+            "elapsed_ms": 0.455,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -4631,7 +4631,7 @@
                 },
                 "seq": 9,
                 "thread": "MainThread",
-                "elapsed_ms": 0.253,
+                "elapsed_ms": 0.26899999999999996,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4732,7 +4732,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                      "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -4859,7 +4859,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                        "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -4886,7 +4886,7 @@
                 },
                 "seq": 10,
                 "thread": "MainThread",
-                "elapsed_ms": 0.13699999999999998,
+                "elapsed_ms": 0.176,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -4898,7 +4898,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157253.2785001,
+                    "at_ms": 1903044512.548916,
                     "method": "GET",
                     "url": "https://httpbin.org/delay/10?item=milk&quantity=2",
                     "headers": {
@@ -4951,7 +4951,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157253.2785001,
+                      "at_ms": 1903044512.548916,
                       "method": "GET",
                       "url": "https://httpbin.org/delay/10?item=milk&quantity=2",
                       "headers": {
@@ -5008,7 +5008,7 @@
                   },
                   "seq": 9,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.253,
+                  "elapsed_ms": 0.26899999999999996,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -5109,7 +5109,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                        "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5236,7 +5236,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                          "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5266,7 +5266,7 @@
                   },
                   "seq": 10,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.13699999999999998,
+                  "elapsed_ms": 0.176,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -5278,7 +5278,7 @@
                     {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157253.2785001,
+                      "at_ms": 1903044512.548916,
                       "method": "GET",
                       "url": "https://httpbin.org/delay/10?item=milk&quantity=2",
                       "headers": {
@@ -5331,7 +5331,7 @@
                       "value": {
                         "label": "wire request",
                         "attempt": 1,
-                        "at_ms": 1048157253.2785001,
+                        "at_ms": 1903044512.548916,
                         "method": "GET",
                         "url": "https://httpbin.org/delay/10?item=milk&quantity=2",
                         "headers": {
@@ -5390,7 +5390,7 @@
             },
             "seq": 11,
             "thread": "MainThread",
-            "elapsed_ms": 0.237,
+            "elapsed_ms": 0.311,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -5402,7 +5402,7 @@
                 },
                 "seq": 12,
                 "thread": "MainThread",
-                "elapsed_ms": 0.232,
+                "elapsed_ms": 0.305,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -5420,7 +5420,7 @@
                         "content": "Order 2 bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                        "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -5527,7 +5527,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-65562ad07d55-0",
+                      "id": "lc_run--01a09c8f-34f6-7293-a512-66e5fc49650a-0",
                       "role": "ai",
                       "content": "The order may or may not have been placed. Please check before ordering again.",
                       "finish_reason": "stop"
@@ -5552,7 +5552,7 @@
                           "content": "Order 2 bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                          "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5668,7 +5668,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-65562ad07d55-0",
+                        "id": "lc_run--01a09c8f-34f6-7293-a512-66e5fc49650a-0",
                         "role": "ai",
                         "content": "The order may or may not have been placed. Please check before ordering again.",
                         "finish_reason": "stop"
@@ -5688,7 +5688,7 @@
                   },
                   "seq": 12,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.232,
+                  "elapsed_ms": 0.305,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -5706,7 +5706,7 @@
                           "content": "Order 2 bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                          "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -5813,7 +5813,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-65562ad07d55-0",
+                        "id": "lc_run--01a09c8f-34f6-7293-a512-66e5fc49650a-0",
                         "role": "ai",
                         "content": "The order may or may not have been placed. Please check before ordering again.",
                         "finish_reason": "stop"
@@ -5838,7 +5838,7 @@
                             "content": "Order 2 bottles of milk."
                           },
                           {
-                            "id": "lc_run--01a0699a-a70b-7d31-b4f8-654c22ed01da-0",
+                            "id": "lc_run--01a09c8f-34f6-7293-a512-66daffb724ef-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -5954,7 +5954,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-65562ad07d55-0",
+                          "id": "lc_run--01a09c8f-34f6-7293-a512-66e5fc49650a-0",
                           "role": "ai",
                           "content": "The order may or may not have been placed. Please check before ordering again.",
                           "finish_reason": "stop"
@@ -5985,7 +5985,7 @@
       },
       "seq": 13,
       "thread": "MainThread",
-      "elapsed_ms": 0.937,
+      "elapsed_ms": 1.107,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -6002,7 +6002,7 @@
           },
           "seq": 14,
           "thread": "MainThread",
-          "elapsed_ms": 0.27999999999999997,
+          "elapsed_ms": 0.31,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -6014,7 +6014,7 @@
               },
               "seq": 15,
               "thread": "MainThread",
-              "elapsed_ms": 0.259,
+              "elapsed_ms": 0.287,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -6115,7 +6115,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                    "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -6242,7 +6242,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -6338,7 +6338,7 @@
                 },
                 "seq": 15,
                 "thread": "MainThread",
-                "elapsed_ms": 0.259,
+                "elapsed_ms": 0.287,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -6439,7 +6439,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -6566,7 +6566,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -6664,7 +6664,7 @@
           },
           "seq": 17,
           "thread": "MainThread",
-          "elapsed_ms": 0.414,
+          "elapsed_ms": 0.486,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -6676,7 +6676,7 @@
               },
               "seq": 18,
               "thread": "MainThread",
-              "elapsed_ms": 0.236,
+              "elapsed_ms": 0.242,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -6694,7 +6694,7 @@
                       "content": "Order 20 bottles of milk."
                     },
                     {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -6801,7 +6801,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                    "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -6836,7 +6836,7 @@
                         "content": "Order 20 bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -6952,7 +6952,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -6979,9 +6979,9 @@
               },
               "seq": 19,
               "thread": "MainThread",
-              "elapsed_ms": 0.166,
-              "model_provider_ms": 0.047624945640563965,
-              "library_ms": 0.11837505435943604,
+              "elapsed_ms": 0.232,
+              "model_provider_ms": 0.07958292961120605,
+              "library_ms": 0.15241707038879396,
               "notes": [
                 {
                   "label": "args",
@@ -6991,7 +6991,7 @@
                 {
                   "label": "wire request",
                   "attempt": 1,
-                  "at_ms": 1048157254.180583,
+                  "at_ms": 1903044513.6016252,
                   "method": "GET",
                   "url": "https://httpbin.org/get?item=milk&quantity=12",
                   "headers": {
@@ -7015,7 +7015,7 @@
                 },
                 {
                   "label": "wire response",
-                  "at_ms": 1048157254.228208,
+                  "at_ms": 1903044513.6812081,
                   "status": 200,
                   "headers": {
                     "content-length": "47",
@@ -7052,7 +7052,7 @@
                   "value": {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157254.180583,
+                    "at_ms": 1903044513.6016252,
                     "method": "GET",
                     "url": "https://httpbin.org/get?item=milk&quantity=12",
                     "headers": {
@@ -7079,7 +7079,7 @@
                   "kind": "note",
                   "value": {
                     "label": "wire response",
-                    "at_ms": 1048157254.228208,
+                    "at_ms": 1903044513.6812081,
                     "status": 200,
                     "headers": {
                       "content-length": "47",
@@ -7120,7 +7120,7 @@
                 },
                 "seq": 18,
                 "thread": "MainThread",
-                "elapsed_ms": 0.236,
+                "elapsed_ms": 0.242,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -7138,7 +7138,7 @@
                         "content": "Order 20 bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -7245,7 +7245,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -7280,7 +7280,7 @@
                           "content": "Order 20 bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -7396,7 +7396,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -7426,9 +7426,9 @@
                 },
                 "seq": 19,
                 "thread": "MainThread",
-                "elapsed_ms": 0.166,
-                "model_provider_ms": 0.047624945640563965,
-                "library_ms": 0.11837505435943604,
+                "elapsed_ms": 0.232,
+                "model_provider_ms": 0.07958292961120605,
+                "library_ms": 0.15241707038879396,
                 "notes": [
                   {
                     "label": "args",
@@ -7438,7 +7438,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157254.180583,
+                    "at_ms": 1903044513.6016252,
                     "method": "GET",
                     "url": "https://httpbin.org/get?item=milk&quantity=12",
                     "headers": {
@@ -7462,7 +7462,7 @@
                   },
                   {
                     "label": "wire response",
-                    "at_ms": 1048157254.228208,
+                    "at_ms": 1903044513.6812081,
                     "status": 200,
                     "headers": {
                       "content-length": "47",
@@ -7499,7 +7499,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157254.180583,
+                      "at_ms": 1903044513.6016252,
                       "method": "GET",
                       "url": "https://httpbin.org/get?item=milk&quantity=12",
                       "headers": {
@@ -7526,7 +7526,7 @@
                     "kind": "note",
                     "value": {
                       "label": "wire response",
-                      "at_ms": 1048157254.228208,
+                      "at_ms": 1903044513.6812081,
                       "status": 200,
                       "headers": {
                         "content-length": "47",
@@ -7566,7 +7566,7 @@
           },
           "seq": 20,
           "thread": "MainThread",
-          "elapsed_ms": 0.229,
+          "elapsed_ms": 0.29500000000000004,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -7578,7 +7578,7 @@
               },
               "seq": 21,
               "thread": "MainThread",
-              "elapsed_ms": 0.225,
+              "elapsed_ms": 0.289,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -7596,7 +7596,7 @@
                       "content": "Order 20 bottles of milk."
                     },
                     {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -7618,7 +7618,7 @@
                       "tool_call_id": "c1"
                     },
                     {
-                      "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -7727,7 +7727,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0699a-a70c-7093-961d-ff9f1041aa02-0",
+                    "id": "lc_run--01a09c8f-34f7-76a0-b4e2-070166a8713a-0",
                     "role": "ai",
                     "content": "I ordered 12, the most allowed in one order.",
                     "finish_reason": "stop"
@@ -7752,7 +7752,7 @@
                         "content": "Order 20 bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -7774,7 +7774,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -7892,7 +7892,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70c-7093-961d-ff9f1041aa02-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-070166a8713a-0",
                       "role": "ai",
                       "content": "I ordered 12, the most allowed in one order.",
                       "finish_reason": "stop"
@@ -7912,7 +7912,7 @@
                 },
                 "seq": 21,
                 "thread": "MainThread",
-                "elapsed_ms": 0.225,
+                "elapsed_ms": 0.289,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -7930,7 +7930,7 @@
                         "content": "Order 20 bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -7952,7 +7952,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -8061,7 +8061,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70c-7093-961d-ff9f1041aa02-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-070166a8713a-0",
                       "role": "ai",
                       "content": "I ordered 12, the most allowed in one order.",
                       "finish_reason": "stop"
@@ -8086,7 +8086,7 @@
                           "content": "Order 20 bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -8108,7 +8108,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -8226,7 +8226,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70c-7093-961d-ff9f1041aa02-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-070166a8713a-0",
                         "role": "ai",
                         "content": "I ordered 12, the most allowed in one order.",
                         "finish_reason": "stop"
@@ -8249,7 +8249,7 @@
             },
             "seq": 14,
             "thread": "MainThread",
-            "elapsed_ms": 0.27999999999999997,
+            "elapsed_ms": 0.31,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -8261,7 +8261,7 @@
                 },
                 "seq": 15,
                 "thread": "MainThread",
-                "elapsed_ms": 0.259,
+                "elapsed_ms": 0.287,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -8362,7 +8362,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -8489,7 +8489,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -8585,7 +8585,7 @@
                   },
                   "seq": 15,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.259,
+                  "elapsed_ms": 0.287,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -8686,7 +8686,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -8813,7 +8813,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -8914,7 +8914,7 @@
             },
             "seq": 17,
             "thread": "MainThread",
-            "elapsed_ms": 0.414,
+            "elapsed_ms": 0.486,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -8926,7 +8926,7 @@
                 },
                 "seq": 18,
                 "thread": "MainThread",
-                "elapsed_ms": 0.236,
+                "elapsed_ms": 0.242,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -8944,7 +8944,7 @@
                         "content": "Order 20 bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -9051,7 +9051,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -9086,7 +9086,7 @@
                           "content": "Order 20 bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -9202,7 +9202,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -9229,9 +9229,9 @@
                 },
                 "seq": 19,
                 "thread": "MainThread",
-                "elapsed_ms": 0.166,
-                "model_provider_ms": 0.047624945640563965,
-                "library_ms": 0.11837505435943604,
+                "elapsed_ms": 0.232,
+                "model_provider_ms": 0.07958292961120605,
+                "library_ms": 0.15241707038879396,
                 "notes": [
                   {
                     "label": "args",
@@ -9241,7 +9241,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157254.180583,
+                    "at_ms": 1903044513.6016252,
                     "method": "GET",
                     "url": "https://httpbin.org/get?item=milk&quantity=12",
                     "headers": {
@@ -9265,7 +9265,7 @@
                   },
                   {
                     "label": "wire response",
-                    "at_ms": 1048157254.228208,
+                    "at_ms": 1903044513.6812081,
                     "status": 200,
                     "headers": {
                       "content-length": "47",
@@ -9302,7 +9302,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157254.180583,
+                      "at_ms": 1903044513.6016252,
                       "method": "GET",
                       "url": "https://httpbin.org/get?item=milk&quantity=12",
                       "headers": {
@@ -9329,7 +9329,7 @@
                     "kind": "note",
                     "value": {
                       "label": "wire response",
-                      "at_ms": 1048157254.228208,
+                      "at_ms": 1903044513.6812081,
                       "status": 200,
                       "headers": {
                         "content-length": "47",
@@ -9370,7 +9370,7 @@
                   },
                   "seq": 18,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.236,
+                  "elapsed_ms": 0.242,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -9388,7 +9388,7 @@
                           "content": "Order 20 bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -9495,7 +9495,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -9530,7 +9530,7 @@
                             "content": "Order 20 bottles of milk."
                           },
                           {
-                            "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                            "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -9646,7 +9646,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -9676,9 +9676,9 @@
                   },
                   "seq": 19,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.166,
-                  "model_provider_ms": 0.047624945640563965,
-                  "library_ms": 0.11837505435943604,
+                  "elapsed_ms": 0.232,
+                  "model_provider_ms": 0.07958292961120605,
+                  "library_ms": 0.15241707038879396,
                   "notes": [
                     {
                       "label": "args",
@@ -9688,7 +9688,7 @@
                     {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157254.180583,
+                      "at_ms": 1903044513.6016252,
                       "method": "GET",
                       "url": "https://httpbin.org/get?item=milk&quantity=12",
                       "headers": {
@@ -9712,7 +9712,7 @@
                     },
                     {
                       "label": "wire response",
-                      "at_ms": 1048157254.228208,
+                      "at_ms": 1903044513.6812081,
                       "status": 200,
                       "headers": {
                         "content-length": "47",
@@ -9749,7 +9749,7 @@
                       "value": {
                         "label": "wire request",
                         "attempt": 1,
-                        "at_ms": 1048157254.180583,
+                        "at_ms": 1903044513.6016252,
                         "method": "GET",
                         "url": "https://httpbin.org/get?item=milk&quantity=12",
                         "headers": {
@@ -9776,7 +9776,7 @@
                       "kind": "note",
                       "value": {
                         "label": "wire response",
-                        "at_ms": 1048157254.228208,
+                        "at_ms": 1903044513.6812081,
                         "status": 200,
                         "headers": {
                           "content-length": "47",
@@ -9819,7 +9819,7 @@
             },
             "seq": 20,
             "thread": "MainThread",
-            "elapsed_ms": 0.229,
+            "elapsed_ms": 0.29500000000000004,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -9831,7 +9831,7 @@
                 },
                 "seq": 21,
                 "thread": "MainThread",
-                "elapsed_ms": 0.225,
+                "elapsed_ms": 0.289,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -9849,7 +9849,7 @@
                         "content": "Order 20 bottles of milk."
                       },
                       {
-                        "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -9871,7 +9871,7 @@
                         "tool_call_id": "c1"
                       },
                       {
-                        "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -9980,7 +9980,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70c-7093-961d-ff9f1041aa02-0",
+                      "id": "lc_run--01a09c8f-34f7-76a0-b4e2-070166a8713a-0",
                       "role": "ai",
                       "content": "I ordered 12, the most allowed in one order.",
                       "finish_reason": "stop"
@@ -10005,7 +10005,7 @@
                           "content": "Order 20 bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -10027,7 +10027,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -10145,7 +10145,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70c-7093-961d-ff9f1041aa02-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-070166a8713a-0",
                         "role": "ai",
                         "content": "I ordered 12, the most allowed in one order.",
                         "finish_reason": "stop"
@@ -10165,7 +10165,7 @@
                   },
                   "seq": 21,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.225,
+                  "elapsed_ms": 0.289,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -10183,7 +10183,7 @@
                           "content": "Order 20 bottles of milk."
                         },
                         {
-                          "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -10205,7 +10205,7 @@
                           "tool_call_id": "c1"
                         },
                         {
-                          "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -10314,7 +10314,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70c-7093-961d-ff9f1041aa02-0",
+                        "id": "lc_run--01a09c8f-34f7-76a0-b4e2-070166a8713a-0",
                         "role": "ai",
                         "content": "I ordered 12, the most allowed in one order.",
                         "finish_reason": "stop"
@@ -10339,7 +10339,7 @@
                             "content": "Order 20 bottles of milk."
                           },
                           {
-                            "id": "lc_run--01a0699a-a70b-7d31-b4f8-656acab9d3f5-0",
+                            "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06e4209e2afa-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -10361,7 +10361,7 @@
                             "tool_call_id": "c1"
                           },
                           {
-                            "id": "lc_run--01a0699a-a70c-7093-961d-ff86a839dd89-0",
+                            "id": "lc_run--01a09c8f-34f7-76a0-b4e2-06f9453dd4c2-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -10479,7 +10479,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0699a-a70c-7093-961d-ff9f1041aa02-0",
+                          "id": "lc_run--01a09c8f-34f7-76a0-b4e2-070166a8713a-0",
                           "role": "ai",
                           "content": "I ordered 12, the most allowed in one order.",
                           "finish_reason": "stop"
@@ -10510,7 +10510,7 @@
       },
       "seq": 22,
       "thread": "MainThread",
-      "elapsed_ms": 0.606,
+      "elapsed_ms": 0.699,
       "model_provider_ms": null,
       "library_ms": null,
       "notes": [
@@ -10527,7 +10527,7 @@
           },
           "seq": 23,
           "thread": "MainThread",
-          "elapsed_ms": 0.371,
+          "elapsed_ms": 0.389,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -10539,7 +10539,7 @@
               },
               "seq": 24,
               "thread": "MainThread",
-              "elapsed_ms": 0.219,
+              "elapsed_ms": 0.23299999999999998,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -10640,7 +10640,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                    "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                     "role": "ai",
                     "content": "",
                     "tool_calls": [
@@ -10766,7 +10766,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                      "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -10792,9 +10792,9 @@
               },
               "seq": 25,
               "thread": "MainThread",
-              "elapsed_ms": 0.14400000000000002,
-              "model_provider_ms": 0.04233288764953613,
-              "library_ms": 0.10166711235046388,
+              "elapsed_ms": 0.149,
+              "model_provider_ms": 0.04349994659423828,
+              "library_ms": 0.10550005340576171,
               "notes": [
                 {
                   "label": "args",
@@ -10803,7 +10803,7 @@
                 {
                   "label": "wire request",
                   "attempt": 1,
-                  "at_ms": 1048157254.817625,
+                  "at_ms": 1903044514.356333,
                   "method": "GET",
                   "url": "https://httpbin.org/status/404?item=milk",
                   "headers": {
@@ -10827,7 +10827,7 @@
                 },
                 {
                   "label": "wire response",
-                  "at_ms": 1048157254.8599579,
+                  "at_ms": 1903044514.399833,
                   "status": 404,
                   "headers": {
                     "content-length": "0",
@@ -10865,7 +10865,7 @@
                   "value": {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157254.817625,
+                    "at_ms": 1903044514.356333,
                     "method": "GET",
                     "url": "https://httpbin.org/status/404?item=milk",
                     "headers": {
@@ -10892,7 +10892,7 @@
                   "kind": "note",
                   "value": {
                     "label": "wire response",
-                    "at_ms": 1048157254.8599579,
+                    "at_ms": 1903044514.399833,
                     "status": 404,
                     "headers": {
                       "content-length": "0",
@@ -10935,7 +10935,7 @@
                 },
                 "seq": 24,
                 "thread": "MainThread",
-                "elapsed_ms": 0.219,
+                "elapsed_ms": 0.23299999999999998,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -11036,7 +11036,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                      "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -11162,7 +11162,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -11191,9 +11191,9 @@
                 },
                 "seq": 25,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14400000000000002,
-                "model_provider_ms": 0.04233288764953613,
-                "library_ms": 0.10166711235046388,
+                "elapsed_ms": 0.149,
+                "model_provider_ms": 0.04349994659423828,
+                "library_ms": 0.10550005340576171,
                 "notes": [
                   {
                     "label": "args",
@@ -11202,7 +11202,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157254.817625,
+                    "at_ms": 1903044514.356333,
                     "method": "GET",
                     "url": "https://httpbin.org/status/404?item=milk",
                     "headers": {
@@ -11226,7 +11226,7 @@
                   },
                   {
                     "label": "wire response",
-                    "at_ms": 1048157254.8599579,
+                    "at_ms": 1903044514.399833,
                     "status": 404,
                     "headers": {
                       "content-length": "0",
@@ -11264,7 +11264,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157254.817625,
+                      "at_ms": 1903044514.356333,
                       "method": "GET",
                       "url": "https://httpbin.org/status/404?item=milk",
                       "headers": {
@@ -11291,7 +11291,7 @@
                     "kind": "note",
                     "value": {
                       "label": "wire response",
-                      "at_ms": 1048157254.8599579,
+                      "at_ms": 1903044514.399833,
                       "status": 404,
                       "headers": {
                         "content-length": "0",
@@ -11333,7 +11333,7 @@
           },
           "seq": 26,
           "thread": "MainThread",
-          "elapsed_ms": 0.225,
+          "elapsed_ms": 0.29500000000000004,
           "model_provider_ms": null,
           "library_ms": null,
           "notes": [],
@@ -11345,7 +11345,7 @@
               },
               "seq": 27,
               "thread": "MainThread",
-              "elapsed_ms": 0.22,
+              "elapsed_ms": 0.29100000000000004,
               "model_provider_ms": null,
               "library_ms": null,
               "notes": [
@@ -11363,7 +11363,7 @@
                       "content": "How much is milk?"
                     },
                     {
-                      "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                      "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -11469,7 +11469,7 @@
                 {
                   "label": "reply",
                   "message": {
-                    "id": "lc_run--01a0699a-a70d-7120-a172-4f47bf40192e-0",
+                    "id": "lc_run--01a09c8f-34f8-7c21-874b-60f0d042f5a6-0",
                     "role": "ai",
                     "content": "I could not get the price of milk.",
                     "finish_reason": "stop"
@@ -11494,7 +11494,7 @@
                         "content": "How much is milk?"
                       },
                       {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -11609,7 +11609,7 @@
                   "value": {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70d-7120-a172-4f47bf40192e-0",
+                      "id": "lc_run--01a09c8f-34f8-7c21-874b-60f0d042f5a6-0",
                       "role": "ai",
                       "content": "I could not get the price of milk.",
                       "finish_reason": "stop"
@@ -11629,7 +11629,7 @@
                 },
                 "seq": 27,
                 "thread": "MainThread",
-                "elapsed_ms": 0.22,
+                "elapsed_ms": 0.29100000000000004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -11647,7 +11647,7 @@
                         "content": "How much is milk?"
                       },
                       {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -11753,7 +11753,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70d-7120-a172-4f47bf40192e-0",
+                      "id": "lc_run--01a09c8f-34f8-7c21-874b-60f0d042f5a6-0",
                       "role": "ai",
                       "content": "I could not get the price of milk.",
                       "finish_reason": "stop"
@@ -11778,7 +11778,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                          "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -11893,7 +11893,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70d-7120-a172-4f47bf40192e-0",
+                        "id": "lc_run--01a09c8f-34f8-7c21-874b-60f0d042f5a6-0",
                         "role": "ai",
                         "content": "I could not get the price of milk.",
                         "finish_reason": "stop"
@@ -11916,7 +11916,7 @@
             },
             "seq": 23,
             "thread": "MainThread",
-            "elapsed_ms": 0.371,
+            "elapsed_ms": 0.389,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -11928,7 +11928,7 @@
                 },
                 "seq": 24,
                 "thread": "MainThread",
-                "elapsed_ms": 0.219,
+                "elapsed_ms": 0.23299999999999998,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -12029,7 +12029,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                      "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                       "role": "ai",
                       "content": "",
                       "tool_calls": [
@@ -12155,7 +12155,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -12181,9 +12181,9 @@
                 },
                 "seq": 25,
                 "thread": "MainThread",
-                "elapsed_ms": 0.14400000000000002,
-                "model_provider_ms": 0.04233288764953613,
-                "library_ms": 0.10166711235046388,
+                "elapsed_ms": 0.149,
+                "model_provider_ms": 0.04349994659423828,
+                "library_ms": 0.10550005340576171,
                 "notes": [
                   {
                     "label": "args",
@@ -12192,7 +12192,7 @@
                   {
                     "label": "wire request",
                     "attempt": 1,
-                    "at_ms": 1048157254.817625,
+                    "at_ms": 1903044514.356333,
                     "method": "GET",
                     "url": "https://httpbin.org/status/404?item=milk",
                     "headers": {
@@ -12216,7 +12216,7 @@
                   },
                   {
                     "label": "wire response",
-                    "at_ms": 1048157254.8599579,
+                    "at_ms": 1903044514.399833,
                     "status": 404,
                     "headers": {
                       "content-length": "0",
@@ -12254,7 +12254,7 @@
                     "value": {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157254.817625,
+                      "at_ms": 1903044514.356333,
                       "method": "GET",
                       "url": "https://httpbin.org/status/404?item=milk",
                       "headers": {
@@ -12281,7 +12281,7 @@
                     "kind": "note",
                     "value": {
                       "label": "wire response",
-                      "at_ms": 1048157254.8599579,
+                      "at_ms": 1903044514.399833,
                       "status": 404,
                       "headers": {
                         "content-length": "0",
@@ -12324,7 +12324,7 @@
                   },
                   "seq": 24,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.219,
+                  "elapsed_ms": 0.23299999999999998,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -12425,7 +12425,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -12551,7 +12551,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                          "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -12580,9 +12580,9 @@
                   },
                   "seq": 25,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.14400000000000002,
-                  "model_provider_ms": 0.04233288764953613,
-                  "library_ms": 0.10166711235046388,
+                  "elapsed_ms": 0.149,
+                  "model_provider_ms": 0.04349994659423828,
+                  "library_ms": 0.10550005340576171,
                   "notes": [
                     {
                       "label": "args",
@@ -12591,7 +12591,7 @@
                     {
                       "label": "wire request",
                       "attempt": 1,
-                      "at_ms": 1048157254.817625,
+                      "at_ms": 1903044514.356333,
                       "method": "GET",
                       "url": "https://httpbin.org/status/404?item=milk",
                       "headers": {
@@ -12615,7 +12615,7 @@
                     },
                     {
                       "label": "wire response",
-                      "at_ms": 1048157254.8599579,
+                      "at_ms": 1903044514.399833,
                       "status": 404,
                       "headers": {
                         "content-length": "0",
@@ -12653,7 +12653,7 @@
                       "value": {
                         "label": "wire request",
                         "attempt": 1,
-                        "at_ms": 1048157254.817625,
+                        "at_ms": 1903044514.356333,
                         "method": "GET",
                         "url": "https://httpbin.org/status/404?item=milk",
                         "headers": {
@@ -12680,7 +12680,7 @@
                       "kind": "note",
                       "value": {
                         "label": "wire response",
-                        "at_ms": 1048157254.8599579,
+                        "at_ms": 1903044514.399833,
                         "status": 404,
                         "headers": {
                           "content-length": "0",
@@ -12725,7 +12725,7 @@
             },
             "seq": 26,
             "thread": "MainThread",
-            "elapsed_ms": 0.225,
+            "elapsed_ms": 0.29500000000000004,
             "model_provider_ms": null,
             "library_ms": null,
             "notes": [],
@@ -12737,7 +12737,7 @@
                 },
                 "seq": 27,
                 "thread": "MainThread",
-                "elapsed_ms": 0.22,
+                "elapsed_ms": 0.29100000000000004,
                 "model_provider_ms": null,
                 "library_ms": null,
                 "notes": [
@@ -12755,7 +12755,7 @@
                         "content": "How much is milk?"
                       },
                       {
-                        "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                        "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                         "role": "ai",
                         "content": "",
                         "tool_calls": [
@@ -12861,7 +12861,7 @@
                   {
                     "label": "reply",
                     "message": {
-                      "id": "lc_run--01a0699a-a70d-7120-a172-4f47bf40192e-0",
+                      "id": "lc_run--01a09c8f-34f8-7c21-874b-60f0d042f5a6-0",
                       "role": "ai",
                       "content": "I could not get the price of milk.",
                       "finish_reason": "stop"
@@ -12886,7 +12886,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                          "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -13001,7 +13001,7 @@
                     "value": {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70d-7120-a172-4f47bf40192e-0",
+                        "id": "lc_run--01a09c8f-34f8-7c21-874b-60f0d042f5a6-0",
                         "role": "ai",
                         "content": "I could not get the price of milk.",
                         "finish_reason": "stop"
@@ -13021,7 +13021,7 @@
                   },
                   "seq": 27,
                   "thread": "MainThread",
-                  "elapsed_ms": 0.22,
+                  "elapsed_ms": 0.29100000000000004,
                   "model_provider_ms": null,
                   "library_ms": null,
                   "notes": [
@@ -13039,7 +13039,7 @@
                           "content": "How much is milk?"
                         },
                         {
-                          "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                          "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                           "role": "ai",
                           "content": "",
                           "tool_calls": [
@@ -13145,7 +13145,7 @@
                     {
                       "label": "reply",
                       "message": {
-                        "id": "lc_run--01a0699a-a70d-7120-a172-4f47bf40192e-0",
+                        "id": "lc_run--01a09c8f-34f8-7c21-874b-60f0d042f5a6-0",
                         "role": "ai",
                         "content": "I could not get the price of milk.",
                         "finish_reason": "stop"
@@ -13170,7 +13170,7 @@
                             "content": "How much is milk?"
                           },
                           {
-                            "id": "lc_run--01a0699a-a6d6-7f51-9f1f-a89ced7b6f1d-0",
+                            "id": "lc_run--01a09c8f-34bd-7630-b565-3225cdab2810-0",
                             "role": "ai",
                             "content": "",
                             "tool_calls": [
@@ -13285,7 +13285,7 @@
                       "value": {
                         "label": "reply",
                         "message": {
-                          "id": "lc_run--01a0699a-a70d-7120-a172-4f47bf40192e-0",
+                          "id": "lc_run--01a09c8f-34f8-7c21-874b-60f0d042f5a6-0",
                           "role": "ai",
                           "content": "I could not get the price of milk.",
                           "finish_reason": "stop"
