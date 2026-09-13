@@ -23,6 +23,8 @@ agent** — that one sentence, one clause each:
 
 Remove any one and it is not an agent.
 
+![AI Agent loop: call model, execute tools, append results, repeat until done.](assets/loop.png)
+
 ## Why this exists
 
 My understanding of agentic flows was good, but it lacked detail.
