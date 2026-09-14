@@ -18,6 +18,17 @@ from pathlib import Path
 
 _STYLE = """
 :root { color-scheme: light dark; --line: #8884; --dim: #8888; }
+:root[data-theme="dark"] { color-scheme: dark; }
+:root[data-theme="light"] { color-scheme: light; }
+/* Top-right, on every page -- the toggle needs no scrolling to reach and no
+   scrolling to keep reaching, the same reasoning that keeps `header.top`
+   itself stuck in place. `sticky` on the header is enough of a positioned
+   ancestor for this to anchor against. */
+.theme-toggle { position: absolute; top: .9rem; right: .75rem; border: 0;
+                width: 1.6rem; height: 1.6rem; display: flex;
+                align-items: center; justify-content: center; cursor: pointer;
+                background: transparent; color: var(--dim); font-size: 1rem; line-height: 1; }
+.theme-toggle:hover { color: inherit; }
 body { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; margin: 0 1.5rem 2rem; }
 /* The title and the column toggles stay put: at thirty-five chapters you are
    always scrolled away from them, and hiding a column is something you want
@@ -107,7 +118,10 @@ table.headers td.hname { color: var(--dim); white-space: nowrap; width: 1%; }
 table.headers td.hvalue { overflow-wrap: anywhere; }
 table.headers td.unrecorded { color: var(--dim); font-style: italic; }
 .wirefields dd.defaulted { color: #b26; }
-@media (prefers-color-scheme: dark) { .wirefields dd.defaulted { color: #f9a; } }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .wirefields dd.defaulted { color: #f9a; }
+}
+:root[data-theme="dark"] .wirefields dd.defaulted { color: #f9a; }
 /* Wrap rather than scroll: the page is read at whatever width the window is,
    and a horizontal scrollbar inside a column hides the end of every line.
    Unscoped, not `pre.wire .k` -- `_highlight` colours a plain note's inline
@@ -118,9 +132,15 @@ table.headers td.unrecorded { color: var(--dim); font-style: italic; }
 .n { color: #b26; }
 .l { color: #a60; font-style: italic; }
 @media (prefers-color-scheme: dark) {
-  .k { color: #7bf; } .s { color: #6d9; }
-  .n { color: #f9a; } .l { color: #fc7; }
+  :root:not([data-theme="light"]) .k { color: #7bf; }
+  :root:not([data-theme="light"]) .s { color: #6d9; }
+  :root:not([data-theme="light"]) .n { color: #f9a; }
+  :root:not([data-theme="light"]) .l { color: #fc7; }
 }
+:root[data-theme="dark"] .k { color: #7bf; }
+:root[data-theme="dark"] .s { color: #6d9; }
+:root[data-theme="dark"] .n { color: #f9a; }
+:root[data-theme="dark"] .l { color: #fc7; }
 pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-radius: 3px;
            white-space: pre-wrap; overflow-wrap: anywhere; }
 /* The book shell: a fixed-height app, not a page that scrolls past its own
@@ -128,7 +148,7 @@ pre.wire { background: #8881; padding: .5rem .75rem; margin: .35rem 0; border-ra
    does, so the header needs no `sticky` trick here the way a chapter page's
    does. `body.book` overrides the plain `body` rule above by specificity. */
 body.book { margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
-body.book header.top { flex: 0 0 auto; position: static; margin-bottom: 0; }
+body.book header.top { flex: 0 0 auto; position: relative; margin-bottom: 0; }
 .book-body { flex: 1 1 auto; min-height: 0; display: flex; }
 #collapse-nav { display: none; }
 #collapse-nav:checked ~ .chapters { display: none; }
@@ -176,6 +196,38 @@ _SEARCH_SCRIPT = """
   });
 })();
 """
+
+# Every page carries its own copy, chapter pages included -- each one is
+# opened standalone as often as it is opened through the book shell, and
+# `localStorage` is read fresh by whichever document loads. The toggle
+# writes an explicit choice; absent one, the system preference already
+# driving `color-scheme: light dark` decides, same as before this existed.
+_THEME_SCRIPT = """
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById("theme-toggle");
+  function current() {
+    var saved = localStorage.getItem("theme");
+    if (saved === "light" || saved === "dark") return saved;
+    return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function paint() { btn.textContent = current() === "dark" ? "\\u263E" : "\\u2600"; }
+  var saved = localStorage.getItem("theme");
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  paint();
+  btn.addEventListener("click", function () {
+    var next = current() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+    paint();
+  });
+})();
+"""
+
+_THEME_TOGGLE = (
+    '<button type="button" id="theme-toggle" class="theme-toggle" '
+    'title="toggle light/dark" aria-label="toggle light/dark theme"></button>'
+)
 
 
 # One pass over pretty-printed JSON: strings (a key if a colon follows it),
@@ -244,7 +296,8 @@ def write_book(out: Path = Path("out")) -> Path:
         f"<style>{_STYLE}</style>"
         f'<body class="book">'
         f'<header class="top"><h1>the agentic primer</h1>'
-        f'<span class="summary">every chapter that has been run, in order</span></header>'
+        f'<span class="summary">every chapter that has been run, in order</span>'
+        f"{_THEME_TOGGLE}</header>"
         f'<div class="book-body">'
         f'<input type="checkbox" id="collapse-nav">'
         f'<nav class="chapters">'
@@ -255,6 +308,7 @@ def write_book(out: Path = Path("out")) -> Path:
         f"{default_reader}"
         f"</div>"
         f"<script>{_SEARCH_SCRIPT}</script>"
+        f"<script>{_THEME_SCRIPT}</script>"
     )
     return page
 
@@ -272,6 +326,7 @@ def render(traces: dict[str, Json]) -> str:
         f"<title>{html.escape(chapter)}</title><style>{_STYLE}</style>"
         f"{_render_header(chapter, '')}"
         f"{_render_chapter(chapter, traces)}"
+        f"<script>{_THEME_SCRIPT}</script>"
     )
 
 
@@ -779,7 +834,7 @@ def _render_header(title: str, subtitle: str) -> str:
         f'<span class="toggles">show: '
         f'<label><input type="checkbox" id="show-mock" checked> mock</label>'
         f'<label><input type="checkbox" id="show-live" checked> live</label>'
-        f"</span></header>"
+        f"</span>{_THEME_TOGGLE}</header>"
     )
 
 
